@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 # Make vim the default editor.
-export EDITOR='vim'
+export EDITOR="vim"
 export VISUAL="$EDITOR"
 
 # Enable persistent REPL history for `node`.
