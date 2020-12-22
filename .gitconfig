@@ -181,6 +181,7 @@
 [init]
 
 	defaultBranch = main
+	templatedir = ~/.git-template
 
 [user]
 	name = Bryan Hoang
