@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 # Make vim the default editor.
-export EDITOR='vim'
-export VISUAL="$EDITOR"
+export EDITOR="nvim"
+export VISUAL="${EDITOR}"
 
 # Enable persistent REPL history for `node`.
 export NODE_REPL_HISTORY=~/.node_history
@@ -47,3 +47,4 @@ export NVM_DIR="$HOME/.nvm"
 # This loads nvm bash_completion
 # shellcheck disable=SC1090
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
