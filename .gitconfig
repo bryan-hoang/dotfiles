@@ -181,3 +181,12 @@
 [init]
 
 	defaultBranch = main
+
+[user]
+	name = Bryan Hoang
+	email = bryan.c.hoang@gmail.com
+	signingkey = ABE9B748EEAE9E00
+[fetch]
+	prune = true
+[gpg]
+	program = gpg
