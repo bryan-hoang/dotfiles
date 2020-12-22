@@ -4,7 +4,7 @@
 git clone --bare git@github.com:bryan-hoang/dotfiles.git "${HOME}"/config
 
 config() {
-  /usr/bin/git --git-dir="${HOME}"/config/ --work-tree="${HOME}" "$@"
+  git --git-dir="${HOME}"/config/ --work-tree="${HOME}" "$@"
 }
 
 mkdir -p config-backup
