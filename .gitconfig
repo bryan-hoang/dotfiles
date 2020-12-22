@@ -100,6 +100,7 @@
 	untrackedCache = true
 
 	autocrlf = false
+	eol = lf
 
 [color]
 
