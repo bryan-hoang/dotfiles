@@ -1,0 +1,15 @@
+{
+  "proseWrap": "always",
+  "singleQuote": true,
+  "trailingComma": "all",
+  "overrides": [
+    {
+      "files": "*.keystore",
+      "options": { "parser": "json" }
+    },
+    {
+      "files": ".prettierrc",
+      "options": { "parser": "json" }
+    }
+  ]
+}
