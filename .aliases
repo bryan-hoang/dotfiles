@@ -155,6 +155,6 @@ alias reload="exec ${SHELL} -l"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 
-alias ll="ls -Ahl"
-alias python="python3.9"
+alias l="ls -lAh"
+alias python="python3"
 alias config='/usr/bin/git --git-dir=$HOME/config/ --work-tree=$HOME'

@@ -4,15 +4,6 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH="/home/bryan/.oh-my-zsh"
 
-# Load the shell dotfiles, and then some:
-# * ~/.path can be used to extend `$PATH`.
-# * ~/.extra can be used for other settings you don't want to commit.
-for file in ~/.{path,bash_prompt,bash_exports,bash_aliases,bash_functions,extra}; do
-  # shellcheck disable=SC1090
-  [ -r "$file" ] && [ -f "$file" ] && source "$file"
-done
-unset file
-
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -82,6 +73,15 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+
+# Load shell dotfiles, and then some:
+# * ~/.path can be used to extend `$PATH`.
+# * ~/.extra can be used for other settings you don't want to commit.
+for file in ~/.{path,exports,aliases,functions,extra}; do
+  # shellcheck disable=SC1090
+  [ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
+unset file
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
