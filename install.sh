@@ -15,4 +15,5 @@ else
   config checkout 2>&1 | grep -E "\s+\." | awk '{print $1}' | xargs -I{} mv {} config-backup/{}
 fi
 config checkout
+config submodule update --init --recursive
 config config status.showUntrackedFiles no
