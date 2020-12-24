@@ -196,3 +196,5 @@
 	program = gpg
 [pull]
 	rebase = false
+[submodule]
+	recurse = true
