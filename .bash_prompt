@@ -115,11 +115,11 @@ PS1+="\[${userStyle}\]\u"
 PS1+="\[${white}\]@"
 # host
 PS1+="\[${hostStyle}\]\h"
-PS1+="\[${white}\] in "
+PS1+="\[${white}\]:"
 # working directory full path
-PS1+="\[${green}\]\w"
+PS1+="\[${blue}\]\w"
 # Git repository details
-PS1+="\`prompt_git \"\[${white}\] on \[${violet}\]\" \"\[${blue}\]\"\`"
+PS1+="\`prompt_git \"\[${red}\] git\[${white}\]#\[${green}\]\" \"\[${blue}\]\"\`"
 PS1+="\n"
 # `$` (and reset color)
 PS1+="\[${white}\]\$ \[${reset}\]"
