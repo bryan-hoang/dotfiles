@@ -41,6 +41,7 @@ export GPG_TTY
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 export FORCE_COLOR=true
+export GIT_PATH="/home/bryan/git"
 
 export NVM_DIR="$HOME/.nvm"
 # This loads nvm
@@ -49,3 +50,4 @@ export NVM_DIR="$HOME/.nvm"
 # This loads nvm bash_completion
 # shellcheck disable=SC1090
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
