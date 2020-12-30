@@ -1,13 +1,10 @@
 #!/usr/bin/env bash
 # -*- coding: utf-8 -*-
 
-# Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:$PATH"
-
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don't want to commit.
-for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
+for file in ~/.{exports,path,bash_prompt,aliases,functions,extra}; do
   # shellcheck disable=SC1090
   [ -r "$file" ] && [ -f "$file" ] && source "$file"
 done

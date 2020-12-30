@@ -1,5 +1,11 @@
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
+# Load shell dotfiles, and then some:
+# * ~/.path can be used to extend `$PATH`.
+# * ~/.extra can be used for other settings you don't want to commit.
+for file in ~/.{path,exports,aliases,functions,extra}; do
+  # shellcheck disable=SC1090
+  [ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
+unset file
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/bryan/.oh-my-zsh"
@@ -73,15 +79,6 @@ plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
-# Load shell dotfiles, and then some:
-# * ~/.path can be used to extend `$PATH`.
-# * ~/.extra can be used for other settings you don't want to commit.
-for file in ~/.{path,exports,aliases,functions,extra}; do
-  # shellcheck disable=SC1090
-  [ -r "$file" ] && [ -f "$file" ] && source "$file"
-done
-unset file
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
