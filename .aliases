@@ -162,3 +162,8 @@ alias vim="nvim"
 alias pip="pip3"
 
 eval "$(thefuck --alias)"
+
+# Work
+alias dcp-worker-dev='dcp-worker start --scheduler http://scheduler.bryan.office.kingsds.network/ --identity test-id-dev --default-bank-account test-bryan'
+alias dcp-worker-stage='dcp-worker start --scheduler http://scheduler.staging.office.kingsds.network/ --identity test-id-stage --default-bank-account test-bryan'
+alias dcp-worker-prod='dcp-worker start --scheduler https://scheduler.distributed.computer/ --identity test-id-prod --default-bank-account test-bryan'

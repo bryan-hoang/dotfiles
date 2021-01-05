@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# -*- coding: utf-8 -*-
+
+export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH

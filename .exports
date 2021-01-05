@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 # -*- coding: utf-8 -*-
 
-export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-
 # Make vim the default editor.
 export EDITOR="nvim"
 export VISUAL="${EDITOR}"
