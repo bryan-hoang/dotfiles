@@ -156,10 +156,8 @@ alias reload="exec ${SHELL} -l"
 alias path='echo -e ${PATH//:/\\n}'
 
 alias l="ls -lAh"
-alias python="python3"
 alias config='git --git-dir=$HOME/config/ --work-tree=$HOME'
 alias vim="nvim"
-alias pip="pip3"
 
 eval "$(thefuck --alias)"
 
