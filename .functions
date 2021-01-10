@@ -177,6 +177,10 @@ function tre() {
   tree -aC -I '.git|node_modules|bower_components' --dirsfirst "$@" | less -FRNX
 }
 
+function drop-mysql-databases() {
+  mysql -uroot -e "show databases" | grep -v Database | grep -v mysql| grep -v information_schema| gawk '{print "drop database `" $1 "`;"}' | mysql -uroot
+}
+
 function init-ssh-agent() {
   local env
   local agent_run_state
