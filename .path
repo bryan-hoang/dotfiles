@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # -*- coding: utf-8 -*-
 
-export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.local/umake/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.local/bin:$HOME/.local/share/umake/bin:/usr/local/bin:$PATH
