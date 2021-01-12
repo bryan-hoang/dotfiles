@@ -80,6 +80,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+source /etc/zsh_command_not_found
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
