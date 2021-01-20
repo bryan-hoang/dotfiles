@@ -1,0 +1,28 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:node/recommended",
+    "plugin:security/recommended",
+    "plugin:jsdoc/recommended",
+    "airbnb-base",
+    "plugin:prettier/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 12
+  },
+  "plugins": ["security", "jsdoc"],
+  "rules": {
+    "node/no-unsupported-features/es-syntax": [
+      "error",
+      {
+        "version": ">=10.0.0",
+        "ignores": []
+      }
+    ]
+  }
+}
