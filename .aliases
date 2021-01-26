@@ -157,9 +157,6 @@ alias path='echo -e ${PATH//:/\\n}'
 
 alias l="ls -lAh"
 alias config='git --git-dir=$HOME/config/ --work-tree=$HOME'
-alias vim="nvim"
-
-eval "$(thefuck --alias)"
 
 # Work
 alias dcp-worker-dev='dcp-worker start --scheduler http://scheduler.bryan.office.kingsds.network/ --identity test-id-dev --default-bank-account test-bryan'
