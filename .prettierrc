@@ -1,15 +1,21 @@
 {
-  "proseWrap": "always",
-  "singleQuote": true,
-  "trailingComma": "all",
+  "$schema": "http://json.schemastore.org/prettierrc",
   "overrides": [
     {
       "files": "*.keystore",
-      "options": { "parser": "json" }
+      "options": {
+        "parser": "json"
+      }
     },
     {
       "files": ".prettierrc",
-      "options": { "parser": "json" }
+      "options": {
+        "parser": "json"
+      }
     }
-  ]
+  ],
+  "proseWrap": "always",
+  "singleQuote": true,
+  "trailingComma": "all",
+  "xmlWhitespaceSensitivity": "ignore"
 }
