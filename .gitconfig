@@ -136,6 +136,10 @@
 
 	# Detect copies as well as renames.
 	renames = copies
+	tool = vscode
+
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
 
 [diff "bin"]
 
@@ -151,6 +155,10 @@
 
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
+	tool = vscode
+
+[mergetool "vscode"]
+	cmd = code --wait $MERGED
 
 [push]
 
