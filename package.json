@@ -7,10 +7,8 @@
   "license": "ISC",
   "author": "Bryan Hoang",
   "scripts": {},
-  "dependencies": {},
   "devDependencies": {
     "@prettier/plugin-xml": "0.13.0",
-    "cz-conventional-changelog": "3.3.0",
     "eslint": "7.19.0",
     "eslint-config-airbnb-base": "14.2.1",
     "eslint-config-prettier": "7.2.0",

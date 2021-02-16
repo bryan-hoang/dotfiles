@@ -3,5 +3,5 @@
   "disableSubjectLowerCase": true,
   "maxHeaderWidth": 50,
   "maxLineWidth": 72,
-  "path": "./node_modules/cz-conventional-changelog"
+  "path": "cz-conventional-changelog"
 }
