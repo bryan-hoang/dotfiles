@@ -1,7 +1,7 @@
 {
   "disableScopeLowerCase": true,
   "disableSubjectLowerCase": true,
-  "maxHeaderWidth": 50,
+  "maxHeaderWidth": 72,
   "maxLineWidth": 72,
   "path": "cz-conventional-changelog"
 }
