@@ -5,10 +5,12 @@
   "description": "",
   "keywords": [],
   "license": "ISC",
-  "author": "",
+  "author": "Bryan Hoang",
   "scripts": {},
+  "dependencies": {},
   "devDependencies": {
     "@prettier/plugin-xml": "0.13.0",
+    "cz-conventional-changelog": "3.3.0",
     "eslint": "7.19.0",
     "eslint-config-airbnb-base": "14.2.1",
     "eslint-config-prettier": "7.2.0",
@@ -17,6 +19,8 @@
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "3.3.1",
     "eslint-plugin-security": "1.4.0",
-    "prettier": "2.2.1"
+    "prettier": "2.2.1",
+    "prettier-plugin-packagejson": "2.2.9",
+    "prettier-plugin-sort-json": "0.0.2"
   }
 }
