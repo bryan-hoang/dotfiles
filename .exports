@@ -43,6 +43,7 @@ export BASH_SILENCE_DEPRECATION_WARNING=1
 export FORCE_COLOR=true
 export GIT_PATH="$HOME/git"
 export DENO_INSTALL=$HOME/.deno
+export NODE_OPTIONS="--unhandled-rejections=strict"
 
 export NVM_DIR="$HOME/.nvm"
 # This loads nvm
