@@ -207,3 +207,5 @@
 	rebase = false
 [submodule]
 	recurse = true
+[pack]
+	writeReverseIndex = true
