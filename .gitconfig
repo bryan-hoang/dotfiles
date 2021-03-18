@@ -209,3 +209,7 @@
 	recurse = true
 [pack]
 	writeReverseIndex = true
+[maintenance]
+	strategy = incremental
+[clone]
+	defaultRemoteName = origin
