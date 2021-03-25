@@ -213,3 +213,6 @@
 	strategy = incremental
 [clone]
 	defaultRemoteName = origin
+[grep]
+	lineNumber = true
+	column = true
