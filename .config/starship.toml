@@ -1,2 +1,8 @@
 # Add a blank line at the start of the prompt
 add_newline = true
+
+# The character module shows a character (usually an arrow) beside where the
+# text is entered in your terminal.
+[character]
+success_symbol = "[\\$](bold green)"
+error_symbol = "[\\$](bold red)"
