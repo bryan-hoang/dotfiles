@@ -6,3 +6,6 @@
 	path = .vim_runtime
 	url = git@github.com:bryan-hoang/vimrc.git
 	branch = main
+[submodule ".oh-my-bash"]
+	path = .oh-my-bash
+	url = git@github.com:bryan-hoang/oh-my-bash.git
