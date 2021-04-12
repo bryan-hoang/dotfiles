@@ -1,9 +1,9 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 # -*- coding: utf-8 -*-
 
 git clone --bare git@github.com:bryan-hoang/dotfiles.git "${HOME}"/config
 
-config() {
+function config() {
   git --git-dir="${HOME}"/config/ --work-tree="${HOME}" "$@"
 }
 
@@ -17,3 +17,14 @@ fi
 config checkout
 config submodule update --init --recursive
 config config status.showUntrackedFiles no
+
+# Install nvm
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh |
+  bash >/dev/null
+echo 'Installed nvm successfully!'
+
+# Install starship
+mkdir -p ~/bin
+curl -fsSL https://starship.rs/install.sh |
+  BIN_DIR=~/bin bash -s -- -y >/dev/null
+echo 'Installed starship successfully!'
