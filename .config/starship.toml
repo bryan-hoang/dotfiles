@@ -1,8 +1,35 @@
+# ~/.config/starship.toml
+
+format = "$all"
+
 # Add a blank line at the start of the prompt
 add_newline = true
 
 # The character module shows a character (usually an arrow) beside where the
 # text is entered in your terminal.
 [character]
-success_symbol = "[\\$](bold green)"
 error_symbol = "[\\$](bold red)"
+success_symbol = "[\\$](bold green)"
+
+[env_var]
+default = "unknown shell"
+# variable = "SHELL"
+
+[hostname]
+ssh_only = false
+
+[shell]
+# Disables the shell module.
+disabled = false
+
+[status]
+disabled = true
+# Enable symbols mapping from exit code
+map_symbol = true
+
+[time]
+disabled = true
+
+[username]
+disabled = false
+show_always = true
