@@ -13,14 +13,14 @@ success_symbol = "[\\$](bold green)"
 
 [env_var]
 default = "unknown shell"
-# variable = "SHELL"
+variable = "SHELL"
 
 [hostname]
 ssh_only = false
 
 [shell]
 # Disables the shell module.
-disabled = false
+disabled = true
 
 [status]
 disabled = true

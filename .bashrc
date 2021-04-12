@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 # -*- coding: utf-8 -*-
 
-# shellcheck disable=SC1090
-[ -n "$PS1" ] && source ~/.bash_profile
-
 # Path to your oh-my-bash installation.
 export OSH=$HOME/.oh-my-bash
 
@@ -79,6 +76,7 @@ plugins=(
   bashmarks
 )
 
+# shellcheck disable=SC1090
 source "$OSH"/oh-my-bash.sh
 
 # User configuration
@@ -108,5 +106,8 @@ source "$OSH"/oh-my-bash.sh
 # Example aliases
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
+
+# shellcheck disable=SC1090
+[ -n "$PS1" ] && source ~/.bash_profile
 
 eval "$(starship init bash)"
