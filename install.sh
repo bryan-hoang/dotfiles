@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
 # -*- coding: utf-8 -*-
 
-if ! grep -q "^github.com " ~/.ssh/known_hosts; then
+repository_host=github.com
+repository=git@${repository_host}:bryan-hoang/dotfiles.git
+
+if ! grep -q "^${repository_host} " ~/.ssh/known_hosts; then
   touch ~/.ssh/known_hosts
-  ssh-keyscan github.com >>~/.ssh/known_hosts 2>/dev/null
+  ssh-keyscan ${repository_host} >>~/.ssh/known_hosts 2>/dev/null
 fi
 
-if ! git clone --bare git@github.com:bryan-hoang/dotfiles.git "${HOME}"/config; then
-  echo "Could not clone repository"
-  exit 1
+if ! git clone --bare $repository "${HOME}"/config; then
+  echo "Could not clone ${repository}"
+  exit $?
 fi
 
 function config() {
@@ -29,10 +32,10 @@ config config status.showUntrackedFiles no
 # Install nvm
 wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh |
   bash >/dev/null
-echo 'Installed nvm successfully!'
+echo "Installed nvm successfully!"
 
 # Install starship
 mkdir -p ~/bin
 curl -fsSL https://starship.rs/install.sh |
   BIN_DIR=~/bin bash -s -- -y >/dev/null
-echo 'Installed starship successfully!'
+echo "Installed starship successfully!"
