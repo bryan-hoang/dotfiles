@@ -178,7 +178,7 @@ function tre() {
 }
 
 function drop-mysql-databases() {
-  mysql -uroot -e "show databases" | grep -v Database | grep -v mysql| grep -v information_schema| gawk '{print "drop database `" $1 "`;"}' | mysql -uroot
+  mysql -uroot -e "show databases" | grep -v Database | grep -v mysql | grep -v information_schema | gawk '{print "drop database `" $1 "`;"}' | mysql -uroot
 }
 
 function init-ssh-agent() {
@@ -211,3 +211,24 @@ function init-ssh-agent() {
 }
 
 init-ssh-agent
+
+# Safer wget | bash'ing
+function wgetbash {
+  file=$(mktemp wgetbash.XXX.sh) || {
+    echo "Failed creating file"
+    return
+  }
+
+  wget "$1" -qO "$file" || {
+    echo "Failed to wget file"
+    return
+  }
+
+  $EDITOR "$file" || {
+    echo "Editor quit with error code"
+    return
+  }
+
+  bash "$file"
+  rm "$file"
+}
