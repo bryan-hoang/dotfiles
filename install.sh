@@ -1,7 +1,15 @@
 #!/usr/bin/env bash
 # -*- coding: utf-8 -*-
 
-git clone --bare git@github.com:bryan-hoang/dotfiles.git "${HOME}"/config
+if ! grep -q "^github.com " ~/.ssh/known_hosts; then
+  touch ~/.ssh/known_hosts
+  ssh-keyscan github.com >>~/.ssh/known_hosts 2>/dev/null
+fi
+
+if ! git clone --bare git@github.com:bryan-hoang/dotfiles.git "${HOME}"/config; then
+  echo "Could not clone repository"
+  exit 1
+fi
 
 function config() {
   git --git-dir="${HOME}"/config/ --work-tree="${HOME}" "$@"
