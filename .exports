@@ -44,11 +44,3 @@ export FORCE_COLOR=true
 export GIT_PATH="$HOME/git"
 export DENO_INSTALL=$HOME/.deno
 export NODE_OPTIONS="--unhandled-rejections=strict --trace-deprecation"
-
-export NVM_DIR="$HOME/.nvm"
-# This loads nvm
-# shellcheck disable=SC1090
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-# This loads nvm bash_completion
-# shellcheck disable=SC1090
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
