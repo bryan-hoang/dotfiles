@@ -51,6 +51,13 @@ function install_starship() {
   echo "Installed starship successfully!"
 }
 
+function install_deno() {
+  echo "Installing deno..."
+  curl -fsSL https://deno.land/x/install/install.sh |
+    sh >/dev/null
+  echo "Installed deno successfully!"
+}
+
 function does_function_exist() {
   declare -f -F "$1" >/dev/null
   return $?
@@ -69,6 +76,10 @@ fi
 
 if ! command -v starship &>/dev/null; then
   install_starship
+fi
+
+if ! command -v deno &>/dev/null; then
+  install_deno
 fi
 
 echo "Finished installing Bryan's dotfiles setup!"
