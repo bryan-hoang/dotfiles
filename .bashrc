@@ -107,9 +107,6 @@ source "$OSH"/oh-my-bash.sh
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
 
-# shellcheck disable=SC1090
-[ -n "$PS1" ] && source ~/.bash_profile
-
 export NVM_DIR="$HOME/.nvm"
 # This loads nvm
 # shellcheck disable=SC1090

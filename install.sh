@@ -64,7 +64,6 @@ fi
 source ~/.bashrc
 
 if ! does_function_exist nvm; then
-  echo "COMMAND could not be found"
   install_nvm
 fi
 

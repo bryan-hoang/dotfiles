@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # -*- coding: utf-8 -*-
 
+# shellcheck disable=SC1090
+[ -n "$PS1" ] && source ~/.bashrc
+
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don't want to commit.
