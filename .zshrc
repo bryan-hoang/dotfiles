@@ -1,3 +1,6 @@
+#!/usr/bin/env zsh
+# -*- coding: utf-8 -*-
+
 # Load shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
 # * ~/.extra can be used for other settings you don't want to commit.
@@ -103,6 +106,10 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Disabling Zsh's nomatch option
+# http://zsh.sourceforge.net/Doc/Release/Options.html#Expansion-and-Globbing
+setopt +o nomatch
 
 eval "$(starship init zsh)"
 
