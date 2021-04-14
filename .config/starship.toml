@@ -18,6 +18,15 @@ variable = "SHELL"
 [hostname]
 ssh_only = false
 
+# The python module shows the currently installed version of Python and the
+# current Python virtual environment if one is activated.
+[python]
+# Use pyenv to get Python version
+pyenv_version_name = true
+# Configures the python binaries that Starship should executes when getting the
+# version.
+python_binary = ["pytho3", "python", "python2"]
+
 [shell]
 # Disables the shell module.
 disabled = true

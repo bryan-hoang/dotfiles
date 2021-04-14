@@ -40,7 +40,11 @@ export GPG_TTY
 # Hide the "default interactive shell is now zsh" warning on macOS.
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
-export FORCE_COLOR=true
-export GIT_PATH="$HOME/git"
+# Install locations
+export PYENV_ROOT="$HOME/.pyenv"
 export DENO_INSTALL=$HOME/.deno
+export GIT_PATH="$HOME/git"
+
+# Misc.
+export FORCE_COLOR=true
 export NODE_OPTIONS="--unhandled-rejections=strict --trace-deprecation"
