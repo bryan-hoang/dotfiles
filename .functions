@@ -238,5 +238,3 @@ function initpyenv() {
     eval "$(pyenv init -)"
   fi
 }
-
-initpyenv

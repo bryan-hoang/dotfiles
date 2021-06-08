@@ -25,7 +25,7 @@ ssh_only = false
 pyenv_version_name = true
 # Configures the python binaries that Starship should executes when getting the
 # version.
-python_binary = ["pytho3", "python", "python2"]
+python_binary = ["python3", "python", "python2"]
 
 [shell]
 # Disables the shell module.
