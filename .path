@@ -9,6 +9,6 @@ export PATH=/snap/bin:$PATH
 export PATH=$HOME/.local/share/umake/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/bin:$PATH
-export PATH=$PYENV_ROOT/bin:$PATH
 export PATH=$HOME/.deno/bin:$PATH
+export PATH=$PYENV_ROOT/bin:$PATH
 # Searched first
