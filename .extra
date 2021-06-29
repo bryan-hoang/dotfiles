@@ -1,0 +1,32 @@
+#!/usr/bin/env sh
+# -*- coding: utf-8 -*-
+
+if [ -n "$ZSH_NAME" ]; then
+  # Disabling Zsh's nomatch option
+  # http://zsh.sourceforge.net/Doc/Release/Options.html#Expansion-and-Globbing
+  setopt +o nomatch
+
+  # Prevent history from recording duplicated entries
+  setopt histignorealldups
+
+  # Prevent particular entries from being recorded into a history by preceding
+  # them with at least one space.
+  setopt histignorespace
+
+  # # Immediately append to the history file, not just when a term is killed
+  # setopt incappendhistory
+  # Share history across terminals
+  setopt sharehistory
+
+  setopt extendedhistory
+
+  eval "$(starship init zsh)"
+elif [ -n "$BASH_VERSION" ]; then
+  # shellcheck disable=SC3044
+  shopt -s histappend
+
+  # shellcheck disable=SC3044
+  shopt -s cmdhist
+
+  eval "$(starship init bash)"
+fi

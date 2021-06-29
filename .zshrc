@@ -1,15 +1,6 @@
 #!/usr/bin/env zsh
 # -*- coding: utf-8 -*-
 
-# Load shell dotfiles, and then some:
-# * ~/.path can be used to extend `$PATH`.
-# * ~/.extra can be used for other settings you don't want to commit.
-for file in ~/.{exports,path,aliases,functions,extra}; do
-  # shellcheck disable=SC1090
-  [ -r "$file" ] && [ -f "$file" ] && source "$file"
-done
-unset file
-
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -107,11 +98,14 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Disabling Zsh's nomatch option
-# http://zsh.sourceforge.net/Doc/Release/Options.html#Expansion-and-Globbing
-setopt +o nomatch
-
-eval "$(starship init zsh)"
+# Load shell dotfiles, and then some:
+# * ~/.path can be used to extend `$PATH`.
+# * ~/.extra can be used for other settings you don't want to commit.
+for file in ~/.{exports,path,aliases,functions,extra}; do
+  # shellcheck disable=SC1090
+  [ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
+unset file
 
 export NVM_DIR="$HOME/.nvm"
 # This loads nvm

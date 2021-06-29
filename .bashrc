@@ -1,15 +1,6 @@
 #!/usr/bin/env bash
 # -*- coding: utf-8 -*-
 
-# Load the shell dotfiles, and then some:
-# * ~/.path can be used to extend `$PATH`.
-# * ~/.extra can be used for other settings you don't want to commit.
-for file in ~/.{exports,path,aliases,functions,extra,bash_prompt}; do
-  # shellcheck disable=SC1090
-  [ -r "$file" ] && [ -f "$file" ] && source "$file"
-done
-unset file
-
 # Case-insensitive globbing (used in pathname expansion)
 shopt -s nocaseglob
 
@@ -27,11 +18,10 @@ for option in autocd globstar; do
 done
 
 # Add tab completion for many Bash commands
-if which brew &>/dev/null && [ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
+if command -v brew &>/dev/null && [ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
   # Ensure existing Homebrew v1 completions continue to work
   BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
   export BASH_COMPLETION_COMPAT_DIR
-  # shellcheck disable=SC1090
   source "$(brew --prefix)/etc/profile.d/bash_completion.sh"
 elif [ -f /etc/bash_completion ]; then
   # shellcheck disable=SC1091
@@ -159,12 +149,17 @@ source "$OSH"/oh-my-bash.sh
 # alias bashconfig="mate ~/.bashrc"
 # alias ohmybash="mate ~/.oh-my-bash"
 
+# Load the shell dotfiles, and then some:
+# * ~/.path can be used to extend `$PATH`.
+# * ~/.extra can be used for other settings you don't want to commit.
+for file in ~/.{exports,path,aliases,functions,bash_prompt,extra}; do
+  # shellcheck disable=SC1090
+  [ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
+unset file
+
 export NVM_DIR="$HOME/.nvm"
 # This loads nvm
-# shellcheck disable=SC1090
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 # This loads nvm bash_completion
-# shellcheck disable=SC1090
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-eval "$(starship init bash)"
