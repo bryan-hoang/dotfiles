@@ -11,12 +11,24 @@ add_newline = true
 error_symbol = "[\\$](bold red)"
 success_symbol = "[\\$](bold green)"
 
+[cmd_duration]
+disabled = false
+
 [env_var]
 default = "unknown shell"
+disabled = true
+style = "black bold"
 variable = "SHELL"
 
 [hostname]
 ssh_only = false
+
+[memory_usage]
+disabled = false
+threshold = -1
+
+[package]
+disabled = true
 
 # The python module shows the currently installed version of Python and the
 # current Python virtual environment if one is activated.
@@ -25,12 +37,13 @@ ssh_only = false
 pyenv_version_name = true
 # Configures the python binaries that Starship should executes when getting the
 # version.
-python_binary = ["python3", "python", "python2"]
 format = 'via [${symbol}${pyenv_prefix}(${version} )($virtualenv )]($style)'
+python_binary = ["python3", "python", "python2"]
 
 [shell]
 # Disables the shell module.
 disabled = true
+unknown_indicator = "mystery shell"
 
 [status]
 disabled = true
@@ -41,5 +54,15 @@ map_symbol = true
 disabled = true
 
 [username]
-disabled = false
+format = "[$user]($style) at "
 show_always = true
+
+[custom.shell]
+# The command whose output should be printed. The command will be passed on
+# stdin to the shell.
+command = "echo $0"
+format = "with [$output]($style) "
+style = "black bold"
+# A shell command used as a condition to show the module. The module will be
+# shown if the command returns a 0 status code.
+when = "true"
