@@ -241,3 +241,7 @@ function initpyenv() {
 }
 
 initpyenv
+
+function pass(){
+  bw get password "$1" | xclip -se c
+}
