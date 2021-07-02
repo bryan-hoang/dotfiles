@@ -44,4 +44,3 @@ export GIT_PATH="$HOME/git"
 
 # Misc.
 export FORCE_COLOR=true
-export NODE_OPTIONS="--unhandled-rejections=strict --trace-deprecation"
