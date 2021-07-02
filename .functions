@@ -181,8 +181,6 @@ function drop-mysql-databases() {
   mysql -uroot -e "show databases" | grep -v Database | grep -v mysql | grep -v information_schema | gawk '{print "drop database `" $1 "`;"}' | mysql -uroot
 }
 
-eval "$(keychain -q --agents ssh --eval id_ed25519)"
-
 # Safer wget | bash'ing
 function wgetbash {
   file=$(mktemp wgetbash.XXX.sh) || {
