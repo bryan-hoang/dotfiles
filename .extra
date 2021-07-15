@@ -30,3 +30,5 @@ elif [ -n "$BASH_VERSION" ]; then
 
   eval "$(starship init bash)"
 fi
+
+eval "$(keychain --eval --nogui -q id_ed25519)"

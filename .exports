@@ -44,3 +44,5 @@ export GIT_PATH="$HOME/git"
 
 # Misc.
 export FORCE_COLOR=true
+export LC_ALL=en_CA.UTF-8
+export LANGUAGE=$LC_ALL

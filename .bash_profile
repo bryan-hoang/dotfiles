@@ -2,4 +2,4 @@
 # -*- coding: utf-8 -*-
 
 # shellcheck disable=SC1090
-[ -n "$PS1" ] && source ~/.bashrc
+[ -n "$PS1" ] && source ~/.profile
