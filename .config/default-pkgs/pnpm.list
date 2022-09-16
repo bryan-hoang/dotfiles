@@ -1,0 +1,34 @@
+# The commitizen command line utility.
+commitizen
+# A commitizen adapter for the angular preset of
+# conventional-changelog/conventional-changelog.
+cz-conventional-changelog
+# Generate a changelog from git metadata.
+conventional-changelog-cli
+# Find newer versions of package dependencies than what your package.json
+# allows.
+npm-check-updates
+# Fast, reliable, and secure dependency management.
+yarn
+# 📚 Collaborative cheatsheets for console commands.
+#
+# Currently using `tealdeer` in rust.
+# tldr
+# The command line vault.
+@bitwarden/cli
+# Opinionated Code Formatter.
+prettier
+# Monitor for any changes in your node.js application and automatically restart
+# the server.
+nodemon
+# Micro-generator framework that makes it easy for an entire team to create
+# files with a level of uniformity.
+plop
+# A service for capitalizing your title properly.
+https://github.com/bryan-hoang/title
+# Command line tool for the Mermaid library.
+@mermaid-js/mermaid-cli
+# Node.js tool for optimizing SVG files
+svgo
+# Node-Inspect IMproved.
+niim

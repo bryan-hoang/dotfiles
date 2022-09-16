@@ -1,0 +1,23 @@
+# Look for 'source'd files relative to the checked script's location.
+source-path=SCRIPTDIR
+
+# Suggest adding a default case in `case` statements
+enable=add-default-case
+
+# Suggest explicitly using -n in `[ $var ]`
+enable=avoid-nullary-conditions
+
+# Warn when uppercase variables are unassigned
+# enable=check-unassigned-uppercase
+
+# Suggest 'command -v' instead of 'which'
+enable=deprecate-which
+
+# Turn on warnings for unquoted variables with safe values
+enable=quote-safe-variables
+
+# uggest putting braces around all variable references
+enable=require-variable-braces
+
+# Set whether or not to follow arbitrary file paths in source statements (since 0.8.0).
+external-sources=true

@@ -1,0 +1,10 @@
+Core Team
+webpacked
+DCP
+ORMDB
+Object Relational Mapping Database
+MR
+[pP]ortal
+KVIN
+Distributive
+[sS]cheduler

@@ -1,0 +1,54 @@
+# The format is option=value
+# Lines starting with a # are considered comments and are ignored.
+
+# Please see the Streamlink CLI documentation for all available options
+# and their descriptions. All leading dashes need to be ignored,
+# e.g. --default-stream=STREAM becomes default-stream=STREAM
+# https://streamlink.github.io/cli.html#command-line-usage
+
+# Player to feed stream data to.
+player=mpv
+
+# Stream to play.
+#
+# Use best or worst for selecting the highest or lowest available quality.
+#
+# Fallback streams can be specified by using a comma-separated list:
+#
+# "720p,480p,best"
+#
+# This is an alternative to setting the stream using a positional argument and
+# can be useful if set in a config file.
+default-stream=best
+
+# By default, Streamlink will close the player when the stream is over.
+# Use this option to let the player stay or close itself instead.
+# player-no-close
+
+# Number of threads to use when streaming HLS streams
+hls-live-edge=2
+hls-segment-threads=1
+
+# Retry fetching the list of available streams until streams are found while
+# waiting DELAY second(s) between each attempt. If unset, only one attempt will
+# be made to fetch the list of streams available.
+retry-streams=1
+
+# Enables low latency streaming by prefetching HLS segments. Sets
+# --hls-live-edge to 2, if it is higher. Reducing it to 1 will result in the
+# lowest latency possible, but will most likely cause buffering.
+#
+# In order to achieve true low latency streaming during playback, the player's
+# caching/buffering settings will need to be adjusted and reduced to a value as
+# low as possible, but still high enough to not cause any buffering. This
+# depends on the stream's bitrate and the quality of the connection to Twitch's
+# servers. Please refer to the player's own documentation for the required
+# configuration. Player parameters can be set via --player-args.
+twitch-low-latency
+
+# Skip embedded advertisement segments at the beginning or during a stream.
+# Will cause these segments to be missing from the stream.
+twitch-disable-ads
+
+crunchyroll-username=bryan.c.hoang@gmail.com
+ffmpeg-ffmpeg=C:\Program Files\Streamlink\ffmpeg\ffmpeg.exe

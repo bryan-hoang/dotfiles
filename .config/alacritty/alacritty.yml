@@ -1,0 +1,35 @@
+# Import additional configuration files
+#
+# Imports are loaded in order, skipping all missing files, with the importing
+# file being loaded last. If a field is already present in a previous import,
+# it will be replaced.
+#
+# All imports must either be absolute paths starting with `/`, or paths
+# relative to the user's home directory starting with `~/`.
+import:
+  - ~/alacritty.yml
+
+# Shell
+#
+# You can set `shell.program` to the path of your favorite shell, e.g.
+# `/bin/fish`. Entries in `shell.args` are passed unmodified as arguments to
+# the shell.
+#
+# Default:
+# - (macOS) /bin/bash --login
+# - (Linux/BSD) user login shell
+# - (Windows) powershell
+shell:
+  program: zellij
+
+# Font configuration
+font:
+  # Normal (roman) font face
+  normal:
+    # Font family
+    #
+    # Default:
+    #   - (macOS) Menlo
+    #   - (Linux/BSD) monospace
+    #   - (Windows) Consolas
+    family: FiraCode Nerd Font

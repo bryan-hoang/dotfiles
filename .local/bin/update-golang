@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# -*- coding: utf-8 -*-
+
+wget -qO- https://raw.githubusercontent.com/udhos/update-golang/master/update-golang.sh \
+  | sudo bash -s -- "$@"

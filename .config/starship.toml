@@ -1,0 +1,212 @@
+# ~/.config/starship.toml
+
+# Prompt-wide configuration options.
+format = """
+$username\
+$hostname\
+$localip\
+$shlvl\
+$singularity\
+$kubernetes\
+$directory\
+$vcsh\
+${custom.git_url}\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+${custom.git_scope}\
+$hg_branch\
+$docker_context\
+$package\
+$buf\
+$c\
+$cmake\
+$cobol\
+$container\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$haskell\
+$helm\
+$java\
+$julia\
+$kotlin\
+$lua\
+$nim\
+$nodejs\
+${custom.npm}\
+$ocaml\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$swift\
+$terraform\
+$vlang\
+$vagrant\
+$zig\
+$nix_shell\
+$conda\
+$spack\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$env_var\
+$crystal\
+$custom\
+$sudo\
+$cmd_duration\
+$jobs\
+$battery\
+$time\
+$status\
+$shell\
+$line_break\
+$character"""
+
+# Add a blank line at the start of the prompt
+add_newline = true
+
+# Timeout for commands executed by starship (in milliseconds).
+command_timeout = 500
+
+# Timeout for starship to scan files (in milliseconds).
+scan_timeout = 30
+
+# The character module shows a character (usually an arrow) beside where the
+# text is entered in your terminal.
+[character]
+error_symbol = "[\\$](bold red)"
+success_symbol = "[\\$](bold green)"
+
+# The cmd_duration module shows how long the last command took to execute. The
+# module will be shown only if the command took longer than two seconds, or the
+# min_time config value, if it exists.
+[cmd_duration]
+# Disables the cmd_duration module.
+disabled = false
+# Shortest duration to show time for (in milliseconds).
+min_time = 30_000
+# Show desktop notifications when command completes.
+#
+# Showing desktop notifications requires starship to be built with rust-notify
+# support. You check if your starship supports notifications by running
+# `STARSHIP_LOG=debug starship module cmd_duration -d 60000` when
+# show_notifications is set to true.
+show_notifications = true
+
+[deno]
+disabled = false
+
+[directory]
+format = "[$path]($style)[$read_only]($read_only_style) "
+
+[git_branch]
+format = "[$symbol$branch(:$remote_branch)]($style) "
+
+[hostname]
+format = "[$ssh_symbol$hostname]($style):"
+ssh_symbol = ""
+trim_at = ""
+
+# Shows the current number of jobs running.
+[jobs]
+disabled = true
+
+# The memory_usage module shows current system memory and swap usage.
+#
+# By default the swap usage is displayed if the total system swap is non-zero.
+[memory_usage]
+# Disables the memory_usage module.
+disabled = false
+format = "w/ $symbol[${ram}( | ${swap})]($style) "
+# Hide the memory usage unless it exceeds this percentage.
+threshold = 95
+
+# The nodejs module shows the currently installed version of Node.js.
+[nodejs]
+# Disables the nodejs module.
+disabled = false
+# The version format. Available vars are `raw`, `major`, `minor`, & `patch`
+version_format = "v${major}"
+
+[package]
+disabled = true
+
+# The perl module shows the currently installed version of Perl.
+[perl]
+detect_extensions = ["pl", "pm", "pod", "tex"]
+
+# The python module shows the currently installed version of Python and the
+# current Python virtual environment if one is activated.
+[python]
+# Configures the python binaries that Starship should executes when getting the
+# version.
+format = 'via [${symbol}(${version} )($virtualenv )]($style)'
+# Configures the python binaries that Starship should executes when getting the
+# version.
+python_binary = ["python3", "python", "python2"]
+# The version format. Available vars are `raw`, `major`, `minor`, & `patch`
+version_format = "v${raw}"
+
+[shell]
+disabled = false
+format = '\([$indicator]($style)\)'
+
+# Shows the current SHLVL ("shell level") environment variable, if it is set to
+# a number and meets or exceeds the specified threshold.
+[shlvl]
+disabled = true
+
+[status]
+disabled = true
+# Enable symbols mapping from exit code
+map_symbol = true
+
+[time]
+disabled = true
+
+[username]
+format = "[$user]($style)@"
+show_always = false
+
+[custom.direnv]
+command = "echo 'direnv'"
+description = "The fact that direnv is being used"
+disabled = true
+format = "using [$output]($style) "
+style = "purple"
+when = "[[ -n \"${DIRENV_DIR}\" ]]"
+
+[custom.git_scope]
+command = 'git config user.email'
+description = 'The currently configured Git user.email'
+disabled = true
+format = 'as [<$output>]($style) '
+style = 'blue'
+when = 'git rev-parse --is-inside-work-tree'
+
+[custom.git_url]
+# disabled = true
+command = "check-git-remote"
+description = "Display symbol for remote Git server"
+format = "[$output]($style) "
+# Don't run in dotfiles repo.
+os = "unix"
+shell = ["bash", "--noprofile", "--norc"]
+style = "white"
+when = "git rev-parse --is-inside-work-tree 2>/dev/null"

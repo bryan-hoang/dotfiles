@@ -1,0 +1,16 @@
+pip
+wheel
+pipenv
+pyupgrade
+thefuck
+httpie
+Pygments
+radian
+mycli
+yt-dlp
+youtube-dl
+inkscape-figures
+python-dotenv[cli]
+litecli
+trash-cli
+pynvim

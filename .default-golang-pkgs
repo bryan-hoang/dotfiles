@@ -1,0 +1,10 @@
+github.com/x-motemen/ghq@latest
+mvdan.cc/sh/v3/cmd/shfmt@latest
+# Disk Usage/Free Utility - a better 'df' alternative.
+github.com/muesli/duf@latest
+# 🌸 A command-line fuzzy finder.
+github.com/junegunn/fzf@latest
+github.com/dnnrly/abbreviate@latest
+github.com/maaslalani/slides@latest
+github.com/google/git-appraise/git-appraise@latest
+github.com/editorconfig-checker/editorconfig-checker/cmd/editorconfig-checker@latest

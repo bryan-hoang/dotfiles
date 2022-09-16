@@ -1,0 +1,42 @@
+# Download Options:
+
+# Use the specified external downloader. Currently supports
+# aria2c,avconv,axel,c url,ffmpeg,httpie,wget.
+--external-downloader aria2c
+
+# Filesystem Options:
+
+# Output filename template, see the "OUTPUT TEMPLATE" for all the info
+--output ~/Downloads/%(title)s.%(ext)s
+
+# Filesystem Options:
+
+# Restrict filenames to only ASCII characters, and avoid "&" and spaces in
+# filenames.
+--restrict-filenames
+
+# Video Format Options:
+
+# Video format code, see the "FORMAT SELECTION" for all the info
+--format mp4
+
+# Subtitle Options:
+
+# Write subtitle file
+--write-sub
+
+# Write automatically generated subtitle file (YouTube only)
+--write-auto-sub
+
+# Subtitle format, accepts formats preference, for example: "srt" or
+# "ass/srt/best"
+--sub-format srt
+
+# Languages of the subtitles to download (optional) separated by commas, use
+# --list-subs for available language tags
+--sub-lang en
+
+# Post-processing Options:
+
+# Write metadata to the video file
+--add-metadata

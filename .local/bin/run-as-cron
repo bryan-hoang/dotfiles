@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+/usr/bin/env -i $(cat /home/bryan/.cron.env) "$@"

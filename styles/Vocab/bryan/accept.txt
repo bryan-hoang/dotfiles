@@ -1,0 +1,35 @@
+deployer
+dev
+(?i)npm
+nvm
+transpiling
+o|Onboarding
+j|Jira
+MDN
+Proxy Auto-Configuration
+MR
+TurboBridge
+Whereby
+w|Wes
+GitLab
+Kanban
+that is
+That is
+Pheme
+Tzu
+Ethereum
+initialisms
+uppercased
+initializer
+Merge Request
+OAuth
+WFH
+SQLite
+ORM
+MySQL
+VS Code
+bundler
+deserialise
+WebGPU
+Vulkan
+Nvidia

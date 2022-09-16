@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+# -*- coding: utf-8 -*-
+
+echo "${SHELL}"
+echo "${PATH}"
+# shellcheck source=../.profile
+. ~/.profile
+echo "${PATH}"

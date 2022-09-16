@@ -1,0 +1,13 @@
+# Automatically normalize line endings for all text-based files
+* text=auto eol=lf
+
+# Force everything to be LF, except for Windows batch files that require CRLF:
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
+
+.npmrc filter=npmrc
+.gnupg/gpg-agent.conf filter=gpg-agent
+.config/spotify-tui/client.yml filter=spotify-tui
+AppData/Roaming/streamlink/config filter=streamlink-crunchyroll
+.config/i3status-rust/config.toml filter=i3status-rust-token
+.Xresources filter=xresources-dpi

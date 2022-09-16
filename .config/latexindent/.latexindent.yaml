@@ -1,0 +1,66 @@
+defaultIndent: '  '
+
+# Environments and their arguments YAML switche governing the indentation of
+# environments.
+noAdditionalIndent:
+  document: 0
+  forestset: 0
+
+# Modifying line breaks for sentences
+modifyLineBreaks:
+  oneSentencePerLine:
+    manipulateSentences: 0
+
+# Specifying code blocks in this field instructs latexindent.pl to try and align
+# each column by its alignment delimiters.
+lookForAlignDelims:
+  tblr: 1
+  # optionally specifies the number (integer ≥ 0) of spaces to be placed After
+  # ampersands (default: 1);
+  align:
+    spacesBeforeAmpersand: 1
+    spacesAfterAmpersand: 0
+  align*:
+    spacesBeforeAmpersand: 1
+    spacesAfterAmpersand: 0
+  aligned:
+    spacesBeforeAmpersand: 1
+    spacesAfterAmpersand: 0
+  cases:
+    spacesBeforeAmpersand: 1
+    spacesAfterAmpersand: 0
+  alignat*:
+    spacesAfterAmpersand: 0
+  alignedlabel:
+    spacesBeforeAmpersand: 0
+    spacesAfterAmpersand: 0
+
+# https://github.com/cmhughes/latexindent.pl/issues/265#issuecomment-813928326
+# Prevent extra indentation in forest
+noAdditionalIndentGlobal:
+  UnNamedGroupingBracesBrackets: 1
+  keyEqualsValuesBracesBrackets: 0
+  # namedGroupingBracesBrackets: 1
+
+# Enable indentation of forest to work
+fineTuning:
+  UnNamedGroupingBracesBrackets:
+    follow: '\{|\[|,|&|\)|\(|\$|\R|\h'
+  # keyEqualsValuesBracesBrackets:
+  #   name: '[\sa-zA-Z@\*0-9_\/.:\#-]+[a-zA-Z@\*0-9_\/.\h\{\}:\#-]*?'
+
+# If you call latexindent.pl with the -w switch (to overwrite myfile.tex) then
+# it will create a backup file before doing any indentation; the default
+# extension is .bak, so, for example, myfile.bak0 would be created when calling
+# latexindent.pl myfile.tex for the first time.
+#
+# By default, every time you subsequently call latexindent.pl with the -w to
+# act upon myfile.tex, it will create successive back up files: myfile.bak1,
+# myfile.bak2, etc.
+backupExtension: .tex.bak
+
+# If you don't want a backup for every time that you call latexindent.pl (so
+# you don't want myfile.bak1, myfile.bak2, etc) and you simply want myfile.bak
+# (or whatever you chose backupExtension to be) then change onlyOneBackUp to 1;
+# the default value of onlyOneBackUp is 0.
+onlyOneBackUp: 1

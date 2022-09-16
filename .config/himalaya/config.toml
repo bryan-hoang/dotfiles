@@ -1,0 +1,21 @@
+default-page-size = 50
+# Directory to use when downloading attachments.
+downloads-dir = "~/Downloads"
+# Full display name of the user.
+name = "Bryan Hoang"
+# Signature to add at the bottom of all messages.
+signature = "Best regards,\nBryan Hoang"
+
+[gmail]
+default = true
+email = "bryan.c.hoang@gmail.com"
+
+imap-host = "imap.gmail.com"
+imap-login = "bryan.c.hoang@gmail.com"
+imap-passwd-cmd = "pass show gmail"
+imap-port = 993
+
+smtp-host = "smtp.gmail.com"
+smtp-login = "bryan.c.hoang@gmail.com"
+smtp-passwd-cmd = "pass show gmail"
+smtp-port = 465

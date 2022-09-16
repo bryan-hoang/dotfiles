@@ -1,0 +1,5 @@
+# The [net] table controls networking configuration.
+[net]
+# If this is true, then Cargo will use the git executable to fetch registry
+# indexes and git dependencies. If false, then it uses a built-in git library.
+git-fetch-with-cli = true

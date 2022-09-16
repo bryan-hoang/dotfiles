@@ -1,0 +1,92 @@
+---
+#################################
+#################################
+## Super Linter GitHub Actions ##
+#################################
+#################################
+name: Lint Code Base
+
+#
+# Documentation:
+# https://help.github.com/en/articles/workflow-syntax-for-github-actions
+#
+
+#############################
+# Start the job on all push #
+#############################
+on:
+  push:
+  pull_request:
+    branches: [main]
+
+###############
+# Set the Job #
+###############
+jobs:
+  lint:
+    # Name the Job
+    name: Lint Code Base
+    # Set the agent to run on
+    runs-on: ubuntu-latest
+
+    ##################
+    # Load all steps #
+    ##################
+    steps:
+      ##########################
+      # Checkout the code base #
+      ##########################
+      - name: Checkout Code
+        uses: actions/checkout@v3
+        with:
+          # Whether to checkout submodules: `true` to checkout submodules or
+          # `recursive` to recursively checkout submodules.
+          #
+          # When the `ssh-key` input is not provided, SSH URLs beginning with
+          # `git@github.com:` are converted to HTTPS.
+          #
+          # Default: false
+          submodules: false
+          # Number of commits to fetch. 0 indicates all history for all
+          # branches and tags. Default: 1
+          #
+          # Full git history is needed to get a proper list of changed files
+          # within `super-linter`
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: latest
+          run_install: false
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+      - name: Install dependencies
+        run: pnpm install
+
+      ################################
+      # Run Linter against code base #
+      ################################
+      - name: Lint Code Base
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Binary ops like && and | may start a line and switch cases will be
+          # indented.
+          VALIDATE_SHELL_SHFMT: false
+          # Flag to set the default style of JavaScript. Available options:
+          # standard/prettier.
+          JAVASCRIPT_DEFAULT_STYLE: prettier
+          LUA_LINTER_RULES: .config/luacheck/.luacheckrc

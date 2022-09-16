@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+# -*- coding: utf-8 -*-
+
+# ~/.logout: executed by shell when login shell exits.
+
+# Clean MySQL history for security reasons.
+rm "${HOME}"/.mysql_history
+
+# When leaving the console clear the screen to increase privacy.
+clear

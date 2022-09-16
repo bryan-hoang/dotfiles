@@ -1,0 +1,104 @@
+#!/usr/bin/env bash
+# -*- coding: utf-8 -*-
+
+export XDG_CONFIG_HOME="${HOME}"/.config
+export XDG_DATA_HOME="${HOME}"/.local/share
+export XDG_STATE_HOME="${HOME}"/.local/state
+export XDG_CACHE_HOME="${HOME}"/.cache
+export XCURSOR_PATH="${HOME}"/.local/share/icons
+export XCURSOR_THEME=Dracula-cursors
+
+# Default editor.
+if command -v nvim &>/dev/null; then
+	export SUDO_EDITOR='nvim'
+	export VISUAL=${SUDO_EDITOR}
+	export EDITOR=${SUDO_EDITOR}
+elif command -v vim &>/dev/null; then
+	export SUDO_EDITOR='vim'
+	export VISUAL=${SUDO_EDITOR}
+	export EDITOR=${SUDO_EDITOR}
+fi
+
+# Enable persistent REPL history for `node`.
+export NODE_REPL_HISTORY="${HOME}"/.node_history
+# Allow 32^3 entries; the default is 1000.
+export NODE_REPL_HISTORY_SIZE='32768'
+# Use sloppy mode by default, matching web browsers.
+export NODE_REPL_MODE='sloppy'
+export NODE_INSPECT_RESUME_ON_START=1
+
+# Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
+export PYTHONIOENCODING='UTF-8'
+
+# Increase Bash history size. Allow 32^3 entries; the default is 500.
+export HISTSIZE='32768'
+export HISTFILESIZE=${HISTSIZE}
+export SAVEHIST=${HISTSIZE}
+# Share history between zsh and bash
+export HISTFILE="${HOME}/.history"
+# Omit duplicates and commands that begin with a space from history.
+export HISTCONTROL='ignoreboth:erasedups'
+
+# Pager settings
+export PAGER='less'
+command -v bat &>/dev/null \
+	&& export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# -X leaves file contents on the screen when less exits.
+#
+# -F makes less quit if the entire output can be displayed on one screen.
+#
+# -R displays ANSI color escape sequences in "raw" form.
+#
+# -x Sets tab stops.
+export LESS='-XFR -x 2'
+
+# Avoid issues with `gpg` as installed via Homebrew.
+# https://stackoverflow.com/a/42265848/96656
+GPG_TTY=$(tty)
+export GPG_TTY
+
+# Hide the "default interactive shell is now zsh" warning on macOS.
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+# Install locations
+export DENO_INSTALL="${HOME}"/.deno
+export GIT_PATH="${HOME}"/git
+
+# Setting up environment variables for texlive
+# export MANPATH=/usr/local/man:${MANPATH}
+export MANPATH="${TEXDIR}"/texmf-dist/doc/man:"${MANPATH}"
+export INFOPATH="${TEXDIR}"/texmf-dist/doc/info:"${INFOPATH}"
+
+# Locale
+export LANG="C.UTF-8"
+export LANGUAGE=${LANG}
+export LC_ALL=${LANG}
+
+# Misc.
+export FORCE_COLOR='true'
+export SHELLCHECK_OPTS="-x"
+export GHQ_ROOT="${HOME}"/git
+
+case ${TERM} in
+	# WSL in windows Terminal colour support.
+	xterm-256color)
+		export COLORTERM='truecolor'
+		;;
+	*) ;;
+esac
+
+export TERMINAL='wezterm'
+export WEZTERM_CONFIG_FILE="${HOME}"/.config/wezterm/wezterm.lua
+
+# `exa` options
+
+# Sets how to format the time used in the long view's time column.
+export TIME_STYLE='long-iso'
+# Enables strict mode, which will make exa error when two command-line options
+# are incompatible.
+export EXA_STRICT='true'
+
+export MCFLY_KEY_SCHEME=vim
+export MCFLY_RESULTS_SORT=LAST_RUN
+export MCFLY_HISTORY_LIMIT=${HISTSIZE}

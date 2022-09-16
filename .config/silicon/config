@@ -1,0 +1,4 @@
+# The fallback font list. eg. 'Hack; SimSun=31'
+--font 'Fira Code Nerd Font Mono'
+# Tab width [default: 4]
+--tab-width 2

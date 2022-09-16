@@ -1,0 +1,72 @@
+[submodule ".oh-my-zsh"]
+	path = .oh-my-zsh
+	url = https://github.com/ohmyzsh/ohmyzsh.git
+[submodule ".oh-my-bash"]
+	path = .oh-my-bash
+	url = https://github.com/ohmybash/oh-my-bash.git
+[submodule ".asdf"]
+	path = .asdf
+	url = https://github.com/asdf-vm/asdf.git
+[submodule ".config/nvim"]
+	path = .config/nvim
+	url = https://github.com/NvChad/NvChad
+[submodule ".vim_runtime"]
+	path = .vim_runtime
+	url = https://github.com/amix/vimrc.git
+[submodule ".local/share/themes/Dracula"]
+	path = .local/share/themes/Dracula
+	url = https://github.com/dracula/gtk.git
+[submodule "submodules/.tmux"]
+	path = submodules/.tmux
+	url = https://github.com/gpakosz/.tmux.git
+[submodule "submodules/Google"]
+	path = submodules/Google
+	url = https://github.com/errata-ai/Google.git
+[submodule "submodules/Microsoft"]
+	path = submodules/Microsoft
+	url = https://github.com/errata-ai/Microsoft.git
+[submodule "submodules/write-good"]
+	path = submodules/write-good
+	url = https://github.com/errata-ai/write-good.git
+[submodule "submodules/proselint"]
+	path = submodules/proselint
+	url = https://github.com/errata-ai/proselint.git
+[submodule "submodules/alex"]
+	path = submodules/alex
+	url = https://github.com/errata-ai/alex
+[submodule "submodules/Readability"]
+	path = submodules/Readability
+	url = https://github.com/errata-ai/readability
+[submodule "submodules/Openly"]
+	path = submodules/Openly
+	url = https://github.com/testthedocs/Openly.git
+[submodule "submodules/IBM"]
+	path = submodules/IBM
+	url = https://github.com/errata-ai/IBM.git
+[submodule "submodules/rofi"]
+	path = submodules/rofi
+	url = https://github.com/dracula/rofi
+[submodule "submodules/spicetify-themes"]
+	path = submodules/spicetify-themes
+	url = https://github.com/spicetify/spicetify-themes.git
+[submodule "submodules/dracula-git"]
+	path = submodules/dracula-git
+	url = https://github.com/dracula/git
+[submodule "submodules/zsh-syntax-highlighting"]
+	path = submodules/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "submodules/zsh-autosuggestions"]
+	path = submodules/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions.git
+[submodule "submodules/zsh-completions"]
+	path = submodules/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions.git
+[submodule "submodules/pyvenv-activate"]
+	path = submodules/pyvenv-activate
+	url = https://github.com/Intersec/pyvenv-activate.git
+[submodule "submodules/zsh-hist"]
+	path = submodules/zsh-hist
+	url = https://github.com/marlonrichert/zsh-hist.git
+[submodule "submodules/ghq"]
+	path = submodules/ghq
+	url = https://github.com/x-motemen/ghq.git

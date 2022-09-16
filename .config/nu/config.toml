@@ -1,0 +1,7 @@
+pivot_mode = "alway"
+prompt = "STARSHIP_SHELL= starship prompt"
+skip_welcome_message = true
+startup = [
+  "alias dot = git $\"--git-dir=($nu.env.HOME)/config/\" $\"--work-tree=($nu.env.HOME)\"",
+  "source ~/.nu",
+]
