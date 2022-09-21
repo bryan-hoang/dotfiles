@@ -26,19 +26,7 @@ fi
 
 # region: Completions
 
-NODE_PATH='node'
-
-if is_git_bash; then
-	NODE_PATH='node.exe'
-fi
-
-# shellcheck disable=SC1090
-does_program_exist "${NODE_PATH}" && . <(${NODE_PATH} --completion-bash)
-
 does_program_exist thefuck && eval "$(thefuck --alias)"
-
-# shellcheck disable=SC1090
-does_program_exist pm2 && . <(pm2 completion)
 
 # endregion
 

@@ -1210,3 +1210,36 @@ uninstall_global_npm_pkgs() {
 		| awk -F/ '/node_modules\/@/ {print $(NF-1)"/"$NF} /node_modules\/[^@]/ && !/\/npm$/ {print $NF}' \
 		| xargs npm -g rm
 }
+
+generate_completions() {
+	local -r shell="${1}"
+	local -r command_to_complete="${2}"
+	local -r bash_completion_file=${XDG_DATA_HOME}/bash-completion/${command_to_complete}
+	local -r zsh_completion_file=${XDG_DATA_HOME}/zsh/site-functions/_${command_to_complete}
+
+	case "${shell}" in
+		bash)
+			if [[ ! -s ${bash_completion_file} ]]; then
+				"${@:3}" >|"${bash_completion_file}"
+			fi
+			;;
+		zsh)
+			if [[ ! -s ${zsh_completion_file} ]]; then
+				"${@:3}" >|"${zsh_completion_file}"
+			fi
+			;;
+		all)
+			if [[ ! -s ${bash_completion_file} ]]; then
+				"${@:3}" >|"${bash_completion_file}"
+			fi
+
+			if [[ ! -s ${zsh_completion_file} ]]; then
+				"${@:3}" >|"${zsh_completion_file}"
+			fi
+			;;
+		*)
+			echo "Invalid shell: ${shell}"
+			return 1
+			;;
+	esac
+}

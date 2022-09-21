@@ -29,7 +29,6 @@ DISABLE_AUTO_TITLE="true"
 plugins=(
 	command-not-found
 	gitfast
-	npm
 	systemd
 	# Completions
 	docker
@@ -177,7 +176,8 @@ does_program_exist starship && eval "$(starship init zsh)"
 does_program_exist mcfly && eval "$(mcfly init zsh)"
 does_program_exist navi && eval "$(navi widget zsh)"
 does_program_exist zoxide && eval "$(zoxide init zsh)"
-does_program_exist pipenv && eval "$(_PIPENV_COMPLETE=zsh_source pipenv)"
+does_program_exist pipenv \
+	&& generate_completions zsh pipenv env _PIPENV_COMPLETE=zsh_source pipenv
 
 # shellcheck disable=SC1091
 if [[ -f "${XDG_CONFIG_HOME:-${HOME}/.config}/asdf-direnv/zshrc" ]]; then
@@ -185,7 +185,7 @@ if [[ -f "${XDG_CONFIG_HOME:-${HOME}/.config}/asdf-direnv/zshrc" ]]; then
 	source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
 fi
 
-# tabtab source for packages
+# tabtab source for packages (e.g., pnpm).
 # shellcheck disable=SC1091
 [[ -f "${HOME}"/.config/tabtab/zsh/__tabtab.zsh ]] \
 	&& . "${HOME}"/.config/tabtab/zsh/__tabtab.zsh
