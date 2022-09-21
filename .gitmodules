@@ -70,3 +70,9 @@
 [submodule "submodules/ghq"]
 	path = submodules/ghq
 	url = https://github.com/x-motemen/ghq.git
+[submodule "submodules/Joblint"]
+	path = submodules/Joblint
+	url = https://github.com/errata-ai/Joblint.git
+[submodule "submodules/MediaWiki"]
+	path = submodules/MediaWiki
+	url = https://github.com/errata-ai/MediaWiki.git
