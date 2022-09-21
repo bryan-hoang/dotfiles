@@ -53,3 +53,6 @@ pnpm-lock.yaml
 
 # Taplo config file.
 .taplo.toml
+
+# NPM config file.
+.npmrc
