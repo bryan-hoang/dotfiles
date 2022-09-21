@@ -248,6 +248,7 @@
 [push]
 	# https://git-scm.com/docs/git-config#git-config-pushdefault
 	default = current
+	autoSetupRemote = true
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
 	# Make sure all submodule commits used by the revisions to be pushed are
@@ -264,7 +265,6 @@
 	# is used by default, unless submodule.recurse is set (in which case a true
 	# value means on-demand).
 	recurseSubmodules = check
-	autoSetupRemote = true
 [status]
 	showStash = true
 [url "git@github.com:"]
