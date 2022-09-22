@@ -14,3 +14,4 @@ python-dotenv[cli]
 litecli
 trash-cli
 pynvim
+pytest
