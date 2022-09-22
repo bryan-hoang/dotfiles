@@ -4,9 +4,6 @@
  * @type {import('prettier').Config}
  */
 module.exports = {
-	jsdocPreferCodeFences: true,
-	jsdocSingleLineComment: false,
-	jsdocVerticalAlignment: true,
 	overrides: [
 		{
 			files: '*.keystore',
@@ -21,7 +18,8 @@ module.exports = {
 			},
 		},
 	],
-	plugins: ['prettier-plugin-jsdoc', 'prettier-plugin-packagejson'],
+	plugins: ['prettier-plugin-packagejson'],
+	printWidth: 80,
 	proseWrap: 'always',
 	singleQuote: true,
 	trailingComma: 'all',
