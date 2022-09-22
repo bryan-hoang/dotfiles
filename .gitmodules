@@ -37,9 +37,6 @@
 [submodule "submodules/Readability"]
 	path = submodules/Readability
 	url = https://github.com/errata-ai/readability
-[submodule "submodules/Openly"]
-	path = submodules/Openly
-	url = https://github.com/testthedocs/Openly.git
 [submodule "submodules/IBM"]
 	path = submodules/IBM
 	url = https://github.com/errata-ai/IBM.git
@@ -76,3 +73,6 @@
 [submodule "submodules/MediaWiki"]
 	path = submodules/MediaWiki
 	url = https://github.com/errata-ai/MediaWiki.git
+[submodule "submodules/RedHat"]
+	path = submodules/RedHat
+	url = https://github.com/redhat-documentation/vale-at-red-hat.git

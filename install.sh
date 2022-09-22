@@ -79,22 +79,6 @@ if ! is_git_bash; then
 	done
 fi
 
-readonly -a vale_styles=(
-	Google
-	Microsoft
-	IBM
-	write-good
-	proselint
-	alex
-	Readability
-	Openly
-)
-
-mkdir -p "${HOME}"/styles
-for style in "${vale_styles[@]}"; do
-	cp -rf "${HOME}"/submodules/"${style}"/"${style}" "${HOME}"/styles
-done
-
 if is_wsl && [[ ! -f /etc/wsl.conf ]]; then
 	wget -qO- https://gist.githubusercontent.com/bryan-hoang/30d4fd5d764977b01bf3de63681392b6/raw/5c2fce70efc43364099005765b2c83e4ee2c7c60/wsl.conf \
 		| sudo tee /etc/wsl.conf >/dev/null
