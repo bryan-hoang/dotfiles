@@ -12,21 +12,40 @@
 set $mod Mod4
 
 #
-# Workspaces
+# region Workspaces
 #
+
+# This option determines in which mode new containers on workspace level will
+# start.
+workspace_layout tabbed
 
 # Define names for default workspaces for which we configure key bindings later
 # on. We use variables to avoid repeating the names in multiple places.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
+set $ws1 "1: www 🌐"
+set $ws2 "2: 1337 🐱‍💻"
+set $ws3 "3: COMMS 💬!"
+set $ws4 "4: email 📧"
+set $ws5 "5: music 🎵"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+
+# `xrandr --query`
+workspace $ws1 output HDMI-0
+workspace $ws2 output HDMI-1
+workspace $ws3 output HDMI-0
+workspace $ws4 output HDMI-1
+workspace $ws5 output HDMI-0
+
+for_window [class="(?i)firefox"] move to workspace $ws1
+for_window [class="Sizzy"] move to workspace $ws1
+for_window [class="Code"] move to workspace $ws2
+for_window [class="wezterm"] move to workspace $ws2
+for_window [class="Slack"] move to workspace $ws3
+for_window [class="(?i)thunderbird"] move to workspace $ws4
+for_window [class="Spotify"] move to workspace $ws5
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -52,12 +71,7 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-# `xrandr --query`
-workspace 1 output HDMI-0
-workspace 2 output HDMI-1
-workspace 3 output HDMI-0
-workspace 4 output HDMI-1
-workspace 5 output HDMI-0
+# endregion Workspaces
 
 #
 # Assignments
@@ -199,8 +213,6 @@ bindsym $mod+Shift+s exec flameshot gui
 # Auto lock the computer after a set timeout of inactivity.
 exec --no-startup-id "xautolock -detectsleep -time 60 -locker \"i3lock-color\""
 
-exec --no-startup-id copyq
-
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex --autostart --environment i3
@@ -227,14 +239,8 @@ exec --no-startup-id feh --bg-scale ~/Pictures/wallpapers/dracula-blade-desktop.
 # Start compositing window manager.
 exec --no-startup-id picom
 
-# Start screenshot software.
-exec --no-startup-id flameshot
-
 # Geoclue agent for redshift.
 exec --no-startup-id /usr/libexec/geoclue-2.0/demos/agent
-
-# Start redshift.
-exec --no-startup-id redshift-gtk
 
 #
 # Themes
@@ -249,11 +255,11 @@ exec --no-startup-id redshift-gtk
 font pango:FiraCode Nerd Font Mono
 
 # class                 border  bground text    indicator child_border
-client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
-client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
-client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
-client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
+client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4 #6272A4
+client.focused_inactive #44475A #44475A #F8F8F2 #44475A #44475A
+client.unfocused        #282A36 #282A36 #BFBFBF #282A36 #282A36
+client.urgent           #44475A #FF5555 #F8F8F2 #FF5555 #FF5555
+client.placeholder      #282A36 #282A36 #F8F8F2 #282A36 #282A36
 client.background       #F8F8F2
 
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -262,14 +268,14 @@ bar {
 	status_command i3status-rs
 	font pango:FireCode Nerd Font Mono, Font Awesome 6, PowerlineSymbols
 	colors {
-		background #282A36
-		statusline #F8F8F2
-		separator  #44475A
-		focused_workspace  #44475A #44475A #F8F8F2
-		active_workspace   #282A36 #44475A #F8F8F2
-		inactive_workspace #282A36 #282A36 #BFBFBF
-		urgent_workspace   #FF5555 #FF5555 #F8F8F2
-		binding_mode       #FF5555 #FF5555 #F8F8F2
+		background                                                          #282A36
+		statusline                                                          #F8F8F2
+		separator                                                           #44475A
+		focused_workspace                                                   #44475A #44475A #F8F8F2
+		active_workspace                                                    #282A36 #44475A #F8F8F2
+		inactive_workspace                                                  #282A36 #282A36 #BFBFBF
+		urgent_workspace                                                    #FF5555 #FF5555 #F8F8F2
+		binding_mode                                                        #FF5555 #FF5555 #F8F8F2
 	}
 }
 
