@@ -1,6 +1,7 @@
 Core Team
 webpacked
 DCP
+DCP Client
 ORMDB
 Object Relational Mapping Database
 MR

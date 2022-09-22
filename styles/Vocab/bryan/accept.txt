@@ -33,3 +33,4 @@ deserialise
 WebGPU
 Vulkan
 Nvidia
+CI
