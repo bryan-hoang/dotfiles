@@ -88,6 +88,8 @@ eva
 dufs
 # An opinionated Lua code formatter.
 stylua
+# Tree command, improved.
+tre-command
 
 # Windows Incompatible.
 
