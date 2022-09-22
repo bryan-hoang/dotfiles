@@ -1,4 +1,7 @@
 import micromatch from 'micromatch';
+import createDebug from 'debug';
+
+const debug = createDebug('lint-staged:config');
 
 const shellScriptExtensions = [
 	'sh',
@@ -38,16 +41,11 @@ export default {
 		// Ignore submodule files.
 		const matches = micromatch.not(
 			files,
-			['**/submodules/**', '**/.asdf/**', '*.desktop'],
-			{
-				/**
-				 * Allow glob patterns without slashes to match a file path based on its
-				 * basename.
-				 */
-				basename: true,
-			},
+			['**/submodules/**', '**/.asdf/**'],
 		);
-		console.log(matches);
+
+		debug(matches);
+
 		return `editorconfig-checker ${matches.join(' ')}`;
 	},
 };

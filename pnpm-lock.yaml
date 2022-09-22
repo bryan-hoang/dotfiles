@@ -4,6 +4,7 @@ specifiers:
   '@prettier/plugin-ruby': ^3.2.0
   '@typescript-eslint/eslint-plugin': ^5.33.1
   '@typescript-eslint/parser': ^5.33.1
+  debug: ^4.3.4
   eslint: ^8.22.0
   eslint-config-airbnb-base: ^15.0.0
   eslint-config-airbnb-typescript: ^17.0.0
@@ -36,6 +37,7 @@ devDependencies:
   '@prettier/plugin-ruby': 3.2.0
   '@typescript-eslint/eslint-plugin': 5.33.1_vsoshirnpb7xw6mr7xomgfas2i
   '@typescript-eslint/parser': 5.33.1_4rv7y5c6xz3vfxwhbrcxxi73bq
+  debug: 4.3.4
   eslint: 8.22.0
   eslint-config-airbnb-base: 15.0.0_2iahngt3u2tkbdlu6s4gkur3pu
   eslint-config-airbnb-typescript: 17.0.0_ndwsrvi3totxze7jnjj3sukeeq
