@@ -236,9 +236,6 @@ exec --no-startup-id /usr/lib/gsd-xsettings
 # Set default wallpaper.
 exec --no-startup-id feh --bg-scale ~/Pictures/wallpapers/dracula-blade-desktop.png
 
-# Start compositing window manager.
-exec --no-startup-id picom
-
 # Geoclue agent for redshift.
 exec --no-startup-id /usr/libexec/geoclue-2.0/demos/agent
 
