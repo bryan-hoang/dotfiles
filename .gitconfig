@@ -74,6 +74,8 @@
 	pushf = push --force-with-lease --force-if-includes
 	wt = worktree
 	switch-time = "!f() { git switch -d $(git rev-list -n 1 --first-parent --before \"$1 23:59\" $(git default-branch)) ; }; f"
+	# Delete a branch locally and on the remote.
+	branch-delete = "!f() { git branch --delete --force $1 || true && git push origin --delete $1; }; f"
 [apply]
 	# Detect whitespace errors when applying a patch.
 	whitespace = fix
