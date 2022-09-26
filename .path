@@ -15,7 +15,6 @@ export PATH="${HOME}"/.deno/bin:"${PATH}"
 export PATH="${BUN_INSTALL}"/bin:"${PATH}"
 # shellcheck disable=SC1091
 [ -f "${HOME}"/.cargo/env ] && . "${HOME}"/.cargo/env
-export PATH="${VOLTA_HOME}"/bin:"${PATH}"
 export PATH="${HOME}"/.spicetify:"${PATH}"
 export PATH="${HOME}"/.asdf/bin:"${PATH}"
 export PATH="${HOME}"/.asdf/shims:"${PATH}"
