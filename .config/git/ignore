@@ -56,3 +56,6 @@ pnpm-lock.yaml
 
 # NPM config file.
 .npmrc
+
+# Generated file from rdbg VS Code extension.
+.rdbgrc.breakpoints
