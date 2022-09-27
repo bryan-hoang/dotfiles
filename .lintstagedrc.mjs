@@ -20,6 +20,8 @@ const shellScriptExtensions = [
 
 const prettierExtensions = [
 	'js',
+	'mjs',
+	'cjs',
 	'jsx',
 	'ts',
 	'tsx',
@@ -39,13 +41,19 @@ export default {
 	[`*.{${shellScriptExtensions.join(',')}}`]: 'shellcheck',
 	'*': (files) => {
 		// Ignore submodule files.
+		debug('files', files);
 		const matches = micromatch.not(
 			files,
-			['**/submodules/**', '**/.asdf/**'],
+			['submodules', '.asdf', '.config/nvim', '.oh-my-bash', '.vim_runtime'],
+			{
+				contains: true,
+			},
 		);
 
-		debug(matches);
+		debug('matches', matches);
 
-		return `editorconfig-checker ${matches.join(' ')}`;
+		return debug.enabled || !matches.length
+			? 'true'
+			: `editorconfig-checker ${matches.join(' ')}`;
 	},
 };
