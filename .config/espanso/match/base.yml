@@ -12,6 +12,11 @@ matches:
   - trigger: ':espanso'
     replace: 'Hi there!'
 
+  - trigger: :br
+    replace: |
+      Best regards,
+      Bryan Hoang
+
   # But matches can also be dynamic:
 
   # Print the current date
