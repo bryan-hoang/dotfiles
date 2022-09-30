@@ -12,7 +12,7 @@ matches:
   - trigger: ':espanso'
     replace: 'Hi there!'
 
-  - trigger: :br
+  - trigger: ':br:'
     replace: |
       Best regards,
       Bryan Hoang
