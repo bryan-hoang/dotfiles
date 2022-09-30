@@ -5,6 +5,7 @@
  * [SETTING] General>Startup>Restore previous session
  */
 user_pref('browser.startup.page', 3);
+
 /**
  * 0801: disable location bar using search
  * Don't leak URL typos to a search engine, give an error message instead
@@ -14,6 +15,7 @@ user_pref('browser.startup.page', 3);
  * [SETUP-CHROME] Override this if you trust and use a privacy respecting search engine
  */
 user_pref('keyword.enabled', true);
+
 /**
  * 0804: disable live search suggestions
  * [NOTE] Both must be true for the location bar to work
@@ -22,6 +24,17 @@ user_pref('keyword.enabled', true);
  */
 user_pref('browser.search.suggest.enabled', true);
 user_pref('browser.urlbar.suggest.searches', true);
+
+/**
+ * 0810: disable search and form history
+ * [SETUP-WEB] Be aware that autocomplete form data can be read by third parties [1][2]
+ * [NOTE] We also clear formdata on exit (2811)
+ * [SETTING] Privacy & Security>History>Custom Settings>Remember search and form history
+ * [1] https://blog.mindedsecurity.com/2011/10/autocompleteagain.html
+ * [2] https://bugzilla.mozilla.org/381681
+ */
+user_pref('browser.formfill.enable', true);
+
 /**
  * 2811: set/enforce what items to clear on shutdown (if 2810 is true) [SETUP-CHROME]
  * [NOTE] If "history" is true, downloads will also be cleared
@@ -29,6 +42,7 @@ user_pref('browser.urlbar.suggest.searches', true);
  * [1] https://en.wikipedia.org/wiki/Basic_access_authentication
  */
 user_pref('privacy.clearOnShutdown.history', false);
+
 /**
  * 4504: enable RFP letterboxing [FF67+]
  * Dynamically resizes the inner window by applying margins in stepped ranges [2]
@@ -41,6 +55,9 @@ user_pref('privacy.clearOnShutdown.history', false);
  * [2] https://hg.mozilla.org/mozilla-central/rev/6d2d7856e468#l2.32
  */
 user_pref('privacy.resistFingerprinting.letterboxing', false);
-// user_pref("browser.sessionstore.privacy_level", 0); // 1003 optional to restore cookies/formdata
-// user_pref("privacy.clearOnShutdown.history", false); // 2811
-// user_pref("privacy.cpd.history", false); // 2820 optional to match when you use Ctrl-Shift-Del
+
+/**
+ * 4520: disable WebGL (Web Graphics Library)
+ * [SETUP-WEB] If you need it then override it. RFP still randomizes canvas for naive scripts
+ */
+user_pref('webgl.disabled', false);
