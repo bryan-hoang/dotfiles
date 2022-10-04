@@ -157,6 +157,7 @@ does_program_exist navi && eval "$(navi widget bash)"
 does_program_exist zoxide && eval "$(zoxide init bash)"
 does_program_exist gh && eval "$(gh completion -s bash)"
 does_program_exist starship && eval "$(starship init bash)"
+does_program_exist broot && eval "$(broot --print-shell-function bash)"
 
 # shellcheck disable=SC1091
 if [[ -f "${XDG_CONFIG_HOME:-${HOME}/.config}/asdf-direnv/bashrc" ]]; then
