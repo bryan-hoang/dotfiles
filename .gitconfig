@@ -404,3 +404,4 @@
 	missingCommitsCheck = error
 	abbreviateCommands = true
 	autoStash = true
+	updateRefs = true
