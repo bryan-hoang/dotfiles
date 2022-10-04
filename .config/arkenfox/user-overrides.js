@@ -44,6 +44,14 @@ user_pref('browser.formfill.enable', true);
 user_pref('privacy.clearOnShutdown.history', false);
 
 /**
+ * 4501: enable privacy.resistFingerprinting [FF41+]
+ * [SETUP-WEB] RFP can cause some website breakage: mainly canvas, use a site exception via the urlbar
+ * RFP also has a few side effects: mainly timezone is UTC0, and websites will prefer light theme
+ * [1] https://bugzilla.mozilla.org/418986
+ */
+user_pref('privacy.resistFingerprinting', false);
+
+/**
  * 4504: enable RFP letterboxing [FF67+]
  * Dynamically resizes the inner window by applying margins in stepped ranges [2]
  * If you use the dimension pref, then it will only apply those resolutions.
