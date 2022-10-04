@@ -51,8 +51,6 @@ grex
 procs
 # Intuitive find & replace CLI (sed alternative).
 sd
-# Spotify for the terminal written in Rust 🚀.
-spotify-tui
 # A fast CSV command line toolkit written in Rust.
 xsv
 # A cross-platform CLI csv pretty printer that uses column styling to maximize
@@ -90,6 +88,8 @@ dufs
 stylua
 # Tree command, improved.
 tre-command
+# Save space by cleaning non-essential files from software projects.
+kondo
 
 # Windows Incompatible.
 
