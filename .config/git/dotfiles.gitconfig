@@ -1,2 +1,4 @@
+[core]
+	excludesFile = ~/.config/git/dotfiles.gitignore
 [status]
 	showUntrackedFiles = no
