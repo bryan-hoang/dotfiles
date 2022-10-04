@@ -11,4 +11,5 @@ return {
 	["neoclide/coc.nvim"] = {
 		branch = 'release',
 	},
+	["hjson/vim-hjson"] = {},
 }
