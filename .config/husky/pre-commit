@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+# shellcheck disable=SC1091
+. "$(dirname -- "$0")/_/husky.sh"
+
+command -v ripsecrets >/dev/null 2>&1 \
+	&& ripsecrets --strict-ignore \
+		"$(git diff --cached --name-only --diff-filter=ACM)" 2>/dev/null
+
+pnpm run lint-staged

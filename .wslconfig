@@ -1,9 +1,0 @@
-[wsl2]
-# How much memory to assign to the WSL 2 VM.
-# memory=4GB
-# Makes the WSL 2 VM use two virtual processors
-# processors=2
-
-# Boolean to turn on an output console Window that shows the contents of
-# `dmesg` upon start of a WSL 2 distro instance.
-debugConsole=false

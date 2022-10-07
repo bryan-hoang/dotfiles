@@ -6,14 +6,14 @@ local M = {}
 -- example of changing theme:
 
 M.ui = {
-  theme = "chadracula",
+	theme = "chadracula",
 }
 
 M.options = {
-  user = function ()
-  end
+	user = function() end,
 }
 
 M.plugins = require("custom.plugins")
+M.mappings = require("custom.mappings")
 
 return M

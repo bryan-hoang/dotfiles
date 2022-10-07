@@ -1,0 +1,752 @@
+% Identification
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{bch-style}[2021/09/11 Bryan Hoang's Personal LaTeX package for general use]
+
+% It doesn't do anything, per se, it just warns when you accidentally use
+% deprecated LaTeX constructs from `l2tabu'.
+\RequirePackage[l2tabu, orthodox]{nag}
+
+% Toolbox of programming tools geared primarily towards LaTeX class and package
+% authors.
+\RequirePackage{etoolbox}
+
+% Defining key-value options for the class
+\RequirePackage{pgfopts}
+\pgfkeys{
+	/bch-style/.cd,
+	reduceproofspace/.is choice,
+	reduceproofspace/.code =		 {
+			\newcommand{\bch@reduceproofspace}{
+				% Reduce vertical space before the proof environment right after Answer
+				% header.
+				%
+				% Source: https://tex.stackexchange.com/a/232659/204377
+				\makeatletter
+				\xpatchcmd{\proof}{\topsep6\p@\@plus6\p@\relax}{}{}{}
+				\makeatother
+			}
+		},
+	% unknown keys are assumed to be options to be passed to the class
+	.unknown/.code={
+			\PackageWarning{bch-style}{Unknown option '\pgfkeyscurrentname'}
+		}
+}
+\ProcessPgfOptions*
+
+% Extend etoolbox patching commands.
+\RequirePackage{xpatch}
+
+% Provides a high-level interface for producing document-level commands.
+\RequirePackage{xparse}
+
+\ExplSyntaxOn
+% Environment Variables
+% Source: https://tex.stackexchange.com/a/62032/204377
+\NewDocumentCommand{\getenv}{om}{
+	\sys_get_shell:nnN { kpsewhich ~ --var-value ~ #2 } { } \l_tmpa_tl
+	\tl_trim_spaces:N \l_tmpa_tl
+	\IfNoValueTF{#1}{
+		\tl_use:N \l_tmpa_tl
+	} {
+		\tl_set_eq:NN #1 \l_tmpa_tl
+	}
+}
+\ExplSyntaxOff
+
+% Add support for the TS1 encoding.
+\RequirePackage{textcomp}
+
+% The fontspec package allows users of either XeLatex or LuaLatex to load
+% OpenType fonts in a LATEX document. No font installation is necessary, and
+% font features can be selected and used as desired throughout the document.
+\RequirePackage{fontspec}
+
+% Select font encodings.
+%
+% The Cork encoding was developed so that advantage could be taken of the
+% (then) new facilities of TEX3, allowing hyphenation of most Western European
+% (and some Eastern European) languages in an unmodified version of TEX.
+% \PassOptionsToPackage{T1}{fontenc}
+\RequirePackage{fontenc}
+
+% Provides a sturdy rendition of the Computer Modern design font.
+% \RequirePackage{mlmodern}
+
+% % Specify an input encoding, Unicode UTF-8 encoding support.
+% % Warning: Unecessary with lualatex.
+% \RequirePackage[utf8]{inputenc}
+
+% Add internationalization and localization with LATEX and pdftex, xetex and
+% luatex with the `babel' package.
+%
+% FIXME(bryan-hoang): Broken.
+\RequirePackage[english]{babel}
+
+% Provide commands to switch between different date formats.
+\RequirePackage[
+	en-GB,
+	style=iso,
+]{datetime2}
+
+% Suppresses page numbers and headings from appearing on empty pages.
+\RequirePackage{emptypage}
+
+% Provides various types of underlining that can stretch between words and be
+% broken across lines.
+\RequirePackage[normalem]{ulem}
+
+% Print lengths in a variety of units
+\RequirePackage{printlen}
+
+% Provide easy driver-independent access to several kinds of colors, tints,
+% shades, tones, and mixes of arbitrary colors by means of color expressions
+% like `\color{red!50!green!20!blue}'.
+%
+% To add colors to your tables, you need to load xcolor package first before
+% `tabularray`. Tabularray package will also load ninecolors package for proper
+% color contrast.
+%
+% Loading `ninecolors` manually to avoid conflict of loading xcolors in `pdfx`.
+% \RequirePackage{xcolor}
+
+% Carefully selects and defines 9 colors for 13 hues each with proper WCAG
+% color contrast.
+\RequirePackage{ninecolors}
+
+% Typeset Tabulars and Arrays with LATEX3
+\RequirePackage{tabularray}
+
+% With \UseTblrLibrary{booktabs} in the preamble of the document, tabularray
+% will load booktabs package, and define \toprule, \midrule, \bottomrule and
+% \cmidrule inside tblr environment.
+\UseTblrLibrary{booktabs}
+
+% Loads `diagbox' package, so that we can use `\diagbox' and `\diagboxthree'
+% commands inside `tblr' environment.
+\UseTblrLibrary{diagbox}
+
+% An extended implementation of the LATEX array and tabular-environments.
+\RequirePackage{array}
+
+% Adds filler text. i.e., Lorem ipsum
+\RequirePackage{blindtext}
+
+% Add environment that allows switching between one and multicolumn format on
+% the same page.
+\RequirePackage{multicol}
+
+% Provides an interface for selecting code depending on the options `draft' and
+% `final'.
+\RequirePackage{ifdraft}
+
+% Allows a convenient redaction/censor capability to be employed, for those
+% who need to protect restricted information, as well as for those who are
+% forced to work in a more inefficient environment when dealing with restricted
+% information.
+\RequirePackage{censor}
+
+\ifoptionfinal{
+	\StopCensoring
+}{}
+
+% Adds ability to change itemize and enumitem environments.
+\RequirePackage{enumitem}
+
+\setlist{
+	% To set the left margin of items to be flush with the left margin of
+	% normal text.
+	leftmargin=*,
+	% To set the left margin of numbered items so that text to the right of it is
+	% flush with normal text.
+	% leftmargin=0pt,
+	% Kills all vertical spacing.
+	% nosep,
+}
+
+\SetEnumitemKey{twocol}{
+	itemsep = 1\itemsep,
+	parsep = 1\parsep,
+	before = \raggedcolumns\begin{multicols}{2},
+		after = \end{multicols}
+}
+
+% Add the 'extended' or 'enhanced' graphics package.
+\RequirePackage[
+	final,
+]{graphicx}
+
+\graphicspath{{img}}
+
+% Magic command to help remove some "Underfull \vbox (badness 10000) LaTeX"
+% warnings.
+\addtolength{\textheight}{\topskip}
+
+% Draws high-quality function plots in normal or logarithmic scaling with a
+% user-friendly interface directly in TEX.
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=newest}
+
+% Setting the default width for figures.
+\setkeys{Gin}{width=0.75\textwidth}
+
+% Adds greater flexibility to positioning figures.
+\let\newfloat\undefined
+\RequirePackage[]{floatrow}
+
+% Forces captions to be placed above tables.
+\floatsetup[table]{capposition=top}
+
+% Default floating options for figures and tables
+\makeatletter
+\renewcommand*{\fps@figure}{H}
+\renewcommand*{\fps@table}{H}
+\makeatother
+\floatplacement{subfigure}{H}
+
+% tableposition/figureposition - Adds spacing around captions placed in
+% appropriate locations.
+\RequirePackage[
+	tableposition=top,
+	figureposition=bottom,
+	justification=centering,
+]{caption}
+
+% Add support for support for the typesetting of sub-captions (by using the the
+% sub-caption feature of the caption package).
+\RequirePackage[
+	skip=6pt,
+]{subcaption}
+
+% To auto center figures.
+\makeatletter
+\g@addto@macro\@floatboxreset\centering
+\makeatother
+
+% region Math.
+
+% To cross out results
+\RequirePackage[makeroom]{cancel}
+
+% Inhibit the usage of plain TEX and on demand of standard LATEX math
+% environments.
+\RequirePackage[all]{onlyamsmath}
+
+% Include fonts of symbols and several alphabets corresponding to symbols and
+% alphabets used in AMS publications, including electronic journals and the
+% MathSci online database.
+\RequirePackage{amsfonts}
+% Define all the symbols found in the AMS symbol fonts msam and msbm.
+\RequirePackage{amssymb}
+% Implements the AMS-TEX macro \text for use with the new font selection
+% scheme.
+\RequirePackage{amstext}
+% Provides an enhanced version of LATEX's \newtheorem command for defining
+% theorem-like environments.
+\RequirePackage{amsthm}
+% Provide miscellaneous enhancements for improving the information structure
+% and printed output of documents that contain mathematical formulas.
+\RequirePackage{amsmath}
+
+% An extension package to amsmath. There are two things on mathtools' agenda:
+%
+% (1) correct various bugs/defeciencies in amsmath until these are fixed by the
+% AMS
+%
+% (2) provide useful tools for mathematical typesetting, be it a small macro
+% for typesetting a prescript or an underbracket, or entirely new display math
+% constructs such as a multlined environment.
+\RequirePackage{mathtools}
+
+% % Save mathtools' braces.
+% \let\normalunderbrace\underbrace
+% \let\normaloverbrace\overbrace
+
+% An implementation of Unicode maths for LATEX using the XƎTEX and LuaTEX
+% typesetting engines, allowing \mathbb to work on numbers.
+% NOTE: Breaks under/over brackets from `mathtools`.
+\RequirePackage[
+	warnings-off={
+			mathtools-colon,
+			mathtools-overbracket,
+		},
+]{unicode-math}
+
+% For outerjoins. Source: https://tex.stackexchange.com/a/20746/204377
+\setmathfont{XITS Math}
+
+% The math alphabets normally addressed via the macros `\mathcal', `\mathbb',
+% `\mathfrak' and `\mathscr' are in a number of cases not well-adapted to the
+% LATEX math font structure. The goal of this package is to provide remedies
+% for the above, where possible.
+\RequirePackage[
+	% Select the Blackboard bold alphabet from ams, lucida, mathpi, mma, mt, mth,
+	% pazo, fourier, esstix, boondox, px, tx, txof, libus, dsserif, bboldxLight,
+	% bboldx, dsfontserif, dsfontsans, stixtwo, stix.
+	bb=dsserif
+]{mathalpha}
+
+% \ExplSyntaxOn
+% \cs_set:Nn \__um_set_math_overunder:Nnnn
+% {
+%		\cs_gset_protected_nopar:Npx #1 ##1
+%		{
+%			\mathop
+%			{ \__um_accent:nnn {#2} {#3} {#4} {{}{##1}} } % see the empty braces?
+%			\limits
+%		}
+% }
+% \ExplSyntaxOff
+
+% % Restore mathtools' braces *after* \begin{document}.
+% % https://github.com/latex3/mathtools/issues/29#issuecomment-921240544
+% \AtBeginDocument{
+%		\let\underbrace\normalunderbrace
+%		\let\overbrace\normaloverbrace
+% }
+
+% A visual markup extension to amsmath.
+\RequirePackage{empheq}
+
+% Define commands to access bold math symbols.
+\RequirePackage{bm}
+
+% Allows you to enter systems of linear equations or inequalities in a
+% intuitive way, and produces output where the terms and signs are aligned
+% vertically.
+\RequirePackage{systeme}
+
+% Allows the easy and consistent writing of ordinary, partial and other
+% derivatives of arbitrary (algebraic or numeric) order.
+\RequirePackage[ISO]{diffcoeff}
+
+% Define the environment mdframed which automatically deals with pagebreaks in
+% framed text.
+\RequirePackage{mdframed}
+
+\makeatletter
+\ifdef{\bch@reduceproofspace}{
+	\bch@reduceproofspace
+}{}
+\makeatother
+
+% Changing from the default of 10.
+\setcounter{MaxMatrixCols}{11}
+
+% Some shortcuts for common symbols.
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\X}{\ensuremath{\mathcal{X}}}
+\newcommand{\Y}{\ensuremath{\mathcal{Y}}}
+\renewcommand{\O}{\ensuremath{\emptyset}}
+
+% Plain modulo without space in front.
+\newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
+
+% Division symbols
+\newcommand{\divides}{\mid}
+% nmid being from amssymb
+\newcommand{\notdivides}{\nmid}
+
+% Add spacing for `Aboxed` to be aligned correctly.
+\newcommand{\alignedbox}[1]{\Aboxed{{} #1}}
+
+% Opposite of `\nonumber'.
+\newcommand{\numberthis}{\addtocounter{equation}{1}\tag{\theequation}}
+
+% Independent random variables
+\newcommand{\independent}{\perp\!\!\!\perp}
+
+% Redefined symbols to be math operators with better spacing.
+\let\oldforall\forall
+\let\forall\undefined
+\DeclareMathOperator{\forall}{\oldforall}
+\let\oldexists\exists
+\let\exists\undefined
+\DeclareMathOperator{\exists}{\oldexists}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\nint}{\lfloor}{\rceil}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+
+\DeclareMathOperator{\ord}{ord}
+
+% Kullback-Leibler divergence
+\DeclarePairedDelimiterX{\kldivx}[2]{(}{)}{%
+	#1\;\delimsize\|\;#2%
+}
+\newcommand{\kldiv}{D\kldivx}
+
+% Underbrace Relational Operation on the `align` environment.
+\NewDocumentCommand{\uro}{O{=} e{_}}{%
+\IfValueTF{#2}{
+% FIXME: `_` is breaking the indentation.
+\mathrel{\underbrace{#1}_{\mathclap{#2}}}
+}{
+\sbox0{\(\underbrace{#1}_{}\)}%
+\mathrel{\mathmakebox[\wd0]{#1}}
+}
+}
+
+% Underbrace Matrix.
+\NewDocumentCommand{\undermat}{m e{_}}{%
+	\makebox[0pt][l]{%
+		\(\smash{
+			\underbrace{\phantom{\begin{matrix}#1\end{matrix}}}_{#2}
+		}\)%
+	}#1%
+}
+
+% A redefinition of an internal amsmath LaTeX macro for customizing line
+% spacing in specific matrices arbitrarily as desired. Source:
+% https://tex.stackexchange.com/a/14072/204377
+\makeatletter
+\renewcommand*{\env@matrix}[1][\arraystretch]{%
+	\edef\arraystretch{#1}%
+	\hskip -\arraycolsep
+	\let\@ifnextchar\new@ifnextchar
+	\array{*\c@MaxMatrixCols c}%
+}
+\makeatother
+
+\DeclarePairedDelimiterX{\parenthesisdelimiters}[1]{(}{)}{#1}
+\DeclarePairedDelimiterX{\bracketdelimiters}[1]{[}{]}{#1}
+\NewDocumentCommand{\paireddelimitervert}{mm}{%
+	#1\IfValueT{#2}{\nonscript\;\delimsize\vert\nonscript\;#2}%
+}
+
+% Probability command with autosizing conditionals
+% Source: https://tex.stackexchange.com/a/187363/204377
+\RenewDocumentCommand{\Pr}{ e{_} e{^} s o >{\SplitArgument{1}{|}}m}{%
+	% The expectation operator
+	\operatorname{\mathbb{P}}
+	% Distribution to take expectation with respect to.
+	\IfValueT{#1}{{\!}_{#1}}
+	% the measure of the expectation
+	\IfValueT{#2}{{\!}^{#2}}
+	\IfBooleanTF{#3}{% *-variant
+		\parenthesisdelimiters*{\paireddelimitervert#5}%
+	}{% no *-variant
+		\IfNoValueTF{#4}{% no optional argument
+			\parenthesisdelimiters{\paireddelimitervert#5}%
+		}{% optional argument
+			\parenthesisdelimiters[#4]{\paireddelimitervert#5}%
+		}%
+	}%
+}
+
+% Probability command with autosizing conditionals
+% Source: https://tex.stackexchange.com/a/187363/204377
+\NewDocumentCommand{\p}{ e{_} e{^} s o >{\SplitArgument{1}{|}}m}{%
+	% The expectation operator
+	p
+	% Distribution to take expectation with respect to.
+	\IfValueT{#1}{{\!}_{#1}}
+	% the measure of the expectation
+	\IfValueT{#2}{{\!}^{#2}}
+	\IfBooleanTF{#3}{% *-variant
+		\parenthesisdelimiters*{\paireddelimitervert#5}%
+	}{% no *-variant
+		\IfNoValueTF{#4}{% no optional argument
+			\parenthesisdelimiters{\paireddelimitervert#5}%
+		}{% optional argument
+			\parenthesisdelimiters[#4]{\paireddelimitervert#5}%
+		}%
+	}%
+}
+
+% Entropy command with autosizing conditionals
+% Source: https://tex.stackexchange.com/a/187363/204377
+\RenewDocumentCommand{\H}{ e{_} e{^} s o >{\SplitArgument{1}{|}}m }{%
+	% The expectation operator
+	% \operatorname{H}
+	H
+	% Distribution to take expectation with respect to.
+	\IfValueT{#1}{{\!}_{#1}}
+	% the measure of the expectation
+	\IfValueT{#2}{{\!}^{#2}}
+	\IfBooleanTF{#3}{% *-variant
+		\parenthesisdelimiters*{\paireddelimitervert#5}%
+	}{% no *-variant
+		\IfNoValueTF{#4}{% no optional argument
+			\parenthesisdelimiters{\paireddelimitervert#5}%
+		}{% optional argument
+			\parenthesisdelimiters[#4]{\paireddelimitervert#5}%
+		}%
+	}%
+}
+
+% Entropy command with autosizing conditionals
+% Source: https://tex.stackexchange.com/a/187363/204377
+\NewDocumentCommand{\h}{ e{_} e{^} s o >{\SplitArgument{1}{|}}m }{%
+	% The expectation operator
+	h
+	% Distribution to take expectation with respect to.
+	\IfValueT{#1}{{\!}_{#1}}
+	% the measure of the expectation
+	\IfValueT{#2}{{\!}^{#2}}
+	\IfBooleanTF{#3}{% *-variant
+		\parenthesisdelimiters*{\paireddelimitervert#5}%
+	}{% no *-variant
+		\IfNoValueTF{#4}{% no optional argument
+			\parenthesisdelimiters{\paireddelimitervert#5}%
+		}{% optional argument
+			\parenthesisdelimiters[#4]{\paireddelimitervert#5}%
+		}%
+	}%
+}
+
+% Expectation command with autosizing conditionals
+% Source: https://tex.stackexchange.com/a/187363/204377
+\NewDocumentCommand{\E}{ s e{_} e{^} o >{\SplitArgument{1}{|}}m }{%
+	% The expectation operator
+	% \operatorname{E}
+	E
+	% Distribution to take expectation with respect to.
+	\IfValueT{#2}{{\!}_{#2}}
+	% the measure of the expectation
+	\IfValueT{#3}{{\!}^{#3}}
+	\IfBooleanTF{#1}{% *-variant
+		\bracketdelimiters*{\paireddelimitervert#5}%
+	}{% no *-variant
+		\IfNoValueTF{#4}{% no optional argument
+			\bracketdelimiters{\paireddelimitervert#5}%
+		}{% optional argument
+			\bracketdelimiters[#4]{\paireddelimitervert#5}%
+		}%
+	}%
+}
+
+\NewDocumentCommand{\paireddelimiterdoublevert}{mm}{%
+	#1\IfValueT{#2}{\nonscript\;\delimsize\vert\delimsize\vert\nonscript\;#2}%
+}
+% Entropy command with autosizing conditionals
+% Source: https://tex.stackexchange.com/a/187363/204377
+\NewDocumentCommand{\DKL}{e{_} e{^} s o >{\SplitArgument{1}{||}}m}{%
+	% The expectation operator
+	D_{\text{KL}}
+	% Distribution to take expectation with respect to.
+	\IfValueT{#1}{{\!}_{#1}}
+	% the measure of the expectation
+	\IfValueT{#2}{{\!}^{#2}}
+	\IfBooleanTF{#3}{% *-variant
+		\parenthesisdelimiters*{\paireddelimiterdoublevert#5}%
+	}{% no *-variant
+		\IfNoValueTF{#4}{% no optional argument
+			\parenthesisdelimiters{\paireddelimiterdoublevert#5}%
+		}{% optional argument
+			\parenthesisdelimiters[#4]{\paireddelimiterdoublevert#5}%
+		}%
+	}%
+}
+
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Var}{Var}
+% Exponential distribution.
+\DeclareMathOperator{\Exp}{Exp}
+
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+\newtheorem*{eg}{Example}
+% Incompatible with `enotez` package, for SOME reason.
+\newtheorem*{note}{Note}
+\newtheorem*{notation}{Notation}
+\newtheorem*{previouslyseen}{As previously seen}
+\newtheorem*{remark}{Remark}
+\newtheorem*{problem}{Problem}
+\newtheorem*{observe}{Observe}
+\newtheorem*{property}{Property}
+\newtheorem*{intuition}{Intuition}
+\newmdtheoremenv[nobreak=true]{prop}{Proposition}
+\newmdtheoremenv[nobreak=true]{theorem}{Theorem}
+\newmdtheoremenv[nobreak=true]{corollary}{Corollary}
+\newtheorem{theoremref}{Theorem}
+\newtheorem{proofpart}{Part}[theoremref]
+\renewcommand\theproofpart{\arabic{proofpart}}
+\newtheorem{proofcase}{Case}[theoremref]
+\renewcommand\theproofcase{\arabic{proofcase}}
+
+\theoremstyle{remark}
+\newtheorem*{example}{Example}
+\newtheorem*{claim}{Claim}
+
+% Fix some spacing
+% http://tex.stackexchange.com/questions/22119/how-can-i-change-the-spacing-before-theorems-with-amsthm
+\makeatletter
+\def\thm@space@setup{%
+	\thm@preskip=\parskip \thm@postskip=0pt
+}
+\makeatother
+
+% Legendre symbol. https://tex.stackexchange.com/a/433881/204377
+%
+% `\legendre{a}{b}'
+\newcommand{\genlegendre}[4]{%
+	\genfrac{(}{)}{}{#1}{#3}{#4}%
+	\if\relax\detokenize{#2}\relax\else_{\!#2}\fi
+}
+\newcommand{\legendre}[3][]{\genlegendre{}{#1}{#2}{#3}}
+\newcommand{\dlegendre}[3][]{\genlegendre{0}{#1}{#2}{#3}}
+\newcommand{\tlegendre}[3][]{\genlegendre{1}{#1}{#2}{#3}}
+
+% endregion Math
+
+% Aims to provide a unified method for LATEX users to typeset numbers and units
+% correctly and easily.
+\RequirePackage{siunitx}
+
+\DeclareSIUnit{\bits}{bits}
+\DeclareSIUnit{\trits}{trits}
+\DeclareSIUnit{\quaternary}{quaternary\, units}
+\DeclareSIUnit{\source}{source\,symbol}
+\DeclareSIUnit{\nats}{nats}
+
+% To add semantic meaning to texttt.
+\newcommand{\code}{\texttt}
+
+% Tilde in text mode.
+\providecommand{\textapprox}{\raisebox{0.5ex}{\texttildelow}}
+
+% Big O notation shortcut.
+\newcommand{\BigO}{\mathcal{O}}
+
+% To help align the first item in an align environment. Source:
+% https://tex.stackexchange.com/a/149791/204377
+\newcommand{\phantomeq}{\mathrel{\phantom{=}}}
+
+% Add semantics to specifying a state space for a r.v.
+\newcommand{\statespace}[1]{\mathcal{#1}}
+
+% Drawing linguistic (and other kinds of) trees.
+\RequirePackage{forest}
+
+\forestset{
+declare toks={elo}{}, % Edge Label Options
+anchors/.style={anchor=#1,child anchor=#1,parent anchor=#1},
+dot/.style={tikz+={\fill (.child anchor) circle[radius=#1];}},
+dot/.default=2pt,
+huffman edge label/.style n args=3{
+		edge label/.expanded={node[midway,auto=#1,anchor=#2,\forestoption{elo}]{\strut$\unexpanded{#3}$}}
+	},
+huffman tree/.style={
+		for tree={
+				s sep=0.5em,l=8ex,
+				if n children=0{
+						anchors=east
+					}{
+						if n=1{
+								anchors=south west
+							}{
+								anchors=north west
+							}
+					},
+				math content,
+				if n=1{huffman edge label={left}{south}{0}}{},
+				if n=2{huffman edge label={left}{north}{1}}{},
+				if n=3{huffman edge label={right}{north}{2}}{},
+				font=\large,
+				s sep=16pt,
+			},
+		anchors=west,
+		outer sep=2pt,
+		dot,
+		for descendants=dot,
+		delay={for descendants={split option={content}{;}{content,huffman}}},
+	}
+}
+
+% Defines a form of `\verb' command that allows linebreaks at certain
+% characters or combinations of characters, accepts reconfiguration, and can
+% usually be used in the argument to another command.
+\RequirePackage{xurl}
+
+% Provides new commands for defining environments:
+\RequirePackage{environ}
+
+% Environment to align labels for tikz nodes.
+\NewEnviron{alignedlabel}{\(\begin{aligned}\BODY\end{aligned}\)}
+
+\makeatletter
+\@ifclassloaded{cheatsheet}{
+	\renewcommand{\maketitle}{
+		\begin{mdframed}[
+				linecolor=secondaryColor,linewidth=1pt,%
+				leftmargin=0mm,rightmargin=0mm,skipbelow=0mm,skipabove=0mm
+			]
+			{\color{primaryColor}\Large\textbf\sffamily\thetitle}\\
+			\normalsize\theauthor\\
+			\normalsize\thedate
+		\end{mdframed}
+	}
+}{}
+\makeatother
+
+% region Last packages to load
+
+% To allow for a main .tex file to include content from other .tex files.
+\RequirePackage{subfiles}
+
+% Implements a system for eXternal References.
+% \RequirePackage{xr-hyper}
+
+% `\vref' is similar to `\ref' but adds an additional page reference, like 'on
+% the facing page' or 'on page 27' whenever the corresponding \label is not on
+% the same page.
+\RequirePackage{varioref}
+
+% Avoiding pdfminorversion issues with pdfx.
+%
+% Source: https://tex.stackexchange.com/a/374993/204377
+\RequirePackage{luatex85}
+
+% To create hyperlinks.
+% \RequirePackage{hyperref}
+
+% This package1 currently supports generation of PDF/X-, PDF/A- and
+% PDF/E-compliant documents.
+%
+% Loads `hyperref` and `xcolor` packages internally.
+%
+% Source: https://shen.hong.io/reproducible-pdfa-compliant-latex/
+\RequirePackage[a-3u]{pdfx}
+
+\hypersetup{
+	% Set all color options (without border and field options).
+	allcolors=blue,
+	% If Acrobat bookmarks are requested, show them with all the subtrees
+	% expanded.
+	bookmarksopen=true,
+	% Colors the text of links and anchors. The colors chosen depend on the the
+	% type of link. At present the only types of link distinguished are
+	% citations, page references, URLs, local file references, and other links.
+	% Unlike colored boxes, the colored text remains when printing.
+	colorlinks=true,
+	% All hypertext options are turned on.
+	final=true,
+	% In the hypertex driver, the height of links is normally calculated by the
+	% driver as simply the base line of contained text; this options forces
+	% `\special' commands to reflect the real height of the link (which could
+	% contain a graphic).
+	raiselinks=true,
+}
+
+% To add pdf bookmarks.
+%
+% Needs to be loaded after `pdfx` package based on `hyperref` package being
+% internally loaded first. Avoids "\pdfminorversion" error.
+\RequirePackage{bookmark}
+
+% To exploit all the information that LATEX can collect about labels as
+% intelligently as possible (clever processing), allowing you to produce an
+% attractive, consistent formatting of cross-references throughout your
+% document with the minimum of effort (you'd be clever to use it!).
+\RequirePackage{cleveref}
+
+% Re-implement `hyperref's `ocgcolorlinks' option for creating OCG coloured
+% links, which are printed on paper in the default text colour and which can,
+% unlike the original `hyperref' implementation, extend over line and page
+% breaks.
+\RequirePackage[ocgcolorlinks]{ocgx2}
+
+% endregion

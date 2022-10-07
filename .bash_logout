@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-# -*- coding: utf-8 -*-
 
-. "${HOME}"/.logout
+# shellcheck disable=SC1091
+. "${XDG_CONFIG_HOME}"/shell/logout

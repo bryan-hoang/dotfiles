@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # -*- coding: utf-8 -*-
 
-# Common configuration
-. "${HOME}/.common"
+# shellcheck disable=SC1091
+. "${XDG_CONFIG_HOME}"/shell/common
 
 # Setting shell options
 
@@ -70,9 +70,6 @@ complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes Syste
 
 # region ohmybash
 
-# Path to your oh-my-bash installation.
-export OSH="${HOME}"/.oh-my-bash
-
 # Which completions would you like to load? (completions can be found in
 # ~/.oh-my-bash/completions/*) Custom completions may be added to
 # ~/.oh-my-bash/custom/completions/ Example format: completions=(ssh git
@@ -117,12 +114,12 @@ does_function_exist && pyvenv_auto_activate_enable
 unset HISTTIMEFORMAT
 
 # shellcheck disable=SC1091
-[[ -s "${HOME}"/.asdf/completions/asdf.bash ]] \
-	&& . "${HOME}"/.asdf/completions/asdf.bash
+[[ -s "${ASDF_DIR}"/completions/asdf.bash ]] \
+	&& . "${ASDF_DIR}"/completions/asdf.bash
 
 # shellcheck disable=SC1091
-[[ -s "${HOME}"/.asdf/plugins/java/set-java-home.bash ]] \
-	&& . "${HOME}"/.asdf/plugins/java/set-java-home.bash
+[[ -s "${ASDF_DIR}"/plugins/java/set-java-home.bash ]] \
+	&& . "${ASDF_DIR}"/plugins/java/set-java-home.bash
 
 # Completions
 # git
@@ -144,13 +141,6 @@ does_program_exist vr && . <(vr completions bash)
 # uninstall by removing these lines
 # shellcheck disable=SC1090
 [ -f ~/.config/tabtab/bash/pnpm.bash ] && . ~/.config/tabtab/bash/pnpm.bash
-
-# ghq
-# shellcheck disable=1090
-. <(wget -qO- https://raw.githubusercontent.com/x-motemen/ghq/master/misc/bash/_ghq)
-
-# shellcheck disable=SC1091
-does_program_exist cht && . "${HOME}"/.bash.d/cht.sh
 
 does_program_exist mcfly && eval "$(mcfly init bash)"
 does_program_exist navi && eval "$(navi widget bash)"

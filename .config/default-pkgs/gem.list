@@ -1,1 +1,16 @@
-../../.default-gems
+# A gem to bundle gems.
+bundler
+# A runtime developer console and IRB alternative with powerful introspection
+# capabilities.
+pry
+# A normaliser/beautifier for HTML that also understands embedded Ruby.
+htmlbeautifier
+# Manage complex tmux sessions easily.
+tmuxinator
+# Gems for Prettier plugin.
+prettier_print
+syntax_tree
+syntax_tree-haml
+syntax_tree-rbs
+# Ruby support for Neovim.
+neovim

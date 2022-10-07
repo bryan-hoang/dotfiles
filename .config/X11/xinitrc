@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+
+# Invoke global X session script.
+#
+# shellcheck disable=SC1091
+. /etc/X11/Xsession
+. "${XDG_CONFIG_HOME}"/X11/xsession
+
+xmodmap "${XDG_CONFIG_HOME}"/X11/Xmodmap
+
+# https://gist.github.com/abairo/5e2ed2faeadcc7abf43cda37826b2fbc#if-you-get-an-incosistent-theme-on-some-parts-of-the-system-or-windows-try-this
+xsetroot -cursor_name left_ptr &
+
+xrdb -load "${XDG_CONFIG_HOME}"/X11/xresources
+
+session=${1:-}
+
+case ${session} in
+	i3 | i3wm)
+		# https://wiki.archlinux.org/title/Flameshot#Troubleshooting
+		exec dbus-launch i3
+		;;
+
+	# No known session, try to run it as command.
+	*)
+		exec $1
+		;;
+esac

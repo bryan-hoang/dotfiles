@@ -1,9 +1,0 @@
-#!/usr/bin/env sh
-# -*- coding: utf-8 -*-
-
-# Detect if on Git Bash. `ripsecrets` is not available on Git Bash.
-uname -a | grep -q -E "Msys" && exit 0
-
-command -v ripsecrets >/dev/null 2>&1 \
-  && ripsecrets --strict-ignore \
-    "$(git diff --cached --name-only --diff-filter=ACM)" 2>/dev/null

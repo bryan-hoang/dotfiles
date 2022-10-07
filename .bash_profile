@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-# -*- coding: utf-8 -*-
 
-. "${HOME}"/.profile
+# shellcheck disable=SC1091
+. "${HOME}"/.config/shell/profile
+
+# shellcheck disable=SC1091
 . "${HOME}"/.bashrc

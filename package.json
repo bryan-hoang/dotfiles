@@ -2,7 +2,8 @@
 	"name": "bryan",
 	"private": true,
 	"scripts": {
-		"prepare": "husky install"
+		"lint-staged": "lint-staged --config .config/lintstaged/lintstagedrc.mjs",
+		"prepare": "husky install .config/husky"
 	},
 	"dependencies": {
 		"debug": "4.3.4",

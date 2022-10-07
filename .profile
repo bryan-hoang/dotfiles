@@ -16,7 +16,7 @@ if command -v tmux &>/dev/null \
 	exec tmux new-session -A -s ssh
 fi
 
-# shellcheck source=.exports
-. "${HOME}"/.exports
-# shellcheck source=.path
-. "${HOME}"/.path
+# shellcheck disable=SC1091
+. "${HOME}"/.config/shell/exports
+# shellcheck disable=SC1091
+. "${HOME}"/.config/shell/path

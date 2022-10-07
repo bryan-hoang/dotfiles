@@ -1,20 +1,17 @@
-[submodule ".oh-my-zsh"]
-	path = .oh-my-zsh
+[submodule "submodules/oh-my-zsh"]
+	path = submodules/oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
-[submodule ".oh-my-bash"]
-	path = .oh-my-bash
+[submodule "submodules/oh-my-bash"]
+	path = submodules/oh-my-bash
 	url = https://github.com/ohmybash/oh-my-bash.git
-[submodule ".asdf"]
-	path = .asdf
-	url = https://github.com/asdf-vm/asdf.git
-[submodule ".config/nvim"]
-	path = .config/nvim
+[submodule "submodules/NvChad"]
+	path = submodules/NvChad
 	url = https://github.com/NvChad/NvChad
-[submodule ".vim_runtime"]
-	path = .vim_runtime
+[submodule "submodules/vimrc"]
+	path = submodules/vimrc
 	url = https://github.com/amix/vimrc.git
-[submodule ".local/share/themes/Dracula"]
-	path = .local/share/themes/Dracula
+[submodule "submodules/dracula-gtk"]
+	path = submodules/dracula-gtk
 	url = https://github.com/dracula/gtk.git
 [submodule "submodules/.tmux"]
 	path = submodules/.tmux
@@ -43,9 +40,6 @@
 [submodule "submodules/rofi"]
 	path = submodules/rofi
 	url = https://github.com/dracula/rofi
-[submodule "submodules/spicetify-themes"]
-	path = submodules/spicetify-themes
-	url = https://github.com/spicetify/spicetify-themes.git
 [submodule "submodules/dracula-git"]
 	path = submodules/dracula-git
 	url = https://github.com/dracula/git
@@ -79,3 +73,6 @@
 [submodule "submodules/arkenfox"]
 	path = submodules/arkenfox
 	url = https://github.com/arkenfox/user.js.git
+[submodule "submodules/asdf"]
+	path = submodules/asdf
+	url = https://github.com/asdf-vm/asdf.git
