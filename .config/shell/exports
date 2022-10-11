@@ -165,17 +165,15 @@ export CALCHISTFILE="${XDG_STATE_HOME}"/calc/history
 # FIXME: Makes login fail :/
 # export XAUTHORITY="${XDG_CACHE_HOME}"/Xauthority
 export ICEAUTHORITY="${XDG_CACHE_HOME}"/ICEauthority
-
 export DENO_INSTALL="${XDG_DATA_HOME}"/deno
 export BUN_INSTALL="${XDG_DATA_HOME}"/bun
 export KDEHOME="${XDG_CONFIG_HOME}"/kde
 export OSH="${XDG_CONFIG_HOME}"/oh-my-bash
 export ZSH="${XDG_CONFIG_HOME}"/oh-my-zsh
 export TMUX_PLUGIN_MANAGER_PATH="${XDG_CONFIG_HOME}"/tmux/plugins
-
-# TODO: Detect if asdf plugin for golang is installed.
-# export GOPATH="${XDG_DATA_HOME}"/go
 mkdir -p "${XDG_DATA_HOME}"/wineprefixes
 export WINEPREFIX="${XDG_DATA_HOME}"/wineprefixes/default
+
 # Avoid hard coded ~/.osh-update from oh-my-bash.
 export DISABLE_AUTO_UPDATE=true
+export CLOUDSDK_CONFIG="${XDG_CONFIG_HOME}"/gcloud
