@@ -21,16 +21,11 @@ clone_repo() {
 	dot submodule update --init --recursive
 }
 
-if [ ! -d "${HOME}"/.git ] || [ ! -f "${HOME}"/.functions ]; then
+if [ ! -d "${HOME}"/.git ] || [ ! -f "${HOME}"/submodules ]; then
 	clone_repo
 fi
 
-# shellcheck source=.functions
-. "${HOME}"/.functions
-
-if [ ! -f "${HOME}"/submodules/.tmux/.tmux.conf ]; then
-	ln -s -f "${HOME}"/submodules/.tmux/.tmux.conf "${HOME}"
-fi
+. "${HOME}"/.config/shell/functions
 
 declare -a programs=(
 	curl
@@ -89,4 +84,3 @@ link_bash_plugins
 link_nvim_custom_config
 
 echo "Finished installing Bryan's dotfiles setup!"
-git fetch origin && git reset --hard "$(git rev-parse --abbrev-ref --symbolic-full-name '@{u}')" && git clean -fd
