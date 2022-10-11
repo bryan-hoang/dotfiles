@@ -1108,7 +1108,6 @@ start_ssh_agent() {
 
 start_ssh_keychain() {
 	eval "$(keychain -q \
-		--absolute --dir "${XDG_RUNTIME_DIR}"/keychain \
 		--eval --agents ssh,gpg id_ed25519 ABE9B748EEAE9E00 \
 		"$@")"
 }

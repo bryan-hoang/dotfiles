@@ -147,9 +147,9 @@ alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
 alias ls="command ls ${colorflag} -A --time-style=long-iso"
 
 # Override `ls` with `exa` if it exists.
-if does_program_exist exa; then
-	alias ls="exa"
-	alias ll="exa -lFag --group-directories-first --icons -s type"
+if command -v exa >/dev/null 2>&1; then
+	alias ls=exa
+	alias ll='exa -lFag --group-directories-first --icons -s type'
 fi
 
 # endregion ls vs. exa
@@ -158,8 +158,8 @@ fi
 [[ -f '/mnt/c/Windows/System32/clip.exe' ]] \
 	&& alias xclip='/mnt/c/Windows/System32/clip.exe'
 
-if does_program_exist bat; then
-	alias cat="bat"
+if command -v bat >/dev/null 2>&1; then
+	alias cat=bat
 fi
 
 alias conventional-changelog='conventional-changelog -p conventionalcommits -n "${XDG_CONFIG_HOME}"/conventional-changelog/config.js'
@@ -171,3 +171,5 @@ alias wget='wget --hsts-file="${XDG_STATE_HOME}"/wget/history'
 mkdir -p "${XDG_STATE_HOME}"/units
 alias units='units --history "${XDG_STATE_HOME}"/units/history'
 alias xbindkeys='xbindkeys --file "${XDG_CONFIG_HOME}"/xbindkeys/config'
+mkdir -p "${XDG_DATA_HOME}"/keychain
+alias keychain='keychain --absolute --dir "${XDG_DATA_HOME}"/keychain'
