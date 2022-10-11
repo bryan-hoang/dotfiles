@@ -18,6 +18,9 @@ local sources = {
 	-- Shell
 	b.formatting.shfmt,
 	b.diagnostics.shellcheck.with({ diagnostics_format = "#{m} [#{c}]" }),
+
+	-- TOML
+	b.formatting.taplo,
 }
 
 null_ls.setup({

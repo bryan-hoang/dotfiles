@@ -3,7 +3,7 @@ local on_attach = require("plugins.configs.lspconfig").on_attach
 local capabilities = require("plugins.configs.lspconfig").capabilities
 
 local lspconfig = require("lspconfig")
-local servers = { "bashls", "sumneko_lua"}
+local servers = { "bashls", "sumneko_lua", "taplo"}
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({
