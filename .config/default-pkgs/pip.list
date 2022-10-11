@@ -19,3 +19,5 @@ pylint
 black
 bandit
 mypy
+# Build system.
+meson
