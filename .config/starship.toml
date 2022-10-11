@@ -115,6 +115,10 @@ disabled = false
 [directory]
 format = "[$path]($style)[$read_only]($read_only_style) "
 
+[gcloud]
+# The module isn't very useful :(
+disabled = true
+
 [git_branch]
 format = "[$symbol$branch(:$remote_branch)]($style) "
 
@@ -176,6 +180,10 @@ disabled = true
 disabled = true
 # Enable symbols mapping from exit code
 map_symbol = true
+
+[sudo]
+symbol = "👩‍💻 "
+disabled = false
 
 [time]
 disabled = true
