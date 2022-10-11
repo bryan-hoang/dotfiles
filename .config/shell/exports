@@ -177,3 +177,5 @@ export TMUX_PLUGIN_MANAGER_PATH="${XDG_CONFIG_HOME}"/tmux/plugins
 # export GOPATH="${XDG_DATA_HOME}"/go
 mkdir -p "${XDG_DATA_HOME}"/wineprefixes
 export WINEPREFIX="${XDG_DATA_HOME}"/wineprefixes/default
+# Avoid hard coded ~/.osh-update from oh-my-bash.
+export DISABLE_AUTO_UPDATE=true
