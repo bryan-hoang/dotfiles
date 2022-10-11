@@ -69,3 +69,10 @@ user_pref('privacy.resistFingerprinting.letterboxing', false);
  * [SETUP-WEB] If you need it then override it. RFP still randomizes canvas for naive scripts
  */
 user_pref('webgl.disabled', false);
+
+/**
+ * 5003: disable saving passwords
+ * [NOTE] This does not clear any passwords already saved
+ * [SETTING] Privacy & Security>Logins and Passwords>Ask to save logins and passwords for websites
+ */
+user_pref('signon.rememberSignons', false);
