@@ -34,3 +34,5 @@ svgo
 niim
 # Neovim Node.js client and plugin host
 neovim
+# Vscode-json-language-server, a language server for JSON and JSON schema.
+vscode-langservers-extracted
