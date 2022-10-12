@@ -28,6 +28,9 @@ fi
 
 does_program_exist thefuck && eval "$(thefuck --alias)"
 
+# bun completions
+[ -s "${XDG_DATA_HOME}"/bun/_bun ] && . "${XDG_DATA_HOME}"/bun/_bun
+
 # endregion
 
 # https://wiki.archlinux.org/title/XDG_Base_Directory
