@@ -80,6 +80,7 @@ zstyle ':completion::complete:*' gain-privileges 1
 zstyle ':completion:*' rehash true
 
 # bun completions
+#
 # shellcheck disable=SC1091
 [ -s "${HOME}"/.bun/_bun ] && source "${HOME}"/.bun/_bun
 
