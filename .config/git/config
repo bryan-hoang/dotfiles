@@ -262,7 +262,6 @@
 	recurseSubmodules = check
 [status]
 	showStash = true
-	submoduleSummary = true
 [url "git@github.com:"]
 	insteadOf = "gh:"
 	pushInsteadOf = "github:"
