@@ -406,7 +406,7 @@ install_asdf_plugin() {
 	case "${1}" in
 		nodejs)
 			plugin_git_repo='https://github.com/asdf-vm/asdf-nodejs.git'
-			if [[ -z "${version}" ]]; then
+			if [[ -n "${version}" ]]; then
 				version='lts'
 			fi
 			;;
@@ -441,9 +441,6 @@ install_asdf_plugin() {
 				build-essential libcurl4-openssl-dev libssl-dev libxml2-dev r-base || return
 			export R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib --with-cairo'
 			;;
-		dotnet-core)
-			plugin_git_repo='https://github.com/emersonsoares/asdf-dotnet-core.git'
-			;;
 		php)
 			plugin_git_repo='https://github.com/asdf-community/asdf-php.git'
 			install_apt_packages autoconf bison build-essential curl gettext git \
@@ -466,7 +463,9 @@ install_asdf_plugin() {
 			asdf "${1}" setup --shell "${SHELL}" --version "${version}"
 			;;
 		*)
-			asdf install "${1}" "${version}"
+			cd ~ || exit
+			asdf direnv local "${1}" "${version}"
+			cd - || exit
 			;;
 	esac
 
