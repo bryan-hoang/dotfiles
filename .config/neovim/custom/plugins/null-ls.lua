@@ -16,7 +16,9 @@ local sources = {
 	b.formatting.stylua,
 
 	-- Shell
-	b.formatting.shfmt,
+	b.formatting.shfmt.with({
+		extra_args = { "-ci", "-bn" },
+	}),
 	b.diagnostics.shellcheck.with({ diagnostics_format = "#{m} [#{c}]" }),
 
 	-- TOML
