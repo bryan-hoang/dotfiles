@@ -32,6 +32,7 @@ return {
 				"typescript-language-server",
 				"deno",
 				"emmet-ls",
+				"yaml-language-server",
 
 				-- shell
 				"shfmt",
