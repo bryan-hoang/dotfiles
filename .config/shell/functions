@@ -411,7 +411,7 @@ install_asdf_plugin() {
 			fi
 			;;
 		python)
-			plugin_git_repo='https://github.com/danhper/asdf-python.git'
+			plugin_git_repo='https://github.com/asdf-community/asdf-python.git'
 			install_apt_packages make build-essential libssl-dev zlib1g-dev \
 				libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
 				libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev \
