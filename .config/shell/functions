@@ -452,6 +452,10 @@ install_asdf_plugin() {
 				libsqlite3-dev libssl-dev libxml2-dev libzip-dev openssl pkg-config \
 				re2c zlib1g-dev
 			;;
+		lua)
+			install_apt_packages linux-headers-"$(uname -r)" build-essential
+			plugin_git_repo='https://github.com/Stratus3D/asdf-lua.git'
+			;;
 		*) ;;
 	esac
 
