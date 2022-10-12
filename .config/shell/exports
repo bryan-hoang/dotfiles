@@ -179,3 +179,4 @@ export WINEPREFIX="${XDG_DATA_HOME}"/wineprefixes/default
 export DISABLE_AUTO_UPDATE=true
 export CLOUDSDK_CONFIG="${XDG_CONFIG_HOME}"/gcloud
 export JULIA_DEPOT_PATH="${XDG_DATA_HOME}"/julia:"${JULIA_DEPOT_PATH}"
+export MINIKUBE_HOME="${XDG_DATA_HOME}"/minikube
