@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# -*- coding: utf-8 -*-
+#
+# vi: set filetype=sh
 
 export XDG_BIN_HOME="${HOME}"/.local/bin
 export XDG_CONFIG_HOME="${HOME}"/.config
