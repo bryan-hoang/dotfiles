@@ -4,9 +4,9 @@ import createDebug from 'debug';
 const debug = createDebug('lint-staged:config');
 
 const shellScriptExtensions = [
-	'sh',
+	'*.sh',
 	'*profile',
-	'bash_*',
+	'.bash_*',
 	'zshrc',
 	'bashrc',
 	'path',
@@ -37,7 +37,7 @@ const prettierExtensions = [
 
 export default {
 	[`*.{${prettierExtensions.join(',')}}`]: 'prettier --write',
-	[`*.{${shellScriptExtensions.join(',')}}`]: 'shellcheck',
+	[`{${shellScriptExtensions.join(',')}}`]: 'shellcheck',
 	'*': (files) => {
 		// Ignore submodule files.
 		debug('files', files);
