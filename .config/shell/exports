@@ -13,13 +13,13 @@ export XCURSOR_THEME=Dracula-cursors
 
 # Default editor.
 if command -v nvim &>/dev/null; then
-	export SUDO_EDITOR=nvim
-	export VISUAL=${SUDO_EDITOR}
-	export EDITOR=${SUDO_EDITOR}
+	export EDITOR=nvim
+	export VISUAL=${EDITOR}
+	export SUDO_EDITOR=${EDITOR}
 elif command -v vim &>/dev/null; then
-	export SUDO_EDITOR=vim
-	export VISUAL=${SUDO_EDITOR}
-	export EDITOR=${SUDO_EDITOR}
+	export EDITOR=vim
+	export VISUAL=${EDITOR}
+	export SUDO_EDITOR=${EDITOR}
 fi
 
 # Enable persistent REPL history for `node`.
