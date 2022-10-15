@@ -108,6 +108,8 @@ export EXA_STRICT=true
 export MCFLY_KEY_SCHEME=vim
 export MCFLY_RESULTS_SORT=LAST_RUN
 export MCFLY_HISTORY_LIMIT=${HISTSIZE}
+export MCFLY_RESULTS=50
+export MCFLY_INTERFACE_VIEW=BOTTOM
 
 export BUN_INSTALL="${HOME}"/.bun
 
@@ -128,9 +130,9 @@ export PNPM_HOME="${XDG_DATA_HOME}"/pnpm
 export CONDARC="${XDG_CONFIG_HOME}"/conda/condarc
 export BASH_COMPLETION_USER_FILE="${XDG_CONFIG_HOME}"/bash-completion/bash_completion
 export DOCKER_CONFIG="${XDG_CONFIG_HOME}"/docker
-chmod 600 "${XDG_DATA_HOME}"/gnupg/*
-chmod 700 "${XDG_DATA_HOME}"/gnupg
-export GNUPGHOME="${XDG_DATA_HOME}"/gnupg
+chmod 600 "${HOME}"/.gnupg/*
+chmod 700 "${HOME}"/.gnupg
+export GNUPGHOME="${HOME}"/.gnupg
 export PASSWORD_STORE_DIR="${XDG_DATA_HOME}"/pass
 export INPUTRC="${XDG_CONFIG_HOME}"/readline/inputrc
 export RIPGREP_CONFIG_PATH=${XDG_CONFIG_HOME}/ripgrep/config
