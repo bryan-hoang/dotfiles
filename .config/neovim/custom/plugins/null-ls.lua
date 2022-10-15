@@ -5,10 +5,9 @@ if not present then
 end
 
 local b = null_ls.builtins
-
 local sources = {
 
-	-- webdev stuff
+	-- Webdev stuff
 	b.formatting.deno_fmt,
 	b.formatting.prettier,
 
@@ -23,6 +22,10 @@ local sources = {
 
 	-- TOML
 	b.formatting.taplo,
+
+	-- Markdown
+	b.diagnostics.markdownlint,
+	b.diagnostics.vale,
 }
 
 null_ls.setup({

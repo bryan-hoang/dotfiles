@@ -6,10 +6,14 @@ local lspconfig = require("lspconfig")
 local servers = {
 	"bashls",
 	"sumneko_lua",
+	-- TOML
 	"taplo",
 	"tsserver",
 	"jsonls",
 	"yamlls",
+
+	-- Markdown
+	"ltex",
 }
 
 for _, lsp in ipairs(servers) do

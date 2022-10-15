@@ -41,6 +41,15 @@ return {
 
 				-- TOML
 				"taplo",
+
+				-- Markdown
+				"vale",
+				"ltex-ls",
+				"markdownlint",
+
+				-- DAPs.
+				"js-debug-adapter",
+				"bash-debug-adapter",
 			},
 		},
 	},
@@ -48,6 +57,11 @@ return {
 		after = "nvim-lspconfig",
 		config = function()
 			require("custom.plugins.null-ls")
+		end,
+	},
+	["iamcco/markdown-preview.nvim"] = {
+		run = function()
+			vim.fn["mkdp#util#install"]()
 		end,
 	},
 }
