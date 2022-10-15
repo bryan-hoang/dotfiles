@@ -6,7 +6,6 @@
 DOWNLOAD_DIR="${HOME}"/Downloads
 FONT_DIR="${XDG_DATA_HOME}"/fonts
 DEFAULT_PKGS_DIR="${XDG_CONFIG_HOME}"/default-pkgs
-ZSH_FPATH="${XDG_DATA_HOME}"/zsh/site-functions
 
 install_gh() {
 	echo "Installing gh..."
@@ -24,7 +23,7 @@ install_gh() {
 		sudo apt install "${DOWNLOAD_DIR}"/gh_*_linux_arm64.deb
 	fi
 
-	gh completion -s zsh >"${ZSH_FPATH}"/_gh
+	gh completion -s zsh >"${ZSH_USER_FPATH}"/_gh
 	gh --version
 	if ! gh auth status; then
 		gh auth login --web
@@ -292,7 +291,7 @@ install_cht.sh() {
 	curl https://cht.sh/:cht.sh >"${XDG_BIN_HOME}/cht.sh"
 	chmod +x "${XDG_BIN_HOME}/cht.sh"
 	curl https://cheat.sh/:bash_completion >"${BASH_DIR}"/cht.sh
-	curl https://cheat.sh/:zsh >"${ZSH_FPATH}"/_cht
+	curl https://cheat.sh/:zsh >"${ZSH_USER_FPATH}"/_cht
 
 	cht.sh --help
 	echo "Installed cht successfully!"
@@ -630,7 +629,7 @@ install_poetry() {
 		echo "Installing poetry..."
 		curl -sSL https://install.python-poetry.org | python3 -
 		poetry --version
-		poetry completions zsh >"${ZSH_FPATH}"/_poetry
+		poetry completions zsh >"${ZSH_USER_FPATH}"/_poetry
 		if has_sudo; then
 			poetry completions bash \
 				| sudo tee /etc/bash_completion.d/poetry >/dev/null
@@ -1111,6 +1110,7 @@ start_ssh_agent() {
 
 start_ssh_keychain() {
 	eval "$(keychain -q \
+		--absolute --dir "${XDG_DATA_HOME}"/keychain \
 		--eval --agents ssh,gpg id_ed25519 ABE9B748EEAE9E00 \
 		"$@")"
 }

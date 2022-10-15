@@ -62,12 +62,11 @@ mkdir -p "${XDG_CACHE_HOME}"/zsh
 compinit -d "${XDG_CACHE_HOME}"/zsh/zcompdump-"${ZSH_VERSION}"
 zstyle ':completion:*' cache-path "${XDG_CACHE_HOME}"/zsh/zcompcache
 
-ZSH_FPATH="${XDG_DATA_HOME}"/zsh/site-functions
-
 does_program_exist compdef && compdef dot='git'
 
+# Zsh completions plugin.
 fpath+=${ZSH_CUSTOM_PLUGINS_DIR}/zsh-completions/src
-fpath+=${ZSH_FPATH}
+fpath+=${ZSH_USER_FPATH}
 
 # For enabling autocompletion of privileged environments in privileged commands
 # (e.g. if you complete a command starting with sudo, completion scripts will
@@ -85,12 +84,12 @@ zstyle ':completion:*' rehash true
 [ -s "${HOME}"/.bun/_bun ] && source "${HOME}"/.bun/_bun
 
 # tmuxinator completions.
-[[ -s "${ZSH_FPATH}"/_tmuxinator ]] \
+[[ -s "${ZSH_USER_FPATH}"/_tmuxinator ]] \
 	|| wget https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh \
-		-O "${ZSH_FPATH}"/_tmuxinator
+		-O "${ZSH_USER_FPATH}"/_tmuxinator
 
 # shellcheck disable=SC1091
-. "${ZSH_FPATH}"/_tmuxinator
+. "${ZSH_USER_FPATH}"/_tmuxinator
 
 # endregion Completions
 
