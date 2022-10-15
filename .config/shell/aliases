@@ -172,4 +172,4 @@ mkdir -p "${XDG_STATE_HOME}"/units
 alias units='units --history "${XDG_STATE_HOME}"/units/history'
 alias xbindkeys='xbindkeys --file "${XDG_CONFIG_HOME}"/xbindkeys/config'
 mkdir -p "${XDG_DATA_HOME}"/keychain
-alias keychain='keychain --absolute --dir "${XDG_DATA_HOME}"/keychain'
+command -v keychain &>/dev/null && alias keychain='keychain --absolute --dir "${XDG_DATA_HOME}"/keychain'
