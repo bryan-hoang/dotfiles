@@ -333,8 +333,8 @@ set-option -ga update-environment 'TMUX_PLUGIN_MANAGER_PATH VSCODE_GIT_ASKPASS_N
 
 set -g default-command "${SHELL}"
 
-# increase history size
-#set -g history-limit 10000
+# Increase history size.
+set -g history-limit 10000
 
 # start with mouse mode enabled
 #set -g mouse on
