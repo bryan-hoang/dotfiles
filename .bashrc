@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# -*- coding: utf-8 -*-
 
 # shellcheck disable=SC1091
 . "${XDG_CONFIG_HOME}"/shell/common
@@ -143,7 +142,7 @@ does_program_exist vr && . <(vr completions bash)
 [ -f ~/.config/tabtab/bash/pnpm.bash ] && . ~/.config/tabtab/bash/pnpm.bash
 
 does_program_exist mcfly && eval "$(mcfly init bash)"
-does_program_exist navi && eval "$(navi widget bash)"
+is_interactive_shell && does_program_exist navi && eval "$(navi widget bash)"
 does_program_exist zoxide && eval "$(zoxide init bash)"
 does_program_exist gh && eval "$(gh completion -s bash)"
 does_program_exist starship && eval "$(starship init bash)"
