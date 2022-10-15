@@ -488,7 +488,7 @@ install_default_pkgs() {
 			install_opts+=(-g)
 			;;
 		cargo)
-			install_cmd+=(cargo install "$2")
+			install_cmd+=(cargo install --force)
 			;;
 		espanso)
 			install_cmd+=(espanso install)
