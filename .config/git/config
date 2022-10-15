@@ -138,23 +138,10 @@
 [diff]
 	# Detect copies as well as renames.
 	renames = copies
-	# Controls which diff tool is used by git-difftool[1]. This variable
-	# overrides the value configured in merge.tool. The list below shows the
-	# valid built-in values. Any other value is treated as a custom diff tool and
-	# requires that a corresponding difftool.<tool>.cmd variable is defined.
-	tool = vscode
 	# If set, 'git diff' uses a prefix pair that is different from the standard
 	# "a/" and "b/" depending on what is being compared. When this configuration
 	# is in effect, reverse diff output also swaps the order of the prefixes:
 	mnemonicPrefix = true
-	# If set to either a valid <mode> or a true value, moved lines in a diff are
-	# colored differently
-	colorMoved = default
-[diff "bin"]
-	# Use `hexdump` to diff binary files.
-	textconv = hexdump -v -C
-[difftool "vscode"]
-	cmd = code --wait --diff $LOCAL $REMOTE
 [fetch]
 	# If true, fetch will automatically behave as if the --prune option was given
 	# on the command line. See also remote.<name>.prune and the PRUNING section
@@ -214,7 +201,7 @@
 	# the valid built-in values. Any other value is treated as a custom merge
 	# tool and requires that a corresponding mergetool.<tool>.cmd variable is
 	# defined.
-	tool = vimdiff
+	tool = nvimdiff
 	# Specify the style in which conflicted hunks are written out to working tree
 	# files upon merge. The default is "merge", which shows a <<<<<<< conflict
 	# marker, changes made by one side, a ======= marker, changes made by the
@@ -398,3 +385,5 @@
 	abbreviateCommands = true
 	autoStash = true
 	updateRefs = true
+[mergetool]
+	keepBackup = false
