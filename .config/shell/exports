@@ -172,6 +172,7 @@ export DENO_INSTALL="${XDG_DATA_HOME}"/deno
 export BUN_INSTALL="${XDG_DATA_HOME}"/bun
 export KDEHOME="${XDG_CONFIG_HOME}"/kde
 export OSH="${XDG_CONFIG_HOME}"/oh-my-bash
+. "${HOME}"/.zshenv
 export ZSH="${XDG_CONFIG_HOME}"/oh-my-zsh
 export ZSH_USER_FPATH="${XDG_DATA_HOME}"/zsh/functions
 export TMUX_PLUGIN_MANAGER_PATH="${XDG_CONFIG_HOME}"/tmux/plugins
