@@ -2,9 +2,13 @@
 #
 # vi: set filetype=sh
 
-if [[ -n "${SSH_CONNECTION}" ]]; then
-	# shellcheck disable=SC1091
-	. "${ZDOTDIR}"/.zprofile
+if command -v tmux &>/dev/null \
+	&& [[ -n "${PS1}" ]] \
+	&& [[ ! "${TERM}" =~ screen ]] \
+	&& [[ ! "${TERM}" =~ tmux ]] \
+	&& [[ -n "${SSH_CONNECTION}" ]] \
+	&& [[ -z "${TMUX}" ]]; then
+	exec tmux new-session -A -s ssh
 fi
 
 # Uncomment the following line to disable auto-setting terminal title.
