@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+ripsecrets --strict-ignore "$(git diff --cached --name-only --diff-filter=ACM)"
