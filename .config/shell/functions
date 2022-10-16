@@ -405,7 +405,7 @@ install_asdf_plugin() {
 	case "${1}" in
 		nodejs)
 			plugin_git_repo='https://github.com/asdf-vm/asdf-nodejs.git'
-			if [[ -z "${version}" ]]; then
+			if [[ -n "${version}" ]]; then
 				version='lts'
 			fi
 			;;
