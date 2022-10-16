@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+if command -v tmux &>/dev/null \
+	&& [[ -n "${PS1}" ]] \
+	&& [[ ! "${TERM}" =~ screen ]] \
+	&& [[ ! "${TERM}" =~ tmux ]] \
+	&& [[ -n "${SSH_CONNECTION}" ]] \
+	&& [[ -z "${TMUX}" ]]; then
+	exec tmux new-session -A -s ssh
+fi
+
 # shellcheck disable=SC1091
 . "${XDG_CONFIG_HOME}"/shell/common
 
