@@ -22,23 +22,10 @@ elif command -v vim &>/dev/null; then
 	export SUDO_EDITOR=${EDITOR}
 fi
 
-# Enable persistent REPL history for `node`.
-mkdir -p "${XDG_STATE_HOME}"/node
-export NODE_REPL_HISTORY="${XDG_STATE_HOME}"/node/node_repl_history
-
-# Allow 32^3 entries; the default is 1000.
-export NODE_REPL_HISTORY_SIZE=32768
-
-# Use sloppy mode by default, matching web browsers.
-export NODE_REPL_MODE=sloppy
-export NODE_INSPECT_RESUME_ON_START=1
-
-export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}"/npm/npmrc
-
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING=UTF-8
 
-# Increase Bash history size. Allow 32^3 entries; the default is 500.
+# Increase history size. The default is 500.
 export HISTSIZE=32768
 export HISTFILESIZE=${HISTSIZE}
 export SAVEHIST=${HISTSIZE}
@@ -50,6 +37,20 @@ export HISTCONTROL='ignoreboth:erasedups'
 export PAGER=less
 command -v bat &>/dev/null \
 	&& export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# Enable persistent REPL history for `node`.
+mkdir -p "${XDG_STATE_HOME}"/node
+export NODE_REPL_HISTORY="${XDG_STATE_HOME}"/node/node_repl_history
+
+# Allow 32^3 entries; the default is 1000.
+export NODE_REPL_HISTORY_SIZE=${HISTSIZE}
+
+# Use sloppy mode by default, matching web browsers.
+export NODE_REPL_MODE=sloppy
+export NODE_INSPECT_RESUME_ON_START=1
+
+export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}"/npm/npmrc
+
 
 # -X leaves file contents on the screen when less exits.
 #
@@ -108,8 +109,9 @@ export EXA_STRICT=true
 export MCFLY_KEY_SCHEME=vim
 export MCFLY_RESULTS_SORT=LAST_RUN
 export MCFLY_HISTORY_LIMIT=${HISTSIZE}
-export MCFLY_RESULTS=50
+export MCFLY_RESULTS=20
 export MCFLY_INTERFACE_VIEW=BOTTOM
+export MCFLY_FUZZY=2
 
 export BUN_INSTALL="${HOME}"/.bun
 
