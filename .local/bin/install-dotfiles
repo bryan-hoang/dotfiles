@@ -17,7 +17,7 @@ clone_repo() {
 	dot init
 	dot remote add origin "${REPOSITORY}"
 	dot fetch
-	dot switch -t origin/main
+	dot switch -ft origin/main
 	dot submodule update --init --recursive
 }
 
