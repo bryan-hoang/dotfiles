@@ -488,7 +488,7 @@ install_default_pkgs() {
 			install_opts+=(-g)
 			;;
 		cargo)
-			install_cmd+=(cargo install --force)
+			install_cmd+=(cargo install)
 			;;
 		espanso)
 			install_cmd+=(espanso install)
@@ -509,6 +509,10 @@ install_default_pkgs() {
 			;;
 		*) ;;
 	esac
+
+	if [[ -n $2 ]]; then
+		install_cmd+=("$2")
+	fi
 
 	local -r pkg_list_file="${DEFAULT_PKGS_DIR}/${1}.list"
 
