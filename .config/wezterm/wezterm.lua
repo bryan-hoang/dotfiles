@@ -1,5 +1,7 @@
 local wezterm = require("wezterm")
 local dracula = require("dracula")
+
+local is_os_unix = package.config:sub(1, 1) == "/"
 local tmux = { "tmux", "new-session", "-A", "-s", "wezterm" }
 local zsh = { "zsh", "-i" }
 local git_bash = { "C:\\Program Files\\Git\\bin\\bash.exe", "-l" }
@@ -8,14 +10,16 @@ local sh = { "sh", "-i" }
 
 return {
 	colors = dracula,
-	font = wezterm.font("FiraCode Nerd Font Mono"),
+	font = wezterm.font(
+		is_os_unix and "FiraCode Nerd Font Mono" or "FiraCode NFM"
+	),
 	default_cursor_style = "SteadyBlock",
 	-- https://wezfurlong.org/wezterm/config/lua/config/use_fancy_tab_bar
 	use_fancy_tab_bar = false,
 	-- https://wezfurlong.org/wezterm/config/lua/config/default_prog
 	-- http://lua-users.org/wiki/TernaryOperator
 	-- https://stackoverflow.com/a/14425862/8714233
-	default_prog = package.config:sub(1, 1) == "/" and tmux or git_bash,
+	default_prog = is_os_unix and tmux or git_bash,
 	-- https://wezfurlong.org/wezterm/config/lua/config/launch_menu
 	launch_menu = {
 		{
