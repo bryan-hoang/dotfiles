@@ -495,7 +495,7 @@ install_default_pkgs() {
 			;;
 		pip)
 			install_cmd+=(pip install)
-			install_opts+=(--upgrade)
+			install_opts+=(--upgrade --user)
 			;;
 		gem)
 			# `--no-document` option from `~/.gemrc`
@@ -511,7 +511,7 @@ install_default_pkgs() {
 	esac
 
 	if [[ -n $2 ]]; then
-		install_cmd+=("$2")
+		install_opts+=("$2")
 	fi
 
 	local -r pkg_list_file="${DEFAULT_PKGS_DIR}/${1}.list"
