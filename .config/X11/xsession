@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+#
+# shellcheck disable=SC2034
+
+USERXSESSION="${XDG_CACHE_HOME}"/X11/xsession
+USERXSESSIONRC="${XDG_CACHE_HOME}"/X11/xsessionrc
+ALTUSERXSESSION="${XDG_CACHE_HOME}"/X11/Xsession
+ERRFILE="${XDG_CACHE_HOME}"/X11/xsession-errors

@@ -10,6 +10,7 @@ export XDG_CACHE_HOME="${HOME}"/.cache
 
 export XCURSOR_PATH="${XDG_DATA_HOME}"/icons
 export XCURSOR_THEME=Dracula-cursors
+export XCURSOR_DISCOVER=1
 
 # Default editor.
 if command -v nvim &>/dev/null; then
@@ -50,7 +51,6 @@ export NODE_REPL_MODE=sloppy
 export NODE_INSPECT_RESUME_ON_START=1
 
 export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}"/npm/npmrc
-
 
 # -X leaves file contents on the screen when less exits.
 #
@@ -158,8 +158,10 @@ export RUSTUP_HOME="${XDG_DATA_HOME}"/rustup
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME}"/java
 export GTK_RC_FILES="${XDG_CONFIG_HOME}"/gtk-1.0/gtkrc
 export GTK2_RC_FILES="${XDG_CONFIG_HOME}"/gtk-2.0/gtkrc
+
+# startx doesn't respect the following variables.
 export XINITRC="${XDG_CONFIG_HOME}"/X11/xinitrc
-export XSERVERRC="${XDG_CONFIG_HOME}"/X11/xserverr
+export XSERVERRC="${XDG_CONFIG_HOME}"/X11/xserverrc
 
 # Don't set on git bash.
 if ! uname -a | grep -q 'Msys'; then
@@ -169,7 +171,7 @@ fi
 export VSCODE_PORTABLE="${XDG_DATA_HOME}"/vscode
 export PYTHONSTARTUP="${XDG_CONFIG_HOME}"/python/pythonrc.py
 export PYLINTRC="${XDG_CONFIG_HOME}"/pylint/pylintrc
-mkdir -p "${XDG_CONFIG_HOME}"/calc
+mkdir -p "${XDG_STATE_HOME}"/calc
 export CALCHISTFILE="${XDG_STATE_HOME}"/calc/history
 
 # FIXME: Makes login fail :/
