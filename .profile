@@ -12,7 +12,7 @@
 . "${HOME}"/.config/shell/path
 
 # https://wiki.archlinux.org/title/Xinit
-if [ -n "${DISPLAY}" ] && [ "${XDG_VTNR}" -le 2 ]; then
+if [ -n "${DISPLAY}" ] && [ "${XDG_VTNR:-42}" -le 2 ]; then
 	xmodmap "${XDG_CONFIG_HOME}"/X11/Xmodmap
 
 	# https://gist.github.com/abairo/5e2ed2faeadcc7abf43cda37826b2fbc#if-you-get-an-incosistent-theme-on-some-parts-of-the-system-or-windows-try-this
