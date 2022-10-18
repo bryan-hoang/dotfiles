@@ -427,7 +427,7 @@ install_asdf_plugin() {
 				libgdbm6 libgdbm-dev libdb-dev
 			;;
 		java)
-			version='openjdk-16.0.2'
+			version='openjdk-17.0.2'
 			;;
 		perl)
 			plugin_git_repo='https://github.com/ouest/asdf-perl.git'
