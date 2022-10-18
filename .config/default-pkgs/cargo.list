@@ -12,7 +12,7 @@ zoxide
 # A very fast implementation of tldr in Rust.
 tealdeer
 # Executes commands in response to file modifications.
-watchexec-cli
+# watchexec-cli
 # Upgrade everything.
 topgrade
 # An over-engineered rewrite of pipes.sh in Rust.
@@ -46,7 +46,7 @@ tokei
 onefetch
 # A command-line tool and library for generating regular expressions (regex)
 # from user-provided test cases.
-grex
+# grex
 # A modern replacement for ps written in Rust.
 procs
 # Intuitive find & replace CLI (sed alternative).
@@ -61,7 +61,7 @@ hexyl
 # Friendly and fast tool for sending HTTP requests.
 xh
 # Multi functional app to find duplicates, empty folders, similar images etc.
-czkawka_cli
+# czkawka_cli
 # A command-line tool to generate, analyze, convert and manipulate colors.
 pastel
 # 🌀 A nonsense activity generator.
@@ -69,7 +69,7 @@ genact
 # A new way to see and navigate directory trees.
 broot
 # Blazing 💥 fast terminal-ui for git written in rust 🦀. (perl in git-bash)
-gitui
+# gitui
 # Create beautiful image of your source code.
 silicon
 # Like jq, but for HTML.
@@ -80,16 +80,17 @@ htmlq
 just
 # Command-line interface for email management.
 himalaya
-# A calculator REPL, similar to bc(1).
-eva
 # A fully functional file server.
-dufs
+# dufs
 # An opinionated Lua code formatter.
 stylua
 # Tree command, improved.
 tre-command
 # Save space by cleaning non-essential files from software projects.
 kondo
+# Command-line JSON viewer designed for reading, exploring, and searching
+# through JSON data.
+jless
 
 # Windows Incompatible.
 
@@ -97,7 +98,7 @@ kondo
 --git https://github.com/sirwart/ripsecrets --branch main
 # 🤖 The Modern Port Scanner 🤖.
 # https://github.com/RustScan/RustScan/issues/412#issue-1045541309
-rustscan
+# rustscan
 # A modern replacement for `ls`.
 # https://github.com/ogham/exa/pull/820#issue-841921204
 exa
