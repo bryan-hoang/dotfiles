@@ -40,9 +40,6 @@ return {
 				"shellcheck",
 				"bash-language-server",
 
-				-- TOML
-				"taplo",
-
 				-- Markdown
 				"vale",
 				"ltex-ls",

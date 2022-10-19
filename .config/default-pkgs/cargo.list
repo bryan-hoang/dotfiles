@@ -1,20 +1,30 @@
 # A cargo subcommand for checking and applying updates to installed
 # executables.
 cargo-update
-# A syntax-highlighting pager for git and diff output.
-git-delta
-# A cat(1) clone with wings.
-bat
 # A smarter cd command, inspired by z and autojump. It remembers which
 # directories you use most frequently, so you can "jump" to them in just a few
 # keystrokes.
 zoxide
+# A syntax-highlighting pager for git and diff output.
+git-delta
+# A simple, fast and user-friendly alternative to 'find'.
+fd-find
+# A cat(1) clone with wings.
+bat
 # A very fast implementation of tldr in Rust.
 tealdeer
+# Recursively searches directories for a regex pattern while respecting your
+# gitignore.
+ripgrep
+# rga: ripgrep, but also search in PDFs, E-Books, Office documents, zip,
+# tar.gz, etc.
+ripgrep_all --locked
 # Executes commands in response to file modifications.
 # watchexec-cli
 # Upgrade everything.
-topgrade
+topgrade-rs
+# An opinionated Lua code formatter.
+stylua
 # An over-engineered rewrite of pipes.sh in Rust.
 --git https://github.com/lhvy/pipes-rs
 # Yet another cross-platform graphical process/system monitor.
@@ -30,16 +40,8 @@ ffsend
 navi --locked
 # A command-line DNS client.
 --git https://github.com/ogham/dog dog
-# Recursively searches directories for a regex pattern while respecting your
-# gitignore.
-ripgrep
-# rga: ripgrep, but also search in PDFs, E-Books, Office documents, zip,
-# tar.gz, etc.
-ripgrep_all --locked
 # A more intuitive version of du in rust.
 du-dust
-# A simple, fast and user-friendly alternative to 'find'.
-fd-find
 # Count your code, quickly.
 tokei
 # Git repository summary on your terminal.
@@ -71,7 +73,7 @@ broot
 # Blazing 💥 fast terminal-ui for git written in rust 🦀. (perl in git-bash)
 # gitui
 # Create beautiful image of your source code.
-silicon
+# silicon
 # Like jq, but for HTML.
 htmlq
 # Download an asset from the latest GitHub release.
@@ -81,29 +83,27 @@ just
 # Command-line interface for email management.
 himalaya
 # A fully functional file server.
-# dufs
-# An opinionated Lua code formatter.
-stylua
-# Tree command, improved.
+# dufs Tree command, improved.
 tre-command
 # Save space by cleaning non-essential files from software projects.
 kondo
 # Command-line JSON viewer designed for reading, exploring, and searching
 # through JSON data.
 jless
+# A TOML toolkit.
+--features lsp --locked taplo-cli
 
 # Windows Incompatible.
 
-# A command-line tool to prevent committing secret keys into your source code.
---git https://github.com/sirwart/ripsecrets --branch main
-# 🤖 The Modern Port Scanner 🤖.
-# https://github.com/RustScan/RustScan/issues/412#issue-1045541309
-# rustscan
 # A modern replacement for `ls`.
 # https://github.com/ogham/exa/pull/820#issue-841921204
 exa
 # Fly through your shell history. Great Scott!
 # https://github.com/cantino/mcfly/issues/106#issue-723327406
 mcfly
-# Lightweight color picker for X11.
-xcolor
+# A command-line tool to prevent committing secret keys into your source code.
+--git https://github.com/sirwart/ripsecrets --branch main
+# 🤖 The Modern Port Scanner 🤖.
+# https://github.com/RustScan/RustScan/issues/412#issue-1045541309
+# rustscan Lightweight color picker for X11.
+# xcolor
