@@ -17,6 +17,12 @@ module.exports = {
 				singleQuote: false,
 			},
 		},
+		{
+			files: 'gemrc',
+			options: {
+				parser: 'yaml',
+			},
+		},
 	],
 	plugins: ['prettier-plugin-packagejson'],
 	printWidth: 80,
