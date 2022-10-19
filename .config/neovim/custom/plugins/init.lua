@@ -91,4 +91,49 @@ return {
 			end
 		end,
 	},
+	["akinsho/git-conflict.nvim"] = {
+		tag = "*",
+		config = function()
+			require("git-conflict").setup({
+				default_mappings = false,
+				highlights = {
+					incoming = "DiffText",
+					current = "DiffAdd",
+				},
+			})
+		end,
+
+		vim.api.nvim_create_autocmd("User", {
+			pattern = "GitConflictDetected",
+			callback = function()
+				vim.notify("Conflict detected in " .. vim.fn.expand("<afile>"))
+				vim.keymap.set("n", "cww", function()
+					engage.conflict_buster()
+					create_buffer_local_mappings()
+				end)
+			end,
+		}),
+	},
+
+	-- Debug adapter for Neovim plugins.
+	["jbyuki/one-small-step-for-vimkind"] = {
+		config = function()
+			local dap = require("dap")
+			dap.configurations.lua = {
+				{
+					type = "nlua",
+					request = "attach",
+					name = "Attach to running Neovim instance",
+				},
+			}
+
+			dap.adapters.nlua = function(callback, config)
+				callback({
+					type = "server",
+					host = config.host or "127.0.0.1",
+					port = config.port or 8086,
+				})
+			end
+		end,
+	},
 }

@@ -6,6 +6,8 @@ end
 
 local b = null_ls.builtins
 local sources = {
+	-- Code actions
+	b.code_actions.gitsigns,
 
 	-- Webdev stuff
 	b.formatting.deno_fmt,

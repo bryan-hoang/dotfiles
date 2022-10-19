@@ -4,6 +4,40 @@ M.disabled = {
 	n = {
 		["<C-s>"] = "",
 		["<leader>b"] = "",
+		["<TAB>"] = "",
+		["<S-Tab>"] = "",
+	},
+}
+
+M.tabufline = {
+	plugin = true,
+
+	n = {
+		-- cycle through buffers
+		["<C-K>"] = {
+			function()
+				require("nvchad_ui.tabufline").tabuflineNext()
+			end,
+			"goto next buffer",
+		},
+
+		["<C-J>"] = {
+			function()
+				require("nvchad_ui.tabufline").tabuflinePrev()
+			end,
+			"goto prev buffer",
+		},
+
+		-- pick buffers via numbers
+		["<Bslash>"] = { "<cmd> TbufPick <CR>", "Pick buffer" },
+
+		-- close buffer + hide terminal buffer
+		["<leader>x"] = {
+			function()
+				require("nvchad_ui.tabufline").close_buffer()
+			end,
+			"close buffer",
+		},
 	},
 }
 
@@ -13,6 +47,8 @@ local markdown_preview = {
 		"Toggle Markdown preview",
 	},
 }
+
+-- Custom plugins.
 
 M.markdown_preview = {
 	n = markdown_preview,
@@ -38,6 +74,13 @@ M.dap = {
 		["<F11>"] = { "<Cmd>DapStepInto<CR>", "dap step into" },
 		["<F12>"] = { "<Cmd>DapStepOut<CR>", "dap step out" },
 		["<leader>dr"] = { "<Cmd>DapToggleRepl<CR>", "dap toggle repl" },
+	},
+}
+
+M.git_conflict = {
+	n = {
+		["]x"] = { "<Plug>(git-conflict-next-conflict)" },
+		["[x"] = { "<Plug>(git-conflict-prev-conflict)" },
 	},
 }
 
