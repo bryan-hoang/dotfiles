@@ -13,7 +13,7 @@ export XCURSOR_THEME=Dracula-cursors
 export XCURSOR_DISCOVER=1
 
 # Default editor.
-if command -v nvim &>/dev/null; then
+if command -v nvim &>/dev/null || [[ -f ${XDG_BIN_HOME}/nvim ]]; then
 	export EDITOR=nvim
 	export VISUAL=${EDITOR}
 	export SUDO_EDITOR=${EDITOR}
