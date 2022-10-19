@@ -14,6 +14,12 @@ fi
 
 # Setting shell options
 
+# Configure Ctril-w to delete words like ZSH.
+if is_interactive_shell; then
+	stty werase undef
+	bind '\C-w:unix-filename-rubout'
+fi
+
 # If set, bash attempts to save all lines of a multiple-line command in the same
 # history entry. This allows easy re-editing of multi-line commands.  This
 # option is enabled by default, but only has an effect if command history is
