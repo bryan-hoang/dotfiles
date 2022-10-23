@@ -72,6 +72,8 @@ return {
 	},
 	enable_kitty_keyboard = true,
 	keys = {
+		-- Activate the Launcher Menu in the current tab.
+		{ key = "l", mods = "ALT", action = wezterm.action.ShowLauncher },
 		-- Override default key binding to disable confirmation of closing the tab.
 		{
 			key = "W",
