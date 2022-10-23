@@ -175,6 +175,11 @@ setopt INC_APPEND_HISTORY_TIME
 # whenever you need them using `fc -RI`.
 unsetopt SHARE_HISTORY
 
+# Whenever the user enters a line with history expansion, don't execute the
+# line directly; instead, perform history expansion and reload the line into
+# the editing buffer.
+unsetopt HIST_VERIFY
+
 # shellcheck disable=SC1091
 [[ -s "${HOME}"/.asdf/plugins/java/set-java-home.zsh ]] \
 	&& . "${HOME}"/.asdf/plugins/java/set-java-home.zsh

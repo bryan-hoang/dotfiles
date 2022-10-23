@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
 if command -v tmux &>/dev/null \
-	&& [[ -n "${PS1}" ]] \
-	&& [[ ! "${TERM}" =~ screen ]] \
-	&& [[ ! "${TERM}" =~ tmux ]] \
-	&& [[ -n "${SSH_CONNECTION}" ]] \
-	&& [[ -z "${TMUX}" ]]; then
+	&& [[ -n "$PS1" ]] \
+	&& [[ ! "$TERM" =~ screen ]] \
+	&& [[ ! "$TERM" =~ tmux ]] \
+	&& [[ -n "$SSH_CONNECTION" ]] \
+	&& [[ -z "$TMUX" ]]; then
 	exec tmux new-session -A -s ssh
 fi
 
 # shellcheck disable=SC1091
-. "${XDG_CONFIG_HOME}"/shell/common
+. "$XDG_CONFIG_HOME"/shell/common
 
 # Setting shell options
 
@@ -44,12 +44,14 @@ shopt -s lithist
 # The last element of a pipeline may be run by the shell process.
 shopt -s lastpipe
 
-# Enable some Bash 4 features when possible:
-# * `autocd`, e.g. `**/qux` will enter `./foo/bar/baz/qux`
-# * Recursive globbing, e.g. `echo **/*.txt`
-for option in autocd globstar; do
-	shopt -s "${option}" 2>/dev/null
-done
+# Allows patterns which match no files (see Pathname Expansion above) to expand
+# to a null string, rather than themselves.
+shopt -s nullglob
+
+# The pattern ** used in a pathname expansion context will match all files and
+# zero or more directories and subdirectories. If the pattern is followed by
+# a /, only directories and subdirectories match.
+shopt -s globstar
 
 # Add tab completion for many Bash commands
 if command -v brew &>/dev/null && [ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
@@ -118,7 +120,7 @@ plugins=(
 )
 
 # shellcheck disable=SC1091
-[[ -s "${OSH}"/oh-my-bash.sh ]] && . "${OSH}"/oh-my-bash.sh
+[[ -s "$OSH"/oh-my-bash.sh ]] && . "$OSH"/oh-my-bash.sh
 
 does_function_exist && pyvenv_auto_activate_enable
 
@@ -128,12 +130,12 @@ does_function_exist && pyvenv_auto_activate_enable
 unset HISTTIMEFORMAT
 
 # shellcheck disable=SC1091
-[[ -s "${ASDF_DIR}"/completions/asdf.bash ]] \
-	&& . "${ASDF_DIR}"/completions/asdf.bash
+[[ -s "$ASDF_DIR"/completions/asdf.bash ]] \
+	&& . "$ASDF_DIR"/completions/asdf.bash
 
 # shellcheck disable=SC1091
-[[ -s "${ASDF_DIR}"/plugins/java/set-java-home.bash ]] \
-	&& . "${ASDF_DIR}"/plugins/java/set-java-home.bash
+[[ -s "$ASDF_DIR"/plugins/java/set-java-home.bash ]] \
+	&& . "$ASDF_DIR"/plugins/java/set-java-home.bash
 
 # Completions
 # git

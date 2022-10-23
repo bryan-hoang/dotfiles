@@ -39,14 +39,18 @@ opt.showbreak = "↪ "
 opt.listchars = { tab = "->", space = "·", trail = "·" }
 opt.list = true
 
+-- https://vim.fandom.com/wiki/Learn_to_use_help#Comments
+opt.wildmode = { "longest:full", "full" }
+opt.completeopt = { "longest", "menuone" }
+
 -- API calls.
 local file_associations = {
-	["gemrc"] = "yaml",
+	["yaml"] = { "gemrc" },
 }
 
-for key, value in pairs(file_associations) do
+for file_type, patterns in pairs(file_associations) do
 	api.nvim_create_autocmd(
 		{ "BufRead", "BufNewFile" },
-		{ pattern = { key }, command = "setfiletype " .. value }
+		{ pattern = patterns, command = "setfiletype " .. file_type }
 	)
 end

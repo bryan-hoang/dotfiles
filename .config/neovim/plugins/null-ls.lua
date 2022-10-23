@@ -8,19 +8,27 @@ local b = null_ls.builtins
 local sources = {
 	-- Code actions
 	b.code_actions.gitsigns,
+	b.code_actions.shellcheck,
+	b.code_actions.refactoring,
+	b.code_actions.gitrebase,
+	b.code_actions.eslint,
 
-	-- Webdev stuff
+	-- JS/TS
+	b.formatting.rome,
 	b.formatting.deno_fmt,
 	b.formatting.prettier,
+	b.formatting.eslint,
+	b.diagnostics.eslint,
 
 	-- Lua
+	b.diagnostics.selene,
 	b.formatting.stylua,
 
 	-- Shell
 	b.formatting.shfmt.with({
 		extra_args = { "-ci", "-bn" },
 	}),
-	b.diagnostics.shellcheck.with({ diagnostics_format = "#{m} [#{c}]" }),
+	b.formatting.shellharden,
 
 	-- TOML
 	b.formatting.taplo,

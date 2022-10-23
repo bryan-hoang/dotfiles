@@ -19,10 +19,10 @@ else
 
 	if !has('nvim') | set viminfofile=$XDG_STATE_HOME/vim/viminfo | endif
 
-	source ~/submodules/vimrc/autoload/pathogen.vim
+	source ~/src/github.com/amix/vimrc/autoload/pathogen.vim
 
-	source ~/submodules/vimrc/vimrcs/basic.vim
-	source ~/submodules/vimrc/vimrcs/filetypes.vim
-	source ~/submodules/vimrc/vimrcs/plugins_config.vim
-	source ~/submodules/vimrc/vimrcs/extended.vim
+	source ~/src/github.com/amix/vimrc/vimrcs/basic.vim
+	source ~/src/github.com/amix/vimrc/vimrcs/filetypes.vim
+	source ~/src/github.com/amix/vimrc/vimrcs/plugins_config.vim
+	source ~/src/github.com/amix/vimrc/vimrcs/extended.vim
 endif

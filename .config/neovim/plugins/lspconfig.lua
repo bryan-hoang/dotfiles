@@ -6,11 +6,13 @@ local lspconfig = require("lspconfig")
 local servers = {
 	"bashls",
 	"sumneko_lua",
-	-- TOML
-	"taplo",
 	"tsserver",
 	"jsonls",
 	"yamlls",
+	"rome",
+
+	-- TOML
+	"taplo",
 
 	-- Markdown
 	"ltex",

@@ -286,6 +286,8 @@ default_border none
 # i3-gaps
 #
 
+for_window [all] border pixel 0
+
 gaps inner 20
 
 # Activate smart borders (always)

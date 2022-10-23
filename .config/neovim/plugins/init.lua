@@ -1,17 +1,8 @@
 return {
-	["glacambre/firenvim"] = {
-		run = function()
-			vim.fn["firenvim#install"](0)
-		end,
-	},
-
 	-- Creates missing folders on save.
 	["jghauser/mkdir.nvim"] = {},
 	["tpope/vim-sleuth"] = {},
 	["github/copilot.vim"] = {},
-	["neoclide/coc.nvim"] = {
-		branch = "release",
-	},
 	["hjson/vim-hjson"] = {},
 	["neovim/nvim-lspconfig"] = {
 		config = function()
@@ -25,6 +16,7 @@ return {
 				-- lua stuff
 				"lua-language-server",
 				"stylua",
+				"selene",
 
 				-- web dev
 				"prettier",
@@ -34,11 +26,13 @@ return {
 				"deno",
 				"emmet-ls",
 				"yaml-language-server",
+				"rome",
 
 				-- shell
 				"shfmt",
 				"shellcheck",
 				"bash-language-server",
+				"shellharden",
 
 				-- Markdown
 				"vale",
@@ -134,6 +128,40 @@ return {
 					port = config.port or 8086,
 				})
 			end
+		end,
+	},
+
+	-- The Refactoring library based off the Refactoring book by Martin Fowler.
+	["ThePrimeagen/refactoring.nvim"] = {
+		requires = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-treesitter/nvim-treesitter" },
+		},
+		config = function()
+			require("refactoring").setup()
+		end,
+	},
+	["nvim-treesitter/nvim-treesitter"] = {
+		override_options = {
+			auto_install = true,
+		},
+	},
+	["nvim-treesitter/nvim-treesitter-context"] = {
+		config = function()
+			require("treesitter-context").setup({})
+		end,
+	},
+	["windwp/nvim-projectconfig"] = {
+		config = function()
+			require("nvim-projectconfig").setup({
+				project_dir = vim.env.XDG_CONFIG_HOME .. "/neovim/projects/",
+
+				-- Display message after load config file.
+				silent = false,
+
+				-- Change directory inside neovim and load project config.
+				autocmd = true,
+			})
 		end,
 	},
 }

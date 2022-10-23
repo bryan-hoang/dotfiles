@@ -1,78 +1,72 @@
 [submodule "submodules/oh-my-zsh"]
-	path = submodules/oh-my-zsh
+	path = src/github.com/ohmyzsh/ohmyzsh
 	url = https://github.com/ohmyzsh/ohmyzsh.git
 [submodule "submodules/oh-my-bash"]
-	path = submodules/oh-my-bash
+	path = src/github.com/ohmybash/oh-my-bash
 	url = https://github.com/ohmybash/oh-my-bash.git
 [submodule "submodules/NvChad"]
-	path = submodules/NvChad
+	path = src/github.com/NvChad/NvChad
 	url = https://github.com/NvChad/NvChad
 [submodule "submodules/vimrc"]
-	path = submodules/vimrc
+	path = src/github.com/amix/vimrc
 	url = https://github.com/amix/vimrc.git
 [submodule "submodules/dracula-gtk"]
-	path = submodules/dracula-gtk
+	path = src/github.com/dracula/gtk
 	url = https://github.com/dracula/gtk.git
 [submodule "submodules/.tmux"]
-	path = submodules/.tmux
+	path = src/github.com/gpakosz/.tmux
 	url = https://github.com/gpakosz/.tmux.git
 [submodule "submodules/Google"]
-	path = submodules/Google
+	path = src/github.com/errata-ai/Google
 	url = https://github.com/errata-ai/Google.git
 [submodule "submodules/Microsoft"]
-	path = submodules/Microsoft
+	path = src/github.com/errata-ai/Microsoft
 	url = https://github.com/errata-ai/Microsoft.git
 [submodule "submodules/write-good"]
-	path = submodules/write-good
+	path = src/github.com/errata-ai/write-good
 	url = https://github.com/errata-ai/write-good.git
 [submodule "submodules/proselint"]
-	path = submodules/proselint
+	path = src/github.com/errata-ai/proselint
 	url = https://github.com/errata-ai/proselint.git
 [submodule "submodules/alex"]
-	path = submodules/alex
+	path = src/github.com/errata-ai/alex
 	url = https://github.com/errata-ai/alex
 [submodule "submodules/Readability"]
-	path = submodules/Readability
+	path = src/github.com/errata-ai/readability
 	url = https://github.com/errata-ai/readability
 [submodule "submodules/IBM"]
-	path = submodules/IBM
+	path = src/github.com/errata-ai/IBM
 	url = https://github.com/errata-ai/IBM.git
-[submodule "submodules/rofi"]
-	path = submodules/rofi
-	url = https://github.com/dracula/rofi
 [submodule "submodules/dracula-git"]
-	path = submodules/dracula-git
+	path = src/github.com/dracula/git
 	url = https://github.com/dracula/git
 [submodule "submodules/zsh-syntax-highlighting"]
-	path = submodules/zsh-syntax-highlighting
+	path = src/github.com/zsh-users/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "submodules/zsh-autosuggestions"]
-	path = submodules/zsh-autosuggestions
+	path = src/github.com/zsh-users/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions.git
 [submodule "submodules/zsh-completions"]
-	path = submodules/zsh-completions
+	path = src/github.com/zsh-users/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions.git
 [submodule "submodules/pyvenv-activate"]
-	path = submodules/pyvenv-activate
+	path = src/github.com/Intersec/pyvenv-activate
 	url = https://github.com/Intersec/pyvenv-activate.git
 [submodule "submodules/zsh-hist"]
-	path = submodules/zsh-hist
+	path = src/github.com/marlonrichert/zsh-hist
 	url = https://github.com/marlonrichert/zsh-hist.git
-[submodule "submodules/ghq"]
-	path = submodules/ghq
-	url = https://github.com/x-motemen/ghq.git
 [submodule "submodules/Joblint"]
-	path = submodules/Joblint
+	path = src/github.com/errata-ai/Joblint
 	url = https://github.com/errata-ai/Joblint.git
 [submodule "submodules/MediaWiki"]
-	path = submodules/MediaWiki
+	path = src/github.com/errata-ai/MediaWiki
 	url = https://github.com/errata-ai/MediaWiki.git
 [submodule "submodules/RedHat"]
-	path = submodules/RedHat
+	path = src/github.com/redhat-documentation/RedHat
 	url = https://github.com/redhat-documentation/vale-at-red-hat.git
 [submodule "submodules/arkenfox"]
-	path = submodules/arkenfox
+	path = src/github.com/arkenfox/user.js
 	url = https://github.com/arkenfox/user.js.git
 [submodule "submodules/asdf"]
-	path = submodules/asdf
+	path = src/github.com/asdf-vm/asdf
 	url = https://github.com/asdf-vm/asdf.git

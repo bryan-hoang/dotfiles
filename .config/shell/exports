@@ -2,10 +2,11 @@
 #
 # vi: set filetype=sh
 
-export XDG_BIN_HOME="${HOME}"/.local/bin
+export XDG_LOCAL_HOME="${HOME}"/.local
+export XDG_BIN_HOME="${XDG_LOCAL_HOME}"/bin
+export XDG_DATA_HOME="${XDG_LOCAL_HOME}"/share
+export XDG_STATE_HOME="${XDG_LOCAL_HOME}"/state
 export XDG_CONFIG_HOME="${HOME}"/.config
-export XDG_DATA_HOME="${HOME}"/.local/share
-export XDG_STATE_HOME="${HOME}"/.local/state
 export XDG_CACHE_HOME="${HOME}"/.cache
 
 export XCURSOR_PATH="${XDG_DATA_HOME}"/icons
@@ -68,24 +69,14 @@ export GPG_TTY=${TTY}
 # Hide the "default interactive shell is now zsh" warning on macOS.
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
-# Install locations
-export DENO_INSTALL="${HOME}"/.deno
-export GIT_PATH="${HOME}"/git
-
-# Setting up environment variables for texlive
-# export MANPATH=/usr/local/man:${MANPATH}
-export MANPATH="${TEXDIR}"/texmf-dist/doc/man:"${MANPATH}"
-export INFOPATH="${TEXDIR}"/texmf-dist/doc/info:"${INFOPATH}"
-
 # Locale
 export LANG=C.UTF-8
 export LANGUAGE=${LANG}
 export LC_ALL=${LANG}
 
-# Misc.
 export FORCE_COLOR=true
 export SHELLCHECK_OPTS='-x'
-export GHQ_ROOT="${HOME}"/git
+export GHQ_ROOT="${HOME}"/src
 
 case ${TERM} in
 	# WSL in windows Terminal colour support.
@@ -113,16 +104,11 @@ export MCFLY_RESULTS=20
 export MCFLY_INTERFACE_VIEW=BOTTOM
 export MCFLY_FUZZY=2
 
-export BUN_INSTALL="${HOME}"/.bun
-
 # Don't set PYTHONUSERBASE to avoid issues with asdf installing python.
 export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}"/python
 
-export TEXDIR=/usr/local/texlive/2022
-
 # https://wiki.archlinux.org/title/XDG_Base_Directory#Specification
 
-# Share history between zsh and bash
 mkdir -p "${XDG_STATE_HOME}"/shell
 export HISTFILE="${XDG_STATE_HOME}"/shell/history
 export TEXMFHOME="${XDG_DATA_HOME}"/texmf
@@ -150,7 +136,7 @@ export WGETRC="${XDG_CONFIG_HOME}"/wget/wgetrc
 
 # Separate the repo from the data files to make fixing submodule issues less of
 # a hassle.
-export ASDF_DIR="${HOME}"/submodules/asdf
+export ASDF_DIR="${HOME}"/src/github.com/asdf-vm/asdf
 export ASDF_DATA_DIR="${XDG_DATA_HOME}"/asdf
 export ASDF_CONFIG_FILE="${XDG_CONFIG_HOME}"/asdf/asdfrc
 export CARGO_HOME="${XDG_DATA_HOME}"/cargo
@@ -182,7 +168,7 @@ export BUN_INSTALL="${XDG_DATA_HOME}"/bun
 export KDEHOME="${XDG_CONFIG_HOME}"/kde
 export OSH="${XDG_CONFIG_HOME}"/oh-my-bash
 . "${HOME}"/.zshenv
-export ZSH="${XDG_CONFIG_HOME}"/oh-my-zsh
+export ZSH="${XDG_CONFIG_HOME}"/ohmyzsh
 export ZSH_USER_FPATH="${XDG_DATA_HOME}"/zsh/functions
 export TMUX_PLUGIN_MANAGER_PATH="${XDG_CONFIG_HOME}"/tmux/plugins
 mkdir -p "${XDG_DATA_HOME}"/wineprefixes

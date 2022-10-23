@@ -17,7 +17,5 @@ export PATH="${PNPM_HOME}:${PATH}"
 # shellcheck disable=SC1091
 [ -f "${CARGO_HOME}"/env ] && . "${CARGO_HOME}"/env
 export PATH="${XDG_BIN_HOME}":"${PATH}"
-export PATH="${ASDF_DIR}"/bin:"${PATH}"
-export PATH="${ASDF_DIR}"/shims:"${PATH}"
 
 # Searched first

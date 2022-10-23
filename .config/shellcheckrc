@@ -9,6 +9,3 @@ enable=deprecate-which
 
 # Turn on warnings for unquoted variables with safe values.
 enable=quote-safe-variables
-
-# Suggest putting braces around all variable references.
-enable=require-variable-braces

@@ -1,11 +1,20 @@
 #!/usr/bin/env bash
-# -*- coding: utf-8 -*-
+
+# https://github.com/anordal/shellharden/blob/master/how_to_do_things_safely_in_bash.md#assert-that-command-dependencies-are-installed
+require() {
+	hash "$@" || exit 127
+}
+
+# https://github.com/anordal/shellharden/blob/master/how_to_do_things_safely_in_bash.md#echo--printf
+println() {
+	printf '%s\n' "$*"
+}
 
 # region Installation
 
-DOWNLOAD_DIR="${HOME}"/Downloads
-FONT_DIR="${XDG_DATA_HOME}"/fonts
-DEFAULT_PKGS_DIR="${XDG_CONFIG_HOME}"/default-pkgs
+DOWNLOAD_DIR="$HOME"/Downloads
+FONT_DIR="$XDG_DATA_HOME"/fonts
+DEFAULT_PKGS_DIR="$XDG_CONFIG_HOME"/default-pkgs
 
 install_gh() {
 	echo "Installing gh..."
@@ -19,11 +28,11 @@ install_gh() {
 			| grep "browser_download_url.*deb" \
 			| cut -d : -f 2,3 \
 			| tr -d \" \
-			| wget -P "${DOWNLOAD_DIR}" -qi -
-		sudo apt install "${DOWNLOAD_DIR}"/gh_*_linux_arm64.deb
+			| wget -P "$DOWNLOAD_DIR" -qi -
+		sudo apt install "$DOWNLOAD_DIR"/gh_*_linux_arm64.deb
 	fi
 
-	gh completion -s zsh >"${ZSH_USER_FPATH}"/_gh
+	gh completion -s zsh >"$ZSH_USER_FPATH"/_gh
 	gh --version
 	if ! gh auth status; then
 		gh auth login --web
@@ -34,9 +43,9 @@ install_gh() {
 install_wget() {
 	echo "Installing wget..."
 	if is_git_bash; then
-		gh release download -R webfolderio/wget-windows -p 'wget-*-64bit-OpenSSL.zip' -D "${DOWNLOAD_DIR}"
-		unzip "${HOME}/Downloads/wget-*-64bit-OpenSSL.zip" -d "${DOWNLOAD_DIR}"
-		mv "${HOME}/Downloads/wget.exe" "${XDG_BIN_HOME}"
+		gh release download -R webfolderio/wget-windows -p 'wget-*-64bit-OpenSSL.zip' -D "$DOWNLOAD_DIR"
+		unzip "${HOME}/Downloads/wget-*-64bit-OpenSSL.zip" -d "$DOWNLOAD_DIR"
+		mv "${HOME}/Downloads/wget.exe" "$XDG_BIN_HOME"
 	fi
 	wget --version
 	echo "Installed wget successfully!"
@@ -48,11 +57,11 @@ install_git() {
 		install_apt_packagesmake libssl-dev libghc-zlib-dev libcurl4-gnutls-dev \
 			libexpat1-dev gettext
 		local -r src_folder=/usr/src
-		local -r TARBALL_URL=$(gh api repos/git/git/tags \
-			| jq --raw-output '.[0].tarball_url')
-		sudo wget "${TARBALL_URL}" -O "${src_folder}"/git.tar.gz || return 1
-		sudo tar -xf "${src_folder}"/git.tar.gz -C "${src_folder}"
-		cd "${src_folder}"/git-* || return 1
+		local -r TARBALL_URL="$(gh api repos/git/git/tags \
+			| jq --raw-output '.[0].tarball_url')"
+		sudo wget "$TARBALL_URL" -O "$src_folder"/git.tar.gz || return 1
+		sudo tar -xf "$src_folder"/git.tar.gz -C "$src_folder"
+		cd "$src_folder"/git-* || return 1
 		sudo make prefix=/usr/local all
 		sudo make prefix=/usr/local install
 		git --version
@@ -74,9 +83,9 @@ install_git_lfs() {
 
 install_starship() {
 	echo "Installing starship..."
-	mkdir -p "${XDG_BIN_HOME}"
+	mkdir -p "$XDG_BIN_HOME"
 	curl -sS https://starship.rs/install.sh \
-		| sh -s -- -b "${XDG_BIN_HOME}" -y >/dev/null
+		| sh -s -- -b "$XDG_BIN_HOME" -y >/dev/null
 	starship --version
 	echo "Installed starship successfully!"
 }
@@ -110,7 +119,7 @@ install_pandoc() {
 	if ! is_arm32_architecture; then
 		if has_sudo; then
 			echo "Installing pandoc..."
-			gh release download -R jgm/pandoc -p 'pandoc-*-*.deb' -D "${DOWNLOAD_DIR}"
+			gh release download -R jgm/pandoc -p 'pandoc-*-*.deb' -D "$DOWNLOAD_DIR"
 
 			local arch_tag
 			if is_arm64_architecture; then
@@ -119,7 +128,7 @@ install_pandoc() {
 				arch_tag='amd64'
 			fi
 
-			sudo apt install "${DOWNLOAD_DIR}"/pandoc*"${arch_tag}".deb
+			sudo apt install "$DOWNLOAD_DIR"/pandoc*"$arch_tag".deb
 
 			pandoc --version
 			echo "Installed pandoc successfully!"
@@ -137,12 +146,12 @@ install_pandoc() {
 install_shellcheck() {
 	echo "Installing shellcheck..."
 	local -r SHELLCHECK_DOWNLOAD_DIR="${DOWNLOAD_DIR}/shellcheck-latest"
-	rm -rf "${SHELLCHECK_DOWNLOAD_DIR}"
+	rm -rf "$SHELLCHECK_DOWNLOAD_DIR"
 
 	# Binary
-	mkdir -p "${SHELLCHECK_DOWNLOAD_DIR}"
+	mkdir -p "$SHELLCHECK_DOWNLOAD_DIR"
 	gh release download -R koalaman/shellcheck \
-		-D "${SHELLCHECK_DOWNLOAD_DIR}" \
+		-D "$SHELLCHECK_DOWNLOAD_DIR" \
 		-p 'shellcheck-*.linux.*.tar.xz' \
 		-p 'shellcheck-*.zip'
 
@@ -155,10 +164,10 @@ install_shellcheck() {
 		fi
 
 		local -r filename_pattern="shellcheck-*.linux.$(uname -m).tar.xz"
-		local -r filepath="$(find "${SHELLCHECK_DOWNLOAD_DIR}" -name "${filename_pattern}")"
+		local -r filepath="$(find "$SHELLCHECK_DOWNLOAD_DIR" -name "$filename_pattern")"
 
-		tar -xJv -C "${SHELLCHECK_DOWNLOAD_DIR}" --strip-components=1 \
-			-f "${filepath}"
+		tar -xJv -C "$SHELLCHECK_DOWNLOAD_DIR" --strip-components=1 \
+			-f "$filepath"
 		sudo cp "${SHELLCHECK_DOWNLOAD_DIR}/shellcheck" /usr/bin/
 
 		# Man page
@@ -171,8 +180,8 @@ install_shellcheck() {
 			sudo mv "${SHELLCHECK_DOWNLOAD_DIR}/shellcheck.1" /usr/share/man/man1
 		fi
 	else
-		unzip "${SHELLCHECK_DOWNLOAD_DIR}"/shellcheck-*.zip \
-			-d "${XDG_BIN_HOME}"
+		unzip "$SHELLCHECK_DOWNLOAD_DIR"/shellcheck-*.zip \
+			-d "$XDG_BIN_HOME"
 	fi
 
 	shellcheck --version
@@ -191,8 +200,8 @@ install_brew() {
 		fi
 		[ -s /home/linuxbrew/.linuxbrew/bin/brew ] \
 			&& eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-		[ -s "${HOME}"/.linuxbrew/bin/brew ] \
-			&& eval "$("${HOME}"/.linuxbrew/bin/brew shellenv)"
+		[ -s "$HOME"/.linuxbrew/bin/brew ] \
+			&& eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
 		brew --version
 		echo "Installed brew successfully!"
 	else
@@ -207,14 +216,14 @@ install_vale() {
 		file_archive='vale_*_Linux_64-bit.tar.gz'
 		readonly file_archive
 
-		local DOWNLOAD_DIR="${DOWNLOAD_DIR}"
-		rm -f "${DOWNLOAD_DIR}"/*{Windows,Linux}*
+		local DOWNLOAD_DIR="$DOWNLOAD_DIR"
+		rm -f "$DOWNLOAD_DIR"/*{Windows,Linux}*
 		gh release download \
 			-R errata-ai/vale \
-			-p "${file_archive}" \
-			-D "${DOWNLOAD_DIR}"
-		local -r file_archive_path="$(find "${DOWNLOAD_DIR}" -name "${file_archive}")"
-		tar -xzvf "${file_archive_path}" --directory "${XDG_BIN_HOME}" vale
+			-p "$file_archive" \
+			-D "$DOWNLOAD_DIR"
+		local -r file_archive_path="$(find "$DOWNLOAD_DIR" -name "$file_archive")"
+		tar -xzvf "$file_archive_path" --directory "$XDG_BIN_HOME" vale
 
 		vale -v
 		echo "Installed vale successfully!"
@@ -238,11 +247,11 @@ install_tex() {
 	echo "Installing tex..."
 	local -r filename=install-tl-unx.tar.gz
 	wget -q --show-progress \
-		-O "${DOWNLOAD_DIR}"/"${filename}" \
-		https://mirror.ctan.org/systems/texlive/tlnet/"${filename}"
-	tar -xzf "${DOWNLOAD_DIR}"/"${filename}" -C "${DOWNLOAD_DIR}"
-	sudo perl "${DOWNLOAD_DIR}"/install-tl-"$(date +%Y%m%d)"/install-tl \
-		-profile "${HOME}"/.config/texlive.profile
+		-O "$DOWNLOAD_DIR"/"$filename" \
+		https://mirror.ctan.org/systems/texlive/tlnet/"$filename"
+	tar -xzf "$DOWNLOAD_DIR"/"$filename" -C "$DOWNLOAD_DIR"
+	sudo perl "$DOWNLOAD_DIR"/install-tl-"$(date +%Y%m%d)"/install-tl \
+		-profile "$HOME"/.config/texlive.profile
 	tex --version
 	echo "Installed tex successfully!"
 }
@@ -254,16 +263,16 @@ install_nvim() {
 	elif ! is_git_bash; then
 		gh release download -R neovim/neovim \
 			-p 'nvim.appimage' \
-			-D "${DOWNLOAD_DIR}"
-		mv "${DOWNLOAD_DIR}"/nvim.appimage "${XDG_BIN_HOME}"/nvim
-		chmod +x "${XDG_BIN_HOME}"/nvim
+			-D "$DOWNLOAD_DIR"
+		mv "$DOWNLOAD_DIR"/nvim.appimage "$XDG_BIN_HOME"/nvim
+		chmod +x "$XDG_BIN_HOME"/nvim
 	else
 		gh release download -R neovim/neovim -p 'nvim-win64.zip' \
-			-D "${DOWNLOAD_DIR}"
+			-D "$DOWNLOAD_DIR"
 
 		# Install under "C:\Program Files"
 		# shellcheck disable=SC2154
-		unzip "${DOWNLOAD_DIR}"/nvim-win64.zip -d "${ProgramW6432}"
+		unzip "$DOWNLOAD_DIR"/nvim-win64.zip -d "$ProgramW6432"
 	fi
 	nvim --version
 	echo "Installed neovim successfully!"
@@ -286,12 +295,12 @@ install_cht.sh() {
 	# Note: The package `rlwrap` is a required dependency to run in shell mode.
 	install_apt_packages rlwrap
 
-	mkdir -p "${BASH_DIR}"
+	mkdir -p "$BASH_DIR"
 
 	curl https://cht.sh/:cht.sh >"${XDG_BIN_HOME}/cht.sh"
 	chmod +x "${XDG_BIN_HOME}/cht.sh"
-	curl https://cheat.sh/:bash_completion >"${BASH_DIR}"/cht.sh
-	curl https://cheat.sh/:zsh >"${ZSH_USER_FPATH}"/_cht
+	curl https://cheat.sh/:bash_completion >"$BASH_DIR"/cht.sh
+	curl https://cheat.sh/:zsh >"$ZSH_USER_FPATH"/_cht
 
 	cht.sh --help
 	echo "Installed cht successfully!"
@@ -309,11 +318,11 @@ install_rustc() {
 			libegl1-mesa-dev build-essential
 		curl https://sh.rustup.rs -sSf | sh -s -- --no-modify-path -y
 		# shellcheck disable=SC1091
-		. "${CARGO_HOME}"/env
+		. "$CARGO_HOME"/env
 	else
-		wget -P "${DOWNLOAD_DIR}" \
+		wget -P "$DOWNLOAD_DIR" \
 			https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-msvc/rustup-init.exe
-		"${DOWNLOAD_DIR}"/rustup-init.exe --no-modify-path -y
+		"$DOWNLOAD_DIR"/rustup-init.exe --no-modify-path -y
 	fi
 	rustc --version
 	install_default_pkgs cargo
@@ -322,25 +331,25 @@ install_rustc() {
 
 install_nerd_fonts() {
 	if ! is_git_bash; then
-		local -r font_dir="${FONT_DIR}"/fira-code-nerd
-		local -r font_download_dir="${DOWNLOAD_DIR}"/fira-code-nerd
+		local -r font_dir="$FONT_DIR"/fira-code-nerd
+		local -r font_download_dir="$DOWNLOAD_DIR"/fira-code-nerd
 		local -r font_zip=FiraCode.zip
 
 		echo "Installing nerd fonts..."
 
-		rm -rf "${font_dir}" "${font_download_dir}"
-		mkdir -p "${font_dir}" "${font_download_dir}"
+		rm -rf "$font_dir" "$font_download_dir"
+		mkdir -p "$font_dir" "$font_download_dir"
 
 		gh release download -R ryanoasis/nerd-fonts \
-			-p "${font_zip}" \
-			-D "${font_download_dir}"
-		unzip -qo "${font_download_dir}"/"${font_zip}" \
-			-d "${font_download_dir}"
-		rm -f "${font_download_dir}"/*Windows\ Compatible*
-		cp "${font_download_dir}"/Fira\ Code*.ttf "${font_dir}"
+			-p "$font_zip" \
+			-D "$font_download_dir"
+		unzip -qo "$font_download_dir"/"$font_zip" \
+			-d "$font_download_dir"
+		rm -f "$font_download_dir"/*Windows\ Compatible*
+		cp "$font_download_dir"/Fira\ Code*.ttf "$font_dir"
 
 		# Build font information cache files.
-		fc-cache -fv "${font_dir}"
+		fc-cache -fv "$font_dir"
 		fc-list | grep -i 'FiraCode'
 
 		echo "Installed nerd fonts successfully!"
@@ -349,30 +358,30 @@ install_nerd_fonts() {
 
 install_font_awesome_fonts() {
 	if ! is_git_bash; then
-		local -r font_dir="${FONT_DIR}"/font-awesome-6
-		local -r download_dir="${DOWNLOAD_DIR}"/font-awesome-6
+		local -r font_dir="$FONT_DIR"/font-awesome-6
+		local -r download_dir="$DOWNLOAD_DIR"/font-awesome-6
 		local -r font_zip='fontawesome-free-*-desktop.zip'
 		local -r files_to_unzip="fontawesome-free-*-desktop/otfs/*"
 
 		echo "Installing nerd fonts..."
 
-		rm -rf "${font_dir}" "${download_dir}"
-		mkdir -p "${font_dir}" "${download_dir}"
+		rm -rf "$font_dir" "$download_dir"
+		mkdir -p "$font_dir" "$download_dir"
 
 		gh release download -R FortAwesome/Font-Awesome \
-			-p "${font_zip}" \
-			-D "${download_dir}" \
+			-p "$font_zip" \
+			-D "$download_dir" \
 			|| return
-		local -r font_zip_file="$(find "${download_dir}" -name "${font_zip}")"
-		unzip -qjo "${font_zip_file}" "${files_to_unzip}" \
-			-d "${download_dir}" \
+		local -r font_zip_file="$(find "$download_dir" -name "$font_zip")"
+		unzip -qjo "$font_zip_file" "$files_to_unzip" \
+			-d "$download_dir" \
 			|| return
-		cp "${download_dir}"/Font\ Awesome*.otf "${font_dir}" \
+		cp "$download_dir"/Font\ Awesome*.otf "$font_dir" \
 			|| return
 
 		# Build font information cache files.
-		fc-cache -fv "${font_dir}"
-		fc-list | grep "${font_dir}"
+		fc-cache -fv "$font_dir"
+		fc-list | grep "$font_dir"
 
 		echo "Installed nerd fonts successfully!"
 	fi
@@ -382,7 +391,7 @@ install_dotenv-linter() {
 	if ! is_arm32_architecture; then
 		echo "Installing dotenv-linter..."
 		curl -sSfL https://raw.githubusercontent.com/dotenv-linter/dotenv-linter/master/install.sh \
-			| sh -s -- -b "${XDG_BIN_HOME}"
+			| sh -s -- -b "$XDG_BIN_HOME"
 		dotenv-linter --version
 		echo "Installed dotenv-linter successfully!"
 	fi
@@ -405,7 +414,7 @@ install_asdf_plugin() {
 	case "${1}" in
 		nodejs)
 			plugin_git_repo='https://github.com/asdf-vm/asdf-nodejs.git'
-			if [[ -n "${version}" ]]; then
+			if [[ -n "$version" ]]; then
 				version='lts'
 			fi
 			;;
@@ -456,19 +465,19 @@ install_asdf_plugin() {
 	esac
 
 	echo "Installing ${1} plugin from ${plugin_git_repo}"
-	asdf plugin-add "${1}" "${plugin_git_repo}"
+	asdf plugin-add "${1}" "$plugin_git_repo"
 	case "${1}" in
 		direnv)
-			asdf "${1}" setup --shell "${SHELL}" --version "${version}"
+			asdf "${1}" setup --shell "$SHELL" --version "$version"
 			;;
 		*)
 			cd ~ || exit
-			asdf direnv local "${1}" "${version}"
+			asdf direnv local "${1}" "$version"
 			cd - || exit
 			;;
 	esac
 
-	asdf global "${1}" "${version}"
+	asdf global "${1}" "$version"
 }
 
 install_default_pkgs() {
@@ -517,7 +526,7 @@ install_default_pkgs() {
 	local -r pkg_list_file="${DEFAULT_PKGS_DIR}/${1}.list"
 
 	# Filter out comments starting with `#`.
-	sed '/^\s*#/d' "${pkg_list_file}" \
+	sed '/^\s*#/d' "$pkg_list_file" \
 		| xargs -tr -L 1 "${install_cmd[@]}" "${install_opts[@]}"
 
 	# Post install steps.
@@ -547,8 +556,8 @@ install_espanso() {
 install_nircmd() {
 	echo "Installing nircmd"
 	if is_git_bash; then
-		wget -P "${DOWNLOAD_DIR}" http://www.nirsoft.net/utils/nircmd-x64.zip
-		unzip -o -j -d "${XDG_BIN_HOME}" "${DOWNLOAD_DIR}"/nircmd-x64.zip nircmd.exe
+		wget -P "$DOWNLOAD_DIR" http://www.nirsoft.net/utils/nircmd-x64.zip
+		unzip -o -j -d "$XDG_BIN_HOME" "$DOWNLOAD_DIR"/nircmd-x64.zip nircmd.exe
 	fi
 	nircmd --version
 	echo "Installed nircmd successfully!"
@@ -558,9 +567,9 @@ install_check_if_email_exists() {
 	echo "Installing check_if_email_exists"
 	if is_arm32_architecture; then
 		git get https://github.com/reacherhq/check-if-email-exists
-		cd "${HOME}"/git/github.com/reacherhq/check-if-email-exists || return 1
+		cd "$HOME"/git/github.com/reacherhq/check-if-email-exists || return 1
 		cargo build --release
-		mv ./target/release/check_if_email_exists "${XDG_BIN_HOME}"/check-if-email-exists
+		mv ./target/release/check_if_email_exists "$XDG_BIN_HOME"/check-if-email-exists
 		cd -- || return 1
 	else
 		local file_to_download=''
@@ -577,12 +586,12 @@ install_check_if_email_exists() {
 		fi
 
 		file_to_download+='*'
-		rm -f "${DOWNLOAD_DIR}"/"${file_to_download}"
+		rm -f "$DOWNLOAD_DIR"/"$file_to_download"
 		gh release download -R reacherhq/check-if-email-exists \
-			-p "${file_to_download}" \
-			-D "${DOWNLOAD_DIR}"
-		local -r filename="$(find "${DOWNLOAD_DIR}" -name "${file_to_download}")"
-		tar xzfv "${filename}" -C "${XDG_BIN_HOME}"
+			-p "$file_to_download" \
+			-D "$DOWNLOAD_DIR"
+		local -r filename="$(find "$DOWNLOAD_DIR" -name "$file_to_download")"
+		tar xzfv "$filename" -C "$XDG_BIN_HOME"
 	fi
 	check_if_email_exists --version
 	echo "Installed installing check_if_email_exists successfully!"
@@ -595,9 +604,9 @@ install_rustdesk() {
 		# `rustdesk`.
 		gh release download -R rustdesk/rustdesk \
 			-p "rustdesk-*.deb" \
-			-D "${DOWNLOAD_DIR}"
+			-D "$DOWNLOAD_DIR"
 		# Use `dpkg` to install the downloaded file.
-		sudo dpkg -i "${DOWNLOAD_DIR}"/rustdesk-*.deb
+		sudo dpkg -i "$DOWNLOAD_DIR"/rustdesk-*.deb
 		rustdesk --version
 		echo "Installed rustdesk successfully!"
 	fi
@@ -633,7 +642,7 @@ install_poetry() {
 		echo "Installing poetry..."
 		curl -sSL https://install.python-poetry.org | python3 -
 		poetry --version
-		poetry completions zsh >"${ZSH_USER_FPATH}"/_poetry
+		poetry completions zsh >"$ZSH_USER_FPATH"/_poetry
 		if has_sudo; then
 			poetry completions bash \
 				| sudo tee /etc/bash_completion.d/poetry >/dev/null
@@ -656,7 +665,7 @@ install_pnpm() {
 		echo "Installing pnpm..."
 		wget -qO- https://get.pnpm.io/install.sh | sh -
 		# Restoreing changes to dotfile.
-		dot restore "${HOME}"/.bashrc
+		dot restore "$HOME"/.bashrc "$ZDOTDIR"/.zshrc
 		pnpm --version
 		echo "Installed pnpm successfully!"
 	fi
@@ -681,12 +690,6 @@ install_pinentry-tty() {
 	echo "Installing pinentry-tty..."
 	install_apt_packages pinentry-tty
 	echo "Installed pinentry-tty successfully!"
-}
-
-install_ghq() {
-	echo "Installing ghq..."
-	install_apt_packages ghq
-	echo "Installed ghq successfully!"
 }
 
 install_gcloud() {
@@ -793,7 +796,7 @@ is_wsl() {
 }
 
 is_ssh_session() {
-	[ -n "${SSH_CONNECTION}" ]
+	[ "$SSH_CONNECTION" != "" ]
 }
 
 is_root() {
@@ -822,7 +825,7 @@ has_sudo() {
 
 	if prompt=$(sudo -nv 2>&1); then
 		return 0
-	elif echo "${prompt}" | grep -q '^sudo:'; then
+	elif echo "$prompt" | grep -q '^sudo:'; then
 		return 0
 	else
 		return 1
@@ -847,7 +850,7 @@ count_files_in_directory() {
 download_alacritty_config_template() {
 	gh release download -R alacritty/alacritty \
 		-p alacritty.yml \
-		-D "${DOWNLOAD_DIR}"
+		-D "$DOWNLOAD_DIR"
 	mv "${HOME}/Downloads/alacritty.yml" \
 		"${HOME}/.config/alacritty/alacritty-template.yml"
 }
@@ -870,7 +873,7 @@ EOF
 
 # Create a new directory and enter it
 mkd() {
-	mkdir -p "$@" && cd "${_}" || exit
+	mkdir -p "$@" && cd "$_" || exit
 }
 
 # Change working directory to the top-most Finder window location
@@ -881,11 +884,11 @@ cdf() { # short for `cdfinder`
 # Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression
 targz() {
 	local tmpFile="${*%/}.tar"
-	tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1
+	tar -cvf "$tmpFile" --exclude=".DS_Store" "${@}" || return 1
 
 	size=$(
-		stat -f"%z" "${tmpFile}" 2>/dev/null # macOS `stat`
-		stat -c"%s" "${tmpFile}" 2>/dev/null # GNU `stat`
+		stat -f"%z" "$tmpFile" 2>/dev/null # macOS `stat`
+		stat -c"%s" "$tmpFile" 2>/dev/null # GNU `stat`
 	)
 
 	local cmd=""
@@ -901,8 +904,8 @@ targz() {
 	fi
 
 	echo "Compressing .tar ($((size / 1000)) kB) using \`${cmd}\`…"
-	"${cmd}" -v "${tmpFile}" || return 1
-	[ -f "${tmpFile}" ] && rm "${tmpFile}"
+	"$cmd" -v "$tmpFile" || return 1
+	[ -f "$tmpFile" ] && rm "$tmpFile"
 
 	zippedSize=$(
 		stat -f"%z" "${tmpFile}.gz" 2>/dev/null # macOS `stat`
@@ -920,9 +923,9 @@ fs() {
 		local arg=-sh
 	fi
 	if [[ -n "$*" ]]; then
-		du "${arg}" -- "$@"
+		du "$arg" -- "$@"
 	else
-		du "${arg}" .[^.]* ./*
+		du "$arg" .[^.]* ./*
 	fi
 }
 
@@ -967,8 +970,8 @@ gz() {
 	origsize=$(wc -c <"$1")
 	gzipsize=$(gzip -c "$1" | wc -c)
 	ratio=$(echo "${gzipsize} * 100 / ${origsize}" | bc -l)
-	printf "orig: %d bytes\n" "${origsize}"
-	printf "gzip: %d bytes (%2.2f%%)\n" "${gzipsize}" "${ratio}"
+	printf "orig: %d bytes\n" "$origsize"
+	printf "gzip: %d bytes (%2.2f%%)\n" "$gzipsize" "$ratio"
 }
 
 # Run `dig` and display the most useful info
@@ -979,7 +982,7 @@ digga() {
 # Show all the names (CNs and SANs) listed in the SSL certificate
 # for a given domain
 getcertnames() {
-	if [ -z "${1}" ]; then
+	if [ "${1}" = "" ]; then
 		echo "ERROR: No domain specified."
 		return 1
 	fi
@@ -990,20 +993,20 @@ getcertnames() {
 
 	local tmp
 	tmp=$(echo -e "GET / HTTP/1.0\nEOT" \
-		| openssl s_client -connect "${domain}:443" -servername "${domain}" 2>&1)
+		| openssl s_client -connect "${domain}:443" -servername "$domain" 2>&1)
 
-	if [[ "${tmp}" = *"-----BEGIN CERTIFICATE-----"* ]]; then
+	if [[ "$tmp" = *"-----BEGIN CERTIFICATE-----"* ]]; then
 		local certText
-		certText=$(echo "${tmp}" \
+		certText=$(echo "$tmp" \
 			| openssl x509 -text -certopt "no_aux, no_header, no_issuer, no_pubkey, \
 				no_serial, no_sigdump, no_signame, no_validity, no_version")
 		echo "Common Name:"
 		echo "" # newline
-		echo "${certText}" | grep "Subject:" | sed -e "s/^.*CN=//" | sed -e "s/\/emailAddress=.*//"
+		echo "$certText" | grep "Subject:" | sed -e "s/^.*CN=//" | sed -e "s/\/emailAddress=.*//"
 		echo "" # newline
 		echo "Subject Alternative Name(s):"
 		echo "" # newline
-		echo "${certText}" | grep -A 1 "Subject Alternative Name:" \
+		echo "$certText" | grep -A 1 "Subject Alternative Name:" \
 			| sed -e "2s/DNS://g" -e "s/ //g" | tr "," "\n" | tail -n +2
 		return 0
 	else
@@ -1059,18 +1062,18 @@ wgetbash() {
 		return
 	}
 
-	wget "$1" -qO "${file}" || {
+	wget "$1" -qO "$file" || {
 		echo "Failed to wget file"
 		return
 	}
 
-	${EDITOR} "${file}" || {
+	"$EDITOR" "$file" || {
 		echo "Editor quit with error code"
 		return
 	}
 
-	bash "${file}"
-	rm "${file}"
+	bash "$file"
+	rm "$file"
 }
 
 pass_bw() {
@@ -1078,21 +1081,21 @@ pass_bw() {
 }
 
 start_ssh_agent() {
-	local env="${HOME}"/.ssh/agent.env
+	local env="$HOME"/.ssh/agent.env
 
 	# shellcheck disable=SC1090
 	function agent_load_env() {
-		test -f "${env}" && . "${env}" >|/dev/null
+		test -f "$env" && . "$env" >|/dev/null
 	}
 
 	function agent_start() {
 		(
 			umask 077
-			ssh-agent >|"${env}"
+			ssh-agent >|"$env"
 		)
 
 		# shellcheck disable=SC1090
-		. "${env}" >|/dev/null
+		. "$env" >|/dev/null
 	}
 
 	agent_load_env
@@ -1104,17 +1107,17 @@ start_ssh_agent() {
 		echo $?
 	)
 
-	if [ -z "${SSH_AUTH_SOCK}" ] || [ "${agent_run_state}" = 2 ]; then
+	if [ "$SSH_AUTH_SOCK" = "" ] || [ "$agent_run_state" = 2 ]; then
 		agent_start
 		ssh-add
-	elif [ -n "${SSH_AUTH_SOCK}" ] && [ "${agent_run_state}" = 1 ]; then
+	elif [ "$SSH_AUTH_SOCK" != "" ] && [ "$agent_run_state" = 1 ]; then
 		ssh-add
 	fi
 }
 
 start_ssh_keychain() {
 	eval "$(keychain -q --inherit any \
-		--absolute --dir "${XDG_DATA_HOME}"/keychain \
+		--absolute --dir "$XDG_DATA_HOME"/keychain \
 		--eval --agents ssh,gpg --gpg2 ABE9B748EEAE9E00 id_ed25519 \
 		"$@")"
 }
@@ -1165,18 +1168,18 @@ is_raspbian_os() {
 }
 
 generate_ssh_key() {
-	local -r keyfile="${HOME}"/.ssh/id_ed25519"$([[ -n $1 ]] && echo _"$1")"
+	local -r keyfile="$HOME"/.ssh/id_ed25519"$([[ -n $1 ]] && echo _"$1")"
 	local -r comment="$(whoami)@$(hostname)"
-	ssh-keygen -t ed25519 -f "${keyfile}" -C "${comment}"
+	ssh-keygen -t ed25519 -f "$keyfile" -C "$comment"
 }
 
 export_gpg_key() {
-	gpg --export-secret-key --armor ABE9B748EEAE9E00 >|"${HOME}"/.gnupg/secret.asc
-	scp "${HOME}"/.gnupg/secret.asc "${1}":"${HOME}"/.gnupg
+	gpg --export-secret-key --armor ABE9B748EEAE9E00 >|"$HOME"/.gnupg/secret.asc
+	scp "$HOME"/.gnupg/secret.asc "${1}":"$HOME"/.gnupg
 }
 
 import_gpg_key() {
-	gpg --import "${HOME}"/.gnupg/secret.asc
+	gpg --import "$HOME"/.gnupg/secret.asc
 	gpg --edit-key ABE9B748EEAE9E00 trust
 	gpg --update-trustdb
 }
@@ -1184,10 +1187,10 @@ import_gpg_key() {
 fix_gnupg_perms() {
 	# To fix the " gpg: WARNING: unsafe permissions on homedir '/home/path/to/user/.gnupg' " error
 	# Make sure that the .gnupg directory and its contents is accessibile by your user.
-	chown -R "$(whoami)" "${HOME}"/.gnupg/
+	chown -R "$(whoami)" "$HOME"/.gnupg/
 	# Also correct the permissions and access rights on the directory.
-	chmod 600 "${HOME}"/.gnupg/*
-	chmod 700 "${HOME}"/.gnupg
+	chmod 600 "$HOME"/.gnupg/*
+	chmod 700 "$HOME"/.gnupg
 }
 
 kill_detached_tmux_sessions() {
@@ -1196,38 +1199,37 @@ kill_detached_tmux_sessions() {
 		| xargs -n 1 tmux kill-session -t
 }
 
-link_zsh_plugins() {
-	local -r target_dir="${ZSH}"/zsh/custom/plugins
-	local -ra plugins=(
-		zsh-autosuggestions
-		zsh-syntax-highlighting
-		zsh-completions
-		zsh-hist
-		pyvenv-activate
+ln_sh_plugins() {
+	local -r zsh_target_dir="$ZSH"/custom/plugins
+	local -r bash_target_dir="$OSH"/custom/plugins
+	local -ra sh_plugins=(
+		Intersec/pyvenv-activate
+	)
+	local -ra zsh_plugins=(
+		zsh-users/zsh-autosuggestions
+		zsh-users/zsh-syntax-highlighting
+		zsh-users/zsh-completions
+		marlonrichert/zsh-hist
+		"${sh_plugins[@]}"
+	)
+	local -ra bash_plugins=(
+		"${sh_plugins[@]}"
 	)
 
-	mkdir -p "${target_dir}"
-	for plugin in "${plugins[@]}"; do
-		rm -rf "${target_dir:?}"/"${plugin}"
-		ln -sf "${HOME}"/submodules/"${plugin}" "${target_dir}"
+	mkdir -p "$zsh_target_dir"
+	mkdir -p "$bash_target_dir"
+
+	for plugin in "${zsh_plugins[@]}"; do
+		ln -sf "$HOME"/src/github.com/"$plugin" "$zsh_target_dir"
+	done
+
+	for plugin in "${bash_plugins[@]}"; do
+		ln -sf "$HOME"/submodules/"$plugin" "$bash_target_dir"
 	done
 }
 
-link_bash_plugins() {
-	local -r target_dir="${OSH}"/custom/plugins
-	local -ra plugins=(
-		pyvenv-activate
-	)
-
-	for plugin in "${plugins[@]}"; do
-		rm -rf "${target_dir:?}"/"${plugin}"
-		ln -sf "${HOME}"/submodules/"${plugin}" "${target_dir}"
-	done
-}
-
-link_nvim_custom_config() {
-	rm -rf "${XDG_CONFIG_HOME}"/nvim/lua/custom
-	ln -sf "${XDG_CONFIG_HOME}"/neovim/custom "${XDG_CONFIG_HOME}"/nvim/lua
+ln_nvim_cfg() {
+	ln -sf "$XDG_CONFIG_HOME"/neovim "$XDG_CONFIG_HOME"/nvim/lua/custom
 }
 
 install_apt_packages() {
@@ -1243,8 +1245,8 @@ install_apt_packages() {
 
 # https://nvchad.github.io/quickstart/install#uninstall
 uninstall_nvchad() {
-	rm -rf "${HOME}"/.local/share/nvim
-	rm -rf "${HOME}"/.cache/nvim
+	rm -rf "$HOME"/.local/share/nvim
+	rm -rf "$HOME"/.cache/nvim
 }
 
 uninstall_global_npm_pkgs() {
@@ -1259,27 +1261,27 @@ uninstall_global_npm_pkgs() {
 generate_completions() {
 	local -r shell="${1}"
 	local -r command_to_complete="${2}"
-	local -r bash_completion_file="${XDG_DATA_HOME}"/bash-completion/${command_to_complete}
-	local -r zsh_completion_file="${ZSH_USER_FPATH}"/_${command_to_complete}
+	local -r bash_completion_file="$XDG_DATA_HOME"/bash-completion/"$command_to_complete"
+	local -r zsh_completion_file="$ZSH_USER_FPATH"/_"$command_to_complete"
 
-	case "${shell}" in
+	case "$shell" in
 		bash)
 			if [[ ! -s ${bash_completion_file} ]]; then
-				"${@:3}" >|"${bash_completion_file}"
+				"${@:3}" >|"$bash_completion_file"
 			fi
 			;;
 		zsh)
 			if [[ ! -s ${zsh_completion_file} ]]; then
-				"${@:3}" >|"${zsh_completion_file}"
+				"${@:3}" >|"$zsh_completion_file"
 			fi
 			;;
 		all)
 			if [[ ! -s ${bash_completion_file} ]]; then
-				"${@:3}" >|"${bash_completion_file}"
+				"${@:3}" >|"$bash_completion_file"
 			fi
 
 			if [[ ! -s ${zsh_completion_file} ]]; then
-				"${@:3}" >|"${zsh_completion_file}"
+				"${@:3}" >|"$zsh_completion_file"
 			fi
 			;;
 		*)
@@ -1290,13 +1292,13 @@ generate_completions() {
 }
 
 kill_window_manager() {
-	pkill -15 -t tty"${XDG_VTNR}" Xorg
+	pkill -15 -t tty"$XDG_VTNR" Xorg
 }
 
 unexpand_inplace() {
 	local -r tempfile="$(mktemp)"
-	unexpand -t 2 "$1" >|"${tempfile}"
-	cp "${tempfile}" "$1"
+	unexpand -t 2 "$1" >|"$tempfile"
+	cp "$tempfile" "$1"
 }
 
 trim_trailing_whitespace() {

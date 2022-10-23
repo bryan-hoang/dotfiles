@@ -23,7 +23,7 @@ run_in_tmux = true
 #ssh_arguments = "-o ConnectTimeout=2"
 
 # Path to Topgrade executable on remote machines
-remote_topgrade_path = ".local/share/cargo/bin/topgrade"
+remote_topgrade_path = ".local/share/cargo/bin/topgrade-rs"
 
 # Arguments to pass tmux when pulling Repositories
 #tmux_arguments = "-S /var/tmux.sock"
@@ -39,8 +39,12 @@ cleanup = true
 
 [git]
 #max_concurrency = 5
+
 # Additional git repositories to pull
-repos = ["~/submodules/*/"]
+#repos = [
+#    "~/src/*/",
+#    "~/.config/something"
+#]
 
 # Don't pull the predefined git repos
 #pull_predefined = false

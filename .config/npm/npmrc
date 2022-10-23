@@ -1,6 +1,5 @@
 cache=${XDG_CACHE_HOME}/npm
 color=always
-depth=0
 engine-strict=false
 fetch-retries=0
 fetch-retry-maxtimeout=10000

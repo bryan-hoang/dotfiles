@@ -4,8 +4,8 @@
 	useConfigOnly = true
 	signingkey = ABE9B748EEAE9E00
 [include]
-	path = ~/git/.gitconfig
-	path = ~/submodules/dracula-git/config/gitconfig
+	path = src.gitconfig
+	path = ~/src/github.com/dracula/git/config/gitconfig
 [includeIf "gitdir:~/.git"]
 	path = ~/.config/git/dotfiles.gitconfig
 [alias]
@@ -340,15 +340,6 @@
 	# Note that multiple helpers may be defined. See gitcredentials[7] for
 	# details and examples.
 	helper = cache
-[ghq]
-	# The path to directory under which cloned repositories are placed. See
-	# DIRECTORY STRUCTURES below. Defaults to ~/ghq.
-	#
-	# This variable can have multiple values. If so, the last one becomes primary
-	# one i.e. new repository clones are always created under it. You may want to
-	# specify "$GOPATH/src" as a secondary root (environment variables should be
-	# expanded.)
-	root = ~/git
 [column]
 	branch = auto
 [color "grep"]
