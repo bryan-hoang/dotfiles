@@ -481,41 +481,44 @@ install_asdf_plugin() {
 }
 
 install_default_pkgs() {
-	if [[ -z "${1}" ]]; then
+	local -r pkg_mgr="${1}"
+
+	if [[ -z "${pkg_mgr}" ]]; then
 		echo "No package manager supplied."
 		return 1
 	fi
 
-	echo "Installing default ${1} packages"
-
-	local -a install_cmd=()
+	local -a install_cmd=("${pkg_mgr}")
 	local -a install_opts=()
+
+	echo "Installing default ${1} packages"
 
 	case "${1}" in
 		pnpm)
-			install_cmd+=(pnpm install)
+			install_cmd+=(install)
 			install_opts+=(-g)
 			;;
 		cargo)
-			install_cmd+=(cargo install)
+			install_cmd+=(install)
 			;;
 		espanso)
-			install_cmd+=(espanso install)
+			if is_git_bash; then
+				install_cmd[0]+='.cmd'
+			fi
+
+			install_cmd+=(install)
 			;;
 		pip)
-			install_cmd+=(pip install)
+			install_cmd+=(install)
 			install_opts+=(--upgrade --user)
 			;;
 		gem)
-			# `--no-document` option from `~/.gemrc`
-			install_cmd+=(gem install)
+			install_cmd+=(install)
 			;;
 		go)
-			install_cmd+=(go install)
+			install_cmd+=(install)
 			;;
-		cpanm)
-			install_cmd=(cpanm)
-			;;
+		cpanm) ;;
 		*) ;;
 	esac
 
@@ -523,7 +526,7 @@ install_default_pkgs() {
 		install_opts+=("$2")
 	fi
 
-	local -r pkg_list_file="${DEFAULT_PKGS_DIR}/${1}.list"
+	local -r pkg_list_file="${DEFAULT_PKGS_DIR}/${pkg_mgr}.list"
 
 	# Filter out comments starting with `#`.
 	sed '/^\s*#/d' "$pkg_list_file" \

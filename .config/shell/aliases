@@ -173,3 +173,6 @@ alias xbindkeys='xbindkeys --file "${XDG_CONFIG_HOME}"/xbindkeys/config'
 mkdir -p "${XDG_DATA_HOME}"/keychain
 command -v keychain &>/dev/null && alias keychain='keychain --absolute --dir "${XDG_DATA_HOME}"/keychain'
 alias info='info --vi-keys'
+if uname -a | grep -q 'Msys'; then
+	alias espanso='espanso.cmd'
+fi
