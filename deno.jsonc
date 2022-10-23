@@ -1,0 +1,12 @@
+{
+	"fmt": {
+		"files": {
+			"include": ["*.{js,mjs}"]
+		},
+		"options": {
+			// Change default options.
+			"useTabs": true,
+			"singleQuote": true
+		}
+	}
+}

@@ -36,15 +36,18 @@ const prettierExtensions = [
 	'xml',
 ];
 
-const submodules = spawnSync(
-	'/usr/bin/env',
-	['sh', '-c', "git submodule status | awk '{print $2}'"],
+const spawnOutput = spawnSync(
+	'sh',
+	['-c', "git submodule status | awk '{print $2}'"],
 	{
 		stdio: 'pipe',
 		encoding: 'utf-8',
 	},
-)
-	.output[1].split('\n')
+);
+
+debug('spawnOutput', spawnOutput);
+const submodules = spawnOutput.output[1]
+	.split('\n')
 	// Remove last empty string in array.
 	.slice(0, -1);
 
