@@ -1227,7 +1227,7 @@ ln_sh_plugins() {
 	done
 
 	for plugin in "${bash_plugins[@]}"; do
-		ln -sf "$HOME"/submodules/"$plugin" "$bash_target_dir"
+		ln -sf "$HOME"/src/github.com/"$plugin" "$bash_target_dir"
 	done
 }
 
