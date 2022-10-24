@@ -2,14 +2,15 @@
 
 # Load the shell dotfiles, and then some:
 # * ~/.extra can be used for other settings you don't want to commit.
-for file in "${XDG_CONFIG_HOME}"/shell/{aliases,functions,extra}; do
+for file in "$XDG_CONFIG_HOME"/shell/{aliases,functions,extra}; do
 	# shellcheck disable=SC1090
-	[[ -f "${file}" ]] && . "${file}"
+	[[ -f "$file" ]] && . "$file"
 done
 
 # If on a machine that doesn't have keychain, don't use it
 if is_git_bash || ! does_program_exist keychain; then
 	start_ssh_agent
+	gpg-connect-agent reloadagent /bye &>/dev/null
 else
 	# If we're in a shell without a display manager, don't ask for a
 	# password for the ssh key's to be added (unless we're in WSL, which is
@@ -18,9 +19,9 @@ else
 		KEYCHAIN_NOASK='--noask'
 	fi
 
-	if ! start_ssh_keychain "${KEYCHAIN_NOASK}"; then
+	if ! start_ssh_keychain "$KEYCHAIN_NOASK"; then
 		keychain -q -k all
-		start_ssh_keychain "${KEYCHAIN_NOASK}"
+		start_ssh_keychain "$KEYCHAIN_NOASK"
 	fi
 fi
 
@@ -31,12 +32,7 @@ does_program_exist thefuck && eval "$(thefuck --alias)"
 # endregion
 
 # https://wiki.archlinux.org/title/XDG_Base_Directory
-mkdir -p "${XDG_DATA_HOME}"/tig
-
-# broot
-# shellcheck disable=SC1091
-[[ -f "${HOME}"/.config/broot/launcher/bash/br ]] \
-	&& . "${HOME}"/.config/broot/launcher/bash/br
+mkdir -p "$XDG_DATA_HOME"/tig
 
 # Make direnv silent by default. Doesn't work in `.exports` for some reason.
 export DIRENV_LOG_FORMAT=""
