@@ -1,4 +1,4 @@
--- example file i.e lua/custom/init.lua
+local set_file_associations = require('custom.utils').set_file_associations
 
 -- load your globals, autocmds here or anything .__.
 
@@ -44,13 +44,7 @@ opt.wildmode = { "longest:full", "full" }
 opt.completeopt = { "longest", "menuone" }
 
 -- API calls.
-local file_associations = {
-	["yaml"] = { "gemrc" },
-}
 
-for file_type, patterns in pairs(file_associations) do
-	api.nvim_create_autocmd(
-		{ "BufRead", "BufNewFile" },
-		{ pattern = patterns, command = "setfiletype " .. file_type }
-	)
-end
+set_file_associations({
+	["yaml"] = { "gemrc" },
+})
