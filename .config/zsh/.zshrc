@@ -203,12 +203,6 @@ fi
 [[ -f "${HOME}"/.config/tabtab/zsh/__tabtab.zsh ]] \
 	&& . "${HOME}"/.config/tabtab/zsh/__tabtab.zsh
 
-# Update PATH for the Google Cloud SDK.
-if [ -f "${XDG_DATA_HOME}"/google-cloud-sdk/path.zsh.inc ]; then
-	# shellcheck disable=SC1091
-	. "${XDG_DATA_HOME}"/google-cloud-sdk/path.zsh.inc
-fi
-
 # Enable shell command completion for gcloud.
 if [ -f "${XDG_DATA_HOME}"/google-cloud-sdk/completion.zsh.inc ]; then
 	# shellcheck disable=SC1091

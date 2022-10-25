@@ -2,20 +2,27 @@
 
 # Searched last
 
-export PATH="${TEXDIR}"/bin/x86_64-linux:"${PATH}"
-export PATH=/var/lib/flatpak/exports/bin:"${PATH}"
-export PATH="${XDG_CONFIG_HOME}"/rofi/scripts:"${PATH}"
-export PATH="${XDG_DATA_HOME}"/umake/bin:"${PATH}"
-export PATH="${BUN_INSTALL}"/bin:"${PATH}"
-export PATH="${DENO_INSTALL}"/bin:"${PATH}"
+[ -d "$XDG_CONFIG_HOME"/rofi/scripts ] \
+	&& export PATH="$XDG_CONFIG_HOME"/rofi/scripts:"$PATH"
+[ -d "$XDG_DATA_HOME"/google-cloud-sdk/bin ] \
+	&& export PATH="$XDG_DATA_HOME"/google-cloud-sdk/bin:"$PATH"
+
+# Brew
 [ -s /home/linuxbrew/.linuxbrew/bin/brew ] \
 	&& eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-[ -s "${HOME}"/.linuxbrew/bin/brew ] \
-	&& eval "$("${HOME}"/.linuxbrew/bin/brew shellenv)"
-export PATH="${PNPM_HOME}:${PATH}"
+[ -s "$HOME"/.linuxbrew/bin/brew ] \
+	&& eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
+
+# JS eCoSyTeM
+[ -d "$BUN_INSTALL"/bin ] \
+	&& export PATH="$BUN_INSTALL"/bin:"$PATH"
+[ -d "$DENO_INSTALL"/bin ] \
+	&& export PATH="$DENO_INSTALL"/bin:"$PATH"
+[ -d "$PNPM_HOME" ] \
+	&& export PATH="$PNPM_HOME":"$PATH"
 
 # shellcheck disable=SC1091
-[ -f "${CARGO_HOME}"/env ] && . "${CARGO_HOME}"/env
-export PATH="${XDG_BIN_HOME}":"${PATH}"
+[ -s "$CARGO_HOME"/env ] && . "$CARGO_HOME"/env
+export PATH="$XDG_BIN_HOME":"$PATH"
 
 # Searched first
