@@ -176,3 +176,4 @@ alias info='info --vi-keys'
 if uname -a | grep -q 'Msys'; then
 	alias espanso='espanso.cmd'
 fi
+command -v bq &>/dev/null && alias bq='bq --bigqueryrc "${XDG_CONFIG_HOME}"/bigquery/bigqueryrc'
