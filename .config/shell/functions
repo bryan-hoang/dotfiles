@@ -272,13 +272,16 @@ install_nvim() {
 }
 
 install_jq() {
-	echo "Installing jq..."
+	require dra
 	if ! is_git_bash; then
-		install_apt_packages jq
+		echo "Installing jq..."
+		dra download stedolan/jq \
+			--select jq-linux64 \
+			--output "$XDG_BIN_HOME"/jq
+		chmod u+x "$XDG_BIN_HOME"/jq
+		jq --version
+		echo "Installed jq successfully!"
 	fi
-
-	jq --version
-	echo "Installed jq successfully!"
 }
 
 install_cht.sh() {
