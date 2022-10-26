@@ -124,6 +124,8 @@ plugins=(
 
 does_function_exist && pyvenv_auto_activate_enable
 
+[[ -s "$ASDF_DIR"/asdf.sh ]] && . "$ASDF_DIR"/asdf.sh
+
 # endregion
 
 # Remove timestamps from history file to let zsh history parse it.
