@@ -27,6 +27,8 @@ ripgrep
 stylua
 # A TOML toolkit.
 --features lsp --locked taplo-cli
+# Download an asset from the latest GitHub release.
+--git https://github.com/devmatteini/dra
 # An over-engineered rewrite of pipes.sh in Rust.
 # --git https://github.com/lhvy/pipes-rs
 # Yet another cross-platform graphical process/system monitor.
@@ -81,8 +83,6 @@ broot
 # silicon
 # Like jq, but for HTML.
 # htmlq
-# Download an asset from the latest GitHub release.
-# --git https://github.com/devmatteini/dag
 # 🤖 Just a command runner.
 just
 # Command-line interface for email management.
