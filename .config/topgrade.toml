@@ -14,7 +14,7 @@ ignore_failures = []
 #no_retry = true
 
 # Run inside tmux
-run_in_tmux = true
+# run_in_tmux = true
 
 # List of remote machines with Topgrade installed on them
 #remote_topgrades = ["toothless", "pi", "parnas"]
@@ -23,7 +23,7 @@ run_in_tmux = true
 #ssh_arguments = "-o ConnectTimeout=2"
 
 # Path to Topgrade executable on remote machines
-remote_topgrade_path = ".local/share/cargo/bin/topgrade-rs"
+remote_topgrade_path = ".local/share/cargo/bin/topgrade"
 
 # Arguments to pass tmux when pulling Repositories
 #tmux_arguments = "-S /var/tmux.sock"
