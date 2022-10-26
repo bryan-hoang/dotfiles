@@ -1,6 +1,9 @@
 # A cargo subcommand for checking and applying updates to installed
 # executables.
 cargo-update
+# Manage cargo cache (${CARGO_HOME}, ~/.cargo/), print sizes of dirs and
+# remove dirs selectively.
+cargo-cache
 # A smarter cd command, inspired by z and autojump. It remembers which
 # directories you use most frequently, so you can "jump" to them in just a few
 # keystrokes.
@@ -13,20 +16,19 @@ fd-find
 bat
 # A very fast implementation of tldr in Rust.
 tealdeer
+# Upgrade everything.
+topgrade-rs
+# A more intuitive version of du in rust.
+du-dust
 # Recursively searches directories for a regex pattern while respecting your
 # gitignore.
 ripgrep
-# rga: ripgrep, but also search in PDFs, E-Books, Office documents, zip,
-# tar.gz, etc.
-ripgrep_all --locked
-# Executes commands in response to file modifications.
-# watchexec-cli
-# Upgrade everything.
-topgrade-rs
 # An opinionated Lua code formatter.
 stylua
+# A TOML toolkit.
+--features lsp --locked taplo-cli
 # An over-engineered rewrite of pipes.sh in Rust.
---git https://github.com/lhvy/pipes-rs
+# --git https://github.com/lhvy/pipes-rs
 # Yet another cross-platform graphical process/system monitor.
 bottom
 # Ping, but with a graph.
@@ -35,13 +37,16 @@ gping
 hyperfine
 # 📬 Easily and securely share files from the command line. A fully featured
 # Firefox Send client.
-ffsend
+# ffsend
+# rga: ripgrep, but also search in PDFs, E-Books, Office documents, zip,
+# tar.gz, etc.
+# ripgrep_all --locked
+# Executes commands in response to file modifications.
+# watchexec-cli
 # An interactive cheatsheet tool for the command-line.
-navi --locked
+# navi --locked
 # A command-line DNS client.
---git https://github.com/ogham/dog dog
-# A more intuitive version of du in rust.
-du-dust
+# --git https://github.com/ogham/dog dog
 # Count your code, quickly.
 tokei
 # Git repository summary on your terminal.
@@ -57,7 +62,7 @@ sd
 xsv
 # A cross-platform CLI csv pretty printer that uses column styling to maximize
 # viewer enjoyment.
-tidy-viewer
+# tidy-viewer
 # A command-line hex viewer.
 hexyl
 # Friendly and fast tool for sending HTTP requests.
@@ -75,13 +80,13 @@ broot
 # Create beautiful image of your source code.
 # silicon
 # Like jq, but for HTML.
-htmlq
+# htmlq
 # Download an asset from the latest GitHub release.
---git https://github.com/devmatteini/dag
+# --git https://github.com/devmatteini/dag
 # 🤖 Just a command runner.
 just
 # Command-line interface for email management.
-himalaya
+# himalaya
 # A fully functional file server.
 # dufs Tree command, improved.
 tre-command
@@ -90,8 +95,6 @@ kondo
 # Command-line JSON viewer designed for reading, exploring, and searching
 # through JSON data.
 jless
-# A TOML toolkit.
---features lsp --locked taplo-cli
 
 # Windows Incompatible.
 
