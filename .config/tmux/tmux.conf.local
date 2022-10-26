@@ -347,7 +347,8 @@ set -g mode-keys vi
 # replace C-b by C-a instead of using both prefixes
 # set -gu prefix2
 # unbind C-a
-# unbind C-b
+unbind C-b
+set-option -g prefix C-space
 # set -g prefix C-a
 # bind C-a send-prefix
 
