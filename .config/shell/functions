@@ -104,14 +104,6 @@ install_deno() {
 			| sh >/dev/null
 		deno --version
 		echo "Installed deno successfully!"
-		if [ ! -f /usr/local/etc/bash_completion.d/deno.bash ]; then
-			sudo mkdir -p /usr/local/etc/bash_completion.d
-			deno completions bash \
-				| sudo tee /usr/local/etc/bash_completion.d/deno.bash >/dev/null
-		fi
-
-		# Install velociraptor
-		deno install -qAn vr https://deno.land/x/velociraptor/cli.ts
 	fi
 }
 
