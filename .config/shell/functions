@@ -479,12 +479,12 @@ install_asdf_plugin() {
 install_default_pkgs() {
 	local -r pkg_mgr="${1}"
 
-	if [[ -z "${pkg_mgr}" ]]; then
+	if [[ -z "$pkg_mgr" ]]; then
 		echo "No package manager supplied."
 		return 1
 	fi
 
-	local -a install_cmd=("${pkg_mgr}")
+	local -a install_cmd=("$pkg_mgr")
 	local -a install_opts=()
 
 	echo "Installing default ${1} packages"
