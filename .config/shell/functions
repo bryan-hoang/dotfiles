@@ -32,7 +32,8 @@ install_gh() {
 		sudo apt install "$DOWNLOAD_DIR"/gh_*_linux_arm64.deb
 	fi
 
-	gh completion -s zsh >"$ZSH_USER_FPATH"/_gh
+	generate_completions zsh gh gh completion -s zsh
+	generate_completions bash gh gh completion -s bash
 	gh --version
 	if ! gh auth status; then
 		gh auth login --web
