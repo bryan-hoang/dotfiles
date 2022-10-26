@@ -28,6 +28,9 @@ fi
 # region: Completions
 
 does_program_exist thefuck && eval "$(thefuck --alias)"
+does_program_exist dra \
+	&& generate_completions zsh dra dra completion zsh \
+	&& generate_completions bash dra dra completion bash
 
 # endregion
 
