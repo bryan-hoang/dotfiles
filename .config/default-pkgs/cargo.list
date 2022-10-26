@@ -17,7 +17,7 @@ bat
 # A very fast implementation of tldr in Rust.
 tealdeer
 # Upgrade everything.
-topgrade-rs
+topgrade
 # A more intuitive version of du in rust.
 du-dust
 # Recursively searches directories for a regex pattern while respecting your
