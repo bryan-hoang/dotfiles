@@ -25,4 +25,6 @@ else
 	source ~/src/github.com/amix/vimrc/vimrcs/filetypes.vim
 	source ~/src/github.com/amix/vimrc/vimrcs/plugins_config.vim
 	source ~/src/github.com/amix/vimrc/vimrcs/extended.vim
+
+	colorscheme dracula
 endif
