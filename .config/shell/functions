@@ -53,22 +53,18 @@ install_wget() {
 }
 
 install_git() {
-	if is_arm32_architecture || is_arm64_architecture; then
-		echo "Installing git..."
-		install_apt_packagesmake libssl-dev libghc-zlib-dev libcurl4-gnutls-dev \
-			libexpat1-dev gettext
-		local -r src_folder=/usr/src
-		local -r TARBALL_URL="$(gh api repos/git/git/tags \
-			| jq --raw-output '.[0].tarball_url')"
-		sudo wget "$TARBALL_URL" -O "$src_folder"/git.tar.gz || return 1
-		sudo tar -xf "$src_folder"/git.tar.gz -C "$src_folder"
-		cd "$src_folder"/git-* || return 1
-		sudo make prefix=/usr/local all
-		sudo make prefix=/usr/local install
-		git --version
-		cd - || return 1
-		echo "Installed git successfully!"
-	fi
+	require gh jq
+	echo "Installing git..."
+	local -r TARBALL_URL="$(gh api repos/git/git/tags \
+		| jq --raw-output '.[0].tarball_url')"
+	wget "$TARBALL_URL" -O "$SRC_DIR"/git.tar.gz || return 1
+	tar -xf "$SRC_DIR"/git.tar.gz -C "$SRC_DIR"
+	cd "$SRC_DIR"/git-* || return 1
+	make prefix="$XDG_LOCAL_HOME" all
+	make prefix="$XDG_LOCAL_HOME" install
+	git --version
+	cd - || return 1
+	echo "Installed git successfully!"
 }
 
 install_git_lfs() {
