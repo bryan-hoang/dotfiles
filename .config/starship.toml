@@ -109,9 +109,6 @@ min_time = 30_000
 # show_notifications is set to true.
 show_notifications = true
 
-[deno]
-disabled = false
-
 [directory]
 format = "[$path]($style)[$read_only]($read_only_style) "
 
