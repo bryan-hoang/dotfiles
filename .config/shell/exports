@@ -70,9 +70,7 @@ export GPG_TTY=${TTY}
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
 # Locale
-export LANG=C.UTF-8
-export LANGUAGE=${LANG}
-export LC_ALL=${LANG}
+export LC_ALL=C.UTF-8
 
 export FORCE_COLOR=true
 export SHELLCHECK_OPTS='-x'
