@@ -1300,3 +1300,8 @@ unexpand_inplace() {
 trim_trailing_whitespace() {
 	sed -i 's/[ \t]*$//' "$@"
 }
+
+# Open search result in ddg on default browser.
+search() {
+	xdg-open https://duckduckgo.com/\?q="$*"
+}
