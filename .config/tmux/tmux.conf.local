@@ -344,13 +344,10 @@ set -g history-limit 10000
 set -g status-keys vi
 set -g mode-keys vi
 
-# replace C-b by C-a instead of using both prefixes
-# set -gu prefix2
-# unbind C-a
+# Set Ctrl-a to be the main leader key, inspired by ThePrimeagen.
 unbind C-b
-set-option -g prefix C-space
-# set -g prefix C-a
-# bind C-a send-prefix
+set-option -g prefix C-a
+bind C-a send-prefix
 
 # Override previous behaviour to only clear screen.
 bind -n C-l send-keys C-l
