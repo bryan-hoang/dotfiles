@@ -70,4 +70,10 @@ M.git_conflict = {
 	},
 }
 
+M.lsp_format_modifications = {
+	n = {
+		["<Leader>fc"] = { "<Cmd>FormatModifications<CR>", "Format Changed lines." },
+	},
+}
+
 return M

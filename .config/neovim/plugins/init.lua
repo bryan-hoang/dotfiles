@@ -164,4 +164,6 @@ return {
 			})
 		end,
 	},
+	-- Format only changed lines of code (from VCS's POV).
+	["joechrisellis/lsp-format-modifications.nvim"] = {},
 }
