@@ -174,4 +174,17 @@ return {
 	},
 	-- Format only changed lines of code (from VCS's POV).
 	["joechrisellis/lsp-format-modifications.nvim"] = {},
+	-- Embed Neovim in Chrome, Firefox, Thunderbird & others.
+	["glacambre/firenvim"] = {
+		run = function()
+			vim.fn["firenvim#install"](0)
+		end,
+		config = function()
+			-- Make editing comments on GitHub/GitLab easier.
+			vim.api.nvim_create_autocmd({ "BufEnter" }, {
+				pattern = { "gitlab.com_*.txt", "github.com_*.txt" },
+				command = "set filetype=markdown",
+			})
+		end,
+	},
 }
