@@ -1,15 +1,20 @@
 return {
 	-- Creates missing folders on save.
 	["jghauser/mkdir.nvim"] = {},
+	-- Try to auto detect indentation settings from the file.
 	["tpope/vim-sleuth"] = {},
+	-- It's helpful sometimes :D
 	["github/copilot.vim"] = {},
+	-- Syntax highlighting for Human readable JSON.
 	["hjson/vim-hjson"] = {},
+	-- Extend NvChad's built-in lsp-config support by enabling language servers.
 	["neovim/nvim-lspconfig"] = {
 		config = function()
 			require("plugins.configs.lspconfig")
 			require("custom.plugins.lspconfig")
 		end,
 	},
+	-- Customize default items installed.
 	["williamboman/mason.nvim"] = {
 		override_options = {
 			ensure_installed = {
@@ -108,7 +113,6 @@ return {
 			end,
 		}),
 	},
-
 	-- Debug adapter for Neovim plugins.
 	["jbyuki/one-small-step-for-vimkind"] = {
 		config = function()
@@ -130,7 +134,6 @@ return {
 			end
 		end,
 	},
-
 	-- The Refactoring library based off the Refactoring book by Martin Fowler.
 	["ThePrimeagen/refactoring.nvim"] = {
 		requires = {
@@ -141,6 +144,8 @@ return {
 			require("refactoring").setup()
 		end,
 	},
+	-- Override NvChad's options to always autoinstall treesitter languages for
+	-- sticky headers, and whatnot.
 	["nvim-treesitter/nvim-treesitter"] = {
 		override_options = {
 			auto_install = true,
@@ -151,9 +156,12 @@ return {
 			require("treesitter-context").setup({})
 		end,
 	},
+	-- Enable loading project specific config files.
 	["windwp/nvim-projectconfig"] = {
 		config = function()
 			require("nvim-projectconfig").setup({
+				-- Set the project directory to the custom path to use personal
+				-- utilities.
 				project_dir = vim.env.XDG_CONFIG_HOME .. "/neovim/projects/",
 
 				-- Display message after load config file.
