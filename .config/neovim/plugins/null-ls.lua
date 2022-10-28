@@ -39,7 +39,6 @@ local sources = {
 }
 
 null_ls.setup({
-	debug = true,
 	sources = sources,
 	on_attach = function(client, bufnr)
 		local lsp_format_modifications = require("lsp-format-modifications")
