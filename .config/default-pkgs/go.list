@@ -8,3 +8,5 @@ github.com/dnnrly/abbreviate@latest
 github.com/maaslalani/slides@latest
 github.com/google/git-appraise/git-appraise@latest
 github.com/editorconfig-checker/editorconfig-checker/cmd/editorconfig-checker@latest
+# A remote utility tool to copy, paste and open browser over TCP.
+github.com/lemonade-command/lemonade
