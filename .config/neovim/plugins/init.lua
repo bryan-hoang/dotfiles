@@ -50,31 +50,37 @@ return {
 			},
 		},
 	},
+	-- Enable custom language servers
 	["jose-elias-alvarez/null-ls.nvim"] = {
 		after = "nvim-lspconfig",
 		config = function()
 			require("custom.plugins.null-ls")
 		end,
 	},
+	-- Enable markdown previewing.
 	["iamcco/markdown-preview.nvim"] = {
 		run = function()
 			vim.fn["mkdp#util#install"]()
 		end,
-	},
-	["mxsdev/nvim-dap-vscode-js"] = {
-		requires = { "mfussenegger/nvim-dap" },
+		-- Preview markdown over SSH.
 		config = function()
-			require("dap-vscode-js").setup({
-				-- Path to vscode-js-debug installation.
-				debugger_path = vim.fn.stdpath("data")
-					.. "/mason/packages/js-debug-adapter",
-				-- debugger_cmd = { "js-debug-adapter" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
-
-				-- which adapters to register in nvim-dap
-				adapters = { "pwa-node" },
-			})
+			-- https://github.com/iamcco/markdown-preview.nvim/pull/9
+			-- $HOSTNAME would usually be defined per remote machine.
+			-- e.g., in ~/.config/shell/extra.
+			if os.getenv("SSH_CONNECTION") ~= "" then
+				vim.cmd([[
+					let g:mkdp_open_to_the_world = 1
+					let g:mkdp_open_ip = $HOSTNAME
+					let g:mkdp_port = 8080
+					function! g:Open_browser(url)
+						silent exe "!lemonade open "a:url
+					endfunction
+					let g:mkdp_browserfunc = "g:Open_browser"
+					]])
+			end
 		end,
 	},
+	-- Adds support for the debug adapter protocol.
 	["mfussenegger/nvim-dap"] = {
 		config = function()
 			for _, language in ipairs({ "typescript", "javascript" }) do
@@ -90,6 +96,24 @@ return {
 			end
 		end,
 	},
+	-- Manually install debug adapter for JS.
+	["mxsdev/nvim-dap-vscode-js"] = {
+		requires = { "mfussenegger/nvim-dap" },
+		config = function()
+			require("dap-vscode-js").setup({
+				-- Path to vscode-js-debug installation.
+				debugger_path = vim.fn.stdpath("data")
+					.. "/mason/packages/js-debug-adapter",
+				-- Command to use to launch the debug server. Takes precedence over
+				-- `node_path` and `debugger_path`.
+				-- debugger_cmd = { "js-debug-adapter" },
+
+				-- which adapters to register in nvim-dap
+				adapters = { "pwa-node" },
+			})
+		end,
+	},
+	-- Improves editing experience for git conflicts.
 	["akinsho/git-conflict.nvim"] = {
 		tag = "*",
 		config = function()
