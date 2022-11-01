@@ -9,7 +9,7 @@ insert_final_newline = true
 root = true
 trim_trailing_whitespace = true
 
-[*.{py,yml,yaml}]
+[*.{py,yml,yaml,md}]
 indent_style = space
 
 [*gemrc]
