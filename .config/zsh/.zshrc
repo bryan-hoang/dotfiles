@@ -82,18 +82,13 @@ zstyle ':completion::complete:*' gain-privileges 1
 # https://wiki.archlinux.org/title/zsh#Persistent_rehash
 zstyle ':completion:*' rehash true
 
-# bun completions
-#
-# shellcheck disable=SC1091
-[ -s "${HOME}"/.bun/_bun ] && source "${HOME}"/.bun/_bun
-
 # tmuxinator completions.
 [[ -s "${ZSH_USER_FPATH}"/_tmuxinator ]] \
 	|| wget https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh \
 		-O "${ZSH_USER_FPATH}"/_tmuxinator
 
-# shellcheck disable=SC1091
-. "${ZSH_USER_FPATH}"/_tmuxinator
+# Enable user specific completions.
+autoload -U compinit; compinit
 
 # endregion Completions
 
