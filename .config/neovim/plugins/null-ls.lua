@@ -21,7 +21,18 @@ local sources = {
 	b.diagnostics.eslint,
 
 	-- Lua
-	b.diagnostics.selene,
+	b.diagnostics.selene.with({
+		-- https://github.com/Kampfkarren/selene/issues/339#issuecomment-1191992366
+		cwd = function(_params)
+			return vim.fs.dirname(
+				vim.fs.find(
+					{ "selene.toml" },
+					{ upward = true, path = vim.api.nvim_buf_get_name(0) }
+				)[1]
+				-- fallback value
+			) or vim.fn.expand(os.getenv("XDG_CONFIG_HOME") .. "/selene/")
+		end,
+	}),
 	b.formatting.stylua,
 
 	-- Shell

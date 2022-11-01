@@ -27,18 +27,32 @@ M.tabufline = {
 	},
 }
 
-local markdown_preview = {
-	["<C-p>"] = {
-		"<Plug>MarkdownPreviewToggle",
-		"Toggle Markdown preview",
+M.lspconfig = {
+	n = {
+		-- Overriding the default keybinding to change the diagnostic hover text.
+		["<leader>f"] = {
+			function()
+				vim.diagnostic.open_float({
+					source = true,
+					format = function(diagnostic)
+						return diagnostic.message .. " (" .. diagnostic.code .. ")"
+					end,
+				})
+			end,
+			"Custom floating diagnostic.",
+		},
 	},
 }
 
 -- Custom plugins.
 
 M.markdown_preview = {
-	n = markdown_preview,
-	i = markdown_preview,
+	n = {
+		["<C-p>"] = {
+			"<Plug>MarkdownPreviewToggle",
+			"Toggle Markdown preview",
+		},
+	},
 }
 
 M.dap = {
@@ -73,6 +87,12 @@ M.git_conflict = {
 M.lsp_format_modifications = {
 	n = {
 		["<Leader>fc"] = { "<Cmd>FormatModifications<CR>", "Format Changed lines." },
+	},
+}
+
+M.symbols_outline = {
+	n = {
+		["<Leader>so"] = { "<Cmd>SymbolsOutline<CR>", "Toggle symboles outline." },
 	},
 }
 

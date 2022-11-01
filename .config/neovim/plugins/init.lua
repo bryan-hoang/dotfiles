@@ -15,41 +15,7 @@ return {
 		end,
 	},
 	-- Customize default items installed.
-	["williamboman/mason.nvim"] = {
-		override_options = {
-			ensure_installed = {
-				-- lua stuff
-				"lua-language-server",
-				"stylua",
-				"selene",
-
-				-- web dev
-				"prettier",
-				"css-lsp",
-				"html-lsp",
-				"typescript-language-server",
-				"deno",
-				"emmet-ls",
-				"yaml-language-server",
-				"rome",
-
-				-- shell
-				"shfmt",
-				"shellcheck",
-				"bash-language-server",
-				"shellharden",
-
-				-- Markdown
-				"vale",
-				"ltex-ls",
-				"markdownlint",
-
-				-- DAPs.
-				"js-debug-adapter",
-				"bash-debug-adapter",
-			},
-		},
-	},
+	["williamboman/mason.nvim"] = require("custom.plugins.mason"),
 	-- Enable custom language servers
 	["jose-elias-alvarez/null-ls.nvim"] = {
 		after = "nvim-lspconfig",
@@ -63,100 +29,25 @@ return {
 			vim.fn["mkdp#util#install"]()
 		end,
 		-- Preview markdown over SSH.
-		config = function()
-			-- https://github.com/iamcco/markdown-preview.nvim/pull/9
-			-- $HOSTNAME would usually be defined per remote machine.
-			-- e.g., in ~/.config/shell/extra.
-			if os.getenv("SSH_CONNECTION") ~= "" then
-				vim.cmd([[
-					let g:mkdp_open_to_the_world = 1
-					let g:mkdp_open_ip = $HOSTNAME
-					let g:mkdp_port = 8080
-					function! g:Open_browser(url)
-						silent exe "!lemonade open "a:url
-					endfunction
-					let g:mkdp_browserfunc = "g:Open_browser"
-					]])
-			end
-		end,
+		config = require("custom.plugins.markdown-preview"),
 	},
 	-- Adds support for the debug adapter protocol.
 	["mfussenegger/nvim-dap"] = {
-		config = function()
-			for _, language in ipairs({ "typescript", "javascript" }) do
-				require("dap").configurations[language] = {
-					{
-						type = "pwa-node",
-						request = "launch",
-						name = "Launch file",
-						program = "${file}",
-						cwd = "${workspaceFolder}",
-					},
-				}
-			end
-		end,
+		config = require("custom.plugins.dap"),
 	},
 	-- Manually install debug adapter for JS.
 	["mxsdev/nvim-dap-vscode-js"] = {
 		requires = { "mfussenegger/nvim-dap" },
-		config = function()
-			require("dap-vscode-js").setup({
-				-- Path to vscode-js-debug installation.
-				debugger_path = vim.fn.stdpath("data")
-					.. "/mason/packages/js-debug-adapter",
-				-- Command to use to launch the debug server. Takes precedence over
-				-- `node_path` and `debugger_path`.
-				-- debugger_cmd = { "js-debug-adapter" },
-
-				-- which adapters to register in nvim-dap
-				adapters = { "pwa-node" },
-			})
-		end,
+		config = require("custom.plugins.dap-vscode-js"),
 	},
 	-- Improves editing experience for git conflicts.
 	["akinsho/git-conflict.nvim"] = {
 		tag = "*",
-		config = function()
-			require("git-conflict").setup({
-				default_mappings = false,
-				highlights = {
-					incoming = "DiffText",
-					current = "DiffAdd",
-				},
-			})
-		end,
-
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "GitConflictDetected",
-			callback = function()
-				vim.notify("Conflict detected in " .. vim.fn.expand("<afile>"))
-				vim.keymap.set("n", "cww", function()
-					engage.conflict_buster()
-					create_buffer_local_mappings()
-				end)
-			end,
-		}),
+		config = require("custom.plugins.git-conflict"),
 	},
 	-- Debug adapter for Neovim plugins.
 	["jbyuki/one-small-step-for-vimkind"] = {
-		config = function()
-			local dap = require("dap")
-			dap.configurations.lua = {
-				{
-					type = "nlua",
-					request = "attach",
-					name = "Attach to running Neovim instance",
-				},
-			}
-
-			dap.adapters.nlua = function(callback, config)
-				callback({
-					type = "server",
-					host = config.host or "127.0.0.1",
-					port = config.port or 8086,
-				})
-			end
-		end,
+		config = require("custom.plugins.ossfv"),
 	},
 	-- The Refactoring library based off the Refactoring book by Martin Fowler.
 	["ThePrimeagen/refactoring.nvim"] = {
@@ -199,16 +90,10 @@ return {
 	-- Format only changed lines of code (from VCS's POV).
 	["joechrisellis/lsp-format-modifications.nvim"] = {},
 	-- Embed Neovim in Chrome, Firefox, Thunderbird & others.
-	["glacambre/firenvim"] = {
-		run = function()
-			vim.fn["firenvim#install"](0)
-		end,
-		config = function()
-			-- Make editing comments on GitHub/GitLab easier.
-			vim.api.nvim_create_autocmd({ "BufEnter" }, {
-				pattern = { "gitlab.com_*.txt", "github.com_*.txt" },
-				command = "set filetype=markdown",
-			})
-		end,
-	},
+	["glacambre/firenvim"] = require("custom.plugins.firenvim"),
+	-- GhostText plugin to sync editor test with text in the browser.
+	-- Experimenting with improving MR review workflow.
+	["subnut/nvim-ghost.nvim"] = require("custom.plugins.ghost"),
+	--A tree like view for symbols in Neovim using the Language Server Protocol.
+	["simrat39/symbols-outline.nvim"] = require("custom.plugins.symbols-outline"),
 }

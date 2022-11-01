@@ -24,7 +24,7 @@ for _, lsp in ipairs(servers) do
 		capabilities = capabilities,
 	}
 
-	if lsp ~= "yamlls" then
+	if lsp == "yamlls" then
 		setup_config["settings"] = {
 			yaml = {
 				schemas = {
@@ -33,7 +33,7 @@ for _, lsp in ipairs(servers) do
 				},
 			},
 		}
-	elseif lsp ~= "sumneko_lua" then
+	elseif lsp == "sumneko_lua" then
 		setup_config["settings"] = {
 			Lua = {
 				runtime = {
@@ -47,6 +47,15 @@ for _, lsp in ipairs(servers) do
 				workspace = {
 					-- Make the server aware of Neovim runtime files
 					library = vim.api.nvim_get_runtime_file("", true),
+				},
+			},
+		}
+	elseif lsp == "ltex" then
+		setup_config["settings"] = {
+			ltex = {
+				-- https://github.com/valentjn/ltex-ls/issues/124#issuecomment-973171649
+				dictionary = {
+					["en-US"] = { "dotfiles", "Neovim", "NvChad" },
 				},
 			},
 		}
