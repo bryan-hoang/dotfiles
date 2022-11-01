@@ -1,6 +1,6 @@
 local wezterm = require("wezterm")
 
-local is_os_unix = package.config:sub(1, 1) == "/"
+local is_os_unix = string.sub(package.config, 1, 1) == "/"
 local tmux = { "tmux", "new-session", "-A", "-s", "wezterm" }
 local zsh = { "zsh", "-i" }
 local bash = { "bash", "-i" }
@@ -14,6 +14,8 @@ return {
 	font = wezterm.font(
 		is_os_unix and "FiraCode Nerd Font Mono" or "FiraCode NFM"
 	),
+	-- Default is 12.0.
+	font_size = 12.0,
 	default_cursor_style = "SteadyBlock",
 	use_fancy_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
@@ -52,8 +54,6 @@ return {
 	},
 	window_background_opacity = 0.75,
 	text_background_opacity = 0.75,
-	-- Default is 12.0.
-	font_size = 14.0,
 	window_close_confirmation = "NeverPrompt",
 	initial_cols = 100,
 	selection_word_boundary = " \t\n{}[]()\"'`",
