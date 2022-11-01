@@ -167,7 +167,7 @@ export OSH="$XDG_CONFIG_HOME"/oh-my-bash
 . "$HOME"/.zshenv
 export ZSH="$XDG_CONFIG_HOME"/ohmyzsh
 mkdir -p "$XDG_DATA_HOME"/zsh/functions
-export ZSH_USER_FPATH="$XDG_DATA_HOME"/zsh/functions
+export ZSH_USER_FPATH="$XDG_DATA_HOME"/zsh/completions
 export TMUX_PLUGIN_MANAGER_PATH="$XDG_CONFIG_HOME"/tmux/plugins
 mkdir -p "$XDG_DATA_HOME"/wineprefixes
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
