@@ -1,0 +1,5 @@
+---
+base: lua53
+globals:
+  package.config:
+    property: read-only
