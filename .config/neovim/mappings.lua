@@ -35,7 +35,12 @@ M.lspconfig = {
 				vim.diagnostic.open_float({
 					source = true,
 					format = function(diagnostic)
-						return diagnostic.message .. " (" .. diagnostic.code .. ")"
+						local message = diagnostic.message
+						if diagnostic.code ~= nil then
+							message = message .. " (" .. diagnostic.code .. ")"
+						end
+
+						return message
 					end,
 				})
 			end,
