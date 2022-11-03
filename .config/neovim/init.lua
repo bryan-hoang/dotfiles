@@ -4,7 +4,6 @@ local set_file_associations = require("custom.utils").set_file_associations
 
 local opt = vim.opt
 local g = vim.g
-local api = vim.api
 
 local enable_providers = {
 	"python3",
