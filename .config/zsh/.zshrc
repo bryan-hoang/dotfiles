@@ -41,6 +41,7 @@ plugins=(
 
 custom_plugins=(
 	zsh-autosuggestions
+	zsh-syntax-highlighting-dracula
 	zsh-syntax-highlighting
 	zsh-hist
 	pyvenv-activate

@@ -73,3 +73,6 @@
 [submodule "LGUG2Z/komorebi"]
 	path = src/github.com/LGUG2Z/komorebi
 	url = https://github.com/LGUG2Z/komorebi.git
+[submodule "dracula/zsh-syntax-highlighting"]
+	path = src/github.com/dracula/zsh-syntax-highlighting
+	url = https://github.com/dracula/zsh-syntax-highlighting.git
