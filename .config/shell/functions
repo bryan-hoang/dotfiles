@@ -1313,7 +1313,7 @@ kill_window_manager() {
 
 unexpand_inplace() {
 	local -r tempfile="$(mktemp)"
-	unexpand -t 2 "$1" >|"$tempfile"
+	unexpand -t 2 --first-only "$1" >|"$tempfile"
 	cp "$tempfile" "$1"
 }
 
