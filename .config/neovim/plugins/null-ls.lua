@@ -6,6 +6,10 @@ end
 
 local b = null_ls.builtins
 local sources = {
+	b.diagnostics.editorconfig_checker.with({
+		command = "editorconfig-checker",
+	}),
+
 	-- Code actions
 	b.code_actions.gitsigns,
 	b.code_actions.shellcheck,

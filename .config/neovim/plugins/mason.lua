@@ -3,6 +3,8 @@ return {
 	-- setup/`:MasonInstallAll`.
 	override_options = {
 		ensure_installed = {
+			"editorconfig-checker",
+
 			-- lua stuff
 			"lua-language-server",
 			"stylua",
