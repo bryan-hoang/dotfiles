@@ -1,4 +1,4 @@
-return {
+local module = {
 	-- Creates missing folders on save.
 	["jghauser/mkdir.nvim"] = {},
 	-- Enables EditorConfig support.
@@ -110,3 +110,5 @@ return {
 		},
 	},
 }
+
+return module
