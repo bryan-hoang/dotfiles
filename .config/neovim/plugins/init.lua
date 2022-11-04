@@ -96,4 +96,14 @@ return {
 	["subnut/nvim-ghost.nvim"] = require("custom.plugins.ghost"),
 	--A tree like view for symbols in Neovim using the Language Server Protocol.
 	["simrat39/symbols-outline.nvim"] = require("custom.plugins.symbols-outline"),
+	-- Override some UI elements.
+	["NvChad/ui"] = {
+		override_options = {
+			statusline = {
+				overriden_modules = function()
+					return require("custom.plugins.nvchad_ui")
+				end,
+			},
+		},
+	},
 }
