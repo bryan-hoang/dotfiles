@@ -2,15 +2,6 @@
 #
 # vi: set filetype=sh
 
-if command -v tmux &>/dev/null \
-	&& [[ -n "${PS1}" ]] \
-	&& [[ ! "${TERM}" =~ screen ]] \
-	&& [[ ! "${TERM}" =~ tmux ]] \
-	&& [[ -n "${SSH_CONNECTION}" ]] \
-	&& [[ -z "${TMUX}" ]]; then
-	exec tmux new-session -A -s ssh
-fi
-
 # Uncomment the following line to disable auto-setting terminal title.
 # shellcheck disable=SC2034
 DISABLE_AUTO_TITLE="true"
@@ -204,3 +195,7 @@ if [ -f "${XDG_DATA_HOME}"/google-cloud-sdk/completion.zsh.inc ]; then
 	# shellcheck disable=SC1091
 	. "${XDG_DATA_HOME}"/google-cloud-sdk/completion.zsh.inc
 fi
+
+# Alt-s makes switching between tmux workspaces of projects easier. Inspired by
+# ThePrimeagen.
+bindkey -s '^[s' 'tmux-sessionizer\n'

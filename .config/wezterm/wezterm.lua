@@ -1,7 +1,6 @@
 local wezterm = require("wezterm")
 
 local is_os_unix = string.sub(package.config, 1, 1) == "/"
-local tmux = { "tmux", "new-session", "-A", "-s", "wezterm" }
 local zsh = { "zsh", "-i" }
 local bash = { "bash", "-i" }
 local sh = { "sh", "-i" }
@@ -21,14 +20,10 @@ return {
 	hide_tab_bar_if_only_one_tab = true,
 	-- http://lua-users.org/wiki/TernaryOperator
 	-- https://stackoverflow.com/a/14425862/8714233
-	default_prog = is_os_unix and tmux or git_bash,
+	default_prog = is_os_unix and zsh or git_bash,
 	launch_menu = {
 		{
-			label = "tmux",
-			args = tmux,
-		},
-		{
-			label = "Zsh",
+			label = "Z shell (Zsh)",
 			args = zsh,
 		},
 		{
