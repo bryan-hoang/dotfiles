@@ -38,16 +38,19 @@ return {
 	-- Manually install debug adapter for JS.
 	["mxsdev/nvim-dap-vscode-js"] = {
 		requires = { "mfussenegger/nvim-dap" },
+		after = { "nvim-dap" },
 		config = require("custom.plugins.dap-vscode-js"),
+	},
+	-- Debug adapter for Neovim plugins.
+	["jbyuki/one-small-step-for-vimkind"] = {
+		requires = { "mfussenegger/nvim-dap" },
+		after = { "nvim-dap" },
+		config = require("custom.plugins.ossfv"),
 	},
 	-- Improves editing experience for git conflicts.
 	["akinsho/git-conflict.nvim"] = {
 		tag = "*",
 		config = require("custom.plugins.git-conflict"),
-	},
-	-- Debug adapter for Neovim plugins.
-	["jbyuki/one-small-step-for-vimkind"] = {
-		config = require("custom.plugins.ossfv"),
 	},
 	-- The Refactoring library based off the Refactoring book by Martin Fowler.
 	["ThePrimeagen/refactoring.nvim"] = {
