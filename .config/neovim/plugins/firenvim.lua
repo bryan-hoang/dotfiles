@@ -10,15 +10,9 @@ return {
 		})
 
 		vim.g.firenvim_config = {
-			globalSettings = {
-				takeover = "never",
-			},
 			localSettings = {
 				[".*"] = {
 					takeover = "never",
-				},
-				["https://git(hub|lab).com/"] = {
-					takeover = "always",
 				},
 			},
 		}
