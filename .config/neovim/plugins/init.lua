@@ -1,8 +1,8 @@
 return {
 	-- Creates missing folders on save.
 	["jghauser/mkdir.nvim"] = {},
-	-- Try to auto detect indentation settings from the file.
-	["tpope/vim-sleuth"] = {},
+	-- Enables EditorConfig support.
+	["gpanders/editorconfig.nvim"] = {},
 	-- It's helpful sometimes :D
 	["github/copilot.vim"] = {},
 	-- Syntax highlighting for Human readable JSON.
