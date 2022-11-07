@@ -7,6 +7,7 @@ local M = {}
 
 M.ui = {
 	theme = "chadracula",
+	transparency = true,
 }
 
 M.options = {
