@@ -1,6 +1,6 @@
 
 [theme]
-theme = "nord-dark"
+theme = "dracula"
 
 [theme.overrides]
 separator = "<span font='16'> </span>"
