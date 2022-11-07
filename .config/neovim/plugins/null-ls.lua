@@ -51,6 +51,9 @@ local sources = {
 	-- Markdown
 	b.diagnostics.markdownlint,
 	b.diagnostics.vale,
+
+	-- Python
+	b.diagnostics.ruff,
 }
 
 null_ls.setup({
