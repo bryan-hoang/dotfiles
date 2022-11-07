@@ -12,7 +12,6 @@ youtube-dl
 inkscape-figures
 python-dotenv[cli]
 litecli
-trash-cli
 pynvim
 pytest
 pylint
