@@ -1,6 +1,4 @@
 local module = {
-	-- Creates missing folders on save.
-	["jghauser/mkdir.nvim"] = {},
 	-- Enables EditorConfig support.
 	["gpanders/editorconfig.nvim"] = {},
 	-- It's helpful sometimes :D
