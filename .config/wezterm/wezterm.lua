@@ -48,7 +48,6 @@ return {
 		},
 	},
 	window_background_opacity = 0.75,
-	text_background_opacity = 0.75,
 	window_close_confirmation = "NeverPrompt",
 	initial_cols = 100,
 	selection_word_boundary = " \t\n{}[]()\"'`",
