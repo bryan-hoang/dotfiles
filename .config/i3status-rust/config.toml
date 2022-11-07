@@ -2,6 +2,9 @@
 [theme]
 theme = "nord-dark"
 
+[theme.overrides]
+separator = "<span font='16'> </span>"
+
 [icons]
 icons = "awesome6"
 

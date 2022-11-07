@@ -263,7 +263,6 @@ client.background       #F8F8F2
 # finds out, if available)
 bar {
 	status_command i3status-rs
-	font pango:FireCode Nerd Font Mono, Font Awesome 6, PowerlineSymbols
 	colors {
 		background                                                          #282A36
 		statusline                                                          #F8F8F2
