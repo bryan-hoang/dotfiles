@@ -1,61 +1,14 @@
-! Use a truetype font and size.
-*.faceName: Cascadia Code:size=12
-
-! Set the initial Window size
-xterm*geometry: 120x30
-xfd*geometry: 1280x720
-
-! Clipboard settings
-*VT100.translations: #override <Btn1Up>: select-end(PRIMARY, CLIPBOARD, CUT_BUFFER0)
+! DPI scaling (filtered through `git config filter.xresources-dpi.clean`).
 
 ! Set consistent cursor theme.
 Xcursor.theme: Dracula-cursors
 
-! DPI scaling.
-
-!
-! Dark+ Theme (https://github.com/mbadolato/iTerm2-Color-Schemes)
-!
-! Generated with :
-! XRDB2Xreources.py
-!
-*.foreground:  #cccccc
-*.background:  #0e0e0e
-*.cursorColor: #ffffff
-!
-! Black
-*.color0:      #000000
-*.color8:      #666666
-!
-! Red
-*.color1:      #cd3131
-*.color9:      #f14c4c
-!
-! Green
-*.color2:      #0dbc79
-*.color10:     #23d18b
-!
-! Yellow
-*.color3:      #e5e510
-*.color11:     #f5f543
-!
-! Blue
-*.color4:      #2472c8
-*.color12:     #3b8eea
-!
-! Magenta
-*.color5:      #bc3fbc
-*.color13:     #d670d6
-!
-! Cyan
-*.color6:      #11a8cd
-*.color14:     #29b8db
-!
-! White
-*.color7:      #e5e5e5
-*.color15:     #e5e5e5
-!
-! Bold, Italic, Underline
-*.colorBD:     #ffffff
-!*.colorIT:
-!*.colorUL:
+! Some applications like URxvt will ignore fontconfig settings. You can work
+! around this by using ~/.Xresources, but it is not as flexible as fontconfig.
+! https://wiki.archlinux.org/title/Font_configuration#Applications_without_fontconfig_support
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintslight
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
