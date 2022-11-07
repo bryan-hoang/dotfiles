@@ -21,3 +21,5 @@ bandit
 mypy
 # Build system.
 meson
+# An extremely fast Python linter, written in Rust.
+ruff
