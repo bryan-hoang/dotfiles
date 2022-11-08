@@ -8,17 +8,24 @@
 
 # Unofficial 'strict mode'.
 set -euo pipefail
+# Adding ':' to make it easier to convert ':' delimited lists into arrays.
+IFS=$':\n\t'
 
 declare -ra proj_dirs=(
 	# e.g., neovim configs.
 	"$XDG_CONFIG_HOME"
 	# Local projects not tracked by git.
 	~/src/localhost
-	# Group/user specific git repo projects.
-	~/src/gitlab.com/Distributed-Compute-Protocol
+	# Machine specific project directories. e.g., exported in
+	# `$XDG_CONFIG_HOME/shell/extra`.
+	"${PROJ_DIRS[@]}"
 )
 
-selected=$(find "${proj_dirs[@]}" -mindepth 1 -maxdepth 1 -type d | fzf)
+if [[ $# -eq 1 ]]; then
+	selected=$(realpath --no-symlinks "$1")
+else
+	selected=$(find "${proj_dirs[@]}" -mindepth 1 -maxdepth 1 -type d | fzf)
+fi
 
 if [[ -z $selected ]]; then
 	exit 0
