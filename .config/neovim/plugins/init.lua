@@ -105,6 +105,14 @@ local module = {
 			},
 		},
 	},
+	-- Adds a minimap that integrates with treesitter and the built-in LSP.
+	["gorbit99/codewindow.nvim"] = {
+		config = function()
+			local codewindow = require("codewindow")
+			codewindow.setup()
+			codewindow.apply_default_keybinds()
+		end,
+	},
 }
 
 return module
