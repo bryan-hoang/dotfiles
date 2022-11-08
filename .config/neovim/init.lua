@@ -25,20 +25,36 @@ opt.colorcolumn = { 80, 100, 120 }
 -- code. For long lines of code, use J where needed.
 opt.tw = 80
 
--- Indent wrapped lines using same indentation as parent.
+-- Auto-wrap text using 'textwidth'.
 opt.formatoptions:remove("t")
+-- Auto-wrap comments using 'textwidth', inserting the current comment leader
+-- automatically.
 opt.formatoptions:append("c")
+-- Automatically insert the current comment leader after hitting <Enter> in
+-- Insert mode.
 opt.formatoptions:append("r")
+-- Automatically insert the current comment leader after hitting 'o' or 'O' in
+-- Normal mode.  In case comment is unwanted in a specific place use CTRL-U to
+-- quickly delete it. |i_CTRL-U|
 opt.formatoptions:append("o")
+-- When 'o' is included: do not insert the comment leader for a // comment after
+-- a statement, only when // is at the start of the line.
 opt.formatoptions:append("/")
+-- Allow formatting of comments with "gq". Note that formatting will not change
+-- blank lines or lines containing only the comment leader. A new paragraph
+-- starts after such a line, or when the comment leader changes.
 opt.formatoptions:append("q")
-opt.formatoptions:append("n")
-opt.formatoptions:append("j")
--- Automatic formatting of paragraphs. Every time text is inserted or
--- deleted the paragraph will be reformatted. See |auto-format|.
--- When the 'c' flag is present this only happens for recognized
--- comments.
+-- Automatic formatting of paragraphs. Every time text is inserted or deleted
+-- the paragraph will be reformatted. See |auto-format|. When the 'c' flag is
+-- present this only happens for recognized comments.
 opt.formatoptions:append("a")
+-- When formatting text, recognize numbered lists.
+opt.formatoptions:append("n")
+-- When formatting text, use the indent of the second line of a paragraph for
+-- the rest of the paragraph, instead of the indent of the first line.
+opt.formatoptions:append("2")
+-- Where it makes sense, remove a comment leader when joining lines.
+opt.formatoptions:append("j")
 opt.breakindent = true
 opt.linebreak = true
 opt.showbreak = "↪ "
