@@ -113,6 +113,8 @@ local module = {
 			codewindow.apply_default_keybinds()
 		end,
 	},
+	-- A UI for nvim-dap.
+	["rcarriga/nvim-dap-ui"] = require('custom.plugins.dapui'),
 }
 
 return module
