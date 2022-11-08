@@ -1,8 +1,6 @@
 local module = {
 	-- Enables EditorConfig support.
 	["gpanders/editorconfig.nvim"] = {},
-	-- It's helpful sometimes :D
-	["github/copilot.vim"] = {},
 	-- Syntax highlighting for Human readable JSON.
 	["hjson/vim-hjson"] = {},
 	-- Extend NvChad's built-in lsp-config support by enabling language servers.
