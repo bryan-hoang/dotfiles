@@ -7,22 +7,20 @@ local servers = {
 	"bashls",
 	"sumneko_lua",
 	"tsserver",
+	"cssls",
 	"jsonls",
 	"yamlls",
 	"rome",
+	"emmet_ls",
 
 	-- TOML
 	"taplo",
-
 	-- Markdown
 	"ltex",
 }
 
 for _, lsp in ipairs(servers) do
-	local setup_config = {
-		on_attach = on_attach,
-		capabilities = capabilities,
-	}
+	local setup_config = {}
 
 	if lsp == "yamlls" then
 		setup_config["settings"] = {
@@ -60,6 +58,15 @@ for _, lsp in ipairs(servers) do
 			},
 		}
 	end
+
+	setup_config["on_attach"] = function(client, bufnr)
+		on_attach(client, bufnr)
+
+		-- Use the internal formatter rather than the LSP formatter.
+		vim.opt.formatexpr = ""
+	end
+
+	setup_config["capabilities"] = capabilities
 
 	lspconfig[lsp].setup(setup_config)
 end
