@@ -1245,6 +1245,7 @@ ln_sh_plugins() {
 
 ln_nvim_cfg() {
 	ln -sf "$XDG_CONFIG_HOME"/neovim "$XDG_CONFIG_HOME"/nvim/lua/custom
+	ln -sf "$XDG_CONFIG_HOME"/neovim/after "$XDG_CONFIG_HOME"/nvim
 }
 
 install_apt_packages() {
