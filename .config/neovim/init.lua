@@ -47,7 +47,10 @@ opt.formatoptions:append("q")
 -- Automatic formatting of paragraphs. Every time text is inserted or deleted
 -- the paragraph will be reformatted. See |auto-format|. When the 'c' flag is
 -- present this only happens for recognized comments.
-opt.formatoptions:append("a")
+--
+-- Removing since there are a few situations where it's unwanted. e.g., JS
+-- comments, markdown code blocks, etc.
+opt.formatoptions:remove("a")
 -- When formatting text, recognize numbered lists.
 opt.formatoptions:append("n")
 -- When formatting text, use the indent of the second line of a paragraph for
