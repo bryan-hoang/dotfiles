@@ -3,7 +3,9 @@
 theme = "dracula"
 
 [theme.overrides]
-separator = "<span font='16'> </span>"
+separator = "<span font='16'></span>"
+idle_bg = "#44475A"
+idle_fg = "#F8F8F2"
 
 [icons]
 icons = "awesome6"
@@ -13,31 +15,44 @@ block = "focused_window"
 format = "$title.rot-str(16)|"
 
 [[block]]
-block = "music"
-format = "$combo.rot-str(16) $play|"
-
-[[block]]
 block = "docker"
-format = "$running/$total"
-interval = 2
+format = " $icon $running.eng(1)/$total.eng(1) "
+[block.theme_overrides]
+idle_bg = "#8BE9FD"
+idle_fg = "#282A36"
 
 [[block]]
-block = "external_ip"
-
-[[block]]
-alert_unit = "GB"
 block = "disk_space"
-format = "$available.eng(2) available"
+format = " $icon $available.eng(1)/$total "
+alert_unit = "GB"
 [[block.click]]
 button = "right"
 update = true
 
 [[block]]
 block = "memory"
+format = " $icon $mem_avail.eng(1,B,M)/$mem_total.eng(1,B,M) "
+[block.theme_overrides]
+idle_bg = "#FF79C6"
+idle_fg = "#282A36"
 
 [[block]]
 block = "load"
-format = "$1m.eng(4) $5m.eng(4) $15m.eng(4)"
+format = " $icon $1m.eng(3) $5m.eng(3) $15m.eng(3) "
+[block.theme_overrides]
+idle_bg = "#50FA7B"
+idle_fg = "#282A36"
+
+[[block]]
+block = "temperature"
+
+[[block]]
+block = "cpu"
+format = " $icon $barchart $utilization "
+
+[[block]]
+block = "music"
+format = "$combo.rot-str(16) $play "
 
 [[block]]
 block = "bluetooth"
@@ -46,11 +61,11 @@ mac = "88:C9:E8:00:D0:F9"
 
 [[block]]
 block = "sound"
-
-[[block]]
-block = "time"
-format = "%a %Y-%m-%d %R"
-interval = 5
+step_width = 10
+show_volume_when_muted = true
+[block.theme_overrides]
+idle_bg = "#FFB86C"
+idle_fg = "#282A36"
 
 [[block]]
 block = "battery"
@@ -62,3 +77,11 @@ block = "github"
 hide_if_total_is_zero = true
 info = ["total"]
 warning = ["mention", "review_requested"]
+
+[[block]]
+block = "time"
+format = "$icon %a %F %R "
+
+[block.theme_overrides]
+idle_bg = "#BD93F9"
+idle_fg ="#21222C"
