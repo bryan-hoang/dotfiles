@@ -27,4 +27,16 @@ else
 	source ~/src/github.com/amix/vimrc/vimrcs/extended.vim
 
 	colorscheme dracula
+
+	" Transparent background.
+	hi Normal guibg=NONE ctermbg=NONE
+
+	set relativenumber
+
+	" Change cursor based on current mode.
+	let &t_SI = "\e[6 q"
+	let &t_EI = "\e[2 q"
+	set ttimeout
+	set ttimeoutlen=1
+	set ttyfast
 endif
