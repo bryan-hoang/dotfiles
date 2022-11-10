@@ -155,10 +155,6 @@ fi
 [[ -f '/mnt/c/Windows/System32/clip.exe' ]] \
 	&& alias xclip='/mnt/c/Windows/System32/clip.exe'
 
-if command -v bat >/dev/null 2>&1; then
-	alias cat=bat
-fi
-
 alias conventional-changelog='conventional-changelog -p conventionalcommits -n "${XDG_CONFIG_HOME}"/conventional-changelog/config.js'
 alias yarn='yarn --use-yarnrc "${XDG_CONFIG_HOME}"/yarn/config'
 alias sqlite='sqlite3 -init "${XDG_CONFIG_HOME}"/sqlite3/sqliterc'
