@@ -24,6 +24,10 @@ local sources = {
 	b.formatting.eslint,
 	b.diagnostics.eslint,
 
+	-- CSS
+	b.diagnostics.stylelint,
+	b.formatting.stylelint,
+
 	-- Lua
 	b.diagnostics.selene.with({
 		-- https://github.com/Kampfkarren/selene/issues/339#issuecomment-1191992366
