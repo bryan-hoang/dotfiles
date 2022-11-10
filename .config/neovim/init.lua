@@ -70,6 +70,9 @@ opt.list = true
 opt.wildmode = { "longest:full", "full" }
 opt.completeopt = { "longest", "menuone" }
 
+-- Use default wrapping behaviour for diff windows.
+opt.diffopt:append("followwrap")
+
 -- API calls.
 
 set_file_associations({
