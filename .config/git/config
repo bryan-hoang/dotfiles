@@ -138,6 +138,7 @@
 	# "a/" and "b/" depending on what is being compared. When this configuration
 	# is in effect, reverse diff output also swaps the order of the prefixes:
 	mnemonicPrefix = true
+	algorithm = histogram
 [fetch]
 	# If true, fetch will automatically behave as if the --prune option was given
 	# on the command line. See also remote.<name>.prune and the PRUNING section
