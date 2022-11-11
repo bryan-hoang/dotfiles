@@ -33,6 +33,10 @@ stylua
 trashy
 # Terminal image viewer.
 viu
+# A jq clone focussed on correctness, speed, and simplicity.
+jaq
+# Create beautiful image of your source code.
+# silicon
 # An over-engineered rewrite of pipes.sh in Rust.
 # --git https://github.com/lhvy/pipes-rs
 # Yet another cross-platform graphical process/system monitor.
@@ -83,8 +87,6 @@ genact
 broot
 # Blazing 💥 fast terminal-ui for git written in rust 🦀. (perl in git-bash)
 # gitui
-# Create beautiful image of your source code.
-# silicon
 # Like jq, but for HTML.
 # htmlq
 # 🤖 Just a command runner.
@@ -98,7 +100,7 @@ tre-command
 kondo
 # Command-line JSON viewer designed for reading, exploring, and searching
 # through JSON data.
-jless
+# jless
 
 # Windows Incompatible.
 
