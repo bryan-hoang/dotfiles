@@ -114,7 +114,9 @@ local module = {
 		end,
 	},
 	-- A UI for nvim-dap.
-	["rcarriga/nvim-dap-ui"] = require('custom.plugins.dapui'),
+	["rcarriga/nvim-dap-ui"] = require("custom.plugins.dapui"),
+	-- Neovim plugin for silicon in Rust.
+	["krivahtoo/silicon.nvim"] = require("custom.plugins.silicon"),
 }
 
 return module
