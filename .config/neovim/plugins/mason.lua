@@ -34,6 +34,9 @@ return {
 			-- DAPs.
 			"js-debug-adapter",
 			"bash-debug-adapter",
+
+			-- Python
+			"ruff",
 		},
 	},
 }
