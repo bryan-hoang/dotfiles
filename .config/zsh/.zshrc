@@ -177,6 +177,8 @@ does_program_exist navi && eval "$(navi widget zsh)"
 does_program_exist zoxide && eval "$(zoxide init zsh)"
 does_program_exist pipenv \
 	&& generate_completions zsh pipenv env _PIPENV_COMPLETE=zsh_source pipenv
+does_program_exist kubectl && \
+	generate_completions zsh kubectl kubectl completion zsh
 does_program_exist broot && eval "$(broot --print-shell-function zsh)"
 
 # shellcheck disable=SC1091
