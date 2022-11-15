@@ -23,6 +23,9 @@
 
 # shellcheck disable=SC1091
 [ -s "$CARGO_HOME"/env ] && . "$CARGO_HOME"/env
+
+[ -d "$ASDF_DIR"/bin ] \
+	&& export PATH="$ASDF_DIR"/bin:"$PATH"
 export PATH="$XDG_BIN_HOME":"$PATH"
 
 # Searched first

@@ -27,7 +27,6 @@ plugins=(
 	# Completions
 	docker
 	docker-compose
-	asdf
 )
 
 custom_plugins=(
