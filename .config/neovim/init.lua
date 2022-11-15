@@ -73,6 +73,9 @@ opt.completeopt = { "longest", "menuone" }
 -- Use default wrapping behaviour for diff windows.
 opt.diffopt:append("followwrap")
 
+-- Round indent to multiple of 'shiftwidth' when using > and <.
+opt.shiftround = true
+
 -- API calls.
 
 set_file_associations({
