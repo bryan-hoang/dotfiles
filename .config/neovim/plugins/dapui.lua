@@ -1,18 +1,19 @@
+-- Prevent "Setup called twice" message from appearing when calling
+-- :PackerSync multiple times.
+-- https://github.com/rcarriga/nvim-dap-ui/blob/master/lua/dapui/init.lua#L133
+local has_setup_been_called = false
+
 return {
 	requires = {
 		"mfussenegger/nvim-dap",
 	},
 	config = function()
-		local dap = require("dap")
 		local dapui = require("dapui")
-		local UIState = require("dapui.state")
+		local dap = require("dap")
 
-		-- Prevent "Setup called twice" message from appearing when calling
-		-- :PackerSync multiple times.
-		-- https://github.com/rcarriga/nvim-dap-ui/blob/master/lua/dapui/init.lua#L133
-		local ui_state = UIState()
-		if not ui_state then
+		if not has_setup_been_called then
 			dapui.setup()
+			has_setup_been_called = true
 		end
 
 		-- Using nvim-dap events to open and close the windows automatically.

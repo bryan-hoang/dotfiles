@@ -3,117 +3,51 @@ local module = {
 	["gpanders/editorconfig.nvim"] = {},
 	-- Syntax highlighting for Human readable JSON.
 	["hjson/vim-hjson"] = {},
+	-- Format only changed lines of code (from VCS's POV).
+	["joechrisellis/lsp-format-modifications.nvim"] = {},
 	-- Extend NvChad's built-in lsp-config support by enabling language servers.
-	["neovim/nvim-lspconfig"] = {
-		config = function()
-			require("plugins.configs.lspconfig")
-			require("custom.plugins.lspconfig")
-		end,
-	},
+	["neovim/nvim-lspconfig"] = require("custom.plugins.lspconfig"),
 	-- Customize default items installed.
 	["williamboman/mason.nvim"] = require("custom.plugins.mason"),
 	-- Enable custom language servers
-	["jose-elias-alvarez/null-ls.nvim"] = {
-		after = "nvim-lspconfig",
-		config = function()
-			require("custom.plugins.null-ls")
-		end,
-	},
+	["jose-elias-alvarez/null-ls.nvim"] = require("custom.plugins.null_ls"),
 	-- Enable markdown previewing.
-	["iamcco/markdown-preview.nvim"] = {
-		run = function()
-			vim.fn["mkdp#util#install"]()
-		end,
-		-- Preview markdown over SSH.
-		config = require("custom.plugins.markdown-preview"),
-	},
+	["iamcco/markdown-preview.nvim"] = require("custom.plugins.markdown_preview"),
 	-- Adds support for the debug adapter protocol.
-	["mfussenegger/nvim-dap"] = {
-		config = require("custom.plugins.dap"),
-	},
+	["mfussenegger/nvim-dap"] = require("custom.plugins.dap"),
 	-- Manually install debug adapter for JS.
-	["mxsdev/nvim-dap-vscode-js"] = {
-		requires = { "mfussenegger/nvim-dap" },
-		after = { "nvim-dap" },
-		config = require("custom.plugins.dap-vscode-js"),
-	},
+	["mxsdev/nvim-dap-vscode-js"] = require("custom.plugins.dap_vscode_js"),
 	-- Debug adapter for Neovim plugins.
-	["jbyuki/one-small-step-for-vimkind"] = {
-		requires = { "mfussenegger/nvim-dap" },
-		after = { "nvim-dap" },
-		config = require("custom.plugins.ossfv"),
-	},
+	["jbyuki/one-small-step-for-vimkind"] = require("custom.plugins.ossfv"),
 	-- Improves editing experience for git conflicts.
-	["akinsho/git-conflict.nvim"] = {
-		tag = "*",
-		config = require("custom.plugins.git-conflict"),
-	},
+	["akinsho/git-conflict.nvim"] = require("custom.plugins.git_conflict"),
 	-- The Refactoring library based off the Refactoring book by Martin Fowler.
-	["ThePrimeagen/refactoring.nvim"] = {
-		requires = {
-			{ "nvim-lua/plenary.nvim" },
-			{ "nvim-treesitter/nvim-treesitter" },
-		},
-		config = function()
-			require("refactoring").setup()
-		end,
-	},
+	["ThePrimeagen/refactoring.nvim"] = require("custom.plugins.refactoring"),
 	-- Override NvChad's options to always autoinstall treesitter languages for
 	-- sticky headers, and whatnot.
 	["nvim-treesitter/nvim-treesitter"] = require("custom.plugins.treesitter"),
-	["nvim-treesitter/nvim-treesitter-context"] = {
-		config = function()
-			require("treesitter-context").setup()
-		end,
-	},
+	-- Show code context.
+	["nvim-treesitter/nvim-treesitter-context"] = require("custom.plugins.treesitter_context"),
 	-- Enable loading project specific config files.
-	["windwp/nvim-projectconfig"] = {
-		config = function()
-			require("nvim-projectconfig").setup({
-				-- Set the project directory to the custom path to use personal
-				-- utilities.
-				project_dir = vim.env.XDG_CONFIG_HOME .. "/neovim/projects/",
-
-				-- Display message after load config file.
-				silent = false,
-
-				-- Change directory inside neovim and load project config.
-				autocmd = true,
-			})
-		end,
-	},
-	-- Format only changed lines of code (from VCS's POV).
-	["joechrisellis/lsp-format-modifications.nvim"] = {},
+	["windwp/nvim-projectconfig"] = require("custom.plugins.projectconfig"),
 	-- Embed Neovim in Chrome, Firefox, Thunderbird & others.
 	["glacambre/firenvim"] = require("custom.plugins.firenvim"),
-	-- GhostText plugin to sync editor test with text in the browser.
-	-- Experimenting with improving MR review workflow.
-	["subnut/nvim-ghost.nvim"] = require("custom.plugins.ghost"),
 	--A tree like view for symbols in Neovim using the Language Server Protocol.
-	["simrat39/symbols-outline.nvim"] = require("custom.plugins.symbols-outline"),
+	["simrat39/symbols-outline.nvim"] = require("custom.plugins.symbols_outline"),
 	-- Override some UI elements.
-	["NvChad/ui"] = {
-		override_options = {
-			statusline = {
-				separator_style = "arrow",
-				overriden_modules = function()
-					return require("custom.plugins.nvchad_ui")
-				end,
-			},
-		},
-	},
+	["NvChad/ui"] = require("custom.plugins.nvchad_ui"),
 	-- Adds a minimap that integrates with treesitter and the built-in LSP.
-	["gorbit99/codewindow.nvim"] = {
-		config = function()
-			local codewindow = require("codewindow")
-			codewindow.setup()
-			codewindow.apply_default_keybinds()
-		end,
-	},
+	["gorbit99/codewindow.nvim"] = require("custom.plugins.codewindow"),
 	-- A UI for nvim-dap.
 	["rcarriga/nvim-dap-ui"] = require("custom.plugins.dapui"),
 	-- Neovim plugin for silicon in Rust.
 	["krivahtoo/silicon.nvim"] = require("custom.plugins.silicon"),
+	-- Extensible Neovim Scrollbar. Mainly for the gitsigns integration.
+	["petertriho/nvim-scrollbar"] = require("custom.plugins.scrollbar"),
+	-- Copies the exact file location where the cursor is.
+	["diegoulloao/nvim-file-location"] = require("custom.plugins.file_location"),
+	-- A fancy, configurable, notification manager for NeoVim.
+	["rcarriga/nvim-notify"] = require("custom.plugins.notify"),
 }
 
 return module
