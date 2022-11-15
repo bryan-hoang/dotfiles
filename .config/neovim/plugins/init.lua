@@ -60,14 +60,10 @@ local module = {
 	},
 	-- Override NvChad's options to always autoinstall treesitter languages for
 	-- sticky headers, and whatnot.
-	["nvim-treesitter/nvim-treesitter"] = {
-		override_options = {
-			auto_install = true,
-		},
-	},
+	["nvim-treesitter/nvim-treesitter"] = require("custom.plugins.treesitter"),
 	["nvim-treesitter/nvim-treesitter-context"] = {
 		config = function()
-			require("treesitter-context").setup({})
+			require("treesitter-context").setup()
 		end,
 	},
 	-- Enable loading project specific config files.
