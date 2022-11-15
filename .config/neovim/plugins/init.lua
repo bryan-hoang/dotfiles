@@ -95,6 +95,7 @@ local module = {
 	["NvChad/ui"] = {
 		override_options = {
 			statusline = {
+				separator_style = "arrow",
 				overriden_modules = function()
 					return require("custom.plugins.nvchad_ui")
 				end,
