@@ -80,7 +80,7 @@ xh
 # Multi functional app to find duplicates, empty folders, similar images etc.
 # czkawka_cli
 # A command-line tool to generate, analyze, convert and manipulate colors.
-pastel
+# pastel
 # 🌀 A nonsense activity generator.
 genact
 # A new way to see and navigate directory trees.
@@ -90,7 +90,7 @@ broot
 # Like jq, but for HTML.
 # htmlq
 # 🤖 Just a command runner.
-just
+# just
 # Command-line interface for email management.
 # himalaya
 # A fully functional file server.
@@ -101,6 +101,8 @@ kondo
 # Command-line JSON viewer designed for reading, exploring, and searching
 # through JSON data.
 # jless
+# A simple tui to view & control docker containers.
+# oxker
 
 # Windows Incompatible.
 
