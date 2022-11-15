@@ -53,6 +53,10 @@ const submodules = spawnOutput.output[1]
 
 debug('submodules', submodules);
 
+/**
+ * @param files {string[]}
+ * @param command {string}
+ */
 function processMatches(files, command) {
 	// Ignore submodule files.
 	debug('files', files);
@@ -73,4 +77,5 @@ export default {
 	[`{${shellScriptExtensions.join(',')}}`]: (files) =>
 		processMatches(files, 'shellcheck'),
 	'*': (files) => processMatches(files, 'editorconfig-checker'),
+	'*.lua': (files) => processMatches(files, 'stylua'),
 };
