@@ -46,6 +46,8 @@ local module = {
 	["diegoulloao/nvim-file-location"] = require("custom.plugins.file_location"),
 	-- A fancy, configurable, notification manager for NeoVim.
 	["rcarriga/nvim-notify"] = require("custom.plugins.notify"),
+	-- Dracula colorscheme for neovim written in Lua.
+	["Mofiqul/dracula.nvim"] = require("custom.plugins.dracula"),
 }
 
 local is_os_unix = string.sub(package.config, 1, 1) == "/"
