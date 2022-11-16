@@ -40,8 +40,6 @@ local module = {
 	["gorbit99/codewindow.nvim"] = require("custom.plugins.codewindow"),
 	-- A UI for nvim-dap.
 	["rcarriga/nvim-dap-ui"] = require("custom.plugins.dapui"),
-	-- Neovim plugin for silicon in Rust.
-	["krivahtoo/silicon.nvim"] = require("custom.plugins.silicon"),
 	-- Extensible Neovim Scrollbar. Mainly for the gitsigns integration.
 	["petertriho/nvim-scrollbar"] = require("custom.plugins.scrollbar"),
 	-- Copies the exact file location where the cursor is.
@@ -49,5 +47,13 @@ local module = {
 	-- A fancy, configurable, notification manager for NeoVim.
 	["rcarriga/nvim-notify"] = require("custom.plugins.notify"),
 }
+
+local is_os_unix = string.sub(package.config, 1, 1) == "/"
+
+-- Segmentation faults on Windows.
+if is_os_unix then
+	-- Neovim plugin for silicon in Rust.
+	module["krivahtoo/silicon.nvim"] = require("custom.plugins.silicon")
+end
 
 return module
