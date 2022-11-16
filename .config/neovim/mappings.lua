@@ -82,13 +82,6 @@ M.dap = {
 	},
 }
 
-M.git_conflict = {
-	n = {
-		["]x"] = { "<Plug>(git-conflict-next-conflict)" },
-		["[x"] = { "<Plug>(git-conflict-prev-conflict)" },
-	},
-}
-
 M.lsp_format_modifications = {
 	n = {
 		["<Leader>fc"] = { "<Cmd>FormatModifications<CR>", "Format Changed lines." },
