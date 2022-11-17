@@ -3,10 +3,14 @@ local wezterm = require("wezterm")
 local is_os_unix = string.sub(package.config, 1, 1) == "/"
 local zsh = { "zsh", "-i" }
 local bash = { "bash", "-i" }
-local sh = { "sh", "-i" }
 local git_bash = { "C:\\Program Files\\Git\\bin\\bash.exe", "-l" }
-local msys2 =
-	{ "C:\\msys64\\msys2_shell.cmd", "-defterm", "-here", "-no-start", "-msys" }
+local wsl_domains = wezterm.default_wsl_domains()
+
+---@diagnostic disable-next-line: unused-local
+for _index, domain in ipairs(wsl_domains) do
+	-- Otherwise, its opened in the Windows user's home directory.
+	domain.default_cwd = "~"
+end
 
 return {
 	color_scheme = "Dracula (Official)",
@@ -31,10 +35,6 @@ return {
 			args = bash,
 		},
 		{
-			label = "sh",
-			args = sh,
-		},
-		{
 			label = "Git Bash",
 			args = git_bash,
 		},
@@ -42,11 +42,8 @@ return {
 			label = "Powershell Core",
 			args = { "pwsh" },
 		},
-		{
-			label = "MSYS / MSYS2",
-			args = msys2,
-		},
 	},
+	wsl_domains = wsl_domains,
 	window_background_opacity = 0.75,
 	window_close_confirmation = "NeverPrompt",
 	initial_cols = 100,
