@@ -77,5 +77,6 @@ export default {
 	[`{${shellScriptExtensions.join(',')}}`]: (files) =>
 		processMatches(files, 'shellcheck'),
 	'*': (files) => processMatches(files, 'editorconfig-checker'),
-	'*.lua': (files) => processMatches(files, 'stylua'),
+	'*.lua': (files) =>
+		processMatches(files, 'stylua --search-parent-directories'),
 };
