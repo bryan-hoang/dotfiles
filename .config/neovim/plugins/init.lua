@@ -27,7 +27,9 @@ local module = {
 	-- sticky headers, and whatnot.
 	["nvim-treesitter/nvim-treesitter"] = require("custom.plugins.treesitter"),
 	-- Show code context.
-	["nvim-treesitter/nvim-treesitter-context"] = require("custom.plugins.treesitter_context"),
+	["nvim-treesitter/nvim-treesitter-context"] = require(
+		"custom.plugins.treesitter_context"
+	),
 	-- Enable loading project specific config files.
 	["windwp/nvim-projectconfig"] = require("custom.plugins.projectconfig"),
 	-- Embed Neovim in Chrome, Firefox, Thunderbird & others.
@@ -46,8 +48,9 @@ local module = {
 	["diegoulloao/nvim-file-location"] = require("custom.plugins.file_location"),
 	-- A fancy, configurable, notification manager for NeoVim.
 	["rcarriga/nvim-notify"] = require("custom.plugins.notify"),
-	-- Dracula colorscheme for neovim written in Lua.
-	["Mofiqul/dracula.nvim"] = require("custom.plugins.dracula"),
+	-- My chosen color scheme due to it's more colorful use of tree-sitter's
+	-- integration as well as it's reasonable defaults for diff highlighting.
+	["catppuccin/nvim"] = require("custom.plugins.catppuccin"),
 }
 
 local is_os_unix = string.sub(package.config, 1, 1) == "/"

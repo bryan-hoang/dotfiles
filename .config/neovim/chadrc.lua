@@ -6,12 +6,8 @@ local M = {}
 -- example of changing theme:
 
 M.ui = {
-	theme = "chadracula",
+	theme = "catppuccin",
 	transparency = true,
-}
-
-M.options = {
-	user = function() end,
 }
 
 M.plugins = require("custom.plugins")
