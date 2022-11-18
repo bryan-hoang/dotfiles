@@ -1,36 +1,36 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
+FONT="FiraCode Nerd Font Mono"
 BLANK='#00000000'
 CLEAR='#ffffff22'
-DEFAULT='#ff00ffcc'
-TEXT='#ee00eeee'
-WRONG='#880000bb'
-VERIFYING='#bb00bbbb'
+RED='#FF5555'
+GREEN='#50FA7B'
+BLUE='#8BE9FD'
+YELLOW='#F1FA8C'
+ORANGE='#FFB86C'
+WHITE='#F8F8F2'
 
 i3lock \
---insidever-color=$CLEAR     \
---ringver-color=$VERIFYING   \
-\
---insidewrong-color=$CLEAR   \
---ringwrong-color=$WRONG     \
-\
---inside-color=$BLANK        \
---ring-color=$DEFAULT        \
---line-color=$BLANK          \
---separator-color=$DEFAULT   \
-\
---verif-color=$TEXT          \
---wrong-color=$TEXT          \
---time-color=$TEXT           \
---date-color=$TEXT           \
---layout-color=$TEXT         \
---keyhl-color=$WRONG         \
---bshl-color=$WRONG          \
-\
---screen 1                   \
---blur 5                     \
---clock                      \
---indicator                  \
---time-str="%H:%M:%S"        \
---date-str="%A, %Y-%m-%d"       \
---keylayout 1                \
+	--ignore-empty-password \
+	--show-failed-attempts \
+	--pass-{media,screen}-keys \
+	--color "$BLANK" \
+	--clock \
+	--date-str "%Y-%m-%d" \
+	--radius 100 \
+	--{time,date,layout,verif,wrong,greeter}-font="$FONT" \
+	--{time,date,layout,verif,wrong,greeter}-size=24 \
+	--time-color="$GREEN" \
+	--date-color="$BLUE" \
+	--ring-color="$WHITE" \
+	--keyhl-color="$ORANGE" \
+	--verif-text="Verifying..." \
+	--wrong-text="Wrong!" \
+	--insidever-color="$CLEAR" \
+	--ringver-color="$YELLOW" \
+	--insidewrong-color="$CLEAR" \
+	--ringwrong-color="$RED" \
+	--inside-color="$BLANK" \
+	--line-color="$BLANK" \
+	--verif-color="$YELLOW" \
+	--wrong-color="$RED"
