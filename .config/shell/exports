@@ -37,8 +37,10 @@ export HISTCONTROL='ignoreboth:erasedups'
 
 # Pager settings
 export PAGER=less
-command -v bat &>/dev/null \
-	&& export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+# Using Neovim as the man pager to make copying and following links easier.
+command -v nvim &>/dev/null \
+	&& export MANPAGER='nvim +Man!'
 
 # Enable persistent REPL history for `node`.
 mkdir -p "$XDG_STATE_HOME"/node
