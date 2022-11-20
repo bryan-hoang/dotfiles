@@ -6,6 +6,7 @@ M.disabled = {
 		["<leader>b"] = "",
 		["<TAB>"] = "",
 		["<S-Tab>"] = "",
+		["<leader>fw"] = "",
 	},
 }
 
@@ -91,6 +92,15 @@ M.lsp_format_modifications = {
 M.symbols_outline = {
 	n = {
 		["<Leader>so"] = { "<Cmd>SymbolsOutline<CR>", "Toggle symboles outline." },
+	},
+}
+
+M.telescope = {
+	n = {
+		["<Leader>fg"] = {
+			"<Cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
+			"Live grep",
+		},
 	},
 }
 

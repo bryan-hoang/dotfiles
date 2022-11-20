@@ -51,6 +51,8 @@ local module = {
 	-- My chosen color scheme due to it's more colorful use of tree-sitter's
 	-- integration as well as it's reasonable defaults for diff highlighting.
 	["catppuccin/nvim"] = require("custom.plugins.catppuccin"),
+	-- Find, Filter, Preview, Pick. All lua, all the time.
+	["nvim-telescope/telescope.nvim"] = require("custom.plugins.telescope"),
 }
 
 local is_os_unix = string.sub(package.config, 1, 1) == "/"
