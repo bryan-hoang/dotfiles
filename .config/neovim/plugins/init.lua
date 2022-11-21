@@ -53,6 +53,8 @@ local module = {
 	["catppuccin/nvim"] = require("custom.plugins.catppuccin"),
 	-- Find, Filter, Preview, Pick. All lua, all the time.
 	["nvim-telescope/telescope.nvim"] = require("custom.plugins.telescope"),
+	-- Make your nvim window separators colorful.
+	["nvim-zh/colorful-winsep.nvim"] = require("custom.plugins.colorful_winsep"),
 }
 
 local is_os_unix = string.sub(package.config, 1, 1) == "/"
