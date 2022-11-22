@@ -162,4 +162,6 @@ does_program_exist broot && eval "$(broot --print-shell-function bash)"
 if [[ -f "${XDG_CONFIG_HOME:-${HOME}/.config}/asdf-direnv/bashrc" ]]; then
 	# shellcheck disable=SC2250
 	source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
+elif does_program_exist direnv; then
+	eval "$(direnv hook bash)"
 fi
