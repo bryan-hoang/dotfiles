@@ -850,11 +850,6 @@ download_alacritty_config_template() {
 		"${HOME}/.config/alacritty/alacritty-template.yml"
 }
 
-# A shortcut for asdf managed direnv.
-direnv() {
-	asdf exec direnv "$@"
-}
-
 init_direnv() {
 	cat >|.envrc <<EOF
 #!/usr/bin/env sh
