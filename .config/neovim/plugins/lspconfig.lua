@@ -63,6 +63,13 @@ return {
 						},
 					},
 				}
+
+				-- Installing ltex-ls through Mason doesn't install the .bat file.local bin_name = 'ltex-ls'
+				local bin_name = "ltex-ls"
+				if vim.fn.has("win32") == 1 then
+					bin_name = bin_name .. ".cmd"
+				end
+				setup_config["cmd"] = { bin_name }
 			end
 
 			setup_config["on_attach"] = on_attach
