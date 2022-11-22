@@ -18,6 +18,7 @@ return {
 			"yamlls",
 			"rome",
 			"emmet_ls",
+			"powershell_es",
 
 			-- TOML
 			"taplo",
@@ -70,6 +71,9 @@ return {
 					bin_name = bin_name .. ".cmd"
 				end
 				setup_config["cmd"] = { bin_name }
+			elseif lsp == "powershell_es" then
+				setup_config["bundle_path"] = vim.fn.stdpath("data")
+					.. "/mason/packages/powershell-editor-services"
 			end
 
 			setup_config["on_attach"] = on_attach
