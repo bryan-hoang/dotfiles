@@ -42,5 +42,11 @@ $env:KOMOREBI_CONFIG_HOME = "$env:USERPROFILE\.config\komorebi"
 
 #endregion
 
+# Hooking zoxide.
+Invoke-Expression (& {
+	$hook = if ($PSVersionTable.PSVersion.Major -lt 6) { 'prompt' } else { 'pwd' }
+	(zoxide init --hook $hook powershell | Out-String)
+})
+
 # Initializing Starship prompt.
 Invoke-Expression (&starship init powershell)
