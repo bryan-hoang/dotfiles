@@ -8,17 +8,20 @@
 
 # Unofficial 'strict mode'.
 set -euo pipefail
-# Adding ':' to make it easier to convert ':' delimited lists into arrays.
-IFS=$':\n\t'
 
-declare -ra proj_dirs=(
+# TODO: Recursively find project directories under ~/src/git*`.
+
+# Machine specific project directories. e.g., exported in
+# `$XDG_CONFIG_HOME/shell/extra`.
+# Source: https://stackoverflow.com/a/45201229
+# shellcheck disable=2153
+readarray -td ':' proj_dirs < <(awk '{ gsub(/, /,"\0"); print; }' <<<"$PROJ_DIRS: ")
+unset 'proj_dirs[-1]'
+proj_dirs+=(
 	# e.g., neovim configs.
 	"$XDG_CONFIG_HOME"
 	# Local projects not tracked by git.
 	~/src/localhost
-	# Machine specific project directories. e.g., exported in
-	# `$XDG_CONFIG_HOME/shell/extra`.
-	"${PROJ_DIRS[@]}"
 )
 
 if [[ $# -eq 1 ]]; then
