@@ -1321,3 +1321,10 @@ trim_trailing_whitespace() {
 search() {
 	xdg-open https://duckduckgo.com/\?q="$*"
 }
+
+if asdf list direnv &>/dev/null; then
+	# A shortcut for asdf managed direnv.
+	direnv() {
+		asdf exec direnv "$@"
+	}
+fi
