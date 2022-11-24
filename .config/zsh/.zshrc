@@ -164,6 +164,11 @@ unsetopt SHARE_HISTORY
 # the editing buffer.
 unsetopt HIST_VERIFY
 
+# Causes field splitting to be performed on unquoted parameter expansions.  Note
+# that this option has nothing to do with word splitting.  (See zshexpn(1).)
+# More bash-like.
+setopt shwordsplit
+
 # shellcheck disable=SC1091
 [[ -s "${HOME}"/.asdf/plugins/java/set-java-home.zsh ]] \
 	&& . "${HOME}"/.asdf/plugins/java/set-java-home.zsh
