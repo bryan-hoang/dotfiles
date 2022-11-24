@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # shellcheck disable=SC1091
-. "$XDG_CONFIG_HOME"/shell/common
+. "$XDG_CONFIG_HOME"/shell/common.sh
 
 # Setting shell options
 

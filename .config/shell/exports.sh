@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-#
-# vi: set filetype=sh
 
 export XDG_LOCAL_HOME="$HOME"/.local
 export XDG_BIN_HOME="$XDG_LOCAL_HOME"/bin

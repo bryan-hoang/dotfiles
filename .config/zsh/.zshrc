@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-#
-# vi: set filetype=sh
 
 # Uncomment the following line to disable auto-setting terminal title.
 # shellcheck disable=SC2034
@@ -49,7 +47,7 @@ done
 
 # Loaded after framework is loaded to preserve personal aliases.
 # shellcheck disable=SC1091
-. "${XDG_CONFIG_HOME}"/shell/common
+. "${XDG_CONFIG_HOME}"/shell/common.sh
 
 # region Completions
 
