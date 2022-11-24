@@ -10,6 +10,13 @@ M.disabled = {
 	},
 }
 
+-- Disable jumping to keyword definition to avoid conflicting with opening
+-- hyperlinks in Wezterm.
+vim.api.nvim_set_keymap("", "<C-LeftMouse>", "", {})
+-- Disable with 'bypass_mouse_reporting_modifiers' key from Wezterm, not sure
+-- why the undocumented behaviour occurs.
+vim.api.nvim_set_keymap("", "<C-S-LeftMouse>", "", {})
+
 M.tabufline = {
 	n = {
 		-- cycle through buffers

@@ -1,5 +1,6 @@
 local wezterm = require("wezterm")
 
+local act = wezterm.action
 local is_os_unix = string.sub(package.config, 1, 1) == "/"
 local zsh = { "zsh", "-i" }
 local bash = { "bash", "-i" }
@@ -49,16 +50,61 @@ return {
 	initial_cols = 100,
 	selection_word_boundary = " \t\n{}[]()\"'`",
 	mouse_bindings = {
+		-- Change the default click behavior so that it only selects
+		-- text and doesn't open hyperlinks
 		{
-			-- Ctrl-click will open the link under the mouse cursor.
-			event = {
-				Up = {
-					streak = 1,
-					button = "Left",
-				},
-			},
+			event = { Up = { streak = 1, button = "Left" } },
+			mods = "NONE",
+			action = act.CompleteSelection("PrimarySelection"),
+		},
+
+		-- and make CTRL-Click open hyperlinks
+		{
+			event = { Up = { streak = 1, button = "Left" } },
 			mods = "CTRL",
-			action = "OpenLinkAtMouseCursor",
+			action = act.OpenLinkAtMouseCursor,
+		},
+	},
+	hyperlink_rules = {
+		-- Linkify things that look like URLs and the host has a TLD name.
+		-- Compiled-in default. Used if you don't specify any hyperlink_rules.
+		-- FIXME: Handled hyperlinks in HTML anchor elements.
+		{
+			regex = [[\b\w+://[\w.-]+\.[a-z]{2,15}\S*\b]],
+			format = "$1",
+		},
+		-- linkify email addresses
+		-- Compiled-in default. Used if you don't specify any hyperlink_rules.
+		{
+			regex = [[\b\w+@[\w-]+(\.[\w-]+)+\b]],
+			format = "mailto:$0",
+		},
+		-- file:// URI
+		-- Compiled-in default. Used if you don't specify any hyperlink_rules.
+		{
+			regex = [[\bfile://\S*\b]],
+			format = "$0",
+		},
+		-- Linkify things that look like URLs with numeric addresses as hosts.
+		-- E.g. http://127.0.0.1:8000 for a local development server,
+		-- or http://192.168.1.1 for the web interface of many routers.
+		{
+			regex = [[\b\w+://(?:[\d]{1,3}\.){3}[\d]{1,3}\S*\b]],
+			format = "$0",
+		},
+		-- Linkify URLs like http://[::1]:5000/ for local development. e.g., from
+		-- `dufs`.
+		{
+			regex = [[\b\w+://\[::\d\]\S*\b]],
+			format = "$0",
+		},
+		-- Make username/project paths clickable. This implies paths like the following are for GitHub.
+		-- ( "nvim-treesitter/nvim-treesitter" | wbthomason/packer.nvim | wez/wezterm | "wez/wezterm.git" )
+		-- As long as a full URL hyperlink regex exists above this it should not match a full URL to
+		-- GitHub or GitLab / BitBucket (i.e. https://gitlab.com/user/project.git is still a whole clickable URL)
+		{
+			regex = [[["]?([\w\d]{1}[-\w\d]+)(/){1}([-\w\d\.]+)["]?]],
+			format = "https://www.github.com/$1/$3",
 		},
 	},
 	enable_kitty_keyboard = true,

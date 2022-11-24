@@ -62,8 +62,9 @@ opt.breakindent = true
 opt.linebreak = true
 opt.showbreak = "↪ "
 
--- Show whitespace characters.
-opt.listchars = { tab = "->", space = "·", trail = "·" }
+-- Show certain whitespace characters. Don't show all space characters,
+-- otherwise messes with wezterm's hyperlink detection.
+opt.listchars = { tab = "->", lead = "·", trail = "·", nbsp = "+" }
 opt.list = true
 
 -- https://vim.fandom.com/wiki/Learn_to_use_help#Comments
