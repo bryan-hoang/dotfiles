@@ -4,6 +4,7 @@ return {
 	override_options = {
 		ensure_installed = {
 			"editorconfig-checker",
+			"powershell-editor-services",
 
 			-- lua stuff
 			"lua-language-server",

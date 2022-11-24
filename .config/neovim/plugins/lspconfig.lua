@@ -19,6 +19,7 @@ return {
 			"rome",
 			"emmet_ls",
 			"powershell_es",
+			"html",
 
 			-- TOML
 			"taplo",
