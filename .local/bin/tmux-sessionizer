@@ -4,25 +4,52 @@
 # projects with their own individual tmux sessions. Give it a keybinding in a
 # shell to streamline its use.
 #
-# Inspired by ThePrimeagen.
+# Inspired by ThePrimeagen's dotfiles.
 
 # Unofficial 'strict mode'.
 set -euo pipefail
 
-# TODO: Recursively find project directories under ~/src/git*`.
+while getopts 'd' option; do
+	case "$option" in
+		d)
+			# Print what directories will be searched.
+			debug='true'
+			;;
+		*)
+			exit 1
+			;;
+	esac
+done
 
-# Machine specific project directories. e.g., exported in
-# `$XDG_CONFIG_HOME/shell/extra`.
-# Source: https://stackoverflow.com/a/45201229
-# shellcheck disable=2153
-readarray -td ':' proj_dirs < <(awk '{ gsub(/, /,"\0"); print; }' <<<"$PROJ_DIRS: ")
-unset 'proj_dirs[-1]'
-proj_dirs+=(
+shift $((OPTIND - 1))
+
+# List of project directories that we want to make a session in tmux for.
+declare -a proj_dirs=(
 	# e.g., neovim configs.
 	"$XDG_CONFIG_HOME"
 	# Local projects not tracked by git.
 	~/src/localhost
 )
+
+# Find git projects, e.g., `~/src/github.com/foo-bar/`
+mapfile -t -O "${#proj_dirs[@]}" proj_dirs < <(
+	fd --type d --exact-depth 2 --search-path ~/src --exclude localhost
+)
+
+# Read `PROJ_DIRS` for machine specific project directories. e.g., `/mnt/...`
+# Converting `:` delimited string into an array:
+# https://stackoverflow.com/a/45201229
+# shellcheck disable=2153
+readarray -t -d ':' -O "${#proj_dirs[@]}" proj_dirs < <(
+	awk '{ gsub(/, /,"\0"); print; }' <<<"$PROJ_DIRS: "
+)
+unset 'proj_dirs[-1]'
+
+if [[ -n ${debug:-} ]]; then
+	echo 'Directories to search:'
+	printf '%s\n' "${proj_dirs[@]}"
+	exit
+fi
 
 if [[ $# -eq 1 ]]; then
 	selected=$(realpath --no-symlinks "$1")
@@ -56,4 +83,5 @@ if ! tmux has-session -t="$selected_name" 2>/dev/null; then
 	tmux new-session -ds "$selected_name" -c "$selected"
 fi
 
+# We're in tmux and can switch to an existing session.
 tmux switch-client -t "$selected_name"
