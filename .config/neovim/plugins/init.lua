@@ -55,6 +55,7 @@ local module = {
 	["nvim-telescope/telescope.nvim"] = require("custom.plugins.telescope"),
 	-- Make your nvim window separators colorful.
 	["nvim-zh/colorful-winsep.nvim"] = require("custom.plugins.colorful_winsep"),
+	["andweeb/presence.nvim"] = require("custom.plugins.presence"),
 }
 
 local is_os_unix = string.sub(package.config, 1, 1) == "/"
