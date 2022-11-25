@@ -40,10 +40,13 @@ mapfile -t -O "${#proj_dirs[@]}" proj_dirs < <(
 # Converting `:` delimited string into an array:
 # https://stackoverflow.com/a/45201229
 # shellcheck disable=2153
-readarray -t -d ':' -O "${#proj_dirs[@]}" proj_dirs < <(
-	awk '{ gsub(/, /,"\0"); print; }' <<<"$PROJ_DIRS: "
-)
-unset 'proj_dirs[-1]'
+if [[ -n ${PROJ_DIRS:-} ]]; then
+	readarray -t -d ':' -O "${#proj_dirs[@]}" proj_dirs < <(
+		awk '{ gsub(/, /,"\0"); print; }' <<<"$PROJ_DIRS: "
+	)
+
+	unset 'proj_dirs[-1]'
+fi
 
 if [[ -n ${debug:-} ]]; then
 	echo 'Directories to search:'
