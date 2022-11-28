@@ -35,31 +35,31 @@ custom_plugins=(
 	pyvenv-activate
 )
 
-declare ZSH_CUSTOM_PLUGINS_DIR="${ZSH}"/custom/plugins
+declare ZSH_CUSTOM_PLUGINS_DIR="$ZSH"/custom/plugins
 
 for plugin in "${custom_plugins[@]}"; do
-	[[ -d "${ZSH_CUSTOM_PLUGINS_DIR}"/"${plugin}" ]] \
-		&& plugins+=("${plugin}")
+	[[ -d "$ZSH_CUSTOM_PLUGINS_DIR"/"$plugin" ]] \
+		&& plugins+=("$plugin")
 done
 
 # shellcheck disable=SC1091
-[[ -s "${ZSH}"/oh-my-zsh.sh ]] && . "${ZSH}"/oh-my-zsh.sh
+[[ -s "$ZSH"/oh-my-zsh.sh ]] && . "$ZSH"/oh-my-zsh.sh
 
 # Loaded after framework is loaded to preserve personal aliases.
 # shellcheck disable=SC1091
-. "${XDG_CONFIG_HOME}"/shell/common.sh
+. "$XDG_CONFIG_HOME"/shell/common.sh
 
 # region Completions
 
-mkdir -p "${XDG_CACHE_HOME}"/zsh
-compinit -d "${XDG_CACHE_HOME}"/zsh/zcompdump-"${ZSH_VERSION}"
-zstyle ':completion:*' cache-path "${XDG_CACHE_HOME}"/zsh/zcompcache
+mkdir -p "$XDG_CACHE_HOME"/zsh
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
 
 does_program_exist compdef && compdef dot='git'
 
 # Zsh completions plugin.
-fpath+=${ZSH_CUSTOM_PLUGINS_DIR}/zsh-completions/src
-fpath+=${ZSH_USER_FPATH}
+fpath+=$ZSH_CUSTOM_PLUGINS_DIR/zsh-completions/src
+fpath+=$ZSH_USER_FPATH
 
 # For enabling autocompletion of privileged environments in privileged commands
 # (e.g. if you complete a command starting with sudo, completion scripts will
@@ -72,12 +72,13 @@ zstyle ':completion::complete:*' gain-privileges 1
 zstyle ':completion:*' rehash true
 
 # tmuxinator completions.
-[[ -s "${ZSH_USER_FPATH}"/_tmuxinator ]] \
+[[ -s "$ZSH_USER_FPATH"/_tmuxinator ]] \
 	|| wget https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh \
-		-O "${ZSH_USER_FPATH}"/_tmuxinator
+		-O "$ZSH_USER_FPATH"/_tmuxinator
 
 # Enable user specific completions.
-autoload -U compinit; compinit
+autoload -U compinit
+compinit
 
 # endregion Completions
 
@@ -170,8 +171,8 @@ unsetopt HIST_VERIFY
 setopt shwordsplit
 
 # shellcheck disable=SC1091
-[[ -s "${HOME}"/.asdf/plugins/java/set-java-home.zsh ]] \
-	&& . "${HOME}"/.asdf/plugins/java/set-java-home.zsh
+[[ -s "$HOME"/.asdf/plugins/java/set-java-home.zsh ]] \
+	&& . "$HOME"/.asdf/plugins/java/set-java-home.zsh
 
 does_program_exist starship && eval "$(starship init zsh)"
 does_program_exist mcfly && eval "$(mcfly init zsh)"
@@ -179,8 +180,8 @@ does_program_exist navi && eval "$(navi widget zsh)"
 does_program_exist zoxide && eval "$(zoxide init zsh)"
 does_program_exist pipenv \
 	&& generate_completions zsh pipenv env _PIPENV_COMPLETE=zsh_source pipenv
-does_program_exist kubectl && \
-	generate_completions zsh kubectl kubectl completion zsh
+does_program_exist kubectl \
+	&& generate_completions zsh kubectl kubectl completion zsh
 does_program_exist broot && eval "$(broot --print-shell-function zsh)"
 
 # shellcheck disable=SC1091
@@ -191,13 +192,13 @@ fi
 
 # tabtab source for packages (e.g., pnpm).
 # shellcheck disable=SC1091
-[[ -f "${HOME}"/.config/tabtab/zsh/__tabtab.zsh ]] \
-	&& . "${HOME}"/.config/tabtab/zsh/__tabtab.zsh
+[[ -f "$HOME"/.config/tabtab/zsh/__tabtab.zsh ]] \
+	&& . "$HOME"/.config/tabtab/zsh/__tabtab.zsh
 
 # Enable shell command completion for gcloud.
-if [ -f "${XDG_DATA_HOME}"/google-cloud-sdk/completion.zsh.inc ]; then
+if [ -f "$XDG_DATA_HOME"/google-cloud-sdk/completion.zsh.inc ]; then
 	# shellcheck disable=SC1091
-	. "${XDG_DATA_HOME}"/google-cloud-sdk/completion.zsh.inc
+	. "$XDG_DATA_HOME"/google-cloud-sdk/completion.zsh.inc
 fi
 
 # Alt-s makes switching between tmux workspaces of projects easier. Inspired by
