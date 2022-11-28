@@ -1,36 +1,49 @@
 #!/usr/bin/env bash
 
-FONT="FiraCode Nerd Font Mono"
-BLANK='#00000000'
-CLEAR='#ffffff22'
-RED='#FF5555'
-GREEN='#50FA7B'
-BLUE='#8BE9FD'
-YELLOW='#F1FA8C'
-ORANGE='#FFB86C'
-WHITE='#F8F8F2'
+readonly FONT="FiraCode Nerd Font Mono"
+
+readonly ALPHA='dd'
+readonly BLANK='#00000000'
+readonly SELECTION='#44475a'
+
+readonly ORANGE='#ffb86c'
+readonly RED='#ff5555'
+readonly MAGENTA='#ff79c6'
+readonly BLUE='#6272a4'
+readonly GREEN='#50fa7b'
 
 i3lock \
-	--ignore-empty-password \
-	--show-failed-attempts \
-	--pass-{media,screen}-keys \
 	--color "$BLANK" \
-	--clock \
-	--date-str "%Y-%m-%d" \
-	--radius 100 \
+	--insidever-color "$SELECTION$ALPHA" \
+	--insidewrong-color "$SELECTION$ALPHA" \
+	--inside-color "$SELECTION$ALPHA" \
+	--ringver-color "$GREEN$ALPHA" \
+	--ringwrong-color "$RED$ALPHA" \
+	--ringver-color "$GREEN$ALPHA" \
+	--ringwrong-color "$RED$ALPHA" \
+	--ring-color "$BLUE$ALPHA" \
+	--keyhl-color "$MAGENTA$ALPHA" \
+	--bshl-color "$ORANGE$ALPHA" \
+	--separator-color "$SELECTION$ALPHA" \
+	--verif-color "$GREEN" \
+	--wrong-color "$RED" \
+	--layout-color "$BLUE" \
+	--date-color "$BLUE" \
+	--time-color "$BLUE" \
+	--line-uses-ring \
 	--{time,date,layout,verif,wrong,greeter}-font="$FONT" \
 	--{time,date,layout,verif,wrong,greeter}-size=24 \
-	--time-color="$GREEN" \
-	--date-color="$BLUE" \
-	--ring-color="$WHITE" \
-	--keyhl-color="$ORANGE" \
-	--verif-text="Verifying..." \
-	--wrong-text="Wrong!" \
-	--insidever-color="$CLEAR" \
-	--ringver-color="$YELLOW" \
-	--insidewrong-color="$CLEAR" \
-	--ringwrong-color="$RED" \
-	--inside-color="$BLANK" \
-	--line-color="$BLANK" \
-	--verif-color="$YELLOW" \
-	--wrong-color="$RED"
+	--time-str "%H:%M:%S" \
+	--date-str "%Y-%m-%d" \
+	--verif-text "Checking..." \
+	--wrong-text "Incorrect!" \
+	--noinput "No Input" \
+	--lock-text "Locking..." \
+	--lockfailed "Lock Failed" \
+	--radius 120 \
+	--ring-width 10 \
+	--ignore-empty-password \
+	--show-failed-attempts \
+	--pass-{media,screen,volume}-keys \
+	--clock \
+	--indicator
