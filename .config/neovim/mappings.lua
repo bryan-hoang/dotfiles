@@ -105,7 +105,7 @@ M.symbols_outline = {
 M.telescope = {
 	n = {
 		["<Leader>fg"] = {
-			"<Cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
+			"<Cmd>Telescope live_grep_args<CR>",
 			"Live grep",
 		},
 	},

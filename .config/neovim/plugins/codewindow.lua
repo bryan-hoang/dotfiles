@@ -1,4 +1,5 @@
 return {
+	keys = "<Leader>mm",
 	config = function()
 		local codewindow = require("codewindow")
 		codewindow.setup()

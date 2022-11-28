@@ -1,5 +1,5 @@
 return {
-	requires = { "mfussenegger/nvim-dap" },
+	after = "nvim-dap",
 	config = function()
 		local dap = require("dap")
 		dap.configurations.lua = {

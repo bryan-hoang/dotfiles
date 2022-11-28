@@ -1,4 +1,5 @@
 return {
+	event = { "BufNewFile", "BufRead" },
 	config = function()
 		local presence = require("presence")
 		presence:setup({

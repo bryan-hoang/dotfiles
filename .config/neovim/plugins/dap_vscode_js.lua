@@ -1,5 +1,5 @@
 return {
-	requires = { "mfussenegger/nvim-dap" },
+	after = "nvim-dap",
 	config = function()
 		local dap_vscode_js = require("dap-vscode-js")
 		local dap = require("dap")

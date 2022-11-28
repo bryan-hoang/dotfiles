@@ -2,6 +2,7 @@ return {
 	run = function()
 		vim.fn["mkdp#util#install"]()
 	end,
+	ft = "markdown",
 	-- Preview markdown over SSH.
 	config = function()
 		-- https://github.com/iamcco/markdown-preview.nvim/pull/9

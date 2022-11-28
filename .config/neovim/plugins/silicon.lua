@@ -1,5 +1,6 @@
 return {
 	run = "./install.sh",
+	cmd = { "Silicon" },
 	config = function()
 		require("silicon").setup({
 			tab_width = 2,

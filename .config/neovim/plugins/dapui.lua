@@ -4,9 +4,7 @@
 local has_setup_been_called = false
 
 return {
-	requires = {
-		"mfussenegger/nvim-dap",
-	},
+	after = "nvim-dap",
 	config = function()
 		local dapui = require("dapui")
 		local dap = require("dap")

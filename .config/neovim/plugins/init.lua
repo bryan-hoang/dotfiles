@@ -1,10 +1,12 @@
 local module = {
 	-- Enables EditorConfig support.
-	["gpanders/editorconfig.nvim"] = {},
+	["gpanders/editorconfig.nvim"] = require('custom.plugins.editorconfig'),
 	-- Syntax highlighting for Human readable JSON.
-	["hjson/vim-hjson"] = {},
+	["hjson/vim-hjson"] = require("custom.plugins.hjson"),
 	-- Format only changed lines of code (from VCS's POV).
-	["joechrisellis/lsp-format-modifications.nvim"] = {},
+	["joechrisellis/lsp-format-modifications.nvim"] = require(
+		"custom.plugins.lsp_format_modifications"
+	),
 	-- Extend NvChad's built-in lsp-config support by enabling language servers.
 	["neovim/nvim-lspconfig"] = require("custom.plugins.lspconfig"),
 	-- Customize default items installed.

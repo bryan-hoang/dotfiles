@@ -1,4 +1,10 @@
 return {
+	-- https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
+	run = function()
+		local ts_update =
+			require("nvim-treesitter.install").update({ with_sync = true })
+		ts_update()
+	end,
 	override_options = {
 		-- List of parsers to ignore installing (for "all").
 		--
@@ -9,10 +15,5 @@ return {
 		--
 		-- A list of parser names, or "all".
 		ensure_installed = "all",
-		run = function()
-			local ts_update =
-				require("nvim-treesitter.install").update({ with_sync = true })
-			ts_update()
-		end,
 	},
 }
