@@ -50,8 +50,11 @@ return {
 			-- shell
 			b.formatting.shfmt.with({
 				extra_args = { "-ci", "-bn" },
+				filetypes = { "sh", "zsh" },
 			}),
-			b.formatting.shellharden,
+			b.formatting.shellharden.with({
+				filetypes = { "sh", "zsh" },
+			}),
 
 			-- toml
 			b.formatting.taplo,

@@ -75,6 +75,8 @@ return {
 			elseif lsp == "powershell_es" then
 				setup_config["bundle_path"] = vim.fn.stdpath("data")
 					.. "/mason/packages/powershell-editor-services"
+			elseif lsp == "bashls" then
+				setup_config["filetypes"] = { "sh", "zsh" }
 			end
 
 			setup_config["on_attach"] = on_attach
