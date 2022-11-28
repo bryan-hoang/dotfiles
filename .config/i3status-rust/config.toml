@@ -58,6 +58,9 @@ format = "$combo.rot-str(16) $play "
 block = "bluetooth"
 # WH-1000XM5
 mac = "88:C9:E8:00:D0:F9"
+[block.theme_overrides]
+idle_bg = "#8BE9FD"
+idle_fg = "#21222C"
 
 [[block]]
 block = "sound"
@@ -81,7 +84,6 @@ warning = ["mention", "review_requested"]
 [[block]]
 block = "time"
 format = "$icon %a %F %R "
-
 [block.theme_overrides]
 idle_bg = "#BD93F9"
 idle_fg = "#21222C"
