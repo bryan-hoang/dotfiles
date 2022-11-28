@@ -202,5 +202,7 @@ if [ -f "$XDG_DATA_HOME"/google-cloud-sdk/completion.zsh.inc ]; then
 fi
 
 # Alt-s makes switching between tmux workspaces of projects easier. Inspired by
-# ThePrimeagen.
-bindkey -s '^[s' 'tmux-sessionizer\n'
+# ThePrimeagen. Wrap the command in a custom widget so that the command isn't
+# typed out.
+zle -N sessionize_in_tmux
+bindkey '^[s' sessionize_in_tmux

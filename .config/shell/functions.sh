@@ -1328,3 +1328,105 @@ if asdf list direnv &>/dev/null; then
 		asdf exec direnv "$@"
 	}
 fi
+
+# Fuzzy finds folders to open tmux sessions in. Makes it easy to switch between
+# projects with their own individual tmux sessions. Give it a keybinding in a
+# shell to streamline its use.
+#
+# Usage: sessionize_in_tmux [-d] [path]
+#
+# Inspired by ThePrimeagen's dotfiles.
+sessionize_in_tmux() {
+	local debug
+	while getopts 'd' option; do
+		case "$option" in
+			d)
+				# Print what directories will be searched.
+				debug='true'
+				;;
+			*)
+				return 1
+				;;
+		esac
+	done
+
+	readonly debug
+
+	shift $((OPTIND - 1))
+
+	local selected
+	# List of project directories that we want to make a session in tmux for.
+	local -a proj_dirs=(
+		# e.g., neovim configs.
+		"$XDG_CONFIG_HOME"
+		# Local projects not tracked by git.
+		~/src/localhost
+	)
+
+	# Find git projects, e.g., `~/src/github.com/foo-bar/`
+	while IFS='' read -r line; do proj_dirs+=("$line"); done < <(
+		fd --type d --exact-depth 2 --search-path ~/src --exclude localhost
+	)
+
+	# Read `PROJ_DIRS` for machine specific project directories. e.g., `/mnt/...`
+	# Converting `:` delimited string into an array:
+	# https://stackoverflow.com/a/45201229
+	# shellcheck disable=2153
+	if [[ -n ${PROJ_DIRS:-} ]]; then
+		readarray -t -d ':' -O "${#proj_dirs[@]}" proj_dirs < <(
+			awk '{ gsub(/, /,"\0"); print; }' <<<"$PROJ_DIRS: "
+		)
+
+		unset 'proj_dirs[-1]'
+	fi
+
+	readonly proj_dirs
+
+	if [[ -n ${debug:-} ]]; then
+		echo 'Directories to search:'
+		printf '%s\n' "${proj_dirs[@]}"
+		return
+	fi
+
+	if [[ $# -eq 1 ]]; then
+		selected=$(realpath --no-symlinks "$1")
+	else
+		selected=$(find "${proj_dirs[@]}" -mindepth 1 -maxdepth 1 -type d | fzf)
+	fi
+
+	readonly selected
+
+	if [[ -z $selected ]]; then
+		return 0
+	fi
+
+	local selected_name
+	selected_name=$(basename "$selected" | tr . _)
+	readonly selected_name
+	local tmux_running
+	tmux_running=$(pgrep tmux || true)
+	readonly tmux_running
+
+	# If tmux is not running, create a new session first.
+	if [[ -z $tmux_running ]]; then
+		tmux new-session -s "$selected_name" -c "$selected"
+		return 0
+	fi
+
+	# If there is at least a tmux server running and if you're not inside tmux, then
+	# either attach to the session or create it:
+	if [[ -z "${TMUX:-}" ]]; then
+		tmux new-session -A -s "$selected_name" -c "$selected"
+		return 0
+	fi
+
+	# If we're in tmux and the session doesn't exist, create it before switching to
+	# it.
+	if ! tmux has-session -t="$selected_name" 2>/dev/null; then
+		tmux new-session -ds "$selected_name" -c "$selected"
+	fi
+
+	# We're in tmux and can switch to an existing session.
+	tmux switch-client -t "$selected_name"
+
+}
