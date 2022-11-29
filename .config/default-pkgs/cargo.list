@@ -35,6 +35,8 @@ trashy
 viu
 # A jq clone focussed on correctness, speed, and simplicity.
 jaq
+# Executes commands in response to file modifications.
+watchexec-cli
 # Create beautiful image of your source code.
 # silicon
 # An over-engineered rewrite of pipes.sh in Rust.
@@ -51,8 +53,6 @@ hyperfine
 # rga: ripgrep, but also search in PDFs, E-Books, Office documents, zip,
 # tar.gz, etc.
 # ripgrep_all --locked
-# Executes commands in response to file modifications.
-# watchexec-cli
 # An interactive cheatsheet tool for the command-line.
 # navi --locked
 # A command-line DNS client.
