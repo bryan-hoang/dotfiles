@@ -1,5 +1,5 @@
 return {
-	keys = "<F5>",
+	cmd = { "Dap*" },
 	config = function()
 		local dap = require("dap")
 
