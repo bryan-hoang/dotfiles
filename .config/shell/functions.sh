@@ -1401,30 +1401,35 @@ sessionize_in_tmux() {
 	local selected_name
 	selected_name=$(basename "$selected" | tr . _)
 	readonly selected_name
-	local tmux_running
-	tmux_running=$(pgrep tmux || true)
-	readonly tmux_running
+
+	local is_tmux_running
+	is_tmux_running=$(pgrep tmux || true)
+	readonly is_tmux_running
+
+	# https://gist.github.com/mooz/4175464
 
 	# If tmux is not running, create a new session first.
-	if [[ -z $tmux_running ]]; then
-		tmux new-session -s "$selected_name" -c "$selected"
+	if [[ -z $is_tmux_running ]]; then
+		BUFFER="tmux new-session -s $selected_name -c $selected"
+		zle accept-line
 		return 0
 	fi
 
 	# If there is at least a tmux server running and if you're not inside tmux, then
 	# either attach to the session or create it:
 	if [[ -z "${TMUX:-}" ]]; then
-		tmux new-session -A -s "$selected_name" -c "$selected"
+		BUFFER="tmux new-session -A -s $selected_name -c $selected"
+		zle accept-line
 		return 0
 	fi
 
 	# If we're in tmux and the session doesn't exist, create it before switching to
 	# it.
 	if ! tmux has-session -t="$selected_name" 2>/dev/null; then
-		tmux new-session -ds "$selected_name" -c "$selected"
+		BUFFER="tmux new-session -ds $selected_name -c $selected"
 	fi
 
 	# We're in tmux and can switch to an existing session.
-	tmux switch-client -t "$selected_name"
-
+	BUFFER+="; tmux switch-client -t $selected_name"
+	zle accept-line
 }
