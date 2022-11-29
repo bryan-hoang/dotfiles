@@ -7,6 +7,42 @@ export XDG_STATE_HOME="$XDG_LOCAL_HOME"/state
 export XDG_CONFIG_HOME="$HOME"/.config
 export XDG_CACHE_HOME="$HOME"/.cache
 
+export BUN_INSTALL="$XDG_DATA_HOME"/bun
+export DENO_INSTALL="$XDG_DATA_HOME"/deno
+export PNPM_HOME="$XDG_DATA_HOME"/pnpm
+export CARGO_HOME="$XDG_DATA_HOME"/cargo
+export ASDF_DIR="$HOME"/src/github.com/asdf-vm/asdf
+
+export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+export ASDF_DATA_DIR="$XDG_DATA_HOME"/asdf
+export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME"/asdf/asdfrc
+
+# Searched last
+
+[ -d "$XDG_CONFIG_HOME"/rofi/scripts ] \
+	&& export PATH="$XDG_CONFIG_HOME"/rofi/scripts:"$PATH"
+[ -d "$XDG_DATA_HOME"/google-cloud-sdk/bin ] \
+	&& export PATH="$XDG_DATA_HOME"/google-cloud-sdk/bin:"$PATH"
+# Brew
+[ -s /home/linuxbrew/.linuxbrew/bin/brew ] \
+	&& eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+[ -s "$HOME"/.linuxbrew/bin/brew ] \
+	&& eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
+# JS eCoSyTeM
+[ -d "$BUN_INSTALL"/bin ] \
+	&& export PATH="$BUN_INSTALL"/bin:"$PATH"
+[ -d "$DENO_INSTALL"/bin ] \
+	&& export PATH="$DENO_INSTALL"/bin:"$PATH"
+[ -d "$PNPM_HOME" ] \
+	&& export PATH="$PNPM_HOME":"$PATH"
+# shellcheck disable=SC1091
+[ -s "$CARGO_HOME"/env ] && . "$CARGO_HOME"/env
+[ -d "$ASDF_DIR"/bin ] \
+	&& export PATH="$ASDF_DIR"/bin:"$PATH"
+export PATH="$XDG_BIN_HOME":"$PATH"
+
+# Searched first
+
 export XCURSOR_PATH="$XDG_DATA_HOME"/icons
 export XCURSOR_THEME=Dracula-cursors
 export XCURSOR_DISCOVER=1
@@ -107,12 +143,16 @@ export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME"/python
 
 # https://wiki.archlinux.org/title/XDG_Base_Directory#Specification
 
+. "$HOME"/.zshenv
+export ZSH="$ZDOTDIR"/ohmyzsh
+export ZSH_USER_FPATH="$XDG_DATA_HOME"/zsh/completions
+mkdir -p "$ZSH_USER_FPATH"
+
 mkdir -p "$XDG_STATE_HOME"/shell
 export HISTFILE="$XDG_STATE_HOME"/shell/history
 export TEXMFHOME="$XDG_DATA_HOME"/texmf
 export TEXMFVAR="$XDG_CACHE_HOME"/texlive/texmf-var
 export TEXMFCONFIG="$XDG_CONFIG_HOME"/texlive/texmf-config
-export PNPM_HOME="$XDG_DATA_HOME"/pnpm
 export CONDARC="$XDG_CONFIG_HOME"/conda/condarc
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 chmod 600 "$HOME"/.gnupg/*
@@ -123,21 +163,16 @@ export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
 export RIPGREP_CONFIG_PATH=${XDG_CONFIG_HOME}/ripgrep/config
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME"/starship.toml
 export STARSHIP_CACHE="$XDG_CACHE_HOME"/starship
-mkdir -p "$XDG_CONFIG_HOME"/wakatime
 export WAKATIME_HOME="$XDG_CONFIG_HOME"/wakatime
-mkdir -p "$XDG_STATE_HOME"/mysql
+mkdir -p "$WAKATIME_HOME"
 export MYSQL_HISTFILE="$XDG_STATE_HOME"/mysql/history
-mkdir -p "$XDG_STATE_HOME"/sqlite
+mkdir -p "$XDG_STATE_HOME"/mysql
 export SQLITE_HISTORY=${XDG_STATE_HOME}/sqlite/history
+mkdir -p "$XDG_STATE_HOME"/sqlite
 export WGETRC="$XDG_CONFIG_HOME"/wget/wgetrc
 
 # Separate the repo from the data files to make fixing submodule issues less of
 # a hassle.
-export ASDF_DIR="$HOME"/src/github.com/asdf-vm/asdf
-export ASDF_DATA_DIR="$XDG_DATA_HOME"/asdf
-export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME"/asdf/asdfrc
-export CARGO_HOME="$XDG_DATA_HOME"/cargo
-export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export GTK_RC_FILES="$XDG_CONFIG_HOME"/gtk-1.0/gtkrc
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
@@ -154,23 +189,17 @@ fi
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc.py
 export PYLINTRC="$XDG_CONFIG_HOME"/pylint/pylintrc
-mkdir -p "$XDG_STATE_HOME"/calc
 export CALCHISTFILE="$XDG_STATE_HOME"/calc/history
+mkdir -p "$XDG_STATE_HOME"/calc
 
 # FIXME: Makes login fail :/
 # export XAUTHORITY="${XDG_CACHE_HOME}"/Xauthority
 export ICEAUTHORITY="$XDG_CACHE_HOME"/ICEauthority
-export DENO_INSTALL="$XDG_DATA_HOME"/deno
-export BUN_INSTALL="$XDG_DATA_HOME"/bun
 export KDEHOME="$XDG_CONFIG_HOME"/kde
 export OSH="$XDG_CONFIG_HOME"/oh-my-bash
-. "$HOME"/.zshenv
-export ZSH="$XDG_CONFIG_HOME"/ohmyzsh
-export ZSH_USER_FPATH="$XDG_DATA_HOME"/zsh/completions
-mkdir -p "$ZSH_USER_FPATH"
 export TMUX_PLUGIN_MANAGER_PATH="$XDG_CONFIG_HOME"/tmux/plugins
-mkdir -p "$XDG_DATA_HOME"/wineprefixes
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
+mkdir -p "$XDG_DATA_HOME"/wineprefixes
 
 # Avoid hard coded ~/.osh-update from oh-my-bash.
 export DISABLE_AUTO_UPDATE=true

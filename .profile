@@ -7,9 +7,7 @@
 # The files are located in the bash-doc package.
 
 # shellcheck disable=SC1091
-. "$HOME"/.config/shell/exports.sh
-# shellcheck disable=SC1091
-. "$HOME"/.config/shell/path.sh
+. "$HOME"/.config/shell/env.sh
 
 # https://wiki.archlinux.org/title/Xinit
 if [ "$DISPLAY" != "" ] && [ "${XDG_VTNR:-42}" -le 2 ]; then
