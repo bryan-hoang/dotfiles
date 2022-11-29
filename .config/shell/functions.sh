@@ -1352,7 +1352,6 @@ sessionize_in_tmux() {
 
 	shift $((OPTIND - 1))
 
-	local selected
 	# List of project directories that we want to make a session in tmux for.
 	local -a proj_dirs=(
 		# e.g., neovim configs.
@@ -1386,12 +1385,10 @@ sessionize_in_tmux() {
 		return
 	fi
 
-	if [[ $# -eq 1 ]]; then
-		selected=$(realpath --no-symlinks "$1")
-	else
-		selected=$(find "${proj_dirs[@]}" -mindepth 1 -maxdepth 1 -type d | fzf)
-	fi
-
+	local selected
+	selected=$(find "${proj_dirs[@]}" -mindepth 1 -maxdepth 1 -type d \
+		| cat - <(realpath .) \
+		| fzf)
 	readonly selected
 
 	if [[ -z $selected ]]; then
