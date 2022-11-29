@@ -853,10 +853,8 @@ download_alacritty_config_template() {
 init_direnv() {
 	cat >|.envrc <<EOF
 #!/usr/bin/env sh
-# -*- coding: utf-8 -*-
 
-# To tell \`direnv\` to use asdf to update paths for the project.
-dotenv
+use asdf
 EOF
 	direnv allow
 }
