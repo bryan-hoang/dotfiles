@@ -111,4 +111,17 @@ M.telescope = {
 	},
 }
 
+M.gitsigns = {
+	n = {
+		["<Leader>hs"] = {
+			"<Cmd>Gitsigns stage_hunk<CR>",
+			"Stage hunk.",
+		},
+		["<Leader>hu"] = {
+			"<Cmd>Gitsigns undo_stage_hunk<CR>",
+			"Undo stage hunk.",
+		},
+	},
+}
+
 return M
