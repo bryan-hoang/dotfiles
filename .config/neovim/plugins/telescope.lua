@@ -2,10 +2,8 @@ return {
 	requires = {
 		{
 			"nvim-telescope/telescope-live-grep-args.nvim",
-			cmd = "Telescope",
 		},
 	},
-	after = { "telescope-live-grep-args.nvim" },
 	config = function()
 		require("plugins.configs.telescope")
 		local telescope = require("telescope")
