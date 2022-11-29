@@ -637,7 +637,7 @@ install_poetry() {
 		echo "Installing poetry..."
 		curl -sSL https://install.python-poetry.org | python3 -
 		poetry --version
-		poetry completions zsh >"$ZSH_USER_FPATH"/_poetry
+		poetry completions zsh >|"$ZSH_USER_FPATH"/_poetry
 		if has_sudo; then
 			poetry completions bash \
 				| sudo tee /etc/bash_completion.d/poetry >/dev/null
