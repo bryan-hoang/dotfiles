@@ -59,6 +59,7 @@ does_program_exist compdef && compdef dot='git'
 
 # Zsh completions plugin.
 fpath+=$ZSH_CUSTOM_PLUGINS_DIR/zsh-completions/src
+fpath+=$ASDF_DIR/completions
 fpath+=$ZSH_USER_FPATH
 
 # For enabling autocompletion of privileged environments in privileged commands
