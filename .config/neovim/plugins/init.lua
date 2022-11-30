@@ -1,6 +1,10 @@
 local module = {
+	-- Soothing pastel theme for the high-spirited!
+	-- ["catppuccin/nvim"] = require("custom.plugins.catppuccin"),
+	-- Lua port of the most famous vim colorscheme.
+	["ellisonleao/gruvbox.nvim"] = require("custom.plugins.gruvbox"),
 	-- Enables EditorConfig support.
-	["gpanders/editorconfig.nvim"] = require('custom.plugins.editorconfig'),
+	["gpanders/editorconfig.nvim"] = require("custom.plugins.editorconfig"),
 	-- Syntax highlighting for Human readable JSON.
 	["hjson/vim-hjson"] = require("custom.plugins.hjson"),
 	-- Format only changed lines of code (from VCS's POV).
@@ -50,13 +54,11 @@ local module = {
 	["diegoulloao/nvim-file-location"] = require("custom.plugins.file_location"),
 	-- A fancy, configurable, notification manager for NeoVim.
 	["rcarriga/nvim-notify"] = require("custom.plugins.notify"),
-	-- My chosen color scheme due to it's more colorful use of tree-sitter's
-	-- integration as well as it's reasonable defaults for diff highlighting.
-	["catppuccin/nvim"] = require("custom.plugins.catppuccin"),
 	-- Find, Filter, Preview, Pick. All lua, all the time.
 	["nvim-telescope/telescope.nvim"] = require("custom.plugins.telescope"),
 	-- Make your nvim window separators colorful.
 	["nvim-zh/colorful-winsep.nvim"] = require("custom.plugins.colorful_winsep"),
+	-- Discord Rich Presence for Neovim.
 	["andweeb/presence.nvim"] = require("custom.plugins.presence"),
 }
 
