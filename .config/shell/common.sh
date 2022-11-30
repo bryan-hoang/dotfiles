@@ -50,3 +50,6 @@ export DIRENV_LOG_FORMAT=""
 # redirection operators. This may be overridden when creating output files by
 # using the redirection operator >| instead of >.
 set -o noclobber
+
+# Set tabs in the terminal to differ from the default of 8.
+tabs 2
