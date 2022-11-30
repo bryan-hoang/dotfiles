@@ -1,8 +1,9 @@
 return {
 	tag = "*",
-	-- Need colorscheme's colors set up before applying highlights for conflicts.
-	after = { "catppuccin" },
-	keys = { "]x" },
+	after = {
+		-- Need colorscheme's colors set up before applying highlights for conflicts.
+		"gruvbox.nvim",
+	},
 	config = function()
 		require("git-conflict").setup()
 	end,
