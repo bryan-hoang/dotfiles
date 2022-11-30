@@ -60,6 +60,9 @@ local module = {
 	["nvim-zh/colorful-winsep.nvim"] = require("custom.plugins.colorful_winsep"),
 	-- Discord Rich Presence for Neovim.
 	["andweeb/presence.nvim"] = require("custom.plugins.presence"),
+	-- Single tabpage interface for easily cycling through diffs for all modified
+	-- files for any git rev.
+	["sindrets/diffview.nvim"] = require("custom.plugins.diffview"),
 }
 
 local is_os_unix = string.sub(package.config, 1, 1) == "/"
