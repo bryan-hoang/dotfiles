@@ -1,4 +1,5 @@
 return {
+	after = { "ui" },
 	config = function()
 		require("gruvbox").setup({
 			transparent_mode = true,
