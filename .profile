@@ -10,7 +10,7 @@
 . "$HOME"/.config/shell/env.sh
 
 # https://wiki.archlinux.org/title/Xinit
-if [ "$DISPLAY" != "" ] && [ "${XDG_VTNR:-42}" -le 2 ]; then
+if [ "$DISPLAY" != "" ]; then
 	# Swap Ctrl and Caps Lock.
 	setxkbmap -option ctrl:swapcaps
 
