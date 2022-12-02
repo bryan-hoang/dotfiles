@@ -2,7 +2,7 @@
 	name = Bryan Hoang
 	email = bryan@bryanhoang.dev
 	useConfigOnly = true
-	signingkey = ABE9B748EEAE9E00
+	signingKey = bryan@bryanhoang.dev
 [include]
 	path = src.gitconfig
 	path = ~/src/github.com/dracula/git/config/gitconfig
