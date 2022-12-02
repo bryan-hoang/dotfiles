@@ -76,12 +76,6 @@ block = "battery"
 missing_format = ""
 
 [[block]]
-block = "github"
-hide_if_total_is_zero = true
-info = ["total"]
-warning = ["mention", "review_requested"]
-
-[[block]]
 block = "time"
 format = "$icon %a %F %R "
 [block.theme_overrides]
