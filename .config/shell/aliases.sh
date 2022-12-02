@@ -158,8 +158,8 @@ fi
 alias conventional-changelog='conventional-changelog -p conventionalcommits -n "${XDG_CONFIG_HOME}"/conventional-changelog/config.js'
 alias yarn='yarn --use-yarnrc "${XDG_CONFIG_HOME}"/yarn/config'
 alias sqlite='sqlite3 -init "${XDG_CONFIG_HOME}"/sqlite3/sqliterc'
-mkdir -p "${XDG_STATE_HOME}"/wget
-alias wget='wget --hsts-file="${XDG_STATE_HOME}"/wget/history'
+mkdir -p "${XDG_CACHE_HOME}"/wget
+alias wget='wget --hsts-file="${XDG_CACHE_HOME}"/wget/hsts'
 mkdir -p "${XDG_STATE_HOME}"/units
 alias units='units --history "${XDG_STATE_HOME}"/units/history'
 alias xbindkeys='xbindkeys --file "${XDG_CONFIG_HOME}"/xbindkeys/config'
