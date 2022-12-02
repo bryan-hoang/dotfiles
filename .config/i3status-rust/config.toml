@@ -4,7 +4,7 @@ theme = "dracula"
 
 [theme.overrides]
 # Make powerline separators match height of blocks.
-separator = "<span font='16'></span>"
+separator = "<span></span>"
 idle_bg = "#44475A"
 idle_fg = "#F8F8F2"
 
