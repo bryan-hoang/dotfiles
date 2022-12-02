@@ -77,7 +77,7 @@ missing_format = ""
 
 [[block]]
 block = "time"
-format = "$icon %a %F %R "
+format = " $icon %a %F %R "
 [block.theme_overrides]
 idle_bg = "#BD93F9"
 idle_fg = "#21222C"
