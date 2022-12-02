@@ -124,13 +124,16 @@
 	pager = delta
 [interactive]
 	diffFilter = delta --color-only
+[include]
+	path = ~/src/github.com/dandavison/delta/themes.gitconfig
 [delta]
 	navigate = true
 	syntax-theme = Dracula
 	side-by-side = true
-	hunk-header-style = file line-number syntax
 	tabs = 2
-	hyperlinks = false
+	features = decorations zebra-dark
+[delta "decorations"]
+	hunk-header-style = file line-number syntax
 [diff]
 	# Detect copies as well as renames.
 	renames = copies
@@ -139,6 +142,7 @@
 	# is in effect, reverse diff output also swaps the order of the prefixes:
 	mnemonicPrefix = true
 	algorithm = histogram
+	colormoved = default
 [fetch]
 	# If true, fetch will automatically behave as if the --prune option was given
 	# on the command line. See also remote.<name>.prune and the PRUNING section
