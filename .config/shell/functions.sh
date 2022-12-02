@@ -1104,10 +1104,8 @@ start_ssh_agent() {
 }
 
 start_ssh_keychain() {
-	eval "$(keychain -q --inherit any \
-		--absolute --dir "$XDG_DATA_HOME"/keychain \
-		--eval --agents ssh,gpg --gpg2 ABE9B748EEAE9E00 id_ed25519 \
-		"$@")"
+	eval "$(keychain --eval --quiet --inherit any id_ed25519 \
+		--absolute --dir "$XDG_DATA_HOME"/keychain "$@")"
 }
 
 filter_system_information() {
