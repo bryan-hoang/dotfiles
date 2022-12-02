@@ -1104,7 +1104,7 @@ start_ssh_agent() {
 }
 
 start_ssh_keychain() {
-	eval "$(keychain --eval --quiet --inherit any id_ed25519 \
+	eval "$(keychain --eval --quiet --agents ssh,gpg --inherit any id_ed25519 \
 		--absolute --dir "$XDG_DATA_HOME"/keychain "$@")"
 }
 
