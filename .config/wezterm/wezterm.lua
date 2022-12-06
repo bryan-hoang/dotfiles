@@ -57,7 +57,6 @@ return {
 			mods = "NONE",
 			action = act.CompleteSelection("PrimarySelection"),
 		},
-
 		-- and make CTRL-Click open hyperlinks
 		{
 			event = { Up = { streak = 1, button = "Left" } },
@@ -66,15 +65,15 @@ return {
 		},
 	},
 	hyperlink_rules = {
-		-- Linkify things that look like URLs and the host has a TLD name.
-		-- Compiled-in default. Used if you don't specify any hyperlink_rules.
+		-- Linkify things that look like URLs and the host has a TLD name. e.g.,
+		-- https://example.com/. Compiled-in default. Used if you don't specify any
+		-- hyperlink_rules.
 		-- FIXME: Handled hyperlinks in HTML anchor elements.
 		{
-			regex = [[\b\w+://[\w.-]+\.[a-z]{2,15}\S*\b]],
-			format = "$1",
+			regex = [[\b\w+://[\w.-]+\.[a-z]{2,15}\S*\b/?]],
 			format = "$0",
 		},
-		-- linkify email addresses
+		-- Linkify email addresses (e.g., bryan@bryanhoang.dev)
 		-- Compiled-in default. Used if you don't specify any hyperlink_rules.
 		{
 			regex = [[\b\w+@[\w-]+(\.[\w-]+)+\b]],
@@ -87,16 +86,21 @@ return {
 			format = "$0",
 		},
 		-- Linkify things that look like URLs with numeric addresses as hosts.
-		-- E.g. http://127.0.0.1:8000 for a local development server,
-		-- or http://192.168.1.1 for the web interface of many routers.
+		-- E.g. http://127.0.0.1:8000/ for a local development server,
+		-- or http://192.168.1.1/ for the web interface of many routers.
 		{
-			regex = [[\b\w+://(?:[\d]{1,3}\.){3}[\d]{1,3}\S*\b]],
+			regex = [[\b\w+://(?:[\d]{1,3}\.){3}[\d]{1,3}\S*\b/?]],
 			format = "$0",
 		},
 		-- Linkify URLs like http://[::1]:5000/ for local development. e.g., from
 		-- `dufs`.
 		{
-			regex = [[\b\w+://\[::\d\]\S*\b]],
+			regex = [[\b\w+://\[::\d\]\S*\b/?]],
+			format = "$0",
+		},
+		-- Match http://localhost:1337/.
+		{
+			regex = [[http://localhost:[0-9]+\S*\b/?]],
 			format = "$0",
 		},
 		-- Make username/project paths clickable. This implies paths like the following are for GitHub.
