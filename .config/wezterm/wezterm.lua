@@ -72,6 +72,7 @@ return {
 		{
 			regex = [[\b\w+://[\w.-]+\.[a-z]{2,15}\S*\b]],
 			format = "$1",
+			format = "$0",
 		},
 		-- linkify email addresses
 		-- Compiled-in default. Used if you don't specify any hyperlink_rules.
