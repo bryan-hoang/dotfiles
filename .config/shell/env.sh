@@ -6,6 +6,8 @@ export XDG_DATA_HOME="$XDG_LOCAL_HOME"/share
 export XDG_STATE_HOME="$XDG_LOCAL_HOME"/state
 export XDG_CONFIG_HOME="$HOME"/.config
 export XDG_CACHE_HOME="$HOME"/.cache
+export TMPDIR="$XDG_CACHE_HOME"/tmp
+mkdir -p "$TMPDIR"
 
 export BUN_INSTALL="$XDG_DATA_HOME"/bun
 export DENO_INSTALL="$XDG_DATA_HOME"/deno
@@ -19,25 +21,25 @@ export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME"/asdf/asdfrc
 
 # Searched last
 
-[ -d "$XDG_CONFIG_HOME"/rofi/scripts ] \
+[[ -d "$XDG_CONFIG_HOME"/rofi/scripts ]] \
 	&& export PATH="$XDG_CONFIG_HOME"/rofi/scripts:"$PATH"
-[ -d "$XDG_DATA_HOME"/google-cloud-sdk/bin ] \
+[[ -d "$XDG_DATA_HOME"/google-cloud-sdk/bin ]] \
 	&& export PATH="$XDG_DATA_HOME"/google-cloud-sdk/bin:"$PATH"
 # Brew
-[ -s /home/linuxbrew/.linuxbrew/bin/brew ] \
+[[ -s /home/linuxbrew/.linuxbrew/bin/brew ]] \
 	&& eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-[ -s "$HOME"/.linuxbrew/bin/brew ] \
+[[ -s "$HOME"/.linuxbrew/bin/brew ]] \
 	&& eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
 # JS eCoSyTeM
-[ -d "$BUN_INSTALL"/bin ] \
+[[ -d "$BUN_INSTALL"/bin ]] \
 	&& export PATH="$BUN_INSTALL"/bin:"$PATH"
-[ -d "$DENO_INSTALL"/bin ] \
+[[ -d "$DENO_INSTALL"/bin ]] \
 	&& export PATH="$DENO_INSTALL"/bin:"$PATH"
-[ -d "$PNPM_HOME" ] \
+[[ -d "$PNPM_HOME" ]] \
 	&& export PATH="$PNPM_HOME":"$PATH"
 # shellcheck disable=SC1091
-[ -s "$CARGO_HOME"/env ] && . "$CARGO_HOME"/env
-[ -d "$ASDF_DIR"/bin ] \
+[[ -s "$CARGO_HOME"/env ]] && . "$CARGO_HOME"/env
+[[ -d "$ASDF_DIR"/bin ]] \
 	&& export PATH="$ASDF_DIR"/bin:"$PATH"
 export PATH="$XDG_BIN_HOME":"$PATH"
 
@@ -100,6 +102,7 @@ export LESS='-XFR -x 2'
 
 # Avoid issues with `gpg` as installed via Homebrew.
 # https://stackoverflow.com/a/42265848/96656
+# shellcheck disable=SC2154
 export GPG_TTY=${TTY}
 
 # Hide the "default interactive shell is now zsh" warning on macOS.
@@ -216,6 +219,7 @@ export BASH_COMPLETION_USER_DIR="$XDG_DATA_HOME"/bash-completion
 mkdir -p "$BASH_COMPLETION_USER_DIR"/completions
 export COMPOSER_HOME="$XDG_CONFIG_HOME"/composer
 export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
+# shellcheck disable=SC2154
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export TERMINFO="$XDG_DATA_HOME"/terminfo
 export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
