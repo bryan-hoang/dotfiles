@@ -17,5 +17,4 @@ return {
 			},
 		}
 	end,
-	cond = vim.fn.exists("g:started_by_firenvim") ~= 0,
 }
