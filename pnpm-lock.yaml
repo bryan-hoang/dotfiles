@@ -20,7 +20,7 @@ specifiers:
   lint-staged: 13.1.0
   micromatch: 4.0.5
   plop: 3.1.1
-  prettier: 2.8.0
+  prettier: 2.8.1
   prettier-plugin-erb: 0.4.0
   prettier-plugin-packagejson: 2.3.0
   prettier-plugin-sort-json: 0.0.3
@@ -47,15 +47,15 @@ devDependencies:
   eslint-plugin-jsdoc: 39.6.4_eslint@8.29.0
   eslint-plugin-markdown: 3.0.0_eslint@8.29.0
   eslint-plugin-node: 11.1.0_eslint@8.29.0
-  eslint-plugin-prettier: 4.2.1_nrhoyyjffvfyk4vtlt5destxgm
+  eslint-plugin-prettier: 4.2.1_5dgjrgoi64tgrv3zzn3walur3u
   eslint-plugin-security: 1.5.0
   husky: 8.0.2
   lint-staged: 13.1.0
   plop: 3.1.1
-  prettier: 2.8.0
-  prettier-plugin-erb: 0.4.0_omnhl7quvdxk63ydkyagjgynjy
-  prettier-plugin-packagejson: 2.3.0_prettier@2.8.0
-  prettier-plugin-sort-json: 0.0.3_prettier@2.8.0
+  prettier: 2.8.1
+  prettier-plugin-erb: 0.4.0_svdbeockdmbaucwbh7sx7xbdnq
+  prettier-plugin-packagejson: 2.3.0_prettier@2.8.1
+  prettier-plugin-sort-json: 0.0.3_prettier@2.8.1
   stylelint: 14.15.0
   stylelint-config-prettier-scss: 0.0.1_stylelint@14.15.0
   stylelint-config-standard: 29.0.0_stylelint@14.15.0
@@ -166,7 +166,7 @@ packages:
   /@prettier/plugin-ruby/3.2.2:
     resolution: {integrity: sha512-Vc7jVE39Fgswl517ET4kPtpnoRWE6XTi1Sivd84rZyomYnHYUmvUsEeoOf6tVhzTuIXE5XVQB1YCG2hulrwR3Q==}
     dependencies:
-      prettier: 2.8.0
+      prettier: 2.8.1
     dev: true
 
   /@types/fined/1.1.3:
@@ -1179,7 +1179,7 @@ packages:
       semver: 6.3.0
     dev: true
 
-  /eslint-plugin-prettier/4.2.1_nrhoyyjffvfyk4vtlt5destxgm:
+  /eslint-plugin-prettier/4.2.1_5dgjrgoi64tgrv3zzn3walur3u:
     resolution: {integrity: sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -1192,7 +1192,7 @@ packages:
     dependencies:
       eslint: 8.29.0
       eslint-config-prettier: 8.5.0_eslint@8.29.0
-      prettier: 2.8.0
+      prettier: 2.8.1
       prettier-linter-helpers: 1.0.0
     dev: true
 
@@ -2873,12 +2873,12 @@ packages:
     engines: {node: '>= 0.8.0'}
     dev: true
 
-  /prettier-html-templates/0.1.0_prettier@2.8.0:
+  /prettier-html-templates/0.1.0_prettier@2.8.1:
     resolution: {integrity: sha512-KdLveYzO2kJLiwUAebd5UFeKP8h3OqFhOiLbkgeIuS1WNoCRTyxW4KuyGfbh3F+Rp/2A6mipRxCq2zPi+//pmg==}
     peerDependencies:
       prettier: ^2.0.0
     dependencies:
-      prettier: 2.8.0
+      prettier: 2.8.1
     dev: true
 
   /prettier-linter-helpers/1.0.0:
@@ -2888,18 +2888,18 @@ packages:
       fast-diff: 1.2.0
     dev: true
 
-  /prettier-plugin-erb/0.4.0_omnhl7quvdxk63ydkyagjgynjy:
+  /prettier-plugin-erb/0.4.0_svdbeockdmbaucwbh7sx7xbdnq:
     resolution: {integrity: sha512-5RAdvT5BBf29hfC8GmqiMRFiD5g4BZGZDERZHvM5ouOor2TVT0jM0ntmCzFpS2Q32OkUAGFYsRxXDoYscvToXA==}
     peerDependencies:
       '@prettier/plugin-ruby': ^1.0.0
       prettier: '>=2.0.0 <2.3'
     dependencies:
       '@prettier/plugin-ruby': 3.2.2
-      prettier: 2.8.0
-      prettier-html-templates: 0.1.0_prettier@2.8.0
+      prettier: 2.8.1
+      prettier-html-templates: 0.1.0_prettier@2.8.1
     dev: true
 
-  /prettier-plugin-packagejson/2.3.0_prettier@2.8.0:
+  /prettier-plugin-packagejson/2.3.0_prettier@2.8.1:
     resolution: {integrity: sha512-2SAPMMk1UDkqsB7DifWKcwCm6VC52JXMrzLHfbcQHJRWhRCj9zziOy+s+2XOyPBeyqFqS+A/1IKzOrxKFTo6pw==}
     peerDependencies:
       prettier: '>= 1.16.0'
@@ -2907,22 +2907,22 @@ packages:
       prettier:
         optional: true
     dependencies:
-      prettier: 2.8.0
+      prettier: 2.8.1
       sort-package-json: 1.57.0
     dev: true
 
-  /prettier-plugin-sort-json/0.0.3_prettier@2.8.0:
+  /prettier-plugin-sort-json/0.0.3_prettier@2.8.1:
     resolution: {integrity: sha512-1WLOaeaRJRyVzDmuPif32xRn77+K6J00XIin1O/XuXpD5wy3XX8XyoQH/BSlzwdZ3GpnTOJRyIGXhxDCUb4L9Q==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       prettier: ^2.3.2
     dependencies:
       '@types/prettier': 2.7.0
-      prettier: 2.8.0
+      prettier: 2.8.1
     dev: true
 
-  /prettier/2.8.0:
-    resolution: {integrity: sha512-9Lmg8hTFZKG0Asr/kW9Bp8tJjRVluO8EJQVfY2T7FMw9T5jy4I/Uvx0Rca/XWf50QQ1/SS48+6IJWnrb+2yemA==}
+  /prettier/2.8.1:
+    resolution: {integrity: sha512-lqGoSJBQNJidqCHE80vqZJHWHRFoNYsSpP9AjFhlhi9ODCJA541svILes/+/1GM3VaL/abZi7cpFzOpdR9UPKg==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
