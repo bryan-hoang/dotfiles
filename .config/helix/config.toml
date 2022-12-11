@@ -1,13 +1,15 @@
-theme = "dracula"
+theme = "gruvbox_dark_hard_transparent"
 
 [editor]
 line-number = "relative"
 rulers = [80, 100, 120]
+bufferline = "multiple"
+color-modes = true
 
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"
-select = "underline" 
+select = "underline"
 
 [editor.whitespace]
 render = "all"
@@ -17,3 +19,6 @@ space = "·"
 nbsp = "⍽"
 tab = "→"
 newline = "⏎"
+
+[editor.indent-guides]
+render = true
