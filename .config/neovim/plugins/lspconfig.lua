@@ -9,6 +9,13 @@ return {
 		local capabilities = require("plugins.configs.lspconfig").capabilities
 		local lspconfig = require("lspconfig")
 
+		-- https://github.com/b0o/SchemaStore.nvim/issues/9#issuecomment-1140321123
+		local json_schemas = require("schemastore").json.schemas({})
+		local yaml_schemas = {}
+		vim.tbl_map(function(schema)
+			yaml_schemas[schema.url] = schema.fileMatch
+		end, json_schemas)
+
 		local servers = {
 			"bashls",
 			"sumneko_lua",
@@ -33,10 +40,7 @@ return {
 			if lsp == "yamlls" then
 				setup_config["settings"] = {
 					yaml = {
-						schemas = {
-							["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
-							["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = "/.gitlab-ci.yml",
-						},
+						schemas = yaml_schemas,
 					},
 				}
 			elseif lsp == "sumneko_lua" then
@@ -77,6 +81,13 @@ return {
 					.. "/mason/packages/powershell-editor-services"
 			elseif lsp == "bashls" then
 				setup_config["filetypes"] = { "sh", "zsh" }
+			elseif lsp == "jsonls" then
+				setup_config["settings"] = {
+					json = {
+						schemas = json_schemas,
+						validate = { enable = true },
+					},
+				}
 			end
 
 			setup_config["on_attach"] = on_attach

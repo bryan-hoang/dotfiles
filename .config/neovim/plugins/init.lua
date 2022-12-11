@@ -15,8 +15,10 @@ local module = {
 	["neovim/nvim-lspconfig"] = require("custom.plugins.lspconfig"),
 	-- Customize default items installed.
 	["williamboman/mason.nvim"] = require("custom.plugins.mason"),
-	-- Enable custom language servers
+	-- Enable custom language servers.
 	["jose-elias-alvarez/null-ls.nvim"] = require("custom.plugins.null_ls"),
+	-- JSON schemas for Neovim.
+	["b0o/schemastore.nvim"] = {},
 	-- Enable markdown previewing.
 	["iamcco/markdown-preview.nvim"] = require("custom.plugins.markdown_preview"),
 	-- Adds support for the debug adapter protocol.
