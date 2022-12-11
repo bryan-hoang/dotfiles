@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# shellcheck disable=SC2154
 
 # Load the shell dotfiles, and then some:
 # * ~/.extra can be used for other settings you don't want to commit.
@@ -37,6 +39,9 @@ does_program_exist rustup \
 does_program_exist trash \
 	&& generate_completions zsh trash trash completions zsh \
 	&& generate_completions bash trash trash completions bash
+does_program_exist deno \
+	&& generate_completions zsh deno deno completions zsh \
+	&& generate_completions bash deno deno completions bash
 
 # endregion
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
+#
+# shellcheck disable=SC1091,SC2154
 
-# shellcheck disable=SC1091
 . "$XDG_CONFIG_HOME"/shell/common.sh
 
 # Setting shell options
@@ -46,35 +47,19 @@ shopt -s nullglob
 shopt -s globstar
 
 # Add tab completion for many Bash commands
-if command -v brew &>/dev/null && [ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
+if command -v brew &>/dev/null && [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]]; then
 	# Ensure existing Homebrew v1 completions continue to work
 	BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d"
 	export BASH_COMPLETION_COMPAT_DIR
 	# shellcheck disable=SC1091
 	. "$(brew --prefix)/etc/profile.d/bash_completion.sh"
-elif [ -f /etc/bash_completion ]; then
+elif [[ -f /etc/bash_completion ]]; then
 	# shellcheck disable=SC1091
 	. /etc/bash_completion
+elif [[ -s /usr/local/share/bash-completion/bash_completion ]]; then
+	# Locally install completions. e.g., Git Bash on Windows.
+	. /usr/local/share/bash-completion/bash_completion
 fi
-
-# Enable tab completion for `g` by marking it as an alias for `git`
-if type _git &>/dev/null; then
-	complete -o default -o nospace -F _git g
-fi
-
-# Add tab completion for SSH hostnames based on ~/.ssh/config, ignoring wildcards
-[ -e "${HOME}/.ssh/config" ] \
-	&& complete -o "default" -o "nospace" -W "$(grep "^Host" ~/.ssh/config \
-		| grep -v "[?*]" \
-		| cut -d " " -f2- \
-		| tr ' ' '\n')" scp sftp ssh
-
-# Add tab completion for `defaults read|write NSGlobalDomain`
-# You could just use `-g` instead, but I like being explicit
-complete -W "NSGlobalDomain" defaults
-
-# Add `killall` tab completion for common apps
-complete -o "nospace" -W "Contacts Calendar Dock Finder Mail Safari iTunes SystemUIServer Terminal Twitter" killall
 
 # region ohmybash
 
@@ -138,14 +123,6 @@ unset HISTTIMEFORMAT
 	&& . /usr/share/bash-completion/completions/git
 # dot
 __git_complete dot __git_main
-# deno
-# shellcheck disable=1090
-does_program_exist deno && . <(deno completions bash)
-
-# shellcheck disable=1090
-does_program_exist vr && . <(vr completions bash)
-
-# does_program_exist npm && . <(npm completion bash)
 
 # tabtab source for packages
 # uninstall by removing these lines
