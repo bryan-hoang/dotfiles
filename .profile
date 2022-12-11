@@ -9,8 +9,9 @@
 # shellcheck disable=SC1091
 . "$HOME"/.config/shell/env.sh
 
+# Determine if we're in a Linux desktop environment.
 # https://wiki.archlinux.org/title/Xinit
-if [ "$DISPLAY" != "" ]; then
+if [ "$DISPLAY" != "" ] && ! uname -a | grep -q -E 'Msys'; then
 	# Swap Ctrl and Caps Lock.
 	setxkbmap -option ctrl:swapcaps
 
