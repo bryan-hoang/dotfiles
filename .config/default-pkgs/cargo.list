@@ -3,26 +3,28 @@
 cargo-update
 # Manage cargo cache (${CARGO_HOME}, ~/.cargo/), print sizes of dirs and
 # remove dirs selectively.
-cargo-cache
+# cargo-cache
 # A smarter cd command, inspired by z and autojump. It remembers which
 # directories you use most frequently, so you can "jump" to them in just a few
 # keystrokes.
 zoxide
-# A syntax-highlighting pager for git and diff output.
-git-delta
+# Recursively searches directories for a regex pattern while respecting your
+# gitignore.
+ripgrep
 # A simple, fast and user-friendly alternative to 'find'.
 fd-find
+# A syntax-highlighting pager for git and diff output.
+git-delta
 # A cat(1) clone with wings.
 bat
 # A very fast implementation of tldr in Rust.
 tealdeer
-# Upgrade everything.
-topgrade
 # A more intuitive version of du in rust.
 du-dust
-# Recursively searches directories for a regex pattern while respecting your
-# gitignore.
-ripgrep
+# 🌀 A nonsense activity generator.
+genact
+# Upgrade everything.
+topgrade
 # An opinionated Lua code formatter.
 stylua
 # A TOML toolkit.
@@ -43,10 +45,12 @@ watchexec-cli
 # --git https://github.com/lhvy/pipes-rs
 # Yet another cross-platform graphical process/system monitor.
 bottom
+# git commit --fixup, but automatic.
+# git-absorb
 # Ping, but with a graph.
-gping
+# gping
 # A command-line benchmarking tool.
-hyperfine
+# hyperfine
 # 📬 Easily and securely share files from the command line. A fully featured
 # Firefox Send client.
 # ffsend
@@ -58,33 +62,31 @@ hyperfine
 # A command-line DNS client.
 # --git https://github.com/ogham/dog dog
 # Count your code, quickly.
-tokei
+# tokei
 # Git repository summary on your terminal.
-onefetch
+# onefetch
 # A command-line tool and library for generating regular expressions (regex)
 # from user-provided test cases.
 # grex
 # A modern replacement for ps written in Rust.
-procs
+# procs
 # Intuitive find & replace CLI (sed alternative).
-sd
+# sd
 # A fast CSV command line toolkit written in Rust.
-xsv
+# xsv
 # A cross-platform CLI csv pretty printer that uses column styling to maximize
 # viewer enjoyment.
 # tidy-viewer
 # A command-line hex viewer.
-hexyl
+# hexyl
 # Friendly and fast tool for sending HTTP requests.
-xh
+# xh
 # Multi functional app to find duplicates, empty folders, similar images etc.
 # czkawka_cli
 # A command-line tool to generate, analyze, convert and manipulate colors.
 # pastel
-# 🌀 A nonsense activity generator.
-genact
 # A new way to see and navigate directory trees.
-broot
+# broot
 # Blazing 💥 fast terminal-ui for git written in rust 🦀. (perl in git-bash)
 # gitui
 # Like jq, but for HTML.
@@ -95,9 +97,9 @@ broot
 # himalaya
 # A fully functional file server.
 # dufs Tree command, improved.
-tre-command
+# tre-command
 # Save space by cleaning non-essential files from software projects.
-kondo
+# kondo
 # Command-line JSON viewer designed for reading, exploring, and searching
 # through JSON data.
 # jless
