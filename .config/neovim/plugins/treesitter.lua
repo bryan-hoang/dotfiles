@@ -1,8 +1,7 @@
 return {
 	-- https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
 	run = function()
-		local ts_update =
-			require("nvim-treesitter.install").update({ with_sync = true })
+		local ts_update = require("nvim-treesitter.install").update({})
 		ts_update()
 	end,
 	override_options = {
