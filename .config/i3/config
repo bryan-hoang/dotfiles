@@ -232,7 +232,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id /usr/lib/gsd-xsettings
 
 # Set default wallpaper.
-exec --no-startup-id feh --no-fehbg --bg-scale ~/Pictures/wallpapers/default.png
+exec --no-startup-id feh ~/Pictures/wallpapers/secondary.png ~/Pictures/wallpapers/primary.png
 
 # Geoclue agent for redshift.
 exec --no-startup-id /usr/libexec/geoclue-2.0/demos/agent

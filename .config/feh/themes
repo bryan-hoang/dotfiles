@@ -1,0 +1,7 @@
+# Feh themes configuration file.
+# Lines starting with # are comments. Midline comments are not supported.
+# Options are defined in theme_name/options pairs.
+# Separate themename and options by whitespace.
+# https://github.com/derf/feh/blob/master/examples/themes
+
+feh --no-fehbg --bg-fill
