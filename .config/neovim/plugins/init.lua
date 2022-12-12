@@ -65,6 +65,11 @@ local module = {
 	-- Single tabpage interface for easily cycling through diffs for all modified
 	-- files for any git rev.
 	["sindrets/diffview.nvim"] = require("custom.plugins.diffview"),
+	-- A duck that waddles arbitrarily in neovim.
+	["tamton-aquib/duck.nvim"] = require("custom.plugins.duck"),
+	-- Make Vim handle line and column numbers in file names with a minimum of
+	-- fuss.
+	["wsdjeg/vim-fetch"] = {},
 }
 
 local is_os_unix = string.sub(package.config, 1, 1) == "/"

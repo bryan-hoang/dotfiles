@@ -124,4 +124,17 @@ M.gitsigns = {
 	},
 }
 
+M.duck = {
+	n = {
+		["<Leader>dd"] = {
+			'<Cmd>lua require("duck").hatch("ඞ")<CR>',
+			"Hatch a duck.",
+		},
+		["<Leader>dc"] = {
+			'<Cmd>lua require("duck").cook()<CR>',
+			"... cook a duck.",
+		},
+	},
+}
+
 return M
