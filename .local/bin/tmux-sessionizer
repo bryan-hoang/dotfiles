@@ -63,13 +63,23 @@ fi
 declare selected
 
 if [[ $# == 1 ]]; then
-	selected=$(realpath "$1")
+	selected=$(realpath "$1")/
 else
-	selected=$(
-		fd --type d --exact-depth 1 . "${proj_dirs[@]}" \
-			| cat - <(realpath .) \
-			| fzf
-	)
+	# Conditionally add the cwd to the project list if it isn't already present.
+	cwd=$PWD/
+	readonly cwd
+	if [[ ${proj_dirs[*]} =~ $cwd ]]; then
+		selected=$(
+			fd --type d --exact-depth 1 . "${proj_dirs[@]}" \
+				| cat - <(echo "$cwd") \
+				| fzf
+		)
+	else
+		selected=$(
+			fd --type d --exact-depth 1 . "${proj_dirs[@]}" \
+				| fzf
+		)
+	fi
 fi
 
 readonly selected
