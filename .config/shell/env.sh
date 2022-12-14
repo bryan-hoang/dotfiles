@@ -41,6 +41,8 @@ export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME"/asdf/asdfrc
 [[ -s "$CARGO_HOME"/env ]] && . "$CARGO_HOME"/env
 [[ -d "$ASDF_DIR"/bin ]] \
 	&& export PATH="$ASDF_DIR"/bin:"$PATH"
+[[ -d "$ASDF_DATA_DIR"/shims ]] \
+	&& export PATH="$ASDF_DATA_DIR"/shims:"$PATH"
 export PATH="$XDG_BIN_HOME":"$PATH"
 
 # Searched first
