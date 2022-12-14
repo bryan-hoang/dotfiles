@@ -52,7 +52,6 @@ format = " $icon $barchart $utilization "
 
 [[block]]
 block = "music"
-format = "$combo.rot-str(16) $play "
 
 [[block]]
 block = "bluetooth"

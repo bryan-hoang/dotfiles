@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Spotify TUI
+Comment=Spotify for the terminal written in Rust rocket 🚀.
+Keywords=shell;prompt;command;commandline;cmd;
+Icon=org.wezfurlong.wezterm
+StartupWMClass=org.wezfurlong.wezterm
+TryExec=wezterm
+Exec=wezterm start spt
+Type=Application
+Categories=System;TerminalEmulator;Utility;
+Terminal=false

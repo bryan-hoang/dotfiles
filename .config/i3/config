@@ -47,6 +47,7 @@ for_window [class="Slack"] move to workspace $ws3
 for_window [class="discord"] move to workspace $ws3
 for_window [class="(?i)thunderbird"] move to workspace $ws4
 for_window [class="Spotify"] move to workspace $ws5
+for_window [title="spt"] move to workspace $ws5
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
