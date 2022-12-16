@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# shellcheck disable=2154
 
 # https://github.com/anordal/shellharden/blob/master/how_to_do_things_safely_in_bash.md#assert-that-command-dependencies-are-installed
 require() {
@@ -187,9 +189,9 @@ install_brew() {
 			/bin/bash -c "$(curl -fsSL \
 				https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 		fi
-		[ -s /home/linuxbrew/.linuxbrew/bin/brew ] \
+		[[ -s /home/linuxbrew/.linuxbrew/bin/brew ]] \
 			&& eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-		[ -s "$HOME"/.linuxbrew/bin/brew ] \
+		[[ -s "$HOME"/.linuxbrew/bin/brew ]] \
 			&& eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
 		brew --version
 		echo "Installed brew successfully!"
@@ -637,11 +639,8 @@ install_poetry() {
 		echo "Installing poetry..."
 		curl -sSL https://install.python-poetry.org | python3 -
 		poetry --version
-		poetry completions zsh >|"$ZSH_USER_FPATH"/_poetry
-		if has_sudo; then
-			poetry completions bash \
-				| sudo tee /etc/bash_completion.d/poetry >/dev/null
-		fi
+		generate_completions zsh poetry poetry completions zsh
+		generate_completions bash poetry poetry completions bash
 		echo "Installed poetry successfully!"
 	fi
 }
@@ -791,11 +790,11 @@ is_wsl() {
 }
 
 is_ssh_session() {
-	[ "$SSH_CONNECTION" != "" ]
+	[[ "$SSH_CONNECTION" != "" ]]
 }
 
 is_root() {
-	[ "$(id -u)" = 0 ]
+	[[ "$(id -u)" = 0 ]]
 }
 
 is_asdf_plugin_installed() {
@@ -893,7 +892,7 @@ targz() {
 
 	echo "Compressing .tar ($((size / 1000)) kB) using \`${cmd}\`…"
 	"$cmd" -v "$tmpFile" || return 1
-	[ -f "$tmpFile" ] && rm "$tmpFile"
+	[[ -f "$tmpFile" ]] && rm "$tmpFile"
 
 	zippedSize=$(
 		stat -f"%z" "${tmpFile}.gz" 2>/dev/null # macOS `stat`
@@ -970,7 +969,7 @@ digga() {
 # Show all the names (CNs and SANs) listed in the SSL certificate
 # for a given domain
 getcertnames() {
-	if [ "${1}" = "" ]; then
+	if [[ "${1}" = "" ]]; then
 		echo "ERROR: No domain specified."
 		return 1
 	fi
@@ -1005,7 +1004,7 @@ getcertnames() {
 
 # Normalize `open` across Linux, macOS, and Windows.
 # This is needed to make the `o` function (see below) cross-platform.
-if [ ! "$(uname -s)" = 'Darwin' ]; then
+if [[ ! "$(uname -s)" = 'Darwin' ]]; then
 	if grep -q Microsoft /proc/version; then
 		# Ubuntu on Windows using the Linux subsystem
 		alias open='explorer.exe'
@@ -1017,7 +1016,7 @@ fi
 # `o` with no arguments opens the current directory, otherwise opens the given
 # location
 o() {
-	if [ $# -eq 0 ]; then
+	if [[ $# -eq 0 ]]; then
 		open .
 	else
 		open "$@"
@@ -1095,10 +1094,10 @@ start_ssh_agent() {
 		echo $?
 	)
 
-	if [ "$SSH_AUTH_SOCK" = "" ] || [ "$agent_run_state" = 2 ]; then
+	if [[ "$SSH_AUTH_SOCK" = "" ]] || [[ "$agent_run_state" = 2 ]]; then
 		agent_start
 		ssh-add
-	elif [ "$SSH_AUTH_SOCK" != "" ] && [ "$agent_run_state" = 1 ]; then
+	elif [[ "$SSH_AUTH_SOCK" != "" ]] && [[ "$agent_run_state" = 1 ]]; then
 		ssh-add
 	fi
 }
@@ -1117,7 +1116,7 @@ switch_npm() {
 }
 
 rename_file_ext() {
-	if [ $# != 2 ]; then
+	if [[ $# != 2 ]]; then
 		echo "Need to pass two file extensions"
 		return 1
 	fi
@@ -1129,7 +1128,7 @@ rename_file_ext() {
 #   extract:  Extract most know archives with one command
 #   ---------------------------------------------------------
 extract() {
-	if [ -f "$1" ]; then
+	if [[ -f "$1" ]]; then
 		case "$1" in
 			*.tar.bz2) tar xjf "$1" ;;
 			*.tar.gz) tar xzf "$1" ;;
@@ -1214,7 +1213,7 @@ ln_sh_plugins() {
 		local zsh_plugin_src="$HOME"/src/github.com/"$plugin"
 
 		# Rename plugin to avoid namespace conflict.
-		if [ "$plugin" = dracula/zsh-syntax-highlighting ]; then
+		if [[ "$plugin" = dracula/zsh-syntax-highlighting ]]; then
 			# Need to rename the file so that the plugin manager can interpret it as a
 			# plugin.
 			ln -sf "$zsh_plugin_src"/zsh-syntax-highlighting.sh \
