@@ -81,8 +81,8 @@ command -v nvim &>/dev/null \
 	&& export MANPAGER='nvim +Man!'
 
 # Enable persistent REPL history for `node`.
-mkdir -p "$XDG_STATE_HOME"/node
-export NODE_REPL_HISTORY="$XDG_STATE_HOME"/node/node_repl_history
+export NODE_REPL_HISTORY="$XDG_STATE_HOME"/node/history
+mkdir -p "$(dirname "$NODE_REPL_HISTORY")"
 
 # Allow 32^3 entries; the default is 1000.
 export NODE_REPL_HISTORY_SIZE=${HISTSIZE}
@@ -152,9 +152,8 @@ export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME"/python
 export ZSH="$ZDOTDIR"/ohmyzsh
 export ZSH_USER_FPATH="$XDG_DATA_HOME"/zsh/completions
 mkdir -p "$ZSH_USER_FPATH"
-
-mkdir -p "$XDG_STATE_HOME"/shell
 export HISTFILE="$XDG_STATE_HOME"/shell/history
+mkdir -p "$(dirname "$HISTFILE")"
 export TEXMFHOME="$XDG_DATA_HOME"/texmf
 export TEXMFVAR="$XDG_CACHE_HOME"/texlive/texmf-var
 export TEXMFCONFIG="$XDG_CONFIG_HOME"/texlive/texmf-config
@@ -171,9 +170,10 @@ export STARSHIP_CACHE="$XDG_CACHE_HOME"/starship
 export WAKATIME_HOME="$XDG_CONFIG_HOME"/wakatime
 mkdir -p "$WAKATIME_HOME"
 export MYSQL_HISTFILE="$XDG_STATE_HOME"/mysql/history
-mkdir -p "$XDG_STATE_HOME"/mysql
+mkdir -p "$(dirname "$MYSQL_HISTFILE")"
+export MYSQL_HOME=$XDG_CONFIG_HOME/mysql
 export SQLITE_HISTORY=${XDG_STATE_HOME}/sqlite/history
-mkdir -p "$XDG_STATE_HOME"/sqlite
+mkdir -p "$(dirname "$SQLITE_HISTORY")"
 export WGETRC="$XDG_CONFIG_HOME"/wget/wgetrc
 
 # Separate the repo from the data files to make fixing submodule issues less of
@@ -195,16 +195,15 @@ export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc.py
 export PYLINTRC="$XDG_CONFIG_HOME"/pylint/pylintrc
 export CALCHISTFILE="$XDG_STATE_HOME"/calc/history
-mkdir -p "$XDG_STATE_HOME"/calc
+mkdir -p "$(dirname "$CALCHISTFILE")"
 
-# FIXME: Makes login fail :/
-# export XAUTHORITY="${XDG_CACHE_HOME}"/Xauthority
+export XAUTHORITY="$XDG_CACHE_HOME"/Xauthority
 export ICEAUTHORITY="$XDG_CACHE_HOME"/ICEauthority
 export KDEHOME="$XDG_CONFIG_HOME"/kde
 export OSH="$XDG_CONFIG_HOME"/oh-my-bash
 export TMUX_PLUGIN_MANAGER_PATH="$XDG_CONFIG_HOME"/tmux/plugins
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
-mkdir -p "$XDG_DATA_HOME"/wineprefixes
+mkdir -p "$(dirname "$WINEPREFIX")"
 
 # Avoid hard coded ~/.osh-update from oh-my-bash.
 export DISABLE_AUTO_UPDATE=true
@@ -225,3 +224,7 @@ export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export TERMINFO="$XDG_DATA_HOME"/terminfo
 export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
+export RUBY_DEBUG_HISTORY_FILE=$XDG_STATE_HOME/rdbg/history
+mkdir -p "$(dirname "$RUBY_DEBUG_HISTORY_FILE")"
+export BUNDLE_USER_CACHE=$XDG_CACHE_HOME/bundle
+export BUNDLE_USER_CONFIG=$XDG_CONFIG_HOME/bundle/config
