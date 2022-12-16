@@ -1,3 +1,5 @@
+# https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles
+
 #region Functions
 
 # Add commands that make it easy to open your profile.
