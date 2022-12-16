@@ -197,7 +197,12 @@ export PYLINTRC="$XDG_CONFIG_HOME"/pylint/pylintrc
 export CALCHISTFILE="$XDG_STATE_HOME"/calc/history
 mkdir -p "$(dirname "$CALCHISTFILE")"
 
-export XAUTHORITY="$XDG_CACHE_HOME"/Xauthority
+# FIXME: Changing the default causes a login loop in Ubuntu :(
+#
+# shellcheck disable=2154
+export XAUTHORITY="$HOME"/.Xauthority
+touch "$XAUTHORITY"
+# shellcheck disable=2154
 export ICEAUTHORITY="$XDG_CACHE_HOME"/ICEauthority
 export KDEHOME="$XDG_CONFIG_HOME"/kde
 export OSH="$XDG_CONFIG_HOME"/oh-my-bash
