@@ -75,6 +75,7 @@
 	switch-time = "!f() { git switch -d $(git rev-list -n 1 --first-parent --before \"$1 23:59\" $(git default-branch)) ; }; f"
 	# Delete a branch locally and on the remote.
 	branch-delete = "!f() { git branch --delete --force $1 || true && git push origin --delete $1; }; f"
+	branch-activity = "for-each-ref --sort=committerdate refs/heads refs/remotes --format='%(authordate:short) %(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset)) %(authorname)'"
 [apply]
 	# Detect whitespace errors when applying a patch.
 	whitespace = fix
@@ -369,3 +370,5 @@
 	updateRefs = true
 [mergetool]
 	keepBackup = false
+[checkout]
+	defaultRemote = origin
