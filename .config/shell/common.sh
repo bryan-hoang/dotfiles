@@ -13,18 +13,6 @@ done
 if is_git_bash || ! does_program_exist keychain; then
 	start_ssh_agent
 	gpg-connect-agent reloadagent /bye &>/dev/null
-else
-	# If we're in a shell without a display manager, don't ask for a
-	# password for the ssh key's to be added (unless we're in WSL, which is
-	# fine).
-	if is_login_shell && ! is_interactive_shell && ! is_wsl && ! is_ssh_session; then
-		KEYCHAIN_NOASK='--noask'
-	fi
-
-	if ! start_ssh_keychain "$KEYCHAIN_NOASK"; then
-		keychain -q -k all
-		start_ssh_keychain "$KEYCHAIN_NOASK"
-	fi
 fi
 
 # region: Completions
