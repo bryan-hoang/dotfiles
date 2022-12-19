@@ -1,5 +1,5 @@
 return {
 	config = function()
-		require("colorful-winsep").setup()
+		require("colorful-winsep").setup({})
 	end,
 }
