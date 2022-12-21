@@ -82,3 +82,6 @@
 [submodule ".local/share/pass"]
 	path = .local/share/pass
 	url = git@github.com:bryan-hoang/password-store.git
+[submodule "dracula/xresources"]
+	path = src/github.com/dracula/xresources
+	url = https://github.com/dracula/xresources.git
