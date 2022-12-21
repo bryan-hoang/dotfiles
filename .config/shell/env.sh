@@ -102,11 +102,6 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 # -x Sets tab stops.
 export LESS='-XFR -x 2'
 
-# Avoid issues with `gpg` as installed via Homebrew.
-# https://stackoverflow.com/a/42265848/96656
-# shellcheck disable=SC2154
-export GPG_TTY=${TTY}
-
 # Hide the "default interactive shell is now zsh" warning on macOS.
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
@@ -159,9 +154,9 @@ export TEXMFVAR="$XDG_CACHE_HOME"/texlive/texmf-var
 export TEXMFCONFIG="$XDG_CONFIG_HOME"/texlive/texmf-config
 export CONDARC="$XDG_CONFIG_HOME"/conda/condarc
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
-chmod 600 "$HOME"/.gnupg/*
-chmod 700 "$HOME"/.gnupg
-export GNUPGHOME="$HOME"/.gnupg
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+chmod 600 "$GNUPGHOME"/*
+chmod 700 "$GNUPGHOME"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
 export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
 export RIPGREP_CONFIG_PATH=${XDG_CONFIG_HOME}/ripgrep/config

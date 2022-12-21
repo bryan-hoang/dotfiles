@@ -46,3 +46,12 @@ set -o noclobber
 
 # Set tabs in the terminal to differ from the default of 8.
 tabs 2
+
+# Set the environment variable per interactive session. Otherwise `tty` returns
+# "not a tty" if ran from `.profile`.
+# https://wiki.archlinux.org/title/GnuPG#Configure_pinentry_to_use_the_correct_TTY
+export GPG_TTY=${TTY:-$(tty)}
+if command -v gpg-connect-agent >/dev/null; then
+	gpg-connect-agent updatestartuptty /bye >/dev/null
+fi
+
