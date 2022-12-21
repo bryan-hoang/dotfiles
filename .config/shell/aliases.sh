@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# -*- coding: utf-8 -*-
+#
+# shellcheck disable=SC2154
 
 # Alias to manage dotfiles git repo.
 alias dot='git --git-dir="${HOME}"/.git --work-tree="${HOME}"'
@@ -43,7 +44,7 @@ command -v sha1sum >/dev/null || alias sha1sum="shasum"
 # JavaScriptCore REPL
 jscbin="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc"
 # shellcheck disable=SC2139
-[ -e "${jscbin}" ] && alias jsc="${jscbin}"
+[[ -e "$jscbin" ]] && alias jsc="$jscbin"
 unset jscbin
 
 # Trim new lines and copy to clipboard
@@ -158,12 +159,12 @@ fi
 alias conventional-changelog='conventional-changelog -p conventionalcommits -n "${XDG_CONFIG_HOME}"/conventional-changelog/config.js'
 alias yarn='yarn --use-yarnrc "${XDG_CONFIG_HOME}"/yarn/config'
 alias sqlite='sqlite3 -init "${XDG_CONFIG_HOME}"/sqlite3/sqliterc'
-mkdir -p "${XDG_CACHE_HOME}"/wget
+mkdir -p "$XDG_CACHE_HOME"/wget
 alias wget='wget --hsts-file="${XDG_CACHE_HOME}"/wget/hsts'
-mkdir -p "${XDG_STATE_HOME}"/units
+mkdir -p "$XDG_STATE_HOME"/units
 alias units='units --history "${XDG_STATE_HOME}"/units/history'
 alias xbindkeys='xbindkeys --file "${XDG_CONFIG_HOME}"/xbindkeys/config'
-mkdir -p "${XDG_DATA_HOME}"/keychain
+mkdir -p "$XDG_DATA_HOME"/keychain
 command -v keychain &>/dev/null && alias keychain='keychain --absolute --dir "${XDG_DATA_HOME}"/keychain'
 alias info='info --vi-keys'
 if uname -a | grep -q 'Msys'; then
