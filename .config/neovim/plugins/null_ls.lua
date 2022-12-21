@@ -65,6 +65,9 @@ return {
 
 			-- python
 			b.diagnostics.ruff,
+
+			-- Docker
+			b.diagnostics.hadolint,
 		}
 
 		null_ls.setup({

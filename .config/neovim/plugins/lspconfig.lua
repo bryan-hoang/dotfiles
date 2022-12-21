@@ -27,6 +27,7 @@ return {
 			"emmet_ls",
 			"powershell_es",
 			"html",
+			"dockerls",
 
 			-- TOML
 			"taplo",

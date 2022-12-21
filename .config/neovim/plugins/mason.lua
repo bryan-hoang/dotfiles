@@ -38,6 +38,10 @@ return {
 
 			-- Python
 			"ruff",
+
+			-- Docker
+			"dockerfile-language-server",
+			"hadolint",
 		},
 	},
 }
