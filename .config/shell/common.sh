@@ -9,10 +9,8 @@ for file in "$XDG_CONFIG_HOME"/shell/{aliases,functions,extra}.sh; do
 	[[ -f "$file" ]] && . "$file"
 done
 
-# If on a machine that doesn't have keychain, don't use it
-if is_git_bash || ! does_program_exist keychain; then
+if is_git_bash; then
 	start_ssh_agent
-	gpg-connect-agent reloadagent /bye &>/dev/null
 fi
 
 # region: Completions
@@ -52,6 +50,6 @@ tabs 2
 # https://wiki.archlinux.org/title/GnuPG#Configure_pinentry_to_use_the_correct_TTY
 export GPG_TTY=${TTY:-$(tty)}
 if command -v gpg-connect-agent >/dev/null; then
-	gpg-connect-agent updatestartuptty /bye >/dev/null
+	gpg-connect-agent updatestartuptty /bye &>/dev/null
 fi
 
