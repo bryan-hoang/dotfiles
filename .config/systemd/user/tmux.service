@@ -1,10 +1,12 @@
 # https://wiki.archlinux.org/title/Tmux#Autostart_with_systemd
 [Unit]
-Description=Start tmux in detached session
+Description=tmux default session (detached)
+Documentation=man:tmux(1)
 
 [Service]
 Type=forking
 ExecStart=/usr/local/bin/tmux new-session -s %u -d
+ExecStop=/home/%u/.config/tmux/plugins/tmux-resurrect/scripts/save.sh
 ExecStop=/usr/local/bin/tmux kill-session -t %u
 
 [Install]
