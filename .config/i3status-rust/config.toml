@@ -44,9 +44,6 @@ idle_bg = "#50FA7B"
 idle_fg = "#282A36"
 
 [[block]]
-block = "temperature"
-
-[[block]]
 block = "cpu"
 format = " $icon $barchart $utilization "
 
