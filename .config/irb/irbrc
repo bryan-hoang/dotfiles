@@ -1,0 +1,20 @@
+# frozen_string_literal: true
+
+IRB.conf[:SAVE_HISTORY] = 1000
+XDG_STATE_HOME = ENV.fetch('XDG_STATE_HOME')
+FileUtils.mkdir_p(File.join(XDG_STATE_HOME, 'irb'))
+IRB.conf[:HISTORY_FILE] ||= File.join(
+	XDG_STATE_HOME,
+	'irb',
+	'history',
+)
+
+IRB.conf[:PROMPT][:CUSTOM] = {
+	# Minimal, emulates prompt from mysql.
+	PROMPT_I: '> ',
+	PROMPT_S: '%l> ',
+	PROMPT_C: '-> ',
+}
+
+IRB.conf[:PROMPT_MODE] = :CUSTOM
+IRB.conf[:AUTO_INDENT] = true
