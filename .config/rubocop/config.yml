@@ -1,2 +1,23 @@
-inherit_from:
-  - node_modules/@prettier/plugin-ruby/rubocop.yml
+AllCops:
+  NewCops: enable
+Layout/LineLength:
+  Max: 80
+Layout/FirstMethodArgumentLineBreak:
+  Enabled: true
+
+# https://github.com/rubocop/rubocop/issues/9373#issuecomment-760300711
+Layout/IndentationWidth:
+  Width: 1
+Layout/IndentationStyle:
+  EnforcedStyle: tabs
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+Style/MethodCallWithArgsParentheses:
+  Enabled: true
+Layout/MultilineMethodArgumentLineBreaks:
+  Enabled: true
