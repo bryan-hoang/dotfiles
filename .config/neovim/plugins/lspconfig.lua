@@ -8,6 +8,7 @@ return {
 		local on_attach = require("plugins.configs.lspconfig").on_attach
 		local capabilities = require("plugins.configs.lspconfig").capabilities
 		local lspconfig = require("lspconfig")
+		local root_pattern = require("lspconfig.util").root_pattern
 
 		-- https://github.com/b0o/SchemaStore.nvim/issues/9#issuecomment-1140321123
 		local json_schemas = require("schemastore").json.schemas({})
@@ -19,20 +20,24 @@ return {
 		local servers = {
 			"bashls",
 			"sumneko_lua",
-			"tsserver",
 			"cssls",
 			"jsonls",
 			"yamlls",
-			"rome",
-			"emmet_ls",
 			"powershell_es",
-			"html",
 			"dockerls",
-
+			-- JS/TS
+			"rome",
+			"tsserver",
+			-- HTML
+			"emmet_ls",
+			"html",
 			-- TOML
 			"taplo",
 			-- Markdown
 			"ltex",
+			-- Ruby
+			"sorbet",
+			"ruby_ls",
 		}
 
 		for _, lsp in ipairs(servers) do
@@ -89,6 +94,18 @@ return {
 						validate = { enable = true },
 					},
 				}
+			elseif lsp == "ruby_ls" then
+				setup_config["init_options"] = {
+					enabledFeatures = {
+						"codeActions",
+						"diagnostics",
+						"documentHighlights",
+						"documentSymbols",
+						"inlayHint",
+					},
+				}
+			elseif lsp == "sorbet" then
+				setup_config["root_dir"] = root_pattern("Gemfile")
 			end
 
 			setup_config["on_attach"] = on_attach

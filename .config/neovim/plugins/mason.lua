@@ -5,43 +5,37 @@ return {
 		ensure_installed = {
 			"editorconfig-checker",
 			"powershell-editor-services",
-
-			-- lua stuff
+			-- Lua
 			"lua-language-server",
 			"stylua",
 			"selene",
-
-			-- web dev
-			"prettier",
+			-- JS/TS, HTML, CSS
+			"typescript-language-server",
 			"css-lsp",
 			"html-lsp",
-			"typescript-language-server",
-			"deno",
 			"emmet-ls",
 			"yaml-language-server",
+			"deno",
 			"rome",
-
-			-- shell
-			"shfmt",
-			"shellcheck",
+			"prettier",
+			-- Shell
 			"bash-language-server",
+			"shellcheck",
 			"shellharden",
-
-			-- Markdown
+			"shfmt",
+			-- Markdown "ltex-ls",
 			"vale",
-			"ltex-ls",
 			"markdownlint",
-
 			-- DAPs.
 			"js-debug-adapter",
 			"bash-debug-adapter",
-
 			-- Python
 			"ruff",
-
 			-- Docker
 			"dockerfile-language-server",
 			"hadolint",
+			-- Ruby
+			"rubocop",
 		},
 	},
 }

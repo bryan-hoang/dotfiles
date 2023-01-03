@@ -13,25 +13,18 @@ return {
 			b.diagnostics.editorconfig_checker.with({
 				command = "editorconfig-checker",
 			}),
-
-			-- code actions
 			b.code_actions.gitsigns,
-			b.code_actions.shellcheck,
-			b.code_actions.refactoring,
 			b.code_actions.gitrebase,
-			b.code_actions.eslint,
-
-			-- js/ts
+			b.code_actions.refactoring,
+			-- JS/TS, CSS
 			b.formatting.rome,
 			b.formatting.deno_fmt,
-			b.formatting.prettier,
 			b.formatting.eslint,
 			b.diagnostics.eslint,
-
-			-- css
-			b.diagnostics.stylelint,
+			b.code_actions.eslint,
+			b.formatting.prettier,
 			b.formatting.stylelint,
-
+			b.diagnostics.stylelint,
 			-- lua
 			b.diagnostics.selene.with({
 				-- https://github.com/kampfkarren/selene/issues/339#issuecomment-1191992366
@@ -46,7 +39,6 @@ return {
 				end,
 			}),
 			b.formatting.stylua,
-
 			-- shell
 			b.formatting.shfmt.with({
 				extra_args = { "-ci", "-bn" },
@@ -55,19 +47,19 @@ return {
 			b.formatting.shellharden.with({
 				filetypes = { "sh", "zsh" },
 			}),
-
-			-- toml
+			b.code_actions.shellcheck,
+			-- TOML
 			b.formatting.taplo,
-
-			-- markdown
+			-- Markdown
 			b.diagnostics.markdownlint,
 			b.diagnostics.vale,
-
-			-- python
+			-- Python
 			b.diagnostics.ruff,
-
 			-- Docker
 			b.diagnostics.hadolint,
+			-- Ruby
+			b.diagnostics.rubocop,
+			b.formatting.rubocop,
 		}
 
 		null_ls.setup({
