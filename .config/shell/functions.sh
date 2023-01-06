@@ -1323,3 +1323,10 @@ if asdf list direnv &>/dev/null; then
 		asdf exec direnv "$@"
 	}
 fi
+
+install_wezterm_terminfo() {
+	tempfile=$(mktemp) \
+		&& curl -o "$tempfile" https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo \
+		&& tic -x -o "$TERMINFO" "$tempfile" \
+		&& rm "$tempfile"
+}
