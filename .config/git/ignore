@@ -62,3 +62,6 @@ pnpm-lock.yaml
 
 # Make rg not search in the .git directory.
 .git
+
+# Rubocop config file.
+.rubocop.yml
