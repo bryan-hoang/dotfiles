@@ -65,3 +65,6 @@ pnpm-lock.yaml
 
 # Rubocop config file.
 .rubocop.yml
+
+# Common build folder output.
+build
