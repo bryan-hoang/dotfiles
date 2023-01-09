@@ -1,13 +1,20 @@
 # https://wiki.archlinux.org/title/Tmux#Autostart_with_systemd
+# https://wiki.archlinux.org/title/Systemd/User#Persistent_terminal_multiplexer
 [Unit]
 Description=tmux default session (detached)
 Documentation=man:tmux(1)
+# Only start after Multiplexer target is started manually by a login shell to
+# set up environment variables.
+Requires=multiplexer.target
+After=multiplexer.target
+Wants=gpg-agent.service
+After=gpg-agent.service
 
 [Service]
 Type=forking
-ExecStart=/usr/local/bin/tmux new-session -s %u -d
+ExecStart=/home/%u/.local/bin/tmux new-session -s %u -d
 ExecStop=/home/%u/.config/tmux/plugins/tmux-resurrect/scripts/save.sh
-ExecStop=/usr/local/bin/tmux kill-session -t %u
+ExecStop=/home/%u/.local/bin/tmux kill-session -t %u
 
 [Install]
-WantedBy=default.target
+WantedBy=multiplexer.target

@@ -9,6 +9,14 @@
 # shellcheck disable=SC1091
 . "$HOME"/.config/shell/env.sh
 
+# Start multiplexers after environment variables have been imported. See
+# `$XDG_CONFIG_HOME/systemd/user/multiplexer.target` and
+# `$XDG_CONFIG_HOME/systemd/user/tmux.service` for the specifics.
+if command -v systemctl >/dev/null; then
+	systemctl --user import-environment
+	systemctl --user start multiplexer.target
+fi
+
 # Determine if we're in a Linux desktop environment.
 # https://wiki.archlinux.org/title/Xinit
 if [ "$DISPLAY" != "" ] && ! uname -a | grep -q -E 'Msys'; then

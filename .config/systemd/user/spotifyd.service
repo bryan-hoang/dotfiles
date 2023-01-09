@@ -5,6 +5,9 @@ Wants=sound.target
 After=sound.target
 Wants=network-online.target
 After=network-online.target
+# Need to be able to use `pass` as specified in spotifyd's config file.
+Requires=gpg-agent.service
+After=gpg-agent.service
 
 [Service]
 ExecStart=/home/bryan/.local/bin/spotifyd --no-daemon
