@@ -79,9 +79,6 @@
 [submodule "dandavison/delta"]
 	path = src/github.com/dandavison/delta
 	url = https://github.com/dandavison/delta.git
-[submodule ".local/share/pass"]
-	path = .local/share/pass
-	url = git@github.com:bryan-hoang/password-store.git
 [submodule "dracula/xresources"]
 	path = src/github.com/dracula/xresources
 	url = https://github.com/dracula/xresources.git
