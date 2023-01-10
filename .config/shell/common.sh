@@ -28,6 +28,9 @@ does_program_exist trash \
 does_program_exist deno \
 	&& generate_completions zsh deno deno completions zsh \
 	&& generate_completions bash deno deno completions bash
+does_program_exist glab \
+	&& generate_completions zsh glab glab completion --shell zsh \
+	&& generate_completions bash glab glab completion --shell bash
 
 # endregion
 
