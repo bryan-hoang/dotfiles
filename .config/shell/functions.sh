@@ -504,7 +504,7 @@ install_default_pkgs() {
 			;;
 		pip)
 			install_cmd+=(install)
-			install_opts+=(--upgrade --user)
+			install_opts+=(--upgrade)
 			;;
 		gem)
 			install_cmd+=(install)
