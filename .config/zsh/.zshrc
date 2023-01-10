@@ -21,7 +21,6 @@ DISABLE_AUTO_TITLE="true"
 plugins=(
 	command-not-found
 	gitfast
-	systemd
 	# Completions
 	docker
 	docker-compose
