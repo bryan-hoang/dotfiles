@@ -20,11 +20,10 @@ ${custom.git_scope}\
 $hg_branch\
 $docker_context\
 $package\
-$buf\
 $c\
 $cmake\
 $cobol\
-$container\
+$daml\
 $dart\
 $deno\
 $dotnet\
@@ -32,7 +31,9 @@ $elixir\
 $elm\
 $erlang\
 $golang\
+$guix_shell\
 $haskell\
+$haxe\
 $helm\
 $java\
 $julia\
@@ -42,11 +43,13 @@ $nim\
 $nodejs\
 ${custom.npm}\
 $ocaml\
+$opa\
 $perl\
 $php\
 $pulumi\
 $purescript\
 $python\
+$raku\
 $rlang\
 $red\
 $ruby\
@@ -57,8 +60,10 @@ $terraform\
 $vlang\
 $vagrant\
 $zig\
+$buf\
 $nix_shell\
 $conda\
+$meson\
 $spack\
 $memory_usage\
 $aws\
@@ -74,6 +79,8 @@ $jobs\
 $battery\
 $time\
 $status\
+$os\
+$container\
 $shell\
 $line_break\
 $character"""
@@ -145,6 +152,9 @@ disabled = false
 # The version format. Available vars are `raw`, `major`, `minor`, & `patch`
 version_format = "v${major}"
 
+[os]
+disabled = false
+
 [package]
 disabled = true
 
@@ -188,6 +198,15 @@ disabled = true
 [username]
 format = "[$user]($style)@"
 show_always = false
+
+# To help switch between npm versions when it matters -_-
+[custom.npm]
+command = "npm --version | awk -F '.' '{print \"v\"$1}'"
+format = 'via [$symbol($output )]($style)'
+description = "The currently installed version of NPM"
+when = "command -v npm >/dev/null"
+style = "bold red"
+symbol = ' '
 
 [custom.direnv]
 command = "echo 'direnv'"
