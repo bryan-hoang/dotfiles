@@ -70,6 +70,8 @@ local module = {
 	-- Make Vim handle line and column numbers in file names with a minimum of
 	-- fuss.
 	["wsdjeg/vim-fetch"] = {},
+	-- Tools for better development in rust using neovim's builtin lsp.
+	["simrat39/rust-tools.nvim"] = require("custom.plugins.rust_tools"),
 }
 
 local is_os_unix = string.sub(package.config, 1, 1) == "/"

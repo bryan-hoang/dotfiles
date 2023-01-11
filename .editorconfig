@@ -17,3 +17,7 @@ indent_style = space
 
 [*.py]
 indent_size = 4
+
+[*.rs]
+indent_style = space
+indent_size = 4

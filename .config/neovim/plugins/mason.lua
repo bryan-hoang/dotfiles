@@ -36,6 +36,8 @@ return {
 			"hadolint",
 			-- Ruby
 			"rubocop",
+			-- Rust
+			"rust-analyzer",
 		},
 	},
 }
