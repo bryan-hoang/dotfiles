@@ -853,7 +853,7 @@ init_direnv() {
 	cat >|.envrc <<EOF
 #!/usr/bin/env sh
 
-use asdf
+source_up_if_exists .envrc
 EOF
 	direnv allow
 }

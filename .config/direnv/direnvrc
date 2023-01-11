@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+# Always try to initialize `asdf-direnv`.
+use asdf
