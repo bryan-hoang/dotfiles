@@ -172,7 +172,7 @@ format = 'via [${symbol}(${version} )($virtualenv )]($style)'
 # version.
 python_binary = ["python3", "python", "python2"]
 # The version format. Available vars are `raw`, `major`, `minor`, & `patch`
-version_format = "v${raw}"
+version_format = "v${major}.${minor}"
 
 [shell]
 disabled = false
