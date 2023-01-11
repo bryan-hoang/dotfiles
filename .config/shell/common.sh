@@ -21,7 +21,9 @@ does_program_exist dra \
 	&& generate_completions bash dra dra completion bash
 does_program_exist rustup \
 	&& generate_completions zsh cargo rustup completions zsh cargo \
-	&& generate_completions bash cargo rustup completions bash cargo
+	&& generate_completions bash cargo rustup completions bash cargo \
+	&& generate_completions zsh rustup rustup completions zsh rustup \
+	&& generate_completions bash rustup rustup completions bash rustup
 does_program_exist trash \
 	&& generate_completions zsh trash trash completions zsh \
 	&& generate_completions bash trash trash completions bash
