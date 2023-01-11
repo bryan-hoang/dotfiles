@@ -204,8 +204,8 @@ show_always = false
 command = "npm --version | awk -F '.' '{print \"v\"$1}'"
 format = 'via [$symbol($output )]($style)'
 description = "The currently installed version of NPM"
-when = "command -v npm >/dev/null"
 style = "bold red"
+detect_files = ['package-lock.json']
 symbol = ' '
 
 [custom.direnv]
