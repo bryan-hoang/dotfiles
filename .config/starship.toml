@@ -1,6 +1,5 @@
 # ~/.config/starship.toml
 
-# Prompt-wide configuration options.
 format = """
 $username\
 $hostname\
@@ -85,39 +84,25 @@ $shell\
 $line_break\
 $character"""
 
-# Add a blank line at the start of the prompt
 add_newline = true
-
-# Timeout for commands executed by starship (in milliseconds).
 command_timeout = 500
-
-# Timeout for starship to scan files (in milliseconds).
+continuation_prompt = '[>](bright-black) '
 scan_timeout = 30
 
-# The character module shows a character (usually an arrow) beside where the
-# text is entered in your terminal.
 [character]
-error_symbol = "[\\$](bold red)"
-success_symbol = "[\\$](bold green)"
+error_symbol = '[\$](bold red)'
+success_symbol = '[\$](bold green)'
 
-# The cmd_duration module shows how long the last command took to execute. The
-# module will be shown only if the command took longer than two seconds, or the
-# min_time config value, if it exists.
 [cmd_duration]
-# Disables the cmd_duration module.
-disabled = false
-# Shortest duration to show time for (in milliseconds).
-min_time = 30_000
-# Show desktop notifications when command completes.
-#
-# Showing desktop notifications requires starship to be built with rust-notify
-# support. You check if your starship supports notifications by running
-# `STARSHIP_LOG=debug starship module cmd_duration -d 60000` when
-# show_notifications is set to true.
+min_time = 2_000
 show_notifications = true
+format = '[$duration]($style) '
 
 [directory]
 format = "[$path]($style)[$read_only]($read_only_style) "
+
+[deno]
+format = "[$symbol($version )]($style)"
 
 [gcloud]
 # The module isn't very useful :(
@@ -131,62 +116,44 @@ format = "[$ssh_symbol$hostname]($style):"
 ssh_symbol = ""
 trim_at = ""
 
-# Shows the current number of jobs running.
-[jobs]
-disabled = true
+[lua]
+format = '[$symbol($version )]($style)'
 
-# The memory_usage module shows current system memory and swap usage.
-#
-# By default the swap usage is displayed if the total system swap is non-zero.
 [memory_usage]
-# Disables the memory_usage module.
 disabled = false
-format = "w/ $symbol[${ram}( | ${swap})]($style) "
-# Hide the memory usage unless it exceeds this percentage.
-threshold = 95
+format = '$symbol[${ram}( | ${swap})]($style) '
 
-# The nodejs module shows the currently installed version of Node.js.
 [nodejs]
-# Disables the nodejs module.
-disabled = false
-# The version format. Available vars are `raw`, `major`, `minor`, & `patch`
+format = '[$symbol($version )]($style)'
 version_format = "v${major}"
 
 [os]
-disabled = false
-
-[package]
 disabled = true
 
-# The perl module shows the currently installed version of Perl.
-[perl]
-detect_extensions = ["pl", "pm", "pod", "tex"]
+[package]
+format = '[$symbol$version]($style) '
 
-# The python module shows the currently installed version of Python and the
-# current Python virtual environment if one is activated.
 [python]
-# Configures the python binaries that Starship should executes when getting the
-# version.
-format = 'via [${symbol}(${version} )($virtualenv )]($style)'
-# Configures the python binaries that Starship should executes when getting the
-# version.
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 python_binary = ["python3", "python", "python2"]
-# The version format. Available vars are `raw`, `major`, `minor`, & `patch`
 version_format = "v${major}.${minor}"
+
+[rust]
+format = '[$symbol($version )]($style)'
+version_format = 'v${major}.${minor}'
 
 [shell]
 disabled = false
-format = '\([$indicator]($style)\)'
 
-# Shows the current SHLVL ("shell level") environment variable, if it is set to
-# a number and meets or exceeds the specified threshold.
 [shlvl]
-disabled = true
+disabled = false
 
 [status]
-disabled = true
-# Enable symbols mapping from exit code
+disabled = false
 map_symbol = true
+pipestatus = true
+pipestatus_format = '\[$pipestatus\] => [$symbol$common_meaning$signal_name$maybe_int ]($style)'
+pipestatus_segment_format = '[$symbol$status]($style)'
 
 [sudo]
 symbol = "👩‍💻 "
@@ -197,35 +164,17 @@ disabled = true
 
 [username]
 format = "[$user]($style)@"
-show_always = false
 
 # To help switch between npm versions when it matters -_-
 [custom.npm]
 command = "npm --version | awk -F '.' '{print \"v\"$1}'"
-format = 'via [$symbol($output )]($style)'
+format = '[$symbol($output )]($style)'
 description = "The currently installed version of NPM"
 style = "bold red"
 detect_files = ['package-lock.json']
 symbol = ' '
 
-[custom.direnv]
-command = "echo 'direnv'"
-description = "The fact that direnv is being used"
-disabled = true
-format = "using [$output]($style) "
-style = "purple"
-when = "[[ -n \"${DIRENV_DIR}\" ]]"
-
-[custom.git_scope]
-command = 'git config user.email'
-description = 'The currently configured Git user.email'
-disabled = true
-format = 'as [<$output>]($style) '
-style = 'blue'
-when = 'git rev-parse --is-inside-work-tree'
-
 [custom.git_url]
-# disabled = true
 command = "check-git-remote"
 description = "Display symbol for remote Git server"
 format = "[$output]($style) "
@@ -234,3 +183,18 @@ os = "unix"
 shell = ["bash", "--noprofile", "--norc"]
 style = "white"
 when = "git rev-parse --is-inside-work-tree 2>/dev/null"
+
+[custom.git_scope]
+command = 'git config user.email'
+description = 'The currently configured Git user.email'
+format = '[<$output>]($style) '
+style = 'blue'
+when = 'git rev-parse --is-inside-work-tree'
+
+[custom.direnv]
+disabled = true
+command = "echo 'direnv'"
+description = "The fact that direnv is being used"
+format = "using [$output]($style) "
+style = "purple"
+when = "[[ -n \"${DIRENV_DIR}\" ]]"
