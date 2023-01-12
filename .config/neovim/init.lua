@@ -81,4 +81,5 @@ opt.shiftround = true
 
 set_file_associations({
 	["yaml"] = { "gemrc" },
+	["gitconfig"] = { "*.gitconfig" },
 })
