@@ -12,6 +12,9 @@ readonly MAGENTA='#ff79c6'
 readonly BLUE='#6272a4'
 readonly GREEN='#50fa7b'
 
+# https://github.com/cruegge/pam-gnupg#setup-guide
+gpg-connect-agent --no-autostart reloadagent /bye
+
 i3lock \
 	--color "$BLANK" \
 	--insidever-color "$SELECTION$ALPHA" \

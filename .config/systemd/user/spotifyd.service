@@ -6,10 +6,12 @@ After=sound.target
 Wants=network-online.target
 After=network-online.target
 # Want to be able to use `pass` as specified in spotifyd's config file.
-Wants=gpg-agent.service
-After=gpg-agent.service
+Wants=gpg-agent.socket
+After=gpg-agent.socket
 
 [Service]
+# https://github.com/cruegge/pam-gnupg#known-issues
+ExecStartPre=/usr/bin/sleep 5
 ExecStart=/home/bryan/.local/bin/spotifyd --no-daemon
 Restart=always
 RestartSec=12
