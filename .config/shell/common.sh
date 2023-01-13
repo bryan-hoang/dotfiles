@@ -6,7 +6,7 @@
 # * ~/.extra can be used for other settings you don't want to commit.
 for file in "$XDG_CONFIG_HOME"/shell/{aliases,functions,extra}.sh; do
 	# shellcheck disable=SC1090
-	[[ -f "$file" ]] && . "$file"
+	[[ -f $file ]] && . "$file"
 done
 
 if is_git_bash; then
@@ -57,4 +57,3 @@ export GPG_TTY=${TTY:-$(tty)}
 if command -v gpg-connect-agent >/dev/null; then
 	gpg-connect-agent updatestartuptty /bye &>/dev/null
 fi
-

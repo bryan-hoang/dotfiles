@@ -79,4 +79,5 @@ export default {
 	'*': (files) => processMatches(files, 'editorconfig-checker'),
 	'*.lua': (files) =>
 		processMatches(files, 'stylua --search-parent-directories'),
+	'*.sh': (files) => processMatches(files, 'shfmt -bn -ci --simplify'),
 };

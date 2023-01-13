@@ -41,7 +41,7 @@ return {
 			b.formatting.stylua,
 			-- shell
 			b.formatting.shfmt.with({
-				extra_args = { "-ci", "-bn" },
+				extra_args = { "-ci", "-bn", "--simplify" },
 				filetypes = { "sh", "zsh" },
 			}),
 			b.formatting.shellharden.with({
