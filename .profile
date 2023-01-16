@@ -9,6 +9,11 @@
 # shellcheck disable=SC1091
 . "$HOME"/.config/shell/env.sh
 
+# https://wiki.archlinux.org/title/Systemd/User#Environment_variables
+if command -v dbus-update-activation-environment >/dev/null; then
+	dbus-update-activation-environment --systemd --all
+fi
+
 # Determine if we're in a Linux desktop environment.
 # https://wiki.archlinux.org/title/Xinit
 if [ "$DISPLAY" != "" ] && ! uname -a | grep -q -E 'Msys'; then
