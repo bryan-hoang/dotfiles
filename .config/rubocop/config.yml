@@ -10,6 +10,16 @@ Layout/IndentationWidth:
   Width: 1
 Layout/IndentationStyle:
   EnforcedStyle: tabs
+Layout/FirstHashElementLineBreak:
+  Enabled: true
+Layout/MultilineHashBraceLayout:
+  EnforcedStyle: new_line
+Layout/MultilineHashKeyLineBreaks:
+  Enabled: true
+Layout/HashAlignment:
+  Enabled: true
+  EnforcedColonStyle: key
+  EnforcedLastArgumentHashStyle: always_inspect
 
 Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: consistent_comma
@@ -19,5 +29,10 @@ Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
 Style/MethodCallWithArgsParentheses:
   Enabled: true
+  IgnoreMacros: false
+  AllowParenthesesInMultilineCall: true
+  AllowParenthesesInChaining: true
+  AllowParenthesesInCamelCaseMethod: true
+  AllowParenthesesInStringInterpolation: true
 Layout/MultilineMethodArgumentLineBreaks:
   Enabled: true

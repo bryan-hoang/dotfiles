@@ -14,3 +14,6 @@ syntax_tree-haml
 syntax_tree-rbs
 # Ruby support for Neovim.
 neovim
+# A Ruby static code analyzer and formatter, based on the community Ruby style
+# guide.
+rubocop
