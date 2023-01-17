@@ -2,3 +2,6 @@
 
 # Always try to initialize `asdf-direnv`.
 use asdf
+
+# Loads a “.env.local” file into the current environment, but only if it exists.
+dotenv_if_exists .env.local
