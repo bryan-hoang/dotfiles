@@ -139,6 +139,9 @@ format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 python_binary = ["python3", "python", "python2"]
 version_format = "v${major}.${minor}"
 
+[ruby]
+format ="[$symbol($version )]($style)"
+
 [rust]
 format = '[$symbol($version )]($style)'
 version_format = 'v${major}.${minor}'
