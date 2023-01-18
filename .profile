@@ -10,8 +10,12 @@
 . "$HOME"/.config/shell/env.sh
 
 # https://wiki.archlinux.org/title/Systemd/User#Environment_variables
-if command -v dbus-update-activation-environment >/dev/null; then
+if command -v dbus-update-activation-environment >/dev/null \
+	&& command -v systemctl >/dev/null; then
 	dbus-update-activation-environment --systemd --all
+	# Avoid triggering the starship prompt module in tmux server started by
+	# systemd.
+	systemctl --user unset-environment SHLVL
 fi
 
 # Determine if we're in a Linux desktop environment.
