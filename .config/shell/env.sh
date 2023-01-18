@@ -13,9 +13,9 @@ export BUN_INSTALL="$XDG_DATA_HOME"/bun
 export DENO_INSTALL="$XDG_DATA_HOME"/deno
 export PNPM_HOME="$XDG_DATA_HOME"/pnpm
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
-export ASDF_DIR="$HOME"/src/github.com/asdf-vm/asdf
-
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+export GOPATH="$XDG_DATA_HOME"/go
+export ASDF_DIR="$HOME"/src/github.com/asdf-vm/asdf
 export ASDF_DATA_DIR="$XDG_DATA_HOME"/asdf
 export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME"/asdf/asdfrc
 
@@ -35,8 +35,10 @@ export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME"/asdf/asdfrc
 	&& export PATH="$BUN_INSTALL"/bin:"$PATH"
 [[ -d "$DENO_INSTALL"/bin ]] \
 	&& export PATH="$DENO_INSTALL"/bin:"$PATH"
-[[ -d "$PNPM_HOME" ]] \
+[[ -d $PNPM_HOME ]] \
 	&& export PATH="$PNPM_HOME":"$PATH"
+[[ -d $GOPATH/bin ]] \
+	&& export PATH="$GOPATH"/bin:"$PATH"
 # shellcheck disable=SC1091
 [[ -s "$CARGO_HOME"/env ]] && . "$CARGO_HOME"/env
 [[ -d "$ASDF_DIR"/bin ]] \
