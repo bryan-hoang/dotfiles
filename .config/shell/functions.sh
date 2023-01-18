@@ -392,14 +392,14 @@ install_dotenv-linter() {
 }
 
 install_asdf_plugin() {
-	if [[ -z "${1:-1}" ]]; then
+	if [[ -z ${1:-1} ]]; then
 		echo "No plugin argument supplied"
 		return 1
 	fi
 
 	local version='latest'
 
-	if [[ -n "${2:-}" ]]; then
+	if [[ -n ${2:-} ]]; then
 		version="$2"
 	fi
 
@@ -408,7 +408,7 @@ install_asdf_plugin() {
 	case "${1}" in
 		nodejs)
 			plugin_git_repo='https://github.com/asdf-vm/asdf-nodejs.git'
-			if [[ -n "$version" ]]; then
+			if [[ -n $version ]]; then
 				version='lts'
 			fi
 			;;
@@ -477,7 +477,7 @@ install_asdf_plugin() {
 install_default_pkgs() {
 	local -r pkg_mgr="${1}"
 
-	if [[ -z "$pkg_mgr" ]]; then
+	if [[ -z $pkg_mgr ]]; then
 		echo "No package manager supplied."
 		return 1
 	fi
@@ -805,11 +805,11 @@ is_wsl() {
 }
 
 is_ssh_session() {
-	[[ "$SSH_CONNECTION" != "" ]]
+	[[ $SSH_CONNECTION != "" ]]
 }
 
 is_root() {
-	[[ "$(id -u)" = 0 ]]
+	[[ "$(id -u)" == 0 ]]
 }
 
 is_asdf_plugin_installed() {
@@ -826,7 +826,7 @@ is_arm64_architecture() {
 }
 
 is_x86_64() {
-	[[ $(uname -m) = x86_64 ]]
+	[[ $(uname -m) == x86_64 ]]
 }
 
 has_sudo() {
@@ -907,7 +907,7 @@ targz() {
 
 	echo "Compressing .tar ($((size / 1000)) kB) using \`${cmd}\`…"
 	"$cmd" -v "$tmpFile" || return 1
-	[[ -f "$tmpFile" ]] && rm "$tmpFile"
+	[[ -f $tmpFile ]] && rm "$tmpFile"
 
 	zippedSize=$(
 		stat -f"%z" "${tmpFile}.gz" 2>/dev/null # macOS `stat`
@@ -924,7 +924,7 @@ fs() {
 	else
 		local arg=-sh
 	fi
-	if [[ -n "$*" ]]; then
+	if [[ -n $* ]]; then
 		du "$arg" -- "$@"
 	else
 		du "$arg" .[^.]* ./*
@@ -984,7 +984,7 @@ digga() {
 # Show all the names (CNs and SANs) listed in the SSL certificate
 # for a given domain
 getcertnames() {
-	if [[ "${1}" = "" ]]; then
+	if [[ ${1} == "" ]]; then
 		echo "ERROR: No domain specified."
 		return 1
 	fi
@@ -997,7 +997,7 @@ getcertnames() {
 	tmp=$(echo -e "GET / HTTP/1.0\nEOT" \
 		| openssl s_client -connect "${domain}:443" -servername "$domain" 2>&1)
 
-	if [[ "$tmp" = *"-----BEGIN CERTIFICATE-----"* ]]; then
+	if [[ $tmp == *"-----BEGIN CERTIFICATE-----"* ]]; then
 		local certText
 		certText=$(echo "$tmp" \
 			| openssl x509 -text -certopt "no_aux, no_header, no_issuer, no_pubkey, \
@@ -1019,7 +1019,7 @@ getcertnames() {
 
 # Normalize `open` across Linux, macOS, and Windows.
 # This is needed to make the `o` function (see below) cross-platform.
-if [[ ! "$(uname -s)" = 'Darwin' ]]; then
+if [[ "$(uname -s)" != 'Darwin' ]]; then
 	if grep -q Microsoft /proc/version; then
 		# Ubuntu on Windows using the Linux subsystem
 		alias open='explorer.exe'
@@ -1109,10 +1109,10 @@ start_ssh_agent() {
 		echo $?
 	)
 
-	if [[ "$SSH_AUTH_SOCK" = "" ]] || [[ "$agent_run_state" = 2 ]]; then
+	if [[ $SSH_AUTH_SOCK == "" ]] || [[ $agent_run_state == 2 ]]; then
 		agent_start
 		ssh-add
-	elif [[ "$SSH_AUTH_SOCK" != "" ]] && [[ "$agent_run_state" = 1 ]]; then
+	elif [[ $SSH_AUTH_SOCK != "" ]] && [[ $agent_run_state == 1 ]]; then
 		ssh-add
 	fi
 }
@@ -1143,7 +1143,7 @@ rename_file_ext() {
 #   extract:  Extract most know archives with one command
 #   ---------------------------------------------------------
 extract() {
-	if [[ -f "$1" ]]; then
+	if [[ -f $1 ]]; then
 		case "$1" in
 			*.tar.bz2) tar xjf "$1" ;;
 			*.tar.gz) tar xzf "$1" ;;
@@ -1228,7 +1228,7 @@ ln_sh_plugins() {
 		local zsh_plugin_src="$HOME"/src/github.com/"$plugin"
 
 		# Rename plugin to avoid namespace conflict.
-		if [[ "$plugin" = dracula/zsh-syntax-highlighting ]]; then
+		if [[ $plugin == dracula/zsh-syntax-highlighting ]]; then
 			# Need to rename the file so that the plugin manager can interpret it as a
 			# plugin.
 			ln -sf "$zsh_plugin_src"/zsh-syntax-highlighting.sh \
