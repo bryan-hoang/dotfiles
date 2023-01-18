@@ -38,3 +38,6 @@ neovim
 stylelint
 stylelint-config-standard
 stylelint-config-standard-scss
+# tsserver for editor LSP.
+typescript
+typescript-language-server
