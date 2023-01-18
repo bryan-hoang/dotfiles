@@ -742,6 +742,21 @@ install_bun() {
 	curl -fsSL https://bun.sh/install | bash
 }
 
+# https://github.com/helix-editor/helix/wiki/Debugger-Configurations#codelldb-
+install_codelldb() {
+	local -r download_file=codelldb-x86_64-linux.vsix
+	cd "$DOWNLOAD_DIR" || return
+	gh release download --repo vadimcn/vscode-lldb \
+		--pattern "$download_file" \
+		--clobber
+	unzip -qo "$download_file" "extension/adapter/*" "extension/lldb/*"
+	rm -rf "$download_file" "$XDG_DATA_HOME"/codelldb
+	mv extension "$XDG_DATA_HOME"/codelldb
+	ln -sf "$XDG_DATA_HOME"/codelldb/adapter/codelldb "$XDG_BIN_HOME"
+	codelldb -h
+	cd - >/dev/null || return
+}
+
 # endregion Installation.
 
 # region Boolean functions
