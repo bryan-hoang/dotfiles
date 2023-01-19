@@ -64,7 +64,13 @@ opt.showbreak = "↪ "
 
 -- Show certain whitespace characters. Don't show all space characters,
 -- otherwise messes with wezterm's hyperlink detection.
-opt.listchars = { tab = "->", lead = "·", trail = "·", nbsp = "+" }
+opt.listchars = {
+	tab = "->",
+	lead = "·",
+	trail = "·",
+	nbsp = "⍽",
+	eol = "⏎",
+}
 opt.list = true
 
 -- https://vim.fandom.com/wiki/Learn_to_use_help#Comments
@@ -82,4 +88,5 @@ opt.shiftround = true
 set_file_associations({
 	["yaml"] = { "gemrc" },
 	["gitconfig"] = { "*.gitconfig" },
+	["nginx"] = { "/etc/nginx/**/*.conf" },
 })
