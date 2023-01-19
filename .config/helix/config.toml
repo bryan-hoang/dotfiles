@@ -1,3 +1,4 @@
+# https://docs.helix-editor.com/configuration.html
 theme = "gruvbox_dark_hard_transparent"
 
 [editor]
@@ -5,6 +6,28 @@ line-number = "relative"
 rulers = [80, 100, 120]
 bufferline = "multiple"
 color-modes = true
+cursorline = true
+
+[editor.statusline]
+left = [
+	"mode",
+	"file-name",
+]
+center = [
+	"spinner",
+]
+right = [
+	"diagnostics",
+	"workspace-diagnostics",
+	"position",
+	"total-line-numbers",
+	"position-percentage",
+	"file-line-ending",
+	"file-encoding",
+]
+
+[editor.lsp]
+display-messages = true
 
 [editor.cursor-shape]
 insert = "bar"

@@ -1,0 +1,8 @@
+# https://docs.helix-editor.com/languages.html
+
+# https://github.com/helix-editor/helix/wiki/How-to-install-the-default-language-servers#rust_analyzer
+[[language]]
+name = "rust"
+
+[language.config]
+checkOnSave = { command = "clippy" }
