@@ -41,3 +41,5 @@ stylelint-config-standard-scss
 # tsserver for editor LSP.
 typescript
 typescript-language-server
+# LS for editors.
+bash-language-server
