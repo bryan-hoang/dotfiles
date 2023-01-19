@@ -3,5 +3,8 @@
 Description=Terminal multiplexer
 Documentation=man:tmux(1)
 # https://naftuli.wtf/2017/12/28/systemd-user-environment/
-Requires=default.target
-After=default.target
+After=cruft.target
+Wants=cruft.target
+
+[Install]
+Alias=default.target

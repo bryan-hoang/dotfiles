@@ -3,12 +3,8 @@
 [Unit]
 Description=tmux default session (detached)
 Documentation=man:tmux(1)
-# Only start after Multiplexer target is started manually by a login shell to
-# set up environment variables.
-Requires=multiplexer.target
-After=multiplexer.target
-Wants=gpg-agent.service
 After=gpg-agent.service
+Wants=gpg-agent.service
 
 [Service]
 Type=forking
