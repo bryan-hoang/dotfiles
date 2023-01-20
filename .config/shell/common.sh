@@ -33,6 +33,9 @@ does_program_exist deno \
 does_program_exist glab \
 	&& generate_completions zsh glab glab completion --shell zsh \
 	&& generate_completions bash glab glab completion --shell bash
+does_program_exist just \
+	&& generate_completions zsh just just --completions zsh \
+	&& generate_completions bash just just --completions bash
 
 # endregion
 

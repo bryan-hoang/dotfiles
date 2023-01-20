@@ -72,6 +72,8 @@ local module = {
 	["wsdjeg/vim-fetch"] = {},
 	-- Tools for better development in rust using neovim's builtin lsp.
 	["simrat39/rust-tools.nvim"] = require("custom.plugins.rust_tools"),
+	-- Vim Just Syntax.
+	["NoahTheDuke/vim-just"] = {},
 }
 
 local is_os_unix = string.sub(package.config, 1, 1) == "/"

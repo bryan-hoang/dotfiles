@@ -68,3 +68,6 @@ pnpm-lock.yaml
 
 # Common build folder output.
 build
+
+# To help define common commands I personally run in certain projects.
+justfile
