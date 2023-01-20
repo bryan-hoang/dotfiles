@@ -197,8 +197,8 @@ mkdir -p "$(dirname "$CALCHISTFILE")"
 # FIXME: Changing the default causes a login loop in Ubuntu :(
 #
 # shellcheck disable=2154
-export XAUTHORITY="$HOME"/.Xauthority
-touch "$XAUTHORITY"
+# export XAUTHORITY="$HOME"/.Xauthority
+# touch "$XAUTHORITY"
 # shellcheck disable=2154
 export ICEAUTHORITY="$XDG_CACHE_HOME"/ICEauthority
 export KDEHOME="$XDG_CONFIG_HOME"/kde
