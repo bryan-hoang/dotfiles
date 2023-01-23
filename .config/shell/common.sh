@@ -36,6 +36,9 @@ does_program_exist glab \
 does_program_exist just \
 	&& generate_completions zsh just just --completions zsh \
 	&& generate_completions bash just just --completions bash
+does_program_exist starship \
+	&& generate_completions zsh starship starship completions zsh \
+	&& generate_completions bash starship starship completions bash
 
 # endregion
 
