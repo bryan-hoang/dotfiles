@@ -14,8 +14,9 @@ if command -v dbus-update-activation-environment >/dev/null \
 	&& command -v systemctl >/dev/null; then
 	dbus-update-activation-environment --systemd --all
 	# Avoid triggering the starship prompt module in tmux server started by
-	# systemd.
-	systemctl --user unset-environment SHLVL
+	# systemd. Remove lingering SSH env vars.
+	systemctl --user unset-environment SHLVL SSH_CLIENT SSH_CONNECTION SSH_TTY
+	systemctl --user start tmux.service
 fi
 
 # Determine if we're in a Linux desktop environment.
