@@ -15,7 +15,7 @@ $git_commit\
 $git_state\
 $git_metrics\
 $git_status\
-${custom.git_scope}\
+${custom.git_email}\
 $hg_branch\
 $docker_context\
 $package\
@@ -190,16 +190,13 @@ symbol = 'p '
 command = "check-git-remote"
 description = "Display symbol for remote Git server"
 format = "[$output]($style) "
-# Don't run in dotfiles repo.
-os = "unix"
-shell = ["bash", "--noprofile", "--norc"]
 style = "white"
-when = "git rev-parse --is-inside-work-tree 2>/dev/null"
+when = "git rev-parse --is-inside-work-tree"
 
-[custom.git_scope]
-command = 'git config user.email'
+[custom.git_email]
+command = 'print-git-email-symbol'
 description = 'The currently configured Git user.email'
-format = '[<$output>]($style) '
+format = '[<$output> ]($style)'
 style = 'blue'
 when = 'git rev-parse --is-inside-work-tree'
 
