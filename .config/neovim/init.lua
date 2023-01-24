@@ -89,4 +89,5 @@ set_file_associations({
 	["yaml"] = { "gemrc" },
 	["gitconfig"] = { "*.gitconfig" },
 	["nginx"] = { "/etc/nginx/**/*.conf" },
+	["sshconfig"] = { "**/.ssh/conf.d/*.conf" },
 })
