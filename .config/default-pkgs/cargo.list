@@ -39,6 +39,9 @@ viu
 jaq
 # Executes commands in response to file modifications.
 watchexec-cli
+# Beautiful, useful, configurable MOTD generation with zero runtime
+# dependencies.
+--git https://github.com/rust-motd/rust-motd.git
 # Create beautiful image of your source code.
 # silicon
 # An over-engineered rewrite of pipes.sh in Rust.
