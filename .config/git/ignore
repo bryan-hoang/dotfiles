@@ -71,3 +71,6 @@ build
 
 # To help define common commands I personally run in certain projects.
 justfile
+
+# ESLint config file.
+.eslintrc.js
