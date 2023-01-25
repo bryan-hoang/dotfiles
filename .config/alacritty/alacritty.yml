@@ -1,3 +1,50 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+# https://github.com/alacritty/alacritty/blob/master/alacritty.yml
+
+# Import additional configuration files
+#
+# Imports are loaded in order, skipping all missing files, with the importing
+# file being loaded last. If a field is already present in a previous import, it
+# will be replaced.
+#
+# All imports must either be absolute paths starting with `/`, or paths relative
+# to the user's home directory starting with `~/`.
+import:
+  - ~/src/github.com/dracula/alacritty/dracula.yml
+
+# Any items in the `env` entry below will be added as
+# environment variables. Some entries may override variables
+# set by alacritty itself.
+env:
+  # Avoid nested SHLVL of 2. Not sure of the cause in different behaviour from
+  # Wezterm.
+  SHLVL: '0'
+  # TERM variable
+  #
+  # This value is used to set the `$TERM` environment variable for
+  # each instance of Alacritty. If it is not present, alacritty will
+  # check the local terminfo database and use `alacritty` if it is
+  # available, otherwise `xterm-256color` is used.
+  # TERM: alacritty
+
+window:
+  # Window padding (changes require restart)
+  #
+  # Blank space added around the window in pixels. This padding is scaled
+  # by DPI and the specified value is always added at both opposing sides.
+  padding:
+    x: 8
+    y: 0
+
+  # Spread additional padding evenly around the terminal content.
+  #dynamic_padding: false
+
+  # Background opacity
+  #
+  # Window opacity as a floating point number from `0.0` to `1.0`.
+  # The value `0.0` is completely transparent and `1.0` is opaque.
+  opacity: 0.75
+
 # Font configuration
 font:
   # Normal (roman) font face
@@ -9,3 +56,20 @@ font:
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
     family: FiraCode Nerd Font Mono
+
+  # Point size (default 11.0)
+  size: 12.0
+
+# Shell
+#
+# You can set `shell.program` to the path of your favorite shell, e.g.
+# `/bin/fish`. Entries in `shell.args` are passed unmodified as arguments to the
+# shell.
+#
+# Default:
+#   - (Linux/BSD/macOS) `$SHELL` or the user's login shell, if `$SHELL` is unset
+#   - (Windows) powershell
+shell:
+  program: /usr/bin/zsh
+  args:
+    - --interactive

@@ -2,9 +2,9 @@ local wezterm = require("wezterm")
 
 local act = wezterm.action
 local is_os_unix = string.sub(package.config, 1, 1) == "/"
-local zsh = { "zsh", "-i" }
-local bash = { "bash", "-i" }
-local git_bash = { "C:\\Program Files\\Git\\bin\\bash.exe", "-l" }
+local zsh = { "zsh", "--interactive" }
+local bash = { "bash", "--interactive" }
+local git_bash = { "C:\\Program Files\\Git\\bin\\bash.exe", "--login" }
 local wsl_domains = wezterm.default_wsl_domains()
 
 ---@diagnostic disable-next-line: unused-local
@@ -12,6 +12,8 @@ for _index, domain in ipairs(wsl_domains) do
 	-- Otherwise, its opened in the Windows user's home directory.
 	domain.default_cwd = "~"
 end
+
+local x_padding = 8
 
 return {
 	color_scheme = "Dracula (Official)",
@@ -123,5 +125,11 @@ return {
 			mods = "CTRL",
 			action = wezterm.action.CloseCurrentTab({ confirm = false }),
 		},
+	},
+	window_padding = {
+		left = x_padding,
+		right = x_padding,
+		top = 0,
+		bottom = 0,
 	},
 }

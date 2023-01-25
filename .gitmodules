@@ -82,3 +82,6 @@
 [submodule "dracula/xresources"]
 	path = src/github.com/dracula/xresources
 	url = https://github.com/dracula/xresources.git
+[submodule "dracula/alacritty"]
+	path = src/github.com/dracula/alacritty
+	url = https://github.com/dracula/alacritty
