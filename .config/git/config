@@ -50,7 +50,7 @@
 	# Find tags containing commit
 	ft = "!f() { git describe --always --contains $1; }; f"
 	# List contributors with number of commits.
-	contributors = shortlog --summary --numbered
+	contributors = shortlog --summary --numbered --no-merges
 	ignore = "!gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@; }; gi"
 	# Find and replace text in the entire git repo
 	fr = "!gr() { git grep -l "$1" | xargs sed -i '' -e "s/$1/$2/g" 2> /dev/null; }; gr"
