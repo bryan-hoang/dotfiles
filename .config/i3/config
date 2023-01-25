@@ -39,10 +39,19 @@ workspace $ws3 output HDMI-0
 workspace $ws4 output HDMI-1
 workspace $ws5 output HDMI-0
 
+# Browsers
 for_window [class="(?i)firefox"] move to workspace $ws1
+for_window [class="(?i)chromium"] move to workspace $ws1
+for_window [class="(?i)tor browser"] move to workspace $ws1
+for_window [class="(?i)chrome"] move to workspace $ws1
+# WebKit
+for_window [class="(?i)epiphany"] move to workspace $ws1
+for_window [class="(?i)minibrowser"] move to workspace $ws1
 for_window [class="Sizzy"] move to workspace $ws1
-for_window [class="Code"] move to workspace $ws2
+
 for_window [class="wezterm"] move to workspace $ws2
+for_window [class="(?i)alacritty"] move to workspace $ws2
+for_window [class="Code"] move to workspace $ws2
 for_window [class="Slack"] move to workspace $ws3
 for_window [class="discord"] move to workspace $ws3
 for_window [class="(?i)thunderbird"] move to workspace $ws4
