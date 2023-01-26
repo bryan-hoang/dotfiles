@@ -4,6 +4,8 @@
 
 . "$XDG_CONFIG_HOME"/shell/common.sh
 
+does_program_exist rust-motd && rust-motd
+
 # Setting shell options
 
 # Configure Ctril-w to delete words like ZSH.
