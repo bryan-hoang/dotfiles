@@ -8,6 +8,7 @@
 
 # shellcheck disable=SC1091
 . "$HOME"/.config/shell/env.sh
+[ -s "$HOME"/.config/shell/extra.sh ] && . "$HOME"/.config/shell/extra.sh
 
 # https://wiki.archlinux.org/title/Systemd/User#Environment_variables
 if command -v dbus-update-activation-environment >/dev/null \
