@@ -43,3 +43,4 @@ typescript
 typescript-language-server
 # LS for editors.
 bash-language-server
+yaml-language-server
