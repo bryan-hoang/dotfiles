@@ -9,13 +9,13 @@ insert_final_newline = true
 root = true
 trim_trailing_whitespace = true
 
-[*.{py,yml,yaml,md}]
+[*.{py,yml,yaml,md,kdl}]
 indent_style = space
 
 [*gemrc]
 indent_style = space
 
-[*.py]
+[*.{py,kdl}]
 indent_size = 4
 
 [*.rs]
