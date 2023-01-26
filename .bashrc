@@ -2,10 +2,6 @@
 #
 # shellcheck disable=SC1091,SC2154
 
-. "$XDG_CONFIG_HOME"/shell/common.sh
-
-does_program_exist rust-motd && rust-motd
-
 # Setting shell options
 
 # Configure Ctril-w to delete words like ZSH.
@@ -101,9 +97,11 @@ plugins=(
 # shellcheck disable=SC1091
 [[ -s "$OSH"/oh-my-bash.sh ]] && . "$OSH"/oh-my-bash.sh
 
-does_function_exist && pyvenv_auto_activate_enable
+. "$XDG_CONFIG_HOME"/shell/common.sh
 
-[[ -s "$ASDF_DIR"/asdf.sh ]] && . "$ASDF_DIR"/asdf.sh
+does_program_exist rust-motd && rust-motd
+
+does_function_exist && pyvenv_auto_activate_enable
 
 # endregion
 
