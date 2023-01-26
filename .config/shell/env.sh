@@ -162,7 +162,7 @@ export CONDARC="$XDG_CONFIG_HOME"/conda/condarc
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 chmod 600 "$GNUPGHOME"/*
-chmod 700 "$GNUPGHOME"
+chmod 700 "$GNUPGHOME" "$GNUPGHOME"/private-keys-v1.d
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
 export INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME"/ripgrep/config
