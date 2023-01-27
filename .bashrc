@@ -2,6 +2,13 @@
 #
 # shellcheck disable=SC1091,SC2154
 
+# From `/etc/skel/.bashrc`.
+# If not running interactively, don't do anything.
+case $- in
+	*i*) ;;
+	*) return ;;
+esac
+
 # Setting shell options
 
 # Configure Ctril-w to delete words like ZSH.
