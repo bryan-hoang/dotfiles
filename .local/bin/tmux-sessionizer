@@ -44,7 +44,7 @@ while IFS='' read -r line; do proj_dirs+=("$line"); done < <(
 # Converting `:` delimited string into an array:
 # https://stackoverflow.com/a/45201229
 # shellcheck disable=2153
-if [[ -n ${PROJ_DIRS:-} ]]; then
+if [[ -n ${PROJ_DIRS-} ]]; then
 	readarray -t -d ':' -O "${#proj_dirs[@]}" proj_dirs < <(
 		awk '{ gsub(/, /,"\0"); print; }' <<<"$PROJ_DIRS: "
 	)
@@ -54,7 +54,7 @@ fi
 
 readonly proj_dirs
 
-if [[ -n ${debug:-} ]]; then
+if [[ -n ${debug-} ]]; then
 	echo 'Directories to search:'
 	printf '%s\n' "${proj_dirs[@]}"
 	exit
@@ -68,18 +68,11 @@ else
 	# Conditionally add the cwd to the project list if it isn't already present.
 	cwd=$PWD/
 	readonly cwd
-	if [[ ${proj_dirs[*]} =~ $cwd ]]; then
-		selected=$(
-			fd --type d --exact-depth 1 . "${proj_dirs[@]}" \
-				| cat - <(echo "$cwd") \
-				| fzf
-		)
-	else
-		selected=$(
-			fd --type d --exact-depth 1 . "${proj_dirs[@]}" \
-				| fzf
-		)
-	fi
+	selected=$(
+		fd --type d --exact-depth 1 . "${proj_dirs[@]}" \
+			| if [[ ${proj_dirs[*]} =~ $cwd ]]; then cat - <(echo "$cwd"); else cat; fi \
+			| fzf
+	)
 fi
 
 readonly selected
@@ -92,7 +85,7 @@ declare selected_name
 selected_name=$(basename "$selected" | tr . _)
 readonly selected_name
 
-if [[ -z ${TMUX:-} ]]; then
+if [[ -z ${TMUX-} ]]; then
 	tmux new-session -s "$selected_name" -c "$selected" -A
 else
 	# If we're in tmux, handle edge cases to ensure the session exists before
