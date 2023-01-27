@@ -85,3 +85,6 @@
 [submodule "dracula/alacritty"]
 	path = src/github.com/dracula/alacritty
 	url = https://github.com/dracula/alacritty
+[submodule "dracula/kitty"]
+	path = src/github.com/dracula/kitty
+	url = https://github.com/dracula/kitty.git
