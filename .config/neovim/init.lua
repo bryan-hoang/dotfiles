@@ -91,3 +91,25 @@ set_file_associations({
 	["nginx"] = { "/etc/nginx/**/*.conf" },
 	["sshconfig"] = { "**/.ssh/conf.d/*.conf" },
 })
+
+-- Automatically jump to the last place visited in a file before exiting.
+--
+-- https://this-week-in-neovim.org/2023/Jan/02#tips
+vim.api.nvim_create_autocmd("BufReadPost", {
+	callback = function()
+		local cursor_position = vim.api.nvim_win_get_cursor(0)
+		local mark = vim.api.nvim_buf_get_mark(0, '"')
+		local lcount = vim.api.nvim_buf_line_count(0)
+		if
+			-- Line number not specified from CLI. i.e., in default position.
+			cursor_position[1] == 1
+			and cursor_position[2] == 0
+			-- Bounds check the mark for the current version of the file opened in the
+			-- buffer.
+			and mark[1] > 0
+			and mark[1] <= lcount
+		then
+			pcall(vim.api.nvim_win_set_cursor, 0, mark)
+		end
+	end,
+})
