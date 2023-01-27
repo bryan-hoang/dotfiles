@@ -88,3 +88,6 @@
 [submodule "dracula/kitty"]
 	path = src/github.com/dracula/kitty
 	url = https://github.com/dracula/kitty.git
+[submodule "dracula/zellij"]
+	path = src/github.com/dracula/zellij
+	url = https://github.com/dracula/zellij.git
