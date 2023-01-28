@@ -39,6 +39,8 @@ does_program_exist just \
 does_program_exist starship \
 	&& generate_completions zsh starship starship completions zsh \
 	&& generate_completions bash starship starship completions bash
+does_program_exist bw \
+	&& generate_completions zsh bw bw completion --shell zsh | sed -e 's/\x1b\[[0-9;]*m//g'
 
 # endregion
 

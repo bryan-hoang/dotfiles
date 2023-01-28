@@ -1287,23 +1287,24 @@ generate_completions() {
 	local -r zsh_completion_file="$ZSH_USER_FPATH"/_"$command_to_complete"
 
 	case "$shell" in
+		# sed to strip ANSI escape codes. *cough* bw *cough*
 		bash)
 			if [[ ! -s ${bash_completion_file} ]]; then
-				"${completion_cmd[@]}" >|"$bash_completion_file"
+				"${completion_cmd[@]}" | sed -e 's/\x1b\[[0-9;]*m//g' >|"$bash_completion_file"
 			fi
 			;;
 		zsh)
 			if [[ ! -s ${zsh_completion_file} ]]; then
-				"${completion_cmd[@]}" >|"$zsh_completion_file"
+				"${completion_cmd[@]}" | sed -e 's/\x1b\[[0-9;]*m//g' >|"$zsh_completion_file"
 			fi
 			;;
 		all)
 			if [[ ! -s ${bash_completion_file} ]]; then
-				"${completion_cmd[@]}" >|"$bash_completion_file"
+				"${completion_cmd[@]}" | sed -e 's/\x1b\[[0-9;]*m//g' >|"$bash_completion_file"
 			fi
 
 			if [[ ! -s ${zsh_completion_file} ]]; then
-				"${completion_cmd[@]}" >|"$zsh_completion_file"
+				"${completion_cmd[@]}" | sed -e 's/\x1b\[[0-9;]*m//g' >|"$zsh_completion_file"
 			fi
 			;;
 		*)
