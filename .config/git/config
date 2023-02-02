@@ -79,6 +79,7 @@
 	# https://stackoverflow.com/a/27940027/8714233
 	review-changes = "!f() { git merge-base origin/$(git default-branch) origin/$(git branch --show-current) | xargs -I % git diff %..origin/$(git branch --show-current); }; f"
 	review-commits = "!f() { git log --oneline origin/$(git default-branch)..$(git branch --show-current) \"$@\";  }; f"
+	log-local = "!f() { git log --oneline --decorate=no origin/$(git branch --show-current).. \"$@\"; }; f"
 [apply]
 	# Detect whitespace errors when applying a patch.
 	whitespace = fix
