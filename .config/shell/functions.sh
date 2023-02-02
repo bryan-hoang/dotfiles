@@ -284,18 +284,12 @@ install_jq() {
 
 install_cht.sh() {
 	echo "Installing cht..."
-	BASH_DIR="${HOME}/.bash.d"
-
 	# Note: The package `rlwrap` is a required dependency to run in shell mode.
 	install_apt_packages rlwrap
-
-	mkdir -p "$BASH_DIR"
-
 	curl https://cht.sh/:cht.sh >"${XDG_BIN_HOME}/cht.sh"
 	chmod +x "${XDG_BIN_HOME}/cht.sh"
-	curl https://cheat.sh/:bash_completion >"$BASH_DIR"/cht.sh
-	curl https://cheat.sh/:zsh >"$ZSH_USER_FPATH"/_cht
-
+	generate_completions bash cht.sh curl https://cheat.sh/:bash_completion
+	generate_completions zsh cht.sh curl https://cheat.sh/:zsh
 	cht.sh --help
 	echo "Installed cht successfully!"
 }
