@@ -120,7 +120,7 @@ export GHQ_ROOT="$HOME"/src
 
 case ${TERM} in
 	# WSL in windows Terminal colour support.
-	xterm-256color|wezterm)
+	xterm-256color | wezterm)
 		export COLORTERM=truecolor
 		;;
 	*) ;;
@@ -153,6 +153,8 @@ export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME"/python
 export ZSH="$ZDOTDIR"/ohmyzsh
 export ZSH_USER_FPATH="$XDG_DATA_HOME"/zsh/completions
 mkdir -p "$ZSH_USER_FPATH"
+export ZSH_CACHE_DIR="$XDG_CACHE_HOME"/zsh
+export ZSH_COMPDUMP="$ZSH_CACHE_DIR"/.zcompdump
 export HISTFILE="$XDG_STATE_HOME"/shell/history
 mkdir -p "$(dirname "$HISTFILE")"
 export TEXMFHOME="$XDG_DATA_HOME"/texmf
