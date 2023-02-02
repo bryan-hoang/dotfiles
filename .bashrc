@@ -106,8 +106,6 @@ plugins=(
 
 . "$XDG_CONFIG_HOME"/shell/common.sh
 
-does_program_exist rust-motd && rust-motd
-
 does_function_exist && pyvenv_auto_activate_enable
 
 # endregion

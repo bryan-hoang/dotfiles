@@ -9,6 +9,10 @@ for file in "$XDG_CONFIG_HOME"/shell/{aliases,functions,extra}.sh; do
 	[[ -f $file ]] && . "$file"
 done
 
+if [[ -n $SSH_CONNECTION ]] && does_program_exist rust-motd; then
+	rust-motd
+fi
+
 if is_git_bash; then
 	start_ssh_agent
 fi
