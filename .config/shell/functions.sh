@@ -495,6 +495,7 @@ install_default_pkgs() {
 			fi
 
 			install_cmd+=(install)
+			install_opts+=(--force)
 			;;
 		pip | pip3)
 			install_cmd+=(install)
