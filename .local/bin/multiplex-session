@@ -82,17 +82,36 @@ if [[ -z $selected ]]; then
 fi
 
 declare selected_name
-selected_name=$(basename "$selected" | tr . _)
+selected_name=$(basename "$selected")
 readonly selected_name
 
-if [[ -z ${TMUX-} ]]; then
-	tmux new-session -s "$selected_name" -c "$selected" -A
-else
-	# If we're in tmux, handle edge cases to ensure the session exists before
-	# switching to it, without nesting tmux.
-	if ! tmux has-session -t "$selected_name" 2>/dev/null; then
-		tmux new-session -s "$selected_name" -c "$selected" -d
-	fi
+multiplex_tmux() {
+	if [[ -z ${TMUX-} ]]; then
+		tmux new-session -s "$selected_name" -c "$selected" -A
+	else
+		# If we're in tmux, handle edge cases to ensure the session exists before
+		# switching to it, without nesting tmux.
+		if ! tmux has-session -t "$selected_name" 2>/dev/null; then
+			tmux new-session -s "$selected_name" -c "$selected" -d
+		fi
 
-	tmux switch-client -t "$selected_name"
-fi
+		tmux switch-client -t "$selected_name"
+	fi
+}
+
+multiplex_zellij() {
+	if [[ -z ${ZELLIJ-} ]]; then
+		cat >"$HOME"/.config/zellij/layouts/"$selected_name".kdl <<EOF
+layout {
+		cwd "$selected"
+		pane
+		pane size=1 borderless=true {
+				plugin location="zellij:compact-bar"
+		}
+}
+EOF
+		zellij --layout "$selected_name" attach --create "$selected_name"
+	fi
+}
+
+multiplex_"${MULTIPLEXER:-tmux}"

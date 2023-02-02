@@ -71,11 +71,6 @@ zstyle ':completion::complete:*' gain-privileges 1
 # https://wiki.archlinux.org/title/zsh#Persistent_rehash
 zstyle ':completion:*' rehash true
 
-# tmuxinator completions.
-[[ -s "$ZSH_USER_FPATH"/_tmuxinator ]] \
-	|| wget https://raw.githubusercontent.com/tmuxinator/tmuxinator/master/completion/tmuxinator.zsh \
-		-O "$ZSH_USER_FPATH"/_tmuxinator
-
 # Enable user specific completions.
 autoload -U compinit
 compinit
@@ -204,4 +199,4 @@ fi
 # Alt-s makes switching between tmux workspaces of projects easier. Inspired by
 # ThePrimeagen. Wrap the command in a custom widget so that the command isn't
 # typed out.
-bindkey -s '^[s' 'tmux-sessionizer\n'
+bindkey -s '^[s' 'multiplex-session\n'
