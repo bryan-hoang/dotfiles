@@ -23,8 +23,8 @@ fi
 # Determine if we're in a Linux desktop environment.
 # https://wiki.archlinux.org/title/Xinit
 if [ "$DISPLAY" != "" ] && ! uname -a | grep -q -E 'Msys'; then
-	# Swap Ctrl and Caps Lock.
 	setxkbmap -option ctrl:swapcaps
+	setxkbmap -option compose:rctrl
 
 	xrdb -merge "$XDG_CONFIG_HOME"/X11/xresources
 
