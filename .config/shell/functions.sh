@@ -489,6 +489,10 @@ install_default_pkgs() {
 		cargo)
 			install_cmd+=(install)
 			;;
+		cargo-binstall)
+			install_cmd+=()
+			install_opts+=(--no-confirm)
+			;;
 		espanso)
 			if is_git_bash; then
 				install_cmd[0]+='.cmd'

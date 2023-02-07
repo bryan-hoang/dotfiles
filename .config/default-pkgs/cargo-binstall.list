@@ -1,0 +1,115 @@
+# A cargo subcommand for checking and applying updates to installed
+# executables.
+cargo-update
+# A smarter cd command, inspired by z and autojump. It remembers which
+# directories you use most frequently, so you can "jump" to them in just a few
+# keystrokes.
+zoxide
+# Recursively searches directories for a regex pattern while respecting your
+# gitignore.
+ripgrep
+# A simple, fast and user-friendly alternative to 'find'.
+fd-find
+# A syntax-highlighting pager for git and diff output.
+git-delta
+# A cat(1) clone with wings.
+bat
+# A very fast implementation of tldr in Rust.
+tealdeer
+# A more intuitive version of du in rust.
+du-dust
+# 🌀 A nonsense activity generator.
+genact
+# Upgrade everything.
+topgrade
+# An opinionated Lua code formatter.
+stylua
+# A cli system trash manager, alternative to rm and trash-cli.
+trashy
+# Terminal image viewer.
+viu
+# A jq clone focussed on correctness, speed, and simplicity.
+jaq
+# Executes commands in response to file modifications.
+watchexec-cli
+# Create beautiful image of your source code.
+# silicon
+# Yet another cross-platform graphical process/system monitor.
+bottom
+# 🤖 Just a command runner.
+# just
+# Manage cargo cache (${CARGO_HOME}, ~/.cargo/), print sizes of dirs and
+# remove dirs selectively.
+# cargo-cache
+# git commit --fixup, but automatic.
+# git-absorb
+# Ping, but with a graph.
+# gping
+# A command-line benchmarking tool.
+# hyperfine
+# 📬 Easily and securely share files from the command line. A fully featured
+# Firefox Send client.
+# ffsend
+# rga: ripgrep, but also search in PDFs, E-Books, Office documents, zip,
+# tar.gz, etc.
+# ripgrep_all --locked
+# An interactive cheatsheet tool for the command-line.
+# navi --locked
+# Count your code, quickly.
+# tokei
+# Git repository summary on your terminal.
+# onefetch
+# A command-line tool and library for generating regular expressions (regex)
+# from user-provided test cases.
+# grex
+# A modern replacement for ps written in Rust.
+# procs
+# Intuitive find & replace CLI (sed alternative).
+# sd
+# A fast CSV command line toolkit written in Rust.
+# xsv
+# A cross-platform CLI csv pretty printer that uses column styling to maximize
+# viewer enjoyment.
+# tidy-viewer
+# A command-line hex viewer.
+# hexyl
+# Friendly and fast tool for sending HTTP requests.
+# xh
+# Multi functional app to find duplicates, empty folders, similar images etc.
+# czkawka_cli
+# A command-line tool to generate, analyze, convert and manipulate colors.
+# pastel
+# A new way to see and navigate directory trees.
+# broot
+# Blazing 💥 fast terminal-ui for git written in rust 🦀. (perl in git-bash)
+# gitui
+# Like jq, but for HTML.
+# htmlq
+# Command-line interface for email management.
+# himalaya
+# A fully functional file server.
+# dufs Tree command, improved.
+# tre-command
+# Save space by cleaning non-essential files from software projects.
+# kondo
+# Command-line JSON viewer designed for reading, exploring, and searching
+# through JSON data.
+# jless
+# A simple tui to view & control docker containers.
+# oxker
+# Realtime ticker data in your terminal (tarkah/tickrs).
+# tickrs
+
+# Windows Incompatible.
+
+# A modern replacement for `ls`.
+# https://github.com/ogham/exa/pull/820#issue-841921204
+exa
+# Fly through your shell history. Great Scott!
+# https://github.com/cantino/mcfly/issues/106#issue-723327406
+mcfly
+# 🤖 The Modern Port Scanner 🤖.
+# https://github.com/RustScan/RustScan/issues/412#issue-1045541309
+# rustscan
+# Lightweight color picker for X11.
+# xcolor
