@@ -17,7 +17,6 @@ local x_padding = 8
 
 return {
 	color_scheme = "Dracula (Official)",
-	term = "wezterm",
 	font = wezterm.font(
 		is_os_unix and "FiraCode Nerd Font Mono" or "FiraCode NFM"
 	),

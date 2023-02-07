@@ -126,7 +126,6 @@ case ${TERM} in
 	*) ;;
 esac
 
-export TERMINAL=wezterm
 export WEZTERM_CONFIG_FILE="$XDG_CONFIG_HOME"/wezterm/wezterm.lua
 
 # `exa` options
