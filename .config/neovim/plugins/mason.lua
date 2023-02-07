@@ -23,9 +23,11 @@ return {
 			"shellcheck",
 			"shellharden",
 			"shfmt",
-			-- Markdown "ltex-ls",
+			-- Markdown
+			"ltex-ls",
 			"vale",
 			"markdownlint",
+			"marksman",
 			-- DAPs.
 			"js-debug-adapter",
 			"bash-debug-adapter",

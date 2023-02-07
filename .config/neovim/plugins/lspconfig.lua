@@ -35,6 +35,7 @@ return {
 			"taplo",
 			-- Markdown
 			"ltex",
+			"marksman",
 			-- Ruby
 			"sorbet",
 			"ruby_ls",
