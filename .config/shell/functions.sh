@@ -1341,3 +1341,7 @@ install_wezterm_terminfo() {
 		&& tic -x -o "$TERMINFO" "$tempfile" \
 		&& rm "$tempfile"
 }
+
+setup_windows() {
+	winget import --import-file "$XDG_CONFIG_HOME"/winget/packages.json
+}

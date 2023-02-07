@@ -2,12 +2,7 @@
 
 #region Functions
 
-# Add commands that make it easy to open your profile.
-function Pro {
-	code $PROFILE.CurrentUserAllHosts
-}
-
-# Add a function that lists the aliases for any cmdlet.
+# Lists the aliases for any cmdlet.
 function Get-CmdletAlias ($cmdletname) {
 	Get-Alias |
 		Where-Object -FilterScript {$_.Definition -like "$cmdletname"} |
@@ -20,7 +15,7 @@ function Disable-New-Context-Menu {
 }
 
 # Print the values of all environment variables.
-function printenv {
+function env {
 	Get-ChildItem env:
 }
 
@@ -28,19 +23,38 @@ function path {
 	$env:PATH -split ";"
 }
 
+function export($envname, $envvalue) {
+	if ([string]::IsNullOrEmpty([Environment]::GetEnvironmentVariable($envname))) {
+		[Environment]::SetEnvironmentVariable(
+			$envname,
+			$envvalue,
+			"User"
+		)
+	}
+
+	Set-Item "env:$envname" $envvalue
+}
+
 #endregion
 
 #region Aliases
-
-Set-Alias which get-command
-
 #endregion
 
 #region Environment Variables
 
+# Enable symlinking.
+export "MSYS" "winsymlinks:nativestrict"
+export "XDG_CONFIG_HOME" "$env:USERPROFILE\.config"
+export "XDG_LOCAL_HOME" "$env:USERPROFILE\.local"
+export "XDG_DATA_HOME" "$env:XDG_LOCAL_HOME\share"
+export "CARGO_HOME" "$env:XDG_DATA_HOME\cargo"
+export "RUSTUP_HOME" "$env:XDG_DATA_HOME\rustup"
+export "KOMOREBI_CONFIG_HOME" "$env:XDG_CONFIG_HOME\komorebi"
+export "PNPM_HOME" "$env:XDG_DATA_HOME\pnpm"
+export "GOPATH" "$env:XDG_DATA_HOME\go"
+
 $env:PATH = "$env:HOMEPATH\.asdf;$env:PATH"
 $env:PATH = "$env:HOMEPATH\.asdf\shims;$env:PATH"
-$env:KOMOREBI_CONFIG_HOME = "$env:USERPROFILE\.config\komorebi"
 
 #endregion
 
@@ -52,3 +66,4 @@ Invoke-Expression (& {
 
 # Initializing Starship prompt.
 Invoke-Expression (&starship init powershell)
+export "STARSHIP_SHELL" "C:\Program Files\Git\bin\bash.exe --noprofile --norc"
