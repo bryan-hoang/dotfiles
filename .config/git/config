@@ -128,7 +128,7 @@
 	# If set to true, enable the built-in file system monitor daemon for
 	# this working directory.
 	fsmonitor = true
-	hooksPath = ~/Templates/git/hooks
+	hooksPath = hooks
 	pager = delta
 [interactive]
 	diffFilter = delta --color-only
