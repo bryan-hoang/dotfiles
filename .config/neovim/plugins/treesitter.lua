@@ -1,4 +1,9 @@
 return {
+	requires = {
+		{
+			"windwp/nvim-ts-autotag",
+		},
+	},
 	-- https://github.com/nvim-treesitter/nvim-treesitter/wiki/Installation#packernvim
 	run = function()
 		local ts_update = require("nvim-treesitter.install").update({})
@@ -14,5 +19,8 @@ return {
 		--
 		-- A list of parser names, or "all".
 		ensure_installed = "all",
+		autotag = {
+			enable = true,
+		},
 	},
 }
