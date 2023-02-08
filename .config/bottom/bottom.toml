@@ -156,9 +156,9 @@ type = "proc"
 #case_sensitive = false
 #whole_word = false
 
-#[temp_filter]
+# [temp_filter]
 #is_list_ignored = true
-#list = ["cpu", "wifi"]
+# list = []
 #regex = false
 #case_sensitive = false
 #whole_word = false
