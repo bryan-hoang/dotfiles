@@ -61,6 +61,7 @@ opt.formatoptions:append("j")
 opt.breakindent = true
 opt.linebreak = true
 opt.showbreak = "↪ "
+opt.exrc = true
 
 -- Show certain whitespace characters. Don't show all space characters,
 -- otherwise messes with wezterm's hyperlink detection.

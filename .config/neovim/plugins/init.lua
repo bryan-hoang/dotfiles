@@ -38,8 +38,6 @@ local module = {
 	["nvim-treesitter/nvim-treesitter-context"] = require(
 		"custom.plugins.treesitter_context"
 	),
-	-- Enable loading project specific config files.
-	["windwp/nvim-projectconfig"] = require("custom.plugins.projectconfig"),
 	-- Embed Neovim in Chrome, Firefox, Thunderbird & others.
 	["glacambre/firenvim"] = require("custom.plugins.firenvim"),
 	--A tree like view for symbols in Neovim using the Language Server Protocol.
