@@ -1,0 +1,22 @@
+{
+	"$schema": "https://raw.githubusercontent.com/DavidAnson/markdownlint/main/schema/markdownlint-config-schema.json",
+	// https://github.com/DavidAnson/markdownlint/blob/main/doc/md013.md
+	"line-length": {
+		/**
+		 * Warn for lines that are too long and could be fixed but allow long lines
+		 * without spaces.
+		 */
+		"stern": true
+	},
+	"no-inline-html": {
+		// Allow dropdown-style elements.
+		"allowed_elements": [
+			"details",
+			"summary",
+			// To add extra spacing after `details`.
+			"br",
+			// Alternative to nested '`' inside HTMl elements.
+			"code"
+		]
+	}
+}

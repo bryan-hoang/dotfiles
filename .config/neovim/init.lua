@@ -91,6 +91,7 @@ set_file_associations({
 	["gitconfig"] = { "*.gitconfig" },
 	["nginx"] = { "/etc/nginx/**/*.conf" },
 	["sshconfig"] = { "**/.ssh/conf.d/*.conf" },
+	["jsonc"] = { "**/.config/markdownlint/config" },
 })
 
 -- Automatically jump to the last place visited in a file before exiting.
