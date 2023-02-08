@@ -110,6 +110,12 @@
 				},
 				{
 					"PackageIdentifier" : "Espanso.Espanso"
+				},
+				{
+					"PackageIdentifier" : "yt-dlp.yt-dlp"
+				},
+				{
+					"PackageIdentifier" : "Gyan.FFmpeg"
 				}
 			],
 			"SourceDetails" :
