@@ -77,3 +77,6 @@ justfile
 
 # Neovim `.exrc` file.
 .nvim.lua
+
+# Rome config file.
+rome.json
