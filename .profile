@@ -14,6 +14,8 @@
 if command -v dbus-update-activation-environment >/dev/null \
 	&& command -v systemctl >/dev/null; then
 	(
+		unset SHLVL SSH_CONNECTION SSH_CLIENT SSH_TTY
+
 		# Avoid triggering the starship prompt module in tmux server started by
 		# systemd. Remove lingering SSH env vars.
 		#
@@ -30,6 +32,7 @@ fi
 
 # Determine if we're in a Linux desktop environment.
 # https://wiki.archlinux.org/title/Xinit
+# shellcheck disable=2154
 if [ "$DISPLAY" != "" ] && [ "$XDG_VTNR" != "" ] \
 	&& ! uname | grep -q 'MINGW'; then
 	setxkbmap -option ctrl:swapcaps
