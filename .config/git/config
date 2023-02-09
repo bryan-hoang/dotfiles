@@ -373,3 +373,5 @@
 	keepBackup = false
 [checkout]
 	defaultRemote = origin
+[worktree]
+	guessRemote = true
