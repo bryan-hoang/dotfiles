@@ -394,7 +394,7 @@ install_asdf_plugin() {
 
 	local version='latest'
 
-	if [[ -n ${2:-} ]]; then
+	if [[ -n ${2-} ]]; then
 		version="$2"
 	fi
 
@@ -755,6 +755,29 @@ install_codelldb() {
 	ln -sf "$XDG_DATA_HOME"/codelldb/adapter/codelldb "$XDG_BIN_HOME"
 	codelldb -h
 	cd - >/dev/null || return
+}
+
+install_tmux() {
+	echo 'https://github.com/tmux/tmux/wiki/Installing'
+	git get https://github.com/tmux/tmux.git
+	cd "$GHQ_ROOT"/github.com/tmux/tmux || return
+	sh autogen.sh
+	./configure --prefix "$XDG_LOCAL_HOME"
+	make
+	make install
+	cd - || return
+}
+
+install_pwsh() {
+	echo 'Installing pwsh...'
+	local -r file_pattern='powershell_*-1.deb_amd64.deb'
+	gh release download --repo PowerShell/PowerShell \
+		--pattern "$file_pattern" \
+		--dir "$DOWNLOAD_DIR"
+	local -r file="$(fd --glob "$file_pattern" "$DOWNLOAD_DIR")"
+	sudo apt install -y "$file"
+	pwsh --version
+	echo 'Finished installing pwsh!'
 }
 
 # endregion Installation.
