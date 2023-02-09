@@ -4,7 +4,7 @@
 
 # https://github.com/anordal/shellharden/blob/master/how_to_do_things_safely_in_bash.md#assert-that-command-dependencies-are-installed
 require() {
-	hash "$@" || exit 127
+	hash "$@" || return 127
 }
 
 # https://github.com/anordal/shellharden/blob/master/how_to_do_things_safely_in_bash.md#echo--printf
@@ -56,6 +56,7 @@ install_wget() {
 
 install_git() {
 	require gh jq
+	install_apt_packages libcurl4-openssl-dev
 	echo "Installing git..."
 	local -r TARBALL_URL="$(gh api repos/git/git/tags \
 		| jq --raw-output '.[0].tarball_url')"
