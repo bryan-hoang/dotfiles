@@ -68,6 +68,8 @@ then
 	export SUDO_EDITOR="$EDITOR"
 fi
 
+export GOMODCACHE="$XDG_CACHE_HOME"/go
+
 # Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
 export PYTHONIOENCODING=UTF-8
 
