@@ -506,6 +506,9 @@ install_default_pkgs() {
 			install_cmd+=(install)
 			install_opts+=(--upgrade --user)
 			;;
+		pipx)
+			install_cmd+=(install)
+			;;
 		gem)
 			install_cmd+=(install)
 			;;

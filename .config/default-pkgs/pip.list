@@ -1,24 +1,4 @@
 pip
 wheel
-pipenv
-pyupgrade
-thefuck
-httpie
-Pygments
-radian
-mycli
-yt-dlp
-youtube-dl
-inkscape-figures
-python-dotenv[cli]
-litecli
+pipx
 pynvim
-pytest
-pylint
-black
-bandit
-mypy
-# Build system.
-meson
-# An extremely fast Python linter, written in Rust.
-ruff

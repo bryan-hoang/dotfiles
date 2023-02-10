@@ -237,3 +237,4 @@ export RUBY_DEBUG_HISTORY_FILE="$XDG_STATE_HOME"/rdbg/history
 mkdir -p "$(dirname "$RUBY_DEBUG_HISTORY_FILE")"
 export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
 export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle/config
+export PIPX_HOME="$XDG_DATA_HOME"/pipx
