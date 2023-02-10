@@ -1373,3 +1373,7 @@ install_wezterm_terminfo() {
 setup_windows() {
 	winget import --import-file "$XDG_CONFIG_HOME"/winget/packages.json
 }
+
+ls_glab_mr_map() {
+	glab mr list "$@" | tail +3 | head -n -1 | awk '{print $1 " " $(NF)}' | tr -d '()'
+}
