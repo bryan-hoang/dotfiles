@@ -165,6 +165,11 @@ unsetopt HIST_VERIFY
 # More bash-like.
 setopt shwordsplit
 
+# When searching for history entries in the line editor, do not display
+# duplicates of a line previously found, even if the duplicates are not
+# contiguous.
+setopt HIST_FIND_NO_DUPS
+
 # shellcheck disable=SC1091
 [[ -s "$HOME"/.asdf/plugins/java/set-java-home.zsh ]] \
 	&& . "$HOME"/.asdf/plugins/java/set-java-home.zsh

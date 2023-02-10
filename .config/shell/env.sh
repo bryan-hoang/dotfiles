@@ -74,9 +74,9 @@ export GOMODCACHE="$XDG_CACHE_HOME"/go
 export PYTHONIOENCODING=UTF-8
 
 # Increase history size. The default is 500.
-export HISTSIZE=32768
-export HISTFILESIZE="$HISTSIZE"
-export SAVEHIST="$HISTSIZE"
+export HISTFILESIZE=50000
+export HISTSIZE="$HISTFILESIZE"
+export SAVEHIST="$HISTFILESIZE"
 
 # Omit duplicates and commands that begin with a space from history.
 export HISTCONTROL='ignoreboth:erasedups'
@@ -93,7 +93,7 @@ export NODE_REPL_HISTORY="$XDG_STATE_HOME"/node/history
 mkdir -p "$(dirname "$NODE_REPL_HISTORY")"
 
 # Allow 32^3 entries; the default is 1000.
-export NODE_REPL_HISTORY_SIZE="$HISTSIZE"
+export NODE_REPL_HISTORY_SIZE="$HISTFILESIZE"
 
 # Use sloppy mode by default, matching web browsers.
 export NODE_REPL_MODE=sloppy
@@ -140,7 +140,7 @@ export EXA_STRICT=true
 
 export MCFLY_KEY_SCHEME=vim
 export MCFLY_RESULTS_SORT=LAST_RUN
-export MCFLY_HISTORY_LIMIT="$HISTSIZE"
+export MCFLY_HISTORY_LIMIT="$HISTFILESIZE"
 export MCFLY_RESULTS=20
 export MCFLY_INTERFACE_VIEW=BOTTOM
 export MCFLY_FUZZY=2
