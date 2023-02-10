@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+#
+# shellcheck disable=SC2154
 
 # Uncomment the following line to disable auto-setting terminal title.
 # shellcheck disable=SC2034
@@ -170,9 +172,12 @@ setopt shwordsplit
 # contiguous.
 setopt HIST_FIND_NO_DUPS
 
-# shellcheck disable=SC1091
-[[ -s "$HOME"/.asdf/plugins/java/set-java-home.zsh ]] \
-	&& . "$HOME"/.asdf/plugins/java/set-java-home.zsh
+# Prevent the script from changing PATH, already handled in `env.sh`.
+OLD_PATH=$PATH
+. "$ASDF_DIR"/asdf.sh
+PATH=$OLD_PATH
+export PATH
+unset OLD_PATH
 
 does_program_exist starship && eval "$(starship init zsh)"
 does_program_exist mcfly && eval "$(mcfly init zsh)"
@@ -196,7 +201,7 @@ fi
 	&& . "$HOME"/.config/tabtab/zsh/__tabtab.zsh
 
 # Enable shell command completion for gcloud.
-if [ -f "$XDG_DATA_HOME"/google-cloud-sdk/completion.zsh.inc ]; then
+if [[ -f "$XDG_DATA_HOME"/google-cloud-sdk/completion.zsh.inc ]]; then
 	# shellcheck disable=SC1091
 	. "$XDG_DATA_HOME"/google-cloud-sdk/completion.zsh.inc
 fi
