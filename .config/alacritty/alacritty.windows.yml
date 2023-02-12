@@ -1,8 +1,8 @@
-# Unix specific config file directly loaded by Alacritty.
+# Windows specific config file directly loaded by Alacritty.
 # https://github.com/alacritty/alacritty#configuration
 
 import:
-  - ~/.config/alacritty/alacritty.common.yaml
+  - ~/.config/alacritty/alacritty.common.yml
 
 # Font configuration
 font:
@@ -15,3 +15,23 @@ font:
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
     family: FiraCode NFM
+
+# Shell
+#
+# You can set `shell.program` to the path of your favorite shell, e.g.
+# `/bin/fish`. Entries in `shell.args` are passed unmodified as arguments to the
+# shell.
+#
+# Default:
+#   - (Linux/BSD/macOS) `$SHELL` or the user's login shell, if `$SHELL` is unset
+#   - (Windows) powershell
+shell:
+  program: 'C:\Program Files\Git\bin\bash.exe'
+  args:
+    - --login
+
+# Startup directory
+#
+# Directory the shell is started in. If this is unset, or `None`, the working
+# directory of the parent process will be used.
+working_directory: 'C:\Users\bryan'

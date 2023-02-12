@@ -2,7 +2,7 @@
 # https://github.com/alacritty/alacritty#configuration
 
 import:
-  - ~/.config/alacritty/alacritty.common.yaml
+  - ~/.config/alacritty/alacritty.common.yml
 
 # Font configuration
 font:
