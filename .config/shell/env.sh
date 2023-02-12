@@ -6,8 +6,6 @@ export XDG_DATA_HOME="$XDG_LOCAL_HOME"/share
 export XDG_STATE_HOME="$XDG_LOCAL_HOME"/state
 export XDG_CONFIG_HOME="$HOME"/.config
 export XDG_CACHE_HOME="$HOME"/.cache
-export TMPDIR="$XDG_CACHE_HOME"/tmp
-mkdir -p "$TMPDIR"
 
 export BUN_INSTALL="$XDG_DATA_HOME"/bun
 export DENO_INSTALL="$XDG_DATA_HOME"/deno
@@ -238,3 +236,5 @@ mkdir -p "$(dirname "$RUBY_DEBUG_HISTORY_FILE")"
 export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
 export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle/config
 export PIPX_HOME="$XDG_DATA_HOME"/pipx
+export SDIRS="$XDG_STATE_HOME"/bashmarks/sdirs
+mkdir -p "$(dirname "$SDIRS")"

@@ -39,4 +39,6 @@ else
 	set ttimeout
 	set ttimeoutlen=1
 	set ttyfast
+
+	let MRU_File = $XDG_DATA_HOME."/vim/vim_mru_files"
 endif
