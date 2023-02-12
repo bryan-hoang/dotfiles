@@ -21,10 +21,8 @@ if command -v dbus-update-activation-environment >/dev/null \
 		#
 		# shellcheck disable=2046
 		dbus-update-activation-environment --systemd --all >/dev/null 2>&1 \
-			|| mkdir -p "$XDG_CONFIG_HOME"/environment.d \
-			&& env | grep --invert-match \
-				-e SHLVL -e SSH_CONNECTION -e SSH_CLIENT -e SSH_TTY | sort \
-				>|"$XDG_CONFIG_HOME"/environment.d/tmux.conf
+			|| systemctl --user import-environment \
+				"$(awk 'BEGIN{for(v in ENVIRON) print v}' | grep -iv -e awk -e lua)"
 		systemctl --user unset-environment SHLVL SSH_CONNECTION SSH_CLIENT SSH_TTY
 		systemctl --user start tmux.service
 	)
