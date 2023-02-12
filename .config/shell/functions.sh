@@ -1377,7 +1377,7 @@ install_wezterm_terminfo() {
 }
 
 setup_windows() {
-	winget import --import-file "$XDG_CONFIG_HOME"/winget/packages.json
+	winget import --import-file "$XDG_CONFIG_HOME"/windows/winget-pkgs.json
 }
 
 ls_glab_mr_map() {

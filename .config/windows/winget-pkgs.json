@@ -119,6 +119,9 @@
 				},
 				{
 					"PackageIdentifier" : "DenoLand.Deno"
+				},
+				{
+					"PackageIdentifier" : "Alacritty.Alacritty"
 				}
 			],
 			"SourceDetails" :

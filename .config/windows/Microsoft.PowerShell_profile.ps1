@@ -53,9 +53,6 @@ export "KOMOREBI_CONFIG_HOME" "$env:XDG_CONFIG_HOME\komorebi"
 export "PNPM_HOME" "$env:XDG_DATA_HOME\pnpm"
 export "GOPATH" "$env:XDG_DATA_HOME\go"
 
-$env:PATH = "$env:HOMEPATH\.asdf;$env:PATH"
-$env:PATH = "$env:HOMEPATH\.asdf\shims;$env:PATH"
-
 #endregion
 
 # Hooking zoxide.
