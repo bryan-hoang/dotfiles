@@ -3,7 +3,7 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local is_os_unix = string.sub(package.config, 1, 1) == "/"
 local zsh = { "zsh", "--interactive" }
-local bash = { "bash", "--interactive" }
+local bash = { "bash", "-i" }
 local git_bash = { "C:\\Program Files\\Git\\bin\\bash.exe", "--login" }
 local wsl_domains = wezterm.default_wsl_domains()
 
