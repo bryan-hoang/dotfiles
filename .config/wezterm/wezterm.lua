@@ -1,11 +1,18 @@
 local wezterm = require("wezterm")
 
 local act = wezterm.action
+local mux = wezterm.mux
 local is_os_unix = string.sub(package.config, 1, 1) == "/"
 local zsh = { "zsh", "--interactive" }
 local bash = { "bash", "-i" }
 local git_bash = { "C:\\Program Files\\Git\\bin\\bash.exe", "--login" }
 local wsl_domains = wezterm.default_wsl_domains()
+
+wezterm.on("gui-startup", function(cmd)
+	---@diagnostic disable-next-line: unused-local
+	local _tab, _pane, window = mux.spawn_window(cmd or {})
+	window:gui_window():maximize()
+end)
 
 ---@diagnostic disable-next-line: unused-local
 for _index, domain in ipairs(wsl_domains) do
@@ -21,7 +28,7 @@ return {
 		is_os_unix and "FiraCode Nerd Font Mono" or "FiraCode NFM"
 	),
 	-- Default is 12.0.
-	font_size = 12.0,
+	font_size = 11.0,
 	default_cursor_style = "SteadyBlock",
 	use_fancy_tab_bar = false,
 	hide_tab_bar_if_only_one_tab = true,
@@ -49,7 +56,8 @@ return {
 	wsl_domains = wsl_domains,
 	window_background_opacity = 0.75,
 	window_close_confirmation = "NeverPrompt",
-	initial_cols = 100,
+	initial_cols = 120,
+	initial_rows = 32,
 	selection_word_boundary = " \t\n{}[]()\"'`",
 	mouse_bindings = {
 		-- Change the default click behavior so that it only selects
@@ -131,4 +139,5 @@ return {
 		top = 0,
 		bottom = 0,
 	},
+	window_decorations = "RESIZE",
 }
