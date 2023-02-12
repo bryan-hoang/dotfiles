@@ -450,11 +450,14 @@ install_asdf_plugin() {
 			install_apt_packages linux-headers-"$(uname -r)" build-essential
 			plugin_git_repo='https://github.com/Stratus3D/asdf-lua.git'
 			;;
+		direnv)
+			plugin_git_repo='https://github.com/asdf-community/asdf-direnv.git'
+			;;
 		*) ;;
 	esac
 
 	echo "Installing ${1} plugin from ${plugin_git_repo}"
-	asdf plugin-add "${1}" "$plugin_git_repo"
+	asdf plugin add "${1}" "$plugin_git_repo"
 	case "${1}" in
 		direnv)
 			asdf "${1}" setup --shell "$SHELL" --version "$version"
