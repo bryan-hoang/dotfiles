@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 #
 # shellcheck disable=SC2154
 
@@ -44,7 +44,7 @@ command -v sha1sum >/dev/null || alias sha1sum="shasum"
 # JavaScriptCore REPL
 jscbin="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc"
 # shellcheck disable=SC2139
-[[ -e "$jscbin" ]] && alias jsc="$jscbin"
+[ -e "$jscbin" ] && alias jsc="$jscbin"
 unset jscbin
 
 # Trim new lines and copy to clipboard
@@ -153,7 +153,7 @@ fi
 # endregion ls vs. exa
 
 # xclip workaround in WSL 2.
-[[ -f '/mnt/c/Windows/System32/clip.exe' ]] \
+[ -f '/mnt/c/Windows/System32/clip.exe' ] \
 	&& alias xclip='/mnt/c/Windows/System32/clip.exe'
 
 alias conventional-changelog='conventional-changelog -p conventionalcommits -n "${XDG_CONFIG_HOME}"/conventional-changelog/config.js'
@@ -165,9 +165,10 @@ mkdir -p "$XDG_STATE_HOME"/units
 alias units='units --history "${XDG_STATE_HOME}"/units/history'
 alias xbindkeys='xbindkeys --file "${XDG_CONFIG_HOME}"/xbindkeys/config'
 mkdir -p "$XDG_DATA_HOME"/keychain
-command -v keychain &>/dev/null && alias keychain='keychain --absolute --dir "${XDG_DATA_HOME}"/keychain'
+command -v keychain >/dev/null && alias keychain='keychain --absolute --dir "${XDG_DATA_HOME}"/keychain'
 alias info='info --vi-keys'
 if uname -a | grep -q 'Msys'; then
 	alias espanso='espanso.cmd'
 fi
-command -v bq &>/dev/null && alias bq='bq --bigqueryrc "${XDG_CONFIG_HOME}"/bigquery/bigqueryrc'
+command -v bq >/dev/null && alias bq='bq --bigqueryrc "${XDG_CONFIG_HOME}"/bigquery/bigqueryrc'
+command -v shfmt >/dev/null && alias shfmt='shfmt -ci -bn --simplify'
