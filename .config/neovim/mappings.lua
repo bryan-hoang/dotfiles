@@ -20,13 +20,13 @@ vim.api.nvim_set_keymap("", "<C-S-LeftMouse>", "", {})
 M.tabufline = {
 	n = {
 		-- cycle through buffers
-		["<Leader><Tab>"] = {
+		["gn"] = {
 			function()
 				require("nvchad_ui.tabufline").tabuflineNext()
 			end,
 			"goto next buffer",
 		},
-		["<Leader><S-Tab>"] = {
+		["gp"] = {
 			function()
 				require("nvchad_ui.tabufline").tabuflinePrev()
 			end,
