@@ -50,9 +50,6 @@ return {
 			b.code_actions.shellcheck.with({
 				filetypes = { "sh", "zsh" },
 			}),
-			b.diagnostics.shellcheck.with({
-				filetypes = { "sh", "zsh" },
-			}),
 			-- TOML
 			b.formatting.taplo,
 			-- Markdown
