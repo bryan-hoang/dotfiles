@@ -518,7 +518,9 @@ install_default_pkgs() {
 		go)
 			install_cmd+=(install)
 			;;
-		cpanm) ;;
+		brew)
+			install_cmd+=(install)
+			;;
 		*) ;;
 	esac
 
