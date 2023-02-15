@@ -1112,7 +1112,7 @@ pass_bw() {
 }
 
 start_ssh_agent() {
-	local env="$HOME"/.ssh/agent.env
+	local -r env="$HOME"/.ssh/agent.env
 
 	# shellcheck disable=SC1090
 	function agent_load_env() {
@@ -1133,16 +1133,13 @@ start_ssh_agent() {
 
 	# {agent_run_state}: 0=agent running w/ key; 1=agent w/o key; 2= agent not
 	# running
-	agent_run_state=$(
+	local -r agent_run_state="$(
 		ssh-add -l >|/dev/null 2>&1
 		echo $?
-	)
+	)"
 
 	if [[ $SSH_AUTH_SOCK == "" ]] || [[ $agent_run_state == 2 ]]; then
 		agent_start
-		ssh-add
-	elif [[ $SSH_AUTH_SOCK != "" ]] && [[ $agent_run_state == 1 ]]; then
-		ssh-add
 	fi
 }
 
