@@ -45,3 +45,6 @@ newline = "⏎"
 
 [editor.indent-guides]
 render = true
+
+[keys.normal]
+"space" = { c = { f = ":format" } }
