@@ -1,137 +1,137 @@
 {
-	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
-	"CreationDate" : "2023-02-05T15:03:35.271-00:00",
-	"Sources" :
-	[
+	"$schema": "https://aka.ms/winget-packages.schema.2.0.json",
+	"CreationDate": "2023-02-05T15:03:35.271-00:00",
+	"Sources": [
 		{
-			"Packages" :
-			[
+			"Packages": [
 				{
-					"PackageIdentifier" : "Bitwarden.Bitwarden"
+					"PackageIdentifier": "Bitwarden.Bitwarden"
 				},
 				{
-					"PackageIdentifier" : "Discord.Discord"
+					"PackageIdentifier": "Discord.Discord"
 				},
 				{
-					"PackageIdentifier" : "Git.Git"
+					"PackageIdentifier": "Git.Git"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.WindowsTerminal"
+					"PackageIdentifier": "Microsoft.WindowsTerminal"
 				},
 				{
-					"PackageIdentifier" : "Mozilla.Thunderbird"
+					"PackageIdentifier": "Mozilla.Thunderbird"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.OneDrive"
+					"PackageIdentifier": "Microsoft.OneDrive"
 				},
 				{
-					"PackageIdentifier" : "ProtonTechnologies.ProtonMailBridge"
+					"PackageIdentifier": "ProtonTechnologies.ProtonMailBridge"
 				},
 				{
-					"PackageIdentifier" : "Spotify.Spotify"
+					"PackageIdentifier": "Spotify.Spotify"
 				},
 				{
-					"PackageIdentifier" : "Valve.Steam"
+					"PackageIdentifier": "Valve.Steam"
 				},
 				{
-					"PackageIdentifier" : "pnpm.pnpm"
+					"PackageIdentifier": "pnpm.pnpm"
 				},
 				{
-					"PackageIdentifier" : "Google.Chrome"
+					"PackageIdentifier": "Google.Chrome"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.PowerShell"
+					"PackageIdentifier": "Microsoft.PowerShell"
 				},
 				{
-					"PackageIdentifier" : "Logitech.OptionsPlus"
+					"PackageIdentifier": "Logitech.OptionsPlus"
 				},
 				{
-					"PackageIdentifier" : "Neovim.Neovim"
+					"PackageIdentifier": "Neovim.Neovim"
 				},
 				{
-					"PackageIdentifier" : "OpenJS.NodeJS.LTS"
+					"PackageIdentifier": "OpenJS.NodeJS.LTS"
 				},
 				{
-					"PackageIdentifier" : "wez.wezterm"
+					"PackageIdentifier": "wez.wezterm"
 				},
 				{
-					"PackageIdentifier" : "EpicGames.EpicGamesLauncher"
+					"PackageIdentifier": "EpicGames.EpicGamesLauncher"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.WindowsSDK"
+					"PackageIdentifier": "Microsoft.WindowsSDK"
 				},
 				{
-					"PackageIdentifier" : "MSYS2.MSYS2"
+					"PackageIdentifier": "MSYS2.MSYS2"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.PowerToys"
+					"PackageIdentifier": "Microsoft.PowerToys"
 				},
 				{
-					"PackageIdentifier" : "Python.Python.3.11"
+					"PackageIdentifier": "Python.Python.3.11"
 				},
 				{
-					"PackageIdentifier" : "RubyInstallerTeam.RubyWithDevKit.3.1"
+					"PackageIdentifier": "RubyInstallerTeam.RubyWithDevKit.3.1"
 				},
 				{
-					"PackageIdentifier" : "Streamlink.Streamlink"
+					"PackageIdentifier": "Streamlink.Streamlink"
 				},
 				{
-					"PackageIdentifier" : "Streamlink.Streamlink.TwitchGui"
+					"PackageIdentifier": "Streamlink.Streamlink.TwitchGui"
 				},
 				{
-					"PackageIdentifier" : "gerardog.gsudo"
+					"PackageIdentifier": "gerardog.gsudo"
 				},
 				{
-					"PackageIdentifier" : "GoLang.Go.Unstable"
+					"PackageIdentifier": "GoLang.Go.Unstable"
 				},
 				{
-					"PackageIdentifier" : "7zip.7zip"
+					"PackageIdentifier": "7zip.7zip"
 				},
 				{
-					"PackageIdentifier" : "GnuPG.GnuPG"
+					"PackageIdentifier": "GnuPG.GnuPG"
 				},
 				{
-					"PackageIdentifier" : "TechPowerUp.GPU-Z"
+					"PackageIdentifier": "TechPowerUp.GPU-Z"
 				},
 				{
-					"PackageIdentifier" : "Zoom.Zoom"
+					"PackageIdentifier": "Zoom.Zoom"
 				},
 				{
-					"PackageIdentifier" : "Caprine.Caprine"
+					"PackageIdentifier": "Caprine.Caprine"
 				},
 				{
-					"PackageIdentifier" : "Elgato.StreamDeck"
+					"PackageIdentifier": "Elgato.StreamDeck"
 				},
 				{
-					"PackageIdentifier" : "OBSProject.OBSStudio"
+					"PackageIdentifier": "OBSProject.OBSStudio"
 				},
 				{
-					"PackageIdentifier" : "SlackTechnologies.Slack"
+					"PackageIdentifier": "SlackTechnologies.Slack"
 				},
 				{
-					"PackageIdentifier" : "Espanso.Espanso"
+					"PackageIdentifier": "Espanso.Espanso"
 				},
 				{
-					"PackageIdentifier" : "yt-dlp.yt-dlp"
+					"PackageIdentifier": "yt-dlp.yt-dlp"
 				},
 				{
-					"PackageIdentifier" : "Gyan.FFmpeg"
+					"PackageIdentifier": "Gyan.FFmpeg"
 				},
 				{
-					"PackageIdentifier" : "DenoLand.Deno"
+					"PackageIdentifier": "DenoLand.Deno"
 				},
 				{
-					"PackageIdentifier" : "Alacritty.Alacritty"
+					"PackageIdentifier": "Alacritty.Alacritty"
+				},
+				{
+					"PackageIdentifier": "GitHub.cli"
 				}
 			],
-			"SourceDetails" :
-			{
-				"Argument" : "https://cdn.winget.microsoft.com/cache",
-				"Identifier" : "Microsoft.Winget.Source_8wekyb3d8bbwe",
-				"Name" : "winget",
-				"Type" : "Microsoft.PreIndexed.Package"
+			"SourceDetails": {
+				"Argument": "https://cdn.winget.microsoft.com/cache",
+				"Identifier": "Microsoft.Winget.Source_8wekyb3d8bbwe",
+				"Name": "winget",
+				"Type": "Microsoft.PreIndexed.Package"
 			}
 		}
 	],
-	"WinGetVersion" : "1.3.2691"
+	"WinGetVersion": "1.3.2691"
 }
