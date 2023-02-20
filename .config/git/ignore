@@ -80,3 +80,7 @@ justfile
 
 # Rome config file.
 rome.json
+
+# `clangd` LS
+# https://clangd.llvm.org/installation.html#compile_commandsjson
+compile_commands.json
