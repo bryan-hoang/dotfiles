@@ -11,7 +11,7 @@ return {
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = {
 			{
-				"nvim-treesitter/playground",
+				"nvim-treesitter/nvim-treesitter",
 			},
 		},
 	},
@@ -20,7 +20,7 @@ return {
 		cmd = "TSPlaygroundToggle",
 		dependencies = {
 			{
-				"nvim-treesitter/playground",
+				"nvim-treesitter/nvim-treesitter",
 			},
 		},
 	},

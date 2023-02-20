@@ -13,4 +13,20 @@ return {
 			},
 		},
 	},
+	{
+		"echasnovski/mini.pairs",
+		event = function()
+			return {
+				"InsertEnter",
+			}
+		end,
+	},
+	{
+		"echasnovski/mini.ai",
+		event = require("util").get_buf_enter_event_list,
+	},
+	{
+		"echasnovski/mini.comment",
+		event = require("util").get_buf_enter_event_list,
+	},
 }

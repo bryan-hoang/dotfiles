@@ -2,6 +2,9 @@ return {
 	-- LSP keymaps
 	{
 		"neovim/nvim-lspconfig",
+		dependencies = {
+			"joechrisellis/lsp-format-modifications.nvim",
+		},
 		opts = function(_, opts)
 			-- https://github.com/b0o/SchemaStore.nvim/issues/9#issuecomment-1140321123
 			local json_schemas = require("schemastore").json.schemas({})
@@ -10,7 +13,26 @@ return {
 				yaml_schemas[schema.url] = schema.fileMatch
 			end, json_schemas)
 
+			local function format_diagnostic_message(diagnostic)
+				local message = diagnostic.message
+				if diagnostic.code ~= nil then
+					message = message .. " [" .. diagnostic.code .. "]"
+				end
+
+				return message
+			end
+
 			return vim.tbl_deep_extend("force", opts, {
+				-- Options for vim.diagnostic.config()
+				diagnostics = {
+					virtual_text = {
+						source = true,
+						format = format_diagnostic_message,
+					},
+					float = {
+						source = true,
+					},
+				},
 				format = {
 					timeout_ms = 2000,
 				},
@@ -43,6 +65,7 @@ return {
 					clangd = {
 						mason = false,
 						capabilities = {
+							-- Prevent offset warning.
 							offsetEncoding = { "utf-16" },
 						},
 					},
@@ -77,23 +100,6 @@ return {
 				desc = "Perform code action",
 				mode = { "n", "v" },
 				has = "codeAction",
-			}
-			keys[#keys + 1] = {
-				"<leader>cd",
-				function()
-					vim.diagnostic.open_float({
-						source = true,
-						format = function(diagnostic)
-							local message = diagnostic.message
-							if diagnostic.code ~= nil then
-								message = message .. " (" .. diagnostic.code .. ")"
-							end
-
-							return message
-						end,
-					})
-				end,
-				desc = "Float line diagnostics",
 			}
 		end,
 	},
@@ -195,5 +201,46 @@ return {
 				},
 			}
 		end,
+	},
+	{
+		"ThePrimeagen/refactoring.nvim",
+		dependencies = {
+			{ "nvim-lua/plenary.nvim" },
+			{ "nvim-treesitter/nvim-treesitter" },
+		},
+	},
+	{
+		"joechrisellis/lsp-format-modifications.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		keys = {
+			{
+				"<leader>cF",
+				"<cmd>FormatModifications<cr>",
+				desc = "Format Modifications",
+			},
+		},
+		config = function()
+			require("lazyvim.util").on_attach(function(client, buffer)
+				local lsp_format_modifications = require("lsp-format-modifications")
+				lsp_format_modifications.attach(
+					client,
+					buffer,
+					{ format_on_save = false }
+				)
+			end)
+		end,
+	},
+	{
+		"folke/neodev.nvim",
+		opts = {
+			library = {
+				plugins = {
+					"nvim-dap-ui",
+				},
+				types = true,
+			},
+		},
 	},
 }

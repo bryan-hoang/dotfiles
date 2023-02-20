@@ -3,7 +3,8 @@ return {
 		"rcarriga/nvim-notify",
 		-- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/ui.lua#L23
 		init = function()
-			-- Avoid notification for unset background color for certain color schemes. e.g. gruvbox.
+			-- Avoid notification for unset background color for certain color
+			-- schemes. e.g. gruvbox.
 			require("notify").setup({
 				background_colour = "#000000",
 			})
@@ -17,7 +18,12 @@ return {
 		end,
 	},
 	{
+		"akinsho/bufferline.nvim",
+		event = require("util").get_buf_enter_event_list,
+	},
+	{
 		"nvim-lualine/lualine.nvim",
+		event = require("util").get_buf_enter_event_list,
 		opts = function(_, opts)
 			local function noeol()
 				local eol_indocator = (vim.opt.eol:get() and "" or "[noeol]")
@@ -27,5 +33,11 @@ return {
 			table.insert(opts.sections.lualine_c, 4, { noeol })
 			return opts
 		end,
+	},
+	{
+		"m4xshen/smartcolumn.nvim",
+		enabled = false,
+		event = require("util").get_buf_enter_event_list,
+		opts = {},
 	},
 }

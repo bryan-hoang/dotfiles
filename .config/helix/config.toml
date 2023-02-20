@@ -2,20 +2,15 @@
 theme = "gruvbox_dark_hard_transparent"
 
 [editor]
-line-number = "relative"
-rulers = [80, 100, 120]
 bufferline = "multiple"
 color-modes = true
 cursorline = true
+line-number = "relative"
+rulers = [80, 100, 120]
 
 [editor.statusline]
-left = [
-	"mode",
-	"file-name",
-]
-center = [
-	"spinner",
-]
+center = ["spinner"]
+left = ["mode", "file-name"]
 right = [
 	"diagnostics",
 	"workspace-diagnostics",
@@ -38,13 +33,71 @@ select = "underline"
 render = "all"
 
 [editor.whitespace.characters]
-space = "·"
 nbsp = "⍽"
-tab = "→"
 newline = "⏎"
+space = "·"
+tab = "→"
 
 [editor.indent-guides]
 render = true
 
-[keys.normal]
-"space" = { c = { f = ":format" } }
+[keys.normal.']']
+G = "no_op"
+H = "goto_last_change"
+b = "goto_next_buffer"
+g = "no_op"
+h = "goto_next_change"
+
+[keys.normal.'[']
+G = "no_op"
+H = "goto_first_change"
+b = "goto_previous_buffer"
+g = "no_op"
+h = "goto_prev_change"
+
+# Leader
+[keys.normal.space]
+"'" = "no_op"
+D = "no_op"
+F = "no_op"
+S = "no_op"
+a = "no_op"
+d = "no_op"
+j = "no_op"
+r = "no_op"
+
+# Search
+[keys.normal.space.s]
+"'" = "last_picker"
+D = "workspace_diagnostics_picker"
+S = "workspace_symbol_picker"
+d = "diagnostics_picker"
+j = "jumplist_picker"
+s = "symbol_picker"
+
+# Buffer
+[keys.normal.space.b]
+D = ":buffer-close!"
+b = "buffer_picker"
+d = ":buffer-close"
+
+# Code
+[keys.normal.space.c]
+a = "code_action"
+f = ":format"
+r = "rename_symbol"
+
+# File/find
+[keys.normal.space.f]
+F = "file_picker_in_current_directory"
+f = "file_picker"
+n = ":new"
+
+[keys.normal.space.g]
+h = "no_op"
+p = "dap_pause"
+
+# Goto
+[keys.normal.g]
+n = "no_op"
+p = "no_op"

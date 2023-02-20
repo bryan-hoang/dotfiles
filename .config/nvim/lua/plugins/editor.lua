@@ -4,14 +4,27 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
-			{ "nvim-telescope/telescope-live-grep-args.nvim" },
+			{
+				"nvim-telescope/telescope-live-grep-args.nvim",
+				cmd = "Telescope",
+			},
+		},
+		config = function(_, opts)
+			local telescope = require("telescope")
+			telescope.load_extension("live_grep_args")
+			telescope.setup(opts)
+		end,
+		opts = {
+			defaults = {
+				layout_strategy = "horizontal",
+				sorting_strategy = "ascending",
+				layout_config = {
+					prompt_position = "top",
+				},
+			},
 		},
 		keys = {
-			{
-				"<leader>j",
-				"<cmd>Telescope jumplist<cr>",
-				desc = "Open jumplist picker",
-			},
+			-- Search
 			{
 				"<leader>sS",
 				-- Work around certain language servers requiring a query.
@@ -22,16 +35,6 @@ return {
 					})
 				end,
 				desc = "Open workspace symbol picker",
-			},
-			{
-				"<leader>'",
-				"<cmd>Telescope resume<cr>",
-				desc = "Open last picker",
-			},
-			{
-				"<leader>d",
-				"<cmd>Telescope diagnostics<cr>",
-				desc = "Open diagnostic picker",
 			},
 			{ "<leader>sg", false },
 			{
@@ -44,24 +47,57 @@ return {
 				desc = "Grep (cwd)",
 			},
 			{
+				"<leader>sb",
+				false,
+			},
+			{
+				"<leader>sj",
+				"<cmd>Telescope jumplist<cr>",
+				desc = "Open jumplist picker",
+			},
+			{
+				"<leader>sR",
+				false,
+			},
+			{
+				"<leader>s'",
+				"<cmd>Telescope resume<cr>",
+				desc = "Open last picker",
+			},
+			{
+				"<leader>sd",
+				Util.telescope("diagnostics", {
+					bufnr = 0,
+				}),
+				desc = "Open diagnostic picker (current buffer)",
+			},
+			{
+				"<leader>sD",
+				Util.telescope("diagnostics", {
+					bufnr = nil,
+				}),
+				desc = "Open diagnostic picker (all buffers)",
+			},
+			{
 				"<leader>/",
 				function()
 					require("telescope").extensions.live_grep_args.live_grep_args()
 				end,
 				desc = "Global search in workspace folder",
 			},
-		},
-		opts = {
-			defaults = {
-				sorting_strategy = "ascending",
-				layout_config = {
-					prompt_position = "top",
-				},
+			{
+				"<leader><space>",
+				false,
+			},
+			{
+				"<leader>,",
+				false,
+			},
+			{
+				"<leader>fb",
+				false,
 			},
 		},
-		init = function()
-			require("telescope").load_extension("live_grep_args")
-		end,
 	},
 	{
 		"nvim-neo-tree/neo-tree.nvim",
@@ -73,26 +109,23 @@ return {
 			"nvim-lua/plenary.nvim",
 			"folke/which-key.nvim",
 		},
-		-- lazy = true,
-		config = function()
-			local mark = require("harpoon.mark")
-			local ui = require("harpoon.ui")
-			local wk = require("which-key")
-
-			wk.register({
-				m = { mark.add_file, "Add Harpoon mark" },
-				t = { ui.toggle_quick_menu, "Toggle Harpoon quick menu" },
-				-- https://github.com/ThePrimeagen/harpoon/issues/125#issuecomment-1138543399
-				h = {
-					function()
-						ui.nav_file(vim.v.count1)
-					end,
-					"Navigate to harpooned file",
-				},
-			}, {
-				prefix = "<leader>",
-			})
-		end,
+		keys = {
+			{
+				"<leader>m",
+				"<cmd>lua require('harpoon.mark').add_file()<cr>",
+				desc = "Add Harpoon mark",
+			},
+			{
+				"<leader>t",
+				"<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>",
+				desc = "Toggle Harpoon quick menu",
+			},
+			{
+				"<leader>h",
+				"<cmd>lua require('harpoon.ui').nav_file(vim.v.count1)<cr>",
+				desc = "Navigate to harpooned file",
+			},
+		},
 	},
 	{
 		"mbbill/undotree",
@@ -150,5 +183,30 @@ return {
 	{
 		"ggandor/flit.nvim",
 		enabled = false,
+	},
+	{
+		"iamcco/markdown-preview.nvim",
+		ft = "markdown",
+		build = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+
+		-- Preview markdown over SSH.
+		config = function()
+			-- https://github.com/iamcco/markdown-preview.nvim/pull/9
+			-- $HOSTNAME would usually be defined per remote machine.
+			-- e.g., in ~/.config/shell/extra.
+			if os.getenv("SSH_CONNECTION") ~= "" then
+				vim.cmd([[
+					let g:mkdp_open_to_the_world = 1
+					let g:mkdp_open_ip = $HOSTNAME
+					let g:mkdp_port = 8080
+					function! g:Open_browser(url)
+						silent exe "!lemonade open "a:url
+					endfunction
+					let g:mkdp_browserfunc = "g:Open_browser"
+				]])
+			end
+		end,
 	},
 }
