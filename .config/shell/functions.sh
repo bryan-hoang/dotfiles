@@ -248,28 +248,6 @@ install_tex() {
 	echo "Installed tex successfully!"
 }
 
-install_nvim() {
-	echo "Installing neovim..."
-	if is_arm32_architecture || is_arm64_architecture; then
-		install_apt_packages neovim
-	elif ! is_git_bash; then
-		gh release download -R neovim/neovim \
-			-p 'nvim.appimage' \
-			-D "$DOWNLOAD_DIR"
-		mv "$DOWNLOAD_DIR"/nvim.appimage "$XDG_BIN_HOME"/nvim
-		chmod +x "$XDG_BIN_HOME"/nvim
-	else
-		gh release download -R neovim/neovim -p 'nvim-win64.zip' \
-			-D "$DOWNLOAD_DIR"
-
-		# Install under "C:\Program Files"
-		# shellcheck disable=SC2154
-		unzip "$DOWNLOAD_DIR"/nvim-win64.zip -d "$ProgramW6432"
-	fi
-	nvim --version
-	echo "Installed neovim successfully!"
-}
-
 install_jq() {
 	require dra
 	if ! is_git_bash; then
@@ -775,6 +753,19 @@ install_tmux() {
 	cd - || return
 }
 
+# https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-source
+install_nvim() {
+	echo "Installing neovim..."
+	git get https://github.com/neovim/neovim.git
+	cd "$GHQ_ROOT"/github.com/neovim/neovim || return
+	install_apt_packages ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
+	make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=${1:-$XDG_LOCAL_HOME}" || return
+	make install || return
+	nvim --version
+	cd - || return
+	echo "Installed neovim successfully!"
+}
+
 install_pwsh() {
 	echo 'Installing pwsh...'
 	local -r file_pattern='powershell_*-1.deb_amd64.deb'
@@ -785,6 +776,14 @@ install_pwsh() {
 	sudo apt install -y "$file"
 	pwsh --version
 	echo 'Finished installing pwsh!'
+}
+
+install_direnv() {
+	echo 'Installing direnv...'
+	export bin_path=$XDG_BIN_HOME
+	curl -sfL https://direnv.net/install.sh | bash
+	direnv --version
+	echo 'Finished installing direnv!'
 }
 
 # endregion Installation.
@@ -876,7 +875,7 @@ does_function_exist() {
 }
 
 does_program_exist() {
-	command -v "$1" >/dev/null 2>&1
+	command -v "$@" >/dev/null 2>&1
 }
 
 # endregion Boolean functions
