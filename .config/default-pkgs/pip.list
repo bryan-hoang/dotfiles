@@ -2,3 +2,8 @@ pip
 wheel
 pipx
 pynvim
+# Linter *plugin* for pylsp based on ruff.
+python-lsp-ruff
+# python-lsp-server plugin that adds support to black autoformatter, forked from
+# https://github.com/rupert/pyls-black/
+python-lsp-black
