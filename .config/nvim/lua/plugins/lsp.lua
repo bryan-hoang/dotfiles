@@ -166,7 +166,15 @@ return {
 						filetypes = { "sh", "zsh" },
 					}),
 					-- TOML
-					b.formatting.taplo,
+					b.formatting.taplo.with({
+						cwd = function(params)
+							return require("null-ls.utils").root_pattern(
+								"taplo.toml",
+								".taplo.toml",
+								".git"
+							)(params.bufname)
+						end,
+					}),
 					-- Markdown
 					b.diagnostics.markdownlint,
 					b.diagnostics.vale,

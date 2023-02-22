@@ -80,4 +80,7 @@ export default {
 	'*.lua': (files) =>
 		processMatches(files, 'stylua --search-parent-directories'),
 	'*.sh': (files) => processMatches(files, 'shfmt -bn -ci --simplify'),
+	'*.toml': (files) => {
+		return processMatches(files, 'taplo format');
+	},
 };
