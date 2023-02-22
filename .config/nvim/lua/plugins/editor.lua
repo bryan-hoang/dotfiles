@@ -218,6 +218,9 @@ return {
 		end,
 	},
 	{
+		"akinsho/git-conflict.nvim",
+	},
+	{
 		"gorbit99/codewindow.nvim",
 		event = require("util").get_buf_enter_event_list(),
 		config = function(_, opts)

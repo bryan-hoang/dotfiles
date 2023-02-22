@@ -40,4 +40,9 @@ return {
 		event = require("util").get_buf_enter_event_list,
 		opts = {},
 	},
+	{
+		"folke/noice.nvim",
+		-- Disable when `ext_{cmdline,messages}` are enabled by `firenvim`.
+		enabled = not vim.g.started_by_firenvim,
+	},
 }
