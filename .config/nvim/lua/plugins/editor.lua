@@ -107,25 +107,33 @@ return {
 		"ThePrimeagen/harpoon",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"folke/which-key.nvim",
 		},
+		lazy = false,
 		keys = {
 			{
-				"<leader>m",
+				"<leader>hm",
 				"<cmd>lua require('harpoon.mark').add_file()<cr>",
 				desc = "Add Harpoon mark",
 			},
 			{
-				"<leader>t",
+				"<leader>ht",
 				"<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>",
 				desc = "Toggle Harpoon quick menu",
 			},
 			{
-				"<leader>h",
+				"<leader>hf",
 				"<cmd>lua require('harpoon.ui').nav_file(vim.v.count1)<cr>",
 				desc = "Navigate to harpooned file",
 			},
 		},
+		config = function(_, opts)
+			require("harpoon").setup(opts)
+			require("which-key").register({
+				h = { name = "+harpoon" },
+			}, {
+				prefix = "<leader>",
+			})
+		end,
 	},
 	{
 		"mbbill/undotree",
@@ -207,6 +215,19 @@ return {
 					let g:mkdp_browserfunc = "g:Open_browser"
 				]])
 			end
+		end,
+	},
+	{
+		"gorbit99/codewindow.nvim",
+		event = require("util").get_buf_enter_event_list(),
+		config = function(_, opts)
+			local codewindow = require("codewindow")
+			local wk = require("which-key")
+			codewindow.setup(opts)
+			codewindow.apply_default_keybinds()
+			wk.register({
+				["<leader>m"] = { name = "+codewindow" },
+			})
 		end,
 	},
 	{
