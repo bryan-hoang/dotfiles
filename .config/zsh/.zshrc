@@ -46,21 +46,13 @@ done
 # shellcheck disable=SC1091
 [[ -s "$ZSH"/oh-my-zsh.sh ]] && . "$ZSH"/oh-my-zsh.sh
 
-# Loaded after framework is loaded to preserve personal aliases.
-# shellcheck disable=SC1091
-. "$XDG_CONFIG_HOME"/shell/common.sh
-
 # region Completions
 
-mkdir -p "$XDG_CACHE_HOME"/zsh
-compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
-zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
-
-does_program_exist compdef && compdef dot='git'
+compdef dot='git'
 
 # Zsh completions plugin.
 fpath+=$ZSH_CUSTOM_PLUGINS_DIR/zsh-completions/src
-fpath+=$ASDF_DIR/completions
+# fpath+=$ASDF_DIR/completions
 fpath+=$ZSH_USER_FPATH
 
 # For enabling autocompletion of privileged environments in privileged commands
@@ -73,11 +65,20 @@ zstyle ':completion::complete:*' gain-privileges 1
 # https://wiki.archlinux.org/title/zsh#Persistent_rehash
 zstyle ':completion:*' rehash true
 
+mkdir -p "$XDG_CACHE_HOME"/zsh
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
+
 # Enable user specific completions.
-autoload -U compinit
+autoload -U compinit bashcompinit
 compinit
+bashcompinit
 
 # endregion Completions
+
+# Loaded after framework is loaded to preserve personal aliases.
+# shellcheck disable=SC1091
+. "$XDG_CONFIG_HOME"/shell/common.sh
 
 # Make `mapfile` available in `zsh`
 zmodload zsh/mapfile
@@ -172,12 +173,12 @@ setopt shwordsplit
 # contiguous.
 setopt HIST_FIND_NO_DUPS
 
-# Prevent the script from changing PATH, already handled in `env.sh`.
-OLD_PATH=$PATH
-. "$ASDF_DIR"/asdf.sh
-PATH=$OLD_PATH
-export PATH
-unset OLD_PATH
+# # Prevent the script from changing PATH, already handled in `env.sh`.
+# OLD_PATH=$PATH
+# . "$ASDF_DIR"/asdf.sh
+# PATH=$OLD_PATH
+# export PATH
+# unset OLD_PATH
 
 does_program_exist starship && eval "$(starship init zsh)"
 does_program_exist mcfly && eval "$(mcfly init zsh)"
@@ -189,11 +190,11 @@ does_program_exist kubectl \
 	&& generate_completions zsh kubectl kubectl completion zsh
 does_program_exist broot && eval "$(broot --print-shell-function zsh)"
 
-# shellcheck disable=SC1091
-if [[ -f "${XDG_CONFIG_HOME:-${HOME}/.config}/asdf-direnv/zshrc" ]]; then
-	# shellcheck disable=SC2250
-	source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
-fi
+# # shellcheck disable=SC1091
+# if [[ -f "${XDG_CONFIG_HOME:-${HOME}/.config}/asdf-direnv/zshrc" ]]; then
+# 	# shellcheck disable=SC2250
+# 	source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+# fi
 
 # tabtab source for packages (e.g., pnpm).
 # shellcheck disable=SC1091

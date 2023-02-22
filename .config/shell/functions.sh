@@ -541,7 +541,6 @@ install_default_pkgs() {
 			espanso package list
 			;;
 		*)
-			asdf reshim
 			;;
 	esac
 

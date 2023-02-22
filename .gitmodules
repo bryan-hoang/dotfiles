@@ -64,9 +64,6 @@
 [submodule "arkenfox/user.js"]
 	path = src/github.com/arkenfox/user.js
 	url = https://github.com/arkenfox/user.js.git
-[submodule "asdf-vm/asdf"]
-	path = src/github.com/asdf-vm/asdf
-	url = https://github.com/asdf-vm/asdf.git
 [submodule "LGUG2Z/komorebi"]
 	path = src/github.com/LGUG2Z/komorebi
 	url = https://github.com/LGUG2Z/komorebi.git

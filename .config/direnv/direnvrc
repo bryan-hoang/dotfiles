@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-# Always try to initialize `asdf-direnv`.
-use asdf
+# https://github.com/jdxcode/rtx#rtx-inside-of-direnv-use-rtx-in-envrc
+use rtx >/dev/null 2>&1 || true
 
 # Loads a “.env.local” file into the current environment, but only if it exists.
 dotenv_if_exists .env.local

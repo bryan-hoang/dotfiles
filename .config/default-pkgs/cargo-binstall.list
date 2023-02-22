@@ -16,6 +16,8 @@ git-delta
 bat
 # A very fast implementation of tldr in Rust.
 tealdeer
+# Runtime Executor (asdf rust clone).
+rtx-cli
 # A more intuitive version of du in rust.
 du-dust
 # 🌀 A nonsense activity generator.

@@ -113,13 +113,13 @@ does_function_exist && pyvenv_auto_activate_enable
 # Remove timestamps from history file to let zsh history parse it.
 unset HISTTIMEFORMAT
 
-# shellcheck disable=SC1091
-[[ -s "$ASDF_DIR"/completions/asdf.bash ]] \
-	&& . "$ASDF_DIR"/completions/asdf.bash
+# # shellcheck disable=SC1091
+# [[ -s "$ASDF_DIR"/completions/asdf.bash ]] \
+# 	&& . "$ASDF_DIR"/completions/asdf.bash
 
-# shellcheck disable=SC1091
-[[ -s "$ASDF_DIR"/plugins/java/set-java-home.bash ]] \
-	&& . "$ASDF_DIR"/plugins/java/set-java-home.bash
+# # shellcheck disable=SC1091
+# [[ -s "$ASDF_DIR"/plugins/java/set-java-home.bash ]] \
+# 	&& . "$ASDF_DIR"/plugins/java/set-java-home.bash
 
 # Completions
 # git
@@ -148,3 +148,8 @@ if [[ -f "${XDG_CONFIG_HOME:-${HOME}/.config}/asdf-direnv/bashrc" ]]; then
 elif does_program_exist direnv; then
 	eval "$(direnv hook bash)"
 fi
+
+if is_git_bash; then
+	start_ssh_agent
+fi
+
