@@ -231,6 +231,14 @@ return {
 		end,
 	},
 	{
+		"petertriho/nvim-scrollbar",
+		event = require("util").get_buf_enter_event_list(),
+		config = function()
+			require("scrollbar").setup()
+			require("scrollbar.handlers.gitsigns").setup()
+		end,
+	},
+	{
 		"folke/todo-comments.nvim",
 		-- https://github.com/folke/todo-comments.nvim#%EF%B8%8F-configuration
 		opts = {
