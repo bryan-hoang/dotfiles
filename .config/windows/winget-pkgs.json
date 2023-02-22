@@ -123,6 +123,9 @@
 				},
 				{
 					"PackageIdentifier": "GitHub.cli"
+				},
+				{
+					"PackageIdentifier": "aria2.aria2"
 				}
 			],
 			"SourceDetails": {
