@@ -89,8 +89,11 @@ bottom
 # htmlq
 # Command-line interface for email management.
 # himalaya
+# Launch a local network server with live reload feature for static pages.
+# live-server
 # A fully functional file server.
-# dufs Tree command, improved.
+# dufs
+# Tree command, improved.
 # tre-command
 # Save space by cleaning non-essential files from software projects.
 # kondo
