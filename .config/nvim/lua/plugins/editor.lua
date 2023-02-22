@@ -209,4 +209,14 @@ return {
 			end
 		end,
 	},
+	{
+		"folke/todo-comments.nvim",
+		-- https://github.com/folke/todo-comments.nvim#%EF%B8%8F-configuration
+		opts = {
+			highlight = {
+				keyword = "bg",
+				pattern = [[.*<(KEYWORDS).*:]],
+			},
+		},
+	},
 }

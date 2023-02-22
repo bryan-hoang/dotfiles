@@ -23,8 +23,10 @@ return {
 		"catppuccin/nvim",
 		lazy = false,
 		name = "catppuccin",
+		-- https://github.com/catppuccin/nvim#configuration
 		opts = {
 			transparent_background = true,
+			no_italic = true,
 		},
 	},
 	{
