@@ -44,6 +44,8 @@ does_program_exist just \
 	&& generate_completions "$SHELL_BASENAME" just just --completions "$SHELL_BASENAME"
 does_program_exist starship \
 	&& generate_completions "$SHELL_BASENAME" starship starship completions "$SHELL_BASENAME"
+does_program_exist ruff \
+	&& generate_completions "$SHELL_BASENAME" ruff ruff generate-shell-completion "$SHELL_BASENAME"
 
 # Doesn't support bash.
 does_program_exist bw \
