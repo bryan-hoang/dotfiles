@@ -78,9 +78,9 @@ return {
 		-- Linkify things that look like URLs and the host has a TLD name. e.g.,
 		-- https://example.com/. Compiled-in default. Used if you don't specify any
 		-- hyperlink_rules.
-		-- FIXME: Handled hyperlinks in HTML anchor elements.
+		-- https://urlregex.com/
 		{
-			regex = [[\b\w+://[\w.-]+\.[a-z]{2,15}\S*\b/?]],
+			regex = [[http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+]],
 			format = "$0",
 		},
 		-- Linkify email addresses (e.g., bryan@bryanhoang.dev)
