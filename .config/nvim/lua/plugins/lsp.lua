@@ -69,6 +69,10 @@ return {
 							offsetEncoding = { "utf-16" },
 						},
 					},
+					bashls = {
+						mason = false,
+						filetypes = { "sh", "zsh" },
+					},
 				},
 			})
 		end,
