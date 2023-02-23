@@ -48,3 +48,5 @@ vscode-langservers-extracted
 rome
 # MarkdownLint Command Line Interface (igorshubovych/markdownlint-cli).
 markdownlint-cli
+# Emmet support based on LSP (aca/emmet-ls).
+emmet-ls

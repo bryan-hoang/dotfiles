@@ -73,6 +73,15 @@ return {
 						mason = false,
 						filetypes = { "sh", "zsh" },
 					},
+					cssls = {
+						mason = false,
+					},
+					html = {
+						mason = false,
+					},
+					emmet_ls = {
+						mason = false,
+					},
 				},
 			})
 		end,
