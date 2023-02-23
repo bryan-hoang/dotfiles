@@ -14,6 +14,7 @@ return {
 				"nvim-treesitter/nvim-treesitter",
 			},
 		},
+		event = require("util").get_buf_enter_event_list(),
 	},
 	{
 		"nvim-treesitter/playground",
