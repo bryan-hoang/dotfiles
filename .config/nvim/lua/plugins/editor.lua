@@ -153,9 +153,10 @@ return {
 				border = "single",
 			},
 			layout = {
-				-- Better fit on vertically split views.
+				-- Fit better on vertically split views.
 				height = { min = 4, max = 30 },
-				width = { min = 20, max = 40 }, -- min and max width of the columns
+				-- Min and max width of the columns
+				width = { min = 20, max = 40 },
 			},
 		},
 	},
