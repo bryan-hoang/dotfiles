@@ -126,14 +126,6 @@ return {
 				desc = "Navigate to harpooned file",
 			},
 		},
-		config = function(_, opts)
-			require("harpoon").setup(opts)
-			require("which-key").register({
-				h = { name = "+harpoon" },
-			}, {
-				prefix = "<leader>",
-			})
-		end,
 	},
 	{
 		"mbbill/undotree",
@@ -198,7 +190,13 @@ return {
 		build = function()
 			vim.fn["mkdp#util#install"]()
 		end,
-
+		keys = {
+			{
+				"<leader>mp",
+				"<cmd>MarkdownPreview<cr>",
+				desc = "Toggle markdown preview",
+			},
+		},
 		-- Preview markdown over SSH.
 		config = function()
 			-- https://github.com/iamcco/markdown-preview.nvim/pull/9
@@ -225,12 +223,8 @@ return {
 		event = require("util").get_buf_enter_event_list(),
 		config = function(_, opts)
 			local codewindow = require("codewindow")
-			local wk = require("which-key")
 			codewindow.setup(opts)
 			codewindow.apply_default_keybinds()
-			wk.register({
-				["<leader>m"] = { name = "+codewindow" },
-			})
 		end,
 	},
 	{
