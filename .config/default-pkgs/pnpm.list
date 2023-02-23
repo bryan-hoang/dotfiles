@@ -46,3 +46,5 @@ bash-language-server
 yaml-language-server
 vscode-langservers-extracted
 rome
+# MarkdownLint Command Line Interface (igorshubovych/markdownlint-cli).
+markdownlint-cli
