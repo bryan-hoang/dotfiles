@@ -222,6 +222,17 @@ return {
 				},
 			}
 		end,
+		on_attach = function(client, buffer)
+			-- https://github.com/joechrisellis/lsp-format-modifications.nvim#tested-language-servers
+			if client.server_capabilities.documentRangeFormattingProvider then
+				local lsp_format_modifications = require("lsp-format-modifications")
+				lsp_format_modifications.attach(
+					client,
+					buffer,
+					{ format_on_save = false }
+				)
+			end
+		end,
 	},
 	{
 		"ThePrimeagen/refactoring.nvim",
@@ -244,12 +255,14 @@ return {
 		},
 		config = function()
 			require("lazyvim.util").on_attach(function(client, buffer)
-				local lsp_format_modifications = require("lsp-format-modifications")
-				lsp_format_modifications.attach(
-					client,
-					buffer,
-					{ format_on_save = false }
-				)
+				if client.server_capabilities.documentRangeFormattingProvider then
+					local lsp_format_modifications = require("lsp-format-modifications")
+					lsp_format_modifications.attach(
+						client,
+						buffer,
+						{ format_on_save = false }
+					)
+				end
 			end)
 		end,
 	},
