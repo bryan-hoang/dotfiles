@@ -44,7 +44,7 @@
 					"PackageIdentifier": "Logitech.OptionsPlus"
 				},
 				{
-					"PackageIdentifier": "Neovim.Neovim"
+					"PackageIdentifier": "Neovim.Neovim.Nightly"
 				},
 				{
 					"PackageIdentifier": "OpenJS.NodeJS.LTS"
