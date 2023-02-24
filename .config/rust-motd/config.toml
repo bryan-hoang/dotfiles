@@ -1,31 +1,32 @@
 # https://github.com/rust-motd/rust-motd/blob/main/example_config.toml
 
 [banner]
-color = "blue"
+color = 'blue'
 command = """
-echo \"MOTD: Welcome, $(whoami)@$(hostname)\" | figlet -f slant -w 100\
+echo "MOTD: Welcome, $(whoami)@$(hostname)" | figlet -f slant -w 100
 """
 
 [service_status]
+dbus-broker = 'dbus-broker'
 docker = 'docker'
+nginx = 'nginx'
 
 [user_service_status]
-ssh-agent = 'ssh-agent'
-gpg-agent = "gpg-agent"
-tmux = 'tmux'
+gpg-agent = 'gpg-agent'
 spotifyd = 'spotifyd'
+ssh-agent = 'ssh-agent'
+tmux = 'tmux'
 
 [filesystems]
-root = "/"
-home = '/home'
+root = '/'
 
 [memory]
-swap_pos = "beside" # or "below" or "none"
+swap_pos = 'beside'
 
 [last_login]
 bryan = 2
 
 [uptime]
-prefix = "Uptime:"
+prefix = 'Uptime:'
 
 [last_run]
