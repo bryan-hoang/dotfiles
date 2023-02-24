@@ -18,11 +18,9 @@ if command -v dbus-update-activation-environment >/dev/null \
 
 		# Avoid triggering the starship prompt module in tmux server started by
 		# systemd. Remove lingering SSH env vars.
-		#
-		# shellcheck disable=2046
 		dbus-update-activation-environment --systemd --all >/dev/null 2>&1 \
-			|| systemctl --user import-environment \
-				"$(awk 'BEGIN{for(v in ENVIRON) print v}' | grep -iv -e awk -e lua)"
+			|| awk 'BEGIN{for(v in ENVIRON) print v}' | grep -iv -e awk -e lua -e ^_ \
+			| xargs systemctl --user import-environment
 		systemctl --user unset-environment SHLVL SSH_CONNECTION SSH_CLIENT SSH_TTY
 		systemctl --user start tmux.service
 	)
