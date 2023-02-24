@@ -126,6 +126,8 @@ case ${TERM} in
 	*) ;;
 esac
 
+command -v vivid >/dev/null && export LS_COLORS="$(vivid generate dracula)"
+
 export WEZTERM_CONFIG_FILE="$XDG_CONFIG_HOME"/wezterm/wezterm.lua
 
 # `exa` options

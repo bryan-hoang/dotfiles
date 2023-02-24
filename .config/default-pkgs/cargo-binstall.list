@@ -38,6 +38,8 @@ watchexec-cli
 # silicon
 # Yet another cross-platform graphical process/system monitor.
 bottom
+# A themeable LS_COLORS generator with a rich filetype datebase (sharkdp/vivid).
+vivid
 # 🤖 Just a command runner.
 # just
 # Manage cargo cache (${CARGO_HOME}, ~/.cargo/), print sizes of dirs and
