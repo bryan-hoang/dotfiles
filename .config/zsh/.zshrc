@@ -86,7 +86,7 @@ zmodload zsh/mapfile
 # Remove function defined in ohmyzsh conflicting with `title` command.
 does_function_exist title && unfunction title
 
-does_program_exist pyvenv_auto_activate_enable && pyvenv_auto_activate_enable
+does_command_exist pyvenv_auto_activate_enable && pyvenv_auto_activate_enable
 
 # Options
 # Disabling Zsh's nomatch option
@@ -180,15 +180,15 @@ setopt HIST_FIND_NO_DUPS
 # export PATH
 # unset OLD_PATH
 
-does_program_exist starship && eval "$(starship init zsh)"
-does_program_exist mcfly && eval "$(mcfly init zsh)"
-does_program_exist navi && eval "$(navi widget zsh)"
-does_program_exist zoxide && eval "$(zoxide init zsh)"
-does_program_exist pipenv \
+does_command_exist starship && eval "$(starship init zsh)"
+does_command_exist mcfly && eval "$(mcfly init zsh)"
+does_command_exist navi && eval "$(navi widget zsh)"
+does_command_exist zoxide && eval "$(zoxide init zsh)"
+does_command_exist pipenv \
 	&& generate_completions zsh pipenv env _PIPENV_COMPLETE=zsh_source pipenv
-does_program_exist kubectl \
+does_command_exist kubectl \
 	&& generate_completions zsh kubectl kubectl completion zsh
-does_program_exist broot && eval "$(broot --print-shell-function zsh)"
+does_command_exist broot && eval "$(broot --print-shell-function zsh)"
 
 # # shellcheck disable=SC1091
 # if [[ -f "${XDG_CONFIG_HOME:-${HOME}/.config}/asdf-direnv/zshrc" ]]; then

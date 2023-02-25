@@ -23,7 +23,7 @@ install_gh() {
 	if is_git_bash; then
 		winget install GitHub.cli
 		echo "You may need to reload your shell for your path to update with the new program."
-	elif does_program_exist brew; then
+	elif does_command_exist brew; then
 		brew install gh
 	elif is_arm64_architecture; then
 		curl -s https://api.github.com/repos/cli/cli/releases/latest \
@@ -163,7 +163,7 @@ install_shellcheck() {
 		sudo cp "${SHELLCHECK_DOWNLOAD_DIR}/shellcheck" /usr/bin/
 
 		# Man page
-		if does_program_exist pandoc; then
+		if does_command_exist pandoc; then
 			wget -qO "${SHELLCHECK_DOWNLOAD_DIR}/shellcheck.1.md" \
 				"https://raw.githubusercontent.com/koalaman/shellcheck/master/shellcheck.1.md"
 			pandoc -s -f markdown-smart \
@@ -873,8 +873,8 @@ does_function_exist() {
 	declare -f -F "$1" >/dev/null 2>&1
 }
 
-does_program_exist() {
-	command -v "$@" >/dev/null 2>&1
+does_command_exist() {
+	command -v "$@" >/dev/null
 }
 
 # endregion Boolean functions

@@ -53,13 +53,13 @@ export XCURSOR_DISCOVER=1
 
 # Default editor.
 if
-	command -v nvim >/dev/null 2>&1 || [ -f "$XDG_BIN_HOME"/nvim ]
+	command -v nvim >/dev/null || [ -f "$XDG_BIN_HOME"/nvim ]
 then
 	export EDITOR=nvim
 	export VISUAL="$EDITOR"
 	export SUDO_EDITOR="$EDITOR"
 elif
-	command -v vim >/dev/null 2>&1
+	command -v vim >/dev/null
 then
 	export EDITOR=vim
 	export VISUAL="$EDITOR"
@@ -83,7 +83,7 @@ export HISTCONTROL='ignoreboth:erasedups'
 export PAGER=less
 
 # Using Neovim as the man pager to make copying and following links easier.
-command -v nvim >/dev/null 2>&1 \
+command -v nvim >/dev/null \
 	&& export MANPAGER='nvim +Man!'
 
 # Enable persistent REPL history for `node`.
@@ -126,7 +126,9 @@ case ${TERM} in
 	*) ;;
 esac
 
-command -v vivid >/dev/null && export LS_COLORS="$(vivid generate dracula)"
+command -v vivid >/dev/null \
+	&& LS_COLORS="$(vivid generate dracula)" \
+	&& export LS_COLORS
 
 export WEZTERM_CONFIG_FILE="$XDG_CONFIG_HOME"/wezterm/wezterm.lua
 

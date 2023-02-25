@@ -59,7 +59,7 @@ if has_sudo; then
 fi
 
 for program in "${programs[@]}"; do
-	if ! does_program_exist "${program}"; then
+	if ! does_command_exist "${program}"; then
 		install_"${program}"
 	fi
 done

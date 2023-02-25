@@ -134,18 +134,18 @@ __git_complete dot __git_main
 # shellcheck disable=SC1090
 [ -f ~/.config/tabtab/bash/pnpm.bash ] && . ~/.config/tabtab/bash/pnpm.bash
 
-does_program_exist mcfly && eval "$(mcfly init bash)"
-is_interactive_shell && does_program_exist navi && eval "$(navi widget bash)"
-does_program_exist zoxide && eval "$(zoxide init bash)"
-does_program_exist gh && eval "$(gh completion -s bash)"
-does_program_exist starship && eval "$(starship init bash)"
-does_program_exist broot && eval "$(broot --print-shell-function bash)"
+does_command_exist mcfly && eval "$(mcfly init bash)"
+is_interactive_shell && does_command_exist navi && eval "$(navi widget bash)"
+does_command_exist zoxide && eval "$(zoxide init bash)"
+does_command_exist gh && eval "$(gh completion -s bash)"
+does_command_exist starship && eval "$(starship init bash)"
+does_command_exist broot && eval "$(broot --print-shell-function bash)"
 
 # shellcheck disable=SC1091
 if [[ -f "${XDG_CONFIG_HOME:-${HOME}/.config}/asdf-direnv/bashrc" ]]; then
 	# shellcheck disable=SC2250
 	source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
-elif does_program_exist direnv; then
+elif does_command_exist direnv; then
 	eval "$(direnv hook bash)"
 fi
 
