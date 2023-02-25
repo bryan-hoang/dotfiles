@@ -61,10 +61,10 @@
 	# This fetches the merge request into a local mr-origin-5 branch and check it out.
 	# Find the date a file was added. Source: https://stackoverflow.com/a/25633731/8714233
 	fd = "!f() { git log --follow --format=%ad $1 | tail -1; }; f"
-	# Sync with remote, overwrite local changes.
+	# Make local index and working tree match remote.
 	#
 	# Source: https://stackoverflow.com/a/9753364/8714233
-	sync = !git fetch origin && git reset --hard "$(git rev-parse --abbrev-ref --symbolic-full-name '@{u}')" && git clean -fd
+	reset-remote = !git fetch origin && git reset --hard "$(git rev-parse --abbrev-ref --symbolic-full-name '@{u}')" && git clean -fd
 	# <Commit before merge commit to rebase onto> <Merge commit before range of commits to rebase>
 	# <Current branch to end range of commits to rebase>
 	rebase-merge = "!f() { git rebase --onto $(git rev-list --max-count 1 HEAD@{1}) $(git rev-list --merges --max-count=1 HEAD) $(git branch --show-current); }; f"
@@ -75,6 +75,8 @@
 	switch-time = "!f() { git switch -d $(git rev-list -n 1 --first-parent --before \"$1 23:59\" $(git default-branch)) ; }; f"
 	# Delete a branch locally and on the remote.
 	branch-delete = "!f() { git branch --delete --force $1 || true && git push origin --delete $1; }; f"
+	# List branches with most recent committer to it. Useful for finding which
+	# branch someone has been committing to recently.
 	branch-activity = "for-each-ref --sort=committerdate refs/heads refs/remotes --format='%(authordate:short) %(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset)) %(authorname)'"
 	# https://stackoverflow.com/a/27940027/8714233
 	review-changes = "!f() { git merge-base origin/$(git default-branch) origin/$(git branch --show-current) | xargs -I % git diff %..origin/$(git branch --show-current); }; f"
@@ -375,3 +377,5 @@
 	defaultRemote = origin
 [worktree]
 	guessRemote = true
+[format]
+	signOff = true
