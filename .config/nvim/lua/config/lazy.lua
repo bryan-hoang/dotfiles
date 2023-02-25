@@ -12,6 +12,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
+-- https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 require("lazy").setup({
 	spec = {
 		-- add LazyVim and import its plugins
@@ -32,8 +33,19 @@ require("lazy").setup({
 		version = false, -- always use the latest git commit
 		-- version = "*", -- try installing the latest stable version for plugins that support semver
 	},
-	install = { colorscheme = { "tokyonight", "habamax" } },
-	checker = { enabled = true }, -- automatically check for plugin updates
+	install = {
+		-- Try to load one of these colorschemes when starting an installation
+		-- during startup.
+		colorscheme = { "tokyonight" },
+	},
+	checker = {
+		-- Automatically check for plugin updates.
+		enabled = true,
+		-- Get a notification when new updates are found.
+		notify = true,
+		-- Seconds
+		frequency = 3600 * 24,
+	},
 	performance = {
 		rtp = {
 			-- disable some rtp plugins
