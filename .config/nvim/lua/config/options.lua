@@ -87,6 +87,9 @@ opt.swapfile = false
 opt.backup = false
 opt.undofile = true
 
+-- Remove screen line cursor padding so that `zt` and `zb` both work.`
+opt.scrolloff = 0
+
 -- https://github.com/neovim/neovim/blob/master/runtime/lua/editorconfig.lua#L76
 require("editorconfig").properties.max_line_length = function(bufnr, val)
 	local filename = vim.api.nvim_buf_get_name(bufnr)
