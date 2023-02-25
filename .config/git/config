@@ -91,6 +91,7 @@
 [commit]
 	# https://help.github.com/articles/signing-commits-using-gpg/
 	gpgsign = true
+	template = ~/.config/git/COMMIT_EDITMSG
 [core]
 	# Treat spaces before tabs and all kinds of trailing whitespace as an error.
 	# [default] trailing-space: looks for spaces at the end of a line
@@ -379,3 +380,7 @@
 	guessRemote = true
 [format]
 	signOff = true
+[trailer "sign"]
+	key = Signed-off-by
+[trailer "coatr"]
+	key = Co-authored-by
