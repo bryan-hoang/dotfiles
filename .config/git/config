@@ -380,7 +380,3 @@
 	guessRemote = true
 [format]
 	signOff = true
-[trailer "sign"]
-	key = Signed-off-by
-[trailer "coatr"]
-	key = Co-authored-by
