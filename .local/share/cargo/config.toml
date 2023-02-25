@@ -1,3 +1,5 @@
+# https://doc.rust-lang.org/cargo/reference/config.html
+
 # The [net] table controls networking configuration.
 [net]
 # If this is true, then Cargo will use the git executable to fetch registry
