@@ -82,7 +82,7 @@ if [[ -z $selected ]]; then
 fi
 
 declare selected_name
-selected_name=$(basename "$selected")
+selected_name=$(basename "$selected" | sed 's/\./_/g')
 readonly selected_name
 
 multiplex_tmux() {
