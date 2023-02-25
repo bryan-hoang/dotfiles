@@ -40,6 +40,9 @@ watchexec-cli
 bottom
 # A themeable LS_COLORS generator with a rich filetype datebase (sharkdp/vivid).
 vivid
+# An implementation of the Language Server Protocol for LaTeX
+# (latex-lsp/texlab).
+texlab
 # 🤖 Just a command runner.
 # just
 # Manage cargo cache (${CARGO_HOME}, ~/.cargo/), print sizes of dirs and

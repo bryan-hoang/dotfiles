@@ -82,6 +82,9 @@ return {
 					emmet_ls = {
 						mason = false,
 					},
+					texlab = {
+						mason = false,
+					},
 				},
 			})
 		end,
