@@ -240,3 +240,4 @@ export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle/config
 export PIPX_HOME="$XDG_DATA_HOME"/pipx
 export SDIRS="$XDG_STATE_HOME"/bashmarks/sdirs
 mkdir -p "$(dirname "$SDIRS")"
+command -v sccache >/dev/null && export RUSTC_WRAPPER=sccache

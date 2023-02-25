@@ -1,3 +1,5 @@
+# `ccache` with cloud storage (mozilla/sccache).
+sccache
 # A cargo subcommand for checking and applying updates to installed
 # executables.
 cargo-update
