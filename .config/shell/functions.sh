@@ -518,8 +518,7 @@ install_default_pkgs() {
 			espanso restart
 			espanso package list
 			;;
-		*)
-			;;
+		*) ;;
 	esac
 
 	echo "Installed default ${1} packages successfully!"
@@ -1378,5 +1377,9 @@ setup_windows() {
 }
 
 ls_glab_mr_map() {
-	glab mr list "$@" | tail +3 | head -n -1 | awk '{print $1 " " $(NF)}' | tr -d '()'
+	glab mr list "$@" \
+		| tail +3 \
+		| head -n -1 \
+		| awk '{print $1 " " $(NF)}' \
+		| tr -d '()'
 }
