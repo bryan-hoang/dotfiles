@@ -1,0 +1,6 @@
+# https://github.com/hrkfdn/ncspot#configuration
+
+use_nerdfont = true
+flip_status_indicators = true
+volnorm = true
+notify = true

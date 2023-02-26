@@ -121,6 +121,9 @@ tree-sitter-cli
 # oxker
 # Realtime ticker data in your terminal (tarkah/tickrs).
 # tickrs
+# Cross-platform ncurses Spotify client written in Rust, inspired by ncmpc and
+# the likes (hrkfdn/ncspot).
+# ncspot
 
 # Windows Incompatible.
 
