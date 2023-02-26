@@ -52,6 +52,8 @@ vivid
 texlab
 # A blazing-fast modern Lua linter written in Rust (Kampfkarren/selene).
 selene
+# An incremental parsing system for programming tools (tree-sitter/tree-sitter).
+tree-sitter-cli
 # 🤖 Just a command runner.
 # just
 # Background rust code check (Canop/bacon).
