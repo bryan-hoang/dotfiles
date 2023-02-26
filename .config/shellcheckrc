@@ -20,3 +20,6 @@ enable=quote-safe-variables
 
 # Require [[ and warn about [ in Bash/Ksh.
 enable=require-double-brackets
+
+# Literal carriage return. Fine on windows when using version control.
+disable=SC1017
