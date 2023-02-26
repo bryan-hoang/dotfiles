@@ -9,6 +9,8 @@
 --git https://github.com/lhvy/pipes-rs
 # A command-line DNS client.
 --git https://github.com/ogham/dog dog
+# Visualize your most used commands.
+--git https://github.com/nate-sys/muc
 
 # Windows Incompatible.
 
