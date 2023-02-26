@@ -660,7 +660,21 @@ install_curl() {
 
 install_lua-language-server() {
 	echo "Installing lua-language-server..."
-	brew install lua-language-server
+	if is_git_bash; then
+		local -r file_pattern='lua-language-server-*-win32-x64.zip'
+		local -r install_dir="$XDG_DATA_HOME"/lua-language-server
+		gh release download --repo LuaLS/lua-language-server \
+			--pattern "$file_pattern" \
+			--dir "$DOWNLOAD_DIR" \
+			--clobber \
+			|| return
+		local -r file="$(fd --glob "$file_pattern" "$DOWNLOAD_DIR")"
+		rm -rf "$install_dir" && mkdir -p "$install_dir"
+		unzip -q "$file" -d "$install_dir"
+	else
+		brew install lua-language-server
+	fi
+	command -v lua-language-server || return
 	echo "Installed lua-language-server successfully!"
 }
 
