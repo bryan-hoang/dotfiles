@@ -888,7 +888,7 @@ does_function_exist() {
 }
 
 does_command_exist() {
-	command -v "$@" >/dev/null
+	command -v "$1" >/dev/null
 }
 
 # endregion Boolean functions

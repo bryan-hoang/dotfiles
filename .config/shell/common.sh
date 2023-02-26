@@ -16,7 +16,9 @@ SHELL_BASENAME=$(basename "$(readlink -f /proc/$$/exe)")
 OLD_PATH=$PATH
 
 # https://github.com/jdxcode/rtx#rtx-inside-of-direnv-use-rtx-in-envrc
-[[ ! -s ~/.config/direnv/lib/use_rtx.sh ]] && does_command_exist direnv rtx \
+[[ ! -s ~/.config/direnv/lib/use_rtx.sh ]] \
+	&& does_command_exist direnv \
+	&& does_command_exist rtx \
 	&& rtx direnv activate >~/.config/direnv/lib/use_rtx.sh
 does_command_exist direnv && eval "$(direnv hook "$SHELL_BASENAME")"
 does_command_exist rtx && eval "$(rtx activate "$SHELL_BASENAME")" \
