@@ -60,6 +60,8 @@ tree-sitter-cli
 # bacon
 # git commit --fixup, but automatic.
 # git-absorb
+# A simple and easy to use Wikipedia Text User Interface (Builditluc/wiki-tui).
+# wiki-tui
 # Ping, but with a graph.
 # gping
 # A command-line benchmarking tool.
