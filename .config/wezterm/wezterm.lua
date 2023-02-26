@@ -75,12 +75,26 @@ return {
 		},
 	},
 	hyperlink_rules = {
-		-- Linkify things that look like URLs and the host has a TLD name. e.g.,
-		-- https://example.com/. Compiled-in default. Used if you don't specify any
-		-- hyperlink_rules.
-		-- https://urlregex.com/
+		-- Linkify things that look like URLs and the host has a TLD name in
+		-- punctionation (i.e., brackets). e.g.,
+		-- (https://example.com)
+		-- [https://example.com]
+		-- <https://example.com>
+		-- "https://example.com"
+		--
 		{
-			regex = [[http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+]],
+			regex = "[[:punct:]](\\w+://\\S+)[[:punct:]]",
+			format = "$1",
+		},
+		-- Then handle URLs not wrapped in brackets
+		-- and include terminating ), / or - characters, if any
+		-- these seem to be the most common trailing characters that are part of URLs
+		-- there may be additional common ones. e.g.,
+		-- https://example.com/
+		-- https://www.rfc-editor.org/rfc/rfc2606.html#section-1
+		-- https://dcp.work/?bankAccount=foo
+		{
+			regex = "\\b\\w+://\\S+[)/a-zA-Z0-9-]+",
 			format = "$0",
 		},
 		-- Linkify email addresses (e.g., bryan@bryanhoang.dev)
