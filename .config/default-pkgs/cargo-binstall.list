@@ -1,8 +1,13 @@
 # `ccache` with cloud storage (mozilla/sccache).
 sccache
+# Manage cargo cache (${CARGO_HOME}, ~/.cargo/), print sizes of dirs and
+# remove dirs selectively.
+cargo-cache
 # A cargo subcommand for checking and applying updates to installed
 # executables.
 cargo-update
+# Query crates.io for crates details <https://gitlab.com/imp/cargo-info>
+cargo-info
 # A smarter cd command, inspired by z and autojump. It remembers which
 # directories you use most frequently, so you can "jump" to them in just a few
 # keystrokes.
@@ -47,9 +52,8 @@ vivid
 texlab
 # 🤖 Just a command runner.
 # just
-# Manage cargo cache (${CARGO_HOME}, ~/.cargo/), print sizes of dirs and
-# remove dirs selectively.
-# cargo-cache
+# Background rust code check (Canop/bacon).
+# bacon
 # git commit --fixup, but automatic.
 # git-absorb
 # Ping, but with a graph.
