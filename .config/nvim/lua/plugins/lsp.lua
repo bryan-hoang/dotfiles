@@ -122,9 +122,7 @@ return {
 	{
 		"williamboman/mason.nvim",
 		opts = {
-			ensure_installed = {
-				"selene",
-			},
+			ensure_installed = {},
 		},
 	},
 	{

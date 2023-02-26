@@ -50,6 +50,8 @@ vivid
 # An implementation of the Language Server Protocol for LaTeX
 # (latex-lsp/texlab).
 texlab
+# A blazing-fast modern Lua linter written in Rust (Kampfkarren/selene).
+selene
 # 🤖 Just a command runner.
 # just
 # Background rust code check (Canop/bacon).
