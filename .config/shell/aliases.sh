@@ -119,21 +119,8 @@ alias tree="tree --dirsfirst --charset=ascii"
 
 # region ls vs. exa
 
-# List all files colorized in long format
-# shellcheck disable=SC2139
-alias l="ls -lF ${colorflag}"
-
-# List all files colorized in long format, excluding . and ..
-# shellcheck disable=SC2139
-alias la="ls -lAF ${colorflag}"
-
-# List only directories
-# shellcheck disable=SC2139
-alias lsd="ls -lF ${colorflag} | grep --color=never '^d'"
-
-# Always use color output for `ls`
-# shellcheck disable=SC2139
-alias ls="command ls ${colorflag} -A --time-style=long-iso"
+alias ls="ls --color"
+alias ll="ls -l --almost-all --classify --group-directories-first --human-readable --color"
 
 # Override `ls` with `exa` if it exists.
 if command -v exa >/dev/null 2>&1; then
