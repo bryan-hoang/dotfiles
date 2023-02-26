@@ -121,6 +121,8 @@ tree-sitter-cli
 # oxker
 # Realtime ticker data in your terminal (tarkah/tickrs).
 # tickrs
+# speedtest-cli in Rust. (nelsonjchen/speedtest-rs).
+# speedtest-rs
 # Cross-platform ncurses Spotify client written in Rust, inspired by ncmpc and
 # the likes (hrkfdn/ncspot).
 # ncspot
