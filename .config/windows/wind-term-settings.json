@@ -39,13 +39,15 @@
         {
             "colorScheme": "Dracula",
             "cursorShape": "filledBox",
-            "experimental.retroTerminalEffect": false,
+            "experimental.retroTerminalEffect": true,
             "font": 
             {
                 "face": "FiraCode NFM"
             },
+            "historySize": 20000,
             "opacity": 75,
-            "useAcrylic": false
+            "useAcrylic": true,
+            "useAtlasEngine": true
         },
         "list": 
         [
