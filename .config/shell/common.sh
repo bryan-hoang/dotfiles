@@ -11,7 +11,6 @@ done
 
 # Source: https://unix.stackexchange.com/a/37535
 SHELL_BASENAME=$(basename "$(readlink -f /proc/$$/exe)")
-readonly SHELL_BASENAME
 
 # Temporarily add rtx bin-paths to $PATH.
 OLD_PATH=$PATH
@@ -80,4 +79,4 @@ if command -v gpg-connect-agent >/dev/null; then
 fi
 
 PATH=$OLD_PATH
-unset OLD_PATH
+unset OLD_PATH SHELL_BASENAME
