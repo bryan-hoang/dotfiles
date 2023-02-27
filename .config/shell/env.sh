@@ -194,7 +194,8 @@ export XSERVERRC="$XDG_CONFIG_HOME"/X11/xserverrc
 
 # Don't set on git bash.
 if ! uname -a | grep -q 'Msys'; then
-	export VIMINIT="let \$MYVIMRC = has(\"nvim\") ? \"${XDG_CONFIG_HOME}/nvim/init.lua\" : \"${XDG_CONFIG_HOME}/vim/vimrc\" | so \$MYVIMRC"
+	# https://blog.joren.ga/vim-xdg#viminit-environmental-variable
+	export VIMINIT="if has('nvim') | so ${XDG_CONFIG_HOME}/nvim/init.lua | else | set nocp | so ${XDG_CONFIG_HOME}/vim/vimrc | endif"
 fi
 
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
