@@ -30,4 +30,9 @@ return {
 			return opts
 		end,
 	},
+	{
+		-- Vim Just Syntax.
+		"NoahTheDuke/vim-just",
+		ft = "just",
+	},
 }

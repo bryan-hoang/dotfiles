@@ -246,4 +246,14 @@ return {
 			},
 		},
 	},
+	{
+		"diegoulloao/nvim-file-location",
+		keys = {
+			{
+				"<leader>L",
+				"<cmd>lua require('nvim-file-location').copy_file_location('workdir', true, false)<cr>",
+				desc = "Copy file location",
+			},
+		},
+	},
 }

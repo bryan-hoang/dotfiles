@@ -11,4 +11,5 @@ set_file_associations({
 	["nginx"] = { "/etc/nginx/**/*.conf" },
 	["sshconfig"] = { "**/.ssh/conf.d/*.conf" },
 	["jsonc"] = { "**/.config/markdownlint/config" },
+	["just"] = { "*justfile" },
 })
