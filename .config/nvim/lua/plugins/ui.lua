@@ -1,20 +1,12 @@
 return {
 	{
 		"rcarriga/nvim-notify",
-		-- https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/plugins/ui.lua#L23
-		init = function()
-			-- Avoid notification for unset background color for certain color
-			-- schemes. e.g. gruvbox.
-			require("notify").setup({
-				background_colour = "#000000",
-			})
-			-- When noice is not enabled, install notify on VeryLazy
-			local Util = require("lazyvim.util")
-			if not Util.has("noice.nvim") then
-				Util.on_very_lazy(function()
-					vim.notify = require("notify")
-				end)
-			end
+		opts = {
+			background_colour = "#000000",
+		},
+		config = function(_, opts)
+			require("notify").setup(opts)
+			require("telescope").load_extension("notify")
 		end,
 	},
 	{
@@ -44,5 +36,26 @@ return {
 		"folke/noice.nvim",
 		-- Disable when `ext_{cmdline,messages}` are enabled by `firenvim`.
 		enabled = not vim.g.started_by_firenvim,
+	},
+	{
+		"hrsh7th/nvim-cmp",
+		dependencies = {
+			"rcarriga/cmp-dap",
+		},
+		opts = {
+			enabled = function()
+				return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+					or require("cmp_dap").is_dap_buffer()
+			end,
+		},
+		config = function(_, opts)
+			local cmp = require("cmp")
+			cmp.setup(opts)
+			cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+				sources = {
+					{ name = "dap" },
+				},
+			})
+		end,
 	},
 }

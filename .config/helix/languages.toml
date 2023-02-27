@@ -6,3 +6,54 @@ name = "rust"
 
 [language.config]
 checkOnSave = { command = "clippy" }
+
+[[language]]
+name = "javascript"
+#
+[language.debugger]
+args = [
+  "/home/bryan/src/github.com/microsoft/vscode-node-debug2/out/src/nodeDebug.js",
+]
+command = "node"
+name = "vscode-node-debug2"
+transport = "stdio"
+# TODO: Wait for `vscode-js-debug` to be fixed. Still buggy.
+# args = [ "/home/bryan/src/github.com/microsoft/vscode-js-debug/out/src/vsDebugServer.js" ]
+# command = "node"
+# name = "vscode-js-debug"
+# port-arg = "{}"
+# transport = "tcp"
+[[language.debugger.templates]]
+name = "source"
+request = "launch"
+[[language.debugger.templates.completion]]
+completion = "filename"
+name = "main"
+[language.debugger.templates.args]
+program = "{0}"
+[[language.debugger.templates]]
+name = "attach"
+request = "attach"
+[[language.debugger.templates.completion]]
+completion = "pid"
+[language.debugger.templates.args]
+processId = "{0}"
+
+# FIXME: Module requires filename argument, which can't be passed yet.
+# [[language]]
+# name = "python"
+# [language.debugger]
+# # How to specify the file to debug?
+# args = ["-m", "debugpy", "--wait-for-client"]
+# command = "python"
+# name = "debugpy"
+# port-arg = "--listen {}"
+# transport = "tcp"
+# [[language.debugger.templates]]
+# name = "source"
+# request = "launch"
+# [[language.debugger.templates.completion]]
+# completion = "filename"
+# name = "main"
+# [language.debugger.templates.args]
+# program = "{0}"

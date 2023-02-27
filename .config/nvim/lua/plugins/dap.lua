@@ -1,32 +1,116 @@
 return {
 	{
 		"mfussenegger/nvim-dap",
-		lazy = true,
+		dependencies = {
+			{
+				"Weissle/persistent-breakpoints.nvim",
+				opts = {
+					load_breakpoints_event = { "BufReadPost" },
+				},
+			},
+		},
 		keys = {
 			{
 				"<leader>gb",
-				"<cmd>lua require('dap').toggle_breakpoint()<cr>",
+				"<cmd>PBToggleBreakpoint<cr>",
 				desc = "Toggle breakpoint",
 			},
+			{
+				"<leader>gl",
+				"<cmd>DapContinue<cr>",
+				desc = "Launch debug target",
+			},
+			{
+				"<leader>gt",
+				"<cmd>DapTerminate<cr>",
+				desc = "Terminate debug session",
+			},
+			{
+				"<leader>gi",
+				"<cmd>DapStepInto<cr>",
+				desc = "Step in",
+			},
+			{
+				"<leader>go",
+				"<cmd>DapStepOut<cr>",
+				desc = "Step out",
+			},
+			{
+				"<leader>gn",
+				"<cmd>DapStepOver<cr>",
+				desc = "Step over",
+			},
 		},
+		config = function()
+			local dap = require("dap")
+			local bash_debug_adapter_install_path = os.getenv("GHQ_ROOT")
+				.. "/github.com/rogalmic/vscode-bash-debug"
+			local bashdb_dir = bash_debug_adapter_install_path .. "/bashdb_dir"
+
+			-- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#bash
+			dap.adapters.bashdb = {
+				type = "executable",
+				command = "node",
+				args = {
+					bash_debug_adapter_install_path .. "/out/bashDebug.js",
+				},
+				name = "bashdb",
+			}
+			dap.configurations.sh = {
+				{
+					name = "Launch file",
+					type = "bashdb",
+					request = "launch",
+					program = "${file}",
+					cwd = "${workspaceFolder}",
+					env = {},
+					args = {},
+					showDebugOutput = false,
+					trace = false,
+					pathBashdb = bashdb_dir .. "/bashdb",
+					pathBashdbLib = bashdb_dir,
+					pathBash = "bash",
+					pathCat = "cat",
+					pathMkfifo = "mkfifo",
+					pathPkill = "pkill",
+				},
+			}
+		end,
 	},
 	{
 		"jay-babu/mason-nvim-dap.nvim",
+		event = require("util").get_buf_enter_event_list(),
 		dependencies = {
 			"williamboman/mason.nvim",
 			"mfussenegger/nvim-dap",
 		},
 		opts = {
-			ensure_installed = { "python" },
+			ensure_installed = {
+				"codelldb",
+			},
+			automatic_installation = true,
+			automatic_setup = {
+				configurations = function(default)
+					return default
+				end,
+			},
 		},
+		config = function(_, opts)
+			local mason_nvim_dap = require("mason-nvim-dap")
+			mason_nvim_dap.setup(opts)
+			mason_nvim_dap.setup_handlers({})
+		end,
 	},
 	{
 		"rcarriga/nvim-dap-ui",
+		event = require("util").get_buf_enter_event_list(),
 		dependencies = {
 			"mfussenegger/nvim-dap",
 		},
-		config = function()
+		config = function(_, opts)
 			local dap, dapui = require("dap"), require("dapui")
+
+			dapui.setup(opts)
 			dap.listeners.after.event_initialized["dapui_config"] = function()
 				dapui.open()
 			end
@@ -40,17 +124,22 @@ return {
 	},
 	{
 		"theHamsta/nvim-dap-virtual-text",
+		event = require("util").get_buf_enter_event_list(),
 		dependencies = {
 			"mfussenegger/nvim-dap",
 			"nvim-treesitter/nvim-treesitter",
 		},
+		opts = {
+			all_references = true,
+		},
 	},
 	{
 		"nvim-telescope/telescope-dap.nvim",
+		event = require("util").get_buf_enter_event_list(),
 		dependencies = {
 			"mfussenegger/nvim-dap",
-			"nvim-treesitter/nvim-treesitter",
 			"nvim-telescope/telescope.nvim",
+			"nvim-treesitter/nvim-treesitter",
 		},
 		config = function()
 			require("telescope").load_extension("dap")
@@ -61,14 +150,18 @@ return {
 		dependencies = {
 			"mfussenegger/nvim-dap",
 		},
+		ft = {
+			"javascript",
+			"typescript",
+		},
 		config = function()
 			local dap_vscode_js = require("dap-vscode-js")
 			local dap = require("dap")
 
 			dap_vscode_js.setup({
 				-- Path to vscode-js-debug installation.
-				debugger_path = vim.fn.stdpath("data")
-					.. "/mason/packages/js-debug-adapter",
+				debugger_path = os.getenv("GHQ_ROOT")
+					.. "/github.com/microsoft/vscode-js-debug",
 
 				-- Which adapters to register in nvim-dap.
 				adapters = { "pwa-node" },
@@ -92,6 +185,14 @@ return {
 					},
 				}
 			end
+		end,
+	},
+	{
+		"mfussenegger/nvim-dap-python",
+		ft = "python",
+		config = function()
+			local dap_python = require("dap-python")
+			dap_python.setup(os.getenv("XDG_DATA_HOME") .. "/rtx/shims/python")
 		end,
 	},
 }

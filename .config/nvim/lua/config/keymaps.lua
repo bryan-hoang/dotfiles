@@ -11,6 +11,9 @@ wk.register({
 	h = {
 		name = "+harpoon",
 	},
+	g = {
+		name = "+git/debug",
+	},
 }, {
 	prefix = "<Leader>",
 })

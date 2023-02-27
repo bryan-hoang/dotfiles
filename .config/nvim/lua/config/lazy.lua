@@ -44,7 +44,7 @@ require("lazy").setup({
 		-- Get a notification when new updates are found.
 		notify = true,
 		-- Seconds
-		frequency = 3600 * 24,
+		frequency = 3600 * 12,
 	},
 	performance = {
 		rtp = {

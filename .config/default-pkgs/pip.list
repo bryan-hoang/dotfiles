@@ -7,3 +7,6 @@ python-lsp-ruff
 # python-lsp-server plugin that adds support to black autoformatter, forked from
 # https://github.com/rupert/pyls-black/
 python-lsp-black
+# An implementation of the Debug Adapter Protocol for Python
+# (microsoft/debugpy).
+debugpy

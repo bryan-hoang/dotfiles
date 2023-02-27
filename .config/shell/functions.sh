@@ -799,6 +799,36 @@ install_direnv() {
 	echo 'Finished installing direnv!'
 }
 
+install_vscode_js_debug() {
+	git get https://github.com/microsoft/vscode-js-debug.git
+	z "$GHQ_ROOT"/github.com/microsoft/vscode-js-debug
+	# https://github.com/mxsdev/nvim-dap-vscode-js/issues/19#issuecomment-1333564516
+	git switch -d v1.68.0
+	pnpm import
+	pnpm install
+	pnpm compile
+	z -
+}
+
+install_vscode_node_debug2() {
+	git get https://github.com/microsoft/vscode-node-debug2.git
+	z "$GHQ_ROOT"/github.com/microsoft/vscode-node-debug2
+	# https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#javascript
+	pnpm import
+	pnpm install
+	NODE_OPTIONS=--no-experimental-fetch pnpm build
+	z -
+}
+
+install_vscode_bash_debug() {
+	git get https://github.com/rogalmic/vscode-bash-debug.git
+	z "$GHQ_ROOT"/github.com/rogalmic/vscode-bash-debug
+	pnpm import
+	pnpm install
+	pnpm compile
+	z -
+}
+
 # endregion Installation.
 
 # region Boolean functions
