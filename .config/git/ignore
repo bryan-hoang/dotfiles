@@ -84,3 +84,6 @@ rome.json
 # `clangd` LS
 # https://clangd.llvm.org/installation.html#compile_commandsjson
 compile_commands.json
+
+# Symlinked file to avoid namespace collisions.
+zsh-syntax-highlighting-dracula.plugin.zsh
