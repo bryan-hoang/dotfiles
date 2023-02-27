@@ -13,17 +13,21 @@
 # https://wiki.archlinux.org/title/Systemd/User#Environment_variables
 if command -v dbus-update-activation-environment >/dev/null \
 	&& command -v systemctl >/dev/null; then
-	(
-		unset SHLVL SSH_CONNECTION SSH_CLIENT SSH_TTY
+	update_tmux_env() {
+		(
+			unset SHLVL SSH_CONNECTION SSH_CLIENT SSH_TTY
 
-		# Avoid triggering the starship prompt module in tmux server started by
-		# systemd. Remove lingering SSH env vars.
-		dbus-update-activation-environment --systemd --all >/dev/null 2>&1 \
-			|| awk 'BEGIN{for(v in ENVIRON) print v}' | grep -iv -e awk -e lua -e ^_ \
-			| xargs systemctl --user import-environment
-		systemctl --user unset-environment SHLVL SSH_CONNECTION SSH_CLIENT SSH_TTY
-		systemctl --user start tmux.service
-	)
+			# Avoid triggering the starship prompt module in tmux server started by
+			# systemd. Remove lingering SSH env vars.
+			dbus-update-activation-environment --systemd --all >/dev/null 2>&1 \
+				|| awk 'BEGIN{for(v in ENVIRON) print v}' | grep -iv -e awk -e lua -e ^_ \
+				| xargs systemctl --user import-environment
+			systemctl --user unset-environment SHLVL SSH_CONNECTION SSH_CLIENT SSH_TTY
+			systemctl --user start tmux.service
+		)
+	}
+
+	update_tmux_env
 fi
 
 # Determine if we're in a Linux desktop environment.
