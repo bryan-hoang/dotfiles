@@ -78,30 +78,6 @@ return {
 		end,
 	},
 	{
-		"jay-babu/mason-nvim-dap.nvim",
-		event = require("util").get_buf_enter_event_list(),
-		dependencies = {
-			"williamboman/mason.nvim",
-			"mfussenegger/nvim-dap",
-		},
-		opts = {
-			ensure_installed = {
-				"codelldb",
-			},
-			automatic_installation = true,
-			automatic_setup = {
-				configurations = function(default)
-					return default
-				end,
-			},
-		},
-		config = function(_, opts)
-			local mason_nvim_dap = require("mason-nvim-dap")
-			mason_nvim_dap.setup(opts)
-			mason_nvim_dap.setup_handlers({})
-		end,
-	},
-	{
 		"rcarriga/nvim-dap-ui",
 		event = require("util").get_buf_enter_event_list(),
 		dependencies = {
@@ -118,6 +94,10 @@ return {
 				dapui.close()
 			end
 			dap.listeners.before.event_exited["dapui_config"] = function()
+				dapui.close()
+			end
+			-- https://github.com/rcarriga/nvim-dap-ui/issues/147#issuecomment-1297126808
+			dap.listeners.before.disconnect["dapui_config"] = function()
 				dapui.close()
 			end
 		end,
