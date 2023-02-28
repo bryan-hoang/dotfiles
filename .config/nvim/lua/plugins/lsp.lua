@@ -85,6 +85,9 @@ return {
 					texlab = {
 						mason = false,
 					},
+					marksman = {
+						mason = false,
+					},
 				},
 			})
 		end,

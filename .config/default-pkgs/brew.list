@@ -1,2 +1,5 @@
 # A language server that offers Lua language support - programmed in Lua.
 lua-language-server
+# Write Markdown with code assist and intelligence in the comfort of your
+# favourite editor.
+marksman
