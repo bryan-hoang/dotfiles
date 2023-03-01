@@ -70,7 +70,8 @@
 	rebase-merge = "!f() { git rebase --onto $(git rev-list --max-count 1 HEAD@{1}) $(git rev-list --merges --max-count=1 HEAD) $(git branch --show-current); }; f"
 	# Print the current default branch on the remote.
 	default-branch = "!f() { git rev-parse --abbrev-ref origin/HEAD | sed 's/origin\\///'; }; f"
-	pushf = push --force-with-lease --force-if-includes
+	# https://stackoverflow.com/questions/65837109/when-should-i-use-git-push-force-if-includes
+	push-force-safely = push --force-with-lease --force-if-includes
 	wt = worktree
 	switch-time = "!f() { git switch -d $(git rev-list -n 1 --first-parent --before \"$1 23:59\" $(git default-branch)) ; }; f"
 	# Delete a branch locally and on the remote.
@@ -79,9 +80,14 @@
 	# branch someone has been committing to recently.
 	branch-activity = "for-each-ref --sort=committerdate refs/heads refs/remotes --format='%(authordate:short) %(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset)) %(authorname)'"
 	# https://stackoverflow.com/a/27940027/8714233
-	review-changes = "!f() { git merge-base origin/$(git default-branch) origin/$(git branch --show-current) | xargs -I % git diff %..origin/$(git branch --show-current); }; f"
-	review-commits = "!f() { git log --oneline origin/$(git default-branch)..$(git branch --show-current) \"$@\";  }; f"
+	diff-changes = "!f() { git merge-base origin/$(git default-branch) origin/$(git branch --show-current) | xargs -I '{}' git diff '{}'..origin/$(git branch --show-current); }; f"
+	# Logs the diff of commits between the default branch and the current branch.
+	log-diff = "!f() { git log --oneline origin/$(git default-branch)..$(git branch --show-current) \"$@\";  }; f"
+	# Logs commits that haven't been pushed to a remote yet.
 	log-local = "!f() { git log --oneline --decorate=no origin/$(git branch --show-current).. \"$@\"; }; f"
+	# Takes a file path as an argument. Prints the date the file was first added
+	# to the repository.
+	log-added-date = "log --format='format:%ci' --name-status --diff-filter=A --follow"
 [apply]
 	# Detect whitespace errors when applying a patch.
 	whitespace = fix
