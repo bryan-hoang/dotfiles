@@ -34,7 +34,8 @@ return {
 					},
 				},
 				format = {
-					timeout_ms = 2000,
+					async = true,
+					timeout_ms = 4000,
 				},
 				autoformat = false,
 				---@type lspconfig.options

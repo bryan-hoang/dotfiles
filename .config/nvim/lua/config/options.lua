@@ -14,6 +14,12 @@ for _, plugin in pairs(enable_providers) do
 	g["loaded_" .. plugin .. "_provider"] = nil
 end
 
+-- Configure Netrw to be a little more sane.
+-- g.netrw_banner = 0
+g.netrw_liststyle = 3
+g.netrw_browse_split = 4
+-- g.netrw_winsize = 20
+
 -- Jump based on relative line #.
 opt.relativenumber = true
 
@@ -89,33 +95,3 @@ opt.undofile = true
 
 -- Remove screen line cursor padding so that `zt` and `zb` both work.`
 opt.scrolloff = 0
-
--- https://github.com/neovim/neovim/blob/master/runtime/lua/editorconfig.lua#L76
-require("editorconfig").properties.max_line_length = function(bufnr, val)
-	local filename = vim.api.nvim_buf_get_name(bufnr)
-
-	-- Don't set `textwidth` for certain filesto maintains `gw` wrapping.
-	if string.match(filename, "COMMIT_EDITMSG") then
-		return
-	end
-
-	local n = tonumber(val)
-
-	if n then
-		vim.bo[bufnr].textwidth = n
-	else
-		assert(val == "off", 'max_line_length must be a number or "off"')
-		vim.bo[bufnr].textwidth = 0
-	end
-end
-
--- https://github.com/neovim/neovim/blob/master/runtime/lua/editorconfig.lua#L111
-require("editorconfig").properties.insert_final_newline = function(bufnr, val)
-	assert(
-		val == "true" or val == "false",
-		'insert_final_newline must be either "true" or "false"'
-	)
-	-- Don't fix to by default to make it easier to signal in lualine..
-	vim.bo[bufnr].fixendofline = false
-	-- vim.bo[bufnr].endofline = val == "true"
-end

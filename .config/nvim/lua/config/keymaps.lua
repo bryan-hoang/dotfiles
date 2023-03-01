@@ -21,8 +21,8 @@ wk.register({
 -- Keep default line wrapping behaviour.
 vim.keymap.del({ "n", "x" }, "gw")
 vim.keymap.del("n", "<Leader>`")
-vim.keymap.del("n", "<Leader>gc")
-vim.keymap.del("n", "<Leader>gs")
+-- vim.keymap.del("n", "<Leader>gc")
+-- vim.keymap.del("n", "<Leader>gs")
 
 -- Set here instead of `keys` section for telescope.nvim to prevent race
 -- condition.
