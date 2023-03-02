@@ -88,6 +88,10 @@
 	# Takes a file path as an argument. Prints the date the file was first added
 	# to the repository.
 	log-added-date = "log --format='format:%ci' --name-status --diff-filter=A --follow"
+	# Opens all modified, untracked, and staged files in the editor of choice.
+	# Respects the current working directory. Source:
+	# https://stackoverflow.com/a/32231077/8714233
+	edit = !"$EDITOR $(git status --short | awk '$1 ~ /^M|A|U|\\?\\?/ {print $2}');"
 [apply]
 	# Detect whitespace errors when applying a patch.
 	whitespace = fix
