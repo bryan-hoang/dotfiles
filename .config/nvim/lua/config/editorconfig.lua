@@ -16,7 +16,6 @@ require("editorconfig").properties.max_line_length = function(bufnr, val)
 		vim.bo[bufnr].textwidth = 0
 	end
 end
-
 -- https://github.com/neovim/neovim/blob/master/runtime/lua/editorconfig.lua#L111
 require("editorconfig").properties.insert_final_newline = function(bufnr, val)
 	assert(

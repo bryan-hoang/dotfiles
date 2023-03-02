@@ -1,5 +1,6 @@
 return {
 	{
+		-- Diff syntax highlighting is off.
 		"ellisonleao/gruvbox.nvim",
 		lazy = false,
 		opts = {
@@ -64,7 +65,7 @@ return {
 	{
 		"LazyVim/LazyVim",
 		opts = {
-			colorscheme = "gruvbox",
+			colorscheme = "catppuccin",
 		},
 	},
 }

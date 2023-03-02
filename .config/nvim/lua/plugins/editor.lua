@@ -8,10 +8,16 @@ return {
 				"nvim-telescope/telescope-live-grep-args.nvim",
 				cmd = "Telescope",
 			},
+			{
+				"nvim-telescope/telescope-frecency.nvim",
+				dependencies = { "kkharji/sqlite.lua" },
+				cmd = "Telescope",
+			},
 		},
 		config = function(_, opts)
 			local telescope = require("telescope")
 			telescope.load_extension("live_grep_args")
+			telescope.load_extension("frecency")
 			telescope.setup(opts)
 		end,
 		opts = {
@@ -217,7 +223,19 @@ return {
 		end,
 	},
 	{
+		-- A plugin to visualise and resolve merge conflicts in neovim.
 		"akinsho/git-conflict.nvim",
+		event = require("util").get_buf_enter_event_list(),
+		opts = {
+			default_mappings = {
+				ours = "<Leader>gco",
+				theirs = "<Leader>gct",
+				none = "<Leader>gcn",
+				both = "<Leader>gcb",
+				next = "]x",
+				prev = "[x",
+			},
+		},
 	},
 	{
 		"gorbit99/codewindow.nvim",
@@ -260,8 +278,10 @@ return {
 		"pwntester/octo.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
 			"nvim-tree/nvim-web-devicons",
+			"folke/which-key.nvim",
+			-- Breaks keymaps if uncommented.
+			-- "nvim-telescope/telescope.nvim",
 		},
 		cmd = "Octo",
 		opts = {},

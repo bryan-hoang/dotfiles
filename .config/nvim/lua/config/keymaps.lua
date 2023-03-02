@@ -2,6 +2,12 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+-- Keep default line wrapping behaviour.
+vim.keymap.del({ "n", "x" }, "gw")
+vim.keymap.del("n", "<Leader>`")
+vim.keymap.del("n", "<Leader>gc")
+vim.keymap.del("n", "<Leader>gs")
+
 local wk = require("which-key")
 
 wk.register({
@@ -13,16 +19,13 @@ wk.register({
 	},
 	g = {
 		name = "+git/debug",
+		c = {
+			name = "+conflict",
+		},
 	},
 }, {
 	prefix = "<Leader>",
 })
-
--- Keep default line wrapping behaviour.
-vim.keymap.del({ "n", "x" }, "gw")
-vim.keymap.del("n", "<Leader>`")
--- vim.keymap.del("n", "<Leader>gc")
--- vim.keymap.del("n", "<Leader>gs")
 
 -- Set here instead of `keys` section for telescope.nvim to prevent race
 -- condition.
