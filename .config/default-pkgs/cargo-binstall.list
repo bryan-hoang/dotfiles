@@ -58,6 +58,8 @@ tree-sitter-cli
 # just
 # Background rust code check (Canop/bacon).
 # bacon
+# A next-generation test runner for Rust (nextest-rs/nextest).
+# cargo-nextest
 # git commit --fixup, but automatic.
 # git-absorb
 # A simple and easy to use Wikipedia Text User Interface (Builditluc/wiki-tui).

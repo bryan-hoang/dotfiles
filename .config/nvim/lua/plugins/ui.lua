@@ -58,4 +58,18 @@ return {
 			})
 		end,
 	},
+	{
+		"folke/twilight.nvim",
+	},
+	{
+		"folke/zen-mode.nvim",
+		dependencies = { "folke/twilight.nvim" },
+		cmd = "ZenMode",
+		opts = {
+			tmux = { enabled = true },
+		},
+		keys = {
+			{ "<Leader>uz", "<Cmd>ZenMode<CR>", desc = "Toggle Zen Mode" },
+		},
+	},
 }
