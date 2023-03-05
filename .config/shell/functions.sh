@@ -473,7 +473,7 @@ install_default_pkgs() {
 			;;
 		cargo-binstall)
 			install_cmd+=()
-			install_opts+=(--no-confirm)
+			install_opts+=(--no-confirm --no-symlinks)
 			;;
 		espanso)
 			if is_git_bash; then
@@ -1426,4 +1426,18 @@ ls_glab_mr_map() {
 		| head -n -1 \
 		| awk '{print $1 " " $(NF)}' \
 		| tr -d '()'
+}
+
+update_tmux_env() {
+	(
+		unset SHLVL SSH_CONNECTION SSH_CLIENT SSH_TTY
+
+		# Avoid triggering the starship prompt module in tmux server started by
+		# systemd. Remove lingering SSH env vars.
+		dbus-update-activation-environment --systemd --all >/dev/null 2>&1 \
+			|| awk 'BEGIN{for(v in ENVIRON) print v}' | grep -iv -e awk -e lua -e ^_ \
+			| xargs systemctl --user import-environment
+		systemctl --user unset-environment SHLVL SSH_CONNECTION SSH_CLIENT SSH_TTY
+		systemctl --user start tmux.service
+	)
 }
