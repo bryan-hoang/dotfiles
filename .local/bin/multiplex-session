@@ -90,8 +90,9 @@ multiplex_tmux() {
 		tmux new-session -s "$selected_name" -c "$selected" -A
 	else
 		# If we're in tmux, handle edge cases to ensure the session exists before
-		# switching to it, without nesting tmux.
-		if ! tmux has-session -t "$selected_name" 2>/dev/null; then
+		# switching to it, without nesting tmux. Need to specify `=` for exact
+		# matching rather than prefix matching.
+		if ! tmux has-session -t="$selected_name" 2>/dev/null; then
 			tmux new-session -s "$selected_name" -c "$selected" -d
 		fi
 
