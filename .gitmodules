@@ -85,3 +85,6 @@
 [submodule "dracula/zellij"]
 	path = src/github.com/dracula/zellij
 	url = https://github.com/dracula/zellij.git
+[submodule "doomemacs/doomemacs"]
+	path = src/github.com/doomemacs/doomemacs
+	url = https://github.com/doomemacs/doomemacs.git

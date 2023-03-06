@@ -152,3 +152,4 @@ command -v bq >/dev/null && alias bq='bq --bigqueryrc "${XDG_CONFIG_HOME}"/bigqu
 command -v shfmt >/dev/null && alias shfmt='shfmt -ci -bn --simplify'
 alias watch='watch --color'
 alias muc='muc --file $HISTFILE --pretty --count 16'
+alias ec='emacsclient --tty'

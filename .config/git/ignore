@@ -87,3 +87,6 @@ compile_commands.json
 
 # Symlinked file to avoid namespace collisions.
 zsh-syntax-highlighting-dracula.plugin.zsh
+
+# Doom Emacs folder. Not sure why it's not ignored by default.
+hooks

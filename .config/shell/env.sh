@@ -23,6 +23,9 @@ export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME"/asdf/asdfrc
 	&& export PATH="$XDG_CONFIG_HOME"/rofi/scripts:"$PATH"
 [ -d "$XDG_DATA_HOME"/google-cloud-sdk/bin ] \
 	&& export PATH="$XDG_DATA_HOME"/google-cloud-sdk/bin:"$PATH"
+# Doom Emacs.
+[ -d "$XDG_CONFIG_HOME"/emacs/bin ] \
+	&& export PATH="$XDG_CONFIG_HOME"/emacs/bin:"$PATH"
 # Brew
 [ -s /home/linuxbrew/.linuxbrew/bin/brew ] \
 	&& eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
