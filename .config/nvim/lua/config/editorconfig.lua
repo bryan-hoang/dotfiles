@@ -3,7 +3,7 @@ require("editorconfig").properties.max_line_length = function(bufnr, val)
 	local filename = vim.api.nvim_buf_get_name(bufnr)
 
 	-- Don't set `textwidth` for certain filesto maintains `gw` wrapping.
-	if string.match(filename, "COMMIT_EDITMSG") then
+	if filename:match("COMMIT_EDITMSG") then
 		return
 	end
 
