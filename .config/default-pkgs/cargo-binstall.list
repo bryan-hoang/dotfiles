@@ -12,9 +12,6 @@ cargo-info
 # directories you use most frequently, so you can "jump" to them in just a few
 # keystrokes.
 zoxide
-# Recursively searches directories for a regex pattern while respecting your
-# gitignore.
-ripgrep
 # A simple, fast and user-friendly alternative to 'find'.
 fd-find
 # A syntax-highlighting pager for git and diff output.
