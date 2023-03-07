@@ -1,5 +1,3 @@
-# ~/.config/starship.toml
-
 format = """
 $username\
 $hostname\
@@ -9,6 +7,7 @@ $singularity\
 $kubernetes\
 $directory\
 $vcsh\
+$fossil_branch\
 ${custom.git_url}\
 $git_branch\
 $git_commit\
@@ -17,6 +16,7 @@ $git_metrics\
 $git_status\
 ${custom.git_email}\
 $hg_branch\
+$pijul_channel\
 $docker_context\
 $package\
 $c\
@@ -29,6 +29,7 @@ $dotnet\
 $elixir\
 $elm\
 $erlang\
+$fennel\
 $golang\
 $guix_shell\
 $haskell\
@@ -37,9 +38,11 @@ $helm\
 $java\
 $julia\
 $kotlin\
+$gradle\
 $lua\
 $nim\
 $nodejs\
+${custom.pnpm}\
 ${custom.npm}\
 $ocaml\
 $opa\
@@ -140,7 +143,7 @@ python_binary = ["python3", "python", "python2"]
 version_format = "v${major}.${minor}"
 
 [ruby]
-format ="[$symbol($version )]($style)"
+format = "[$symbol($version )]($style)"
 
 [rust]
 format = '[$symbol($version )]($style)'
