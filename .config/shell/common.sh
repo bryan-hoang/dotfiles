@@ -47,6 +47,8 @@ does_command_exist starship \
 	&& generate_completions "$SHELL_BASENAME" starship starship completions "$SHELL_BASENAME"
 does_command_exist ruff \
 	&& generate_completions "$SHELL_BASENAME" ruff ruff generate-shell-completion "$SHELL_BASENAME"
+does_command_exist poetry \
+	&& generate_completions "$SHELL_BASENAME" poetry poetry completions "$SHELL_BASENAME"
 
 # Doesn't support bash.
 does_command_exist bw \
