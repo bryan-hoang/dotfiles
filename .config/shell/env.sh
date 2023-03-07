@@ -247,3 +247,6 @@ export PIPX_HOME="$XDG_DATA_HOME"/pipx
 export SDIRS="$XDG_STATE_HOME"/bashmarks/sdirs
 mkdir -p "$(dirname "$SDIRS")"
 command -v sccache >/dev/null && export RUSTC_WRAPPER=sccache
+# https://github.com/jdxcode/rtx#rtx_use_toml
+export RTX_USE_TOML=1
+export RTX_SHIMS_DIR="$XDG_DATA_HOME"/rtx/shims
