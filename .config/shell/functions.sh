@@ -34,8 +34,6 @@ install_gh() {
 		sudo apt install "$DOWNLOAD_DIR"/gh_*_linux_arm64.deb
 	fi
 
-	generate_completions zsh gh gh completion -s zsh
-	generate_completions bash gh gh completion -s bash
 	gh --version
 	if ! gh auth status; then
 		gh auth login --web
@@ -267,8 +265,6 @@ install_cht.sh() {
 	install_apt_packages rlwrap
 	curl https://cht.sh/:cht.sh >"${XDG_BIN_HOME}/cht.sh"
 	chmod +x "${XDG_BIN_HOME}/cht.sh"
-	generate_completions bash cht.sh curl https://cheat.sh/:bash_completion
-	generate_completions zsh cht.sh curl https://cheat.sh/:zsh
 	cht.sh --help
 	echo "Installed cht successfully!"
 }
@@ -623,8 +619,6 @@ install_poetry() {
 		echo "Installing poetry..."
 		curl -sSL https://install.python-poetry.org | python3 -
 		poetry --version
-		generate_completions zsh poetry poetry completions zsh
-		generate_completions bash poetry poetry completions bash
 		echo "Installed poetry successfully!"
 	fi
 }
@@ -1349,9 +1343,9 @@ uninstall_global_npm_pkgs() {
 }
 
 generate_completions() {
-	local -r shell="${1}"
-	local -r command_to_complete="${2}"
-	local -ra completion_cmd=("${@:3}")
+	local -r shell=$(basename "$(readlink -f /proc/$$/exe)")
+	local -r command_to_complete="${1}"
+	local -ra completion_cmd=("${@:2}")
 	local -r bash_completion_file="$BASH_COMPLETION_USER_DIR"/completions/"$command_to_complete"
 	local -r zsh_completion_file="$ZSH_USER_FPATH"/_"$command_to_complete"
 
@@ -1363,15 +1357,6 @@ generate_completions() {
 			fi
 			;;
 		zsh)
-			if [[ ! -s ${zsh_completion_file} ]]; then
-				"${completion_cmd[@]}" | sed -e 's/\x1b\[[0-9;]*m//g' >|"$zsh_completion_file"
-			fi
-			;;
-		all)
-			if [[ ! -s ${bash_completion_file} ]]; then
-				"${completion_cmd[@]}" | sed -e 's/\x1b\[[0-9;]*m//g' >|"$bash_completion_file"
-			fi
-
 			if [[ ! -s ${zsh_completion_file} ]]; then
 				"${completion_cmd[@]}" | sed -e 's/\x1b\[[0-9;]*m//g' >|"$zsh_completion_file"
 			fi

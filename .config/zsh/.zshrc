@@ -184,10 +184,6 @@ does_command_exist starship && eval "$(starship init zsh)"
 does_command_exist mcfly && eval "$(mcfly init zsh)"
 does_command_exist navi && eval "$(navi widget zsh)"
 does_command_exist zoxide && eval "$(zoxide init zsh)"
-does_command_exist pipenv \
-	&& generate_completions zsh pipenv env _PIPENV_COMPLETE=zsh_source pipenv
-does_command_exist kubectl \
-	&& generate_completions zsh kubectl kubectl completion zsh
 does_command_exist broot && eval "$(broot --print-shell-function zsh)"
 
 # # shellcheck disable=SC1091

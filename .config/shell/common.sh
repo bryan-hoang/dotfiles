@@ -31,28 +31,39 @@ fi
 # region: Completions
 
 does_command_exist dra \
-	&& generate_completions "$SHELL_BASENAME" dra dra completion "$SHELL_BASENAME"
+	&& generate_completions dra dra completion "$SHELL_BASENAME"
 does_command_exist rustup \
-	&& generate_completions "$SHELL_BASENAME" cargo rustup completions "$SHELL_BASENAME" cargo \
-	&& generate_completions "$SHELL_BASENAME" rustup rustup completions "$SHELL_BASENAME" rustup
+	&& generate_completions cargo rustup completions "$SHELL_BASENAME" cargo \
+	&& generate_completions rustup rustup completions "$SHELL_BASENAME" rustup
 does_command_exist trash \
-	&& generate_completions "$SHELL_BASENAME" trash trash completions "$SHELL_BASENAME"
+	&& generate_completions trash trash completions "$SHELL_BASENAME"
 does_command_exist deno \
-	&& generate_completions "$SHELL_BASENAME" deno deno completions "$SHELL_BASENAME"
+	&& generate_completions deno deno completions "$SHELL_BASENAME"
 does_command_exist glab \
-	&& generate_completions "$SHELL_BASENAME" glab glab completion --shell "$SHELL_BASENAME"
+	&& generate_completions glab glab completion --shell "$SHELL_BASENAME"
 does_command_exist just \
-	&& generate_completions "$SHELL_BASENAME" just just --completions "$SHELL_BASENAME"
+	&& generate_completions just just --completions "$SHELL_BASENAME"
 does_command_exist starship \
-	&& generate_completions "$SHELL_BASENAME" starship starship completions "$SHELL_BASENAME"
+	&& generate_completions starship starship completions "$SHELL_BASENAME"
 does_command_exist ruff \
-	&& generate_completions "$SHELL_BASENAME" ruff ruff generate-shell-completion "$SHELL_BASENAME"
+	&& generate_completions ruff ruff generate-shell-completion "$SHELL_BASENAME"
 does_command_exist poetry \
-	&& generate_completions "$SHELL_BASENAME" poetry poetry completions "$SHELL_BASENAME"
+	&& generate_completions poetry poetry completions "$SHELL_BASENAME"
+does_command_exist gh \
+	&& generate_completions gh gh completion -s "$SHELL_BASENAME"
+does_command_exist cht.sh \
+	&& generate_completions cht.sh curl https://cheat.sh/:bash_completion \
+	&& generate_completions cht.sh curl https://cheat.sh/:zsh
+does_command_exist cog \
+	&& generate_completions cog cog generate-completions "$SHELL_BASENAME"
 
 # Doesn't support bash.
 does_command_exist bw \
-	&& generate_completions zsh bw bw completion --shell zsh | sed -e 's/\x1b\[[0-9;]*m//g'
+	&& generate_completions bw bw completion --shell zsh | sed -e 's/\x1b\[[0-9;]*m//g'
+does_command_exist pipenv \
+	&& generate_completions pipenv env _PIPENV_COMPLETE=zsh_source pipenv
+does_command_exist kubectl \
+	&& generate_completions kubectl kubectl completion zsh
 does_command_exist register-python-argcomplete pipx \
 	&& eval "$(register-python-argcomplete pipx)"
 
