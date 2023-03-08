@@ -74,3 +74,18 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+; Make GUI transparent.
+; https://kristofferbalintona.me/posts/202206071000/
+; For current frame
+(set-frame-parameter nil 'alpha-background 75)
+; For all new frames henceforth
+(add-to-list 'default-frame-alist '(alpha-background . 76))
+
+; Make terminal transparent.
+; https://github.com/syl20bnr/spacemacs/issues/7262#issuecomment-252462174
+(defun on-after-init ()
+  (unless (display-graphic-p (selected-frame))
+    (set-face-background 'default "unspecified-bg" (selected-frame))))
+(add-hook 'window-setup-hook 'on-after-init)
+(add-hook 'server-after-make-frame-hook 'on-after-init)
