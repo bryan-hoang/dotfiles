@@ -224,6 +224,17 @@ return {
 							return { "--edition=2021" }
 						end,
 					}),
+					-- Git commits
+					b.diagnostics.commitlint.with({
+						args = {
+							"--format",
+							"commitlint-format-json",
+							"--config",
+							"/home/bryan/.config/commitlint/commitlint.config.js",
+							"--extends",
+							"/home/bryan/.local/share/pnpm/global/5/node_modules/@commitlint/config-conventional",
+						},
+					}),
 				},
 			}
 		end,

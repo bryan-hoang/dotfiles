@@ -50,3 +50,10 @@ rome
 markdownlint-cli
 # Emmet support based on LSP (aca/emmet-ls).
 emmet-ls
+# A Spell Checker for Code!
+cspell
+# Lint commit messages (conventional-changelog/commitlint).
+@commitlint/{config-conventional,cli}
+# Format all commitlint issues as a simple JSON string
+# (bycedric/commitlint-formats).
+commitlint-format-json
