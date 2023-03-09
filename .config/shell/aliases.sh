@@ -125,7 +125,7 @@ alias ll="ls -l --almost-all --classify --group-directories-first --human-readab
 # Override `ls` with `exa` if it exists.
 if command -v exa >/dev/null 2>&1; then
 	alias ls=exa
-	alias ll='exa -lFag --group-directories-first --icons -s type'
+	alias ll='exa --long --all --classify --group-directories-first --links --group --icons --sort Name'
 fi
 
 # endregion ls vs. exa
