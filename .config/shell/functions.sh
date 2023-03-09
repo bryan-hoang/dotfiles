@@ -1426,3 +1426,9 @@ update_tmux_env() {
 		systemctl --user start tmux.service
 	)
 }
+
+fix_ssh_perms() {
+	chmod 700 "$HOME"/.ssh
+	chmod 600 "$HOME"/.ssh/id_*
+	chmod 644 "$HOME"/.ssh/{*.pub,authorized_keys}
+}
