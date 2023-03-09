@@ -129,6 +129,15 @@
 				},
 				{
 					"PackageIdentifier": "StephanDilly.gitui"
+				},
+				{
+					"PackageIdentifier": "RustDesk.RustDesk"
+				},
+				{
+					"PackageIdentifier": "marha.VcXsrv"
+				},
+				{
+					"PackageIdentifier": "GNU.Emacs"
 				}
 			],
 			"SourceDetails": {
