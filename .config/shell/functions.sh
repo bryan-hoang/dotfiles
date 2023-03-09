@@ -499,7 +499,7 @@ install_default_pkgs() {
 	esac
 
 	if [[ -n $2 ]]; then
-		install_opts+=("$2")
+		install_opts+=("${@:2}")
 	fi
 
 	local -r pkg_list_file="${DEFAULT_PKGS_DIR}/${pkg_mgr}.list"
