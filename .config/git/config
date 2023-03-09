@@ -92,6 +92,9 @@
 	# Respects the current working directory. Source:
 	# https://stackoverflow.com/a/32231077/8714233
 	edit = !"$EDITOR $(git status --short | awk '$1 ~ /^M|A|U|\\?\\?/ {print $2}');"
+	# Logs dangling commits, helpfulin recovering lost states.
+	# https://stackoverflow.com/a/91795/8714233
+	log-dangling = "!f() { git log --oneline --graph "$@" $(git fsck --no-reflog | awk '/dangling commit/ {print $3}'); }; f"
 [apply]
 	# Detect whitespace errors when applying a patch.
 	whitespace = fix
