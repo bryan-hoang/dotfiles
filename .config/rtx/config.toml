@@ -1,2 +1,7 @@
 [settings]
 experimental = true
+shims_dir = '~/.local/share/rtx/shims'
+
+[tools]
+nodejs = "lts"
+python = "latest"
