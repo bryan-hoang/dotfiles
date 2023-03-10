@@ -97,6 +97,7 @@ install_unzip() {
 
 install_deno() {
 	if ! is_arm32_architecture && ! is_arm64_architecture; then
+		require unzip || return
 		echo "Installing deno..."
 		curl -fsSL https://deno.land/x/install/install.sh \
 			| sh >/dev/null
@@ -279,7 +280,7 @@ install_rustc() {
 			libxcb-xfixes0-dev libpulse-dev libdbus-1-dev xcb-proto libx11-dev \
 			libx11-xcb-dev libxcursor-dev libfontconfig1-dev libxkbcommon-dev \
 			libegl1-mesa-dev build-essential
-		curl https://sh.rustup.rs -sSf | sh -s -- --no-modify-path -y
+		curl https://sh.rustup.rs -sSf | sh -s -- --no-modify-path -y --default-toolchain nightly
 		# shellcheck disable=SC1091
 		. "$CARGO_HOME"/env
 	else
@@ -823,6 +824,12 @@ install_vscode_bash_debug() {
 	z -
 }
 
+install_python_deps() {
+	install_apt_packages build-essential libssl-dev zlib1g-dev \
+		libbz2-dev libreadline-dev libsqlite3-dev curl \
+		libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+}
+
 # endregion Installation.
 
 # region Boolean functions
@@ -1327,12 +1334,6 @@ install_apt_packages() {
 	fi
 }
 
-# https://nvchad.github.io/quickstart/install#uninstall
-uninstall_nvchad() {
-	rm -rf "$HOME"/.local/share/nvim
-	rm -rf "$HOME"/.cache/nvim
-}
-
 uninstall_global_npm_pkgs() {
 	npm ls -gp --depth=0 \
 		| awk -F/ '/node_modules/ && !/\/npm$/ {print $NF}' \
@@ -1343,7 +1344,7 @@ uninstall_global_npm_pkgs() {
 }
 
 generate_completions() {
-	local -r shell=$(basename "$(readlink -f /proc/$$/exe)")
+	local -r shell="$(basename "$(readlink -f /proc/$$/exe)")"
 	local -r command_to_complete="${1}"
 	local -ra completion_cmd=("${@:2}")
 	local -r bash_completion_file="$BASH_COMPLETION_USER_DIR"/completions/"$command_to_complete"

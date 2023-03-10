@@ -56,6 +56,8 @@ does_command_exist cht.sh \
 	&& generate_completions cht.sh curl https://cheat.sh/:zsh
 does_command_exist cog \
 	&& generate_completions cog cog generate-completions "$SHELL_BASENAME"
+does_command_exist rtx \
+	&& generate_completions rtx rtx complete --shell "$SHELL_BASENAME"
 
 # Doesn't support bash.
 does_command_exist bw \

@@ -56,6 +56,8 @@ languagetool-rust
 # A tool to format codeblocks inside markdown and org documents
 # (ukas-reineke/cbfmt).
 cbfmt
+# The corrective bash syntax highlighter (anordal/shellharden).
+shellharden
 # 🤖 Just a command runner.
 # just
 # Background rust code check (Canop/bacon).
