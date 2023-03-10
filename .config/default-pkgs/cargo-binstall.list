@@ -51,6 +51,11 @@ texlab
 selene
 # An incremental parsing system for programming tools (tree-sitter/tree-sitter).
 tree-sitter-cli
+# LanguageTool API in Rust (jeertmans/languagetool-rust).
+languagetool-rust
+# A tool to format codeblocks inside markdown and org documents
+# (ukas-reineke/cbfmt).
+cbfmt
 # 🤖 Just a command runner.
 # just
 # Background rust code check (Canop/bacon).

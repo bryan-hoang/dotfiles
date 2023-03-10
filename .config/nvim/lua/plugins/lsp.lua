@@ -131,13 +131,15 @@ return {
 	},
 	{
 		"jose-elias-alvarez/null-ls.nvim",
+		keys = {
+			{
+				"<Leader>cn",
+				"<Cmd>NullLsInfo<CR>",
+				desc = "null-ls Info",
+			},
+		},
 		opts = function()
-			local present, null_ls = pcall(require, "null-ls")
-
-			if not present then
-				return
-			end
-
+			local null_ls = require("null-ls")
 			local b = null_ls.builtins
 			return {
 				sources = {
@@ -193,9 +195,6 @@ return {
 							)(params.bufname)
 						end,
 					}),
-					-- Markdown
-					b.diagnostics.markdownlint,
-					b.diagnostics.vale,
 					-- Python
 					b.diagnostics.ruff,
 					-- Docker
@@ -224,6 +223,16 @@ return {
 							return { "--edition=2021" }
 						end,
 					}),
+					-- Markdown/text
+					b.diagnostics.markdownlint,
+					b.diagnostics.vale,
+					b.diagnostics.cspell,
+					b.code_actions.cspell,
+					b.completion.spell,
+					b.hover.dictionary,
+					b.diagnostics.ltrs,
+					b.code_actions.ltrs,
+					b.code_actions.proselint,
 					-- Git commits
 					b.diagnostics.commitlint.with({
 						args = {
