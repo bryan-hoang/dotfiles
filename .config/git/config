@@ -202,6 +202,9 @@
 [filter "git-config"]
 	smudge = cat
 	clean = "sed -e '/\\[gpg\\]/d' -e '/^	program = /d'"
+[filter "macchina"]
+	smudge = cat
+	clean = "sed '/^interface =/d'"
 [help]
 	# Automatically correct and execute mistyped commands.
 	autocorrect = 0

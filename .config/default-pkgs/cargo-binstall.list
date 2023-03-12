@@ -58,6 +58,9 @@ languagetool-rust
 cbfmt
 # The corrective bash syntax highlighter (anordal/shellharden).
 shellharden
+# A system information frontend with an emphasis on performance
+# (Macchina-CLI/macchina).
+macchina
 # 🤖 Just a command runner.
 # just
 # Background rust code check (Canop/bacon).

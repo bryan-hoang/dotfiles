@@ -1,0 +1,4 @@
+# https://github.com/Macchina-CLI/macchina/wiki/Configuration
+long_kernel = true
+
+# Specify the network interface to use for the LocalIP readout.
