@@ -226,7 +226,11 @@ return {
 					-- Markdown/text
 					b.diagnostics.markdownlint,
 					b.diagnostics.vale,
-					b.diagnostics.cspell,
+					b.diagnostics.cspell.with({
+						env = {
+							FORCE_COLOR = "false",
+						},
+					}),
 					b.code_actions.cspell,
 					b.completion.spell,
 					b.hover.dictionary,
@@ -239,12 +243,15 @@ return {
 							"--format",
 							"commitlint-format-json",
 							"--config",
-							"/home/bryan/.config/commitlint/commitlint.config.js",
+							vim.fn.expand("~/.config/commitlint/commitlint.config.js"),
 							"--extends",
-							"/home/bryan/.local/share/pnpm/global/5/node_modules/@commitlint/config-conventional",
+							vim.fn.expand(
+								"~/.local/share/pnpm/global/5/node_modules/@commitlint/config-conventional"
+							),
 						},
 					}),
 				},
+				debug = true,
 			}
 		end,
 		on_attach = function(client, buffer)
