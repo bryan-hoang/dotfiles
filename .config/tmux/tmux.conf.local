@@ -12,7 +12,7 @@ run '"$TMUX_PROGRAM" source "$XDG_CONFIG_HOME"/tmux/tmux-base.conf.local'
 # https://github.com/microsoft/vscode-remote-release/issues/2763#issuecomment-682276412
 # Also make certain environment variables available to be referenced in the
 # config file.
-set-option -ga update-environment 'VSCODE_GIT_ASKPASS_NODE VSCODE_GIT_ASKPASS_MAIN VSCODE_IPC_HOOK_CLI GIT_ASKPASS NODE_OPTIONS VSCODE_INSPECTOR_OPTIONS'
+set-option -ga update-environment 'VSCODE_GIT_ASKPASS_NODE VSCODE_GIT_ASKPASS_MAIN VSCODE_IPC_HOOK_CLI GIT_ASKPASS NODE_OPTIONS VSCODE_INSPECTOR_OPTIONS DISPLAY'
 
 # -- windows & pane creation ---------------------------------------------------
 tmux_conf_new_window_retain_current_path=true
@@ -59,7 +59,7 @@ set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @resurrect-strategy-nvim 'session'
 # Restore pane contents.
 set -g @resurrect-capture-pane-contents 'on'
-set -g @resurrect-processes 'hx "~spt->spt" "~bin/dev->bin/dev" emacsclient'
+set -g @resurrect-processes 'hx spt "~bin/dev->bin/dev" emacsclient watchexec'
 
 # Continuous saving of tmux environment. Automatic restore when tmux is started.
 # Automatic tmux start when computer is turned on.
