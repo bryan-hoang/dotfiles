@@ -19,7 +19,8 @@ OLD_PATH=$PATH
 [[ ! -s ~/.config/direnv/lib/use_rtx.sh ]] \
 	&& does_command_exist direnv \
 	&& does_command_exist rtx \
-	&& rtx direnv activate >~/.config/direnv/lib/use_rtx.sh
+	&& mkdir -p "$XDG_CONFIG_HOME"/direnv/lib \
+	&& rtx direnv activate >"$XDG_CONFIG_HOME"/direnv/lib/use_rtx.sh
 does_command_exist direnv && eval "$(direnv hook "$SHELL_BASENAME")"
 does_command_exist rtx && eval "$(rtx activate "$SHELL_BASENAME")" \
 	&& PATH=$(rtx bin-paths | paste -sd :):$PATH
