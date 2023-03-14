@@ -230,6 +230,10 @@ return {
 						env = {
 							FORCE_COLOR = "false",
 						},
+						-- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/538#issuecomment-1037319978
+						diagnostics_postprocess = function(diagnostic)
+							diagnostic.severity = vim.diagnostic.severity["HINT"]
+						end,
 					}),
 					b.code_actions.cspell,
 					b.completion.spell,
@@ -251,7 +255,7 @@ return {
 						},
 					}),
 				},
-				debug = true,
+				-- debug = true,
 			}
 		end,
 		on_attach = function(client, buffer)
