@@ -830,6 +830,23 @@ install_python_deps() {
 		libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
 }
 
+# https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-source
+install_dbus-broker() {
+	echo "Installing dbus-broker..."
+	git get https://github.com/bus1/dbus-broker.git
+	cd "$GHQ_ROOT"/github.com/bus1/dbus-broker || return
+	install_apt_packages meson pkg-config python-docutils dbus systemd expat \
+		libsystemd-dev
+	meson setup build || return
+	meson compile -C build || return
+	meson test -C build || return
+	sudo meson install -C build || return
+	sudo systemctl enable dbus-broker.service
+	sudo systemctl start dbus-broker.service
+	cd - || return
+	echo "Installed dbus-broker successfully!"
+}
+
 # endregion Installation.
 
 # region Boolean functions
@@ -1329,8 +1346,9 @@ install_apt_packages() {
 	fi
 
 	if ! dpkg-query -s "${@}" >/dev/null 2>&1; then
-		sudo apt update
-		sudo apt install -y "${@}"
+		sudo DEBIAN_FRONTEND=noninteractive apt-get -qq -o=Dpkg::Use-Pty=0 update
+		sudo DEBIAN_FRONTEND=noninteractive apt-get -qq -o=Dpkg::Use-Pty=0 install \
+			"${@}"
 	fi
 }
 
