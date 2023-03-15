@@ -774,6 +774,30 @@ install_nvim() {
 	echo "Installed neovim successfully!"
 }
 
+# https://github.com/emacs-mirror/emacs/blob/master/INSTALL.REPO
+# https://www.emacswiki.org/emacs/BuildingEmacs
+install_emacs() {
+	echo "Installing emacs..."
+	mkdir -p "$GHQ_ROOT"/github.com/emacs-mirror
+	git clone --filter=blob:none --depth=1 https://github.com/emacs-mirror/emacs \
+		"$GHQ_ROOT"/github.com/emacs-mirror/emacs >/dev/null 2>&1
+	cd "$GHQ_ROOT"/github.com/emacs-mirror/emacs || return
+	install_apt_packages autoconf texinfo libgtk-3-dev libwebkit2gtk-4.0-dev \
+		libgccjit-9-dev libjansson-dev editorconfig pandoc
+	sudo apt build-dep -qqy emacs
+	./autogen.sh
+	./configure --with-native-compilation --with-json \
+		--with-cairo --with-xwidgets --with-x-toolkit=gtk3 \
+		--prefix="${1:-$XDG_LOCAL_HOME}" || return
+	make --jobs "$(nproc)" || return
+	make install || return
+	emacs --version || return
+	doom install --force || return
+	doom doctor || return
+	cd - || return
+	echo "Installed emacs successfully!"
+}
+
 install_pwsh() {
 	echo 'Installing pwsh...'
 	local -r file_pattern='powershell_*-1.deb_amd64.deb'
