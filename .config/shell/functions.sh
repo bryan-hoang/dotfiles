@@ -499,9 +499,10 @@ install_default_pkgs() {
 
 	local -r pkg_list_file="${DEFAULT_PKGS_DIR}/${pkg_mgr}.list"
 
-	# Filter out comments starting with `#`.
+	# Filter out comments starting with `#` and delay brace expansion
+	# (https://superuser.com/a/519019).
 	sed '/^\s*#/d' "$pkg_list_file" \
-		| xargs -tr -L 1 "${install_cmd[@]}" "${install_opts[@]}"
+		| xargs -tr -L 1 -I "{}" bash -c "${install_cmd[*]} ${install_opts[*]} {}"
 
 	# Post install steps.
 	case "${1}" in
