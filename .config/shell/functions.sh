@@ -384,20 +384,14 @@ install_asdf_plugin() {
 			;;
 		python)
 			plugin_git_repo='https://github.com/asdf-community/asdf-python.git'
-			install_apt_packages make build-essential libssl-dev zlib1g-dev \
-				libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \
-				libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev \
-				libffi-dev liblzma-dev aria2 \
-				|| return
+			install_python_deps
 			;;
 		golang)
 			plugin_git_repo='https://github.com/kennyp/asdf-golang.git'
 			;;
 		ruby)
 			plugin_git_repo='https://github.com/asdf-vm/asdf-ruby.git'
-			install_apt_packages autoconf bison build-essential libssl-dev \
-				libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev \
-				libgdbm6 libgdbm-dev libdb-dev
+			install_ruby_deps
 			;;
 		java)
 			version='openjdk-17.0.2'
@@ -852,6 +846,12 @@ install_python_deps() {
 	install_apt_packages build-essential libssl-dev zlib1g-dev \
 		libbz2-dev libreadline-dev libsqlite3-dev curl \
 		libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+}
+
+install_ruby_deps() {
+	install_apt_packages autoconf bison build-essential libssl-dev \
+		libyaml-dev libreadline6-dev zlib1g-dev libncurses5-dev libffi-dev \
+		libgdbm6 libgdbm-dev libdb-dev
 }
 
 # https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-source
