@@ -1371,7 +1371,9 @@ install_apt_packages() {
 	fi
 
 	if ! dpkg-query -s "${@}" >/dev/null 2>&1; then
-		sudo DEBIAN_FRONTEND=noninteractive apt-get -qq -o=Dpkg::Use-Pty=0 update
+		echo "Updating apt cache..."
+		sudo apt-get update
+		echo "Installing apt packages..."
 		sudo DEBIAN_FRONTEND=noninteractive apt-get -qq -o=Dpkg::Use-Pty=0 install \
 			"${@}"
 	fi
