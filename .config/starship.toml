@@ -182,7 +182,7 @@ detect_files = ['package-lock.json']
 symbol = ' '
 
 [custom.pnpm]
-command = "pnpm --version | awk -F '.' '{print \"v\"$1}'"
+command = "pnpm --version | awk -F '.' '{print \"v\"$0}'"
 format = '[$symbol($output )]($style)'
 description = "The currently installed version of PNPM"
 style = "bold yellow"
