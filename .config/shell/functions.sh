@@ -449,13 +449,24 @@ install_default_pkgs() {
 		return 1
 	fi
 
+	local -r pkg_list_file="${DEFAULT_PKGS_DIR}/${pkg_mgr}.list"
 	local -a install_cmd=("$pkg_mgr")
 	local -a install_opts=()
+	local max_procs=1
+	local packages
+	packages=$(sed '/^\s*#/d' "$pkg_list_file")
 
-	echo "Installing default ${1} packages"
+	# Evaluator `{a,b}` brace expansion.
+	eval packages="($packages)"
 
-	case "${1}" in
+	# Convert array to a list delimited by newlines.
+	packages=$(echo "${packages[*]}" | tr ' ' '\n')
+
+	echo "Installing default ${pkg_mgr} packages"
+
+	case ""${1} in
 		pnpm)
+			packages=$(echo "$packages" | tr '\n' ' ')
 			install_cmd+=(install)
 			install_opts+=(-g)
 			;;
@@ -471,23 +482,28 @@ install_default_pkgs() {
 				install_cmd[0]+='.cmd'
 			fi
 
+			max_procs=$(nproc)
 			install_cmd+=(install)
 			install_opts+=(--force)
 			;;
 		pip | pip3)
+			packages=$(echo "$packages" | tr '\n' ' ')
 			install_cmd+=(install)
 			install_opts+=(--upgrade --user)
 			;;
 		pipx)
+			max_procs=$(nproc)
 			install_cmd+=(install)
 			;;
 		gem)
+			packages=$(echo "$packages" | tr '\n' ' ')
 			install_cmd+=(install)
 			;;
 		go)
 			install_cmd+=(install)
 			;;
 		brew)
+			packages=$(echo "$packages" | tr '\n' ' ')
 			install_cmd+=(install)
 			;;
 		*) ;;
@@ -497,12 +513,11 @@ install_default_pkgs() {
 		install_opts+=("${@:2}")
 	fi
 
-	local -r pkg_list_file="${DEFAULT_PKGS_DIR}/${pkg_mgr}.list"
-
-	# Filter out comments starting with `#` and delay brace expansion
+	# Filter out comments starting with $(#` and delay brace expansion
 	# (https://superuser.com/a/519019).
-	sed '/^\s*#/d' "$pkg_list_file" \
-		| xargs -tr -L 1 -I "{}" bash -c "${install_cmd[*]} ${install_opts[*]} {}"
+	echo "$packages" \
+		| xargs --verbose --no-run-if-empty --max-procs="$max_procs" --replace="{}" \
+			bash -c "${install_cmd[*]} ${install_opts[*]} {}"
 
 	# Post install steps.
 	case "${1}" in
