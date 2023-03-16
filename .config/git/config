@@ -119,30 +119,9 @@
 	# Speed up commands involving untracked files such as `git status`.
 	# https://git-scm.com/docs/git-update-index#_untracked_cache
 	untrackedCache = true
-	# Setting this variable to "true" is the same as setting the text attribute
-	# to "auto" on all files and core.eol to "crlf". Set to true if you want to
-	# have CRLF line endings in your working directory and the repository has LF
-	# line endings. This variable can be set to input, in which case no output
-	# conversion is performed.
 	autocrlf = input
-	# Sets the line ending type to use in the working directory for files that
-	# are marked as text (either by having the text attribute set, or by having
-	# text=auto and Git auto-detecting the contents as text). Alternatives are
-	# lf, crlf and native, which uses the platform's native line ending. The
-	# default value is native. See gitattributes[5] for more information on
-	# end-of-line conversion. Note that this value is ignored if core.autocrlf is
-	# set to true or input.
 	eol = lf
-	# If false, symbolic links are checked out as small plain files that contain
-	# the link text. git-update-index[1] and git-add[1] will not change the
-	# recorded type to regular file. Useful on filesystems like FAT that do not
-	# support symbolic links.
-	#
-	# The default is true, except git-clone[1] or git-init[1] will probe and set
-	# core.symlinks false if appropriate when the repository is created.
 	symlinks = true
-	# If set to true, enable the built-in file system monitor daemon for
-	# this working directory.
 	fsmonitor = true
 	hooksPath = hooks
 	pager = delta
@@ -167,11 +146,6 @@
 	mnemonicPrefix = true
 	algorithm = histogram
 	colormoved = default
-[fetch]
-	# If true, fetch will automatically behave as if the --prune option was given
-	# on the command line. See also remote.<name>.prune and the PRUNING section
-	# of git-fetch[1].
-	prune = true
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
@@ -219,55 +193,17 @@
 [merge]
 	# Include summaries of merged commits in newly created merge commit messages
 	log = true
-	# Controls which merge tool is used by git-mergetool[1]. The list below shows
-	# the valid built-in values. Any other value is treated as a custom merge
-	# tool and requires that a corresponding mergetool.<tool>.cmd variable is
-	# defined.
 	tool = nvimdiff
-	# Specify the style in which conflicted hunks are written out to working tree
-	# files upon merge. The default is "merge", which shows a <<<<<<< conflict
-	# marker, changes made by one side, a ======= marker, changes made by the
-	# other side, and then a >>>>>>> marker. An alternate style, "diff3", adds a
-	# ||||||| marker and the original text before the ======= marker. The "merge"
-	# style tends to produce smaller conflict regions than diff3, both because of
-	# the exclusion of the original text, and because when a subset of lines
-	# match on the two sides they are just pulled out of the conflict region.
-	# Another alternate style, "zdiff3", is similar to diff3 but removes matching
-	# lines on the two sides from the conflict region when those matching lines
-	# appear near either the beginning or end of a conflict region.
 	conflictstyle = diff3
 	ff = only
 	strategy = ort
 	renormalize = true
-[mergetool "vscode"]
-	# Specify the command to invoke the specified merge tool. The specified
-	# command is evaluated in shell with the following variables available: BASE
-	# is the name of a temporary file containing the common base of the files to
-	# be merged, if available; LOCAL is the name of a temporary file containing
-	# the contents of the file on the current branch; REMOTE is the name of a
-	# temporary file containing the contents of the file from the branch being
-	# merged; MERGED contains the name of the file to which the merge tool should
-	# write the results of a successful merge.
-	cmd = code --wait $MERGED
 [push]
 	# https://git-scm.com/docs/git-config#git-config-pushdefault
 	default = current
 	autoSetupRemote = true
 	# Make `git push` push relevant annotated tags when pushing branches out.
 	followTags = true
-	# Make sure all submodule commits used by the revisions to be pushed are
-	# available on a remote-tracking branch. If the value is check then Git will
-	# verify that all submodule commits that changed in the revisions to be
-	# pushed are available on at least one remote of the submodule. If any
-	# commits are missing, the push will be aborted and exit with non-zero
-	# status. If the value is on-demand then all submodules that changed in the
-	# revisions to be pushed will be pushed. If on-demand was not able to push
-	# all necessary revisions it will also be aborted and exit with non-zero
-	# status. If the value is no then default behavior of ignoring submodules
-	# when pushing is retained. You may override this configuration at time of
-	# push by specifying --recurse-submodules=check|on-demand|no. If not set, no
-	# is used by default, unless submodule.recurse is set (in which case a true
-	# value means on-demand).
 	recurseSubmodules = check
 [status]
 	showStash = true
@@ -284,54 +220,17 @@
 [url "git://gist.github.com/"]
 	insteadOf = "gist:"
 [pull]
-	# When true, rebase branches on top of the fetched branch, instead of merging
-	# the default branch from the default remote when "git pull" is run. See
-	# "branch.<name>.rebase" for setting this on a per-branch basis.
-	#
-	# When merges (or just m), pass the --rebase-merges option to git rebase so
-	# that the local merge commits are included in the rebase (see git-rebase[1]
-	# for details).
-	#
-	# When the value is interactive (or just i), the rebase is run in interactive
-	# mode.
-	#
-	# NOTE: this is a possibly dangerous operation; do not use it unless you
-	# understand the implications (see git-rebase[1] for details).
 	rebase = true
+[fetch]
+	prune = true
+	pruneTags = true
+	parallel = 0
 [submodule]
-	# A boolean indicating if commands should enable the --recurse-submodules
-	# option by default. Applies to all commands that support this option
-	# (checkout, fetch, grep, pull, push, read-tree, reset, restore and switch)
-	# except clone and ls-files. Defaults to false. When set to true, it can be
-	# deactivated via the --no-recurse-submodules option. Note that some Git
-	# commands lacking this option may call some of the above commands affected
-	# by submodule.recurse; for instance git remote update will call git fetch
-	# but does not have a --no-recurse-submodules option. For these commands a
-	# workaround is to temporarily change the configuration value by using git -c
-	# submodule.recurse=0.
 	recurse = true
+	fetchJobs = 0
 [pack]
-	# When true, git will write a corresponding .rev file (see:
-	# Documentation/technical/pack-format.txt) for each new packfile that it
-	# writes in all places except for git-fast-import[1] and in the bulk checkin
-	# mechanism. Defaults to false.
 	writeReverseIndex = true
 [maintenance]
-	# This string config option provides a way to specify one of a few
-	# recommended schedules for background maintenance. This only affects which
-	# tasks are run during git maintenance run --schedule=X commands, provided no
-	# --task=<task> arguments are provided. Further, if a
-	# maintenance.<task>.schedule config value is set, then that value is used
-	# instead of the one provided by maintenance.strategy. The possible strategy
-	# strings are:
-	#
-	# - none: This default setting implies no task are run at any schedule.
-	#
-	# - incremental: This setting optimizes for performing small maintenance
-	# activities that do not delete any data. This does not schedule the gc
-	# task, but runs the prefetch and commit-graph tasks hourly, the
-	# loose-objects and incremental-repack tasks daily, and the pack-refs task
-	# weekly.
 	strategy = incremental
 [grep]
 	# If set to true, enable -n option by default.
@@ -339,31 +238,17 @@
 	# If set to true, enable the --column option by default.
 	column = true
 [tag]
+	gpgsign = true
 	# A boolean to specify whether annotated tags created should be GPG signed.
 	# If --annotate is specified on the command line, it takes precedence over
 	# this option.
 	forceSignAnnotated = true
-	# A boolean to specify whether all tags should be GPG signed. Use of this
-	# option when running in an automated script can result in a large number of
-	# tags being signed. It is therefore convenient to use an agent to avoid
-	# typing your gpg passphrase several times. Note that this option doesn't
-	# affect tag signing behavior enabled by "-u <keyid>" or
-	# "--local-user=<keyid>" options.
-	gpgsign = true
 [advice]
 	# Advice shown if a user attempts to add an ignored file to the index.
 	addIgnoredFile = false
 	addEmptyPathspec = false
 	statusHints = false
 [credential]
-	# Specify an external helper to be called when a username or password
-	# credential is needed; the helper may consult external storage to avoid
-	# prompting the user for the credentials. This is normally the name of a
-	# credential helper with possible arguments, but may also be an absolute path
-	# with arguments or, if preceded by !, shell commands.
-	#
-	# Note that multiple helpers may be defined. See gitcredentials[7] for
-	# details and examples.
 	helper = cache
 [column]
 	branch = auto
@@ -376,6 +261,7 @@
 	untracked = cyan
 [feature]
 	manyFiles = true
+	experimental = true
 [add.interactive]
 	useBuiltin = false
 [rerere]
