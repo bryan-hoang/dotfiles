@@ -1,5 +1,6 @@
 # Lint commit messages (conventional-changelog/commitlint).
-@commitlint/{config-conventional,cli}
+@commitlint/config-conventional
+@commitlint/cli
 # Format all commitlint issues as a simple JSON string
 # (bycedric/commitlint-formats).
 commitlint-format-json

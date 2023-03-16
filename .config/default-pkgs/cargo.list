@@ -1,6 +1,6 @@
 # Recursively searches directories for a regex pattern while respecting your
 # gitignore.
-ripgrep --features 'pcre2 simd-accel'
+ripgrep --features pcre2,simd-accel
 # A TOML toolkit.
 --features lsp --locked taplo-cli
 # Download an asset from the latest GitHub release.

@@ -453,14 +453,9 @@ install_default_pkgs() {
 	local -a install_cmd=("$pkg_mgr")
 	local -a install_opts=()
 	local max_procs=1
+
 	local packages
-	packages=$(sed '/^\s*#/d' "$pkg_list_file")
-
-	# Evaluator `{a,b}` brace expansion.
-	eval packages="($packages)"
-
-	# Convert array to a list delimited by newlines.
-	packages=$(echo "${packages[*]}" | tr ' ' '\n')
+	packages="$(sed -e '/^\s*#/d' -e '/^\s*$/d' "$pkg_list_file")"
 
 	echo "Installing default ${pkg_mgr} packages"
 
