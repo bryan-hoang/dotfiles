@@ -52,3 +52,15 @@ vim.keymap.set("n", "[<Space>", function()
 end, {
 	desc = "Add newline above",
 })
+
+-- Keybinds inspired by ThePrimeagen.
+-- https://youtu.be/w7i4amO_zaE?t=1464
+vim.keymap.set("x", "<Leader>p", '"_dP', {
+	desc = "Paste and preseve clipboard",
+})
+vim.keymap.set({ "n", "v" }, "<Leader>y", '"+y', {
+	desc = "Yank selections to clipboard",
+})
+vim.keymap.set("n", "<Leader>Y", '"+Y', {
+	desc = "Yank to end of line to clipboard",
+})

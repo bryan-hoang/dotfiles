@@ -98,3 +98,6 @@ opt.undofile = true
 
 -- Remove screen line cursor padding so that `zt` and `zb` both work.`
 opt.scrolloff = 0
+
+-- Don't always use system clipboard.
+opt.clipboard:remove("unnamedplus")
