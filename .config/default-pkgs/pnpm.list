@@ -1,5 +1,8 @@
 # Lint commit messages (conventional-changelog/commitlint).
 @commitlint/{config-conventional,cli}
+# Format all commitlint issues as a simple JSON string
+# (bycedric/commitlint-formats).
+commitlint-format-json
 # The commitizen command line utility.
 commitizen
 # A commitizen adapter for the angular preset of
@@ -54,6 +57,6 @@ markdownlint-cli
 emmet-ls
 # A Spell Checker for Code!
 cspell
-# Format all commitlint issues as a simple JSON string
-# (bycedric/commitlint-formats).
-commitlint-format-json
+# Sort an Object or package.json based on the well-known package.json keys
+# (keithamus/sort-package-json).
+sort-package-json
