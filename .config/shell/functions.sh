@@ -793,6 +793,17 @@ install_emacs() {
 	echo "Installed emacs successfully!"
 }
 
+install_hx() {
+	echo "Installing hx..."
+	git get https://github.com/helix-editor/helix.git
+	cd "$GHQ_ROOT"/github.com/helix-editor/helix || return
+	rustup override set nightly
+	cargo install --locked --path helix-term
+	hx --version
+	cd - || return
+	echo "Installed hx successfully!"
+}
+
 install_pwsh() {
 	echo 'Installing pwsh...'
 	local -r file_pattern='powershell_*-1.deb_amd64.deb'
