@@ -1,5 +1,14 @@
 # https://doc.rust-lang.org/cargo/reference/config.html
 
+# https://doc.rust-lang.org/nightly/cargo/reference/unstable.html
+[unstable]
+[unstable.gitoxide]
+fetch = true
+shallow_index = true
+shallow_deps = true
+checkout = true
+internal_use_git2 = false
+
 # The [net] table controls networking configuration.
 [net]
 # If this is true, then Cargo will use the git executable to fetch registry
