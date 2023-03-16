@@ -246,7 +246,17 @@ export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle/config
 export PIPX_HOME="$XDG_DATA_HOME"/pipx
 export SDIRS="$XDG_STATE_HOME"/bashmarks/sdirs
 mkdir -p "$(dirname "$SDIRS")"
-command -v sccache >/dev/null && export RUSTC_WRAPPER=sccache
+# https://github.com/mozilla/sccache#usage
+if command -v sccache >/dev/null; then
+	export RUSTC_WRAPPER=sccache
+	export CMAKE_C_COMPILER_LAUNCHER="$RUSTC_WRAPPER"
+	export CMAKE_CXX_COMPILER_LAUNCHER="$RUSTC_WRAPPER"
+fi
+# https://doc.rust-lang.org/stable/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-build-scripts
+NUM_JOBS="$(nproc)"
+export NUM_JOBS
+export MAKEFLAGS="--jobs $NUM_JOBS"
+export CARGO_MAKEFLAGS="$MAKEFLAGS"
 # https://github.com/jdxcode/rtx#rtx_use_toml
 export RTX_USE_TOML=1
 export RTX_SHIMS_DIR="$XDG_DATA_HOME"/rtx/shims
