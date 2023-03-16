@@ -28,6 +28,12 @@ if command -v dbus-update-activation-environment >/dev/null \
 	}
 
 	update_tmux_env
+
+	# Only run the lemonade server when not over ssh and with a desktop environment.
+	# shellcheck disable=2154
+	if [ "$SSH_CONNECTION" = "" ] && command -v i3 >/dev/null; then
+		systemctl --user start lemonade.service
+	fi
 fi
 
 # Determine if we're in a Linux desktop environment.

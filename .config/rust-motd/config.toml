@@ -14,6 +14,7 @@ nginx = 'nginx'
 [user_service_status]
 emacs = 'emacs'
 gpg-agent = 'gpg-agent'
+lemonade = 'lemonade'
 spotifyd = 'spotifyd'
 ssh-agent = 'ssh-agent'
 tmux = 'tmux'
