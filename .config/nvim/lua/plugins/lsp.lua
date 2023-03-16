@@ -238,7 +238,11 @@ return {
 					b.code_actions.cspell,
 					b.completion.spell,
 					b.hover.dictionary,
-					b.diagnostics.ltrs,
+					b.diagnostics.ltrs.with({
+						diagnostics_postprocess = function(diagnostic)
+							diagnostic.severity = vim.diagnostic.severity["HINT"]
+						end,
+					}),
 					b.code_actions.ltrs,
 					b.code_actions.proselint,
 					-- Git commits
