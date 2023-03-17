@@ -10,6 +10,7 @@ echo "MOTD: Welcome, $(whoami)@$(hostname)" | figlet -f slant -w 100
 dbus-broker = 'dbus-broker'
 docker = 'docker'
 nginx = 'nginx'
+systemd-timesyncd = 'systemd-timesyncd'
 
 [user_service_status]
 emacs = 'emacs'
