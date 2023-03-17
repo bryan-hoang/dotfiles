@@ -461,7 +461,7 @@ install_default_pkgs() {
 
 	case ""${1} in
 		pnpm)
-			packages=$(echo "$packages" | tr '\n' ' ')
+			packages=$(echo -n "$packages" | tr '\n' ' ')
 			install_cmd+=(install)
 			install_opts+=(-g)
 			;;
@@ -482,7 +482,7 @@ install_default_pkgs() {
 			install_opts+=(--force)
 			;;
 		pip | pip3)
-			packages=$(echo "$packages" | tr '\n' ' ')
+			packages=$(echo -n "$packages" | tr '\n' ' ')
 			install_cmd+=(install)
 			install_opts+=(--upgrade --user)
 			;;
@@ -491,14 +491,14 @@ install_default_pkgs() {
 			install_cmd+=(install)
 			;;
 		gem)
-			packages=$(echo "$packages" | tr '\n' ' ')
+			packages=$(echo -n "$packages" | tr '\n' ' ')
 			install_cmd+=(install)
 			;;
 		go)
 			install_cmd+=(install)
 			;;
 		brew)
-			packages=$(echo "$packages" | tr '\n' ' ')
+			packages=$(echo -n "$packages" | tr '\n' ' ')
 			install_cmd+=(install)
 			;;
 		*) ;;
