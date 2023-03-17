@@ -6,3 +6,6 @@ marksman
 # Dockerfile linter, validate inline bash, written in Haskell
 # (hadolint/hadolint).
 hadolint
+# A syntax-aware linter for prose built with speed and extensibility in mind
+# (errata-ai/vale).
+vale
