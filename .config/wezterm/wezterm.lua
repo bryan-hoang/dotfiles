@@ -6,7 +6,13 @@ local is_os_unix = string.sub(package.config, 1, 1) == "/"
 local zsh = { "zsh", "--interactive" }
 local bash = { "bash", "-i" }
 local git_bash = { "C:\\Program Files\\Git\\bin\\bash.exe", "--login" }
+local x_padding = 8
+
 local wsl_domains = wezterm.default_wsl_domains()
+for _index, domain in ipairs(wsl_domains) do
+	-- Otherwise, its opened in the Windows user's home directory.
+	domain.default_cwd = "~"
+end
 
 wezterm.on("gui-startup", function(cmd)
 	---@diagnostic disable-next-line: unused-local
@@ -14,13 +20,25 @@ wezterm.on("gui-startup", function(cmd)
 	window:gui_window():maximize()
 end)
 
----@diagnostic disable-next-line: unused-local
-for _index, domain in ipairs(wsl_domains) do
-	-- Otherwise, its opened in the Windows user's home directory.
-	domain.default_cwd = "~"
+-- https://wezfurlong.org/wezterm/config/lua/wezterm/enumerate_ssh_hosts/
+local ssh_domains = {}
+for host, _config in pairs(wezterm.enumerate_ssh_hosts()) do
+	table.insert(ssh_domains, {
+		-- The name can be anything you want; we're just using the hostname
+		name = host,
+		-- Remote_address must be set to `host` for the ssh config to apply to it
+		remote_address = host,
+		-- If you don't have wezterm's mux server installed on the remote
+		-- host, you may wish to set multiplexing = "None" to use a direct
+		-- ssh connection that supports multiple panes/tabs which will close
+		-- when the connection is dropped.
+		multiplexing = "None",
+		-- If you know that the remote host has a posix/unix environment,
+		-- setting assume_shell = "Posix" will result in new panes respecting
+		-- the remote current directory when multiplexing = "None".
+		assume_shell = "Posix",
+	})
 end
-
-local x_padding = 8
 
 return {
 	color_scheme = "Dracula (Official)",
@@ -54,6 +72,7 @@ return {
 		},
 	},
 	wsl_domains = wsl_domains,
+	ssh_domains = ssh_domains,
 	window_background_opacity = 0.75,
 	window_close_confirmation = "NeverPrompt",
 	initial_cols = 120,
