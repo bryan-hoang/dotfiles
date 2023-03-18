@@ -893,6 +893,14 @@ install_dbus-broker() {
 	echo "Installed dbus-broker successfully!"
 }
 
+install_deb-get() {
+	echo "Installing deb-get..."
+	curl -sL https://raw.githubusercontent.com/wimpysworld/deb-get/main/deb-get \
+		| sudo -E bash -s install deb-get
+	deb-get version || return
+	echo "Installed deb-get successfully!"
+}
+
 # endregion Installation.
 
 # region Boolean functions
