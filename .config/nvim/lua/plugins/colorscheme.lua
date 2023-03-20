@@ -5,8 +5,9 @@ return {
 		lazy = false,
 		opts = {
 			transparent_mode = true,
-			-- Slanted quotes are annoying to try and separate.
-			italic = false,
+			italics = {
+				strings = false,
+			},
 		},
 	},
 	{

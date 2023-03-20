@@ -185,6 +185,7 @@ return {
 					b.code_actions.shellcheck.with({
 						filetypes = { "sh", "zsh" },
 					}),
+					b.diagnostics.dotenv_linter,
 					-- TOML
 					b.formatting.taplo.with({
 						cwd = function(params)

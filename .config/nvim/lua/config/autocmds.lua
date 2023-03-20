@@ -12,4 +12,5 @@ set_file_associations({
 	["sshconfig"] = { "**/.ssh/conf.d/*.conf" },
 	["jsonc"] = { "**/.config/markdownlint/config" },
 	["just"] = { "*justfile" },
+	["sh"] = { ".env.local" },
 })
