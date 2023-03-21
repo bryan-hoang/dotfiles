@@ -1,12 +1,11 @@
 local wezterm = require("wezterm")
 
-local act = wezterm.action
-local mux = wezterm.mux
 local is_os_unix = string.sub(package.config, 1, 1) == "/"
 local zsh = { "zsh", "--interactive" }
 local bash = { "bash", "-i" }
 local git_bash = { "C:\\Program Files\\Git\\bin\\bash.exe", "--login" }
 
+local mux = wezterm.mux
 -- Max window on startup.
 wezterm.on("gui-startup", function(cmd)
 	---@diagnostic disable-next-line: unused-local
@@ -14,27 +13,28 @@ wezterm.on("gui-startup", function(cmd)
 	window:gui_window():maximize()
 end)
 
-local config = {
-	color_scheme = "Dracula (Official)",
-	font = wezterm.font(
-		is_os_unix and "FiraCode Nerd Font Mono" or "FiraCode NFM"
-	),
-	-- Default is 12.0.
-	font_size = 11.0,
-	default_cursor_style = "SteadyBlock",
-	use_fancy_tab_bar = false,
-	hide_tab_bar_if_only_one_tab = true,
-	-- http://lua-users.org/wiki/TernaryOperator
-	-- https://stackoverflow.com/a/14425862/8714233
-	default_prog = is_os_unix and zsh or git_bash,
-	window_background_opacity = 0.75,
-	window_close_confirmation = "NeverPrompt",
-	initial_cols = 120,
-	initial_rows = 32,
-	selection_word_boundary = " \t\n{}[]()\"'`",
-	enable_kitty_keyboard = true,
-	window_decorations = "RESIZE",
-}
+local config = wezterm.config_builder()
+
+config:set_strict_mode(true)
+
+config.color_scheme = "Dracula (Official)"
+config.font =
+	wezterm.font(is_os_unix and "FiraCode Nerd Font Mono" or "FiraCode NFM")
+-- Default is 12.0.
+config.font_size = 11.0
+config.default_cursor_style = "SteadyBlock"
+config.use_fancy_tab_bar = false
+config.hide_tab_bar_if_only_one_tab = true
+-- http://lua-users.org/wiki/TernaryOperator
+-- https://stackoverflow.com/a/14425862/8714233
+config.default_prog = is_os_unix and zsh or git_bash
+config.window_background_opacity = 0.75
+config.window_close_confirmation = "NeverPrompt"
+config.initial_cols = 120
+config.initial_rows = 32
+config.selection_word_boundary = " \t\n{}[]()\"'`"
+config.enable_kitty_keyboard = true
+config.window_decorations = "RESIZE"
 
 config.launch_menu = {
 	{
@@ -66,6 +66,7 @@ config.keys = {
 	},
 }
 
+local act = wezterm.action
 config.mouse_bindings = {
 	-- Change the default click behavior so that it only selects
 	-- text and doesn't open hyperlinks
