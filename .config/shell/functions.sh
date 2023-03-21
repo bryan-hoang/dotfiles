@@ -901,6 +901,20 @@ install_deb-get() {
 	echo "Installed deb-get successfully!"
 }
 
+install_less() {
+	echo "Installing less..."
+	git get https://github.com/gwsw/less.git
+	cd "$GHQ_ROOT"/github.com/gwsw/less || return
+	make -f Makefile.aut distfiles
+	sh configure --prefix="${1:-$XDG_LOCAL_HOME}"
+	make
+	make check || return
+	make install || return
+	less --version || return
+	make clean
+	echo "Installed less successfully!"
+}
+
 # endregion Installation.
 
 # region Boolean functions
