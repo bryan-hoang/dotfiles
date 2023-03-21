@@ -151,7 +151,7 @@ return {
 					b.code_actions.refactoring,
 					-- JS/TS, CSS
 					b.formatting.rome,
-					b.formatting.deno_fmt,
+					-- b.formatting.deno_fmt,
 					b.formatting.eslint,
 					b.diagnostics.eslint,
 					b.code_actions.eslint,
