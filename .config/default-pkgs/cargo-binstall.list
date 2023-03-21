@@ -58,6 +58,9 @@ languagetool-rust
 cbfmt
 # The corrective bash syntax highlighter (anordal/shellharden).
 shellharden
+# Lightning-fast linter for .env files. Written in Rust
+# (dotenv-linter/dotenv-linter).
+dotenv-linter
 # A system information frontend with an emphasis on performance
 # (Macchina-CLI/macchina).
 macchina

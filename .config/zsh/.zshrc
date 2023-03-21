@@ -43,15 +43,13 @@ for plugin in "${custom_plugins[@]}"; do
 		&& plugins+=("$plugin")
 done
 
-# shellcheck disable=SC1091
-[[ -s "$ZSH"/oh-my-zsh.sh ]] && . "$ZSH"/oh-my-zsh.sh
-
 # region Completions
 
 compdef dot='git'
 
 # Zsh completions plugin.
 fpath+=$ZSH_CUSTOM_PLUGINS_DIR/zsh-completions/src
+fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
 # fpath+=$ASDF_DIR/completions
 fpath+=$ZSH_USER_FPATH
 
@@ -75,6 +73,9 @@ compinit
 bashcompinit
 
 # endregion Completions
+
+# shellcheck disable=SC1091
+[[ -s "$ZSH"/oh-my-zsh.sh ]] && . "$ZSH"/oh-my-zsh.sh
 
 # Loaded after framework is loaded to preserve personal aliases.
 # shellcheck disable=SC1091
