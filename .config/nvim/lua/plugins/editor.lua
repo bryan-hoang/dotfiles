@@ -16,19 +16,32 @@ return {
 		},
 		config = function(_, opts)
 			local telescope = require("telescope")
+			telescope.setup(opts)
 			telescope.load_extension("live_grep_args")
 			telescope.load_extension("frecency")
-			telescope.setup(opts)
 		end,
-		opts = {
-			defaults = {
-				layout_strategy = "horizontal",
-				sorting_strategy = "ascending",
-				layout_config = {
-					prompt_position = "top",
+		opts = function(_, opts)
+			local lga_actions = require("telescope-live-grep-args.actions")
+
+			return vim.tbl_deep_extend("force", opts, {
+				defaults = {
+					layout_strategy = "horizontal",
+					sorting_strategy = "ascending",
+					layout_config = {
+						prompt_position = "top",
+					},
 				},
-			},
-		},
+				extensions = {
+					live_grep_args = {
+						mappings = {
+							i = {
+								["<C-k>"] = lga_actions.quote_prompt(),
+							},
+						},
+					},
+				},
+			})
+		end,
 		keys = {
 			-- Search
 			{
