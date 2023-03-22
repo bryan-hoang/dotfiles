@@ -122,8 +122,7 @@ export SHELLCHECK_OPTS='-x'
 export GHQ_ROOT="$HOME"/src
 
 command -v wezterm >/dev/null \
-	&& export TERMINAL=wezterm \
-	&& TERM=wezterm
+	&& export TERMINAL=wezterm
 
 case ${TERM} in
 	# WSL in windows Terminal colour support.
