@@ -87,3 +87,9 @@ set -g @dracula-weather-colors "orange dark_gray"
 set -g @dracula-cpu-usage-colors "green dark_gray"
 # run 'cut -c3- "$TMUX_CONF" | sh -s _apply_configuration'
 set -g @dracula-time-colors "cyan dark_gray"
+
+# A lightning fast version of tmux-fingers written in Rust, copy/pasting tmux
+# like vimium/vimperator.
+set -g @plugin 'fcsonline/tmux-thumbs'
+run-shell "$TMUX_PLUGIN_MANAGER_PATH"/tmux-thumbs/tmux-thumbs.tmux
+set -g @thumbs-command 'echo -n {} | lemonade copy'
