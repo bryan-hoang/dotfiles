@@ -237,7 +237,6 @@ return {
 						end,
 					}),
 					b.code_actions.cspell,
-					b.completion.spell,
 					b.hover.dictionary,
 					b.diagnostics.ltrs.with({
 						diagnostics_postprocess = function(diagnostic)
