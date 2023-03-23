@@ -55,6 +55,10 @@ config.launch_menu = {
 	},
 }
 
+config.set_environment_variables = {
+	SHLVL = "0",
+}
+
 config.keys = {
 	-- Activate the Launcher Menu in the current tab.
 	{ key = "l", mods = "ALT", action = wezterm.action.ShowLauncher },
