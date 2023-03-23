@@ -1,9 +1,17 @@
 {
-	"name": "bryan",
 	"private": true,
 	"scripts": {
 		"lint-staged": "lint-staged --config .config/lintstaged/lintstagedrc.mjs",
 		"prepare": "husky install .config/husky"
+	},
+	"config": {
+		"commitizen": {
+			"disableScopeLowerCase": true,
+			"disableSubjectLowerCase": true,
+			"maxHeaderWidth": 50,
+			"maxLineWidth": 72,
+			"path": "cz-conventional-changelog"
+		}
 	},
 	"dependencies": {
 		"debug": "4.3.4",
@@ -39,6 +47,6 @@
 		"typescript": "5.0.2"
 	},
 	"engines": {
-		"node": ">=16.0.0"
+		"node": ">=18"
 	}
 }

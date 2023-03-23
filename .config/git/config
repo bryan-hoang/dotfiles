@@ -179,6 +179,9 @@
 [filter "macchina"]
 	smudge = cat
 	clean = "sed '/^interface =/d'"
+[filter "rtx"]
+	smudge = cat
+	clean = "sed -e '/^ruby =/d'"
 [help]
 	# Automatically correct and execute mistyped commands.
 	autocorrect = 0

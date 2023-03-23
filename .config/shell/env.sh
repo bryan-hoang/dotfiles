@@ -157,7 +157,8 @@ export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME"/python
 
 # https://wiki.archlinux.org/title/XDG_Base_Directory#Specification
 
-. "$HOME"/.zshenv
+# shellcheck disable=SC1091,SC2154
+. "$ZDOTDIR"/.zshenv
 export ZSH="$ZDOTDIR"/ohmyzsh
 export ZSH_USER_FPATH="$XDG_DATA_HOME"/zsh/completions
 mkdir -p "$ZSH_USER_FPATH"
@@ -211,10 +212,7 @@ mkdir -p "$(dirname "$CALCHISTFILE")"
 
 # FIXME: Changing the default causes a login loop in Ubuntu :(
 #
-# shellcheck disable=2154
-# export XAUTHORITY="$HOME"/.Xauthority
-# touch "$XAUTHORITY"
-# shellcheck disable=2154
+export XAUTHORITY="$HOME"/.Xauthority
 export ICEAUTHORITY="$XDG_CACHE_HOME"/ICEauthority
 export KDEHOME="$XDG_CONFIG_HOME"/kde
 export OSH="$XDG_CONFIG_HOME"/oh-my-bash

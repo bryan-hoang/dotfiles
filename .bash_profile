@@ -1,5 +1,1 @@
-#!/usr/bin/env bash
-
-. "${HOME}"/.profile
-
-. "${HOME}"/.bashrc
+.config/bash/.bash_profile

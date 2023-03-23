@@ -13,3 +13,5 @@ github.com/lemonade-command/lemonade@latest
 # A GitLab CLI tool bringing GitLab to your command line
 # (https://gitlab.com/gitlab-org/cli).
 gitlab.com/gitlab-org/cli/cmd/glab@latest
+# Render markdown on the CLI, with pizzazz! 💅.
+github.com/charmbracelet/glow@latest
