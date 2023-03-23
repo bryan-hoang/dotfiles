@@ -53,6 +53,8 @@ const submodules = spawnOutput.output[1]
 
 debug('submodules', submodules);
 
+const ignoreGlobs = submodules.concat(['xdg-ninja']);
+
 /**
  * @param files {string[]}
  * @param command {string}
@@ -60,7 +62,7 @@ debug('submodules', submodules);
 function processMatches(files, command) {
 	// Ignore submodule files.
 	debug('files', files);
-	const matches = micromatch.not(files, submodules, {
+	const matches = micromatch.not(files, ignoreGlobs, {
 		contains: true,
 	});
 
