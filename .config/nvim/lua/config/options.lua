@@ -100,3 +100,5 @@ opt.undofile = true
 opt.scrolloff = 0
 
 opt.clipboard:append("unnamedplus")
+
+opt.jumpoptions:append("view")
