@@ -59,6 +59,7 @@ return {
 					},
 					jsonls = {
 						mason = false,
+						filetypes = { "json", "jsonc", "json5" },
 					},
 					lua_ls = {
 						mason = false,
