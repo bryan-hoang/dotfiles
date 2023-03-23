@@ -140,7 +140,11 @@ return {
 		},
 		opts = function()
 			local null_ls = require("null-ls")
+			local h = require("null-ls.helpers")
+			local methods = require("null-ls.methods")
+
 			local b = null_ls.builtins
+			local DIAGNOSTICS = methods.internal.DIAGNOSTICS
 			return {
 				sources = {
 					b.diagnostics.editorconfig_checker.with({
@@ -185,7 +189,37 @@ return {
 					b.code_actions.shellcheck.with({
 						filetypes = { "sh", "zsh" },
 					}),
-					b.diagnostics.dotenv_linter,
+					-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/lua/null-ls/builtins/diagnostics/dotenv_linter.lua
+					h.make_builtin({
+						name = "dotenv-linter",
+						meta = {
+							url = "https://github.com/dotenv-linter/dotenv-linter",
+							description = "Lightning-fast linter for .env files.",
+						},
+						method = DIAGNOSTICS,
+						filetypes = { "sh" },
+						generator_opts = {
+							command = "dotenv-linter",
+							args = { "$FILENAME" },
+							from_stderr = false,
+							ignore_stderr = false,
+							format = "line",
+							check_exit_code = function(code)
+								return code <= 1
+							end,
+							to_temp_file = true,
+							runtime_condition = h.cache.by_bufnr(function(params)
+								vim.notify(params.bufname)
+								return params.bufname:find("%.env.*") ~= nil
+									and params.bufname:find(".envrc") == nil
+							end),
+							on_output = h.diagnostics.from_pattern(
+								[[%w+:(%d+) (%w+): (.*)]],
+								{ "row", "code", "message" }
+							),
+						},
+						factory = h.generator_factory,
+					}),
 					-- TOML
 					b.formatting.taplo.with({
 						cwd = function(params)
