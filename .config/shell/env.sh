@@ -260,4 +260,4 @@ export CARGO_MAKEFLAGS="$MAKEFLAGS"
 # https://github.com/jdxcode/rtx#rtx_use_toml
 export RTX_USE_TOML=1
 export RTX_SHIMS_DIR="$XDG_DATA_HOME"/rtx/shims
-export SUDO_PROMPT='Password for %p@%H to run as %U: '
+export SUDO_PROMPT='[sudo] password for %p@%H to run as %U: '

@@ -918,7 +918,7 @@ install_less() {
 install_sudo() {
 	git get https://github.com/sudo-project/sudo.git
 	cd "$GHQ_ROOT"/github.com/sudo-project/sudo || return
-	./configure || return
+	./configure --with-passprompt="[sudo] password for %u: " || return
 	make || return
 	make check || return
 	sudo make install || return
