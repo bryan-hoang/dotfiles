@@ -158,7 +158,8 @@ export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME"/python
 # https://wiki.archlinux.org/title/XDG_Base_Directory#Specification
 
 # shellcheck disable=SC1091,SC2154
-. "$ZDOTDIR"/.zshenv
+. "$XDG_CONFIG_HOME"/zsh/.zshenv
+# shellcheck disable=SC2154
 export ZSH="$ZDOTDIR"/ohmyzsh
 export ZSH_USER_FPATH="$XDG_DATA_HOME"/zsh/completions
 mkdir -p "$ZSH_USER_FPATH"
