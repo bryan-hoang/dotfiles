@@ -59,15 +59,14 @@ if
 	command -v nvim >/dev/null || [ -f "$XDG_BIN_HOME"/nvim ]
 then
 	export EDITOR=nvim
-	export VISUAL="$EDITOR"
-	export SUDO_EDITOR="$EDITOR"
 elif
 	command -v vim >/dev/null
 then
 	export EDITOR=vim
-	export VISUAL="$EDITOR"
-	export SUDO_EDITOR="$EDITOR"
 fi
+
+export VISUAL="$EDITOR"
+export SUDO_EDITOR="$EDITOR"
 
 export GOMODCACHE="$XDG_CACHE_HOME"/go
 
@@ -263,3 +262,4 @@ export CARGO_MAKEFLAGS="$MAKEFLAGS"
 # https://github.com/jdxcode/rtx#rtx_use_toml
 export RTX_USE_TOML=1
 export RTX_SHIMS_DIR="$XDG_DATA_HOME"/rtx/shims
+export SUDO_PROMPT='Password for %p@%H to run as %U: '

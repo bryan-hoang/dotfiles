@@ -915,6 +915,16 @@ install_less() {
 	echo "Installed less successfully!"
 }
 
+install_sudo() {
+	git get https://github.com/sudo-project/sudo.git
+	cd "$GHQ_ROOT"/github.com/sudo-project/sudo || return
+	./configure || return
+	make || return
+	make check || return
+	sudo make install || return
+	sudo --version
+}
+
 # endregion Installation.
 
 # region Boolean functions
