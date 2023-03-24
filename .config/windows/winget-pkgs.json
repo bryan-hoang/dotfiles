@@ -138,6 +138,33 @@
 				},
 				{
 					"PackageIdentifier": "GNU.Emacs"
+				},
+				{
+					"PackageIdentifier": "Microsoft.DotNet.SDK.Preview"
+				},
+				{
+					"PackageIdentifier": "GnuWin32.Make"
+				},
+				{
+					"PackageIdentifier": "rjpcomputing.luaforwindows"
+				},
+				{
+					"PackageIdentifier": "Julialang.Julia"
+				},
+				{
+					"PackageIdentifier": "Oracle.JDK.17"
+				},
+				{
+					"PackageIdentifier": "JernejSimoncic.Wget"
+				},
+				{
+					"PackageIdentifier": "hadolint.hadolint"
+				},
+				{
+					"PackageIdentifier": "StrawberryPerl.StrawberryPerl"
+				},
+				{
+					"PackageIdentifier": "GnuWin32.Tree"
 				}
 			],
 			"SourceDetails": {
