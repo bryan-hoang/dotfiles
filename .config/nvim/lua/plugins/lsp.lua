@@ -210,7 +210,6 @@ return {
 							end,
 							to_temp_file = true,
 							runtime_condition = h.cache.by_bufnr(function(params)
-								vim.notify(params.bufname)
 								return params.bufname:find("%.env.*") ~= nil
 									and params.bufname:find(".envrc") == nil
 							end),
