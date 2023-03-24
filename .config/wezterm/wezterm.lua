@@ -132,7 +132,7 @@ local hyperlink_rules = wezterm.default_hyperlink_rules()
 -- gitlab.com/gitlab-org/cli/cmd/glab@latest
 -- github.com/lemonade-command/lemonade@latest
 table.insert(hyperlink_rules, {
-	regex = [[(git(?:hub|lab)\.com(?:/[)a-zA-Z0-9-]+){2})\S*(?=@)]],
+	regex = [[(git(?:hub|lab)\.com(?:/[)a-zA-Z0-9-]+){2})\S*@?]],
 	format = "https://$1",
 	highlight = 1,
 })
