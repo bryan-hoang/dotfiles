@@ -3,14 +3,12 @@ theme = "dracula"
 
 [theme.overrides]
 # Make powerline separators match height of blocks.
-separator = "<span></span>"
 idle_bg = "#44475A"
 idle_fg = "#F8F8F2"
+separator = "<span></span>"
 
-# FIXME(bryan-hoang): Wait for fix for "Icon 'volume' missing" for time and
-# music blocks.
-# [icons]
-# icons = "awesome6"
+[icons]
+icons = "awesome6"
 
 [[block]]
 block = "focused_window"
@@ -23,9 +21,9 @@ idle_bg = "#8BE9FD"
 idle_fg = "#282A36"
 
 [[block]]
+alert_unit = "GB"
 block = "disk_space"
 format = " $icon $available.eng(w:1)/$total "
-alert_unit = "GB"
 [[block.click]]
 button = "right"
 update = true
@@ -61,8 +59,8 @@ idle_fg = "#21222C"
 
 [[block]]
 block = "sound"
-step_width = 10
 show_volume_when_muted = true
+step_width = 10
 [block.theme_overrides]
 idle_bg = "#FFB86C"
 idle_fg = "#282A36"
@@ -73,8 +71,17 @@ block = "battery"
 missing_format = ""
 
 [[block]]
+block = "uptime"
+
+[[block]]
 block = "time"
 format = " $icon $timestamp.datetime(f:'%a %F %R') "
 [block.theme_overrides]
 idle_bg = "#BD93F9"
 idle_fg = "#21222C"
+
+[[block]]
+block = "apt"
+
+[[block]]
+block = "notify"
