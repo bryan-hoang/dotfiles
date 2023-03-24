@@ -462,8 +462,8 @@ install_default_pkgs() {
 	case ""${1} in
 		pnpm)
 			packages=$(echo -n "$packages" | tr '\n' ' ')
-			install_cmd+=(install)
-			install_opts+=(-g)
+			install_cmd+=(add)
+			install_opts+=(--global)
 			;;
 		cargo)
 			install_cmd+=(install)
