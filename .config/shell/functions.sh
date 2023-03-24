@@ -487,7 +487,6 @@ install_default_pkgs() {
 			install_opts+=(--upgrade --user)
 			;;
 		pipx)
-			max_procs=$(nproc)
 			install_cmd+=(install)
 			;;
 		gem)
@@ -923,6 +922,12 @@ install_sudo() {
 	make check || return
 	sudo make install || return
 	sudo --version
+}
+
+install_cpanm() {
+	curl -L https://cpanmin.us/ -o "$XDG_BIN_HOME"/cpanm
+	chmod u+x "$XDG_BIN_HOME"/cpanm
+	cpanm --version
 }
 
 # endregion Installation.
