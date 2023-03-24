@@ -88,7 +88,7 @@ $line_break\
 $character"""
 
 add_newline = true
-command_timeout = 500
+command_timeout = 1000
 continuation_prompt = '[>](bright-black) '
 scan_timeout = 30
 
@@ -174,8 +174,8 @@ format = "[$user]($style)@"
 
 # To help switch between npm versions when it matters -_-
 [custom.npm]
-command = "npm --version | awk -F '.' '{print \"v\"$1}'"
-format = '[$symbol($output )]($style)'
+command = "npm --version | awk -F '.' '{print $1}'"
+format = '[$symbol(v$output )]($style)'
 description = "The currently installed version of NPM"
 style = "bold red"
 detect_files = ['package-lock.json']
