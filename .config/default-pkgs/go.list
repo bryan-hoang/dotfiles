@@ -15,3 +15,5 @@ github.com/lemonade-command/lemonade@latest
 gitlab.com/gitlab-org/cli/cmd/glab@latest
 # Render markdown on the CLI, with pizzazz! 💅.
 github.com/charmbracelet/glow@latest
+# Cleans up your $HOME from those pesky dotfiles.
+github.com/doron-cohen/antidot@latest
