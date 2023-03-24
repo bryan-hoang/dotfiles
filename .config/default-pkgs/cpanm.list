@@ -1,4 +1,5 @@
-App::cpanminus
+# Neovim integration.
+Neovim::Ext
 File::HomeDir
 Unicode::GCString
 YAML::Tiny

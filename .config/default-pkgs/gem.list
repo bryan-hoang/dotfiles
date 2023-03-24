@@ -5,8 +5,6 @@ bundler
 pry
 # A normaliser/beautifier for HTML that also understands embedded Ruby.
 htmlbeautifier
-# Manage complex tmux sessions easily.
-tmuxinator
 # Gems for Prettier plugin.
 prettier_print
 syntax_tree
