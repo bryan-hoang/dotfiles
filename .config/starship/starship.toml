@@ -92,9 +92,15 @@ command_timeout = 1000
 continuation_prompt = '[>](bright-black) '
 scan_timeout = 30
 
+[c]
+format = "[$symbol($version(-$name) )]($style)"
+
 [character]
 error_symbol = '[\$](bold red)'
 success_symbol = '[\$](bold green)'
+
+[cobol]
+format = "[$symbol($version )]($style)"
 
 [cmd_duration]
 min_time = 2_000

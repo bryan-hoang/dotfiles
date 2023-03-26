@@ -262,3 +262,4 @@ export CARGO_MAKEFLAGS="$MAKEFLAGS"
 export RTX_USE_TOML=1
 export RTX_SHIMS_DIR="$XDG_DATA_HOME"/rtx/shims
 export SUDO_PROMPT='[sudo] password for %p@%H to run as %U: '
+export STARSHIP_CONFIG="$XDG_CONFIG_HOME"/starship/starship.toml
