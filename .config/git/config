@@ -35,8 +35,6 @@
 	tags = tag -l
 	branches = branch --all
 	remotes = remote --verbose
-	# List aliases.
-	aliases = "!git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ / | less"
 	# Amend the currently staged files to the latest commit.
 	amend = commit --amend --no-edit
 	# Credit an author on the latest commit.
@@ -51,7 +49,6 @@
 	ft = "!f() { git describe --always --contains $1; }; f"
 	# List contributors with number of commits.
 	contributors = shortlog --summary --numbered --no-merges
-	ignore = "!gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@; }; gi"
 	# Find and replace text in the entire git repo
 	fr = "!gr() { git grep -l "$1" | xargs sed -i '' -e "s/$1/$2/g" 2> /dev/null; }; gr"
 	get = "!ghq get"
@@ -95,6 +92,8 @@
 	# Logs dangling commits, helpfulin recovering lost states.
 	# https://stackoverflow.com/a/91795/8714233
 	log-dangling = "!f() { git log --oneline --graph "$@" $(git fsck --no-reflog | awk '/dangling commit/ {print $3}'); }; f"
+	# Print the latest tag across all branches.
+	tag-latest = "!git describe --tags $(git rev-list --tags --max-count=1)"
 [apply]
 	# Detect whitespace errors when applying a patch.
 	whitespace = fix
