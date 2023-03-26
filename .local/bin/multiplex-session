@@ -35,9 +35,11 @@ declare -a proj_dirs=(
 	~/src/localhost
 )
 
-# Find git projects, e.g., `~/src/github.com/foo-bar/`
+# Find git projects, e.g., `~/src/github.com/foo-bar/` Arbitrarily search for
+# grandparents of `.git/` directories.
 while IFS='' read -r line; do proj_dirs+=("$line"); done < <(
-	fd --type d --exact-depth 2 --search-path ~/src --exclude localhost
+	fd --type directory --search-path ~/src --exclude localhost --max-depth 6 \
+		--hidden --no-ignore --glob '.git' | xargs dirname | xargs dirname | uniq
 )
 
 # Read `PROJ_DIRS` for machine specific project directories. e.g., `/mnt/...`
@@ -55,8 +57,10 @@ fi
 readonly proj_dirs
 
 if [[ -n ${debug-} ]]; then
-	echo 'Directories to search:'
+	echo 'Project directories:'
 	printf '%s\n' "${proj_dirs[@]}"
+	echo 'Found directories:'
+	fd --type directory --exact-depth 1 . "${proj_dirs[@]}"
 	exit
 fi
 
@@ -69,7 +73,7 @@ else
 	cwd=$PWD/
 	readonly cwd
 	selected=$(
-		fd --type d --exact-depth 1 . "${proj_dirs[@]}" \
+		fd --type directory --exact-depth 1 . "${proj_dirs[@]}" \
 			| if [[ ${proj_dirs[*]} =~ $cwd ]]; then cat - <(echo "$cwd"); else cat; fi \
 			| fzf
 	)
