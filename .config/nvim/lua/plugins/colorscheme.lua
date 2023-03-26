@@ -64,6 +64,11 @@ return {
 		},
 	},
 	{
+		-- A mcdonald's inspired theme.
+		"dundargoc/fakedonalds.nvim",
+		lazy = false,
+	},
+	{
 		"LazyVim/LazyVim",
 		opts = {
 			colorscheme = "catppuccin",

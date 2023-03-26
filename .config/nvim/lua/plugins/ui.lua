@@ -11,11 +11,11 @@ return {
 	},
 	{
 		"akinsho/bufferline.nvim",
-		event = require("util").get_buf_enter_event_list,
+		event = require("util").buf_enter_event_list,
 	},
 	{
 		"nvim-lualine/lualine.nvim",
-		event = require("util").get_buf_enter_event_list,
+		event = require("util").buf_enter_event_list,
 		opts = function(_, opts)
 			local function noeol()
 				local eol_indocator = (vim.opt.eol:get() and "" or "[noeol]")
@@ -25,12 +25,6 @@ return {
 			table.insert(opts.sections.lualine_c, 4, { noeol })
 			return opts
 		end,
-	},
-	{
-		"m4xshen/smartcolumn.nvim",
-		enabled = false,
-		event = require("util").get_buf_enter_event_list,
-		opts = {},
 	},
 	{
 		"folke/noice.nvim",
@@ -70,6 +64,22 @@ return {
 		},
 		keys = {
 			{ "<Leader>uz", "<Cmd>ZenMode<CR>", desc = "Toggle Zen Mode" },
+		},
+	},
+	{
+		-- A neovim plugin that shows colorcolumn dynamically.
+		"Bekaboo/deadcolumn.nvim",
+		event = require("util").buf_enter_event_list,
+		opts = {
+			scope = "buffer",
+			modes = { "i", "ic", "ix", "R", "Rc", "Rx", "Rv", "Rvc", "Rvx", "n" },
+			warning = {
+				alpha = 1,
+				hlgroup = {
+					"ColorColumn",
+					"background",
+				},
+			},
 		},
 	},
 }

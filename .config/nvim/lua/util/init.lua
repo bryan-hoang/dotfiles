@@ -1,12 +1,10 @@
 local M = {}
 
 -- Returns a custom list of events that fire only when entering a buffer.
-function M.get_buf_enter_event_list()
-	return {
-		"BufRead",
-		"BufNewFile",
-	}
-end
+M.buf_enter_event_list = {
+	"BufReadPre",
+	"BufNewFile",
+}
 
 -- Creates auto commands to set file types based on filename patterns.
 function M.set_file_associations(file_associations)

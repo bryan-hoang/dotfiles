@@ -12,7 +12,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		event = require("util").get_buf_enter_event_list(),
+		event = require("util").buf_enter_event_list,
 	},
 	{
 		"nvim-treesitter/playground",

@@ -27,7 +27,7 @@ g.netrw_browse_split = 4
 opt.relativenumber = true
 
 -- Column lines.
-opt.colorcolumn = { 80, 100, 120 }
+opt.colorcolumn = { "+0", "+20", "+40" }
 
 -- Textwidth for hard wrapping. I want to encourage writing short lines of
 -- code. For long lines of code, use J where needed.

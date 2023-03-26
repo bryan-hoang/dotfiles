@@ -238,7 +238,7 @@ return {
 	{
 		-- A plugin to visualise and resolve merge conflicts in neovim.
 		"akinsho/git-conflict.nvim",
-		event = require("util").get_buf_enter_event_list(),
+		event = require("util").buf_enter_event_list,
 		opts = {
 			default_mappings = {
 				ours = "<Leader>gco",
@@ -252,7 +252,7 @@ return {
 	},
 	{
 		"gorbit99/codewindow.nvim",
-		event = require("util").get_buf_enter_event_list(),
+		event = require("util").buf_enter_event_list,
 		config = function(_, opts)
 			local codewindow = require("codewindow")
 			codewindow.setup(opts)
@@ -261,7 +261,7 @@ return {
 	},
 	{
 		"petertriho/nvim-scrollbar",
-		event = require("util").get_buf_enter_event_list(),
+		event = require("util").buf_enter_event_list,
 		config = function()
 			require("scrollbar").setup()
 			require("scrollbar.handlers.gitsigns").setup()
