@@ -17,6 +17,6 @@ indent_style = space
 [*.{py,kdl}]
 indent_size = 4
 
-[*.{el,diff}]
+[*.{el,diff,cbl}]
 indent_style = space
 indent_size = unset
