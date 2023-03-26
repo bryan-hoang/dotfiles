@@ -217,7 +217,7 @@ export XAUTHORITY="$HOME"/.Xauthority
 export ICEAUTHORITY="$XDG_CACHE_HOME"/ICEauthority
 export KDEHOME="$XDG_CONFIG_HOME"/kde
 export OSH="$XDG_CONFIG_HOME"/oh-my-bash
-export TMUX_PLUGIN_MANAGER_PATH="$XDG_CONFIG_HOME"/tmux/plugins
+export TMUX_PLUGIN_MANAGER_PATH="$XDG_DATA_HOME"/tmux/plugins
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 mkdir -p "$(dirname "$WINEPREFIX")"
 

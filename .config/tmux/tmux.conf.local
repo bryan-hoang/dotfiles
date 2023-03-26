@@ -74,19 +74,19 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 
 # Dracula theme.
 set -g @plugin 'dracula/tmux'
-set -g @dracula-plugins 'weather cpu-usage time'
-set -g @dracula-show-powerline true
-# Enable window flags. e.g., * beside current window.
+set -g @dracula-plugins 'weather network-ping network-bandwidth ram-usage cpu-usage battery time'
+
 set -g @dracula-show-flags true
-set -g @dracula-cpu-display-load true
 set -g @dracula-show-left-icon session
-set -g @dracula-military-time true
+set -g @dracula-show-powerline true
+
 set -g @dracula-show-fahrenheit false
-# RGB.
-set -g @dracula-weather-colors "orange dark_gray"
-set -g @dracula-cpu-usage-colors "green dark_gray"
-# run 'cut -c3- "$TMUX_CONF" | sh -s _apply_configuration'
-set -g @dracula-time-colors "cyan dark_gray"
+
+set -g @dracula-network-bandwidth eth0
+
+set -g @dracula-cpu-display-load true
+
+set -g @dracula-military-time true
 
 # A lightning fast version of tmux-fingers written in Rust, copy/pasting tmux
 # like vimium/vimperator.
