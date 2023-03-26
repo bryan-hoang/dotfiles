@@ -1,6 +1,7 @@
 import micromatch from 'micromatch';
 import createDebug from 'debug';
 import { spawnSync } from 'node:child_process';
+import { lstatSync } from 'node:fs';
 
 const debug = createDebug('lint-staged:config');
 
@@ -53,8 +54,6 @@ const submodules = spawnOutput.output[1]
 
 debug('submodules', submodules);
 
-const ignoreGlobs = submodules.concat(['xdg-ninja']);
-
 /**
  * @param files {string[]}
  * @param command {string}
@@ -62,9 +61,13 @@ const ignoreGlobs = submodules.concat(['xdg-ninja']);
 function processMatches(files, command) {
 	// Ignore submodule files.
 	debug('files', files);
-	const matches = micromatch.not(files, ignoreGlobs, {
-		contains: true,
-	});
+	const matches = micromatch
+		.not(files, submodules, {
+			contains: true,
+		})
+		.filter((file) => {
+			return !lstatSync(file).isSymbolicLink();
+		});
 
 	debug('matches', matches);
 
