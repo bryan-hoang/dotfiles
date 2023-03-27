@@ -755,13 +755,14 @@ install_codelldb() {
 }
 
 install_tmux() {
-	echo 'https://github.com/tmux/tmux/wiki/Installing'
 	git get https://github.com/tmux/tmux.git
 	cd "$GHQ_ROOT"/github.com/tmux/tmux || return
+	install_apt_packages libevent-dev ncurses-dev build-essential bison pkg-config
 	sh autogen.sh
-	./configure --prefix "$XDG_LOCAL_HOME"
-	make
-	make install
+	./configure --prefix "$XDG_LOCAL_HOME" || return
+	make || return
+	make install || return
+	tmux -V
 	cd - || return
 }
 
