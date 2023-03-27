@@ -771,7 +771,8 @@ install_nvim() {
 	echo "Installing neovim..."
 	git get https://github.com/neovim/neovim.git
 	cd "$GHQ_ROOT"/github.com/neovim/neovim || return
-	install_apt_packages ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip curl doxygen
+	install_apt_packages ninja-build gettext libtool libtool-bin autoconf \
+		automake cmake g++ pkg-config unzip curl doxygen liblua5.1-0-dev
 	make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=${1:-$XDG_LOCAL_HOME}" || return
 	make install || return
 	nvim --version
