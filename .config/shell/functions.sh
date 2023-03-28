@@ -773,11 +773,21 @@ install_nvim() {
 	cd "$GHQ_ROOT"/github.com/neovim/neovim || return
 	install_apt_packages ninja-build gettext libtool libtool-bin autoconf \
 		automake cmake g++ pkg-config unzip curl doxygen liblua5.1-0-dev
-	make CMAKE_BUILD_TYPE=Release CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=${1:-$XDG_LOCAL_HOME}" || return
+	make CMAKE_BUILD_TYPE=Release \
+		CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=${1:-$XDG_LOCAL_HOME}" || return
 	make install || return
 	nvim --version
 	cd - || return
 	echo "Installed neovim successfully!"
+}
+
+# https://neovide.dev/installation.html#linux-source
+install_neovide() {
+	install_apt_packages curl gnupg ca-certificates git gcc-multilib \
+		g++-multilib cmake libssl-dev pkg-config libfreetype6-dev libasound2-dev \
+		libexpat1-dev libxcb-composite0-dev libbz2-dev libsndio-dev freeglut3-dev \
+		libxmu-dev libxi-dev libfontconfig1-dev libxcursor-dev libxkbcommon-x11-0
+	cargo install --git https://github.com/neovide/neovide
 }
 
 # https://github.com/emacs-mirror/emacs/blob/master/INSTALL.REPO
