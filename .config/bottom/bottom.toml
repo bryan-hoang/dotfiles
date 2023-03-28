@@ -20,7 +20,7 @@
 # Whether to set CPU% on a process to be based on the total CPU or per-core CPU% (not divided by the number of cpus).
 #unnormalized_cpu = false
 # Whether to group processes with the same name together by default.
-#group_processes = false
+group_processes = true
 # Whether to make process searching case sensitive by default.
 #case_sensitive = false
 # Whether to make process searching look for matching the entire word by default.
@@ -64,7 +64,7 @@ color = "gruvbox"
 # Shows an indicator in table widgets tracking where in the list you are.
 show_table_scroll_position = true
 # Show processes as their commands by default in the process widget.
-#process_command = false
+process_command = true
 # Displays the network widget with binary prefixes.
 #network_use_binary_prefix = false
 # Displays the network widget using bytes.
