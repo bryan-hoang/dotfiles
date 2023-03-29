@@ -1558,3 +1558,13 @@ fix_ssh_perms() {
 	chmod 600 "$HOME"/.ssh/id_*
 	chmod 644 "$HOME"/.ssh/{*.pub,authorized_keys}
 }
+
+add_to_path() {
+	if [[ -d $1 ]] && [[ ":$PATH:" != *":$1:"* ]]; then
+		PATH="$1${PATH:+":$PATH"}"
+		return 0
+	fi
+
+	return 1
+}
+
