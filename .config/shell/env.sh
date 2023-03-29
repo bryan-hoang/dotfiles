@@ -88,6 +88,9 @@ export PAGER=less
 command -v nvim >/dev/null \
 	&& export MANPAGER='nvim +Man!'
 
+# Remove linuxbrew man pages by default.
+unset MANPATH
+
 # Enable persistent REPL history for `node`.
 export NODE_REPL_HISTORY="$XDG_STATE_HOME"/node/history
 mkdir -p "$(dirname "$NODE_REPL_HISTORY")"

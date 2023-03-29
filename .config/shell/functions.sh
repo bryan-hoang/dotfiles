@@ -786,7 +786,7 @@ install_neovide() {
 	install_apt_packages curl gnupg ca-certificates git gcc-multilib \
 		g++-multilib cmake libssl-dev pkg-config libfreetype6-dev libasound2-dev \
 		libexpat1-dev libxcb-composite0-dev libbz2-dev libsndio-dev freeglut3-dev \
-		libxmu-dev libxi-dev libfontconfig1-dev libxcursor-dev libxkbcommon-x11-0
+		libxmu-dev libxi-dev libfontconfig1-dev libxcursor-dev libxkbcommon-x11-a
 	cargo install --git https://github.com/neovide/neovide
 }
 
@@ -1482,6 +1482,16 @@ generate_completions() {
 			return 1
 			;;
 	esac
+}
+
+generate_man_pages() {
+	local -r command_with_man_page="${1}"
+	local -r man_page_file="$XDG_DATA_HOME/man/man1/$command_with_man_page".1
+	# sed to strip ANSI escape codes. *cough* bw *cough*
+	if [[ ! -s ${man_page_file} ]]; then
+		local -ra generation_command=("${@:2}")
+		"${generation_command[@]}" | sed -e 's/\x1b\[[0-9;]*m//g' >|"$man_page_file"
+	fi
 }
 
 kill_window_manager() {

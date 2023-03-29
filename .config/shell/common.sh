@@ -60,6 +60,9 @@ does_command_exist cog \
 	&& generate_completions cog cog generate-completions "$SHELL_BASENAME"
 does_command_exist rtx \
 	&& generate_completions rtx rtx complete --shell "$SHELL_BASENAME"
+does_command_exist watchexec \
+	&& generate_completions watchexec watchexec --completions "$SHELL_BASENAME" \
+	&& generate_man_pages watchexec watchexec --manual
 
 # Doesn't support bash.
 does_command_exist bw \
