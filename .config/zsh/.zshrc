@@ -63,14 +63,12 @@ zstyle ':completion::complete:*' gain-privileges 1
 # https://wiki.archlinux.org/title/zsh#Persistent_rehash
 zstyle ':completion:*' rehash true
 
-mkdir -p "$XDG_CACHE_HOME"/zsh
-compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
-zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
-
 # Enable user specific completions.
 autoload -U compinit bashcompinit
-compinit
+mkdir -p "$XDG_CACHE_HOME"/zsh
+compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 bashcompinit
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
 
 # endregion Completions
 
