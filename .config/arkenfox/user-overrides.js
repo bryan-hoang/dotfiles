@@ -76,3 +76,7 @@ user_pref('webgl.disabled', false);
  * [SETTING] Privacy & Security>Logins and Passwords>Ask to save logins and passwords for websites
  */
 user_pref('signon.rememberSignons', false);
+/**
+ * Enable WebGPU by default.
+ */
+user_pref('dom.webgpu.enabled', true);
