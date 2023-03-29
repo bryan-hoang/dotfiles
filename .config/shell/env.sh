@@ -90,6 +90,7 @@ command -v nvim >/dev/null \
 
 # Remove linuxbrew man pages by default.
 unset MANPATH
+mkdir -p "$XDG_DATA_HOME"/man/man1
 
 # Enable persistent REPL history for `node`.
 export NODE_REPL_HISTORY="$XDG_STATE_HOME"/node/history
