@@ -12,7 +12,7 @@ run '"$TMUX_PROGRAM" source "$XDG_CONFIG_HOME"/tmux/tmux-base.conf.local'
 # https://github.com/microsoft/vscode-remote-release/issues/2763#issuecomment-682276412
 # Also make certain environment variables available to be referenced in the
 # config file.
-set-option -ga update-environment 'VSCODE_GIT_ASKPASS_NODE VSCODE_GIT_ASKPASS_MAIN VSCODE_IPC_HOOK_CLI GIT_ASKPASS NODE_OPTIONS VSCODE_INSPECTOR_OPTIONS DISPLAY'
+set-option -ga update-environment 'VSCODE_GIT_ASKPASS_NODE VSCODE_GIT_ASKPASS_MAIN VSCODE_IPC_HOOK_CLI GIT_ASKPASS NODE_OPTIONS VSCODE_INSPECTOR_OPTIONS DISPLAY SSH_CONNECTION XAUTHORITY TERM'
 
 # -- windows & pane creation ---------------------------------------------------
 tmux_conf_new_window_retain_current_path=true
@@ -23,7 +23,7 @@ tmux_conf_copy_to_os_clipboard=true
 # -- user customizations -------------------------------------------------------
 
 # increase history size
-set -g history-limit 20000
+set -g history-limit 32768
 
 # replace C-b by C-a instead of using both prefixes
 set -gu prefix2
