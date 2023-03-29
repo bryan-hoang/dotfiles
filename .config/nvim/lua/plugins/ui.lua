@@ -66,20 +66,4 @@ return {
 			{ "<Leader>uz", "<Cmd>ZenMode<CR>", desc = "Toggle Zen Mode" },
 		},
 	},
-	{
-		-- A neovim plugin that shows colorcolumn dynamically.
-		"Bekaboo/deadcolumn.nvim",
-		event = require("util").buf_enter_event_list,
-		opts = {
-			scope = "buffer",
-			modes = { "i", "ic", "ix", "R", "Rc", "Rx", "Rv", "Rvc", "Rvx", "n" },
-			warning = {
-				alpha = 1,
-				hlgroup = {
-					"ColorColumn",
-					"background",
-				},
-			},
-		},
-	},
 }

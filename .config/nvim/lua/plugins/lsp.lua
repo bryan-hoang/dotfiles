@@ -269,6 +269,9 @@ return {
 						diagnostics_postprocess = function(diagnostic)
 							diagnostic.severity = vim.diagnostic.severity["HINT"]
 						end,
+						diagnostic_config = {
+							virtual_text = false,
+						},
 					}),
 					b.code_actions.cspell,
 					b.hover.dictionary,
