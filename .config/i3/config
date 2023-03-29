@@ -296,7 +296,7 @@ default_border none
 
 for_window [all] border pixel 0
 
-gaps inner 20
+# gaps inner 20
 
 # Activate smart borders (always)
 smart_borders on
