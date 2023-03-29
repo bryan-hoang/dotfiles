@@ -90,6 +90,10 @@ return {
 					marksman = {
 						mason = false,
 					},
+					-- FIXME: Performance with w/ tsserver freezing the program.
+					-- rome = {
+					-- 	mason = false,
+					-- },
 				},
 			})
 		end,
