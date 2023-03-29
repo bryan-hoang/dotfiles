@@ -75,7 +75,7 @@
 	branch-delete = "!f() { git branch --delete --force $1 || true && git push origin --delete $1; }; f"
 	# List branches with most recent committer to it. Useful for finding which
 	# branch someone has been committing to recently.
-	branch-activity = "for-each-ref --sort=committerdate refs/heads refs/remotes --format='%(authordate:short) %(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset)) %(authorname)'"
+	branch-activity = "for-each-ref --sort=committerdate refs/remotes --format='%(authordate:short) %(color:yellow)%(refname:lstrip=3)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset)) %(color:blue)%(authorname)%(color:reset)'"
 	# https://stackoverflow.com/a/27940027/8714233
 	diff-changes = "!f() { git merge-base origin/$(git default-branch) origin/$(git branch --show-current) | xargs -I '{}' git diff '{}'..origin/$(git branch --show-current); }; f"
 	# Logs the diff of commits between the default branch and the current branch.
