@@ -44,6 +44,9 @@ set -ga terminal-overrides ",*256color:Tc"
 # Isn't set when started by systemctl.
 set-environment -g COLORTERM "truecolor"
 
+# Make tmux scrolling behave more intuitively
+set -g mouse on
+
 # https://unix.stackexchange.com/a/615565/460126
 bind-key -N 'Choose a session from a list, sorted alphabetically' s choose-tree -s -O name
 
