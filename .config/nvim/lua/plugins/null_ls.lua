@@ -75,7 +75,7 @@ return {
 								),
 							}
 
-							if util.is_os_unix then
+							if not util.is_os_unix then
 								table.insert(
 									args,
 									1,
