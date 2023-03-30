@@ -19,7 +19,7 @@ return {
 			local DIAGNOSTICS = methods.internal.DIAGNOSTICS
 
 			return {
-				-- debug = true,
+				debug = true,
 				sources = {
 					-- Markdown/text
 					b.diagnostics.markdownlint,
@@ -51,26 +51,40 @@ return {
 					b.diagnostics.commitlint.with({
 						-- Fails to spawn on windows unless it's called with the extension.
 						command = util.is_os_unix and "commitlint" or "pwsh",
-						args = {
-							util.is_os_unix and ""
-								or vim.fn.expand("$PNPM_HOME") .. "/commitlint.ps1",
-							"--format",
-							"commitlint-format-json",
-							"--config",
-							vim.fn.expand("$XDG_CONFIG_HOME/commitlint/commitlint.config.js"),
-							"--extends",
-							vim.fn.expand(
-								vim.fn
-									.system({
-										"pnpm",
-										"root",
-										"--global",
-									})
-									:match("^%s*(.*%S)")
-									.. "/@commitlint/config-conventional"
-							),
-						},
-						extra_args = {},
+						args = function(params)
+							local args = {
+								"--format",
+								"commitlint-format-json",
+								"--config",
+								vim.fn.expand(
+									"$XDG_CONFIG_HOME/commitlint/commitlint.config.js"
+								),
+								"--extends",
+								vim.fn.expand(
+									vim
+										.fn
+										.system({
+											"pnpm",
+											"root",
+											"--global",
+										})
+										-- Remove trailing newline character.
+										:match(
+											"^%s*(.*%S)"
+										) .. "/@commitlint/config-conventional"
+								),
+							}
+
+							if util.is_os_unix then
+								table.insert(
+									args,
+									1,
+									vim.fn.expand("$PNPM_HOME") .. "/commitlint.ps1"
+								)
+							end
+
+							return args
+						end,
 					}),
 
 					b.diagnostics.editorconfig_checker.with({
