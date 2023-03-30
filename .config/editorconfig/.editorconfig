@@ -20,3 +20,6 @@ indent_size = 4
 [*.{el,diff,cbl}]
 indent_style = space
 indent_size = unset
+
+[*.vil]
+insert_final_newline = unset
