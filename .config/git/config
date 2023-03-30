@@ -69,13 +69,14 @@
 	default-branch = "!f() { git rev-parse --abbrev-ref origin/HEAD | sed 's/origin\\///'; }; f"
 	# https://stackoverflow.com/questions/65837109/when-should-i-use-git-push-force-if-includes
 	push-force-safely = push --force-with-lease --force-if-includes
-	wt = worktree
+	# https://stackoverflow.com/a/54408181/8714233
+	wt-fix-refs = "!git for-each-ref --format='%(refname:short)' refs/heads | xargs git branch -D 2>/dev/null || true"
 	switch-time = "!f() { git switch -d $(git rev-list -n 1 --first-parent --before \"$1 23:59\" $(git default-branch)) ; }; f"
 	# Delete a branch locally and on the remote.
 	branch-delete = "!f() { git branch --delete --force $1 || true && git push origin --delete $1; }; f"
 	# List branches with most recent committer to it. Useful for finding which
 	# branch someone has been committing to recently.
-	branch-activity = "for-each-ref --sort=committerdate refs/remotes --format='%(authordate:short) %(color:yellow)%(refname:lstrip=3)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset)) %(color:blue)%(authorname)%(color:reset)'"
+	branch-activity = "branch --remotes --format='%(authordate:short) %(color:yellow)%(refname:lstrip=3)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset)) %(color:blue)%(authorname)%(color:reset)' --no-merged origin/HEAD"
 	# https://stackoverflow.com/a/27940027/8714233
 	diff-changes = "!f() { git merge-base origin/$(git default-branch) origin/$(git branch --show-current) | xargs -I '{}' git diff '{}'..origin/$(git branch --show-current); }; f"
 	# Logs the diff of commits between the default branch and the current branch.
@@ -124,7 +125,6 @@
 	fsmonitor = true
 	hooksPath = hooks
 	pager = delta
-	logAllRefUpdates = always
 [interactive]
 	diffFilter = delta --color-only
 [include]
