@@ -77,7 +77,7 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 
 # Dracula theme.
 set -g @plugin 'dracula/tmux'
-set -g @dracula-plugins 'weather network-ping network-bandwidth ram-usage cpu-usage battery time'
+set -g @dracula-plugins 'weather network-ping network-bandwidth ram-usage cpu-usage battery time mysql sql'
 
 set -g @dracula-show-flags true
 set -g @dracula-show-left-icon session
