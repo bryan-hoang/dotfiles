@@ -124,6 +124,7 @@
 	fsmonitor = true
 	hooksPath = hooks
 	pager = delta
+	logAllRefUpdates = always
 [interactive]
 	diffFilter = delta --color-only
 [include]
@@ -284,3 +285,5 @@
 	guessRemote = true
 [format]
 	signOff = true
+[index]
+	skipHash = false

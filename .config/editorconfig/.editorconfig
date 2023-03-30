@@ -23,3 +23,6 @@ indent_size = unset
 
 [*.vil]
 insert_final_newline = unset
+
+[**/.git/config]
+indent_size = unset
