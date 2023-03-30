@@ -3,9 +3,15 @@
 -- Add any additional options here
 
 require("config.editorconfig")
+local util = require("util")
 
 local opt = vim.opt
 local g = vim.g
+
+-- Avoid https://github.com/neovim/neovim/issues/14605
+if not util.is_os_unix and string.match(opt.shell:get(), "bash%.exe") then
+	opt.shellcmdflag = "-c"
+end
 
 local enable_providers = {
 	"python3",

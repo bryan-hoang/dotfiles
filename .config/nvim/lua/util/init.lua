@@ -19,4 +19,6 @@ function M.set_file_associations(file_associations)
 	end
 end
 
+M.is_os_unix = string.sub(package.config, 1, 1) == "/"
+
 return M
