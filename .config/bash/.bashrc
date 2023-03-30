@@ -129,10 +129,8 @@ unset HISTTIMEFORMAT
 # dot
 __git_complete dot __git_main
 
-# tabtab source for packages
-# uninstall by removing these lines
-# shellcheck disable=SC1090
-[ -f ~/.config/tabtab/bash/pnpm.bash ] && . ~/.config/tabtab/bash/pnpm.bash
+[[ -f $XDG_CONFIG_HOME/tabtab/bash/pnpm.bash ]] \
+	&& . "$XDG_CONFIG_HOME"/tabtab/bash/pnpm.bash
 
 does_command_exist mcfly && eval "$(mcfly init bash)"
 is_interactive_shell && does_command_exist navi && eval "$(navi widget bash)"
@@ -140,16 +138,8 @@ does_command_exist zoxide && eval "$(zoxide init bash)"
 does_command_exist gh && eval "$(gh completion -s bash)"
 does_command_exist starship && eval "$(starship init bash)"
 does_command_exist broot && eval "$(broot --print-shell-function bash)"
-
-# shellcheck disable=SC1091
-if [[ -f "${XDG_CONFIG_HOME:-${HOME}/.config}/asdf-direnv/bashrc" ]]; then
-	# shellcheck disable=SC2250
-	source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/bashrc"
-elif does_command_exist direnv; then
-	eval "$(direnv hook bash)"
-fi
+does_command_exist direnv && eval "$(direnv hook bash)"
 
 if is_git_bash; then
 	start_ssh_agent
 fi
-
