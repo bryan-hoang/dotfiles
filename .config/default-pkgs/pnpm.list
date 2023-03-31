@@ -61,3 +61,7 @@ cspell
 # Sort an Object or package.json based on the well-known package.json keys
 # (keithamus/sort-package-json).
 sort-package-json
+# Check for outdated, incorrect, and unused dependencies (dylang/npm-check).
+npm-check
+# Check your npm module for unused dependencies (depcheck/depcheck).
+depcheck
