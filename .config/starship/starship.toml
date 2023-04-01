@@ -107,6 +107,9 @@ min_time = 2_000
 show_notifications = true
 format = '[$duration]($style) '
 
+[container]
+format = '[$symbol ]($style)'
+
 [directory]
 format = "[$path]($style)[$read_only]($read_only_style) "
 
