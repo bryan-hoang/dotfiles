@@ -36,6 +36,16 @@ user_pref('browser.urlbar.suggest.searches', true);
 user_pref('browser.formfill.enable', true);
 
 /**
+ * 0903: disable auto-filling username & password form fields
+ * can leak in cross-site forms *and* be spoofed
+ * [NOTE] Username & password is still available when you enter the field
+ * [SETTING] Privacy & Security>Logins and Passwords>Autofill logins and passwords
+ * [1] https://freedom-to-tinker.com/2017/12/27/no-boundaries-for-user-identities-web-trackers-exploit-browser-login-managers/
+ * [2] https://homes.esat.kuleuven.be/~asenol/leaky-forms/
+ */
+user_pref('signon.autofillForms', true);
+
+/**
  * 2811: set/enforce what items to clear on shutdown (if 2810 is true) [SETUP-CHROME]
  * [NOTE] If "history" is true, downloads will also be cleared
  * [NOTE] "sessions": Active Logins: refers to HTTP Basic Authentication [1], not logins via cookies
@@ -75,7 +85,8 @@ user_pref('webgl.disabled', false);
  * [NOTE] This does not clear any passwords already saved
  * [SETTING] Privacy & Security>Logins and Passwords>Ask to save logins and passwords for websites
  */
-user_pref('signon.rememberSignons', false);
+user_pref('signon.rememberSignons', true);
+
 /**
  * Enable WebGPU by default.
  */
