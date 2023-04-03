@@ -91,6 +91,9 @@ return {
 					marksman = {
 						mason = false,
 					},
+					neocmake = {
+						mason = false,
+					},
 				},
 			}
 

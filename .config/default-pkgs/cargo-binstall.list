@@ -64,6 +64,8 @@ dotenv-linter
 # A system information frontend with an emphasis on performance
 # (Macchina-CLI/macchina).
 macchina
+# Another cmake lsp (Decodetalkers/neocmakelsp).
+neocmakelsp
 # 🤖 Just a command runner.
 # just
 # Background rust code check (Canop/bacon).
