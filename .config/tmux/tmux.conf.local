@@ -62,7 +62,7 @@ set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @resurrect-strategy-nvim 'session'
 # Restore pane contents.
 set -g @resurrect-capture-pane-contents 'on'
-set -g @resurrect-processes 'hx spt "~bin/dev->bin/dev" emacsclient watchexec glab pnpm genact pipes-rs'
+set -g @resurrect-processes 'hx spt "~bin/dev->bin/dev" emacsclient watchexec glab pnpm genact pipes-rs mysql sql'
 
 # Continuous saving of tmux environment. Automatic restore when tmux is started.
 # Automatic tmux start when computer is turned on.
@@ -77,7 +77,7 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 
 # Dracula theme.
 set -g @plugin 'dracula/tmux'
-set -g @dracula-plugins 'weather network-ping network-bandwidth ram-usage cpu-usage battery time mysql sql'
+set -g @dracula-plugins 'weather network-ping network-bandwidth ram-usage cpu-usage battery time'
 
 set -g @dracula-show-flags true
 set -g @dracula-show-left-icon session
