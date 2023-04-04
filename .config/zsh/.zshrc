@@ -43,6 +43,13 @@ for plugin in "${custom_plugins[@]}"; do
 		&& plugins+=("$plugin")
 done
 
+# shellcheck disable=SC1091
+[[ -s "$ZSH"/oh-my-zsh.sh ]] && . "$ZSH"/oh-my-zsh.sh
+
+# Loaded after framework is loaded to preserve personal aliases.
+# shellcheck disable=SC1091
+. "$XDG_CONFIG_HOME"/shell/common.sh
+
 # region Completions
 
 compdef dot='git'
@@ -71,13 +78,6 @@ bashcompinit
 zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
 
 # endregion Completions
-
-# shellcheck disable=SC1091
-[[ -s "$ZSH"/oh-my-zsh.sh ]] && . "$ZSH"/oh-my-zsh.sh
-
-# Loaded after framework is loaded to preserve personal aliases.
-# shellcheck disable=SC1091
-. "$XDG_CONFIG_HOME"/shell/common.sh
 
 # Make `mapfile` available in `zsh`
 zmodload zsh/mapfile
