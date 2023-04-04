@@ -1116,13 +1116,6 @@ fs() {
 	fi
 }
 
-# Use Git's colored diff when available
-if hash git &>/dev/null; then
-	function diff() {
-		git diff --no-index --color-words "$@"
-	}
-fi
-
 # Combine `bat` with `git diff` to view lines around code changes with proper
 # syntax highlighting.
 batdiff() {
