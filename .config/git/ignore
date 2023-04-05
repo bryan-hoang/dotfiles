@@ -32,7 +32,7 @@ Thumbs.db
 .shellcheckrc
 svgo.config.js
 .hadolint.yaml
-prettier.config.js
+.prettierrc.js
 .editorconfig
 .stylelintrc.json
 

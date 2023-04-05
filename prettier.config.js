@@ -1,1 +1,0 @@
-.config/prettier/prettier.config.js
