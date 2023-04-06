@@ -942,6 +942,16 @@ install_cpanm() {
 	cpanm --version
 }
 
+install_bwrap() {
+	git get https://github.com/containers/bubblewrap.git
+	cd "$GHQ_ROOT"/github.com/containers/bubblewrap || return
+	install_apt_packages libcap-dev
+	./autogen.sh || return
+	make
+	sudo make install || return
+	bwrap --version
+}
+
 # endregion Installation.
 
 # region Boolean functions
@@ -1561,3 +1571,9 @@ add_to_path() {
 	return 1
 }
 
+standup() {
+	git bulk -a standup -F authordate -F gpg "$@" 2>&1 \
+		| rg ' - ' \
+		| cut --delimiter ' ' --fields 3- \
+		| huniq
+}

@@ -101,6 +101,8 @@
 [branch]
 	# Show most recently changed branches first.
 	sort = -committerdate
+# Config for `git bulk` from `git-extras`.`
+[bulkworkspaces]
 [commit]
 	# https://help.github.com/articles/signing-commits-using-gpg/
 	gpgsign = true
@@ -175,7 +177,9 @@
 	clean = "sed '/^Xft.dpi/d'"
 [filter "git-config"]
 	smudge = cat
-	clean = "sed -e '/\\[gpg\\]/d' -e '/^	program = /d'"
+	# Using sed to delete all lines between two matching patterns:
+	# https://stackoverflow.com/a/6287940/8714233
+	clean = "sed -e '/\\[gpg\\]/d' -e '/^	program = /d' -e '/^\\[bulkworkspaces\\]/,/^\\[/{/^\\[bulkworkspaces\\]/!{/\\[/!d}}'"
 [filter "macchina"]
 	smudge = cat
 	clean = "sed '/^interface =/d'"
