@@ -67,7 +67,7 @@ pnpm-lock.yaml
 build
 
 # To help define common commands I personally run in certain projects.
-justfile
+.justfile
 
 # ESLint config file.
 .eslintrc.js
