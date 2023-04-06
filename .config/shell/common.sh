@@ -63,6 +63,10 @@ does_command_exist rtx \
 does_command_exist watchexec \
 	&& generate_completions watchexec watchexec --completions "$SHELL_BASENAME" \
 	&& generate_man_pages watchexec watchexec --manual
+does_command_exist git-absorb \
+	&& generate_completions git-absorb git-absorb --gen-completions "$SHELL_BASENAME"
+does_command_exist dufs \
+	&& generate_completions dufs dufs --completions "$SHELL_BASENAME"
 
 # Doesn't support bash.
 does_command_exist bw \
