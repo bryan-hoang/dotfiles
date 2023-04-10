@@ -9,5 +9,5 @@ Wants=gpg-agent.service
 [Service]
 Type=forking
 ExecStart=/home/%u/.local/bin/tmux new-session -s %u -d
-ExecStop=/home/%u/.config/tmux/plugins/tmux-resurrect/scripts/save.sh
+ExecStop=/home/%u/.local/share/tmux/plugins/tmux-resurrect/scripts/save.sh
 ExecStop=/home/%u/.local/bin/tmux kill-session -t %u
