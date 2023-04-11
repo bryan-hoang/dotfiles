@@ -1,3 +1,0 @@
-return {
-	event = { "BufNewFile", "BufRead" },
-}
