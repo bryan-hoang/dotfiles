@@ -23,6 +23,7 @@ if command -v dbus-update-activation-environment >/dev/null \
 				|| awk 'BEGIN{for(v in ENVIRON) print v}' | grep -iv -e awk -e lua -e ^_ \
 				| xargs systemctl --user import-environment
 			systemctl --user unset-environment SHLVL SSH_CONNECTION SSH_CLIENT SSH_TTY
+			systemctl --user daemon-reload
 			systemctl --user start tmux.service
 		)
 	}
