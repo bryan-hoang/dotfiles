@@ -267,3 +267,5 @@ export RTX_USE_TOML=1
 export RTX_SHIMS_DIR="$XDG_DATA_HOME"/rtx/shims
 export SUDO_PROMPT='[sudo] password for %p@%H to run as %U: '
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME"/starship/starship.toml
+# https://wiki.archlinux.org/title/Alacritty#Different_font_size_on_multiple_monitors
+export WINIT_X11_SCALE_FACTOR=1
