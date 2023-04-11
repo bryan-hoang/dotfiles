@@ -168,6 +168,12 @@
 				},
 				{
 					"PackageIdentifier": "rocksdanister.LivelyWallpaper"
+				},
+				{
+					"PackageIdentifier": "Google.Chrome.Canary"
+				},
+				{
+					"PackageIdentifier": "Mozilla.Firefox.Nightly"
 				}
 			],
 			"SourceDetails": {
