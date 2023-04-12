@@ -3,6 +3,9 @@ sccache
 # Manage cargo cache (${CARGO_HOME}, ~/.cargo/), print sizes of dirs and
 # remove dirs selectively.
 cargo-cache
+# The minimal, blazing-fast, and infinitely customizable prompt for any shell
+# (starship/starship)!
+starship
 # A cargo subcommand for checking and applying updates to installed
 # executables.
 cargo-update
