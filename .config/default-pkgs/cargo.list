@@ -19,3 +19,6 @@ ripgrep --features pcre2,simd-accel
 
 # A command-line tool to prevent committing secret keys into your source code.
 --git https://github.com/sirwart/ripsecrets --branch main
+# A lightning fast version of tmux-fingers written in Rust, copy/pasting tmux
+# like vimium/vimperator (fcsonline/tmux-thumbs).
+--git https://github.com/fcsonline/tmux-thumbs thumbs
