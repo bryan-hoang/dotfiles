@@ -13,6 +13,7 @@ nginx = 'nginx'
 systemd-timesyncd = 'systemd-timesyncd'
 
 [user_service_status]
+docuum = 'docuum'
 emacs = 'emacs'
 gpg-agent = 'gpg-agent'
 lemonade = 'lemonade'

@@ -1,0 +1,13 @@
+# https://github.com/stepchowfun/docuum#creating-a-systemd-service-on-linux
+[Unit]
+Description=Docuum
+After=docker.service
+Wants=docker.service
+
+[Service]
+Environment='THRESHOLD=5 GB'
+ExecStart=/home/%u/.local/bin/docuum --threshold ${THRESHOLD}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

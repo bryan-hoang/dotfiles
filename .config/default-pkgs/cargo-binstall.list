@@ -145,6 +145,9 @@ huniq
 # ncspot
 # A tool to interactively write shell pipelines (elkowar/pipr).
 # pipr
+# Docuum performs least recently used (LRU) eviction of Docker images
+# (stepchowfun/docuum).
+# docuum
 
 # Windows Incompatible.
 
