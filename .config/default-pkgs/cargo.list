@@ -22,3 +22,5 @@ ripgrep --features pcre2,simd-accel
 # A lightning fast version of tmux-fingers written in Rust, copy/pasting tmux
 # like vimium/vimperator (fcsonline/tmux-thumbs).
 --git https://github.com/fcsonline/tmux-thumbs thumbs
+# xautolock rewrite in Rust, with a few extra features (jD91mZM2/xidlehook).
+# xidlehook --bins

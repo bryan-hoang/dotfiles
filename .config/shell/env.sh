@@ -269,3 +269,5 @@ export SUDO_PROMPT='[sudo] password for %p@%H to run as %U: '
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME"/starship/starship.toml
 # https://wiki.archlinux.org/title/Alacritty#Different_font_size_on_multiple_monitors
 export WINIT_X11_SCALE_FACTOR=1
+# https://github.com/jD91mZM2/xidlehook#configuring-via-systemd
+export XIDLEHOOK_SOCK="$XDG_RUNTIME_DIR"/xidlehook.socket

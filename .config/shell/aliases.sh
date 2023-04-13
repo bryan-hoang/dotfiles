@@ -158,3 +158,4 @@ alias commitlint='commitlint --config ~/.config/commitlint/commitlint.config.js 
 alias make='make --jobs $(nproc) --output-sync=target'
 alias restart-tmux='systemctl --user stop tmux && update_tmux_env && tmux attach'
 alias watchexec='watchexec --project-origin . --clear --restart'
+alias xidlehook-client='xidlehook-client --socket $XIDLEHOOK_SOCK'
