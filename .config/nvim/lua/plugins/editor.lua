@@ -249,6 +249,29 @@ return {
 				prev = "[x",
 			},
 		},
+		config = function(_, opts)
+			-- Make it easier to know when conflicts are actually present in a file,
+			-- instead of being handled by `git rerere`.
+			vim.api.nvim_create_autocmd("User", {
+				pattern = "GitConflictDetected",
+				callback = function()
+					vim.notify("Git merge conflict detected.")
+				end,
+			})
+
+			-- Fixes a bug where the conflicts arent' fetched at the right time.
+			vim.api.nvim_create_autocmd("BufRead", {
+				callback = function()
+					vim.cmd([[GitConflictRefresh]])
+				end,
+			})
+
+			require("git-conflict").setup(opts)
+
+			-- Clear distraction background colors, defer to colorscheme.
+			vim.api.nvim_set_hl(0, "GitConflictCurrent", {})
+			vim.api.nvim_set_hl(0, "GitConflictAncestor", {})
+		end,
 	},
 	{
 		"gorbit99/codewindow.nvim",
