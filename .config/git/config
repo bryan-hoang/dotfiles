@@ -78,9 +78,9 @@
 	# branch someone has been committing to recently.
 	branch-activity = "branch --remotes --format='%(authordate:short) %(color:yellow)%(refname:lstrip=3)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset)) %(color:blue)%(authorname)%(color:reset)' --no-merged origin/HEAD"
 	# https://stackoverflow.com/a/27940027/8714233
-	diff-changes = "!f() { git merge-base origin/$(git default-branch) origin/$(git branch --show-current) | xargs -I '{}' git diff '{}'..origin/$(git branch --show-current); }; f"
+	diff-changes = "!f() { git merge-base origin/$(git default-branch) origin/$(git branch --show-current) | xargs -I '{}' git diff '{}'..origin/$(git branch --show-current) "$@"; }; f"
 	# Logs the diff of commits between the default branch and the current branch.
-	log-changes = "!f() { git log --oneline origin/$(git default-branch)..$(git branch --show-current) \"$@\";  }; f"
+	log-changes = "!f() { git log --oneline \"$@\" origin/$(git default-branch)..$(git branch --show-current);  }; f"
 	# Logs commits that haven't been pushed to a remote yet.
 	log-local = "!f() { git log --oneline --decorate=no origin/$(git branch --show-current).. \"$@\"; }; f"
 	# Takes a file path as an argument. Prints the date the file was first added
