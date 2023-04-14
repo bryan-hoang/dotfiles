@@ -38,8 +38,9 @@ declare -a proj_dirs=(
 # Find git projects, e.g., `~/src/github.com/foo-bar/` Arbitrarily search for
 # grandparents of `.git/` directories.
 while IFS='' read -r line; do proj_dirs+=("$line"); done < <(
-	fd --type directory --search-path ~/src --exclude localhost --max-depth 6 \
-		--hidden --no-ignore --glob '.git' | xargs dirname | xargs dirname | uniq
+	fd --search-path ~/src --exclude localhost --exclude 'sub*' --max-depth 6 \
+		--type directory --no-ignore --hidden '^\.git$' \
+		| xargs dirname | xargs dirname | huniq
 )
 
 # Read `PROJ_DIRS` for machine specific project directories. e.g., `/mnt/...`
@@ -75,6 +76,7 @@ else
 	selected=$(
 		fd --type directory --exact-depth 1 . "${proj_dirs[@]}" \
 			| if [[ ${proj_dirs[*]} =~ $cwd ]]; then cat - <(echo "$cwd"); else cat; fi \
+			| sort --reverse \
 			| fzf
 	)
 fi
