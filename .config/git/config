@@ -289,5 +289,6 @@
 	guessRemote = true
 [format]
 	signOff = true
+	pretty = fuller
 [index]
 	skipHash = false
