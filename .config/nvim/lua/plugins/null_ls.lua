@@ -19,7 +19,7 @@ return {
 			local DIAGNOSTICS = methods.internal.DIAGNOSTICS
 
 			return {
-				debug = true,
+				-- debug = true,
 				sources = {
 					-- Markdown/text
 					b.diagnostics.markdownlint,
