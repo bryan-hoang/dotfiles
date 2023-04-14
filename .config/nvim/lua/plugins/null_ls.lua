@@ -96,9 +96,9 @@ return {
 					-- JS/TS, CSS
 					b.formatting.rome,
 					-- b.formatting.deno_fmt,
-					b.formatting.eslint,
-					b.diagnostics.eslint,
-					b.code_actions.eslint,
+					b.formatting.eslint_d,
+					b.diagnostics.eslint_d,
+					b.code_actions.eslint_d,
 					b.formatting.prettier,
 					b.formatting.stylelint,
 					b.diagnostics.stylelint,

@@ -65,3 +65,5 @@ sort-package-json
 npm-check
 # Check your npm module for unused dependencies (depcheck/depcheck).
 depcheck
+# Makes eslint the fastest linter on the planet (mantoni/eslint_d.js).
+eslint_d
