@@ -5,9 +5,9 @@ After=docker.service
 Wants=docker.service
 
 [Service]
-Environment='THRESHOLD=5 GB'
+Environment='THRESHOLD=4 GB'
 ExecStart=/home/%u/.local/bin/docuum --threshold ${THRESHOLD}
 Restart=on-failure
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
