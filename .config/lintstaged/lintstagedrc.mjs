@@ -57,6 +57,7 @@ debug('submodules', submodules);
 /**
  * @param files {string[]}
  * @param command {string}
+ * @returns {string} The filtered matches.
  */
 function processMatches(files, command) {
 	// Ignore submodule files.

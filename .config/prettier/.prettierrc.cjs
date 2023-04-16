@@ -1,5 +1,3 @@
-/* eslint sort-keys: "error" */
-
 /**
  * @type {import('prettier').Config}
  */

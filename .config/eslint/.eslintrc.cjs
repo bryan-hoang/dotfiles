@@ -1,7 +1,7 @@
 /**
  * @type {import('eslint').Linter.Config}
  */
-const config = {
+module.exports = {
 	env: {
 		es2022: true,
 		node: true,
@@ -12,11 +12,12 @@ const config = {
 		'eslint:recommended',
 		'plugin:node/recommended',
 		'plugin:security/recommended',
-		'plugin:jsdoc/recommended',
+		'plugin:jsdoc/recommended-typescript',
 		'plugin:markdown/recommended',
 		'airbnb-base',
 		'plugin:prettier/recommended',
 	],
+	ignorePatterns: ['!.*'],
 	overrides: [
 		{
 			files: ['**/*.md'],
@@ -51,16 +52,18 @@ const config = {
 			globalReturn: true,
 		},
 		sourceType: 'module',
+		ecmaVersion: 'latest',
 	},
 	plugins: ['security', 'jsdoc', 'markdown', '@typescript-eslint', 'html'],
 	root: true,
 	rules: {
 		'jsdoc/require-jsdoc': [
-			'error',
+			'warn',
 			{
 				publicOnly: true,
 			},
 		],
+		'jsdoc/require-file-overview': 'warn',
 		'no-unused-vars': [
 			'error',
 			{
@@ -76,6 +79,9 @@ const config = {
 			},
 		],
 	},
+	settings: {
+		jsdoc: {
+			mode: 'typescript',
+		},
+	},
 };
-
-Object.assign(module.exports, config);
