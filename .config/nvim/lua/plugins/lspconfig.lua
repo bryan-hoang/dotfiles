@@ -100,7 +100,7 @@ return {
 			-- FIXME: Performance with w/ tsserver freezing the program.
 			if not util.is_os_unix then
 				user_opts.servers.rome = {
-					masone = false,
+					mason = false,
 				}
 			end
 
