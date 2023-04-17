@@ -57,7 +57,7 @@ debug('submodules', submodules);
 /**
  * @param files {string[]}
  * @param command {string}
- * @returns {string} The filtered matches.
+ * @returns The filtered matches.
  */
 function processMatches(files, command) {
 	// Ignore submodule files.
@@ -78,11 +78,16 @@ function processMatches(files, command) {
 }
 
 export default {
-	[`*.{${prettierExtensions.join(',')}}`]: (files) =>
-		processMatches(files, 'prettier --write'),
+	[`*`]: [
+		(files) =>
+			processMatches(
+				files,
+				'prettier --ignore-unknown --cache --cache-strategy=content --cache-location=.cache/prettier/cache --write',
+			),
+		(files) => processMatches(files, 'editorconfig-checker'),
+	],
 	[`{${shellScriptExtensions.join(',')}}`]: (files) =>
 		processMatches(files, 'shellcheck'),
-	'*': (files) => processMatches(files, 'editorconfig-checker'),
 	'*.lua': (files) =>
 		processMatches(files, 'stylua --search-parent-directories'),
 	'*.sh': (files) => processMatches(files, 'shfmt -bn -ci --simplify'),
