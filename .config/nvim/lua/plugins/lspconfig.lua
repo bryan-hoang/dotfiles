@@ -75,6 +75,14 @@ return {
 					bashls = {
 						mason = false,
 						filetypes = { "sh", "zsh" },
+						on_attach = function(client, bufnr)
+							-- Disable `shellcheck` and semantic token highlighting in dotenv
+							-- files.
+							local filename = vim.api.nvim_buf_get_name(bufnr)
+							if filename:find("%.env.*") then
+								client.stop(true)
+							end
+						end,
 					},
 					cssls = {
 						mason = false,
