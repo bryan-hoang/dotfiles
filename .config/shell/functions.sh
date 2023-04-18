@@ -642,7 +642,7 @@ install_pnpm() {
 		echo "Installing pnpm..."
 		wget -qO- https://get.pnpm.io/install.sh | sh -
 		# Restoreing changes to dotfile.
-		dot restore "$HOME"/.bashrc "$ZDOTDIR"/.zshrc
+		dot restore "$XDG_CONFIG_HOME"/bash/.bashrc "$ZDOTDIR"/.zshrc
 		pnpm --version
 		echo "Installed pnpm successfully!"
 	fi
