@@ -68,6 +68,22 @@ config.keys = {
 		mods = "CTRL",
 		action = wezterm.action.CloseCurrentTab({ confirm = false }),
 	},
+	-- https://wezfurlong.org/wezterm/config/lua/keyassignment/QuickSelectArgs.html
+	{
+		key = "P",
+		mods = "CTRL",
+		action = wezterm.action.QuickSelectArgs({
+			label = "Open url",
+			patterns = {
+				"https?://\\S+",
+			},
+			action = wezterm.action_callback(function(window, pane)
+				local url = window:get_selection_text_for_pane(pane)
+				wezterm.log_info("Opening: " .. url)
+				wezterm.open_with(url)
+			end),
+		}),
+	},
 }
 
 local act = wezterm.action
