@@ -17,3 +17,5 @@ gitlab.com/gitlab-org/cli/cmd/glab@latest
 github.com/charmbracelet/glow@latest
 # Cleans up your $HOME from those pesky dotfiles.
 github.com/doron-cohen/antidot@latest
+# Unclutter your .profile.
+github.com/direnv/direnv@latest
