@@ -12,7 +12,7 @@ module.exports = {
 		'eslint:recommended',
 		'plugin:node/recommended',
 		'plugin:security/recommended',
-		'plugin:jsdoc/recommended-typescript',
+		'plugin:jsdoc/recommended',
 		'plugin:markdown/recommended',
 		'airbnb-base',
 		'plugin:prettier/recommended',
@@ -39,6 +39,7 @@ module.exports = {
 			extends: [
 				'plugin:@typescript-eslint/recommended',
 				'plugin:@typescript-eslint/recommended-requiring-type-checking',
+				'plugin:jsdoc/recommended',
 				'airbnb-typescript/base',
 			],
 			parserOptions: {
@@ -72,12 +73,6 @@ module.exports = {
 			},
 		],
 		'@typescript-eslint/dot-notation': 'off',
-		'node/no-unsupported-features/node-builtins': [
-			'error',
-			{
-				version: '>=14.0.0',
-			},
-		],
 	},
 	settings: {
 		jsdoc: {
