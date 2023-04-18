@@ -32,9 +32,9 @@ Thumbs.db
 .shellcheckrc
 svgo.config.js
 .hadolint.yaml
-.prettierrc.js
 .editorconfig
-.stylelintrc.json
+.prettierrc.cjs
+.stylelintrc.cjs
 
 # VS Code related files.
 .vscode/
@@ -70,7 +70,7 @@ build
 .justfile
 
 # ESLint config file.
-.eslintrc.js
+.eslintrc.cjs
 
 # Neovim `.exrc` file.
 .nvim.lua
