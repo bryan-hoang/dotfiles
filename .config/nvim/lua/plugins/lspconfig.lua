@@ -15,12 +15,11 @@ return {
 			end, json_schemas)
 
 			local function format_diagnostic_message(diagnostic)
-				local message = diagnostic.message
 				if diagnostic.code ~= nil then
-					message = message .. " [" .. diagnostic.code .. "]"
+					return " [" .. diagnostic.code .. "]"
 				end
 
-				return message
+				return ""
 			end
 
 			local user_opts = {
@@ -28,7 +27,11 @@ return {
 				diagnostics = {
 					virtual_text = {
 						source = true,
-						format = format_diagnostic_message,
+						-- Append error code to match float diagnostic formatting.
+						suffix = format_diagnostic_message,
+						-- This will set set the prefix to a function that returns the diagnostics icon based on the severity
+						-- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
+						prefix = "icons",
 					},
 					float = {
 						source = true,
