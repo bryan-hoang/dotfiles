@@ -1,10 +1,5 @@
 cache=${XDG_CACHE_HOME}/npm
 color=always
-engine-strict=false
-fetch-retries=0
-fetch-retry-maxtimeout=10000
-fetch-retry-mintimeout=10000
-fetch-timeout=20000
 fund=false
 init-author-email=bryan@bryanhoang.dev
 init-author-name=Bryan Hoang
