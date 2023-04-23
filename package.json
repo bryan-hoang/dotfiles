@@ -19,7 +19,7 @@
 	},
 	"devDependencies": {
 		"@prettier/plugin-ruby": "3.2.2",
-		"@types/node": "18.15.13",
+		"@types/node": "18.16.0",
 		"@typescript-eslint/eslint-plugin": "5.58.0",
 		"@typescript-eslint/parser": "5.58.0",
 		"eslint": "8.39.0",
