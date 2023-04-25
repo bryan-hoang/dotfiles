@@ -15,5 +15,25 @@ Xft.hinting: 1
 Xft.antialias: 1
 Xft.rgba: rgb
 
+! Font settings.
+XTerm.vt100.faceName: FiraCode Nerd Font Mono
+XTerm.vt100.faceSize: 12
+XTerm.vt100.renderFont: true
 ! https://wiki.archlinux.org/title/Xterm#Configuration
+! SUpport color by default.
 XTerm.termName: xterm-256color
+! Force UTF-8.
+XTerm.vt100.locale: false
+XTerm.vt100.utf8: true
+! Make 'Alt' key behave as on other terminal emulators.
+XTerm.vt100.metaSendsEscape: true
+! Fix the backspace key.
+XTerm.vt100.backarrowKey: false
+XTerm.ttyModes: erase ^?
+! Increase save history by default.
+XTerm.vt100.saveLines: 4096
+! Enable bell urgency.
+XTerm.vt100.bellIsUrgent: true
+XTerm*visualbell: true
+! Fix disappearing cursor on moving backwards through text.
+XTerm*cursorBlink: true

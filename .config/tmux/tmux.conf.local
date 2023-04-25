@@ -23,7 +23,7 @@ tmux_conf_copy_to_os_clipboard=true
 # -- user customizations -------------------------------------------------------
 
 # increase history size
-set -g history-limit 32768
+set -g history-limit 4096
 
 # replace C-b by C-a instead of using both prefixes
 set -gu prefix2
