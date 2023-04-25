@@ -43,6 +43,7 @@ $lua\
 $nim\
 $nodejs\
 ${custom.pnpm}\
+${custom.yarn}\
 ${custom.npm}\
 $ocaml\
 $opa\
@@ -182,22 +183,31 @@ disabled = true
 [username]
 format = "[$user]($style)@"
 
-# To help switch between npm versions when it matters -_-
-[custom.npm]
-command = "npm --version | awk -F '.' '{print $1}'"
-description = "The currently installed version of NPM"
-detect_files = ['package-lock.json']
-format = '[$symbol(v$output )]($style)'
-style = "bold red"
-symbol = ' '
-
 [custom.pnpm]
 command = "pnpm --version | awk -F '.' '{print \"v\"$0}'"
-description = "The currently installed version of PNPM"
+description = "The currently installed version of pnpm"
 detect_files = ['pnpm-lock.yaml']
 format = '[$symbol($output )]($style)'
 style = "bold yellow"
 symbol = 'p '
+
+# To help switch between npm versions when it matters -_-
+[custom.yarn]
+command = "yarn --version | awk -F '.' '{print \"v\"$1}'"
+description = "The currently installed version of yarn"
+detect_files = ['yarn.lock']
+format = '[$symbol($output )]($style)'
+style = "bold blue"
+symbol = ' '
+
+# To help switch between npm versions when it matters -_-
+[custom.npm]
+command = "npm --version | awk -F '.' '{print $1}'"
+description = "The currently installed version of npm"
+detect_files = ['package-lock.json']
+format = '[$symbol(v$output )]($style)'
+style = "bold red"
+symbol = ' '
 
 [custom.git_url]
 command = "check-git-remote"
