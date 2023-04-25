@@ -155,7 +155,7 @@
 	clean = git-lfs clean -- %f
 [filter "npmrc"]
 	smudge = cat
-	clean = "sed '/registry./d'"
+	clean = "sed '/_authToken/d'"
 [filter "gpg-agent"]
 	# The command which is used to convert the content of a worktree file to a blob upon checkin. See
 	# gitattributes[5] for details.

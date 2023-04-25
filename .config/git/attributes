@@ -6,7 +6,7 @@
 *.{bat,[bB][aA][tT]} text eol=crlf
 
 # Apply filters to certain files that are either secrets, or machine specific.
-.npmrc filter=npmrc
+.config/npm/npmrc filter=npmrc
 .gnupg/gpg-agent.conf filter=gpg-agent
 .config/spotify-tui/client.yml filter=spotify-tui
 AppData/Roaming/streamlink/config filter=streamlink-crunchyroll
