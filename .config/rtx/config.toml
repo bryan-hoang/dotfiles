@@ -1,7 +1,6 @@
 [settings]
 experimental = true
 legacy_version_file = false
-shims_dir = '~/.local/share/rtx/shims'
 
 [tools]
 nodejs = "lts"
