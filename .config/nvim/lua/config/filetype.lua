@@ -9,4 +9,5 @@ set_file_associations({
 	jsonc = { ".*/%.config/markdownlint/config", ".*/%.vscode/.*%.json" },
 	just = { ".*justfile" },
 	sh = { "%.env%.local" },
+	xdefaults = { ".*/%.config/X11/xresources" },
 })

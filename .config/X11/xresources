@@ -14,3 +14,6 @@ Xft.hintstyle: hintslight
 Xft.hinting: 1
 Xft.antialias: 1
 Xft.rgba: rgb
+
+! https://wiki.archlinux.org/title/Xterm#Configuration
+XTerm.termName: xterm-256color
