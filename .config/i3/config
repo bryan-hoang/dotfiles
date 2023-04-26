@@ -167,7 +167,7 @@ for_window [class="(?i)chrome"] move to workspace $ws1
 for_window [class="(?i)epiphany"] move to workspace $ws1
 for_window [class="Sizzy"] move to workspace $ws1
 
-for_window [class="wezterm"] move to workspace $ws2
+for_window [class="(?i)term"] move to workspace $ws2
 for_window [class="(?i)alacritty"] move to workspace $ws2
 for_window [class="Code"] move to workspace $ws2
 for_window [class="Slack"] move to workspace $ws3
