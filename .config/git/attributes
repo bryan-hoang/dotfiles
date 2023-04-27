@@ -11,7 +11,7 @@
 .config/spotify-tui/client.yml filter=spotify-tui
 AppData/Roaming/streamlink/config filter=streamlink-crunchyroll
 .config/i3status-rust/config.toml filter=i3status-rust-token
-.Xresources filter=xresources-dpi
+.config/X11/xresources filter=xresources-dpi
 .config/git/config filter=git-config
 .config/macchina/macchina.toml filter=macchina
 .config/rtx/config.toml filter=rtx
