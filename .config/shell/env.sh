@@ -149,13 +149,6 @@ export TIME_STYLE=long-iso
 # are incompatible.
 export EXA_STRICT=true
 
-export MCFLY_KEY_SCHEME=vim
-export MCFLY_RESULTS_SORT=LAST_RUN
-export MCFLY_HISTORY_LIMIT="$HISTFILESIZE"
-export MCFLY_RESULTS=20
-export MCFLY_INTERFACE_VIEW=BOTTOM
-export MCFLY_FUZZY=2
-
 # Don't set PYTHONUSERBASE to avoid issues with asdf installing python.
 export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME"/python
 

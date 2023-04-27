@@ -132,13 +132,14 @@ __git_complete dot __git_main
 [[ -f $XDG_CONFIG_HOME/tabtab/bash/pnpm.bash ]] \
 	&& . "$XDG_CONFIG_HOME"/tabtab/bash/pnpm.bash
 
-does_command_exist mcfly && eval "$(mcfly init bash)"
 is_interactive_shell && does_command_exist navi && eval "$(navi widget bash)"
 does_command_exist zoxide && eval "$(zoxide init bash)"
 does_command_exist gh && eval "$(gh completion -s bash)"
 does_command_exist starship && eval "$(starship init bash)"
 does_command_exist broot && eval "$(broot --print-shell-function bash)"
 does_command_exist direnv && eval "$(direnv hook bash)"
+. "$GHQ_ROOT"/github.com/rcaloras/bash-preexec/bash-preexec.sh
+does_command_exist atuin && eval "$(atuin init bash)"
 
 if is_git_bash; then
 	start_ssh_agent

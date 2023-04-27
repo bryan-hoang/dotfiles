@@ -179,8 +179,8 @@ setopt HIST_FIND_NO_DUPS
 # export PATH
 # unset OLD_PATH
 
+does_command_exist atuin && eval "$(atuin init zsh)"
 does_command_exist starship && eval "$(starship init zsh)"
-does_command_exist mcfly && eval "$(mcfly init zsh)"
 does_command_exist navi && eval "$(navi widget zsh)"
 does_command_exist zoxide && eval "$(zoxide init zsh)"
 does_command_exist broot && eval "$(broot --print-shell-function zsh)"

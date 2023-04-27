@@ -952,6 +952,13 @@ install_bwrap() {
 	bwrap --version
 }
 
+install_atuin() {
+	bash <(curl https://raw.githubusercontent.com/ellie/atuin/main/install.sh) \
+		|| return
+	atuin --version || return
+	atuin import auto
+}
+
 # endregion Installation.
 
 # region Boolean functions

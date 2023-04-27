@@ -156,10 +156,9 @@ huniq
 
 # A modern replacement for `ls`.
 # https://github.com/ogham/exa/pull/820#issue-841921204
-exa
-# Fly through your shell history. Great Scott!
-# https://github.com/cantino/mcfly/issues/106#issue-723327406
-mcfly
+# exa
+# 🐢 Magical shell history (ellie/atuin).
+# antuin
 # 🤖 The Modern Port Scanner 🤖.
 # https://github.com/RustScan/RustScan/issues/412#issue-1045541309
 # rustscan
