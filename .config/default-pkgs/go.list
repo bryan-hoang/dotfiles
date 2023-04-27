@@ -19,3 +19,5 @@ github.com/charmbracelet/glow@latest
 github.com/doron-cohen/antidot@latest
 # Unclutter your .profile.
 github.com/direnv/direnv@latest
+# 🔥 Feature-rich interactive Jira command line.
+# github.com/ankitpokhrel/jira-cli/cmd/jira@latest
