@@ -8,7 +8,7 @@ idle_fg = "#F8F8F2"
 separator = "<span></span>"
 
 [icons]
-icons = "awesome6"
+icons = "material-nf"
 
 [[block]]
 block = "focused_window"
@@ -21,7 +21,6 @@ idle_bg = "#8BE9FD"
 idle_fg = "#282A36"
 
 [[block]]
-alert_unit = "GB"
 block = "disk_space"
 format = " $icon $available.eng(w:1)/$total "
 [[block.click]]

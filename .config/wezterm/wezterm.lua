@@ -18,8 +18,7 @@ local config = wezterm.config_builder()
 config:set_strict_mode(true)
 
 config.color_scheme = "Dracula (Official)"
-config.font =
-	wezterm.font(is_os_unix and "FiraCode Nerd Font Mono" or "FiraCode NFM")
+config.font = wezterm.font("FiraCode Nerd Font Mono")
 -- Default is 12.0.
 config.font_size = 11.0
 config.default_cursor_style = "SteadyBlock"

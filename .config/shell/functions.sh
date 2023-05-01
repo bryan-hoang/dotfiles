@@ -294,30 +294,27 @@ install_rustc() {
 }
 
 install_nerd_fonts() {
-	if ! is_git_bash; then
-		local -r font_dir="$FONT_DIR"/fira-code-nerd
-		local -r font_download_dir="$DOWNLOAD_DIR"/fira-code-nerd
-		local -r font_zip=FiraCode.zip
-
-		echo "Installing nerd fonts..."
-
-		rm -rf "$font_dir" "$font_download_dir"
-		mkdir -p "$font_dir" "$font_download_dir"
-
-		gh release download -R ryanoasis/nerd-fonts \
-			-p "$font_zip" \
-			-D "$font_download_dir"
-		unzip -qo "$font_download_dir"/"$font_zip" \
-			-d "$font_download_dir"
-		rm -f "$font_download_dir"/*Windows\ Compatible*
-		cp "$font_download_dir"/Fira\ Code*.ttf "$font_dir"
-
-		# Build font information cache files.
-		fc-cache -fv "$font_dir"
-		fc-list | grep -i 'FiraCode'
-
-		echo "Installed nerd fonts successfully!"
+	if is_git_bash; then
+		return
 	fi
+
+	local -r font_dir="$FONT_DIR"/fira-code-nerd
+	local -r font_download_dir="$DOWNLOAD_DIR"/fira-code-nerd
+	local -r font_zip=FiraCode.zip
+
+	rm -rf "$font_dir" "$font_download_dir"
+	mkdir -p "$font_dir" "$font_download_dir"
+
+	gh release download -R ryanoasis/nerd-fonts \
+		-p "$font_zip" \
+		-D "$font_download_dir"
+	unzip -qo "$font_download_dir"/"$font_zip" \
+		-d "$font_download_dir"
+	cp "$font_download_dir"/FiraCodeNerdFont*.ttf "$font_dir"
+
+	# Build font information cache files.
+	fc-cache -fv "$font_dir"
+	fc-list | grep -i 'FiraCodeNerd'
 }
 
 install_font_awesome_fonts() {

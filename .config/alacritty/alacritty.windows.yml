@@ -4,18 +4,6 @@
 import:
   - ~/.config/alacritty/alacritty.common.yml
 
-# Font configuration
-font:
-  # Normal (roman) font face
-  normal:
-    # Font family
-    #
-    # Default:
-    #   - (macOS) Menlo
-    #   - (Linux/BSD) monospace
-    #   - (Windows) Consolas
-    family: FiraCode NFM
-
 # Shell
 #
 # You can set `shell.program` to the path of your favorite shell, e.g.
