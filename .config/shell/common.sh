@@ -106,3 +106,7 @@ fi
 
 PATH=$OLD_PATH
 unset OLD_PATH SHELL_BASENAME
+
+# Automatic transparency for xterm.
+# https://wiki.archlinux.org/title/Xterm#Automatic_transparency
+[[ -n "$XTERM_VERSION" ]] && transset --id "$WINDOWID" >/dev/null
