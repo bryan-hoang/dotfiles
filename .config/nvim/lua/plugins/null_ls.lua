@@ -30,6 +30,14 @@ return {
 						diagnostics_postprocess = function(diagnostic)
 							diagnostic.severity = vim.diagnostic.severity["HINT"]
 						end,
+						-- Filter frontmatter lines to prevent cli parsing issues.
+						args = {
+							"check",
+							"-m",
+							"-r",
+							"--text",
+							"$(echo \"$TEXT\" | sed '/---/d')",
+						},
 					}),
 					b.code_actions.ltrs,
 					b.code_actions.proselint,
@@ -52,7 +60,7 @@ return {
 					b.diagnostics.commitlint.with({
 						-- Fails to spawn on windows unless it's called with the extension.
 						command = util.is_os_unix and "commitlint" or "pwsh",
-						args = function(params)
+						args = function(_params)
 							local args = {
 								"--format",
 								"commitlint-format-json",
@@ -134,6 +142,7 @@ return {
 										message = "text",
 										code = "rule",
 									},
+									-- Add severities from parsed JSON.
 									severities = {
 										h.diagnostics.severities["warning"],
 										h.diagnostics.severities["error"],
@@ -192,6 +201,7 @@ return {
 								return code <= 1
 							end,
 							to_temp_file = true,
+							-- Customize when source is enabled.
 							runtime_condition = h.cache.by_bufnr(function(params)
 								return params.bufname:find("%.env.*") ~= nil
 									and params.bufname:find(".envrc") == nil
