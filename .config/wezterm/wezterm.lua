@@ -61,15 +61,9 @@ config.set_environment_variables = {
 config.keys = {
 	-- Activate the Launcher Menu in the current tab.
 	{ key = "l", mods = "ALT", action = wezterm.action.ShowLauncher },
-	-- Override default key binding to disable confirmation of closing the tab.
-	{
-		key = "W",
-		mods = "CTRL",
-		action = wezterm.action.CloseCurrentTab({ confirm = false }),
-	},
 	-- https://wezfurlong.org/wezterm/config/lua/keyassignment/QuickSelectArgs.html
 	{
-		key = "P",
+		key = "O",
 		mods = "CTRL",
 		action = wezterm.action.QuickSelectArgs({
 			label = "Open url",
