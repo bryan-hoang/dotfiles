@@ -92,16 +92,15 @@ selected_name=$(basename "$selected" | sed 's/\./_/g')
 readonly selected_name
 
 multiplex_tmux() {
-	if [[ -z ${TMUX-} ]]; then
-		tmux new-session -s "$selected_name" -c "$selected" -A
-	else
-		# If we're in tmux, handle edge cases to ensure the session exists before
-		# switching to it, without nesting tmux. Need to specify `=` for exact
-		# matching rather than prefix matching.
-		if ! tmux has-session -t="$selected_name" 2>/dev/null; then
-			tmux new-session -s "$selected_name" -c "$selected" -d
-		fi
+	# Ensure the session exists before switching to it. Need to specify `=` for
+	# exact matching rather than prefix matching.
+	if ! tmux has-session -t="$selected_name" 2>/dev/null; then
+		tmux new-session -c "$selected" -s "$selected_name" -d
+	fi
 
+	if [[ -z ${TMUX-} ]]; then
+		tmux attach-session -c "$selected" -t "$selected_name"
+	else
 		tmux switch-client -t "$selected_name"
 	fi
 }
