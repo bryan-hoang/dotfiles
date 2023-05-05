@@ -10,4 +10,5 @@ set_file_associations({
 	just = { ".*justfile" },
 	sh = { "%.env%.local" },
 	xdefaults = { ".*/%.config/X11/xresources" },
+	i3config = { ".*/i3/config%.d/.*" },
 })

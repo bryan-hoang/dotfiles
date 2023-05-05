@@ -151,13 +151,6 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 # start.
 workspace_layout tabbed
 
-# `xrandr --query`
-workspace $ws1 output HDMI-0
-workspace $ws2 output HDMI-1
-workspace $ws3 output HDMI-0
-workspace $ws4 output HDMI-1
-workspace $ws5 output HDMI-0
-
 # Browsers
 for_window [class="(?i)browser"] move to workspace $ws1
 for_window [class="(?i)firefox"] move to workspace $ws1
@@ -271,7 +264,7 @@ client.background       #F8F8F2
 
 default_border none
 
-for_window [all] border pixel 0
-
 # Activate smart borders (always)
 smart_borders on
+
+include config.d/*
