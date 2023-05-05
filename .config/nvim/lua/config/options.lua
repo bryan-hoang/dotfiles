@@ -3,7 +3,6 @@
 -- Add any additional options here
 
 require("config.editorconfig")
-require("config.filetype")
 
 local util = require("util")
 
