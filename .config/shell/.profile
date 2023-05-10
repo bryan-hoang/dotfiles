@@ -36,18 +36,3 @@ if command -v dbus-update-activation-environment >/dev/null \
 		systemctl --user start lemonade.service
 	fi
 fi
-
-# Determine if we're in a Linux desktop environment.
-# https://wiki.archlinux.org/title/Xinit
-# shellcheck disable=2154
-if [ "$DISPLAY" != "" ] && [ "$XDG_VTNR" != "" ] \
-	&& ! uname | grep -q 'MINGW'; then
-	setxkbmap -option ctrl:swapcaps
-	setxkbmap -option compose:rctrl
-
-	xrdb -merge "$XDG_CONFIG_HOME"/X11/xresources
-
-	# FIXME: IDK how to properly start an X session from scratch.
-	# exec startx "$XINITRC" i3 -- \
-	# 	-keeptty "$XSERVERRC" >"$XDG_DATA_HOME"/xorg/Xorg.log 2>&1
-fi

@@ -2,18 +2,13 @@
 #
 # shellcheck disable=SC2154
 
-xmodmap "$XDG_CONFIG_HOME"/X11/Xmodmap
-
 # https://gist.github.com/abairo/5e2ed2faeadcc7abf43cda37826b2fbc#if-you-get-an-incosistent-theme-on-some-parts-of-the-system-or-windows-try-this
 xsetroot -cursor_name left_ptr &
+
 xrdb -merge "$XDG_CONFIG_HOME"/X11/xresources
 
-session=${1:-i3}
+setxkbmap -option ctrl:swapcaps
+setxkbmap -option compose:rctrl
 
-case ${session} in
-	# No known session, try to run it as command.
-	*)
-		# https://wiki.archlinux.org/title/Flameshot#Troubleshooting
-		exec dbus-launch "$1"
-		;;
-esac
+session=${1:-${WM:-i3}}
+exec dbus-launch "$session"

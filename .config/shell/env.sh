@@ -74,7 +74,7 @@ export GOMODCACHE="$XDG_CACHE_HOME"/go
 export PYTHONIOENCODING=UTF-8
 
 # Increase history size. The default is 500.
-export HISTFILESIZE=50000
+export HISTFILESIZE=8192
 export HISTSIZE="$HISTFILESIZE"
 export SAVEHIST="$HISTFILESIZE"
 

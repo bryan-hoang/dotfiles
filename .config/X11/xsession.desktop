@@ -1,3 +1,4 @@
+# Symlink to /usr/local/share/xsessions/xsession.desktop
 [Desktop Entry]
 Name=Xsession
 Comment=Custom Xsession file
