@@ -1,17 +1,30 @@
 return {
 	{
 		"echasnovski/mini.comment",
-		opts = {
-			mappings = {
-				-- Toggle comment (like `gcip` - comment inner paragraph) for both
-				-- Normal and Visual modes
-				comment = "<C-c>",
-				-- Toggle comment on current line
-				comment_line = "<C-c>",
-				-- Define 'comment' textobject (like `dgc` - delete whole comment block)
-				textobject = "<C-c>",
-			},
-		},
+		config = function()
+			local mini_comment = require("mini.comment")
+
+			-- https://github.com/wez/wezterm/issues/3180#issuecomment-1517896371
+			mini_comment.setup({
+				mappings = {
+					-- Toggle comment (like `gcip` - comment inner paragraph) for both
+					-- Normal and Visual modes
+					comment = "<C-/>",
+					-- Toggle comment on current line
+					comment_line = "<C-/>",
+					-- Define 'comment' textobject (like `dgc` - delete whole comment block)
+					textobject = "<C-/>",
+				},
+			})
+
+			mini_comment.setup({
+				mappings = {
+					comment = "<C-_>",
+					comment_line = "<C-_>",
+					textobject = "<C-_>",
+				},
+			})
+		end,
 	},
 	{
 		"echasnovski/mini.pairs",
