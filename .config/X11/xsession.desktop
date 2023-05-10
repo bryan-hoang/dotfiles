@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Xsession
+Comment=Custom Xsession file
+Exec=/etc/X11/Xsession
+Type=Application

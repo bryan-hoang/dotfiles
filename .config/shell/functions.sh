@@ -956,6 +956,36 @@ install_atuin() {
 	atuin import auto
 }
 
+install_picom() {
+	git get https://github.com/yshui/picom.git
+	cd "$GHQ_ROOT"/github.com/yshui/picom || return
+	git pull
+	meson --buildtype=release . build || return
+	ninja -C build || return
+	sudo ninja -C build install
+	picom --version
+}
+
+install_ly() {
+	git get https://github.com/fairyglade/ly.git
+	cd "$GHQ_ROOT"/github.com/fairyglade/ly || return
+	git pull
+	install_apt_packages build-essential libpam0g-dev libxcb-xkb-dev
+	make
+	sudo make install installsystemd
+	sudo systemctl enable ly.service
+	sudo systemctl disable getty@tty2.service
+	bin/ly --version
+}
+
+install_lemurs() {
+	git get https://github.com/coastalwhite/lemurs.git
+	cd "$GHQ_ROOT"/github.com/coastalwhite/lemurs || return
+	git pull
+	./install.sh
+	lemurs --version
+}
+
 # endregion Installation.
 
 # region Boolean functions
