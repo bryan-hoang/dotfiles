@@ -61,9 +61,6 @@
 [submodule "redhat-documentation/RedHat"]
 	path = src/github.com/redhat-documentation/RedHat
 	url = https://github.com/redhat-documentation/vale-at-red-hat.git
-[submodule "arkenfox/user.js"]
-	path = src/github.com/arkenfox/user.js
-	url = https://github.com/arkenfox/user.js.git
 [submodule "LGUG2Z/komorebi"]
 	path = src/github.com/LGUG2Z/komorebi
 	url = https://github.com/LGUG2Z/komorebi.git
