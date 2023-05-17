@@ -332,4 +332,15 @@ return {
 			"DiffviewFileHistory",
 		},
 	},
+	{
+		-- Work with several variants of a word at once. e.g., search and replacing
+		-- variants.
+		"tpope/vim-abolish",
+		event = require("util").buf_enter_event_list,
+	},
+	{
+		-- Defaults everyone can agree on.
+		"tpope/vim-sensible",
+		event = require("util").buf_enter_event_list,
+	},
 }
