@@ -13,6 +13,16 @@ return {
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		event = require("util").buf_enter_event_list,
+		opts = {},
+		keys = {
+			{
+				"[c",
+				function()
+					require("treesitter-context").go_to_context()
+				end,
+				desc = "Jump to treesitter context",
+			},
+		},
 	},
 	{
 		"nvim-treesitter/playground",

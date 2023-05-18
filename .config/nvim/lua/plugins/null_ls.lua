@@ -251,19 +251,20 @@ return {
 							return { "--edition=2021" }
 						end,
 					}),
+					on_attach = function(client, buffer)
+						-- https://github.com/joechrisellis/lsp-format-modifications.nvim#tested-language-servers
+						if client.server_capabilities.documentRangeFormattingProvider then
+							local lsp_format_modifications =
+								require("lsp-format-modifications")
+							lsp_format_modifications.attach(
+								client,
+								buffer,
+								{ format_on_save = false }
+							)
+						end
+					end,
 				},
 			}
-		end,
-		on_attach = function(client, buffer)
-			-- https://github.com/joechrisellis/lsp-format-modifications.nvim#tested-language-servers
-			if client.server_capabilities.documentRangeFormattingProvider then
-				local lsp_format_modifications = require("lsp-format-modifications")
-				lsp_format_modifications.attach(
-					client,
-					buffer,
-					{ format_on_save = false }
-				)
-			end
 		end,
 	},
 }
