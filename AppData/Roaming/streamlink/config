@@ -50,4 +50,4 @@ twitch-low-latency
 # Will cause these segments to be missing from the stream.
 # twitch-disable-ads
 
-ffmpeg-ffmpeg=C:\Users\bryan\AppData\Local\Streamlink\ffmpeg\ffmpeg.exe
+ffmpeg-ffmpeg=C:\Program Files\Streamlink\ffmpeg\ffmpeg.exe
