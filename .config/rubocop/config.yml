@@ -21,6 +21,7 @@ Layout/HashAlignment:
   EnforcedColonStyle: key
   EnforcedLastArgumentHashStyle: always_inspect
 
+# https://docs.rubocop.org/rubocop/cops_style.html
 Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: consistent_comma
 Style/TrailingCommaInArrayLiteral:
@@ -34,5 +35,7 @@ Style/MethodCallWithArgsParentheses:
   AllowParenthesesInChaining: true
   AllowParenthesesInCamelCaseMethod: true
   AllowParenthesesInStringInterpolation: true
+Style/MethodCallWithoutArgsParentheses:
+  AllowedPatterns: ['.*']
 Layout/MultilineMethodArgumentLineBreaks:
   Enabled: true
