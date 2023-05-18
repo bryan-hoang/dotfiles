@@ -119,6 +119,10 @@ format = "[$path]($style)[$read_only]($read_only_style) "
 format = '[$symbol($version )]($style)'
 version_format = 'v${major}.${minor}'
 
+[docker_context]
+disabled = true
+format = "[$symbol$context]($style) "
+
 [gcloud]
 # The module isn't very useful :(
 disabled = true
@@ -184,7 +188,7 @@ disabled = true
 format = "[$user]($style)@"
 
 [custom.pnpm]
-command = "pnpm --version | awk -F '.' '{print \"v\"$0}'"
+command = "pnpm --version | awk -F '.' '{print \"v\"$1}'"
 description = "The currently installed version of pnpm"
 detect_files = ['pnpm-lock.yaml']
 format = '[$symbol($output )]($style)'
