@@ -265,3 +265,5 @@ export WINIT_X11_SCALE_FACTOR=1
 # https://github.com/jD91mZM2/xidlehook#configuring-via-systemd
 export XIDLEHOOK_SOCK="$XDG_RUNTIME_DIR"/xidlehook.socket
 export CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
+# Default Brewfile location. See `brew bundle --help`.
+export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME"/brewfile/Brewfile

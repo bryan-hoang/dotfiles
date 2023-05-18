@@ -493,10 +493,6 @@ install_default_pkgs() {
 		go)
 			install_cmd+=(install)
 			;;
-		brew)
-			packages=$(echo -n "$packages" | tr '\n' ' ')
-			install_cmd+=(install)
-			;;
 		*) ;;
 	esac
 
