@@ -267,3 +267,7 @@ export XIDLEHOOK_SOCK="$XDG_RUNTIME_DIR"/xidlehook.socket
 export CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 # Default Brewfile location. See `brew bundle --help`.
 export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME"/brewfile/Brewfile
+# Disable marksman crashing due to missing icu dependency.
+# https://learn.microsoft.com/en-us/dotnet/core/runtime-config/globalization#invariant-mode
+# https://stackoverflow.com/questions/59119904/process-terminated-couldnt-find-a-valid-icu-package-installed-on-the-system-in
+export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
