@@ -11,4 +11,7 @@ setxkbmap -option ctrl:swapcaps
 setxkbmap -option compose:rctrl
 
 session=${1:-${WM:-i3}}
-exec dbus-launch "$session"
+
+# Don't use `dbus-launch` here.
+# https://bbs.archlinux.org/viewtopic.php?pid=2080921#p2080921
+exec "$session"
