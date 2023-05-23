@@ -82,5 +82,6 @@ idle_fg = "#21222C"
 [[block]]
 block = "apt"
 
-[[block]]
-block = "notify"
+# Fails to get property on some machines.
+# [[block]]
+# block = "notify"

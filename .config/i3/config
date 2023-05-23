@@ -265,4 +265,5 @@ default_border none
 # Activate smart borders (always)
 smart_borders on
 
-include config.d/*
+# Machine/i3/sway specific config.
+include conf.d/*.conf
