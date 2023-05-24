@@ -9,38 +9,40 @@ return {
 				},
 			},
 		},
-		keys = {
-			{
-				"<leader>gb",
-				"<cmd>PBToggleBreakpoint<cr>",
-				desc = "Toggle breakpoint",
-			},
-			{
-				"<leader>gl",
-				"<cmd>DapContinue<cr>",
-				desc = "Launch debug target",
-			},
-			{
-				"<leader>gt",
-				"<cmd>DapTerminate<cr>",
-				desc = "Terminate debug session",
-			},
-			{
-				"<leader>gi",
-				"<cmd>DapStepInto<cr>",
-				desc = "Step in",
-			},
-			{
-				"<leader>go",
-				"<cmd>DapStepOut<cr>",
-				desc = "Step out",
-			},
-			{
-				"<leader>gn",
-				"<cmd>DapStepOver<cr>",
-				desc = "Step over",
-			},
-		},
+		keys = function(_, _keys)
+			return {
+				{
+					"<leader>gb",
+					"<cmd>PBToggleBreakpoint<cr>",
+					desc = "Toggle breakpoint",
+				},
+				{
+					"<leader>gl",
+					"<cmd>DapContinue<cr>",
+					desc = "Launch debug target",
+				},
+				{
+					"<leader>gt",
+					"<cmd>DapTerminate<cr>",
+					desc = "Terminate debug session",
+				},
+				{
+					"<leader>gi",
+					"<cmd>DapStepInto<cr>",
+					desc = "Step in",
+				},
+				{
+					"<leader>go",
+					"<cmd>DapStepOut<cr>",
+					desc = "Step out",
+				},
+				{
+					"<leader>gn",
+					"<cmd>DapStepOver<cr>",
+					desc = "Step over",
+				},
+			}
+		end,
 		config = function()
 			local dap = require("dap")
 			local bash_debug_adapter_install_path = os.getenv("GHQ_ROOT")

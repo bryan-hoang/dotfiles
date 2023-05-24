@@ -2,9 +2,16 @@ return {
 	{
 		"williamboman/mason.nvim",
 		-- I want to use the command in the editor as well as on the CLI.
-		enabled = false,
+		enabled = true,
 		opts = {
 			ensure_installed = {},
+		},
+	},
+	{
+		"mason-nvim-dap.nvim",
+		enabled = true,
+		opts = {
+			automatic_installation = false,
 		},
 	},
 	{
