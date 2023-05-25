@@ -2,6 +2,11 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+-- Don't try dealing with keymap changes/differences in VS Code
+if vim.g.vscode then
+	return
+end
+
 -- Keep default line wrapping behaviour.
 vim.keymap.del({ "n", "x" }, "gw")
 vim.keymap.del("n", "<Leader>`")
