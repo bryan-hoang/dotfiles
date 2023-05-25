@@ -203,6 +203,7 @@ if ! uname -a | grep -q 'Msys'; then
 fi
 
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
+mkdir -p "$VSCODE_PORTABLE"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc.py
 export PYLINTRC="$XDG_CONFIG_HOME"/pylint/pylintrc
 export CALCHISTFILE="$XDG_STATE_HOME"/calc/history
