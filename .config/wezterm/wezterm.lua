@@ -132,10 +132,56 @@ config.window_padding = {
 	bottom = 0,
 }
 
--- https://wezfurlong.org/wezterm/config/lua/config/hyperlink_rules.html?h=hyperlink
+-- (https://wezfurlong.org/wezterm/config/lua/config/hyperlink_rules.html?h=hyperlink)
+-- [https://wezfurlong.org/wezterm/config/lua/config/hyperlink_rules.html?h=hyperlink]
+-- {https://wezfurlong.org/wezterm/config/lua/config/hyperlink_rules.html?h=hyperlink}
+-- <https://wezfurlong.org/wezterm/config/lua/config/hyperlink_rules.html?h=hyperlink>
 --
 -- Use the defaults as a base
-local hyperlink_rules = wezterm.default_hyperlink_rules()
+local hyperlink_rules = {
+	-- Matches: a URL in parens: (URL)
+	{
+		regex = "\\((\\w+://\\S+)\\)",
+		format = "$1",
+		highlight = 1,
+	},
+	-- Matches: a URL in brackets: [URL]
+	{
+		regex = "\\[(\\w+://\\S+)\\]",
+		format = "$1",
+		highlight = 1,
+	},
+	-- Matches: a URL in curly braces: {URL}
+	{
+		regex = "\\{(\\w+://\\S+)\\}",
+		format = "$1",
+		highlight = 1,
+	},
+	-- Matches: a URL in angle brackets: <URL>
+	{
+		regex = "<(\\w+://\\S+)>",
+		format = "$1",
+		highlight = 1,
+	},
+	-- Then handle URLs not wrapped in brackets.
+	--
+	-- NOTE: Remove `)` in matched character class unexpectedly in certain
+	-- situations.
+	{
+		regex = "\\b\\w+://\\S+[/a-zA-Z0-9-]+",
+		format = "$0",
+	},
+	-- Implicit mailto link. e.g., john@example.com
+	{
+		regex = "\\b\\w+@[\\w-]+(\\.[\\w-]+)+\\b",
+		format = "mailto:$0",
+	},
+}
+
+-- FIXME: Default rules lead to odd hyperlinking behaviours.
+-- for _index, value in ipairs(wezterm.default_hyperlink_rules()) do
+-- 	table.insert(hyperlink_rules, value)
+-- end
 
 -- Go module/pkg identifiers. e.g.,
 -- gitlab.com/gitlab-org/cli/cmd/glab@latest
