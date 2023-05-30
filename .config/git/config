@@ -269,8 +269,6 @@
 [feature]
 	manyFiles = true
 	experimental = true
-[add.interactive]
-	useBuiltin = false
 [rerere]
 	enabled = true
 	autoupdate = true
