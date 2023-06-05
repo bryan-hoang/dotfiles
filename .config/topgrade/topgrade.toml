@@ -6,7 +6,8 @@ assume_yes = true
 # emacs - Doom Emacs fails to update, likely due to it being symlinked to a
 # submodule.
 # bun - Fails with 403 status code. Installed through brew instead.
-disable = ["emacs", "bun"]
+# shell - oh-my-zsh tries pulling submodules which fails.
+disable = ["emacs", "bun", "shell"]
 
 # Ignore failures for these steps
 #ignore_failures = ["powershell"]
