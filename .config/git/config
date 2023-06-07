@@ -280,7 +280,7 @@
 	autoStash = true
 	updateRefs = true
 [mergetool]
-	keepBackup = false
+	writeToTemp = true
 [checkout]
 	defaultRemote = origin
 [worktree]
