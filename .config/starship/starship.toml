@@ -130,6 +130,9 @@ disabled = true
 [git_branch]
 format = "[$symbol$branch(:$remote_branch)]($style) "
 
+[git_metrics]
+disabled = false
+
 [hostname]
 format = "[$ssh_symbol$hostname]($style):"
 ssh_symbol = ""
