@@ -44,9 +44,6 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
-bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
-
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -172,8 +169,6 @@ for_window [class="Spotify"] move to workspace $ws5
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'loginctl kill-user $USER'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
