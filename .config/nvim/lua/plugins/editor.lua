@@ -8,17 +8,11 @@ return {
 				"nvim-telescope/telescope-live-grep-args.nvim",
 				cmd = "Telescope",
 			},
-			{
-				"nvim-telescope/telescope-frecency.nvim",
-				dependencies = { "kkharji/sqlite.lua" },
-				cmd = "Telescope",
-			},
 		},
 		config = function(_, opts)
 			local telescope = require("telescope")
 			telescope.setup(opts)
 			telescope.load_extension("live_grep_args")
-			telescope.load_extension("frecency")
 		end,
 		opts = function(_, opts)
 			local lga_actions = require("telescope-live-grep-args.actions")
