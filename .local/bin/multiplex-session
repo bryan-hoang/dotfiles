@@ -38,8 +38,8 @@ declare -a proj_dirs=(
 # Find git projects, e.g., `~/src/github.com/foo-bar/` Arbitrarily search for
 # grandparents of `.git/` directories.
 while IFS='' read -r line; do proj_dirs+=("$line"); done < <(
-	fd --search-path ~/src --exclude localhost --exclude 'sub*' --max-depth 7 \
-		--type directory --no-ignore --hidden '^\.git$' \
+	fd --search-path ~/src --exclude localhost --max-depth 4 \
+		--no-ignore --hidden '^\.git$' \
 		| xargs dirname | xargs dirname | huniq
 )
 
