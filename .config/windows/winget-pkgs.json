@@ -180,6 +180,9 @@
 				},
 				{
 					"PackageIdentifier": "Docker.DockerDesktop"
+				},
+				{
+					"PackageIdentifier": "Element.Element"
 				}
 			],
 			"SourceDetails": {
