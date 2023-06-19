@@ -8,8 +8,6 @@ github.com/dnnrly/abbreviate@latest
 github.com/maaslalani/slides@latest
 github.com/google/git-appraise/git-appraise@latest
 github.com/editorconfig-checker/editorconfig-checker/cmd/editorconfig-checker@latest
-# A remote utility tool to copy, paste and open browser over TCP.
-github.com/lemonade-command/lemonade@latest
 # A GitLab CLI tool bringing GitLab to your command line
 # (https://gitlab.com/gitlab-org/cli).
 gitlab.com/gitlab-org/cli/cmd/glab@latest
@@ -19,5 +17,7 @@ github.com/charmbracelet/glow@latest
 github.com/doron-cohen/antidot@latest
 # Unclutter your .profile.
 github.com/direnv/direnv@latest
+# A remote utility tool to copy, paste and open browser over TCP.
+# github.com/lemonade-command/lemonade@latest
 # 🔥 Feature-rich interactive Jira command line.
 # github.com/ankitpokhrel/jira-cli/cmd/jira@latest
