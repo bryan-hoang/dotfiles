@@ -762,12 +762,15 @@ install_tmux() {
 # https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-source
 install_nvim() {
 	echo "Installing neovim..."
+	local -r INSTALL_PREFIX=${1-$XDG_LOCAL_HOME}
 	git get https://github.com/neovim/neovim.git
 	cd "$GHQ_ROOT"/github.com/neovim/neovim || return
+	# Deal with `nightly` and `stable` tags.
+	git pull --force
 	install_apt_packages ninja-build gettext libtool libtool-bin autoconf \
 		automake cmake g++ pkg-config unzip curl doxygen liblua5.1-0-dev
 	make CMAKE_BUILD_TYPE=Release \
-		CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=${1:-$XDG_LOCAL_HOME}" || return
+		CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX" || return
 	make install || return
 	nvim --version
 	cd - || return
