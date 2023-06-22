@@ -24,7 +24,10 @@ indent_size = unset
 [*.vil]
 insert_final_newline = unset
 
-[{**/.git/config,*.md}]
+[**/.git/config]
+indent_size = unset
+
+[*.md]
 indent_size = unset
 
 # https://github.com/rust-lang/style-team/blob/master/guide/guide.md
