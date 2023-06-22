@@ -37,6 +37,11 @@ return {
 						source = true,
 					},
 				},
+				-- Be aware that you also will need to properly configure your LSP server to
+				-- provide the inlay hints.
+				inlay_hints = {
+					enabled = true,
+				},
 				format = {
 					async = true,
 					timeout_ms = 4000,
@@ -103,6 +108,9 @@ return {
 						mason = false,
 					},
 					neocmake = {
+						mason = false,
+					},
+					rust_analyzer = {
 						mason = false,
 					},
 				},
