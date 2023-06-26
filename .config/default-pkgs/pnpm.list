@@ -67,3 +67,9 @@ npm-check
 depcheck
 # Makes eslint the fastest linter on the planet (mantoni/eslint_d.js).
 eslint_d
+# CLI tool for running Yeoman generators.
+yo
+# Scaffold out a Standard Readme.
+generator-standard-readme
+# Command line interface to inspect and change markdown files with remark.
+# remark-cli
