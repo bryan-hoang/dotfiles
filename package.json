@@ -20,8 +20,8 @@
 	"devDependencies": {
 		"@prettier/plugin-ruby": "3.2.2",
 		"@types/node": "18.16.18",
-		"@typescript-eslint/eslint-plugin": "5.60.0",
-		"@typescript-eslint/parser": "5.60.0",
+		"@typescript-eslint/eslint-plugin": "5.60.1",
+		"@typescript-eslint/parser": "5.60.1",
 		"eslint": "8.43.0",
 		"eslint-config-airbnb-base": "15.0.0",
 		"eslint-config-airbnb-typescript": "17.0.0",
