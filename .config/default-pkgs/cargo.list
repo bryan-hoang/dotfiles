@@ -8,6 +8,9 @@ ripgrep --features pcre2,simd-accel
 --git https://github.com/rust-motd/rust-motd.git
 # Download an asset from the latest GitHub release.
 --git https://github.com/devmatteini/dra
+# Intercept any risky patterns (default or defined by you) and prompt you a
+# small challenge for double verification.
+--git https://github.com/kaplanelad/shellfirm shellfirm
 # A command-line DNS client.
 # --git https://github.com/ogham/dog dog
 # Visualize your most used commands.

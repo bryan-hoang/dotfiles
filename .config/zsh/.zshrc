@@ -6,6 +6,8 @@
 # shellcheck disable=SC2034
 DISABLE_AUTO_TITLE="true"
 
+export SHELDON_CONFIG_DIR="$XDG_CONFIG_HOME"/sheldon/zsh
+
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # You can set one of the optional three formats:
@@ -28,23 +30,9 @@ plugins=(
 	docker-compose
 )
 
-custom_plugins=(
-	zsh-autosuggestions
-	zsh-syntax-highlighting-dracula
-	zsh-syntax-highlighting
-	zsh-hist
-	pyvenv-activate
-)
+export ZSH="$SHELDON_DATA_DIR"/repos/github.com/ohmyzsh/ohmyzsh
 
-declare ZSH_CUSTOM_PLUGINS_DIR="$ZSH"/custom/plugins
-
-for plugin in "${custom_plugins[@]}"; do
-	[[ -d "$ZSH_CUSTOM_PLUGINS_DIR"/"$plugin" ]] \
-		&& plugins+=("$plugin")
-done
-
-# shellcheck disable=SC1091
-[[ -s "$ZSH"/oh-my-zsh.sh ]] && . "$ZSH"/oh-my-zsh.sh
+command -v sheldon >/dev/null && eval "$(sheldon source)"
 
 # Loaded after framework is loaded to preserve personal aliases.
 # shellcheck disable=SC1091
@@ -70,12 +58,13 @@ zstyle ':completion::complete:*' gain-privileges 1
 # https://wiki.archlinux.org/title/zsh#Persistent_rehash
 zstyle ':completion:*' rehash true
 
+mkdir -p "$XDG_CACHE_HOME"/zsh
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
+
 # Enable user specific completions.
 autoload -U compinit bashcompinit
-mkdir -p "$XDG_CACHE_HOME"/zsh
-compinit -d "$XDG_CACHE_HOME"/zsh/zcompdump-"$ZSH_VERSION"
 bashcompinit
-zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
+compinit
 
 # endregion Completions
 
@@ -180,7 +169,6 @@ setopt HIST_FIND_NO_DUPS
 # unset OLD_PATH
 
 does_command_exist atuin && eval "$(atuin init zsh)"
-does_command_exist starship && eval "$(starship init zsh)"
 does_command_exist navi && eval "$(navi widget zsh)"
 does_command_exist zoxide && eval "$(zoxide init zsh)"
 does_command_exist broot && eval "$(broot --print-shell-function zsh)"

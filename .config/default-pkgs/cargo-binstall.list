@@ -75,6 +75,8 @@ huniq
 # A git tool to manage worktrees and integrate with GitHub and GitLab
 # (hakoerber/git-repo-manager).
 git-repo-manager
+# Fast, configurable, shell plugin manager.
+sheldon
 # 🤖 Just a command runner.
 # just
 # Background rust code check (Canop/bacon).

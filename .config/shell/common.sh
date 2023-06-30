@@ -30,6 +30,8 @@ if [[ -n $SSH_CONNECTION ]] && [[ -z $TMUX ]]; then
 	does_command_exist macchina && macchina
 fi
 
+does_command_exist starship && eval "$(starship init "$SHELL_BASENAME")"
+
 # region: Completions
 
 does_command_exist dra \
@@ -70,6 +72,8 @@ does_command_exist dufs \
 does_command_exist genact \
 	&& generate_completions genact genact --print-completions "$SHELL_BASENAME" \
 	&& generate_man_pages genact genact --print-manpage
+does_command_exist sheldon \
+	&& generate_completions sheldon sheldon completions --shell "$SHELL_BASENAME"
 
 # Doesn't support bash.
 does_command_exist bw \
@@ -112,4 +116,4 @@ unset OLD_PATH SHELL_BASENAME
 
 # Automatic transparency for xterm.
 # https://wiki.archlinux.org/title/Xterm#Automatic_transparency
-[[ -n "$XTERM_VERSION" ]] && transset --id "$WINDOWID" >/dev/null
+[[ -n $XTERM_VERSION ]] && transset --id "$WINDOWID" >/dev/null

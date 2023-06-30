@@ -1,6 +1,3 @@
-[submodule "ohmyzsh/ohmyzsh"]
-	path = src/github.com/ohmyzsh/ohmyzsh
-	url = https://github.com/ohmyzsh/ohmyzsh.git
 [submodule "ohmybash/oh-my-bash"]
 	path = src/github.com/ohmybash/oh-my-bash
 	url = https://github.com/ohmybash/oh-my-bash.git
@@ -37,21 +34,6 @@
 [submodule "dracula/git"]
 	path = src/github.com/dracula/git
 	url = https://github.com/dracula/git
-[submodule "zsh-users/zsh-syntax-highlighting"]
-	path = src/github.com/zsh-users/zsh-syntax-highlighting
-	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule "zsh-users/zsh-autosuggestions"]
-	path = src/github.com/zsh-users/zsh-autosuggestions
-	url = https://github.com/zsh-users/zsh-autosuggestions.git
-[submodule "zsh-users/zsh-completions"]
-	path = src/github.com/zsh-users/zsh-completions
-	url = https://github.com/zsh-users/zsh-completions.git
-[submodule "Intersec/pyvenv-activate"]
-	path = src/github.com/Intersec/pyvenv-activate
-	url = https://github.com/Intersec/pyvenv-activate.git
-[submodule "marlonrichert/zsh-hist"]
-	path = src/github.com/marlonrichert/zsh-hist
-	url = https://github.com/marlonrichert/zsh-hist.git
 [submodule "errata-ai/Joblint"]
 	path = src/github.com/errata-ai/Joblint
 	url = https://github.com/errata-ai/Joblint.git
@@ -64,9 +46,6 @@
 [submodule "LGUG2Z/komorebi"]
 	path = src/github.com/LGUG2Z/komorebi
 	url = https://github.com/LGUG2Z/komorebi.git
-[submodule "dracula/zsh-syntax-highlighting"]
-	path = src/github.com/dracula/zsh-syntax-highlighting
-	url = https://github.com/dracula/zsh-syntax-highlighting.git
 [submodule "dandavison/delta"]
 	path = src/github.com/dandavison/delta
 	url = https://github.com/dandavison/delta.git

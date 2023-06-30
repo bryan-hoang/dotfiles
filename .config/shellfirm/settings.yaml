@@ -1,0 +1,10 @@
+---
+challenge: Math
+includes:
+  - kubernetes
+  - terraform
+  - kubernetes-strict
+  - base
+  - fs
+ignores_patterns_ids: []
+deny_patterns_ids: []

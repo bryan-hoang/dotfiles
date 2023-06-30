@@ -272,3 +272,4 @@ export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME"/brewfile/Brewfile
 # https://learn.microsoft.com/en-us/dotnet/core/runtime-config/globalization#invariant-mode
 # https://stackoverflow.com/questions/59119904/process-terminated-couldnt-find-a-valid-icu-package-installed-on-the-system-in
 export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+export SHELDON_DATA_DIR="$XDG_DATA_HOME"/sheldon
