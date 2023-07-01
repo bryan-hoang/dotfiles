@@ -71,5 +71,5 @@ eslint_d
 yo
 # Scaffold out a Standard Readme.
 generator-standard-readme
-# Command line interface to inspect and change markdown files with remark.
-# remark-cli
+# A language server (implementing the language server protocol) for Svelte.
+svelte-language-server

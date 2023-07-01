@@ -113,6 +113,9 @@ return {
 					rust_analyzer = {
 						mason = false,
 					},
+					svelte = {
+						mason = false,
+					},
 				},
 			}
 
