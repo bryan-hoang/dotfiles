@@ -10,9 +10,11 @@ return {
 			vim.fn["firenvim#install"](0)
 		end,
 		config = function()
-			vim.api.nvim_create_autocmd({ "BufEnter" }, {
+			vim.api.nvim_create_autocmd("BufEnter", {
 				pattern = { "gitlab.com_*.txt", "github.com_*.txt" },
-				command = "set filetype=markdown",
+				callback = function()
+					vim.bo.filetype = "markdown"
+				end,
 			})
 
 			vim.g.firenvim_config = {
@@ -25,27 +27,29 @@ return {
 		end,
 	},
 	{
-		"raghur/vim-ghost",
+		"subnut/nvim-ghost.nvim",
 		lazy = false,
-		build = function()
-			vim.cmd([[GhostInstall]])
-		end,
-		config = function()
-			vim.cmd([[
-				function! s:SetupGhostBuffer()
-					if match(expand("%:a"), '\v/ghost-(github|gitlab|reddit)\.com-')
-						set ft=markdown
-					endif
-					if match(expand("%:a"), '\v/ghost-learn\.svelte\.dev-')
-						set ft=svelte
-					endif
-				endfunction
+		init = function()
+			vim.g.nvim_ghost_autostart = 0
+			vim.api.nvim_create_augroup("nvim_ghost_user_autocommands", {})
 
-				augroup vim-ghost
-					au!
-					au User vim-ghost#connected call s:SetupGhostBuffer()
-				augroup END
-			]])
+			local pattern = {
+				"learn.svelte.dev",
+			}
+
+			vim.api.nvim_create_autocmd("User", {
+				group = "nvim_ghost_user_autocommands",
+				pattern = pattern,
+				callback = function(event)
+					-- Avoid "nofile" value to enable LSP attaching.
+					vim.bo.buftype = "nowrite"
+
+					if event.match:match(pattern[1]) then
+						vim.bo.filetype = "svelte"
+					end
+				end,
+			})
 		end,
+		config = function() end,
 	},
 }

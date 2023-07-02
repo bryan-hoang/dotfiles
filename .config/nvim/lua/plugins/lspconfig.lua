@@ -3,6 +3,7 @@ local util = require("util")
 return {
 	{
 		"neovim/nvim-lspconfig",
+		lazy = false,
 		dependencies = {
 			"joechrisellis/lsp-format-modifications.nvim",
 		},
@@ -115,6 +116,7 @@ return {
 					},
 					svelte = {
 						mason = false,
+						single_file_support = true,
 					},
 				},
 			}
