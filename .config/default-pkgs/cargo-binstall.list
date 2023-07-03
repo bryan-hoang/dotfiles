@@ -77,6 +77,8 @@ huniq
 git-repo-manager
 # Fast, configurable, shell plugin manager.
 sheldon
+# Pluggable and configurable code formatting platform written in Rust.
+dprint
 # 🤖 Just a command runner.
 # just
 # Background rust code check (Canop/bacon).

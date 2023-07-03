@@ -1,4 +1,6 @@
 tap "homebrew/bundle"
+tap "oven-sh/bun"
+brew "bun"
 brew "hadolint"
 brew "lua-language-server"
 brew "marksman"

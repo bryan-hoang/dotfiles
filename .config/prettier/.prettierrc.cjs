@@ -23,7 +23,6 @@ module.exports = {
 		},
 	],
 	plugins: ['prettier-plugin-packagejson'],
-	printWidth: 80,
 	proseWrap: 'always',
 	singleQuote: true,
 	trailingComma: 'all',

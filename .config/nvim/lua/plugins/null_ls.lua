@@ -108,7 +108,7 @@ return {
 					b.formatting.eslint_d,
 					b.diagnostics.eslint_d,
 					b.code_actions.eslint_d,
-					b.formatting.prettier,
+					b.formatting.prettier_d,
 					b.formatting.stylelint,
 					h.make_builtin({
 						name = "stylelint",

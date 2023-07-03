@@ -24,6 +24,8 @@ yarn
 @bitwarden/cli
 # Opinionated Code Formatter.
 prettier
+# prettier, as a daemon, for improved formatting speed.
+@fsouza/prettierd
 # Monitor for any changes in your node.js application and automatically restart
 # the server.
 nodemon
