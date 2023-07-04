@@ -6,5 +6,6 @@ includes:
   - kubernetes-strict
   - base
   - fs
-ignores_patterns_ids: []
+ignores_patterns_ids:
+  - 'fs:flush_file_content'
 deny_patterns_ids: []
