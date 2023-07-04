@@ -39,3 +39,11 @@ indent_size = 4
 [*Dockerfile]
 indent_style = unset
 indent_size = unset
+
+[dunstrc]
+indent_style = space
+indent_size = 4
+
+[**/dunstrc.d/*.conf]
+indent_style = space
+indent_size = 4

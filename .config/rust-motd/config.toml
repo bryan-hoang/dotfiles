@@ -14,6 +14,7 @@ systemd-timesyncd = 'systemd-timesyncd'
 
 [user_service_status]
 docuum = 'docuum'
+dunst = 'dunst'
 emacs = 'emacs'
 gpg-agent = 'gpg-agent'
 lemonade = 'lemonade'
