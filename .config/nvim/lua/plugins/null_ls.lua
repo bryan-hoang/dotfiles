@@ -20,7 +20,7 @@ return {
 			local DIAGNOSTICS = methods.internal.DIAGNOSTICS
 
 			return {
-				-- debug = true,
+				debug = os.getenv("DEBUG") == "nvim:null-ls",
 				sources = {
 					-- Markdown/text
 					b.diagnostics.markdownlint,
@@ -108,7 +108,7 @@ return {
 					b.formatting.eslint_d,
 					b.diagnostics.eslint_d,
 					b.code_actions.eslint_d,
-					b.formatting.prettier_d,
+					b.formatting.prettierd,
 					b.formatting.stylelint,
 					h.make_builtin({
 						name = "stylelint",
