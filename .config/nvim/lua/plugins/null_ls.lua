@@ -110,6 +110,7 @@ return {
 					b.code_actions.eslint_d,
 					b.formatting.prettierd,
 					b.formatting.stylelint,
+					-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/lua/null-ls/builtins/diagnostics/stylelint.lua
 					h.make_builtin({
 						name = "stylelint",
 						meta = {
@@ -123,7 +124,9 @@ return {
 							args = { "--formatter", "json", "--stdin-filename", "$FILENAME" },
 							to_stdin = true,
 							format = "json_raw",
-							from_stderr = true,
+							-- NOTE: Don't read messages like "reusing global emitter".
+							-- from_stderr = true,
+							ignore_stderr = true,
 							dynamic_command = cmd_resolver.from_node_modules(),
 							on_output = function(params)
 								local output = params.output
@@ -140,9 +143,9 @@ return {
 									attributes = {
 										severity = "severity",
 										message = "text",
+										-- NOTE: Add the rule to the error code.
 										code = "rule",
 									},
-									-- Add severities from parsed JSON.
 									severities = {
 										h.diagnostics.severities["warning"],
 										h.diagnostics.severities["error"],

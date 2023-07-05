@@ -42,10 +42,9 @@ svgo
 niim
 # Neovim Node.js client and plugin host
 neovim
-# Stylelint related packages for neovim null-ls.
+# A mighty CSS linter that helps you avoid errors and enforce conventions
+# (stylelint/stylelint).
 stylelint
-stylelint-config-standard
-stylelint-config-standard-scss
 # tsserver for editor LSP.
 typescript
 typescript-language-server
