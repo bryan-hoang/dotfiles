@@ -15,3 +15,8 @@ neovim
 # A Ruby static code analyzer and formatter, based on the community Ruby style
 # guide.
 rubocop
+# A Ruby language server (castwide/solargraph).
+solargraph
+# Solargraph plugin to add awareness of Rails-specific code
+# (iftheshoefritz/solargraph-rails).
+solargraph-rails

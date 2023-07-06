@@ -1,18 +1,3 @@
-# Compiled Python files
-*.pyc
-
-# Folder view configuration files
-.DS_Store
-Desktop.ini
-
-# Thumbnail cache files
-._*
-Thumbs.db
-
-# Files that might appear on external disks
-.Spotlight-V100
-.Trashes
-
 # Ignore direnv files.
 .envrc
 
@@ -28,19 +13,17 @@ Thumbs.db
 
 # Trunk related lint files.
 .trunk/
+
+# Config files.
 .markdownlint.*
 .shellcheckrc
 svgo.config.js
 .hadolint.yaml
-.editorconfig
 .prettierrc.cjs
 .stylelintrc.cjs
 
 # VS Code related files.
 .vscode/
-
-# Mypy cache files.
-.mypy_cache/
 
 # "Personal" `pnpm` lock file.
 pnpm-lock.yaml
@@ -90,3 +73,6 @@ hooks
 
 # rtx config file for tool versions.
 .rtx.toml
+
+# LSP config file. e.g., to add plugins for rails.
+.solargraph.yml

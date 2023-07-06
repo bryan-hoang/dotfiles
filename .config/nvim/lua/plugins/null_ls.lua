@@ -230,9 +230,6 @@ return {
 					b.diagnostics.ruff,
 					-- Docker
 					b.diagnostics.hadolint,
-					-- Ruby
-					b.diagnostics.rubocop,
-					b.formatting.rubocop,
 					-- Rust
 					b.formatting.rustfmt.with({
 						-- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Source-specific-Configuration#specifying-edition

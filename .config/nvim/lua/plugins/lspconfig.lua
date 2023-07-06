@@ -45,7 +45,6 @@ return {
 				},
 				format = {
 					async = true,
-					timeout_ms = 4000,
 				},
 				autoformat = false,
 				---@type lspconfig.options
@@ -116,7 +115,9 @@ return {
 					},
 					svelte = {
 						mason = false,
-						single_file_support = true,
+					},
+					solargraph = {
+						mason = false,
 					},
 				},
 			}
