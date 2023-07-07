@@ -76,3 +76,6 @@ hooks
 
 # LSP config file. e.g., to add plugins for rails.
 .solargraph.yml
+
+# Local `BUNDLE_PATH` in Ruby projects.
+vendor/bundle

@@ -1,7 +1,7 @@
 local set_file_associations = require("util").set_file_associations
 
 set_file_associations({
-	yaml = { "gemrc" },
+	yaml = { "gemrc", os.getenv("BUNDLE_USER_CONFIG") },
 	gitconfig = { ".*gitconfig" },
 	gitignore = { ".*ignore", ".*/default-pkgs/.*%.list" },
 	nginx = { "/etc/nginx/.*/.*%.conf" },
