@@ -1,5 +1,3 @@
-# `ccache` with cloud storage (mozilla/sccache).
-sccache
 # Manage cargo cache (${CARGO_HOME}, ~/.cargo/), print sizes of dirs and
 # remove dirs selectively.
 cargo-cache

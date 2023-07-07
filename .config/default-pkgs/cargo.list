@@ -1,3 +1,5 @@
+# `ccache` with cloud storage (mozilla/sccache).
+sccache
 # Recursively searches directories for a regex pattern while respecting your
 # gitignore.
 ripgrep --features pcre2,simd-accel
