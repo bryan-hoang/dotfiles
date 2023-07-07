@@ -1,0 +1,42 @@
+# Dracula theme.
+[theme.palette]
+background = "#282A36"
+foreground = "#F8F8F2"
+selection_background = "#cd824e"
+selection_foreground = "#44475A"
+black = "#21222C"
+blue = "#BD93F9"
+cyan = "#8BE9FD"
+green = "#F1FA8C"
+magenta = "#FF79C6"
+red = "#F8F8F2"
+white = "#F8F8F2"
+yellow = "#F1FA8C"
+light_black = "#6272A4"
+light_white = "#FFFFFF"
+light_red = "#FF6E6E"
+light_magenta = "#FF92DF"
+light_green = "#69FF94"
+light_cyan = "#A4FFFF"
+light_blue = "#D6ACFF"
+light_yellow = "#FFFFA5"
+
+[theme.component_style]
+title_bar = { front = "black", back = "#FFB86C", effect = "bold" }
+matched_highlight = { front = "black", back = "#ffff55" }
+metadata = { front = "#626262" }
+username = { effect = "bold" }
+loading_bar = { front = "#de935f", back = "#1d1f21" }
+header = { front = "black", effect = "bold" }
+quote = { front = "#677280" }
+italic = { effect = "italic" }
+bold = { effect = "bold" }
+single_code_block = { back = "light black", front = "#c8c8c8" }
+multiline_code_block = { front = "light black", effect = "bold" }
+link = { front = "#a3a6a4" }
+link_id = { front = "black", back = "#ff6600" }
+current_story_tag = { front = "light white" }
+ask_hn = { front = "red", effect = "bold" }
+tell_hn = { front = "yellow", effect = "bold" }
+show_hn = { front = "blue", effect = "bold" }
+launch_hn = { front = "green", effect = "bold" }

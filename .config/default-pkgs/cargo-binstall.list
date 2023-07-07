@@ -158,6 +158,8 @@ dprint
 # Docuum performs least recently used (LRU) eviction of Docker images
 # (stepchowfun/docuum).
 # docuum
+# A Terminal UI to browse Hacker News (aome510/hackernews-TUI).
+# hackernews_tui
 
 # Windows Incompatible.
 
