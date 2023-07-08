@@ -183,6 +183,9 @@
 				},
 				{
 					"PackageIdentifier": "Element.Element"
+				},
+				{
+					"PackageIdentifier": "Obsidian.Obsidian"
 				}
 			],
 			"SourceDetails": {
