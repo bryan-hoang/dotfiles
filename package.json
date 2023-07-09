@@ -1,5 +1,6 @@
 {
 	"private": true,
+	"type": "module",
 	"scripts": {
 		"lint-staged": "lint-staged --config .config/lintstaged/lintstagedrc.mjs",
 		"prepare": "husky install .config/husky"
@@ -18,7 +19,6 @@
 		"micromatch": "4.0.5"
 	},
 	"devDependencies": {
-		"@prettier/plugin-ruby": "3.2.2",
 		"@types/node": "18.16.19",
 		"@typescript-eslint/eslint-plugin": "5.60.1",
 		"@typescript-eslint/parser": "5.60.1",
@@ -36,10 +36,8 @@
 		"husky": "8.0.3",
 		"lint-staged": "13.2.3",
 		"plop": "3.1.2",
-		"prettier": "2.8.8",
-		"prettier-plugin-erb": "0.4.0",
-		"prettier-plugin-packagejson": "2.4.3",
-		"prettier-plugin-sort-json": "1.0.0",
+		"prettier": "3.0.0",
+		"prettier-plugin-packagejson": "2.4.4",
 		"stylelint-config-prettier-scss": "1.0.0",
 		"stylelint-config-standard-scss": "9.0.0",
 		"typescript": "5.1.6"
