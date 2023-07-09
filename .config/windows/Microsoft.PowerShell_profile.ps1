@@ -11,7 +11,7 @@ function Get-CmdletAlias ($cmdletname) {
 
 # https://www.reddit.com/r/Windows11/comments/pu5aa3/howto_disable_new_context_menu_explorer_command/?utm_source=share&utm_medium=web2x&context=3
 function Disable-New-Context-Menu {
-	reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+	reg add 'HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32' /f /ve
 }
 
 # Print the values of all environment variables.
@@ -20,19 +20,31 @@ function env {
 }
 
 function path {
-	$env:PATH -split ";"
+	$Env:Path -split ";"
 }
 
-function export($envname, $envvalue) {
-	if ([string]::IsNullOrEmpty([Environment]::GetEnvironmentVariable($envname))) {
+function Set-UserEnvVar($envname, $envvalue) {
+	if ([string]::IsNullOrEmpty([Environment]::GetEnvironmentVariable($envname, 'User'))) {
 		[Environment]::SetEnvironmentVariable(
 			$envname,
 			$envvalue,
-			"User"
+			'User'
 		)
 	}
 
 	Set-Item "env:$envname" $envvalue
+}
+
+function Add-UserPath($PathToAdd) {
+	if (
+		([Environment]::GetEnvironmentVariable('Path', 'User') -notlike "*$PathToAdd*") -and (Test-Path -PathType Container "$PathToAdd")
+	) {
+		[Environment]::SetEnvironmentVariable(
+			'Path',
+			[Environment]::GetEnvironmentVariable('Path', 'User') + "$PathToAdd;",
+			'User'
+		)
+	}
 }
 
 #endregion
@@ -43,15 +55,19 @@ function export($envname, $envvalue) {
 #region Environment Variables
 
 # Enable symlinking.
-export "MSYS" "winsymlinks:nativestrict"
-export "XDG_CONFIG_HOME" "$env:USERPROFILE\.config"
-export "XDG_LOCAL_HOME" "$env:USERPROFILE\.local"
-export "XDG_DATA_HOME" "$env:XDG_LOCAL_HOME\share"
-export "CARGO_HOME" "$env:XDG_DATA_HOME\cargo"
-export "RUSTUP_HOME" "$env:XDG_DATA_HOME\rustup"
-export "KOMOREBI_CONFIG_HOME" "$env:XDG_CONFIG_HOME\komorebi"
-export "PNPM_HOME" "$env:XDG_DATA_HOME\pnpm"
-export "GOPATH" "$env:XDG_DATA_HOME\go"
+Set-UserEnvVar 'MSYS' 'winsymlinks:nativestrict'
+Set-UserEnvVar 'XDG_CONFIG_HOME' "$Env:USERPROFILE\.config"
+Set-UserEnvVar 'XDG_LOCAL_HOME' "$Env:USERPROFILE\.local"
+Set-UserEnvVar 'XDG_BIN_HOME' "$Env:XDG_LOCAL_HOME\bin"
+Set-UserEnvVar 'XDG_DATA_HOME' "$Env:XDG_LOCAL_HOME\share"
+Set-UserEnvVar 'CARGO_HOME' "$Env:XDG_DATA_HOME\cargo"
+Set-UserEnvVar 'RUSTUP_HOME' "$Env:XDG_DATA_HOME\rustup"
+Set-UserEnvVar 'KOMOREBI_CONFIG_HOME' "$Env:XDG_CONFIG_HOME\komorebi"
+Set-UserEnvVar 'PNPM_HOME' "$Env:XDG_DATA_HOME\pnpm"
+Set-UserEnvVar 'GOPATH' "$Env:XDG_DATA_HOME\go"
+Set-UserEnvVar 'VSCODE_PORTABLE' "$Env:XDG_DATA_HOME\vscode"
+
+Add-UserPath "$Env:XDG_BIN_HOME"
 
 #endregion
 
@@ -63,4 +79,4 @@ Invoke-Expression (& {
 
 # Initializing Starship prompt.
 Invoke-Expression (&starship init powershell)
-export "STARSHIP_SHELL" "C:\Program Files\Git\bin\bash.exe --noprofile --norc"
+Set-UserEnvVar 'STARSHIP_SHELL' 'C:\Program Files\Git\bin\bash.exe --noprofile --norc'

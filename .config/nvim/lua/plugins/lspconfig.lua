@@ -6,6 +6,7 @@ return {
 		lazy = false,
 		dependencies = {
 			"joechrisellis/lsp-format-modifications.nvim",
+			"Hoffs/omnisharp-extended-lsp.nvim",
 		},
 		opts = function(_, opts)
 			-- https://github.com/b0o/SchemaStore.nvim/issues/9#issuecomment-1140321123
@@ -121,7 +122,12 @@ return {
 					},
 					omnisharp = {
 						mason = false,
+						cmd = { "OmniSharp" },
+						handlers = {
+							["textDocument/definition"] = require("omnisharp_extended").handler,
+						},
 					},
+					powershell_es = {},
 				},
 			}
 

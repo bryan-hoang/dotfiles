@@ -204,7 +204,7 @@ return {
 								return code <= 1
 							end,
 							to_temp_file = true,
-							-- Customize when source is enabled.
+							-- NOTE: Customize when source is enabled.
 							runtime_condition = h.cache.by_bufnr(function(params)
 								return params.bufname:find("%.env.*") ~= nil
 									and params.bufname:find(".envrc") == nil
@@ -216,6 +216,7 @@ return {
 						},
 						factory = h.generator_factory,
 					}),
+					b.hover.printenv,
 					-- TOML
 					b.formatting.taplo.with({
 						cwd = function(params)
