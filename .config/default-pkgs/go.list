@@ -1,23 +1,23 @@
 github.com/x-motemen/ghq@latest
 mvdan.cc/sh/v3/cmd/shfmt@latest
-# Disk Usage/Free Utility - a better 'df' alternative.
-github.com/muesli/duf@latest
 # 🌸 A command-line fuzzy finder.
 github.com/junegunn/fzf@latest
-github.com/dnnrly/abbreviate@latest
-github.com/maaslalani/slides@latest
-github.com/google/git-appraise/git-appraise@latest
 github.com/editorconfig-checker/editorconfig-checker/cmd/editorconfig-checker@latest
-# A GitLab CLI tool bringing GitLab to your command line
-# (https://gitlab.com/gitlab-org/cli).
-gitlab.com/gitlab-org/cli/cmd/glab@latest
-# Render markdown on the CLI, with pizzazz! 💅.
-github.com/charmbracelet/glow@latest
-# Cleans up your $HOME from those pesky dotfiles.
-github.com/doron-cohen/antidot@latest
 # Unclutter your .profile.
 github.com/direnv/direnv@latest
+# Render markdown on the CLI, with pizzazz! 💅.
+# github.com/charmbracelet/glow@latest
+# github.com/dnnrly/abbreviate@latest
+# github.com/maaslalani/slides@latest
+# github.com/google/git-appraise/git-appraise@latest
+# A GitLab CLI tool bringing GitLab to your command line
+# (https://gitlab.com/gitlab-org/cli).
+# gitlab.com/gitlab-org/cli/cmd/glab@latest
+# Cleans up your $HOME from those pesky dotfiles.
+# github.com/doron-cohen/antidot@latest
 # A remote utility tool to copy, paste and open browser over TCP.
 # github.com/lemonade-command/lemonade@latest
 # 🔥 Feature-rich interactive Jira command line.
 # github.com/ankitpokhrel/jira-cli/cmd/jira@latest
+# rsync for cloud storage
+# github.com/rclone/rclone@latestI
