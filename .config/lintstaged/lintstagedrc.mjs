@@ -19,24 +19,6 @@ const shellScriptExtensions = [
 	'xinitrc',
 ];
 
-const prettierExtensions = [
-	'js',
-	'mjs',
-	'cjs',
-	'jsx',
-	'ts',
-	'tsx',
-	'json',
-	'yml',
-	'yaml',
-	'css',
-	'scss',
-	'md',
-	'mdx',
-	'html',
-	'xml',
-];
-
 const spawnOutput = spawnSync(
 	'sh',
 	['-c', "git submodule status | awk '{print $2}'"],
@@ -57,7 +39,7 @@ debug('submodules', submodules);
 /**
  * @param files {string[]}
  * @param command {string}
- * @returns The filtered matches.
+ * @returns {string[]} The filtered matches.
  */
 function processMatches(files, command) {
 	// Ignore submodule files.
@@ -66,9 +48,11 @@ function processMatches(files, command) {
 		.not(files, submodules, {
 			contains: true,
 		})
-		.filter((file) => {
-			return !lstatSync(file).isSymbolicLink();
-		});
+		.filter(
+			(file) =>
+				!lstatSync(file).isSymbolicLink() &&
+				!file.match(/wind-term-settings\.json/),
+		);
 
 	debug('matches', matches);
 
@@ -91,7 +75,5 @@ export default {
 	'*.lua': (files) =>
 		processMatches(files, 'stylua --search-parent-directories'),
 	'*.sh': (files) => processMatches(files, 'shfmt -bn -ci --simplify'),
-	'*.toml': (files) => {
-		return processMatches(files, 'taplo format');
-	},
+	'*.toml': (files) => processMatches(files, 'taplo format'),
 };

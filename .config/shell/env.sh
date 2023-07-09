@@ -13,40 +13,35 @@ export PNPM_HOME="$XDG_DATA_HOME"/pnpm
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export GOPATH="$XDG_DATA_HOME"/go
-export ASDF_DIR="$HOME"/src/github.com/asdf-vm/asdf
-export ASDF_DATA_DIR="$XDG_DATA_HOME"/asdf
-export ASDF_CONFIG_FILE="$XDG_CONFIG_HOME"/asdf/asdfrc
+
+prepend_to_path() {
+	# https://stackoverflow.com/a/20460402/8714233
+	case "$PATH" in
+		*"$1"*) ;;
+		*) [ -d "$1" ] && export PATH="$1":"$PATH" ;;
+	esac
+}
 
 # Searched last
 
-[ -d "$XDG_CONFIG_HOME"/rofi/scripts ] \
-	&& export PATH="$XDG_CONFIG_HOME"/rofi/scripts:"$PATH"
-[ -d "$XDG_DATA_HOME"/google-cloud-sdk/bin ] \
-	&& export PATH="$XDG_DATA_HOME"/google-cloud-sdk/bin:"$PATH"
+prepend_to_path "$XDG_CONFIG_HOME"/rofi/scripts
+prepend_to_path "$XDG_DATA_HOME"/google-cloud-sdk/bin
+prepend_to_path "$XDG_DATA_HOME"/omnisharp
 # Doom Emacs.
-[ -d "$XDG_CONFIG_HOME"/emacs/bin ] \
-	&& export PATH="$XDG_CONFIG_HOME"/emacs/bin:"$PATH"
+prepend_to_path "$XDG_CONFIG_HOME"/emacs/bin
 # Brew
-[ -s /home/linuxbrew/.linuxbrew/bin/brew ] \
-	&& eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+[ -s ~linuxbrew/.linuxbrew/bin/brew ] \
+	&& eval "$(~/linuxbrew/.linuxbrew/bin/brew shellenv)"
 [ -s "$HOME"/.linuxbrew/bin/brew ] \
 	&& eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
 # JS eCoSyTeM
-[ -d "$BUN_INSTALL"/bin ] \
-	&& export PATH="$BUN_INSTALL"/bin:"$PATH"
-[ -d "$DENO_INSTALL"/bin ] \
-	&& export PATH="$DENO_INSTALL"/bin:"$PATH"
-[ -d "$PNPM_HOME" ] \
-	&& export PATH="$PNPM_HOME":"$PATH"
-[ -d "$GOPATH"/bin ] \
-	&& export PATH="$GOPATH"/bin:"$PATH"
+prepend_to_path "$PNPM_HOME"
+prepend_to_path "$DENO_INSTALL"/bin
+prepend_to_path "$BUN_INSTALL"/bin
+prepend_to_path "$GOPATH"/bin
 # shellcheck disable=SC1091
 [ -s "$CARGO_HOME"/env ] && . "$CARGO_HOME"/env
-# [ -d "$ASDF_DIR"/bin ] \
-# 	&& export PATH="$ASDF_DIR"/bin:"$PATH"
-# [ -d "$ASDF_DATA_DIR"/shims ] \
-# 	&& export PATH="$ASDF_DATA_DIR"/shims:"$PATH"
-export PATH="$XDG_BIN_HOME":"$PATH"
+prepend_to_path "$XDG_BIN_HOME"
 
 # Searched first
 
@@ -56,7 +51,7 @@ export XCURSOR_DISCOVER=1
 
 # Default editor.
 if
-	command -v nvim >/dev/null || [ -f "$XDG_BIN_HOME"/nvim ]
+	command -v nvim >/dev/null
 then
 	export EDITOR=nvim
 elif

@@ -15,7 +15,7 @@ module.exports = {
 		'plugin:jsdoc/recommended',
 		'plugin:markdown/recommended',
 		'airbnb-base',
-		'plugin:prettier/recommended',
+		'prettier',
 	],
 	ignorePatterns: ['!.*'],
 	overrides: [

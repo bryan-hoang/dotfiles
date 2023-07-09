@@ -186,6 +186,15 @@
 				},
 				{
 					"PackageIdentifier": "Obsidian.Obsidian"
+				},
+				{
+					"PackageIdentifier": "LGUG2Z.whkd"
+				},
+				{
+					"PackageIdentifier": "LGUG2Z.komorebi"
+				},
+				{
+					"PackageIdentifier": "Helix.Helix"
 				}
 			],
 			"SourceDetails": {

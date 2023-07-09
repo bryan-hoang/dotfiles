@@ -119,6 +119,9 @@ return {
 					solargraph = {
 						mason = false,
 					},
+					omnisharp = {
+						mason = false,
+					},
 				},
 			}
 
