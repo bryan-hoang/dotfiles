@@ -13,7 +13,7 @@ esac
 
 # Configure Ctril-w to delete words like ZSH.
 stty werase undef
-bind '\C-w:unix-filename-rubout'
+bind '\C-w:backward-kill-word'
 
 # Bind Alt-s
 bind '"\es":"multiplex-session\n"'
