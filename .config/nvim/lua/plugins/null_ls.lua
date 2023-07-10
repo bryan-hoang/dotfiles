@@ -56,6 +56,7 @@ return {
 							virtual_text = false,
 						},
 					}),
+					b.diagnostics.markuplint,
 					-- Git commits
 					b.diagnostics.commitlint.with({
 						-- Fails to spawn on windows unless it's called with the extension.

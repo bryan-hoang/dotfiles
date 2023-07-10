@@ -4,44 +4,12 @@
 # Format all commitlint issues as a simple JSON string
 # (bycedric/commitlint-formats).
 commitlint-format-json
-# The commitizen command line utility.
-commitizen
-# A commitizen adapter for the angular preset of
-# conventional-changelog/conventional-changelog.
-cz-conventional-changelog
-# Generate a changelog from git metadata.
-conventional-changelog-cli
-# Find newer versions of package dependencies than what your package.json
-# allows.
-npm-check-updates
-# Fast, reliable, and secure dependency management.
-yarn
-# 📚 Collaborative cheatsheets for console commands.
-#
-# Currently using `tealdeer` in rust.
-# tldr
-# The command line vault.
-@bitwarden/cli
+# Neovim Node.js client and plugin host
+neovim
 # Opinionated Code Formatter.
 prettier
 # prettier, as a daemon, for improved formatting speed.
 @fsouza/prettierd
-# Monitor for any changes in your node.js application and automatically restart
-# the server.
-nodemon
-# Micro-generator framework that makes it easy for an entire team to create
-# files with a level of uniformity.
-plop
-# A service for capitalizing your title properly.
-https://github.com/bryan-hoang/title
-# Command line tool for the Mermaid library.
-@mermaid-js/mermaid-cli
-# Node.js tool for optimizing SVG files
-svgo
-# Node-Inspect IMproved.
-niim
-# Neovim Node.js client and plugin host
-neovim
 # A mighty CSS linter that helps you avoid errors and enforce conventions
 # (stylelint/stylelint).
 stylelint
@@ -59,18 +27,36 @@ markdownlint-cli
 emmet-ls
 # A Spell Checker for Code!
 cspell
+# Makes eslint the fastest linter on the planet (mantoni/eslint_d.js).
+eslint_d
+# An HTML linter for all markup developers (markuplint/markuplint).
+markuplint
 # Sort an Object or package.json based on the well-known package.json keys
 # (keithamus/sort-package-json).
 sort-package-json
+# Fast, reliable, and secure dependency management.
+yarn
+# Find newer versions of package dependencies than what your package.json
+# allows.
+npm-check-updates
 # Check for outdated, incorrect, and unused dependencies (dylang/npm-check).
 npm-check
 # Check your npm module for unused dependencies (depcheck/depcheck).
 depcheck
-# Makes eslint the fastest linter on the planet (mantoni/eslint_d.js).
-eslint_d
 # CLI tool for running Yeoman generators.
-yo
+# yo
 # Scaffold out a Standard Readme.
-generator-standard-readme
+# generator-standard-readme
 # A language server (implementing the language server protocol) for Svelte.
-svelte-language-server
+# svelte-language-server
+# The commitizen command line utility.
+# commitizen
+# A commitizen adapter for the angular preset of
+# conventional-changelog/conventional-changelog.
+# cz-conventional-changelog
+# Command line tool for the Mermaid library.
+# @mermaid-js/mermaid-cli
+# A service for capitalizing your title properly.
+# https://github.com/bryan-hoang/title
+# The command line vault.
+# @bitwarden/cli
