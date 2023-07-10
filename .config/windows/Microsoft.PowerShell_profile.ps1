@@ -66,6 +66,7 @@ Set-UserEnvVar 'KOMOREBI_CONFIG_HOME' "$Env:XDG_CONFIG_HOME\komorebi"
 Set-UserEnvVar 'PNPM_HOME' "$Env:XDG_DATA_HOME\pnpm"
 Set-UserEnvVar 'GOPATH' "$Env:XDG_DATA_HOME\go"
 Set-UserEnvVar 'VSCODE_PORTABLE' "$Env:XDG_DATA_HOME\vscode"
+Set-UserEnvVar 'WHKD_CONFIG_HOME' "$Env:XDG_CONFIG_HOME\whkd"
 
 Add-UserPath "$Env:XDG_BIN_HOME"
 
