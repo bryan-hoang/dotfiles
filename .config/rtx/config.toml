@@ -3,5 +3,5 @@ experimental = true
 legacy_version_file = false
 
 [tools]
-nodejs = "lts"
+node = "lts"
 python = "latest"
