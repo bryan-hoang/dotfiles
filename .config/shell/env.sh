@@ -30,8 +30,8 @@ prepend_to_path "$XDG_DATA_HOME"/omnisharp
 # Doom Emacs.
 prepend_to_path "$XDG_CONFIG_HOME"/emacs/bin
 # Brew
-[ -s ~linuxbrew/.linuxbrew/bin/brew ] \
-	&& eval "$(~/linuxbrew/.linuxbrew/bin/brew shellenv)"
+[ -s /home/linuxbrew/.linuxbrew/bin/brew ] \
+	&& eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 [ -s "$HOME"/.linuxbrew/bin/brew ] \
 	&& eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
 # JS eCoSyTeM
