@@ -14,34 +14,18 @@
 			"path": "cz-conventional-changelog"
 		}
 	},
-	"dependencies": {
-		"debug": "4.3.4",
-		"micromatch": "4.0.5"
-	},
+	"dependencies": {},
 	"devDependencies": {
-		"@types/node": "18.16.19",
-		"@typescript-eslint/eslint-plugin": "5.60.1",
-		"@typescript-eslint/parser": "5.60.1",
-		"eslint": "8.44.0",
-		"eslint-config-airbnb-base": "15.0.0",
-		"eslint-config-airbnb-typescript": "17.0.0",
-		"eslint-config-prettier": "8.8.0",
-		"eslint-plugin-html": "7.1.0",
-		"eslint-plugin-import": "2.27.5",
-		"eslint-plugin-jsdoc": "46.3.0",
-		"eslint-plugin-markdown": "3.0.0",
-		"eslint-plugin-node": "11.1.0",
-		"eslint-plugin-security": "1.7.1",
+		"debug": "4.3.4",
 		"husky": "8.0.3",
 		"lint-staged": "13.2.3",
-		"plop": "3.1.2",
-		"prettier": "3.0.0",
+		"micromatch": "4.0.5",
 		"prettier-plugin-packagejson": "2.4.4",
 		"stylelint-config-prettier-scss": "1.0.0",
-		"stylelint-config-standard-scss": "9.0.0",
-		"typescript": "5.1.6"
+		"stylelint-config-standard-scss": "9.0.0"
 	},
 	"engines": {
-		"node": ">=18"
+		"node": ">=18",
+		"pnpm": "=8"
 	}
 }

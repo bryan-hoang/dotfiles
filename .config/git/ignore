@@ -15,11 +15,11 @@
 .trunk/
 
 # Config files.
+.prettierrc.mjs
 .markdownlint.*
 .shellcheckrc
 svgo.config.js
 .hadolint.yaml
-.prettierrc.cjs
 .stylelintrc.cjs
 
 # VS Code related files.
