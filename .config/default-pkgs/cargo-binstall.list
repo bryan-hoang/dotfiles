@@ -4,6 +4,8 @@ cargo-cache
 # The minimal, blazing-fast, and infinitely customizable prompt for any shell
 # (starship/starship)!
 starship
+# Runtime Executor (asdf rust clone).
+# rtx-cli
 # A cargo subcommand for checking and applying updates to installed
 # executables.
 cargo-update
@@ -21,8 +23,6 @@ git-delta
 bat
 # A very fast implementation of tldr in Rust.
 tealdeer
-# Runtime Executor (asdf rust clone).
-rtx-cli
 # A more intuitive version of du in rust.
 du-dust
 # 🌀 A nonsense activity generator.
