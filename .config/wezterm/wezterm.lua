@@ -67,8 +67,9 @@ config.keys = {
 		mods = "CTRL",
 		action = wezterm.action.QuickSelectArgs({
 			label = "Open url",
+			-- e.g., http://localhost:9323.
 			patterns = {
-				"https?://\\S+",
+				[[https?://\S+\b]],
 			},
 			action = wezterm.action_callback(function(window, pane)
 				local url = window:get_selection_text_for_pane(pane)
