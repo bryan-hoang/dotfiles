@@ -337,4 +337,9 @@ return {
 		"tpope/vim-sensible",
 		event = require("util").buf_enter_event_list,
 	},
+	{
+		"folke/flash.nvim",
+		-- Don't override default `s` keybind.
+		enabled = false,
+	},
 }
