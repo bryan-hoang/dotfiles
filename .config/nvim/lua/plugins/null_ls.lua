@@ -30,6 +30,8 @@ return {
 						diagnostics_postprocess = function(diagnostic)
 							diagnostic.severity = vim.diagnostic.severity["HINT"]
 						end,
+						-- Add `gitcommit` to the list.
+						filetypes = { "text", "markdown", "gitcommit" },
 						-- Filter frontmatter lines to prevent cli parsing issues.
 						args = {
 							"check",
