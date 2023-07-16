@@ -18,6 +18,7 @@ return {
 
 			local b = null_ls.builtins
 			local DIAGNOSTICS = methods.internal.DIAGNOSTICS
+			local FORMATTING = methods.internal.FORMATTING
 
 			return {
 				debug = os.getenv("DEBUG") == "nvim:null-ls",
@@ -111,8 +112,27 @@ return {
 					b.formatting.eslint_d,
 					b.diagnostics.eslint_d,
 					b.code_actions.eslint_d,
-					b.formatting.prettierd,
-					b.formatting.stylelint,
+					b.formatting.prettier,
+					h.make_builtin({
+						name = "stylelint",
+						meta = {
+							url = "https://github.com/stylelint/stylelint",
+							description = "A mighty, modern linter that helps you avoid errors and enforce conventions in your styles.",
+						},
+						method = FORMATTING,
+						filetypes = { "scss", "less", "css", "sass" },
+						generator_opts = {
+							command = "stylelint",
+							args = { "--fix", "--stdin", "--stdin-filename", "$FILENAME" },
+							to_stdin = true,
+							from_stderr = true,
+							-- NOTE: Ignore stderr be default, otherwise formatting output is
+							-- ignored.
+							ignore_stderr = false,
+							dynamic_command = cmd_resolver.from_node_modules(),
+						},
+						factory = h.formatter_factory,
+					}),
 					-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/lua/null-ls/builtins/diagnostics/stylelint.lua
 					h.make_builtin({
 						name = "stylelint",
@@ -127,10 +147,11 @@ return {
 							args = { "--formatter", "json", "--stdin-filename", "$FILENAME" },
 							to_stdin = true,
 							format = "json_raw",
-							-- NOTE: Don't read messages like "reusing global emitter".
-							-- from_stderr = true,
-							ignore_stderr = true,
 							dynamic_command = cmd_resolver.from_node_modules(),
+							-- NOTE: Don't read messages like "reusing global emitter". Not
+							-- sure when it appears.
+							from_stderr = true,
+							-- ignore_stderr = true,
 							on_output = function(params)
 								local output = params.output
 										and params.output[1]
@@ -144,10 +165,10 @@ return {
 
 								local parser = h.diagnostics.from_json({
 									attributes = {
-										severity = "severity",
-										message = "text",
 										-- NOTE: Add the rule to the error code.
 										code = "rule",
+										severity = "severity",
+										message = "text",
 									},
 									severities = {
 										h.diagnostics.severities["warning"],
