@@ -20,11 +20,12 @@ typescript-language-server
 bash-language-server
 yaml-language-server
 vscode-langservers-extracted
+# Autocompletion and go-to-defintion for cssmodules
+# (antonk52/cssmodules-language-server).
+cssmodules-language-server
 rome
 # MarkdownLint Command Line Interface (igorshubovych/markdownlint-cli).
 markdownlint-cli
-# Emmet support based on LSP (aca/emmet-ls).
-emmet-ls
 # A Spell Checker for Code!
 cspell
 # Makes eslint the fastest linter on the planet (mantoni/eslint_d.js).

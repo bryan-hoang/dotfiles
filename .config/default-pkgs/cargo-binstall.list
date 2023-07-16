@@ -65,8 +65,6 @@ dotenv-linter
 # A system information frontend with an emphasis on performance
 # (Macchina-CLI/macchina).
 macchina
-# Another cmake lsp (Decodetalkers/neocmakelsp).
-neocmakelsp
 # Filter out duplicates on the command line. Replacement for `sort | uniq`
 # (koraa/huniq).
 huniq
@@ -79,6 +77,8 @@ sheldon
 dprint
 # 🤖 Just a command runner.
 # just
+# Another cmake lsp (Decodetalkers/neocmakelsp).
+# neocmakelsp
 # Background rust code check (Canop/bacon).
 # bacon
 # A next-generation test runner for Rust (nextest-rs/nextest).

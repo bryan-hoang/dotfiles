@@ -99,16 +99,10 @@ return {
 					html = {
 						mason = false,
 					},
-					emmet_ls = {
-						mason = false,
-					},
 					texlab = {
 						mason = false,
 					},
 					marksman = {
-						mason = false,
-					},
-					neocmake = {
 						mason = false,
 					},
 					rust_analyzer = {
@@ -127,6 +121,12 @@ return {
 							["textDocument/definition"] = require("omnisharp_extended").handler,
 						},
 					},
+					neocmake = {
+						-- NOTE: Currently fails to install due to `--locked` option.
+						mason = false,
+					},
+					cssmodules_ls = {},
+					emmet_ls = {},
 					powershell_es = {},
 				},
 			}
