@@ -34,3 +34,4 @@ WebGPU
 Vulkan
 Nvidia
 CI
+Vite
