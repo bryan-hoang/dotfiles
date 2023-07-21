@@ -7,3 +7,6 @@ brew "marksman"
 brew "pnpm"
 brew "vale"
 brew "clipboard"
+# GIT utilities -- repo summary, repl, changelog population, author commit
+# percentages and more (tj/git-extras).
+brew "git-extras"
