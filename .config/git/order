@@ -1,0 +1,2 @@
+# Order `package.json` before `package-lock.json`.
+*package.json
