@@ -24,6 +24,9 @@ vscode-langservers-extracted
 # (antonk52/cssmodules-language-server).
 cssmodules-language-server
 rome
+# A language server for Dockerfiles powered by Node.js, TypeScript, and VSCode
+# technologies (rcjsuen/dockerfile-language-server-nodejs).
+dockerfile-language-server-nodejs
 # MarkdownLint Command Line Interface (igorshubovych/markdownlint-cli).
 markdownlint-cli
 # A Spell Checker for Code!

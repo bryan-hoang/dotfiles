@@ -125,6 +125,9 @@ return {
 						-- NOTE: Currently fails to install due to `--locked` option.
 						mason = false,
 					},
+					dockerls = {
+						mason = false,
+					},
 					cssmodules_ls = {},
 					emmet_ls = {},
 					powershell_es = {},
