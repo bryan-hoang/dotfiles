@@ -30,6 +30,20 @@ g.netrw_liststyle = 3
 g.netrw_browse_split = 4
 -- g.netrw_winsize = 20
 
+-- Always use lemonade as the clipboard program, to avoid issues with
+-- `x{sel,clip}` taking precedence over lemonade.
+g.clipboard = {
+	name = "lemonade",
+	copy = {
+		["+"] = { "lemonade", "copy" },
+		["*"] = { "lemonade", "copy" },
+	},
+	paste = {
+		["+"] = { "lemonade", "paste" },
+		["*"] = { "lemonade", "paste" },
+	},
+}
+
 -- Jump based on relative line #.
 opt.relativenumber = true
 
