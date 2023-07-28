@@ -761,8 +761,12 @@ install_tmux() {
 
 # https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-source
 install_nvim() {
-	echo "Installing neovim..."
 	local -r INSTALL_PREFIX=${1-$XDG_LOCAL_HOME}
+	echo "Installing neovim under $INSTALL_PREFIX..."
+	if [[ ! -w "$INSTALL_PREFIX" ]]; then
+		local -r SUDO_CMD=sudo
+		$SUDO_CMD --validate || return
+	fi
 	git get https://github.com/neovim/neovim.git
 	cd "$GHQ_ROOT"/github.com/neovim/neovim || return
 	# Deal with `nightly` and `stable` tags.
@@ -771,7 +775,7 @@ install_nvim() {
 		automake cmake g++ pkg-config unzip curl doxygen liblua5.1-0-dev
 	make CMAKE_BUILD_TYPE=Release \
 		CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX" || return
-	make install || return
+	$SUDO_CMD make install || return
 	nvim --version
 	cd - || return
 	echo "Installed neovim successfully!"
