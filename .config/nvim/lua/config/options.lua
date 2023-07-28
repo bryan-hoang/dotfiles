@@ -47,9 +47,6 @@ g.clipboard = {
 -- Jump based on relative line #.
 opt.relativenumber = true
 
--- Column lines.
-opt.colorcolumn = { "+0", "+20", "+40" }
-
 -- Textwidth for hard wrapping. I want to encourage writing short lines of
 -- code. For long lines of code, use J where needed.
 opt.tw = 80
@@ -123,3 +120,13 @@ opt.scrolloff = 0
 opt.clipboard:append("unnamedplus")
 
 opt.jumpoptions:append("view")
+
+if vim.g.vscode then
+	return
+end
+
+-- Column lines.
+--
+-- Disabled due to a rendering bug in `vscode-neovim`. i.e.,
+-- https://github.com/vscode-neovim/vscode-neovim/issues/1352
+opt.colorcolumn = { "+0", "+20", "+40" }

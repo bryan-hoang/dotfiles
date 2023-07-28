@@ -2,7 +2,34 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
--- Don't try dealing with keymap changes/differences in VS Code
+-- Add newlines above and below the cursor in normal mode. Source:
+-- `tummetott/unimpaired.nvim`.
+vim.keymap.set("n", "]<Space>", function()
+	vim.cmd("put =repeat(nr2char(10), v:count1)|silent '[-")
+end, {
+	desc = "Add newline below",
+})
+vim.keymap.set("n", "[<Space>", function()
+	vim.cmd("put! =repeat(nr2char(10), v:count1)|silent ']+")
+end, {
+	desc = "Add newline above",
+})
+
+-- ThePrimeagen "Vim As Your Editor - Vertical Movements"
+-- https://youtu.be/KfENDDEpCsI?t=321
+-- Centers the cursor after some vertical motions.
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = false })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = false })
+vim.keymap.set("n", "n", "nzzzv", { noremap = false })
+vim.keymap.set("n", "N", "Nzzzv", { noremap = false })
+-- Maintain default behaviour specified by `:help <C-L>`.
+vim.keymap.set(
+	"n",
+	"<C-L>",
+	"<Cmd>nohlsearch<Bar>diffupdate<Bar>normal!<C-L><CR>",
+	{ noremap = false }
+)
+
 if vim.g.vscode then
 	return
 end
@@ -66,19 +93,6 @@ vim.api.nvim_set_keymap("", "<C-LeftMouse>", "", {})
 -- why the undocumente behaviour occurs.
 vim.api.nvim_set_keymap("", "<C-S-LeftMouse>", "", {})
 
--- Add newlines above and below the cursor in normal mode. Source:
--- `tummetott/unimpaired.nvim`.
-vim.keymap.set("n", "]<Space>", function()
-	vim.cmd("put =repeat(nr2char(10), v:count1)|silent '[-")
-end, {
-	desc = "Add newline below",
-})
-vim.keymap.set("n", "[<Space>", function()
-	vim.cmd("put! =repeat(nr2char(10), v:count1)|silent ']+")
-end, {
-	desc = "Add newline above",
-})
-
 -- Keybinds inspired by ThePrimeagen.
 -- https://youtu.be/w7i4amO_zaE?t=1464
 vim.keymap.set("x", "<Leader>p", '"_dP', {
@@ -90,18 +104,3 @@ vim.keymap.set({ "n", "v" }, "<Leader>y", '"+y', {
 vim.keymap.set("n", "<Leader>Y", '"+Y', {
 	desc = "Yank to end of line to clipboard",
 })
-
--- ThePrimeagen "Vim As Your Editor - Vertical Movements"
--- https://youtu.be/KfENDDEpCsI?t=321
--- Centers the cursor after some vertical motions.
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { noremap = false })
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { noremap = false })
-vim.keymap.set("n", "n", "nzzzv", { noremap = false })
-vim.keymap.set("n", "N", "Nzzzv", { noremap = false })
--- Maintain default behaviour specified by `:help <C-L>`.
-vim.keymap.set(
-	"n",
-	"<C-L>",
-	"<Cmd>nohlsearch<Bar>diffupdate<Bar>normal!<C-L><CR>",
-	{ noremap = false }
-)
