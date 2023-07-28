@@ -148,7 +148,7 @@
 	mnemonicPrefix = true
 	algorithm = histogram
 	colormoved = default
-	orderFile = /home/bryan/.config/git/order
+	orderFile = ~/.config/git/order
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
