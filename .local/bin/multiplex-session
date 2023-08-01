@@ -57,11 +57,15 @@ fi
 
 readonly proj_dirs
 
+found_dirs="$(fd --type directory --exact-depth 1 --hidden . "${proj_dirs[@]}")"
+
+readonly found_dirs
+
 if [[ -n ${debug-} ]]; then
 	echo 'Project directories:'
 	printf '%s\n' "${proj_dirs[@]}"
 	echo 'Found directories:'
-	fd --type directory --exact-depth 1 . "${proj_dirs[@]}"
+	echo "$found_dirs"
 	exit
 fi
 
@@ -74,7 +78,7 @@ else
 	cwd=$PWD/
 	readonly cwd
 	selected=$(
-		fd --type directory --exact-depth 1 . "${proj_dirs[@]}" \
+		echo "$found_dirs" \
 			| if [[ ${proj_dirs[*]} =~ $cwd ]]; then cat - <(echo "$cwd"); else cat; fi \
 			| sort --reverse \
 			| fzf
