@@ -195,6 +195,9 @@
 				},
 				{
 					"PackageIdentifier": "Helix.Helix"
+				},
+				{
+					"PackageIdentifier": "ByteDance.Debugtron"
 				}
 			],
 			"SourceDetails": {
