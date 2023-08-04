@@ -282,6 +282,8 @@
 	updateRefs = true
 [mergetool]
 	writeToTemp = true
+	prompt = true
+	keepBackup = false
 [checkout]
 	defaultRemote = origin
 [worktree]
