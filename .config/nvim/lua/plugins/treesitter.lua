@@ -1,7 +1,6 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		-- dependencies = { "windwp/nvim-ts-autotag" },
 		opts = {
 			ensure_installed = {},
 			-- Automatically install missing parsers when entering buffer
@@ -11,7 +10,6 @@ return {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-context",
-		dependencies = "nvim-treesitter/nvim-treesitter",
 		event = require("util").buf_enter_event_list,
 		opts = {},
 		keys = {
@@ -27,11 +25,9 @@ return {
 	{
 		"nvim-treesitter/playground",
 		cmd = "TSPlaygroundToggle",
-		dependencies = "nvim-treesitter/nvim-treesitter",
 	},
 	{
 		"windwp/nvim-ts-autotag",
-		dependencies = "nvim-treesitter/nvim-treesitter",
 		-- https://github.com/windwp/nvim-ts-autotag#default-values
 		ft = {
 			"html",

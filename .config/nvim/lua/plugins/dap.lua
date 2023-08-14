@@ -81,7 +81,6 @@ return {
 	},
 	{
 		"rcarriga/nvim-dap-ui",
-		event = require("util").buf_enter_event_list,
 		dependencies = {
 			"mfussenegger/nvim-dap",
 		},
@@ -106,7 +105,6 @@ return {
 	},
 	{
 		"theHamsta/nvim-dap-virtual-text",
-		event = require("util").buf_enter_event_list,
 		dependencies = {
 			"mfussenegger/nvim-dap",
 			"nvim-treesitter/nvim-treesitter",
@@ -117,7 +115,6 @@ return {
 	},
 	{
 		"nvim-telescope/telescope-dap.nvim",
-		event = require("util").buf_enter_event_list,
 		dependencies = {
 			"mfussenegger/nvim-dap",
 			"nvim-telescope/telescope.nvim",

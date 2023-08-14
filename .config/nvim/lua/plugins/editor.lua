@@ -268,23 +268,6 @@ return {
 		end,
 	},
 	{
-		"gorbit99/codewindow.nvim",
-		event = require("util").buf_enter_event_list,
-		config = function(_, opts)
-			local codewindow = require("codewindow")
-			codewindow.setup(opts)
-			codewindow.apply_default_keybinds()
-		end,
-	},
-	{
-		"petertriho/nvim-scrollbar",
-		event = require("util").buf_enter_event_list,
-		config = function()
-			require("scrollbar").setup()
-			require("scrollbar.handlers.gitsigns").setup()
-		end,
-	},
-	{
 		"folke/todo-comments.nvim",
 		-- https://github.com/folke/todo-comments.nvim#%EF%B8%8F-configuration
 		opts = {

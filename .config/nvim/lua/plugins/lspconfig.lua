@@ -4,18 +4,7 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
-		dependencies = {
-			"joechrisellis/lsp-format-modifications.nvim",
-			"Hoffs/omnisharp-extended-lsp.nvim",
-		},
 		opts = function(_, opts)
-			-- https://github.com/b0o/SchemaStore.nvim/issues/9#issuecomment-1140321123
-			local json_schemas = require("schemastore").json.schemas({})
-			local yaml_schemas = {}
-			vim.tbl_map(function(schema)
-				yaml_schemas[schema.url] = schema.fileMatch
-			end, json_schemas)
-
 			local function format_diagnostic_message(diagnostic)
 				if diagnostic.code ~= nil then
 					return " [" .. diagnostic.code .. "]"
@@ -50,36 +39,43 @@ return {
 				autoformat = false,
 				---@type lspconfig.options
 				servers = {
-					taplo = {
+					-- JSON
+					jsonls = {
 						mason = false,
 					},
+					-- YAML
 					yamlls = {
 						mason = false,
+						-- Lazy-load schemastore when needed.
+						on_new_config = function(new_config)
+							-- NOTE: Use `vim.tbl_extend` over `vim.list_extend` to fix
+							-- issues.
+							new_config.settings.yaml.schemas = vim.tbl_extend(
+								"error",
+								new_config.settings.yaml.schemas or {},
+								require("schemastore").yaml.schemas()
+							)
+						end,
 						settings = {
 							yaml = {
-								schemas = yaml_schemas,
+								schemaStore = {
+									-- TODO: Remove after LazyVim Update happens.
+									--
+									-- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+									url = "",
+								},
 							},
 						},
 					},
-					pylsp = {
+					-- Python
+					pyright = {
 						mason = false,
 					},
-					tsserver = {
+					ruff_lsp = {
 						mason = false,
-					},
-					jsonls = {
-						mason = false,
-						filetypes = { "json", "jsonc", "json5" },
 					},
 					lua_ls = {
 						mason = false,
-					},
-					clangd = {
-						mason = false,
-						capabilities = {
-							-- Prevent offset warning.
-							offsetEncoding = { "utf-16" },
-						},
 					},
 					bashls = {
 						mason = false,
@@ -99,6 +95,7 @@ return {
 					html = {
 						mason = false,
 					},
+					-- LaTeX
 					texlab = {
 						mason = false,
 					},
@@ -108,12 +105,20 @@ return {
 					rust_analyzer = {
 						mason = false,
 					},
+					clangd = {
+						mason = false,
+					},
+					taplo = {
+						mason = false,
+					},
 					svelte = {
 						mason = false,
 					},
+					-- Ruby
 					solargraph = {
 						mason = false,
 					},
+					-- C#/F#
 					omnisharp = {
 						mason = false,
 						cmd = { "OmniSharp" },
@@ -126,6 +131,15 @@ return {
 						mason = false,
 					},
 					dockerls = {
+						mason = false,
+					},
+					docker_compose_language_service = {
+						mason = false,
+					},
+					denols = {
+						mason = false,
+					},
+					tsserver = {
 						mason = false,
 					},
 					cssmodules_ls = {},
@@ -141,7 +155,9 @@ return {
 				}
 			end
 
-			return vim.tbl_deep_extend("force", opts, user_opts)
+			opts = vim.tbl_deep_extend("force", opts, user_opts)
+
+			return opts
 		end,
 		init = function()
 			local keys = require("lazyvim.plugins.lsp.keymaps").get()

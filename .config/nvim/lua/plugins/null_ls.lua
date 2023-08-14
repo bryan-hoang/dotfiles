@@ -107,12 +107,12 @@ return {
 					b.code_actions.gitrebase,
 					b.code_actions.refactoring,
 					-- JS/TS, CSS
-					b.formatting.rome,
+					-- b.formatting.rome,
 					-- b.formatting.deno_fmt,
+					b.formatting.prettier,
 					b.formatting.eslint_d,
 					b.diagnostics.eslint_d,
 					b.code_actions.eslint_d,
-					b.formatting.prettier,
 					h.make_builtin({
 						name = "stylelint",
 						meta = {

@@ -82,8 +82,10 @@ opt.formatoptions:append("n")
 -- When formatting text, use the indent of the second line of a paragraph for
 -- the rest of the paragraph, instead of the indent of the first line.
 opt.formatoptions:append("2")
+
 -- Where it makes sense, remove a comment leader when joining lines.
-opt.formatoptions:append("j")
+-- opt.formatoptions:append("j")
+
 opt.breakindent = true
 opt.linebreak = true
 opt.showbreak = "↪ "
@@ -91,14 +93,16 @@ opt.exrc = true
 
 -- Show certain whitespace characters. Don't show all space characters,
 -- otherwise messes with wezterm's hyperlink detection.
+opt.list = true
 opt.listchars = {
 	tab = "->",
-	lead = "·",
 	trail = "·",
-	nbsp = "⍽",
-	eol = "⏎",
+	extends = ">",
+	precedes = "<",
+	nbsp = "+",
+	lead = "·",
+	-- eol = "⏎",
 }
-opt.list = true
 
 -- https://vim.fandom.com/wiki/Learn_to_use_help#Comments
 opt.wildmode = { "longest:full", "full" }

@@ -28,7 +28,7 @@ return {
 	},
 	{
 		"subnut/nvim-ghost.nvim",
-		lazy = false,
+		cmd = "GhostTextStart",
 		init = function()
 			vim.g.nvim_ghost_autostart = 0
 			vim.api.nvim_create_augroup("nvim_ghost_user_autocommands", {})

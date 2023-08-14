@@ -1,8 +1,10 @@
+local should_load_colorschemes = os.getenv("NVIM_LOAD_COLORSCHEMES")
+
 return {
 	{
 		-- Diff syntax highlighting is off.
 		"ellisonleao/gruvbox.nvim",
-		lazy = false,
+		lazy = not should_load_colorschemes,
 		opts = {
 			transparent_mode = true,
 			italics = {
@@ -12,7 +14,6 @@ return {
 	},
 	{
 		"folke/tokyonight.nvim",
-		lazy = false,
 		opts = {
 			style = "night",
 			transparent = true,
@@ -25,7 +26,7 @@ return {
 	},
 	{
 		"catppuccin/nvim",
-		lazy = false,
+		lazy = not should_load_colorschemes,
 		name = "catppuccin",
 		-- https://github.com/catppuccin/nvim#configuration
 		opts = {
@@ -36,7 +37,7 @@ return {
 	{
 		"rose-pine/neovim",
 		name = "rose-pine",
-		lazy = false,
+		lazy = not should_load_colorschemes,
 		opts = {
 			disable_background = true,
 			disable_float_background = false,
@@ -44,7 +45,7 @@ return {
 	},
 	{
 		"EdenEast/nightfox.nvim",
-		lazy = false,
+		lazy = not should_load_colorschemes,
 		opts = {
 			options = {
 				transparent = true,
@@ -53,14 +54,14 @@ return {
 	},
 	{
 		"navarasu/onedark.nvim",
-		lazy = false,
+		lazy = not should_load_colorschemes,
 		opts = {
 			transparent = true,
 		},
 	},
 	{
 		"rebelot/kanagawa.nvim",
-		lazy = false,
+		lazy = not should_load_colorschemes,
 		opts = {
 			transparent = true,
 		},
@@ -68,7 +69,7 @@ return {
 	{
 		-- A mcdonald's inspired theme.
 		"dundargoc/fakedonalds.nvim",
-		lazy = false,
+		lazy = not should_load_colorschemes,
 	},
 	{
 		"LazyVim/LazyVim",

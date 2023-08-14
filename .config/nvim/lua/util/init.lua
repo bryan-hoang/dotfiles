@@ -2,7 +2,7 @@ local M = {}
 
 -- Returns a custom list of events that fire only when entering a buffer.
 M.buf_enter_event_list = {
-	"BufReadPre",
+	"BufReadPost",
 	"BufNewFile",
 }
 
