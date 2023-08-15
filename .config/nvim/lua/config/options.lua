@@ -51,6 +51,12 @@ opt.relativenumber = true
 -- code. For long lines of code, use J where needed.
 opt.tw = 80
 
+-- Enable line wrap.
+opt.wrap = true
+
+-- Use default wrapping behaviour for diff windows.
+opt.diffopt:append("followwrap")
+
 -- Auto-wrap text using 'textwidth'.
 opt.formatoptions:remove("t")
 -- Auto-wrap comments using 'textwidth', inserting the current comment leader
@@ -107,9 +113,6 @@ opt.listchars = {
 -- https://vim.fandom.com/wiki/Learn_to_use_help#Comments
 opt.wildmode = { "longest:full", "full" }
 opt.completeopt = { "longest", "menuone" }
-
--- Use default wrapping behaviour for diff windows.
-opt.diffopt:append("followwrap")
 
 -- Round indent to multiple of 'shiftwidth' when using > and <.
 opt.shiftround = true
