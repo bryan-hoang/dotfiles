@@ -273,3 +273,4 @@ export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME"/brewfile/Brewfile
 # https://stackoverflow.com/questions/59119904/process-terminated-couldnt-find-a-valid-icu-package-installed-on-the-system-in
 export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
 export SHELDON_DATA_DIR="$XDG_DATA_HOME"/sheldon
+export DCP_HOMEDIR="$XDG_DATA_HOME"
