@@ -13,6 +13,7 @@ export PNPM_HOME="$XDG_DATA_HOME"/pnpm
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export GOPATH="$XDG_DATA_HOME"/go
+export RYE_HOME="$XDG_DATA_HOME"/rye
 
 prepend_to_path() {
 	# https://stackoverflow.com/a/20460402/8714233
@@ -42,6 +43,8 @@ prepend_to_path "$DENO_INSTALL"/bin
 prepend_to_path "$BUN_INSTALL"/bin
 prepend_to_path "$GOPATH"/bin
 # shellcheck disable=SC1091
+[ -s "$RYE_HOME"/env ] && . "$RYE_HOME"/env
+# shellcheck disable=SC1091
 [ -s "$CARGO_HOME"/env ] && . "$CARGO_HOME"/env
 prepend_to_path "$XDG_BIN_HOME"
 
@@ -66,9 +69,6 @@ export VISUAL="$EDITOR"
 export SUDO_EDITOR="$EDITOR"
 
 export GOMODCACHE="$XDG_CACHE_HOME"/go
-
-# Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
-export PYTHONIOENCODING=UTF-8
 
 # Increase history size. The default is 500.
 export HISTFILESIZE=8192
@@ -146,8 +146,12 @@ export TIME_STYLE=long-iso
 # are incompatible.
 export EXA_STRICT=true
 
+# Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
+export PYTHONIOENCODING=UTF-8
+
 # Don't set PYTHONUSERBASE to avoid issues with asdf installing python.
 export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME"/python
+export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc.py
 
 # https://wiki.archlinux.org/title/XDG_Base_Directory#Specification
 
@@ -201,7 +205,6 @@ fi
 
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
 mkdir -p "$VSCODE_PORTABLE"
-export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc.py
 export PYLINTRC="$XDG_CONFIG_HOME"/pylint/pylintrc
 export CALCHISTFILE="$XDG_STATE_HOME"/calc/history
 mkdir -p "$(dirname "$CALCHISTFILE")"
