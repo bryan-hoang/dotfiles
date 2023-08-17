@@ -29,6 +29,8 @@ prepend_to_path "$XDG_DATA_HOME"/google-cloud-sdk/bin
 prepend_to_path "$XDG_DATA_HOME"/omnisharp
 # Doom Emacs.
 prepend_to_path "$XDG_CONFIG_HOME"/emacs/bin
+# Neovim managed by bob (MordechaiHadad/bob).
+prepend_to_path "$XDG_DATA_HOME"/bob/nvim-bin
 # Brew
 [ -s /home/linuxbrew/.linuxbrew/bin/brew ] \
 	&& eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
