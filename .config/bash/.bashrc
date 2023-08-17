@@ -138,8 +138,10 @@ does_command_exist gh && eval "$(gh completion -s bash)"
 does_command_exist starship && eval "$(starship init bash)"
 does_command_exist broot && eval "$(broot --print-shell-function bash)"
 does_command_exist direnv && eval "$(direnv hook bash)"
-. "$GHQ_ROOT"/github.com/rcaloras/bash-preexec/bash-preexec.sh
-does_command_exist atuin && eval "$(atuin init bash)"
+
+[[ -f "$GHQ_ROOT"/github.com/rcaloras/bash-preexec/bash-preexec.sh ]] \
+	&& . "$GHQ_ROOT"/github.com/rcaloras/bash-preexec/bash-preexec.sh \
+	&& does_command_exist atuin && eval "$(atuin init bash)"
 
 if is_git_bash; then
 	start_ssh_agent
