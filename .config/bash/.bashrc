@@ -101,6 +101,10 @@ plugins=(
 	pyvenv-activate
 )
 
+export SHELDON_CONFIG_DIR="$XDG_CONFIG_HOME"/sheldon/bash
+
+# command -v sheldon >/dev/null && eval "$(sheldon source)"
+
 # shellcheck disable=SC1091
 [[ -s "$OSH"/oh-my-bash.sh ]] && . "$OSH"/oh-my-bash.sh
 
@@ -132,16 +136,17 @@ __git_complete dot __git_main
 [[ -f $XDG_CONFIG_HOME/tabtab/bash/pnpm.bash ]] \
 	&& . "$XDG_CONFIG_HOME"/tabtab/bash/pnpm.bash
 
+[[ -f "$GHQ_ROOT"/github.com/rcaloras/bash-preexec/bash-preexec.sh ]] \
+	&& . "$GHQ_ROOT"/github.com/rcaloras/bash-preexec/bash-preexec.sh
+
 is_interactive_shell && does_command_exist navi && eval "$(navi widget bash)"
 does_command_exist zoxide && eval "$(zoxide init bash)"
 does_command_exist gh && eval "$(gh completion -s bash)"
 does_command_exist starship && eval "$(starship init bash)"
 does_command_exist broot && eval "$(broot --print-shell-function bash)"
 does_command_exist direnv && eval "$(direnv hook bash)"
-
-[[ -f "$GHQ_ROOT"/github.com/rcaloras/bash-preexec/bash-preexec.sh ]] \
-	&& . "$GHQ_ROOT"/github.com/rcaloras/bash-preexec/bash-preexec.sh \
-	&& does_command_exist atuin && eval "$(atuin init bash)"
+# Requires `bash-preexec`.
+does_command_exist atuin && eval "$(atuin init bash)"
 
 if is_git_bash; then
 	start_ssh_agent
