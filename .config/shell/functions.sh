@@ -1424,46 +1424,16 @@ kill_detached_tmux_sessions() {
 # Symlinks sh related plugins into the custom plugin folders of sh plugin
 # managers to enable them.
 ln_sh_plugins() {
-	local -r zsh_target_dir="$ZSH"/custom/plugins
 	local -r bash_target_dir="$OSH"/custom/plugins
 	local -ra sh_plugins=(
 		Intersec/pyvenv-activate
-	)
-
-	local -ra zsh_plugins=(
-		"${sh_plugins[@]}"
-		zsh-users/zsh-autosuggestions
-		zsh-users/zsh-completions
-		zsh-users/zsh-syntax-highlighting
-		dracula/zsh-syntax-highlighting
-		marlonrichert/zsh-hist
 	)
 
 	local -ra bash_plugins=(
 		"${sh_plugins[@]}"
 	)
 
-	mkdir -p "$zsh_target_dir"
 	mkdir -p "$bash_target_dir"
-
-	for plugin in "${zsh_plugins[@]}"; do
-		local zsh_plugin_src="$HOME"/src/github.com/"$plugin"
-
-		# Rename plugin to avoid namespace conflict.
-		if [[ $plugin == dracula/zsh-syntax-highlighting ]]; then
-			# Need to rename the file so that the plugin manager can interpret it as a
-			# plugin.
-			ln -sf "$zsh_plugin_src"/zsh-syntax-highlighting.sh \
-				"$zsh_plugin_src"/zsh-syntax-highlighting-dracula.plugin.zsh
-
-			# Remove lingering symlinks to avoid nesting symlinks.
-			rm -rf "$zsh_target_dir"/zsh-syntax-highlighting-dracula
-			ln -sf "$zsh_plugin_src" \
-				"$zsh_target_dir"/zsh-syntax-highlighting-dracula
-		else
-			ln -sf "$zsh_plugin_src" "$zsh_target_dir"
-		fi
-	done
 
 	for plugin in "${bash_plugins[@]}"; do
 		ln -sf "$HOME"/src/github.com/"$plugin" "$bash_target_dir"
