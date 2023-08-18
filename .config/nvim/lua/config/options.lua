@@ -32,17 +32,19 @@ g.netrw_browse_split = 4
 
 -- Always use lemonade as the clipboard program, to avoid issues with
 -- `x{sel,clip}` taking precedence over lemonade.
-g.clipboard = {
-	name = "lemonade",
-	copy = {
-		["+"] = { "lemonade", "copy" },
-		["*"] = { "lemonade", "copy" },
-	},
-	paste = {
-		["+"] = { "lemonade", "paste" },
-		["*"] = { "lemonade", "paste" },
-	},
-}
+if vim.fn.executable("lemonade") == 1 then
+	g.clipboard = {
+		name = "lemonade",
+		copy = {
+			["+"] = { "lemonade", "copy" },
+			["*"] = { "lemonade", "copy" },
+		},
+		paste = {
+			["+"] = { "lemonade", "paste" },
+			["*"] = { "lemonade", "paste" },
+		},
+	}
+end
 
 -- Jump based on relative line #.
 opt.relativenumber = true
