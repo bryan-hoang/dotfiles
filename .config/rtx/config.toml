@@ -4,4 +4,3 @@ legacy_version_file = false
 
 [tools]
 node = "lts"
-python = "latest"
