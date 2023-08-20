@@ -1,53 +1,87 @@
+# Streamlink config file
+
+# Please see the Streamlink CLI documentation for all available options:
+# https://streamlink.github.io/cli.html#command-line-usage
+
 # The format is option=value
 # Lines starting with a # are considered comments and are ignored.
 
-# Please see the Streamlink CLI documentation for all available options
-# and their descriptions. All leading dashes need to be ignored,
+# All leading dashes need to be ignored,
 # e.g. --default-stream=STREAM becomes default-stream=STREAM
-# https://streamlink.github.io/cli.html#command-line-usage
 
-# Player to feed stream data to.
-player=mpv
+# Option values must not be quoted, or quotes become part of the option's actual value.
 
-# Stream to play.
-#
-# Use best or worst for selecting the highest or lowest available quality.
-#
-# Fallback streams can be specified by using a comma-separated list:
-#
-# "720p,480p,best"
-#
-# This is an alternative to setting the stream using a positional argument and
-# can be useful if set in a config file.
-default-stream=best
+# ----
+
+# By default, Streamlink will attempt to locate VLC on your system
+# and use that, but you can also specify the location of a player yourself.
+# Here are a couple of common player paths:
+
+# VLC
+#player=C:\Program Files\VideoLAN\VLC\vlc.exe
+#player=C:\Program Files (x86)\VideoLAN\VLC\vlc.exe
+
+# MPC-HC
+#player=C:\Program Files\MPC-HC\mpc-hc64.exe
+#player=C:\Program Files (x86)\MPC-HC\mpc-hc.exe
+
+# MPV
+#player=C:\Program Files\mpv-x86_64\mpv.exe
+
+# Custom player arguments can be set using the player-args option.
+# Please see the documentation of the used player for its available arguments.
+
+# VLC
+#player-args=--no-one-instance --play-and-exit
+#player-args=--qt-minimal-view
+#player-args=--file-caching=5000
+
+# MPC-HC
+#player-args=/new /play /close
+
+# MPV
+#player-args=--keep-open=no --force-window=yes
+#player-args=--no-border
+#player-args=--cache=yes --demuxer-max-bytes=2M
+
+
+# Custom player window titles can automatically be set when a supported player
+# and plugin are used. The title option has several variables available, which
+# can show the stream's author, category/game, title, URL, etc.
+#title={author} - {category} - {title}
+
+
+# Use this if you want to transport the stream to the player via a named pipe.
+#player-fifo
+
+# Use one of these if you want to transport the stream to the player via HTTP.
+# The continuous option will allow the player to stop and resume the output.
+#player-http
+#player-continuous-http
+
+# Use player-passthrough if you want Streamlink to only pass the resolved URL
+# to your player and let it handle the transport of the stream itself.
+# Please note that the player needs to support the streaming protocol
+# and that custom stream implementations in plugins will become unavailable,
+# same as buffering options and those which change the network behavior.
+#player-passthrough=http,hls
 
 # By default, Streamlink will close the player when the stream is over.
 # Use this option to let the player stay or close itself instead.
-# player-no-close
+#player-no-close
+
+# Show the player's console output
+#verbose-player
+
+# FFMPEG is used to mux separate video and audio streams into a single
+# stream, so that they can be played. The full or relative path to ffmpeg
+# should be specified here.
+#ffmpeg-ffmpeg=C:\Program Files (x86)\Streamlink\ffmpeg\ffmpeg.exe
+#ffmpeg-ffmpeg=C:\Program Files\Streamlink\ffmpeg\ffmpeg.exe
+ffmpeg-ffmpeg=ffmpeg.exe
+
+# Log level, default is info
+#loglevel=debug
 
 # Number of threads to use when streaming HLS streams
-hls-live-edge=2
-hls-segment-threads=1
-
-# Retry fetching the list of available streams until streams are found while
-# waiting DELAY second(s) between each attempt. If unset, only one attempt will
-# be made to fetch the list of streams available.
-retry-streams=1
-
-# Enables low latency streaming by prefetching HLS segments. Sets
-# --hls-live-edge to 2, if it is higher. Reducing it to 1 will result in the
-# lowest latency possible, but will most likely cause buffering.
-#
-# In order to achieve true low latency streaming during playback, the player's
-# caching/buffering settings will need to be adjusted and reduced to a value as
-# low as possible, but still high enough to not cause any buffering. This
-# depends on the stream's bitrate and the quality of the connection to Twitch's
-# servers. Please refer to the player's own documentation for the required
-# configuration. Player parameters can be set via --player-args.
-twitch-low-latency
-
-# Skip embedded advertisement segments at the beginning or during a stream.
-# Will cause these segments to be missing from the stream.
-# twitch-disable-ads
-
-ffmpeg-ffmpeg=C:\Program Files\Streamlink\ffmpeg\ffmpeg.exe
+#stream-segment-threads=1
