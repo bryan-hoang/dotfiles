@@ -69,7 +69,7 @@ compile_commands.json
 zsh-syntax-highlighting-dracula.plugin.zsh
 
 # Doom Emacs folder. Not sure why it's not ignored by default.
-hooks
+/hooks
 
 # rtx config file for tool versions.
 .rtx.toml
