@@ -186,7 +186,7 @@
 	clean = "sed '/^interface =/d'"
 [filter "rtx"]
 	smudge = cat
-	clean = "sed -E -e '/^(ruby|python) =/d'"
+	clean = "sed -E -e '/^(python|ruby|java|emsdk) =/d'"
 [help]
 	# Automatically correct and execute mistyped commands.
 	autocorrect = 0
