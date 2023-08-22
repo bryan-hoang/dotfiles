@@ -1,6 +1,9 @@
 tap "homebrew/bundle"
-tap "oven-sh/bun"
-brew "bun"
+
+# Incredibly fast JavaScript runtime, bundler, test runner, and package manager
+# – all in one.
+# tap "oven-sh/bun"
+# brew "bun"
 brew "hadolint"
 brew "lua-language-server"
 brew "marksman"

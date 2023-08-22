@@ -194,3 +194,7 @@ fi
 # ThePrimeagen. Wrap the command in a custom widget so that the command isn't
 # typed out.
 bindkey -s '^[s' 'multiplex-session\n'
+
+# bun completions
+[[ -s "$BUN_INSTALL/_bun" ]] \
+	&& . "/home/bryan/.local/share/bun/_bun"
