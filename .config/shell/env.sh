@@ -274,3 +274,8 @@ export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME"/brewfile/Brewfile
 export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
 export SHELDON_DATA_DIR="$XDG_DATA_HOME"/sheldon
 export DCP_HOMEDIR="$XDG_DATA_HOME"
+
+# Make Emscripten XDG Base Directory sped compliant.
+export EM_CONFIG="$XDG_CONFIG_HOME"/emscripten/config
+export EM_CACHE="$XDG_CACHE_HOME"/emscripten/cache
+export EM_PORTS="$XDG_DATA_HOME"/emscripten/cache
