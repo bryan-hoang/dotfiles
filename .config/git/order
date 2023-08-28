@@ -1,4 +1,8 @@
-# Order `package.json` before `package-lock.json`.
+# Order these files over lockfile changes.
 *package.json
-# Prefer src files over lockfile changes.
-*/src/*
+*.config.*
+*rc.*
+*index.*
+*src/*
+*lib/*
+*tests/*
