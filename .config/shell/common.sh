@@ -25,7 +25,7 @@ does_command_exist direnv && eval "$(direnv hook "$SHELL_BASENAME")"
 does_command_exist rtx && eval "$(rtx activate "$SHELL_BASENAME")" \
 	&& PATH=$(rtx bin-paths | paste -sd :):$PATH
 
-if [[ -n $SSH_CONNECTION ]] && [[ -z $TMUX ]]; then
+if [[ -n $SSH_CONNECTION ]] && [[ -z $TMUX ]] && [[ -z $ZELLIJ ]]; then
 	does_command_exist rust-motd && rust-motd
 	does_command_exist macchina && macchina
 fi
