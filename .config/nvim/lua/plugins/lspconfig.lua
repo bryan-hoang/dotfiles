@@ -118,6 +118,12 @@ return {
 					solargraph = {
 						mason = false,
 					},
+					-- TODO: Wait for v0.10.0 release to address push based diagnostics.
+					-- https://shopify.github.io/ruby-lsp/EDITORS_md.html#Neovim-LSP
+					-- ruby_ls = {
+					-- 	mason = false,
+					-- },
+
 					-- C#/F#
 					omnisharp = {
 						mason = false,
