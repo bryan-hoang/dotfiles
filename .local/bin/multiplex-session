@@ -111,6 +111,7 @@ multiplex_tmux() {
 
 multiplex_zellij() {
 	if [[ -z ${ZELLIJ-} ]]; then
+		mkdir -p "$HOME"/.config/zellij/layouts/
 		cat >"$HOME"/.config/zellij/layouts/"$selected_name".kdl <<EOF
 layout {
 		cwd "$selected"
