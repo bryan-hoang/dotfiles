@@ -45,6 +45,10 @@
 	fb = "!f() { git branch -a --contains $1; }; f"
 	# Find tags containing commit
 	ft = "!f() { git describe --always --contains $1; }; f"
+	# Find the branch that a commit came from.
+	#
+	# https://stackoverflow.com/a/57562208
+	find-branch = name-rev --name-only --exclude=tags/*
 	# List contributors with number of commits.
 	contributors = shortlog --summary --numbered --no-merges --email
 	# Find and replace text in the entire git repo
