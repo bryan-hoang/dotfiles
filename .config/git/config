@@ -83,8 +83,12 @@
 	diff-changes = "!f() { git merge-base origin/$(git default-branch) origin/$(git branch --show-current) | xargs -I '{}' git diff '{}'..origin/$(git branch --show-current) "$@"; }; f"
 	# Logs the diff of commits between the default branch and the current branch.
 	log-changes = "!f() { git log --oneline \"$@\" origin/$(git default-branch)..$(git branch --show-current);  }; f"
+	# Prints the name of the upstream branch.
+	show-upstream-branch = rev-parse --abbrev-ref HEAD@{u}
 	# Logs commits that haven't been pushed to a remote yet.
-	log-local = "!f() { git log --oneline --decorate=no origin/$(git branch --show-current).. \"$@\"; }; f"
+	log-local = "!f() { git log --oneline --decorate=no $(git show-upstream-branch)..HEAD \"$@\"; }; f"
+	# Diffs the current branch against the remote branch of the same name.
+	diff-local = "!f() { git diff $(git show-upstream-branch)..HEAD \"$@\"; }; f"
 	# Takes a file path as an argument. Prints the date the file was first added
 	# to the repository.
 	log-added-date = "log --format='format:%ci' --name-status --diff-filter=A --follow"
