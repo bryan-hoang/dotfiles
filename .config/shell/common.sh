@@ -74,6 +74,8 @@ does_command_exist genact \
 	&& generate_man_pages genact genact --print-manpage
 does_command_exist sheldon \
 	&& generate_completions sheldon sheldon completions --shell "$SHELL_BASENAME"
+does_command_exist zellij \
+	&& generate_completions zellij zellij setup --generate-completion "$SHELL_BASENAME"
 
 # Doesn't support bash.
 does_command_exist bw \
