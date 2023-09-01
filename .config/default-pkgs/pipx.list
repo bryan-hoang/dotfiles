@@ -1,5 +1,7 @@
 # An extremely fast Python linter, written in Rust.
 ruff
+# A Language Server Protocol implementation for Ruff (astral-sh/ruff-lsp).
+ruff-lsp
 # pylint
 # black
 # bandit

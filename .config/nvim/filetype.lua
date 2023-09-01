@@ -16,4 +16,5 @@ set_file_associations({
 	xdefaults = { ".*/%.config/X11/xresources" },
 	i3config = { ".*/i3/conf%.d/.*%.conf" },
 	cfg = { "dunstrc" },
+	starlark = { "Tiltfile" },
 })

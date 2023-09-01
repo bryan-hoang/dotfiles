@@ -50,3 +50,7 @@ indent_size = 4
 
 [Makefile]
 indent_size = unset
+
+[Tiltfile]
+indent_style = space
+indent_size = 4

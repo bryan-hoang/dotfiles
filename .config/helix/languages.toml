@@ -4,7 +4,7 @@
 [[language]]
 name = "rust"
 
-[language.config]
+[language-server.rust-analyzer.config.check]
 checkOnSave = { command = "clippy" }
 
 # https://github.com/helix-editor/helix/wiki/Debugger-Configurations#rust-with-codelldb

@@ -151,6 +151,10 @@ return {
 					cssmodules_ls = {},
 					emmet_ls = {},
 					powershell_es = {},
+					starlark_rust = {
+						mason = false,
+						filetypes = { "starlark", "bzl", "BUILD.bazel" },
+					},
 				},
 			}
 
