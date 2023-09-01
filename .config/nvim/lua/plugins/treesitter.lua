@@ -7,6 +7,11 @@ return {
 			-- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
 			auto_install = true,
 		},
+		config = function(_, opts)
+			-- https://github.com/nvim-treesitter/nvim-treesitter/wiki/Windows-support#how-will-the-parser-be-downloaded
+			require("nvim-treesitter.install").prefer_git = vim.fn.has("win32") ~= 1
+			require("nvim-treesitter.configs").setup(opts)
+		end,
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-context",
