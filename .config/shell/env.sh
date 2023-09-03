@@ -253,6 +253,9 @@ if command -v sccache >/dev/null; then
 	export CMAKE_C_COMPILER_LAUNCHER="$RUSTC_WRAPPER"
 	export CMAKE_CXX_COMPILER_LAUNCHER="$RUSTC_WRAPPER"
 fi
+# Enable the generation of `compile_commands.json` by default.
+# https://clangd.llvm.org/installation#project-setup
+export CMAKE_EXPORT_COMPILE_COMMANDS=1
 # https://doc.rust-lang.org/stable/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-build-scripts
 NUM_JOBS="$(nproc)"
 export NUM_JOBS
