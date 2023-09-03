@@ -25,10 +25,12 @@ for _, plugin in pairs(enable_providers) do
 end
 
 -- Configure Netrw to be a little more sane.
--- g.netrw_banner = 0
+g.netrw_banner = 0
+g.netrw_winsize = 16
 g.netrw_liststyle = 3
-g.netrw_browse_split = 4
--- g.netrw_winsize = 20
+-- g.netrw_browse_split = 4
+-- Open previews vertically.
+-- g.netrw_preview = 1
 
 -- Always use lemonade as the clipboard program, to avoid issues with
 -- `x{sel,clip}` taking precedence over lemonade.

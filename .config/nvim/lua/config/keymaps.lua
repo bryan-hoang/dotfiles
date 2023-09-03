@@ -15,6 +15,11 @@ end, {
 	desc = "Add newline above",
 })
 
+-- https://theprimeagen.github.io/vim-fundamentals/files-remaps-2
+vim.keymap.set("n", "<Leader>fe", vim.cmd.Ex, {
+	desc = "Open File Explorer (Netrw)",
+})
+
 -- ThePrimeagen "Vim As Your Editor - Vertical Movements"
 -- https://youtu.be/KfENDDEpCsI?t=321
 -- Centers the cursor after some vertical motions.
