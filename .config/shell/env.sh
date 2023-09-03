@@ -197,10 +197,12 @@ export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
 export XSERVERRC="$XDG_CONFIG_HOME"/X11/xserverrc
 
+export NVIM_APPNAME=nvim
+
 # Don't set on git bash.
 if ! uname -a | grep -q 'Msys'; then
 	# https://blog.joren.ga/vim-xdg#viminit-environmental-variable
-	export VIMINIT="if has('nvim') | so ${XDG_CONFIG_HOME}/nvim/init.lua | else | set nocp | so ${XDG_CONFIG_HOME}/vim/vimrc | endif"
+	export VIMINIT="if has('nvim') | so \$XDG_CONFIG_HOME/\$NVIM_APPNAME/init.lua | else | set nocp | so \$XDG_CONFIG_HOME/vim/vimrc | endif"
 fi
 
 export VSCODE_PORTABLE="$XDG_DATA_HOME"/vscode
