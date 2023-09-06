@@ -11,6 +11,8 @@ starship
 cargo-update
 # Query crates.io for crates details <https://gitlab.com/imp/cargo-info>
 cargo-info
+# The next gen ls command (lsd-rs/lsd).
+lsd
 # A smarter cd command, inspired by z and autojump. It remembers which
 # directories you use most frequently, so you can "jump" to them in just a few
 # keystrokes.
@@ -161,9 +163,6 @@ dprint
 
 # Windows Incompatible.
 
-# A modern replacement for `ls`.
-# https://github.com/ogham/exa/pull/820#issue-841921204
-# exa
 # 🐢 Magical shell history (ellie/atuin).
 # antuin
 # 🤖 The Modern Port Scanner 🤖.

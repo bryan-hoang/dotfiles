@@ -123,9 +123,9 @@ alias ls="ls --color"
 alias ll="ls -l --almost-all --classify --group-directories-first --human-readable --color"
 
 # Override `ls` with `exa` if it exists.
-if command -v exa >/dev/null 2>&1; then
-	alias ls=exa
-	alias ll='exa --long --all --classify --group-directories-first --links --group --icons --sort Name'
+if command -v lsd >/dev/null 2>&1; then
+	alias ls=lsd
+	alias ll='lsd --long --almost-all --classify --group-directories-first'
 fi
 
 # endregion ls vs. exa
