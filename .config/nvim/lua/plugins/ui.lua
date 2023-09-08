@@ -30,6 +30,15 @@ return {
 		"folke/noice.nvim",
 		-- Disable when `ext_{cmdline,messages}` are enabled by `firenvim`.
 		enabled = not vim.g.started_by_firenvim,
+		opts = {
+			lsp = {
+				hover = {
+					-- Don't show a message if hover is not available. Helpful if multiple
+					-- LSP's are attached, but only some have info on the symbol to hover.
+					silent = true,
+				},
+			},
+		},
 	},
 	{
 		"hrsh7th/nvim-cmp",
