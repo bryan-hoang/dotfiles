@@ -101,6 +101,9 @@
 	log-dangling = "!f() { git log --oneline --graph "$@" $(git fsck --no-reflog | awk '/dangling commit/ {print $3}'); }; f"
 	# Print the latest tag across all branches.
 	tag-latest = "!git describe --tags $(git rev-list --tags --max-count=1)"
+	# Converts normally cloned repo into one that better accommodates a "git
+	# worktree" based workflow.
+	worktree-convert = "!f() { grm wt convert; mv .git-main-working-tree .git; rm .git/index; git worktree add \"$(git default-branch)\"; git worktree lock \"$(git default-branch)\"; }; f"
 [apply]
 	# Detect whitespace errors when applying a patch.
 	whitespace = fix
