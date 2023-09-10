@@ -28,7 +28,7 @@
 	# Commit all changes.
 	ca = !git add -A && git commit -av
 	# Switch to a branch, creating it if necessary.
-	go = "!f() { git checkout -b \"$1\" 2> /dev/null || git checkout \"$1\"; }; f"
+	go = "!f() { git checkout -b \"$1\" 2>/dev/null || git checkout \"$1\"; }; f"
 	# Show verbose output about tags, branches or remotes
 	tags = tag -l
 	branches = branch --all
@@ -52,7 +52,7 @@
 	# List contributors with number of commits.
 	contributors = shortlog --summary --numbered --no-merges --email
 	# Find and replace text in the entire git repo
-	fr = "!gr() { git grep -l "$1" | xargs sed -i '' -e "s/$1/$2/g" 2> /dev/null; }; gr"
+	fr = "!gr() { git grep -l "$1" | xargs sed -i '' -e "s/$1/$2/g" 2>/dev/null; }; gr"
 	get = "!ghq get"
 	sub-branch = "!git submodule foreach --recursive 'git switch "$(basename $(git symbolic-ref --short refs/remotes/origin/HEAD))"; git pull'"
 	# Usage: git mr <remote> <id>
@@ -79,16 +79,16 @@
 	# List branches with most recent committer to it. Useful for finding which
 	# branch someone has been committing to recently.
 	branch-activity = "branch --remotes --format='%(authordate:short) %(color:yellow)%(refname:lstrip=3)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset)) %(color:blue)%(authorname)%(color:reset)' --no-merged origin/HEAD"
+	# Prints the name of the upstream branch.
+	show-upstream-ref = rev-parse --abbrev-ref HEAD@{u}
 	# https://stackoverflow.com/a/27940027/8714233
-	diff-changes = "!f() { git merge-base origin/$(git default-branch) origin/$(git branch --show-current) | xargs -I '{}' git diff '{}'..origin/$(git branch --show-current) "$@"; }; f"
+	diff-changes = "!f() { git merge-base origin/$(git default-branch) $(git show-upstream-ref) | xargs -I '{}' git diff '{}'..$(git show-upstream-ref) "$@" 2>/dev/null; }; f"
 	# Logs the diff of commits between the default branch and the current branch.
 	log-changes = "!f() { git log --oneline \"$@\" origin/$(git default-branch)..$(git branch --show-current);  }; f"
-	# Prints the name of the upstream branch.
-	show-upstream-branch = rev-parse --abbrev-ref HEAD@{u}
 	# Logs commits that haven't been pushed to a remote yet.
-	log-local = "!f() { git log --oneline --decorate=no $(git show-upstream-branch)..HEAD \"$@\"; }; f"
+	log-local = "!f() { git log --oneline --decorate=no $(git show-upstream-ref)..HEAD \"$@\"; }; f"
 	# Diffs the current branch against the remote branch of the same name.
-	diff-local = "!f() { git diff $(git show-upstream-branch)..HEAD \"$@\"; }; f"
+	diff-local = "!f() { git diff $(git show-upstream-ref)..HEAD \"$@\"; }; f"
 	# Takes a file path as an argument. Prints the date the file was first added
 	# to the repository.
 	log-added-date = "log --format='format:%ci' --name-status --diff-filter=A --follow"
