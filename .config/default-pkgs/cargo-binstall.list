@@ -77,6 +77,9 @@ git-repo-manager
 sheldon
 # Pluggable and configurable code formatting platform written in Rust.
 dprint
+# ⚡ A CLI tool for code structrual search, lint and rewriting. Written in Rust.
+# (ast-grep/ast-grep).
+# ast-grep
 # 🤖 Just a command runner.
 # just
 # Another cmake lsp (Decodetalkers/neocmakelsp).

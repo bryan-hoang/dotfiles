@@ -79,6 +79,9 @@ does_command_exist sheldon \
 	&& generate_completions sheldon sheldon completions --shell "$SHELL_BASENAME"
 does_command_exist zellij \
 	&& generate_completions zellij zellij setup --generate-completion "$SHELL_BASENAME"
+does_command_exist ast-grep \
+	&& generate_completions ast-grep ast-grep completions \
+	&& generate_completions sg sg completions
 
 # Doesn't support bash.
 does_command_exist bw \
