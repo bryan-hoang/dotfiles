@@ -285,3 +285,5 @@ export EM_CACHE="$XDG_CACHE_HOME"/emscripten/cache
 export EM_PORTS="$XDG_DATA_HOME"/emscripten/cache
 # Make mozbuild tooling comply w/ XDG sped.
 export MOZBUILD_STATE_PATH="$XDG_DATA_HOME"/mozbuild
+# https://www.haskell.org/ghcup/guide/#xdg-support
+export GHCUP_USE_XDG_DIRS=1
