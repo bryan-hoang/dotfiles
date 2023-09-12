@@ -211,16 +211,17 @@ return {
 				desc = "Toggle markdown preview",
 			},
 		},
-		-- Preview markdown over SSH.
 		config = function()
+			vim.g.mkdp_echo_preview_url = 1
+			-- Preview markdown over SSH.
 			-- https://github.com/iamcco/markdown-preview.nvim/pull/9
 			-- $HOSTNAME would usually be defined per remote machine.
 			-- e.g., in ~/.config/shell/extra.
-			if os.getenv("SSH_CONNECTION") ~= "" then
+			if os.getenv("SSH_CONNECTION") ~= nil then
+				vim.g.mkdp_open_to_the_world = 1
+				vim.g.mkdp_open_ip = os.getenv("HOSTNAME")
+				vim.g.mkdp_port = 8080
 				vim.cmd([[
-					let g:mkdp_open_to_the_world = 1
-					let g:mkdp_open_ip = $HOSTNAME
-					let g:mkdp_port = 8080
 					function! g:Open_browser(url)
 						silent exe "!lemonade open "a:url
 					endfunction

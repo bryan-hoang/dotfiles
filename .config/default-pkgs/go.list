@@ -5,6 +5,8 @@ github.com/junegunn/fzf@latest
 github.com/editorconfig-checker/editorconfig-checker/cmd/editorconfig-checker@latest
 # Unclutter your .profile.
 github.com/direnv/direnv@latest
+# A remote utility tool to copy, paste and open browser over TCP.
+# github.com/lemonade-command/lemonade@latest
 # Render markdown on the CLI, with pizzazz! 💅.
 # github.com/charmbracelet/glow@latest
 # github.com/dnnrly/abbreviate@latest
@@ -15,8 +17,6 @@ github.com/direnv/direnv@latest
 # gitlab.com/gitlab-org/cli/cmd/glab@latest
 # Cleans up your $HOME from those pesky dotfiles.
 # github.com/doron-cohen/antidot@latest
-# A remote utility tool to copy, paste and open browser over TCP.
-# github.com/lemonade-command/lemonade@latest
 # 🔥 Feature-rich interactive Jira command line.
 # github.com/ankitpokhrel/jira-cli/cmd/jira@latest
 # rsync for cloud storage
