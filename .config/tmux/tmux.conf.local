@@ -23,7 +23,7 @@ tmux_conf_copy_to_os_clipboard=true
 # -- user customizations -------------------------------------------------------
 
 # increase history size
-set -g history-limit 8128
+set -g history-limit 65536
 
 # replace C-b by C-a instead of using both prefixes
 set -gu prefix2
@@ -36,7 +36,7 @@ bind r source-file "$XDG_CONFIG_HOME"/tmux/tmux.conf
 # https://wiki.archlinux.org/title/tmux#Start_a_non-login_shell
 # Commented out: If started by systemd which sets minimal env vars, set them
 # through login shell.
-set -g default-command "$SHELL"
+# set -g default-command "$SHELL"
 
 # https://wiki.archlinux.org/title/Tmux#Setting_the_correct_term#256_colors
 set -g default-terminal "tmux-256color"
