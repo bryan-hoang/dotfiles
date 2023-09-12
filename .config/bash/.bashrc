@@ -105,8 +105,13 @@ export SHELDON_CONFIG_DIR="$XDG_CONFIG_HOME"/sheldon/bash
 
 # command -v sheldon >/dev/null && eval "$(sheldon source)"
 
+# Avoid `oh-my-bash` from overwriting `LS_COLORS` using `dircolors`.
+ORIGINAL_LS_COLORS="$LS_COLORS"
+
 # shellcheck disable=SC1091
 [[ -s "$OSH"/oh-my-bash.sh ]] && . "$OSH"/oh-my-bash.sh
+
+export LS_COLORS="$ORIGINAL_LS_COLORS"
 
 . "$XDG_CONFIG_HOME"/shell/common.sh
 
