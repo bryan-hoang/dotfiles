@@ -82,6 +82,8 @@ does_command_exist zellij \
 does_command_exist ast-grep \
 	&& generate_completions ast-grep ast-grep completions \
 	&& generate_completions sg sg completions
+does_command_exist bob \
+	&& generate_completions bob bob complete "$SHELL_BASENAME"
 
 # Doesn't support bash.
 does_command_exist bw \
