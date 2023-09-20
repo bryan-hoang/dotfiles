@@ -82,7 +82,7 @@
 	# Prints the name of the upstream branch.
 	show-upstream-ref = rev-parse --abbrev-ref HEAD@{u}
 	# https://stackoverflow.com/a/27940027/8714233
-	diff-changes = "!f() { git merge-base origin/$(git default-branch) $(git show-upstream-ref) | xargs -I '{}' git diff '{}'..$(git show-upstream-ref) "$@" 2>/dev/null; }; f"
+	diff-changes = "!f() { git merge-base origin/$(git default-branch) $(git branch --show-current) | xargs -I '{}' git diff '{}'..$(git branch --show-current) "$@" 2>/dev/null; }; f"
 	# Logs the diff of commits between the default branch and the current branch.
 	log-changes = "!f() { git log --oneline \"$@\" origin/$(git default-branch)..$(git branch --show-current);  }; f"
 	# Logs commits that haven't been pushed to a remote yet.
