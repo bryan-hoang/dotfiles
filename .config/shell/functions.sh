@@ -54,17 +54,21 @@ install_wget() {
 
 install_git() {
 	require gh jq
-	install_apt_packages libcurl4-openssl-dev
+	# https://git-scm.com/book/en/v2/Getting-Started-Installing-Git#_installing_from_source
+	install_apt_packages dh-autoreconf libexpat1-dev \
+		gettext libssl-dev zlib1g-dev libcurl4-openssl-dev
 	echo "Installing git..."
 	local -r TARBALL_URL="$(gh api repos/git/git/tags \
 		| jq --raw-output '.[0].tarball_url')"
-	wget "$TARBALL_URL" -O "$SRC_DIR"/git.tar.gz || return 1
+	wget "$TARBALL_URL" -O "$SRC_DIR"/git.tar.gz || return
 	tar -xf "$SRC_DIR"/git.tar.gz -C "$SRC_DIR"
-	cd "$SRC_DIR"/git-* || return 1
-	make prefix="$XDG_LOCAL_HOME" all
-	make prefix="$XDG_LOCAL_HOME" install
+	cd "$SRC_DIR"/git-* || return
+	make configure
+	./configure --prefix="${PREFIX:-$XDG_LOCAL_HOME}" || return
+	make all || return
+	make install || return
 	git --version
-	cd - || return 1
+	cd - || return
 	echo "Installed git successfully!"
 }
 
