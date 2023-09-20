@@ -157,5 +157,6 @@ alias ruby='ruby --yjit'
 alias commitlint='commitlint --config ~/.config/commitlint/commitlint.config.js --extends $(pnpm root --global)/@commitlint/config-conventional'
 alias make='make --jobs $(nproc)'
 alias restart-tmux='systemctl --user stop tmux && update_tmux_env && tmux attach'
-alias watchexec='watchexec --project-origin . --clear=reset --restart --notify'
+command -v watchexec >/dev/null \
+	&& alias watchexec='watchexec --project-origin . --clear=reset --restart --notify'
 alias xidlehook-client='xidlehook-client --socket $XIDLEHOOK_SOCK'
