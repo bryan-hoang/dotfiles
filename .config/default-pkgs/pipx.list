@@ -9,14 +9,17 @@ ruff-lsp
 # Fork of the python-language-server project, maintained by the Spyder IDE team
 # and the community .
 "python-lsp-server[all]"
+# Quickly rewrite git repository history (filter-branch replacement,
+# newren/git-filter-repo).
+git-filter-repo
 # Build system.
 meson
 # A linter for prose (amperser/proselint).
 proselint
-# Magnificent app which corrects your previous console command (nvbn/thefuck).
-thefuck
 # A youtube-dl fork with additional features and fixes (yt-dlp/yt-dlp).
 yt-dlp
+# Magnificent app which corrects your previous console command (nvbn/thefuck).
+# thefuck
 # youtube-dl
 # python-dotenv[cli]
 # pytest
