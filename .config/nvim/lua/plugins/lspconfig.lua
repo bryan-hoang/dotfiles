@@ -150,7 +150,6 @@ return {
 					},
 					cssmodules_ls = {},
 					emmet_ls = {},
-					powershell_es = {},
 					starlark_rust = {
 						mason = false,
 						filetypes = { "starlark", "bzl", "BUILD.bazel" },
@@ -163,6 +162,9 @@ return {
 				user_opts.servers.rome = {
 					mason = false,
 				}
+
+				-- Only install on windows.
+				user_opts.servers.powershell_es = {}
 			end
 
 			opts = vim.tbl_deep_extend("force", opts, user_opts)
