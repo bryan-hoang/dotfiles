@@ -35,10 +35,17 @@ prepend_to_path "$XDG_CONFIG_HOME"/emacs/bin
 # Neovim managed by bob (MordechaiHadad/bob).
 prepend_to_path "$XDG_DATA_HOME"/bob/nvim-bin
 # Brew
-[ -s /home/linuxbrew/.linuxbrew/bin/brew ] \
-	&& eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-[ -s "$HOME"/.linuxbrew/bin/brew ] \
-	&& eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
+case "$PATH" in
+	*/home/linuxbrew/.linuxbrew/bin*)
+		[ -s /home/linuxbrew/.linuxbrew/bin/brew ] \
+			&& eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+		;;
+	*"$HOME"/.linuxbrew/bin*)
+		[ -s "$HOME"/.linuxbrew/bin/brew ] \
+			&& eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
+		;;
+	*) ;;
+esac
 # JS eCoSyTeM
 prepend_to_path "$PNPM_HOME"
 prepend_to_path "$DENO_INSTALL"/bin
