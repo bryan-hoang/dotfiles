@@ -484,7 +484,7 @@ install_default_pkgs() {
 			;;
 		pip | pip3)
 			packages=$(echo -n "$packages" | tr '\n' ' ')
-			install_cmd+=(install)
+			install_cmd=(python3 -m pip install)
 			install_opts+=(--upgrade --user)
 			;;
 		pipx)
