@@ -16,11 +16,13 @@ export GOPATH="$XDG_DATA_HOME"/go
 export RYE_HOME="$XDG_DATA_HOME"/rye
 
 prepend_to_path() {
-	# https://stackoverflow.com/a/20460402/8714233
-	case "$PATH" in
-		*"$1"*) ;;
-		*) [ -d "$1" ] && export PATH="$1":"$PATH" ;;
-	esac
+	for folder in "$@"; do
+		# https://stackoverflow.com/a/20460402/8714233
+		case "$PATH" in
+			*"$folder"*) ;;
+			*) [ -d "$folder" ] && export PATH="$folder":"$PATH" ;;
+		esac
+	done
 }
 
 # Searched last
