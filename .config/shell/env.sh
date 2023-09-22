@@ -25,8 +25,26 @@ prepend_to_path() {
 	done
 }
 
+prepend_brew_to_path() {
+	for brew_prefix in "$@"; do
+		# https://stackoverflow.com/a/20460402/8714233
+		case "$PATH" in
+			# Do nothing if it's already added.
+			*"$brew_prefix"*) ;;
+			*)
+				[ -s "$brew_prefix"/bin/brew ] \
+					&& eval "$("$brew_prefix"/bin/brew shellenv)"
+				;;
+		esac
+	done
+}
+
 # Searched last
 
+# Brew
+prepend_brew_to_path /home/linuxbrew/.linuxbrew
+prepend_brew_to_path "$HOME"/.linuxbrew
+# Misc.
 prepend_to_path "$XDG_CONFIG_HOME"/rofi/scripts
 prepend_to_path "$XDG_DATA_HOME"/google-cloud-sdk/bin
 prepend_to_path "$XDG_DATA_HOME"/omnisharp
@@ -34,27 +52,19 @@ prepend_to_path "$XDG_DATA_HOME"/omnisharp
 prepend_to_path "$XDG_CONFIG_HOME"/emacs/bin
 # Neovim managed by bob (MordechaiHadad/bob).
 prepend_to_path "$XDG_DATA_HOME"/bob/nvim-bin
-# Brew
-case "$PATH" in
-	*/home/linuxbrew/.linuxbrew/bin*)
-		[ -s /home/linuxbrew/.linuxbrew/bin/brew ] \
-			&& eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-		;;
-	*"$HOME"/.linuxbrew/bin*)
-		[ -s "$HOME"/.linuxbrew/bin/brew ] \
-			&& eval "$("$HOME"/.linuxbrew/bin/brew shellenv)"
-		;;
-	*) ;;
-esac
 # JS eCoSyTeM
 prepend_to_path "$PNPM_HOME"
 prepend_to_path "$DENO_INSTALL"/bin
 prepend_to_path "$BUN_INSTALL"/bin
+# Go
 prepend_to_path "$GOPATH"/bin
+# Python managed by rye
 # shellcheck disable=SC1091
 [ -s "$RYE_HOME"/env ] && . "$RYE_HOME"/env
+# Rust
 # shellcheck disable=SC1091
 [ -s "$CARGO_HOME"/env ] && . "$CARGO_HOME"/env
+# Personal
 prepend_to_path "$XDG_BIN_HOME"
 
 # Searched first
