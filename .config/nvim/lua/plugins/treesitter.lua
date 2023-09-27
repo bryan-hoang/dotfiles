@@ -11,6 +11,7 @@ return {
 			-- https://github.com/nvim-treesitter/nvim-treesitter/wiki/Windows-support#how-will-the-parser-be-downloaded
 			require("nvim-treesitter.install").prefer_git = vim.fn.has("win32") ~= 1
 			require("nvim-treesitter.configs").setup(opts)
+			vim.treesitter.language.register("markdown", "mdx")
 		end,
 	},
 	{

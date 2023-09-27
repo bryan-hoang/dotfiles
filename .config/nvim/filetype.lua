@@ -18,3 +18,9 @@ set_file_associations({
 	cfg = { "dunstrc" },
 	starlark = { "Tiltfile" },
 })
+
+vim.filetype.add({
+	extension = {
+		mdx = "mdx",
+	},
+})
