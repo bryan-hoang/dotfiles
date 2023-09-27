@@ -287,6 +287,7 @@ return {
 				desc = "Copy file location",
 			},
 		},
+		opts = {},
 	},
 	{
 		"pwntester/octo.nvim",
