@@ -2,7 +2,7 @@ local util = require("util")
 
 return {
 	{
-		"jose-elias-alvarez/null-ls.nvim",
+		"nvimtools/none-ls.nvim",
 		keys = {
 			{
 				"<Leader>cn",
