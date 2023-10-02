@@ -127,3 +127,7 @@ unset OLD_PATH SHELL_BASENAME
 # Automatic transparency for xterm.
 # https://wiki.archlinux.org/title/Xterm#Automatic_transparency
 [[ -n $XTERM_VERSION ]] && transset --id "$WINDOWID" >/dev/null
+
+# shellcheck disable=SC1091
+[[ -s $XDG_CONFIG_HOME/broot/launcher/bash/br ]] \
+	&& . "$XDG_CONFIG_HOME"/broot/launcher/bash/br
