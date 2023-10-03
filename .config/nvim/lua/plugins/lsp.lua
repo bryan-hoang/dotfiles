@@ -58,4 +58,56 @@ return {
 			},
 		},
 	},
+	{
+		-- Lightweight yet powerful formatter plugin for Neovim.
+		"stevearc/conform.nvim",
+		keys = {
+			{
+				"<Leader>cc",
+				function()
+					vim.cmd([[ConformInfo]])
+				end,
+				mode = { "n", "v" },
+				desc = "Conform Info",
+			},
+		},
+		opts = function(_, opts)
+			local prettier = { "prettierd", "prettier" }
+			local jsFormatters = { "eslint_d", prettier }
+			local cssFormatters = { "stylelint", prettier }
+			local user_opts = {
+				formatters_by_ft = {
+					fish = {},
+					sh = { "shellcheck", "shellharden", "shfmt" },
+					toml = { "taplo" },
+					json = { prettier },
+					yaml = { prettier },
+					markdown = { "markdownlint", prettier },
+					css = cssFormatters,
+					scss = cssFormatters,
+					javascript = jsFormatters,
+					typescript = jsFormatters,
+					javascriptreact = jsFormatters,
+					typescriptreact = jsFormatters,
+					-- rust = { "rustfmt" },
+				},
+				-- LazyVim will merge the options you set here with builtin formatters.
+				-- You can also define any custom formatters here.
+				---@type table<string,table>
+				formatters = {
+					-- -- Example of using dprint only when a dprint.json file is present
+					-- dprint = {
+					--   condition = function(ctx)
+					--     return vim.fs.find({ "dprint.json" }, { path = ctx.filename, upward = true })[1]
+					--   end,
+					-- },
+				},
+			}
+			return vim.tbl_deep_extend("force", opts, user_opts)
+		end,
+	},
+	-- {
+	-- 	"mfussenegger/nvim-lint",
+	-- 	linters_by_ft = {},
+	-- },
 }

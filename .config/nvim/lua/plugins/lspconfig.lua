@@ -125,13 +125,13 @@ return {
 					-- },
 
 					-- C#/F#
-					omnisharp = {
-						mason = false,
-						cmd = { "OmniSharp" },
-						handlers = {
-							["textDocument/definition"] = require("omnisharp_extended").handler,
-						},
-					},
+					-- omnisharp = {
+					-- 	mason = false,
+					-- 	cmd = { "OmniSharp" },
+					-- 	handlers = {
+					-- 		["textDocument/definition"] = require("omnisharp_extended").handler,
+					-- 	},
+					-- },
 					neocmake = {
 						-- NOTE: Currently fails to install due to `--locked` option.
 						mason = false,
