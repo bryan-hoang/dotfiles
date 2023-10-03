@@ -84,6 +84,8 @@ does_command_exist ast-grep \
 	&& generate_completions sg sg completions
 does_command_exist bob \
 	&& generate_completions bob bob complete "$SHELL_BASENAME"
+does_command_exist rye \
+	&& generate_completions rye rye self completion --shell "$SHELL_BASENAME"
 
 # Doesn't support bash.
 does_command_exist bw \
