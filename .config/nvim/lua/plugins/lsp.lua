@@ -73,7 +73,7 @@ return {
 		},
 		opts = function(_, opts)
 			local prettier = { "prettierd", "prettier" }
-			local jsFormatters = { "eslint_d", prettier }
+			local jsFormatters = { prettier }
 			local cssFormatters = { "stylelint", prettier }
 			local user_opts = {
 				formatters_by_ft = {
@@ -82,6 +82,7 @@ return {
 					toml = { "taplo" },
 					json = { prettier },
 					yaml = { prettier },
+					html = { prettier },
 					markdown = { "markdownlint", prettier },
 					css = cssFormatters,
 					scss = cssFormatters,
