@@ -306,3 +306,5 @@ export EM_PORTS="$XDG_DATA_HOME"/emscripten/cache
 export MOZBUILD_STATE_PATH="$XDG_DATA_HOME"/mozbuild
 # https://www.haskell.org/ghcup/guide/#xdg-support
 export GHCUP_USE_XDG_DIRS=1
+# Preferred over GNU screen's default of `~/.screenrc`.
+export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc

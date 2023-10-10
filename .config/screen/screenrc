@@ -1,0 +1,11 @@
+# https://wiki.archlinux.org/title/GNU_Screen
+
+# Use 256 colors.
+term xterm-256color
+truecolors on
+# Turn welcome message off.
+startup_message off
+# Use X scrolling mechanism.
+termcapinfo xterm*|rxvt*|kterm*|Eterm* ti@:te@
+# Fix for residual editor text.
+altscreen on
