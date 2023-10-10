@@ -1543,6 +1543,13 @@ install_wezterm_terminfo() {
 		&& rm "$tempfile"
 }
 
+# https://yazi-rs.github.io/docs/usage/installation/
+install_yazi () {
+	install_apt_packages ffmpegthumbnailer unar jq poppler-utils
+	cargo install --git https://github.com/sxyazi/yazi.git
+	yazi --version
+}
+
 setup_windows() {
 	winget import --import-file "$XDG_CONFIG_HOME"/windows/winget-pkgs.json
 }

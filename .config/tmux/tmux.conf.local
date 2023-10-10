@@ -12,7 +12,12 @@ run '"$TMUX_PROGRAM" source "$XDG_CONFIG_HOME"/tmux/tmux-base.conf.local'
 # https://github.com/microsoft/vscode-remote-release/issues/2763#issuecomment-682276412
 # Also make certain environment variables available to be referenced in the
 # config file.
-set-option -ga update-environment 'VSCODE_GIT_ASKPASS_NODE VSCODE_GIT_ASKPASS_MAIN VSCODE_IPC_HOOK_CLI GIT_ASKPASS NODE_OPTIONS VSCODE_INSPECTOR_OPTIONS DISPLAY SSH_CONNECTION XAUTHORITY TERM'
+set-option -ga update-environment 'VSCODE_GIT_ASKPASS_NODE VSCODE_GIT_ASKPASS_MAIN VSCODE_IPC_HOOK_CLI GIT_ASKPASS NODE_OPTIONS VSCODE_INSPECTOR_OPTIONS DISPLAY SSH_CONNECTION XAUTHORITY'
+
+# https://github.com/sxyazi/yazi/wiki/Image-preview-within-tmux
+set -g allow-passthrough on
+set -ga update-environment TERM
+set -ga update-environment TERM_PROGRAM
 
 # -- windows & pane creation ---------------------------------------------------
 tmux_conf_new_window_retain_current_path=true
