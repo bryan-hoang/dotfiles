@@ -10,17 +10,17 @@ return {
 				desc = "null-ls Info",
 			},
 		},
-		opts = function()
-			local null_ls = require("null-ls")
+		opts = function(_, opts)
+			local nls = require("null-ls")
 			local h = require("null-ls.helpers")
 			local cmd_resolver = require("null-ls.helpers.command_resolver")
 			local methods = require("null-ls.methods")
 
-			local b = null_ls.builtins
+			local b = nls.builtins
 			local DIAGNOSTICS = methods.internal.DIAGNOSTICS
 			local FORMATTING = methods.internal.FORMATTING
 
-			return {
+			local user_opts = {
 				debug = os.getenv("DEBUG") == "nvim:null-ls",
 				sources = {
 					-- Markdown/text
@@ -179,20 +179,10 @@ return {
 						factory = h.generator_factory,
 					}),
 					-- lua
-					b.diagnostics.selene.with({
-						-- https://github.com/kampfkarren/selene/issues/339#issuecomment-1191992366
-						cwd = function(_params)
-							return vim.fs.dirname(
-								vim.fs.find(
-									{ "selene.toml" },
-									{ upward = true, path = vim.api.nvim_buf_get_name(0) }
-								)[1]
-								-- fallback value
-							) or vim.fn.expand(
-								os.getenv("XDG_CONFIG_HOME") .. "/selene/"
-							)
-						end,
-					}),
+					--
+					-- May or may not want
+					-- https://github.com/kampfkarren/selene/issues/339#issuecomment-1191992366
+					b.diagnostics.selene,
 					-- shell
 					b.formatting.shfmt.with({
 						extra_args = { "-ci", "-bn", "--simplify" },
@@ -285,6 +275,8 @@ return {
 					end,
 				},
 			}
+
+			return vim.tbl_deep_extend("force", opts, user_opts)
 		end,
 	},
 }
