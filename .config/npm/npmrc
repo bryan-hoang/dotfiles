@@ -10,4 +10,4 @@ preid=rc
 save-exact=true
 sign-git-commit=true
 sign-git-tag=true
-update-notifier=false
+# update-notifier=false
