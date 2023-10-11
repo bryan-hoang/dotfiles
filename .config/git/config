@@ -84,7 +84,7 @@
 	# https://stackoverflow.com/a/27940027/8714233
 	diff-changes = "!f() { git merge-base origin/$(git default-branch) $(git branch --show-current) | xargs -I '{}' git diff '{}'..$(git branch --show-current) "$@" 2>/dev/null; }; f"
 	# Logs the diff of commits between the default branch and the current branch.
-	log-changes = "!f() { git log --oneline \"$@\" origin/$(git default-branch)..$(git branch --show-current);  }; f"
+	log-changes = "!f() { git log --oneline --graph \"$@\" origin/$(git default-branch)..$(git branch --show-current); }; f"
 	# Logs commits that haven't been pushed to a remote yet.
 	log-local = "!f() { git log --oneline --decorate=no $(git show-upstream-ref)..HEAD \"$@\"; }; f"
 	# Diffs the current branch against the remote branch of the same name.
