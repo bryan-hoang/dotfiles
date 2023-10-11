@@ -42,6 +42,7 @@ $gradle\
 $lua\
 $nim\
 $nodejs\
+$bun\
 ${custom.pnpm}\
 ${custom.yarn}\
 ${custom.npm}\
@@ -93,6 +94,9 @@ add_newline = true
 command_timeout = 1000
 continuation_prompt = '[>](bright-black) '
 scan_timeout = 30
+
+[bun]
+format = '[$symbol($version )]($style)'
 
 [c]
 format = "[$symbol($version(-$name) )]($style)"
@@ -191,6 +195,7 @@ disabled = true
 format = "[$user]($style)@"
 
 [custom.pnpm]
+disabled = true
 command = "pnpm --version | awk -F '.' '{print \"v\"$1}'"
 description = "The currently installed version of pnpm"
 detect_files = ['pnpm-lock.yaml']
@@ -200,6 +205,7 @@ symbol = 'p '
 
 # To help switch between npm versions when it matters -_-
 [custom.yarn]
+disabled = true
 command = "yarn --version | awk -F '.' '{print \"v\"$1}'"
 description = "The currently installed version of yarn"
 detect_files = ['yarn.lock']
@@ -209,6 +215,7 @@ symbol = ' '
 
 # To help switch between npm versions when it matters -_-
 [custom.npm]
+disabled = true
 command = "npm --version | awk -F '.' '{print $1}'"
 description = "The currently installed version of npm"
 detect_files = ['package-lock.json']

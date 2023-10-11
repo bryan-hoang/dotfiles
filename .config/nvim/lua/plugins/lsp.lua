@@ -102,6 +102,9 @@ return {
 					--     return vim.fs.find({ "dprint.json" }, { path = ctx.filename, upward = true })[1]
 					--   end,
 					-- },
+					shfmt = {
+						args = { "-filename", "$FILENAME", "-ci", "-bn", "--simplify" },
+					},
 				},
 			}
 			return vim.tbl_deep_extend("force", opts, user_opts)

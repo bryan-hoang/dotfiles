@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/sh
 
 GIT_EMAIL=$(git config user.email)
 
@@ -14,4 +14,4 @@ case $GIT_EMAIL in
 		;;
 esac
 
-echo "${GIT_EMAIL_SYMBOL}"
+echo "$GIT_EMAIL_SYMBOL"
