@@ -156,6 +156,9 @@ dprint
 # Cross-platform ncurses Spotify client written in Rust, inspired by ncmpc and
 # the likes (hrkfdn/ncspot).
 # ncspot
+# A Spotify player in the terminal with full feature parity
+# (aome510/spotify-player).
+# spotify_player
 # A tool to interactively write shell pipelines (elkowar/pipr).
 # pipr
 # Docuum performs least recently used (LRU) eviction of Docker images
@@ -163,6 +166,8 @@ dprint
 # docuum
 # A Terminal UI to browse Hacker News (aome510/hackernews-TUI).
 # hackernews_tui
+# Turn your keyboard into a typewriter! 📇 (orhun/daktilo)
+# daktilo
 
 # Windows Incompatible.
 
