@@ -302,3 +302,5 @@
 	pretty = fuller
 [index]
 	skipHash = false
+[sendemail]
+	annotate = yes
