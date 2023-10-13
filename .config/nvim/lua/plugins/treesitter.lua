@@ -15,44 +15,7 @@ return {
 		end,
 	},
 	{
-		"nvim-treesitter/nvim-treesitter-context",
-		event = require("util").buf_enter_event_list,
-		opts = {},
-		keys = {
-			{
-				"[c",
-				function()
-					require("treesitter-context").go_to_context()
-				end,
-				desc = "Jump to treesitter context",
-			},
-		},
-	},
-	{
 		"nvim-treesitter/playground",
 		cmd = "TSPlaygroundToggle",
-	},
-	{
-		"windwp/nvim-ts-autotag",
-		-- https://github.com/windwp/nvim-ts-autotag#default-values
-		ft = {
-			"html",
-			"javascript",
-			"typescript",
-			"javascriptreact",
-			"typescriptreact",
-			"svelte",
-			"vue",
-			"tsx",
-			"jsx",
-			"rescript",
-			"xml",
-			"php",
-			"markdown",
-			"glimmer",
-			"handlebars",
-			"hbs",
-		},
-		opts = {},
 	},
 }

@@ -34,7 +34,7 @@ return {
 			},
 		},
 		config = function()
-			require("lazyvim.util").on_attach(function(client, buffer)
+			require("lazyvim.util").lsp.on_attach(function(client, buffer)
 				if client.server_capabilities.documentRangeFormattingProvider then
 					local lsp_format_modifications = require("lsp-format-modifications")
 					lsp_format_modifications.attach(
@@ -75,10 +75,13 @@ return {
 			local prettier = { "prettierd", "prettier" }
 			local jsFormatters = { prettier }
 			local cssFormatters = { "stylelint", prettier }
+			local shFormatters = { "shellcheck", "shellharden", "shfmt" }
+
 			local user_opts = {
 				formatters_by_ft = {
 					fish = {},
-					sh = { "shellcheck", "shellharden", "shfmt" },
+					sh = shFormatters,
+					zsh = shFormatters,
 					toml = { "taplo" },
 					json = { prettier },
 					yaml = { prettier },
@@ -110,8 +113,39 @@ return {
 			return vim.tbl_deep_extend("force", opts, user_opts)
 		end,
 	},
-	-- {
-	-- 	"mfussenegger/nvim-lint",
-	-- 	linters_by_ft = {},
-	-- },
+	{
+		"mfussenegger/nvim-lint",
+		opts = function(_, opts)
+			local shLinters = { "shellcheck" }
+
+			local user_opts = {
+				linters_by_ft = {
+					dockerfile = { "hadolint" },
+					fish = {},
+					markdown = { "markdownlint", "vale" },
+					sh = shLinters,
+					zsh = shLinters,
+					css = { "stylelint" },
+					-- May or may not want
+					-- https://github.com/kampfkarren/selene/issues/340#issuecomment-1191992366
+					lua = { "selene" },
+					python = { "ruff" },
+				},
+				linters = {
+					-- TODO: Contribute `ltrs`, `typos`, `markuplint`, `commitlint`,
+					-- `editorconfig_checker`, `dotenv-linter` to `nvim-lint`!
+					-- ltrs = {
+					-- 	cmd = "ltrs",
+					-- },
+					-- typos = {
+					-- 	cmd = "typos",
+					-- },
+				},
+			}
+
+			local merged_opts = vim.tbl_deep_extend("force", opts, user_opts)
+
+			return merged_opts
+		end,
+	},
 }

@@ -15,10 +15,9 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 -- https://github.com/folke/lazy.nvim#%EF%B8%8F-configuration
 require("lazy").setup({
 	spec = {
-		-- add LazyVim and import its plugins
+		-- Add LazyVim and import its plugins.
 		{ "LazyVim/LazyVim", import = "lazyvim.plugins" },
-		-- import any extras modules here
-		{ import = "lazyvim.plugins.extras.formatting.conform" },
+		-- Import any extras modules here.
 		-- { import = "lazyvim.plugins.extras.linting.nvim-lint" },
 		{ import = "lazyvim.plugins.extras.dap.core" },
 		-- { import = "lazyvim.plugins.extras.dap.nlua" },
@@ -34,7 +33,10 @@ require("lazy").setup({
 		-- { import = "lazyvim.plugins.extras.lang.tex" },
 		{ import = "lazyvim.plugins.extras.util.dot" },
 		{ import = "lazyvim.plugins.extras.vscode" },
-		-- import/override with your plugins
+		{ import = "lazyvim.plugins.extras.editor.navic" },
+		{ import = "lazyvim.plugins.extras.linting.eslint" },
+		{ import = "lazyvim.plugins.extras.lsp.none-ls" },
+		-- Import/override with your plugins.
 		{ import = "plugins" },
 	},
 	defaults = {

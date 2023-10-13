@@ -3,6 +3,7 @@ local util = require("util")
 return {
 	{
 		"nvimtools/none-ls.nvim",
+		enabled = false,
 		keys = {
 			{
 				"<Leader>cn",
@@ -24,8 +25,6 @@ return {
 				debug = os.getenv("DEBUG") == "nvim:null-ls",
 				sources = {
 					-- Markdown/text
-					b.diagnostics.markdownlint,
-					b.diagnostics.vale,
 					b.hover.dictionary,
 					b.diagnostics.ltrs.with({
 						diagnostics_postprocess = function(diagnostic)
@@ -106,94 +105,78 @@ return {
 					b.code_actions.gitsigns,
 					b.code_actions.gitrebase,
 					b.code_actions.refactoring,
-					-- JS/TS, CSS
-					b.diagnostics.eslint_d,
-					b.code_actions.eslint_d,
-					h.make_builtin({
-						name = "stylelint",
-						meta = {
-							url = "https://github.com/stylelint/stylelint",
-							description = "A mighty, modern linter that helps you avoid errors and enforce conventions in your styles.",
-						},
-						method = FORMATTING,
-						filetypes = { "scss", "less", "css", "sass" },
-						generator_opts = {
-							command = "stylelint",
-							args = { "--fix", "--stdin", "--stdin-filename", "$FILENAME" },
-							to_stdin = true,
-							from_stderr = true,
-							-- NOTE: Ignore stderr be default, otherwise formatting output is
-							-- ignored.
-							ignore_stderr = false,
-							dynamic_command = cmd_resolver.from_node_modules(),
-						},
-						factory = h.formatter_factory,
-					}),
+					-- CSS
+					-- h.make_builtin({
+					-- 	name = "stylelint",
+					-- 	meta = {
+					-- 		url = "https://github.com/stylelint/stylelint",
+					-- 		description = "A mighty, modern linter that helps you avoid errors and enforce conventions in your styles.",
+					-- 	},
+					-- 	method = FORMATTING,
+					-- 	filetypes = { "scss", "less", "css", "sass" },
+					-- 	generator_opts = {
+					-- 		command = "stylelint",
+					-- 		args = { "--fix", "--stdin", "--stdin-filename", "$FILENAME" },
+					-- 		to_stdin = true,
+					-- 		from_stderr = true,
+					-- 		-- NOTE: Ignore stderr be default, otherwise formatting output is
+					-- 		-- ignored.
+					-- 		ignore_stderr = false,
+					-- 		dynamic_command = cmd_resolver.from_node_modules(),
+					-- 	},
+					-- 	factory = h.formatter_factory,
+					-- }),
 					-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/lua/null-ls/builtins/diagnostics/stylelint.lua
-					h.make_builtin({
-						name = "stylelint",
-						meta = {
-							url = "https://github.com/stylelint/stylelint",
-							description = "A mighty, modern linter that helps you avoid errors and enforce conventions in your styles.",
-						},
-						method = DIAGNOSTICS,
-						filetypes = { "scss", "less", "css", "sass" },
-						generator_opts = {
-							command = "stylelint",
-							args = { "--formatter", "json", "--stdin-filename", "$FILENAME" },
-							to_stdin = true,
-							format = "json_raw",
-							dynamic_command = cmd_resolver.from_node_modules(),
-							-- NOTE: Don't read messages like "reusing global emitter". Not
-							-- sure when it appears.
-							from_stderr = true,
-							-- ignore_stderr = true,
-							on_output = function(params)
-								local output = params.output
-										and params.output[1]
-										and params.output[1].warnings
-									or {}
-
-								-- json decode failure means stylelint failed to run
-								if params.err then
-									table.insert(output, { text = params.output })
-								end
-
-								local parser = h.diagnostics.from_json({
-									attributes = {
-										-- NOTE: Add the rule to the error code.
-										code = "rule",
-										severity = "severity",
-										message = "text",
-									},
-									severities = {
-										h.diagnostics.severities["warning"],
-										h.diagnostics.severities["error"],
-									},
-								})
-
-								params.output = output
-								return parser(params)
-							end,
-						},
-						factory = h.generator_factory,
-					}),
+					-- h.make_builtin({
+					-- 	name = "stylelint",
+					-- 	meta = {
+					-- 		url = "https://github.com/stylelint/stylelint",
+					-- 		description = "A mighty, modern linter that helps you avoid errors and enforce conventions in your styles.",
+					-- 	},
+					-- 	method = DIAGNOSTICS,
+					-- 	filetypes = { "scss", "less", "css", "sass" },
+					-- 	generator_opts = {
+					-- 		command = "stylelint",
+					-- 		args = { "--formatter", "json", "--stdin-filename", "$FILENAME" },
+					-- 		to_stdin = true,
+					-- 		format = "json_raw",
+					-- 		dynamic_command = cmd_resolver.from_node_modules(),
+					-- 		-- NOTE: Don't read messages like "reusing global emitter". Not
+					-- 		-- sure when it appears.
+					-- 		from_stderr = true,
+					-- 		-- ignore_stderr = true,
+					-- 		on_output = function(params)
+					-- 			local output = params.output
+					-- 					and params.output[1]
+					-- 					and params.output[1].warnings
+					-- 				or {}
+					--
+					-- 			-- json decode failure means stylelint failed to run
+					-- 			if params.err then
+					-- 				table.insert(output, { text = params.output })
+					-- 			end
+					--
+					-- 			local parser = h.diagnostics.from_json({
+					-- 				attributes = {
+					-- 					-- NOTE: Add the rule to the error code.
+					-- 					code = "rule",
+					-- 					severity = "severity",
+					-- 					message = "text",
+					-- 				},
+					-- 				severities = {
+					-- 					h.diagnostics.severities["warning"],
+					-- 					h.diagnostics.severities["error"],
+					-- 				},
+					-- 			})
+					--
+					-- 			params.output = output
+					-- 			return parser(params)
+					-- 		end,
+					-- 	},
+					-- 	factory = h.generator_factory,
+					-- }),
 					-- lua
 					--
-					-- May or may not want
-					-- https://github.com/kampfkarren/selene/issues/339#issuecomment-1191992366
-					b.diagnostics.selene,
-					-- shell
-					b.formatting.shfmt.with({
-						extra_args = { "-ci", "-bn", "--simplify" },
-						filetypes = { "sh", "zsh" },
-					}),
-					b.formatting.shellharden.with({
-						filetypes = { "sh", "zsh" },
-					}),
-					b.code_actions.shellcheck.with({
-						filetypes = { "sh", "zsh" },
-					}),
 					-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/lua/null-ls/builtins/diagnostics/dotenv_linter.lua
 					h.make_builtin({
 						name = "dotenv-linter",
@@ -226,54 +209,19 @@ return {
 						factory = h.generator_factory,
 					}),
 					b.hover.printenv,
-					-- TOML
-					b.formatting.taplo.with({
-						cwd = function(params)
-							return require("null-ls.utils").root_pattern(
-								"taplo.toml",
-								".taplo.toml",
-								".git"
-							)(params.bufname)
-						end,
-					}),
-					-- Python
-					b.diagnostics.ruff,
-					-- Docker
-					b.diagnostics.hadolint,
-					-- Rust
-					b.formatting.rustfmt.with({
-						-- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Source-specific-Configuration#specifying-edition
-						extra_args = function(params)
-							local Path = require("plenary.path")
-							local cargo_toml = Path:new(params.root .. "/" .. "Cargo.toml")
-
-							if cargo_toml:exists() and cargo_toml:is_file() then
-								for _, line in ipairs(cargo_toml:readlines()) do
-									local edition = line:match([[^edition%s*=%s*%"(%d+)%"]])
-									if edition then
-										return { "--edition=" .. edition }
-									end
-								end
-							end
-
-							-- Default edition when we don't find `Cargo.toml` or the `edition` in
-							-- it.
-							return { "--edition=2021" }
-						end,
-					}),
-					on_attach = function(client, buffer)
-						-- https://github.com/joechrisellis/lsp-format-modifications.nvim#tested-language-servers
-						if client.server_capabilities.documentRangeFormattingProvider then
-							local lsp_format_modifications =
-								require("lsp-format-modifications")
-							lsp_format_modifications.attach(
-								client,
-								buffer,
-								{ format_on_save = false }
-							)
-						end
-					end,
 				},
+
+				on_attach = function(client, buffer)
+					-- https://github.com/joechrisellis/lsp-format-modifications.nvim#tested-language-servers
+					if client.server_capabilities.documentRangeFormattingProvider then
+						local lsp_format_modifications = require("lsp-format-modifications")
+						lsp_format_modifications.attach(
+							client,
+							buffer,
+							{ format_on_save = false }
+						)
+					end
+				end,
 			}
 
 			return vim.tbl_deep_extend("force", opts, user_opts)

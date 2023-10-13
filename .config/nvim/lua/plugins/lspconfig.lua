@@ -5,6 +5,8 @@ return {
 		"neovim/nvim-lspconfig",
 		lazy = false,
 		opts = function(_, opts)
+			vim.g.autoformat = false
+
 			local function format_diagnostic_message(diagnostic)
 				if diagnostic.code ~= nil then
 					return " [" .. diagnostic.code .. "]"
@@ -36,7 +38,6 @@ return {
 				format = {
 					async = true,
 				},
-				autoformat = false,
 				---@type lspconfig.options
 				servers = {
 					-- JSON
@@ -148,7 +149,7 @@ return {
 					tsserver = {
 						mason = false,
 					},
-					cssmodules_ls = {},
+					-- cssmodules_ls = {},
 					emmet_ls = {},
 					starlark_rust = {
 						mason = false,

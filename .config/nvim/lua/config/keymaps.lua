@@ -99,7 +99,7 @@ vim.api.nvim_set_keymap("", "<C-S-LeftMouse>", "", {})
 -- Keybinds inspired by ThePrimeagen.
 -- https://youtu.be/w7i4amO_zaE?t=1464
 vim.keymap.set("x", "<Leader>p", '"_dP', {
-	desc = "Paste and preseve clipboard",
+	desc = "Paste and preserve clipboard",
 })
 vim.keymap.set({ "n", "v" }, "<Leader>y", '"+y', {
 	desc = "Yank selections to clipboard",
