@@ -52,6 +52,8 @@ prepend_to_path "$XDG_DATA_HOME"/omnisharp
 prepend_to_path "$XDG_CONFIG_HOME"/emacs/bin
 # Neovim managed by bob (MordechaiHadad/bob).
 prepend_to_path "$XDG_DATA_HOME"/bob/nvim-bin
+# shellcheck disable=SC2154
+prepend_to_path "$LOCALAPPDATA"/bob/nvim-bin
 # JS eCoSyTeM
 prepend_to_path "$PNPM_HOME"
 prepend_to_path "$DENO_INSTALL"/bin
@@ -308,3 +310,4 @@ export MOZBUILD_STATE_PATH="$XDG_DATA_HOME"/mozbuild
 export GHCUP_USE_XDG_DIRS=1
 # Preferred over GNU screen's default of `~/.screenrc`.
 export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
+export BOB_CONFIG="$XDG_CONFIG_HOME"/bob/config.json
