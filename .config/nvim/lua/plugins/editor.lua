@@ -199,19 +199,10 @@ return {
 		enabled = false,
 	},
 	{
+		-- Markdown preview plugin for (neo)vim.
 		"iamcco/markdown-preview.nvim",
-		ft = "markdown",
-		build = function()
-			vim.fn["mkdp#util#install"]()
-		end,
-		keys = {
-			{
-				"<leader>mp",
-				"<cmd>MarkdownPreview<cr>",
-				desc = "Toggle markdown preview",
-			},
-		},
 		config = function()
+			vim.cmd([[do FileType]])
 			vim.g.mkdp_echo_preview_url = 1
 			-- Preview markdown over SSH.
 			-- https://github.com/iamcco/markdown-preview.nvim/pull/9
