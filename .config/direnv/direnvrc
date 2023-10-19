@@ -3,5 +3,6 @@
 # https://github.com/jdxcode/rtx#rtx-inside-of-direnv-use-rtx-in-envrc
 use rtx >/dev/null 2>&1 || true
 
+source_up_if_exists .envrc
 # Loads a “.env.local” file into the current environment, but only if it exists.
 dotenv_if_exists .env.local
