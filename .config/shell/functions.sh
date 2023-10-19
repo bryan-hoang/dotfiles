@@ -758,7 +758,9 @@ install_tmux() {
 	install_apt_packages libevent-dev libncurses-dev build-essential bison \
 		pkg-config || return
 	sh autogen.sh
-	./configure --prefix "${PREFIX:-$XDG_LOCAL_HOME}" --enable-static || return
+	./configure --prefix "${PREFIX:-$XDG_LOCAL_HOME}" --enable-{static,sixel} \
+		|| return
+	make clean
 	make || return
 	make install || return
 	tmux -V
@@ -1544,7 +1546,7 @@ install_wezterm_terminfo() {
 }
 
 # https://yazi-rs.github.io/docs/usage/installation/
-install_yazi () {
+install_yazi() {
 	install_apt_packages ffmpegthumbnailer unar jq poppler-utils
 	cargo install --git https://github.com/sxyazi/yazi.git
 	yazi --version
