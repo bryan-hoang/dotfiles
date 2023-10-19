@@ -71,6 +71,8 @@ mini_comment.setup({
 		comment = "<C-/>",
 		-- Toggle comment on current line
 		comment_line = "<C-/>",
+		-- Toggle comment on visual selection
+		comment_visual = "<C-/>",
 		-- Define 'comment' textobject (like `dgc` - delete whole comment block)
 		textobject = "<C-/>",
 	},
@@ -79,6 +81,7 @@ mini_comment.setup({
 	mappings = {
 		comment = "<C-_>",
 		comment_line = "<C-_>",
+		comment_visual = "<C-_>",
 		textobject = "<C-_>",
 	},
 })
