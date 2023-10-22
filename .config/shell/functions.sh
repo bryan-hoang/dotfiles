@@ -1539,10 +1539,11 @@ if asdf list direnv &>/dev/null; then
 fi
 
 install_wezterm_terminfo() {
-	tempfile=$(mktemp) \
-		&& curl -o "$tempfile" https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo \
-		&& tic -x -o "$TERMINFO" "$tempfile" \
-		&& rm "$tempfile"
+	local tempfile
+	tempfile=$(mktemp)
+	curl -o "$tempfile" https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo
+	tic -x -o "$TERMINFO" "$tempfile"
+	rm "$tempfile"
 }
 
 # https://yazi-rs.github.io/docs/usage/installation/
