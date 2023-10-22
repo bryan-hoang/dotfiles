@@ -198,6 +198,9 @@
 				},
 				{
 					"PackageIdentifier": "ByteDance.Debugtron"
+				},
+				{
+					"PackageIdentifier": "ImageMagick.ImageMagick"
 				}
 			],
 			"SourceDetails": {
