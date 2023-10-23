@@ -126,6 +126,7 @@ return {
 					sh = shLinters,
 					zsh = shLinters,
 					css = { "stylelint" },
+					dotenv = { "dotenv_linter" },
 					-- May or may not want
 					-- https://github.com/kampfkarren/selene/issues/340#issuecomment-1191992366
 					lua = { "selene" },
@@ -133,7 +134,7 @@ return {
 				},
 				linters = {
 					-- TODO: Contribute `ltrs`, `typos`, `markuplint`, `commitlint`,
-					-- `editorconfig_checker`, `dotenv-linter` to `nvim-lint`!
+					-- `editorconfig_checker`, to `nvim-lint`!
 					-- ltrs = {
 					-- 	cmd = "ltrs",
 					-- },

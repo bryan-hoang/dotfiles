@@ -12,15 +12,19 @@ set_file_associations({
 	sshconfig = { ".*/%.ssh/conf%.d/.*%.conf" },
 	jsonc = { ".*/%.config/markdownlint/config", ".*/%.vscode/.*%.json" },
 	just = { ".*justfile" },
-	sh = { "%.env%.local" },
 	xdefaults = { ".*/%.config/X11/xresources" },
 	i3config = { ".*/i3/conf%.d/.*%.conf" },
 	cfg = { "dunstrc" },
 	starlark = { "Tiltfile" },
+	dotenv = { ".*%.env%..*" },
 })
 
 vim.filetype.add({
 	extension = {
 		mdx = "mdx",
+	},
+	filename = {
+		-- Override detection from distributed files.
+		[".env"] = "dotenv",
 	},
 })

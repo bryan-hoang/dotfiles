@@ -12,6 +12,7 @@ return {
 			require("nvim-treesitter.install").prefer_git = vim.fn.has("win32") ~= 1
 			require("nvim-treesitter.configs").setup(opts)
 			vim.treesitter.language.register("markdown", "mdx")
+			vim.treesitter.language.register("bash", "dotenv")
 		end,
 	},
 	{
