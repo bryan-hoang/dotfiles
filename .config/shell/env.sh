@@ -311,3 +311,4 @@ export GHCUP_USE_XDG_DIRS=1
 # Preferred over GNU screen's default of `~/.screenrc`.
 export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
 export BOB_CONFIG="$XDG_CONFIG_HOME"/bob/config.json
+export TAPLO_CONFIG="$XDG_CONFIG_HOME"/taplo/.taplo.toml
