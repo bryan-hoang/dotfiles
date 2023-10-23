@@ -117,6 +117,7 @@ return {
 		"mfussenegger/nvim-lint",
 		opts = function(_, opts)
 			local shLinters = { "shellcheck" }
+			local cssLinters = { "stylelint" }
 
 			local user_opts = {
 				linters_by_ft = {
@@ -125,8 +126,9 @@ return {
 					markdown = { "markdownlint", "vale" },
 					sh = shLinters,
 					zsh = shLinters,
-					css = { "stylelint" },
 					dotenv = { "dotenv_linter" },
+					css = cssLinters,
+					scss = cssLinters,
 					-- May or may not want
 					-- https://github.com/kampfkarren/selene/issues/340#issuecomment-1191992366
 					lua = { "selene" },
