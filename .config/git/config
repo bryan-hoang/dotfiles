@@ -55,9 +55,10 @@
 	fr = "!gr() { git grep -l "$1" | xargs sed -i '' -e "s/$1/$2/g" 2>/dev/null; }; gr"
 	get = "!ghq get"
 	sub-branch = "!git submodule foreach --recursive 'git switch "$(basename $(git symbolic-ref --short refs/remotes/origin/HEAD))"; git pull'"
-	# Usage: git mr <remote> <id>
-	# $ git mr origin 5
-	# This fetches the merge request into a local mr-origin-5 branch and check it out.
+	# Usage: git mr <id> [target branch]
+	# $ git review-mr 1337
+	# Switchs to the merge base with the overall changes as hunks.
+	review-mr = "!f() { git fetch origin refs/merge-requests/$1/head && git switch --detach FETCH_HEAD && git reset $(git merge-base HEAD ${2:-$(git branch-default)}); }; f"
 	# Find the date a file was added. Source: https://stackoverflow.com/a/25633731/8714233
 	fd = "!f() { git log --follow --format=%ad $1 | tail -1; }; f"
 	# Make local index and working tree match remote.
@@ -68,12 +69,12 @@
 	# <Current branch to end range of commits to rebase>
 	rebase-merge = "!f() { git rebase --onto $(git rev-list --max-count 1 HEAD@{1}) $(git rev-list --merges --max-count=1 HEAD) $(git branch --show-current); }; f"
 	# Print the current default branch on the remote.
-	default-branch = "!f() { git rev-parse --abbrev-ref origin/HEAD | sed 's/origin\\///'; }; f"
+	branch-default = "!f() { git rev-parse --abbrev-ref origin | sed 's/origin\\///'; }; f"
 	# https://stackoverflow.com/questions/65837109/when-should-i-use-git-push-force-if-includes
 	push-force-safely = push --force-with-lease --force-if-includes
 	# https://stackoverflow.com/a/54408181/8714233
 	wt-fix-refs = "!git for-each-ref --format='%(refname:short)' refs/heads | xargs git branch -D 2>/dev/null || true"
-	switch-time = "!f() { git switch -d $(git rev-list -n 1 --first-parent --before \"$1 23:59\" $(git default-branch)) ; }; f"
+	switch-time = "!f() { git switch -d $(git rev-list -n 1 --first-parent --before \"$1 23:59\" $(git branch-default)) ; }; f"
 	# Delete a branch locally and on the remote.
 	branch-delete = "!f() { git branch --delete --force $1 || true && git push origin --delete $1; }; f"
 	# List branches with most recent committer to it. Useful for finding which
@@ -82,9 +83,9 @@
 	# Prints the name of the upstream branch.
 	show-upstream-ref = rev-parse --abbrev-ref HEAD@{u}
 	# https://stackoverflow.com/a/27940027/8714233
-	diff-changes = "!f() { git merge-base origin/$(git default-branch) $(git branch --show-current) | xargs -I '{}' git diff '{}'..$(git branch --show-current) "$@" 2>/dev/null; }; f"
+	diff-changes = "!f() { git merge-base origin/$(git branch-default) $(git branch --show-current) | xargs -I '{}' git diff '{}'..$(git branch --show-current) "$@" 2>/dev/null; }; f"
 	# Logs the diff of commits between the default branch and the current branch.
-	log-changes = "!f() { git log --oneline --graph \"$@\" origin/$(git default-branch)..$(git branch --show-current); }; f"
+	log-changes = "!f() { git log --oneline --graph \"$@\" origin/$(git branch-default)..$(git branch --show-current); }; f"
 	# Logs commits that haven't been pushed to a remote yet.
 	log-local = "!f() { git log --oneline --decorate=no $(git show-upstream-ref)..HEAD \"$@\"; }; f"
 	# Diffs the current branch against the remote branch of the same name.
@@ -103,7 +104,7 @@
 	tag-latest = "!git describe --tags $(git rev-list --tags --max-count=1)"
 	# Converts normally cloned repo into one that better accommodates a "git
 	# worktree" based workflow.
-	worktree-convert = "!f() { grm wt convert; mv .git-main-working-tree .git; rm .git/index; git worktree add \"$(git default-branch)\"; git worktree lock \"$(git default-branch)\"; }; f"
+	worktree-convert = "!f() { grm wt convert; mv .git-main-working-tree .git; rm .git/index; git worktree add \"$(git branch-default)\"; git worktree lock \"$(git branch-default)\"; }; f"
 [apply]
 	# Detect whitespace errors when applying a patch.
 	whitespace = fix
