@@ -147,6 +147,8 @@ dprint
 # Command-line JSON viewer designed for reading, exploring, and searching
 # through JSON data.
 # jless
+# A JSON Query Language CLI tool (yamafaktory/jql).
+# jql
 # A simple tui to view & control docker containers.
 # oxker
 # Realtime ticker data in your terminal (tarkah/tickrs).
