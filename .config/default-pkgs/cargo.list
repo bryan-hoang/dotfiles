@@ -4,7 +4,7 @@ sccache
 # gitignore.
 ripgrep --features pcre2,simd-accel
 # A TOML toolkit.
---features lsp --locked taplo-cli
+taplo-cli --features lsp
 # Beautiful, useful, configurable MOTD generation with zero runtime
 # dependencies.
 --git https://github.com/rust-motd/rust-motd.git
