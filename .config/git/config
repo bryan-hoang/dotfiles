@@ -53,7 +53,6 @@
 	contributors = shortlog --summary --numbered --no-merges --email
 	# Find and replace text in the entire git repo
 	fr = "!gr() { git grep -l "$1" | xargs sed -i '' -e "s/$1/$2/g" 2>/dev/null; }; gr"
-	get = "!ghq get"
 	sub-branch = "!git submodule foreach --recursive 'git switch "$(basename $(git symbolic-ref --short refs/remotes/origin/HEAD))"; git pull'"
 	# Usage: git mr <id> [target branch]
 	# $ git review-mr 1337

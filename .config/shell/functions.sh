@@ -545,7 +545,7 @@ install_nircmd() {
 install_check_if_email_exists() {
 	echo "Installing check_if_email_exists"
 	if is_arm32_architecture; then
-		git get https://github.com/reacherhq/check-if-email-exists
+		ghq get https://github.com/reacherhq/check-if-email-exists
 		cd "$HOME"/git/github.com/reacherhq/check-if-email-exists || return 1
 		cargo build --release
 		mv ./target/release/check_if_email_exists "$XDG_BIN_HOME"/check-if-email-exists
@@ -752,7 +752,7 @@ install_codelldb() {
 }
 
 install_tmux() {
-	git get https://github.com/tmux/tmux.git
+	ghq get https://github.com/tmux/tmux.git
 	cd "$GHQ_ROOT"/github.com/tmux/tmux || return
 	git pull
 	install_apt_packages libevent-dev libncurses-dev build-essential bison \
@@ -775,7 +775,7 @@ install_nvim() {
 		local -r SUDO_CMD=sudo
 		"$SUDO_CMD" --validate || return
 	fi
-	git get https://github.com/neovim/neovim.git
+	ghq get https://github.com/neovim/neovim.git
 	cd "$GHQ_ROOT"/github.com/neovim/neovim || return
 	# Deal with `nightly` and `stable` tags.
 	git pull --force
@@ -824,7 +824,7 @@ install_emacs() {
 
 install_hx() {
 	echo "Installing hx..."
-	git get https://github.com/helix-editor/helix.git
+	ghq get https://github.com/helix-editor/helix.git
 	cd "$GHQ_ROOT"/github.com/helix-editor/helix || return
 	rustup override set nightly
 	cargo install --locked --path helix-term
@@ -854,7 +854,7 @@ install_direnv() {
 }
 
 install_vscode_js_debug() {
-	git get https://github.com/microsoft/vscode-js-debug.git
+	ghq get https://github.com/microsoft/vscode-js-debug.git
 	z "$GHQ_ROOT"/github.com/microsoft/vscode-js-debug
 	# https://github.com/mxsdev/nvim-dap-vscode-js/issues/19#issuecomment-1333564516
 	git switch -d v1.68.0
@@ -865,7 +865,7 @@ install_vscode_js_debug() {
 }
 
 install_vscode_node_debug2() {
-	git get https://github.com/microsoft/vscode-node-debug2.git
+	ghq get https://github.com/microsoft/vscode-node-debug2.git
 	z "$GHQ_ROOT"/github.com/microsoft/vscode-node-debug2
 	# https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#javascript
 	pnpm import
@@ -875,7 +875,7 @@ install_vscode_node_debug2() {
 }
 
 install_vscode_bash_debug() {
-	git get https://github.com/rogalmic/vscode-bash-debug.git
+	ghq get https://github.com/rogalmic/vscode-bash-debug.git
 	z "$GHQ_ROOT"/github.com/rogalmic/vscode-bash-debug
 	pnpm import
 	pnpm install
@@ -898,7 +898,7 @@ install_ruby_deps() {
 # https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-source
 install_dbus-broker() {
 	echo "Installing dbus-broker..."
-	git get https://github.com/bus1/dbus-broker.git
+	ghq get https://github.com/bus1/dbus-broker.git
 	cd "$GHQ_ROOT"/github.com/bus1/dbus-broker || return
 	install_apt_packages meson pkg-config python-docutils dbus systemd expat \
 		libsystemd-dev
@@ -922,7 +922,7 @@ install_deb-get() {
 
 install_less() {
 	echo "Installing less..."
-	git get https://github.com/gwsw/less.git
+	ghq get https://github.com/gwsw/less.git
 	cd "$GHQ_ROOT"/github.com/gwsw/less || return
 	make -f Makefile.aut distfiles
 	sh configure --prefix="${1:-$XDG_LOCAL_HOME}"
@@ -935,7 +935,7 @@ install_less() {
 }
 
 install_sudo() {
-	git get https://github.com/sudo-project/sudo.git
+	ghq get https://github.com/sudo-project/sudo.git
 	cd "$GHQ_ROOT"/github.com/sudo-project/sudo || return
 	./configure --with-passprompt="[sudo] password for %u: " || return
 	make || return
@@ -951,7 +951,7 @@ install_cpanm() {
 }
 
 install_bwrap() {
-	git get https://github.com/containers/bubblewrap.git
+	ghq get https://github.com/containers/bubblewrap.git
 	cd "$GHQ_ROOT"/github.com/containers/bubblewrap || return
 	install_apt_packages libcap-dev
 	./autogen.sh || return
@@ -968,7 +968,7 @@ install_atuin() {
 }
 
 install_picom() {
-	git get https://github.com/yshui/picom.git
+	ghq get https://github.com/yshui/picom.git
 	cd "$GHQ_ROOT"/github.com/yshui/picom || return
 	git pull
 	meson --buildtype=release . build || return
@@ -978,7 +978,7 @@ install_picom() {
 }
 
 install_ly() {
-	git get https://github.com/fairyglade/ly.git
+	ghq get https://github.com/fairyglade/ly.git
 	cd "$GHQ_ROOT"/github.com/fairyglade/ly || return
 	git pull
 	install_apt_packages build-essential libpam0g-dev libxcb-xkb-dev
@@ -990,7 +990,7 @@ install_ly() {
 }
 
 install_lemurs() {
-	git get https://github.com/coastalwhite/lemurs.git
+	ghq get https://github.com/coastalwhite/lemurs.git
 	cd "$GHQ_ROOT"/github.com/coastalwhite/lemurs || return
 	git pull
 	./install.sh
