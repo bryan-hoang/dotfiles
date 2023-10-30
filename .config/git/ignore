@@ -18,6 +18,7 @@
 svgo.config.js
 .hadolint.yaml
 .stylelintrc.cjs
+.editorconfig
 
 # VS Code related files.
 .vscode/
