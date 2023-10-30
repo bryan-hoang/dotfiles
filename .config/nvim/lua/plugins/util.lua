@@ -10,7 +10,7 @@ return {
 		cmd = "CellularAutomaton",
 		keys = {
 			{
-				"<leader>fml",
+				"<leader>ua",
 				"<Cmd>CellularAutomaton make_it_rain<CR>",
 				desc = "Make it rain",
 			},
