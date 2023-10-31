@@ -855,13 +855,13 @@ install_direnv() {
 
 install_vscode_js_debug() {
 	ghq get https://github.com/microsoft/vscode-js-debug.git
-	z "$GHQ_ROOT"/github.com/microsoft/vscode-js-debug
+	cd "$GHQ_ROOT"/github.com/microsoft/vscode-js-debug || return
 	# https://github.com/mxsdev/nvim-dap-vscode-js/issues/19#issuecomment-1333564516
 	git switch -d v1.68.0
 	pnpm import
 	pnpm install
 	pnpm compile
-	z -
+	cd - || return
 }
 
 install_vscode_node_debug2() {
