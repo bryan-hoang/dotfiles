@@ -37,8 +37,8 @@ use = ['{{ name }}.zsh']
 github = 'kaplanelad/shellfirm'
 use = ["{{ name }}.plugin.oh-my-zsh.zsh"]
 
+[plugins.pyvenv-activate]
+github = 'Intersec/pyvenv-activate'
+
 # [plugins.zsh-hist]
 # github = 'marlonrichert/zsh-hist'
-
-# [plugins.pyvenv-activate]
-# github = 'Intersec/pyvenv-activate'
