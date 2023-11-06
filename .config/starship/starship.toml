@@ -146,7 +146,7 @@ trim_at = ""
 format = '[$symbol($version )]($style)'
 
 [memory_usage]
-disabled = false
+disabled = true
 format = '$symbol[${ram}( | ${swap})]($style) '
 
 [nodejs]
@@ -195,30 +195,30 @@ disabled = true
 format = "[$user]($style)@"
 
 [custom.pnpm]
-disabled = true
 command = "pnpm --version | awk -F '.' '{print \"v\"$1}'"
 description = "The currently installed version of pnpm"
 detect_files = ['pnpm-lock.yaml']
+disabled = true
 format = '[$symbol($output )]($style)'
 style = "bold yellow"
 symbol = 'p '
 
 # To help switch between npm versions when it matters -_-
 [custom.yarn]
-disabled = true
 command = "yarn --version | awk -F '.' '{print \"v\"$1}'"
 description = "The currently installed version of yarn"
 detect_files = ['yarn.lock']
+disabled = true
 format = '[$symbol($output )]($style)'
 style = "bold blue"
 symbol = ' '
 
 # To help switch between npm versions when it matters -_-
 [custom.npm]
-disabled = true
 command = "npm --version | awk -F '.' '{print $1}'"
 description = "The currently installed version of npm"
 detect_files = ['package-lock.json']
+disabled = true
 format = '[$symbol(v$output )]($style)'
 style = "bold red"
 symbol = ' '
