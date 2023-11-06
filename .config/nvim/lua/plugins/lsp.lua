@@ -116,7 +116,6 @@ return {
 	{
 		"mfussenegger/nvim-lint",
 		opts = function(_, opts)
-			local shLinters = { "shellcheck" }
 			local cssLinters = { "stylelint" }
 
 			local user_opts = {
@@ -124,8 +123,6 @@ return {
 					dockerfile = { "hadolint" },
 					fish = {},
 					markdown = { "markdownlint", "vale" },
-					sh = shLinters,
-					zsh = shLinters,
 					dotenv = { "dotenv_linter" },
 					css = cssLinters,
 					scss = cssLinters,
