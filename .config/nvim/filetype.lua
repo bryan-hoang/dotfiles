@@ -21,7 +21,7 @@ set_file_associations({
 
 vim.filetype.add({
 	extension = {
-		mdx = "mdx",
+		mdx = "markdown.mdx",
 	},
 	filename = {
 		-- Override detection from distributed files.
