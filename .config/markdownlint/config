@@ -8,15 +8,6 @@
 		 */
 		"stern": true
 	},
-	"no-inline-html": {
-		// Allow dropdown-style elements.
-		"allowed_elements": [
-			"details",
-			"summary",
-			// To add extra spacing after `details`.
-			"br",
-			// Alternative to nested '`' inside HTMl elements.
-			"code"
-		]
-	}
+	// The rule becomes noisy in mdx files.
+	"no-inline-html": false
 }
