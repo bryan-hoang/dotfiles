@@ -3,7 +3,7 @@ local util = require("util")
 return {
 	{
 		"nvimtools/none-ls.nvim",
-		enabled = false,
+		enabled = true,
 		keys = {
 			{
 				"<Leader>cn",
