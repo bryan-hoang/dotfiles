@@ -80,7 +80,7 @@
 					"PackageIdentifier": "gerardog.gsudo"
 				},
 				{
-					"PackageIdentifier": "GoLang.Go.Unstable"
+					"PackageIdentifier": "GoLang.Go"
 				},
 				{
 					"PackageIdentifier": "7zip.7zip"
