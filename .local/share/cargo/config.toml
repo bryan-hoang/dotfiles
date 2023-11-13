@@ -1,13 +1,17 @@
 # https://doc.rust-lang.org/cargo/reference/config.html
 
+[build]
+# https://blog.rust-lang.org/2023/11/09/parallel-rustc.html#how-to-use-it
+rustflags = ["-Z", "threads=8"]
+
 # https://doc.rust-lang.org/nightly/cargo/reference/unstable.html
 [unstable]
 [unstable.gitoxide]
-fetch = true
-shallow_index = true
-shallow_deps = true
 checkout = true
+fetch = true
 internal_use_git2 = false
+shallow_deps = true
+shallow_index = true
 
 # The [net] table controls networking configuration.
 [net]
