@@ -189,7 +189,6 @@ mkdir -p "$(dirname "$HISTFILE")"
 export TEXMFHOME="$XDG_DATA_HOME"/texmf
 export TEXMFVAR="$XDG_CACHE_HOME"/texlive/texmf-var
 export TEXMFCONFIG="$XDG_CONFIG_HOME"/texlive/texmf-config
-export CONDARC="$XDG_CONFIG_HOME"/conda/condarc
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 chmod 600 "$GNUPGHOME"/*
