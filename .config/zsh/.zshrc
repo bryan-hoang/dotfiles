@@ -172,6 +172,9 @@ does_command_exist atuin && eval "$(atuin init zsh)"
 does_command_exist navi && eval "$(navi widget zsh)"
 does_command_exist zoxide && eval "$(zoxide init zsh)"
 does_command_exist broot && eval "$(broot --print-shell-function zsh)"
+# Conda
+does_command_exist conda && eval "$(conda shell.zsh hook 2>/dev/null)"
+
 
 # # shellcheck disable=SC1091
 # if [[ -f "${XDG_CONFIG_HOME:-${HOME}/.config}/asdf-direnv/zshrc" ]]; then

@@ -113,6 +113,10 @@ format = '[$duration]($style) '
 min_time = 2_000
 show_notifications = true
 
+[conda]
+format = "[$symbol$environment]($style) "
+ignore_base = false
+
 [container]
 format = '[$symbol ]($style)'
 
