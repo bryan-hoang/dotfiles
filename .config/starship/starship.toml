@@ -108,6 +108,10 @@ success_symbol = '[\$](bold green)'
 [cobol]
 format = "[$symbol($version )]($style)"
 
+[cmake]
+format = "[$symbol($version )]($style)"
+version_format = "v${major}.${minor}"
+
 [cmd_duration]
 format = '[$duration]($style) '
 min_time = 2_000
