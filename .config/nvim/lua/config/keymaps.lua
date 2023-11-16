@@ -2,6 +2,10 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+local discipline = require("bryan-hoang.discipline")
+
+discipline.cowboy()
+
 -- Add newlines above and below the cursor in normal mode. Source:
 -- `tummetott/unimpaired.nvim`.
 vim.keymap.set("n", "]<Space>", function()

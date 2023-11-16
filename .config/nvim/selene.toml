@@ -1,1 +1,5 @@
 std = "neovim"
+
+[lints]
+# `lazy.nvim`'s plugin spec tables makes this lint rule noisy.
+mixed_table = "allow"
