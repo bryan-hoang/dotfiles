@@ -155,7 +155,6 @@ alias muc='muc --count 16'
 alias ec='emacsclient --tty'
 alias ruby='ruby --yjit'
 alias commitlint='commitlint --config ~/.config/commitlint/commitlint.config.js --extends $(pnpm root --global)/@commitlint/config-conventional'
-alias make='make --jobs $(nproc)'
 alias restart-tmux='systemctl --user stop tmux && update_tmux_env && tmux attach'
 command -v watchexec >/dev/null \
 	&& alias watchexec='watchexec --project-origin . --clear=reset --restart --notify'
