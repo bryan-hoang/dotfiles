@@ -193,6 +193,7 @@ export TEXMFVAR="$XDG_CACHE_HOME"/texlive/texmf-var
 export TEXMFCONFIG="$XDG_CONFIG_HOME"/texlive/texmf-config
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+mkdir -p "$GNUPGHOME" "$GNUPGHOME"/private-keys-v1.d
 chmod 600 "$GNUPGHOME"/*
 chmod 700 "$GNUPGHOME" "$GNUPGHOME"/private-keys-v1.d
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
