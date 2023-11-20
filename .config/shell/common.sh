@@ -86,6 +86,8 @@ does_command_exist bob \
 	&& generate_completions bob bob complete "$SHELL_BASENAME"
 does_command_exist rye \
 	&& generate_completions rye rye self completion --shell "$SHELL_BASENAME"
+does_command_exist gt \
+	&& generate_completions gt gt completion
 
 # Doesn't support bash.
 does_command_exist bw \
