@@ -26,22 +26,24 @@ return {
 				sources = {
 					-- Markdown/text
 					b.hover.dictionary,
-					b.diagnostics.ltrs.with({
-						diagnostics_postprocess = function(diagnostic)
-							diagnostic.severity = vim.diagnostic.severity["HINT"]
-						end,
-						-- Add `gitcommit` to the list.
-						filetypes = { "text", "markdown", "gitcommit" },
-						-- Filter frontmatter lines to prevent cli parsing issues.
-						args = {
-							"check",
-							"-m",
-							"-r",
-							"--text",
-							"$(echo \"$TEXT\" | sed '/---/d')",
-						},
-					}),
-					b.code_actions.ltrs,
+					-- LanguageTool costs money for a decent experience. So, I'm switching
+					-- to a free alternative.
+					-- b.diagnostics.ltrs.with({
+					-- 	diagnostics_postprocess = function(diagnostic)
+					-- 		diagnostic.severity = vim.diagnostic.severity["HINT"]
+					-- 	end,
+					-- 	-- Add `gitcommit` to the list.
+					-- 	filetypes = { "text", "markdown", "gitcommit" },
+					-- 	-- Filter frontmatter lines to prevent cli parsing issues.
+					-- 	args = {
+					-- 		"check",
+					-- 		"-m",
+					-- 		"-r",
+					-- 		"--text",
+					-- 		"$(echo \"$TEXT\" | sed '/---/d')",
+					-- 	},
+					-- }),
+					-- b.code_actions.ltrs,
 					b.code_actions.proselint,
 					b.code_actions.cspell,
 					b.diagnostics.cspell.with({
