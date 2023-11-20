@@ -328,10 +328,4 @@ return {
 			},
 		},
 	},
-	{
-		-- 🎈 Floating statuslines for Neovim.
-		"b0o/incline.nvim",
-		event = "VeryLazy",
-		opts = {},
-	},
 }

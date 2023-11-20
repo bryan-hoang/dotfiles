@@ -91,4 +91,16 @@ return {
 		"echasnovski/mini.indentscope",
 		enabled = false,
 	},
+	{
+		-- 🎈 Floating statuslines for Neovim.
+		"b0o/incline.nvim",
+		event = "VeryLazy",
+		opts = {
+			window = {
+				placement = {
+					vertical = "bottom",
+				},
+			},
+		},
+	},
 }
