@@ -13,3 +13,6 @@ brew "clipboard"
 # GIT utilities -- repo summary, repl, changelog population, author commit
 # percentages and more (tj/git-extras).
 brew "git-extras"
+# Command-line tools for working with Architecture Decision Records (ADRs).
+# (npryce/adr-tools)
+brew "adr-tools"
