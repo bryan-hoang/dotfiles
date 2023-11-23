@@ -141,3 +141,5 @@ end
 -- Disabled due to a rendering bug in `vscode-neovim`. i.e.,
 -- https://github.com/vscode-neovim/vscode-neovim/issues/1352
 opt.colorcolumn = { "+0", "+20", "+40" }
+
+vim.env.FORCE_COLOR = nil
