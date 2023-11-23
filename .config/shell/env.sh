@@ -129,6 +129,8 @@ command -v pnpm >/dev/null \
 
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 
+# Colors
+
 # -X leaves file contents on the screen when less exits.
 #
 # -F makes less quit if the entire output can be displayed on one screen.
@@ -137,20 +139,11 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 #
 # -x Sets tab stops.
 export LESS='-XFR -x 2'
-
-# Hide the "default interactive shell is now zsh" warning on macOS.
-export BASH_SILENCE_DEPRECATION_WARNING=1
-
-# Locale
-export LC_ALL=C.UTF-8
-
-export FORCE_COLOR=true
-export SHELLCHECK_OPTS='-x'
-export GHQ_ROOT="$HOME"/src
-
-command -v wezterm >/dev/null \
-	&& export TERMINAL=wezterm
-
+# https://force-color.org/
+export FORCE_COLOR=1
+command -v vivid >/dev/null \
+	&& LS_COLORS="$(vivid generate dracula)" \
+	&& export LS_COLORS
 case ${TERM} in
 	# WSL in windows Terminal colour support.
 	xterm-256color | wezterm)
@@ -158,10 +151,16 @@ case ${TERM} in
 		;;
 	*) ;;
 esac
+export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
 
-command -v vivid >/dev/null \
-	&& LS_COLORS="$(vivid generate dracula)" \
-	&& export LS_COLORS
+# Hide the "default interactive shell is now zsh" warning on macOS.
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+# Locale
+export LC_ALL=C.UTF-8
+
+export SHELLCHECK_OPTS='-x'
+export GHQ_ROOT="$HOME"/src
 
 export WEZTERM_CONFIG_FILE="$XDG_CONFIG_HOME"/wezterm/wezterm.lua
 
@@ -262,7 +261,6 @@ mkdir -p "$SRC_DIR"
 export BASH_COMPLETION_USER_DIR="$XDG_DATA_HOME"/bash-completion
 mkdir -p "$BASH_COMPLETION_USER_DIR"/completions
 export COMPOSER_HOME="$XDG_CONFIG_HOME"/composer
-export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
 # shellcheck disable=SC2154
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 export TERMINFO="$XDG_DATA_HOME"/terminfo
