@@ -130,15 +130,14 @@ return {
 					-- https://github.com/kampfkarren/selene/issues/340#issuecomment-1191992366
 					lua = { "selene" },
 					python = { "ruff" },
+					gitcommit = { "commitlint", "vale" },
+					["*"] = { "typos" },
 				},
 				linters = {
 					-- TODO: Contribute `ltrs`, `typos`, `markuplint`, `commitlint`,
 					-- `editorconfig_checker`, to `nvim-lint`!
 					-- ltrs = {
 					-- 	cmd = "ltrs",
-					-- },
-					-- typos = {
-					-- 	cmd = "typos",
 					-- },
 				},
 			}

@@ -46,61 +46,8 @@ return {
 					-- b.code_actions.ltrs,
 					b.code_actions.proselint,
 					b.code_actions.cspell,
-					b.diagnostics.cspell.with({
-						-- Fails to spawn on windows unless it's called with the extension.
-						command = "cspell" .. (util.is_os_unix and "" or ".cmd"),
-						env = {
-							FORCE_COLOR = "false",
-						},
-						-- https://github.com/jose-elias-alvarez/null-ls.nvim/issues/538#issuecomment-1037319978
-						diagnostics_postprocess = function(diagnostic)
-							diagnostic.severity = vim.diagnostic.severity["HINT"]
-						end,
-						diagnostic_config = {
-							virtual_text = false,
-						},
-					}),
+					b.diagnostics.cspell,
 					b.diagnostics.markuplint,
-					-- Git commits
-					b.diagnostics.commitlint.with({
-						-- Fails to spawn on windows unless it's called with the extension.
-						command = util.is_os_unix and "commitlint" or "pwsh",
-						args = function(_params)
-							local args = {
-								"--format",
-								"commitlint-format-json",
-								"--config",
-								vim.fn.expand(
-									"$XDG_CONFIG_HOME/commitlint/commitlint.config.js"
-								),
-								"--extends",
-								vim.fn.expand(
-									vim
-										.fn
-										.system({
-											"pnpm",
-											"root",
-											"--global",
-										})
-										-- Remove trailing newline character.
-										:match(
-											"^%s*(.*%S)"
-										) .. "/@commitlint/config-conventional"
-								),
-							}
-
-							if not util.is_os_unix then
-								table.insert(
-									args,
-									1,
-									vim.fn.expand("$PNPM_HOME") .. "/commitlint.ps1"
-								)
-							end
-
-							return args
-						end,
-					}),
-
 					b.diagnostics.editorconfig_checker.with({
 						command = "editorconfig-checker",
 					}),

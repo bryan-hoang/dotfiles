@@ -123,6 +123,10 @@ export NODE_REPL_HISTORY_SIZE="$HISTFILESIZE"
 export NODE_REPL_MODE=sloppy
 export NODE_INSPECT_RESUME_ON_START=1
 
+command -v pnpm >/dev/null \
+	&& NODE_PATH="$(pnpm root --global)" \
+	&& export NODE_PATH
+
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 
 # -X leaves file contents on the screen when less exits.
