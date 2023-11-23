@@ -8,7 +8,7 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{py,yml,yaml,md,kdl,hjson}]
+[*.{py,yml,yaml,kdl,hjson}]
 indent_style = space
 
 [*gemrc]
