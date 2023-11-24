@@ -80,18 +80,6 @@ return {
 		enabled = false,
 	},
 	{
-		"lukas-reineke/indent-blankline.nvim",
-		opts = {
-			scope = {
-				enabled = true,
-			},
-		},
-	},
-	{
-		"echasnovski/mini.indentscope",
-		enabled = false,
-	},
-	{
 		-- 🎈 Floating statuslines for Neovim.
 		"b0o/incline.nvim",
 		event = "VeryLazy",
