@@ -84,6 +84,7 @@ return {
 					zsh = shFormatters,
 					toml = { "taplo" },
 					json = { prettier },
+					jsonc = { prettier },
 					yaml = { prettier },
 					html = { prettier },
 					markdown = { "markdownlint", prettier },
