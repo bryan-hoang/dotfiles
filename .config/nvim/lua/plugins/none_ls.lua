@@ -45,8 +45,6 @@ return {
 					-- }),
 					-- b.code_actions.ltrs,
 					b.code_actions.proselint,
-					b.code_actions.cspell,
-					b.diagnostics.cspell,
 					b.diagnostics.markuplint,
 					b.diagnostics.editorconfig_checker.with({
 						command = "editorconfig-checker",
