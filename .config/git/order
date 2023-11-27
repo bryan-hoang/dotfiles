@@ -3,6 +3,7 @@
 *.config.*
 *rc.*
 *index.*
+*scripts/*
 *src/*
 *lib/*
 *tests/*
