@@ -1,5 +1,8 @@
 // https://commitlint.js.org/#/reference-configuration
-module.exports = {
+
+import type { UserConfig } from '@commitlint/types';
+
+export default {
 	extends: ['@commitlint/config-conventional'],
 	rules: {
 		'header-max-length': [2, 'always', 50],
@@ -8,4 +11,4 @@ module.exports = {
 		'signed-off-by': [1, 'always', 'Reviewed-by'],
 		'trailer-exists': [1, 'always', 'Refs'],
 	},
-};
+} satisfies UserConfig;

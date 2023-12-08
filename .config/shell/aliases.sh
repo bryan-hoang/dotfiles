@@ -154,8 +154,6 @@ alias watch='watch --color'
 alias muc='muc --count 16'
 alias ec='emacsclient --tty'
 alias ruby='ruby --yjit'
-command -v commitlint >/dev/null &&\
-	alias commitlint='commitlint --extends ~/.config/commitlint/commitlint.config.cjs'
 alias restart-tmux='systemctl --user stop tmux && update_tmux_env && tmux attach'
 command -v watchexec >/dev/null \
 	&& alias watchexec='watchexec --project-origin . --clear=reset --restart --notify'
