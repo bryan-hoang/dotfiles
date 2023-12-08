@@ -1,21 +1,37 @@
-default-page-size = 50
-# Directory to use when downloading attachments.
+# https://github.com/soywod/himalaya
+# https://pimalaya.org/himalaya/
+
+# Represents the full display name of the user. It is used for building the
+# sender address From when composing emails.
+display-name = "Bryan Hoang"
+# Represents the signature to add at the bottom of all emails. It can be a
+# string or a path to a signature file. The signature supports TOML multiline.
+signature = """
+Bryan Hoang
+Software Developer
+bryan@bryanhoang.dev
+"""
+# Represents the directory to download attachments in.
 downloads-dir = "~/Downloads"
-# Full display name of the user.
-name = "Bryan Hoang"
-# Signature to add at the bottom of all messages.
-signature = "Best regards,\nBryan Hoang"
 
-[gmail]
+[personal]
 default = true
-email = "bryan.c.hoang@gmail.com"
+email = "bryan@bryanhoang.dev"
 
-imap-host = "imap.gmail.com"
-imap-login = "bryan.c.hoang@gmail.com"
-imap-passwd-cmd = "pass show gmail"
-imap-port = 993
+backend = "imap"
+imap-host = "127.0.0.1"
+imap-auth = "passwd"
+imap-login = "bryan@bryanhoang.dev"
+imap-passwd-cmd = "pass show email/protonmail"
+imap-port = 1143
+imap-starttls = true
 
-smtp-host = "smtp.gmail.com"
-smtp-login = "bryan.c.hoang@gmail.com"
-smtp-passwd-cmd = "pass show gmail"
-smtp-port = 465
+sender = "smtp"
+smtp-host = "127.0.0.1"
+smtp-auth = "passwd"
+smtp-login = "bryan@bryanhoang.dev"
+smtp-passwd-cmd = "pass show email/protonmail"
+smtp-port = 1025
+smtp-starttls = true
+
+[personal.folder-aliases]
