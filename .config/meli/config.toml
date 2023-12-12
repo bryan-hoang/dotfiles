@@ -1,0 +1,18 @@
+# https://github.com/meli/meli/blob/master/meli/docs/samples/sample-config.toml
+
+[accounts.personal]
+format = "imap"
+root_mailbox = "INBOX"
+server_hostname = "127.0.0.1"
+server_username = "bryan@bryanhoang.dev"
+server_password_command = "pass email/protonmail"
+server_port = 1143
+use_starttls = true
+composing.send_mail = { hostname = "127.0.0.1", port = 1025, auth = { type = "auto", username = "bryan@bryanhoang.dev", password = { type = "command_eval", value = "pass email/protonmail" } }, security = { type = "STARTTLS" } }
+listing.index_style = "Conversations"
+identity = "bryan@bryanhoang.dev"
+display_name = "Bryan Hoang"
+subscribed_mailboxes = ["*"]
+
+[composing]
+send_mail = 'false'
