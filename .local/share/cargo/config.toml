@@ -6,6 +6,7 @@ rustflags = ["-Z", "threads=8"]
 
 # https://doc.rust-lang.org/nightly/cargo/reference/unstable.html
 [unstable]
+gc = true
 [unstable.gitoxide]
 checkout = true
 fetch = true
