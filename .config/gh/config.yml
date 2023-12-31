@@ -19,3 +19,4 @@ aliases:
 
 # traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
+version: '1'
