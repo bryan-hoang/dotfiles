@@ -73,3 +73,6 @@
 [submodule "dracula/lsd"]
 	path = src/github.com/dracula/lsd
 	url = https://github.com/dracula/lsd.git
+[submodule "akinomyoga/ble.sh"]
+	path = src/github.com/akinomyoga/ble.sh
+	url = https://github.com/akinomyoga/ble.sh.git

@@ -144,6 +144,9 @@ __git_complete dot __git_main
 [[ -f "$GHQ_ROOT"/github.com/rcaloras/bash-preexec/bash-preexec.sh ]] \
 	&& . "$GHQ_ROOT"/github.com/rcaloras/bash-preexec/bash-preexec.sh
 
+[[ -f "$XDG_DATA_HOME"/blesh/ble.sh ]] \
+	&& . "$XDG_DATA_HOME"/blesh/ble.sh
+
 is_interactive_shell && does_command_exist navi && eval "$(navi widget bash)"
 does_command_exist zoxide && eval "$(zoxide init bash)"
 does_command_exist gh && eval "$(gh completion -s bash)"
