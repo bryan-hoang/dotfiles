@@ -8,6 +8,7 @@ $kubernetes\
 $directory\
 $vcsh\
 $fossil_branch\
+$fossil_metrics\
 ${custom.git_url}\
 $git_branch\
 $git_commit\
@@ -59,8 +60,10 @@ $red\
 $ruby\
 $rust\
 $scala\
+$solidity\
 $swift\
 $terraform\
+$typst\
 $vlang\
 $vagrant\
 $zig\
@@ -74,6 +77,7 @@ $aws\
 $gcloud\
 $openstack\
 $azure\
+$direnv\
 $env_var\
 $crystal\
 $custom\
@@ -130,6 +134,9 @@ format = "[$path]($style)[$read_only]($read_only_style) "
 [deno]
 format = '[$symbol($version )]($style)'
 version_format = 'v${major}.${minor}'
+
+[direnv]
+disabled = true
 
 [docker_context]
 disabled = true
