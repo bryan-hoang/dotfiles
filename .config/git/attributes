@@ -14,4 +14,4 @@ AppData/Roaming/streamlink/config filter=streamlink-crunchyroll
 .config/X11/xresources filter=xresources-dpi
 .config/git/config filter=git-config
 .config/macchina/macchina.toml filter=macchina
-.config/rtx/config.toml filter=rtx
+.config/mise/config.toml filter=mise

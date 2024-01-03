@@ -167,7 +167,7 @@ return {
 		ft = "python",
 		config = function()
 			local dap_python = require("dap-python")
-			dap_python.setup(os.getenv("XDG_DATA_HOME") .. "/rtx/shims/python")
+			dap_python.setup(os.getenv("XDG_DATA_HOME") .. "/mise/shims/python")
 		end,
 	},
 }

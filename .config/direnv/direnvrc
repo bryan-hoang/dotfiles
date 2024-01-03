@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-# https://github.com/jdxcode/rtx#rtx-inside-of-direnv-use-rtx-in-envrc
-use rtx >/dev/null 2>&1 || true
+# https://github.com/jdxcode/mise#mise-inside-of-direnv-use-mise-in-envrc
+use mise >/dev/null 2>&1 || true
 
 source_up_if_exists .envrc
 # Loads a “.env.local” file into the current environment, but only if it exists.

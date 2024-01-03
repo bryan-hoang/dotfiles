@@ -194,7 +194,7 @@
 [filter "macchina"]
 	smudge = cat
 	clean = "sed '/^interface =/d'"
-[filter "rtx"]
+[filter "mise"]
 	smudge = cat
 	clean = "sed -E -e '/^\\[tools\\]/,/^\\[/{/^\\[tools\\]/!{/\\[/!d}}' -e '/^\\[env\\]/,/^\\[/{/^\\[env\\]/!{/\\[/!d}}'"
 [help]

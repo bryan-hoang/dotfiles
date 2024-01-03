@@ -12,18 +12,18 @@ done
 # Source: https://unix.stackexchange.com/a/37535
 SHELL_BASENAME=$(basename "$(readlink -f /proc/$$/exe)")
 
-# Temporarily add rtx bin-paths to $PATH.
+# Temporarily add mise bin-paths to $PATH.
 OLD_PATH=$PATH
 
-# https://github.com/jdxcode/rtx#rtx-inside-of-direnv-use-rtx-in-envrc
-[[ ! -s ~/.config/direnv/lib/use_rtx.sh ]] \
+# https://github.com/jdxcode/mise#mise-inside-of-direnv-use-mise-in-envrc
+[[ ! -s ~/.config/direnv/lib/use_mise.sh ]] \
 	&& does_command_exist direnv \
-	&& does_command_exist rtx \
+	&& does_command_exist mise \
 	&& mkdir -p "$XDG_CONFIG_HOME"/direnv/lib \
-	&& rtx direnv activate >"$XDG_CONFIG_HOME"/direnv/lib/use_rtx.sh
+	&& mise direnv activate >"$XDG_CONFIG_HOME"/direnv/lib/use_mise.sh
 does_command_exist direnv && eval "$(direnv hook "$SHELL_BASENAME")"
-does_command_exist rtx && eval "$(rtx activate "$SHELL_BASENAME")" \
-	&& PATH=$(rtx bin-paths | paste -sd :):$PATH
+does_command_exist mise && eval "$(mise activate "$SHELL_BASENAME")" \
+	&& PATH=$(mise bin-paths | paste -sd :):$PATH
 
 if [[ -n $SSH_CONNECTION ]] \
 	&& [[ -z $TMUX ]] \
@@ -63,8 +63,8 @@ does_command_exist cht.sh \
 	&& generate_completions cht.sh curl https://cheat.sh/:zsh
 does_command_exist cog \
 	&& generate_completions cog cog generate-completions "$SHELL_BASENAME"
-does_command_exist rtx \
-	&& generate_completions rtx rtx complete --shell "$SHELL_BASENAME"
+does_command_exist mise \
+	&& generate_completions mise mise complete --shell "$SHELL_BASENAME"
 does_command_exist watchexec \
 	&& generate_completions watchexec watchexec --completions "$SHELL_BASENAME" \
 	&& generate_man_pages watchexec watchexec --manual

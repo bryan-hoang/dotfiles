@@ -4,8 +4,6 @@ cargo-cache
 # The minimal, blazing-fast, and infinitely customizable prompt for any shell
 # (starship/starship)!
 starship
-# Runtime Executor (asdf rust clone).
-# rtx-cli
 # A cargo subcommand for checking and applying updates to installed
 # executables.
 cargo-update
@@ -175,6 +173,8 @@ dprint
 
 # Windows Incompatible.
 
+# Dev tools, env vars, task runner.
+# mise
 # 🐢 Magical shell history (ellie/atuin).
 # antuin
 # 🤖 The Modern Port Scanner 🤖.

@@ -69,8 +69,8 @@ zsh-syntax-highlighting-dracula.plugin.zsh
 # Doom Emacs folder. Not sure why it's not ignored by default.
 /hooks
 
-# rtx config file for tool versions.
-.rtx.toml
+# mise config file for tool versions.
+.mise.toml
 
 # LSP config file. e.g., to add plugins for rails.
 .solargraph.yml
