@@ -1,5 +1,10 @@
 #!/usr/bin/env sh
 
+if [ -z "${USER:-}" ]; then
+	USER="$(id -un 2>/dev/null)"
+	export USER
+fi
+
 export XDG_LOCAL_HOME="$HOME"/.local
 export XDG_BIN_HOME="$XDG_LOCAL_HOME"/bin
 export XDG_DATA_HOME="$XDG_LOCAL_HOME"/share
