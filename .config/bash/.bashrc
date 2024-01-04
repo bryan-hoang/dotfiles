@@ -9,6 +9,9 @@ case $- in
 	*) return ;;
 esac
 
+[[ -f "$XDG_DATA_HOME"/blesh/ble.sh ]] \
+	&& . "$XDG_DATA_HOME"/blesh/ble.sh --noattach
+
 # Setting shell options
 
 # Configure Ctril-w to delete words like ZSH.
@@ -144,9 +147,6 @@ __git_complete dot __git_main
 [[ -f "$GHQ_ROOT"/github.com/rcaloras/bash-preexec/bash-preexec.sh ]] \
 	&& . "$GHQ_ROOT"/github.com/rcaloras/bash-preexec/bash-preexec.sh
 
-[[ -f "$XDG_DATA_HOME"/blesh/ble.sh ]] \
-	&& . "$XDG_DATA_HOME"/blesh/ble.sh
-
 is_interactive_shell && does_command_exist navi && eval "$(navi widget bash)"
 does_command_exist zoxide && eval "$(zoxide init bash)"
 does_command_exist gh && eval "$(gh completion -s bash)"
@@ -159,3 +159,5 @@ does_command_exist atuin && eval "$(atuin init bash)"
 if is_git_bash; then
 	start_ssh_agent
 fi
+
+[[ ${BLE_VERSION-} ]] && ble-attach
