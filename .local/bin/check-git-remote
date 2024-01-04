@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/usr/bin/env sh
 
 GIT_REMOTE=$(git ls-remote --get-url 2>/dev/null)
 case "$GIT_REMOTE" in
