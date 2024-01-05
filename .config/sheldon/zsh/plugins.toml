@@ -23,15 +23,18 @@ defer = "{{ hooks | get: \"pre\" | nl }}{% for file in files %}zsh-defer source 
 [plugins.oh-my-zsh]
 github = 'ohmyzsh/ohmyzsh'
 
-[plugins.zsh-syntax-highlighting-dracula]
-github = 'dracula/zsh-syntax-highlighting'
-
 [plugins.zsh-syntax-highlighting]
 github = 'zsh-users/zsh-syntax-highlighting'
 
 [plugins.zsh-autosuggestions]
 github = 'zsh-users/zsh-autosuggestions'
 use = ['{{ name }}.zsh']
+
+# [plugins.zsh-completions]
+# github = "zsh-users/zsh-completions"
+
+[plugins.zsh-syntax-highlighting-dracula]
+github = 'dracula/zsh-syntax-highlighting'
 
 [plugins.shellfirm]
 github = 'kaplanelad/shellfirm'
