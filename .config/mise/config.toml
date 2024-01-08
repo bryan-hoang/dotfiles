@@ -1,7 +1,3 @@
-[settings]
-experimental = true
-legacy_version_file = false
-
 [alias]
 [env]
 [tools]
