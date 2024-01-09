@@ -48,7 +48,7 @@ remote_topgrade_path = ".local/share/cargo/bin/topgrade"
 # no_retry = true
 
 # Run inside tmux (default: false)
-run_in_tmux = true
+# run_in_tmux = true
 
 # Cleanup temporary or old files (default: false)
 # cleanup = true
@@ -100,8 +100,8 @@ enable_pipupgrade = true       ###disabled by default
 #self_update = true
 
 [brew]
-greedy_cask = true
 autoremove = true
+greedy_cask = true
 
 [linux]
 # Arch Package Manager to use.
