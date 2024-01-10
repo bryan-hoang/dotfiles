@@ -4,11 +4,24 @@ tap "homebrew/bundle"
 # – all in one.
 # tap "oven-sh/bun"
 # brew "bun"
-brew "hadolint"
-brew "lua-language-server"
-brew "marksman"
+# ✨ Magical shell history (atuinsh/atuin).
+brew "atuin"
+# Fast, disk space efficient package manager (pnpm/pnpm).
 brew "pnpm"
+# Dockerfile linter, validate inline bash, written in Haskell
+# (hadolint/hadolint).
+brew "hadolint"
+# A language server that offers Lua language support - programmed in Lua
+# (LuaLS/lua-language-server).
+brew "lua-language-server"
+# Write Markdown with code assist and intelligence in the comfort of your
+# favourite editor (artempyanykh/marksman).
+brew "marksman"
+# 📝 A markup-aware linter for prose built with speed and extensibility in mind
+# (errata-ai/vale).
 brew "vale"
+# 😎🏖️🐬 Your new, 𝙧𝙞𝙙𝙤𝙣𝙠𝙪𝙡𝙞𝙘𝙞𝙤𝙪𝙨𝙡𝙮 smart clipboard manager
+# (Slackadays/Clipboard).
 brew "clipboard"
 # GIT utilities -- repo summary, repl, changelog population, author commit
 # percentages and more (tj/git-extras).
