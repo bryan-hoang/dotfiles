@@ -49,7 +49,7 @@ indent_size = 4
 indent_style = space
 indent_size = 4
 
-[Makefile]
+[{Makefile,*.mk}]
 indent_size = unset
 
 [Tiltfile]
