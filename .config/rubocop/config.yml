@@ -20,6 +20,9 @@ Layout/HashAlignment:
   Enabled: true
   EnforcedColonStyle: key
   EnforcedLastArgumentHashStyle: always_inspect
+Layout/MultilineMethodCallIndentation:
+  # `rubyfmt`
+  EnforcedStyle: indented
 
 # https://docs.rubocop.org/rubocop/cops_style.html
 Style/TrailingCommaInArguments:

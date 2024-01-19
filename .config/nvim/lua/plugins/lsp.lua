@@ -94,6 +94,7 @@ return {
 					typescript = jsFormatters,
 					javascriptreact = jsFormatters,
 					typescriptreact = jsFormatters,
+					ruby = { "rubyfmt", "rubocop" },
 					-- rust = { "rustfmt" },
 				},
 				-- LazyVim will merge the options you set here with builtin formatters.
