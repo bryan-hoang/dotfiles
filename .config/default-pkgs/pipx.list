@@ -2,6 +2,8 @@
 ruff
 # A Language Server Protocol implementation for Ruff (astral-sh/ruff-lsp).
 ruff-lsp
+# Static Type Checker for Python (microsoft/pyright).
+pyright
 # pylint
 # black
 # bandit
