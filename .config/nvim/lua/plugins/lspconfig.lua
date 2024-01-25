@@ -75,9 +75,11 @@ return {
 					ruff_lsp = {
 						mason = false,
 					},
+					-- Lua
 					lua_ls = {
 						mason = false,
 					},
+					-- Shell script
 					bashls = {
 						mason = false,
 						filetypes = { "sh", "zsh" },
