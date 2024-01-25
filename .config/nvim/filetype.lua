@@ -17,6 +17,7 @@ set_file_associations({
 	cfg = { "dunstrc" },
 	starlark = { "Tiltfile" },
 	dotenv = { ".*%.env%..*" },
+	ruby = { ".*/%.config/pry/pryrc" },
 })
 
 vim.filetype.add({
