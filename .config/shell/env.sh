@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-if [ -z "${USER:-}" ]; then
+if [ "${USER:-}" = "" ]; then
 	USER="$(id -un 2>/dev/null)"
 	export USER
 fi
@@ -98,9 +98,11 @@ export SUDO_EDITOR="$EDITOR"
 
 export GOMODCACHE="$XDG_CACHE_HOME"/go
 
-# Increase history size. The default is 500.
+# Increase history size.
 export HISTFILESIZE=8192
+# From bash, default is 500 (see `man bash`).
 export HISTSIZE="$HISTFILESIZE"
+# From zsh (see `man zshparam`).
 export SAVEHIST="$HISTFILESIZE"
 
 # Omit duplicates and commands that begin with a space from history.
@@ -181,8 +183,9 @@ export EXA_STRICT=true
 export PYTHONIOENCODING=UTF-8
 
 # Don't set PYTHONUSERBASE to avoid issues with asdf installing python.
-export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME"/python
 export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc.py
+export PYTHON_HISTORY="$XDG_STATE_HOME"/python/history
+export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME"/python
 
 # https://wiki.archlinux.org/title/XDG_Base_Directory#Specification
 
