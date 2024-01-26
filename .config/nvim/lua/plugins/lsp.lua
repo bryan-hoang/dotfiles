@@ -131,7 +131,6 @@ return {
 					-- May or may not want
 					-- https://github.com/kampfkarren/selene/issues/340#issuecomment-1191992366
 					lua = { "selene" },
-					python = { "ruff" },
 					gitcommit = { "commitlint", "vale" },
 					["*"] = { "typos" },
 				},
