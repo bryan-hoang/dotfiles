@@ -328,4 +328,22 @@ return {
 			},
 		},
 	},
+	{
+		-- A lua neovim plugin to generate shareable file permalinks (with line
+		-- ranges) for several git web frontend hosts. Inspired by
+		-- tpope/vim-fugitive's `:GBrowse`.
+		"ruifm/gitlinker.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		keys = {
+			{
+				"<Leader>gy",
+				"<Cmd>lua require('gitlinker').get_buf_range_url('n')<CR>",
+				mode = { "n", "v" },
+				desc = "Generate shareable permalink",
+			},
+		},
+		opts = {
+			mappings = nil,
+		},
+	},
 }
