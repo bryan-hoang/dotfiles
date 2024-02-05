@@ -70,7 +70,7 @@ set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @resurrect-strategy-nvim 'session'
 # Restore pane contents.
 set -g @resurrect-capture-pane-contents 'on'
-set -g @resurrect-processes 'hx emacsclient watchexec glab pnpm pipes-rs mysql sql journalctl btm spt genact "~bin/rails s->bin/rails *"'
+set -g @resurrect-processes 'hx emacsclient watchexec glab pnpm pipes-rs mysql sql journalctl btm spt genact "~puma->bin/rails s"'
 
 # Continuous saving of tmux environment. Automatic restore when tmux is started.
 # Automatic tmux start when computer is turned on.
