@@ -327,3 +327,7 @@ export GHCUP_USE_XDG_DIRS=1
 export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
 export BOB_CONFIG="$XDG_CONFIG_HOME"/bob/config.json
 export TAPLO_CONFIG="$XDG_CONFIG_HOME"/taplo/.taplo.toml
+# Hide messages from npm installing.
+export DISABLE_OPENCOLLECTIVE=1
+export ADBLOCK=1
+export SUPPRESS_SUPPORT=1
