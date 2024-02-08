@@ -833,6 +833,15 @@ install_hx() {
 	echo "Installed hx successfully!"
 }
 
+install_argbash() {
+	ghq get https://github.com/matejak/argbash.git
+	cd "$GHQ_ROOT"/github.com/matejak/argbash/resources || return
+	git pull
+	make install
+	command -v argbash
+	argbash --version
+}
+
 install_pwsh() {
 	echo 'Installing pwsh...'
 	local -r file_pattern='powershell_*-1.deb_amd64.deb'
