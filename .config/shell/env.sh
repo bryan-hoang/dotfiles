@@ -138,14 +138,17 @@ export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 
 # Colors
 
-# -X leaves file contents on the screen when less exits.
+# -F|--quit-if-one-screen - makes less quit if the entire output can be
+# displayed on one screen.
 #
-# -F makes less quit if the entire output can be displayed on one screen.
+# -R|--RAW-CONTROL-CHARS - displays ANSI color escape sequences in "raw" form.
 #
-# -R displays ANSI color escape sequences in "raw" form.
+# -I|--IGNORE-CASE
 #
-# -x Sets tab stops.
-export LESS='-XFR -x 2'
+# -X|--no-init - leaves file contents on the screen when less exits.
+#
+# -xn|--tabs=n Sets tab stops.
+export LESS='-FIRXx2'
 # https://force-color.org/
 export FORCE_COLOR=1
 command -v vivid >/dev/null \
