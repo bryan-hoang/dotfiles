@@ -64,9 +64,6 @@
 [submodule "doomemacs/doomemacs"]
 	path = src/github.com/doomemacs/doomemacs
 	url = https://github.com/doomemacs/doomemacs.git
-[submodule "rcaloras/bash-preexec"]
-	path = src/github.com/rcaloras/bash-preexec
-	url = https://github.com/rcaloras/bash-preexec.git
 [submodule "dracula/dunst"]
 	path = src/github.com/dracula/dunst
 	url = https://github.com/dracula/dunst.git

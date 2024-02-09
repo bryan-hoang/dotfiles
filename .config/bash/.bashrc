@@ -144,9 +144,6 @@ __git_complete dot __git_main
 [[ -f $XDG_CONFIG_HOME/tabtab/bash/pnpm.bash ]] \
 	&& . "$XDG_CONFIG_HOME"/tabtab/bash/pnpm.bash
 
-[[ -f "$GHQ_ROOT"/github.com/rcaloras/bash-preexec/bash-preexec.sh ]] \
-	&& . "$GHQ_ROOT"/github.com/rcaloras/bash-preexec/bash-preexec.sh
-
 is_interactive_shell && does_command_exist navi && eval "$(navi widget bash)"
 does_command_exist zoxide && eval "$(zoxide init bash)"
 does_command_exist gh && eval "$(gh completion -s bash)"
