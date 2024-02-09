@@ -3,7 +3,7 @@
 	"type": "module",
 	"scripts": {
 		"lint-staged": "lint-staged --config .config/lintstaged/lintstagedrc.mjs",
-		"prepare": "husky install .config/husky"
+		"prepare": "husky .config/husky"
 	},
 	"config": {
 		"commitizen": {
