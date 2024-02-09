@@ -4,8 +4,6 @@ tap "homebrew/bundle"
 # – all in one.
 # tap "oven-sh/bun"
 # brew "bun"
-# ✨ Magical shell history (atuinsh/atuin).
-brew "atuin"
 # Fast, disk space efficient package manager (pnpm/pnpm).
 brew "pnpm"
 # Dockerfile linter, validate inline bash, written in Haskell
