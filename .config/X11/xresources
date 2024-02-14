@@ -20,7 +20,7 @@ XTerm.vt100.faceName: FiraCode Nerd Font Mono
 XTerm.vt100.faceSize: 12
 XTerm.vt100.renderFont: true
 ! https://wiki.archlinux.org/title/Xterm#Configuration
-! SUpport color by default.
+! Support color by default.
 XTerm.termName: xterm-256color
 ! Force UTF-8.
 XTerm.vt100.locale: false
@@ -37,3 +37,5 @@ XTerm.vt100.bellIsUrgent: true
 XTerm*visualbell: true
 ! Fix disappearing cursor on moving backwards through text.
 XTerm*cursorBlink: true
+! Allow sixel graphics. Try: `convert -colors 16 foo.jpg sixel:-`.
+XTerm*decTerminalID: vt340
