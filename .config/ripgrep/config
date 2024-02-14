@@ -1,2 +1,11 @@
 # Search hidden files and directories.
 --hidden
+
+# Select the engine based on the pattern.
+--engine=auto
+
+# This flag prints the file path above clusters of matches from each file
+# instead of printing the file path as a prefix for each matched line.
+#
+# Disable by default to match `grep`/`git grep`.
+--no-heading
