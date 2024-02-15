@@ -269,7 +269,7 @@
 [credential]
 	helper = cache
 [column]
-	branch = auto
+	ui = auto
 [color "grep"]
 	match = green bold reverse
 	column = white
