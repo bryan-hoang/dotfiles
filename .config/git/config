@@ -76,9 +76,10 @@
 	switch-time = "!f() { git switch -d $(git rev-list -n 1 --first-parent --before \"$1 23:59\" $(git branch-default)) ; }; f"
 	# Delete a branch locally and on the remote.
 	branch-delete = "!f() { git branch --delete --force $1 || true && git push origin --delete $1; }; f"
-	# List branches with most recent committer to it. Useful for finding which
-	# branch someone has been committing to recently.
-	branch-activity = "branch --remotes --format='%(authordate:short) %(color:yellow)%(refname:lstrip=3)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset)) %(color:blue)%(authorname)%(color:reset)' --no-merged origin/HEAD"
+	# List all branches along with their most recent author.
+	branch-activity = "!git branch --color --all --format='%(committerdate:relative)\t%(color:yellow)%(refname:lstrip=3)%(color:reset)\t%(color:blue)%(authorname)%(color:reset)' --no-merged origin/HEAD"
+	# List local branches w/ additional info.
+	branch-list = "!git for-each-ref --color --sort=-committerdate --no-merged=HEAD --format='%(color:red)%(ahead-behind:HEAD)\t%(color:green)%(objectname:short) %(refname:short)\t%(color:blue)%(committerdate:relative)\t%(color:yellow)%(authorname)' refs/heads/ | sed 's/ /\t/' | column --separator='\t' --table --table-columns='Ahead,Behind,Branch,Last Commit,Latest Author'"
 	# Prints the name of the upstream branch.
 	show-upstream-ref = rev-parse --abbrev-ref HEAD@{u}
 	# https://stackoverflow.com/a/27940027/8714233
