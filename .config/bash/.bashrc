@@ -125,14 +125,6 @@ does_function_exist && pyvenv_auto_activate_enable
 # Remove timestamps from history file to let zsh history parse it.
 unset HISTTIMEFORMAT
 
-# # shellcheck disable=SC1091
-# [[ -s "$ASDF_DIR"/completions/asdf.bash ]] \
-# 	&& . "$ASDF_DIR"/completions/asdf.bash
-
-# # shellcheck disable=SC1091
-# [[ -s "$ASDF_DIR"/plugins/java/set-java-home.bash ]] \
-# 	&& . "$ASDF_DIR"/plugins/java/set-java-home.bash
-
 # Completions
 # git
 # shellcheck disable=SC1091
@@ -144,17 +136,14 @@ __git_complete dot __git_main
 [[ -f $XDG_CONFIG_HOME/tabtab/bash/pnpm.bash ]] \
 	&& . "$XDG_CONFIG_HOME"/tabtab/bash/pnpm.bash
 
-is_interactive_shell && does_command_exist navi && eval "$(navi widget bash)"
-does_command_exist zoxide && eval "$(zoxide init bash)"
-does_command_exist gh && eval "$(gh completion -s bash)"
-does_command_exist starship && eval "$(starship init bash)"
-does_command_exist broot && eval "$(broot --print-shell-function bash)"
-does_command_exist direnv && eval "$(direnv hook bash)"
-# Requires `bash-preexec`.
-does_command_exist atuin && eval "$(atuin init bash)"
-
 if is_git_bash; then
 	start_ssh_agent
 fi
 
-[[ ${BLE_VERSION-} ]] && ble-attach
+does_command_exist navi && eval "$(navi widget bash)"
+does_command_exist gh && eval "$(gh completion -s bash)"
+does_command_exist broot && eval "$(broot --print-shell-function bash)"
+
+does_command_exist atuin && eval "$(atuin init bash)"
+
+[[ -n ${BLE_VERSION-} ]] && ble-attach

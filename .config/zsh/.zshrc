@@ -1,27 +1,19 @@
 #!/usr/bin/env bash
 #
 # shellcheck disable=SC2154
+# shellcheck disable=SC2034
+# shellcheck disable=SC1091
 
 # Uncomment the following line to disable auto-setting terminal title.
-# shellcheck disable=SC2034
 DISABLE_AUTO_TITLE="true"
 
 export SHELDON_CONFIG_DIR="$XDG_CONFIG_HOME"/sheldon/zsh
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)a
 # Add wisely, as too many plugins slow down shell startup.
-# shellcheck disable=SC2034
 plugins=(
 	command-not-found
 	gitfast
@@ -35,7 +27,6 @@ export ZSH="$SHELDON_DATA_DIR"/repos/github.com/ohmyzsh/ohmyzsh
 command -v sheldon >/dev/null && eval "$(sheldon source)"
 
 # Loaded after framework is loaded to preserve personal aliases.
-# shellcheck disable=SC1091
 . "$XDG_CONFIG_HOME"/shell/common.sh
 
 # region Completions
@@ -168,28 +159,17 @@ setopt HIST_FIND_NO_DUPS
 # export PATH
 # unset OLD_PATH
 
-does_command_exist atuin && eval "$(atuin init zsh)"
 does_command_exist navi && eval "$(navi widget zsh)"
-does_command_exist zoxide && eval "$(zoxide init zsh)"
 does_command_exist broot && eval "$(broot --print-shell-function zsh)"
-# Conda
 does_command_exist conda && eval "$(conda shell.zsh hook 2>/dev/null)"
-
-
-# # shellcheck disable=SC1091
-# if [[ -f "${XDG_CONFIG_HOME:-${HOME}/.config}/asdf-direnv/zshrc" ]]; then
-# 	# shellcheck disable=SC2250
-# 	source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
-# fi
+does_command_exist atuin && eval "$(atuin init zsh)"
 
 # tabtab source for packages (e.g., pnpm).
-# shellcheck disable=SC1091
 [[ -f "$HOME"/.config/tabtab/zsh/__tabtab.zsh ]] \
 	&& . "$HOME"/.config/tabtab/zsh/__tabtab.zsh
 
 # Enable shell command completion for gcloud.
 if [[ -f "$XDG_DATA_HOME"/google-cloud-sdk/completion.zsh.inc ]]; then
-	# shellcheck disable=SC1091
 	. "$XDG_DATA_HOME"/google-cloud-sdk/completion.zsh.inc
 fi
 

@@ -21,7 +21,15 @@ OLD_PATH=$PATH
 	&& does_command_exist mise \
 	&& mkdir -p "$XDG_CONFIG_HOME"/direnv/lib \
 	&& mise direnv activate >"$XDG_CONFIG_HOME"/direnv/lib/use_mise.sh
+
+# NOTE: Activate starship before `mise` to avoid `_mise_hook` in
+# `$PROMPT_COMMAND` (bash) from getting saved into `$_PRESERVED_PROMPT_COMMAND`.
+# This avoids getting "command not found: _mise_hook" for every prompt due too
+# starship's hook trying to to eval the ones it "saved".
+does_command_exist zoxide && eval "$(zoxide init "$SHELL_BASENAME")"
 does_command_exist direnv && eval "$(direnv hook "$SHELL_BASENAME")"
+does_command_exist starship && eval "$(starship init "$SHELL_BASENAME")"
+
 does_command_exist mise && eval "$(mise activate "$SHELL_BASENAME")" \
 	&& PATH=$(mise bin-paths | paste -sd :):$PATH
 
@@ -32,8 +40,6 @@ if [[ -n $SSH_CONNECTION ]] \
 	does_command_exist rust-motd && rust-motd
 	does_command_exist macchina && macchina
 fi
-
-does_command_exist starship && eval "$(starship init "$SHELL_BASENAME")"
 
 # region: Completions
 
