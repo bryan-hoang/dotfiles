@@ -47,7 +47,7 @@ prepend_brew_to_path() {
 # Searched last
 
 # mise
-prepend_to_path "$XDG_DATA_HOME"/mise/shims
+# prepend_to_path "$XDG_DATA_HOME"/mise/shims
 # Brew
 prepend_brew_to_path /home/linuxbrew/.linuxbrew
 prepend_brew_to_path "$HOME"/.linuxbrew

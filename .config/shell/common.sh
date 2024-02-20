@@ -12,9 +12,6 @@ done
 # Source: https://unix.stackexchange.com/a/37535
 SHELL_BASENAME=$(basename "$(readlink -f /proc/$$/exe)")
 
-# Temporarily add mise bin-paths to $PATH.
-OLD_PATH=$PATH
-
 # https://github.com/jdxcode/mise#mise-inside-of-direnv-use-mise-in-envrc
 [[ ! -s ~/.config/direnv/lib/use_mise.sh ]] \
 	&& does_command_exist direnv \
@@ -31,7 +28,7 @@ does_command_exist direnv && eval "$(direnv hook "$SHELL_BASENAME")"
 does_command_exist starship && eval "$(starship init "$SHELL_BASENAME")"
 
 does_command_exist mise && eval "$(mise activate "$SHELL_BASENAME")" \
-	&& PATH=$(mise bin-paths | paste -sd :):$PATH
+	&& eval "$(mise hook-env --shell "$SHELL_BASENAME")"
 
 if [[ -n $SSH_CONNECTION ]] \
 	&& [[ -z $TMUX ]] \
@@ -135,8 +132,7 @@ if command -v gpg-connect-agent >/dev/null; then
 	gpg-connect-agent updatestartuptty /bye &>/dev/null
 fi
 
-PATH=$OLD_PATH
-unset OLD_PATH SHELL_BASENAME
+unset SHELL_BASENAME
 
 # Automatic transparency for xterm.
 # https://wiki.archlinux.org/title/Xterm#Automatic_transparency
