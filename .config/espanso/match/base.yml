@@ -36,5 +36,5 @@ matches:
 
   # And much more! For more information, visit the docs: https://espanso.org/docs/
 
-  - trigger: ':br'
+  - trigger: ':br:'
     replace: 'Best Regards,\nBryan Hoang'
