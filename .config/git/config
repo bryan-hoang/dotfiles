@@ -117,6 +117,7 @@
 	# https://help.github.com/articles/signing-commits-using-gpg/
 	gpgsign = true
 	template = ~/.config/git/COMMIT_EDITMSG
+	verbose = true
 [core]
 	# Treat spaces before tabs and all kinds of trailing whitespace as an error.
 	# [default] trailing-space: looks for spaces at the end of a line
@@ -160,6 +161,10 @@
 	colormoved = default
 	orderFile = ~/.config/git/order
 	colorMovedWS = allow-indentation-change
+	submodule = log
+	tool = difftastic
+[difftool "difftastic"]
+	cmd = difft "$LOCAL" "$REMOTE"
 [filter "lfs"]
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
@@ -226,6 +231,7 @@
 	recurseSubmodules = check
 [status]
 	showStash = true
+	submoduleSummary = true
 [url "git@github.com:"]
 	insteadOf = "gh:"
 	pushInsteadOf = "github:"
@@ -306,3 +312,5 @@
 	skipHash = false
 [sendemail]
 	annotate = yes
+[transfer]
+	fsckobjects = true
