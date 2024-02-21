@@ -1,7 +1,5 @@
 # Order these files over lockfile changes.
 *package.json
-*.yaml
-*.yml
 *.config.*
 *rc.*
 *index.*

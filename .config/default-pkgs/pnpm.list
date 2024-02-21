@@ -1,6 +1,8 @@
 # Lint commit messages (conventional-changelog/commitlint).
-@commitlint/config-conventional
 @commitlint/cli
+# Installed in `~/package.json` to avoid issues with failing to resolve the
+# sharable config package.
+# @commitlint/config-conventional
 @commitlint/types
 # Format all commitlint issues as a simple JSON string
 # (bycedric/commitlint-formats).

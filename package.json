@@ -14,8 +14,8 @@
 			"path": "cz-conventional-changelog"
 		}
 	},
-	"dependencies": {},
 	"devDependencies": {
+		"@commitlint/config-conventional": "18.6.2",
 		"debug": "4.3.4",
 		"husky": "9.0.11",
 		"lint-staged": "15.2.2",

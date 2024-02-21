@@ -135,7 +135,7 @@ return {
 					["*"] = { "typos" },
 				},
 				linters = {
-					-- TODO: Contribute `ltrs`, `typos`, `markuplint`, `commitlint`,
+					-- TODO: Contribute `ltrs`, `typos`, `markuplint`
 					-- `editorconfig_checker`, to `nvim-lint`!
 					-- ltrs = {
 					-- 	cmd = "ltrs",
