@@ -79,10 +79,6 @@ format = " $icon $timestamp.datetime(f:'%a %F %R') "
 idle_bg = "#BD93F9"
 idle_fg = "#21222C"
 
-# Too distracting.
-# [[block]]
-# block = "apt"
-
 # Fails to get property on some machines.
 # [[block]]
 # block = "notify"
