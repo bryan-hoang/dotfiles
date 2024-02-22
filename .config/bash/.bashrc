@@ -144,6 +144,4 @@ does_command_exist navi && eval "$(navi widget bash)"
 does_command_exist gh && eval "$(gh completion -s bash)"
 does_command_exist broot && eval "$(broot --print-shell-function bash)"
 
-does_command_exist atuin && eval "$(atuin init bash)"
-
 [[ -n ${BLE_VERSION-} ]] && ble-attach

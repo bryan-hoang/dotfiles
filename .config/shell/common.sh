@@ -109,6 +109,7 @@ does_command_exist register-python-argcomplete pipx \
 # endregion
 
 does_command_exist thefuck && eval "$(thefuck --alias)"
+does_command_exist atuin && eval "$(atuin init --disable-up-arrow "$SHELL_BASENAME")"
 
 # https://wiki.archlinux.org/title/XDG_Base_Directory
 mkdir -p "$XDG_DATA_HOME"/tig

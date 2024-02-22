@@ -162,7 +162,6 @@ setopt HIST_FIND_NO_DUPS
 does_command_exist navi && eval "$(navi widget zsh)"
 does_command_exist broot && eval "$(broot --print-shell-function zsh)"
 does_command_exist conda && eval "$(conda shell.zsh hook 2>/dev/null)"
-does_command_exist atuin && eval "$(atuin init zsh)"
 
 # tabtab source for packages (e.g., pnpm).
 [[ -f "$HOME"/.config/tabtab/zsh/__tabtab.zsh ]] \
