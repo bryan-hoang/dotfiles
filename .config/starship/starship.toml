@@ -106,6 +106,7 @@ format = '[$symbol($version )]($style)'
 format = "[$symbol($version(-$name) )]($style)"
 
 [character]
+disabled = false
 error_symbol = '[\$](bold red)'
 success_symbol = '[\$](bold green)'
 
@@ -156,6 +157,9 @@ disabled = false
 format = "[$ssh_symbol$hostname]($style):"
 ssh_symbol = ""
 trim_at = ""
+
+[line_break]
+disabled = false
 
 [lua]
 format = '[$symbol($version )]($style)'

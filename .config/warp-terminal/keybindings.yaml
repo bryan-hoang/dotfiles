@@ -1,0 +1,8 @@
+---
+'pane_group:add_down': 'ctrl-alt-shift-"'
+'editor_view:move_to_line_start': ctrl-a
+'pane_group:add_right': ctrl-alt-shift-%
+'workspace:toggle_keybindings_page': none
+'editor_view:move_to_line_end': ctrl-e
+'editor_view:select_all': ctrl-shift-A
+'input:open_completion_suggestions': tab

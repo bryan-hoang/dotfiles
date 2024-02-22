@@ -1,0 +1,30 @@
+{
+	"prefs": {
+		"AutosuggestionAcceptedCount": "2",
+		"FontName": "\"FiraCode Nerd Font Mono\"",
+		"WelcomeTipsFeaturesUsed": "[{\"Action\":\"CommandSearch\"},{\"Action\":\"SplitPane\"},{\"Action\":\"WarpAI\"},{\"Action\":\"OpenWarpDrive\"},{\"Hint\":\"CreateBlock\"},{\"Hint\":\"BlockSelect\"},{\"Hint\":\"BlockAction\"},{\"Action\":\"SaveNewLaunchConfig\"},{\"Action\":\"ThemePicker\"},{\"Action\":\"AiCommandSearch\"},{\"Action\":\"CommandPalette\"}]",
+		"DismissedWarpAIWarmWelcome": "true",
+		"OverrideOpacity": "75",
+		"ExperimentId": "69527a36-b3ef-4779-97bc-68ac13f05979",
+		"Theme": "\"Dracula\"",
+		"SnackbarEnabled": "true",
+		"InputMode": "\"Waterfall\"",
+		"WelcomeTipsCompleted": "true",
+		"OpenFileEditor": "null",
+		"EmacsBindingsBannerState": "\"Dismissed\"",
+		"HasAutoOpenedWelcomeFolder": "true",
+		"FontSize": "14.0",
+		"VimKeybindingsBannerState": "\"Dismissed\"",
+		"UseAudibleBell": "true",
+		"Shortcuts": "true",
+		"ChangelogVersions": "{\"v0.2024.02.20.08.01.stable_01\":true}",
+		"AIAssistantRequestLimitInfo": "{\"limit\":100,\"num_requests_used_since_refresh\":2,\"next_refresh_time\":\"2024-02-23T16:42:44.496690Z\"}",
+		"ReceivedReferralTheme": "\"Inactive\"",
+		"SystemTheme": "false",
+		"HonorPS1": "true",
+		"SafeModeEnabled": "true",
+		"HasDismissedWarpDriveWelcome": "true",
+		"AliasExpansionBannerSeen": "true",
+		"Notifications": "{\"mode\":\"Enabled\",\"is_long_running_enabled\":true,\"long_running_threshold\":{\"secs\":30,\"nanos\":0},\"is_password_prompt_enabled\":true}"
+	}
+}
