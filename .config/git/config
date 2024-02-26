@@ -255,6 +255,7 @@
 	fetchJobs = 0
 [pack]
 	writeReverseIndex = true
+	allowPackReuse = multi
 [maintenance]
 	strategy = incremental
 [grep]
@@ -273,6 +274,7 @@
 	addIgnoredFile = false
 	addEmptyPathspec = false
 	statusHints = false
+	pushAlreadyExists = true
 [credential]
 	helper = cache
 [column]
