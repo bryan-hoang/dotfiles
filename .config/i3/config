@@ -264,4 +264,4 @@ default_border none
 smart_borders on
 
 # Machine/i3/sway specific config.
-include conf.d/*.conf
+include config.d/*.conf
