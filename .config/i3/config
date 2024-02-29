@@ -246,6 +246,9 @@ exec --no-startup-id feh ~/Pictures/wallpapers/secondary.png ~/Pictures/wallpape
 # Geoclue agent for redshift.
 exec --no-startup-id /usr/libexec/geoclue-2.0/demos/agent
 
+# Compositor
+exec_always --no-startup-id picom --daemon
+
 # Dracula theme.
 # class                 border  bground text    indicator child_border
 client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4 #6272A4
