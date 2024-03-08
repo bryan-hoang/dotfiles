@@ -153,6 +153,7 @@ for_window [class="(?i)browser"] move to workspace $ws1
 for_window [class="(?i)firefox"] move to workspace $ws1
 for_window [class="(?i)chromium"] move to workspace $ws1
 for_window [class="(?i)chrome"] move to workspace $ws1
+for_window [class="(?i)responsively"] move to workspace $ws1
 # WebKit
 for_window [class="(?i)epiphany"] move to workspace $ws1
 for_window [class="Sizzy"] move to workspace $ws1
