@@ -1,4 +1,5 @@
 # Order these files over lockfile changes.
+*.md
 *package.json
 *.config.*
 *rc.*
