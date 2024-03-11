@@ -1,4 +1,7 @@
 # https://docs.atuin.sh/configuration/config/
 
+# Search by session by default to avoid history from other sessions messing up
+# my expected search order for previous commands in the current session.
+filter_mode = "session"
 keymap_mode = "auto"
 show_preview = true
