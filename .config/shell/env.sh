@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
+#
+# shellcheck disable=SC1091,SC2154
 
 if [ "${USER:-}" = "" ]; then
 	USER="$(id -un 2>/dev/null)"
@@ -68,10 +70,8 @@ prepend_to_path "$BUN_INSTALL"/bin
 # Go
 prepend_to_path "$GOPATH"/bin
 # Python managed by rye
-# shellcheck disable=SC1091
 [ -s "$RYE_HOME"/env ] && . "$RYE_HOME"/env
 # Rust
-# shellcheck disable=SC1091
 [ -s "$CARGO_HOME"/env ] && . "$CARGO_HOME"/env
 # Personal
 prepend_to_path "$XDG_BIN_HOME"
@@ -188,9 +188,7 @@ export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME"/python
 
 # https://wiki.archlinux.org/title/XDG_Base_Directory#Specification
 
-# shellcheck disable=SC1091,SC2154
 . "$XDG_CONFIG_HOME"/zsh/.zshenv
-# shellcheck disable=SC2154
 export ZSH="$ZDOTDIR"/ohmyzsh
 export ZSH_USER_FPATH="$XDG_DATA_HOME"/zsh/completions
 mkdir -p "$ZSH_USER_FPATH"
