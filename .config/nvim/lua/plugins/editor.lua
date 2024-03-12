@@ -346,4 +346,11 @@ return {
 			mappings = nil,
 		},
 	},
+	{
+		"brenoprata10/nvim-highlight-colors",
+		ft = {
+			"css",
+		},
+		opts = {},
+	},
 }
