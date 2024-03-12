@@ -135,11 +135,12 @@ return {
 					["*"] = { "typos" },
 				},
 				linters = {
-					-- TODO: Contribute `ltrs`, `typos`, `markuplint`
+					-- TODO: Contribute `ltrs`, `markuplint`
 					-- `editorconfig_checker`, to `nvim-lint`!
-					-- ltrs = {
-					-- 	cmd = "ltrs",
-					-- },
+					stylelint = {
+						-- v16 switched from reporting on stdout to stderr.
+						stream = "stderr",
+					},
 				},
 			}
 
