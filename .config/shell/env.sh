@@ -21,6 +21,9 @@ export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export GOPATH="$XDG_DATA_HOME"/go
 export RYE_HOME="$XDG_DATA_HOME"/rye
+export WASMER_DIR="$XDG_DATA_HOME"/wasmer
+export WASMER_CACHE_DIR="$XDG_CACHE_HOME"/wasmer
+# [ -s "$WASMER_DIR"/wasmer.sh ] && . "$WASMER_DIR"/wasmer.sh
 
 prepend_to_path() {
 	for folder in "$@"; do
@@ -65,6 +68,7 @@ prepend_to_path "$XDG_DATA_HOME"/bob/nvim-bin
 prepend_to_path "$LOCALAPPDATA"/bob/nvim-bin
 # JS eCoSyTeM
 prepend_to_path "$PNPM_HOME"
+prepend_to_path "$WASMER_DIR"/bin
 prepend_to_path "$DENO_INSTALL"/bin
 prepend_to_path "$BUN_INSTALL"/bin
 # Go
