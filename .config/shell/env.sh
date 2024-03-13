@@ -329,3 +329,4 @@ export TAPLO_CONFIG="$XDG_CONFIG_HOME"/taplo/.taplo.toml
 export DISABLE_OPENCOLLECTIVE=1
 export ADBLOCK=1
 export SUPPRESS_SUPPORT=1
+export WARP_THEMES_DIR="$XDG_DATA_HOME"/warp-terminal/themes

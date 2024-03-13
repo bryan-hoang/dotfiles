@@ -2,6 +2,12 @@ local should_load_colorschemes = os.getenv("NVIM_LOAD_COLORSCHEMES")
 
 return {
 	{
+		"LazyVim/LazyVim",
+		opts = {
+			colorscheme = "catppuccin",
+		},
+	},
+	{
 		-- Diff syntax highlighting is off.
 		"ellisonleao/gruvbox.nvim",
 		lazy = not should_load_colorschemes,
@@ -14,6 +20,7 @@ return {
 	},
 	{
 		"folke/tokyonight.nvim",
+		lazy = not should_load_colorschemes,
 		opts = {
 			style = "night",
 			transparent = true,
@@ -70,11 +77,5 @@ return {
 		-- A mcdonald's inspired theme.
 		"dundargoc/fakedonalds.nvim",
 		lazy = not should_load_colorschemes,
-	},
-	{
-		"LazyVim/LazyVim",
-		opts = {
-			colorscheme = "tokyonight",
-		},
 	},
 }
