@@ -70,4 +70,10 @@ return {
 			},
 		},
 	},
+	{
+		-- Cloak allows you to overlay *'s over defined patterns in defined files.
+		"laytan/cloak.nvim",
+		ft = "dotenv",
+		opts = {},
+	},
 }
