@@ -82,8 +82,9 @@
 	branch-list = "!git for-each-ref --color --sort=-committerdate --no-merged=HEAD --format='%(color:red)%(ahead-behind:HEAD)\t%(color:green)%(objectname:short) %(refname:short)\t%(color:blue)%(committerdate:relative)\t%(color:yellow)%(authorname)' refs/heads/ | sed 's/ /\t/' | column --separator='\t' --table --table-columns='Ahead,Behind,Branch,Last Commit,Latest Author'"
 	# Prints the name of the upstream branch.
 	show-upstream-ref = rev-parse --abbrev-ref HEAD@{u}
-	# https://stackoverflow.com/a/27940027/8714233
-	diff-changes = "!f() { git merge-base origin/$(git branch-default) $(git branch --show-current) | xargs -I '{}' git diff '{}'..$(git branch --show-current) "$@" 2>/dev/null; }; f"
+	# Prints the diff of the current branch (i.e., HEAD) against the remote
+	# default branch. e.g., origin/main
+	diff-changes = "!f() { git diff origin... "$@" 2>/dev/null; }; f"
 	# Logs the diff of commits between the default branch and the current branch.
 	log-changes = "!f() { git log --oneline --graph \"$@\" origin/$(git branch-default)..$(git branch --show-current); }; f"
 	# Logs commits that haven't been pushed to a remote yet.
