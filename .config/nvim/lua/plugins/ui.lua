@@ -41,27 +41,6 @@ return {
 		},
 	},
 	{
-		"hrsh7th/nvim-cmp",
-		dependencies = {
-			"rcarriga/cmp-dap",
-		},
-		opts = {
-			enabled = function()
-				return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
-					or require("cmp_dap").is_dap_buffer()
-			end,
-		},
-		config = function(_, opts)
-			local cmp = require("cmp")
-			cmp.setup(opts)
-			cmp.setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
-				sources = {
-					{ name = "dap" },
-				},
-			})
-		end,
-	},
-	{
 		"folke/twilight.nvim",
 	},
 	{
