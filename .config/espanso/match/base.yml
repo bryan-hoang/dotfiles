@@ -38,3 +38,7 @@ matches:
 
   - trigger: ':br:'
     replace: 'Best Regards,\nBryan Hoang'
+
+  # ¯\_(ツ)_/¯
+  - trigger: ':empty'
+    replace: '‎'
