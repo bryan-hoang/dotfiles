@@ -30,4 +30,12 @@ return {
 			cmp_git.setup()
 		end,
 	},
+	{
+		"hrsh7th/nvim-cmp",
+		opts = {
+			completion = {
+				autocomplete = false,
+			},
+		},
+	},
 }
