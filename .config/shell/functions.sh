@@ -980,7 +980,7 @@ install_picom() {
 	ghq get https://github.com/yshui/picom.git
 	cd "$GHQ_ROOT"/github.com/yshui/picom || return
 	git pull
-	meson --buildtype=release . build || return
+	meson setup --buildtype=release build || return
 	ninja -C build || return
 	sudo ninja -C build install
 	picom --version
