@@ -115,8 +115,8 @@ dprint
 # procs
 # Intuitive find & replace CLI (sed alternative).
 # sd
-# A fast CSV command line toolkit written in Rust.
-# xsv
+# CSVs sliced, diced & analyzed (jqnatividad/qsv).
+# qsv
 # A cross-platform CLI csv pretty printer that uses column styling to maximize
 # viewer enjoyment.
 # tidy-viewer
