@@ -1,8 +1,7 @@
 return {
 	{
-		-- Make Vim handle line and column numbers in file names with a minimum of
-		-- fuss.
-		"wsdjeg/vim-fetch",
+		-- Goto filenames with line info.
+		"lewis6991/fileline.nvim",
 		lazy = false,
 	},
 	{
