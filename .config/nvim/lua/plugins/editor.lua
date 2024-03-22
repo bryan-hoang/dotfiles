@@ -174,19 +174,6 @@ return {
 		},
 	},
 	{
-		"simrat39/symbols-outline.nvim",
-		cmd = "SymbolsOutline",
-		keys = {
-			{ "<leader>cs", "<cmd>SymbolsOutline<cr>", desc = "Symbols Outline" },
-		},
-		opts = {
-			show_numbers = true,
-			show_relative_numbers = true,
-			auto_preview = true,
-			auto_close = true,
-		},
-	},
-	{
 		"folke/neodev.nvim",
 		ft = "lua",
 	},
