@@ -26,30 +26,20 @@ return {
 						-- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
 						prefix = "icons",
 					},
-					float = {
-						source = true,
-					},
+					float = { source = true },
 				},
 				-- Be aware that you also will need to properly configure your LSP
 				-- server to provide the inlay hints.
-				inlay_hints = {
-					enabled = true,
-				},
+				inlay_hints = { enabled = true },
 				-- Enable this to enable the builtin LSP code lenses on Neovim >= 0.10.0
 				-- Be aware that you also will need to properly configure your LSP
 				-- server to provide the code lenses.
-				codelens = {
-					enabled = true,
-				},
-				format = {
-					async = true,
-				},
+				codelens = { enabled = true },
+				format = { async = true },
 				---@type lspconfig.options
 				servers = {
 					-- JSON
-					jsonls = {
-						mason = false,
-					},
+					jsonls = { mason = false },
 					-- YAML
 					yamlls = {
 						mason = false,
@@ -75,16 +65,10 @@ return {
 						},
 					},
 					-- Python
-					pyright = {
-						mason = false,
-					},
-					ruff_lsp = {
-						mason = false,
-					},
+					pyright = { mason = false },
+					ruff_lsp = { mason = false },
 					-- Lua
-					lua_ls = {
-						mason = false,
-					},
+					lua_ls = { mason = false },
 					-- Shell script
 					bashls = {
 						mason = false,
@@ -98,31 +82,15 @@ return {
 							end
 						end,
 					},
-					cssls = {
-						mason = false,
-					},
-					html = {
-						mason = false,
-					},
+					cssls = { mason = false },
+					html = { mason = false },
 					-- LaTeX
-					texlab = {
-						mason = false,
-					},
-					marksman = {
-						mason = false,
-					},
-					rust_analyzer = {
-						mason = false,
-					},
-					clangd = {
-						mason = false,
-					},
-					taplo = {
-						mason = false,
-					},
-					svelte = {
-						mason = false,
-					},
+					texlab = { mason = false },
+					marksman = { mason = false },
+					rust_analyzer = { mason = false },
+					clangd = { mason = false },
+					taplo = { mason = false },
+					svelte = { mason = false },
 					-- Ruby
 					solargraph = {
 						mason = false,
@@ -145,23 +113,32 @@ return {
 						-- NOTE: Currently fails to install due to `--locked` option.
 						mason = false,
 					},
-					dockerls = {
-						mason = false,
-					},
-					docker_compose_language_service = {
-						mason = false,
-					},
-					denols = {
-						mason = false,
-					},
+					dockerls = { mason = false },
+					docker_compose_language_service = { mason = false },
+					denols = { mason = false },
 					tsserver = {
 						mason = false,
+						cmd = { "typescript-language-server", "--stdio", "--log-level=4" },
 					},
 					-- cssmodules_ls = {},
-					emmet_ls = {},
+					emmet_language_server = { mason = false },
 					starlark_rust = {
 						mason = false,
 						filetypes = { "starlark", "bzl", "BUILD.bazel" },
+					},
+					eslint = {
+						capabilities = {
+							workspace = {
+								didChangeWorkspaceFolders = {
+									-- Workaround "The language server eslint triggers a
+									-- registerCapability handler for
+									-- workspace/didChangeWorkspaceFolders despite
+									-- dynamicRegistration set to false. Report upstream, this
+									-- warning is harmless"
+									dynamicRegistration = true,
+								},
+							},
+						},
 					},
 				},
 			}

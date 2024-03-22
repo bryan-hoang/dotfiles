@@ -23,6 +23,7 @@ typescript-language-server
 bash-language-server
 yaml-language-server
 vscode-langservers-extracted
+@olrtg/emmet-language-server
 # Autocompletion and go-to-defintion for cssmodules
 # (antonk52/cssmodules-language-server).
 cssmodules-language-server
