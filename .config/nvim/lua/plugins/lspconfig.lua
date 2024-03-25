@@ -1,3 +1,6 @@
+-- Suppress warnings in lspconfig.options table.
+---@diagnostic disable: missing-fields
+
 local util = require("util")
 
 return {
