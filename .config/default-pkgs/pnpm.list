@@ -16,15 +16,12 @@ prettier
 # A mighty CSS linter that helps you avoid errors and enforce conventions
 # (stylelint/stylelint).
 stylelint
-# tsserver for editor LSP.
-typescript
-typescript-language-server
 # LS for editors.
 bash-language-server
 yaml-language-server
 vscode-langservers-extracted
 @olrtg/emmet-language-server
-# Autocompletion and go-to-defintion for cssmodules
+# Autocompletion and go-to-definition for cssmodules
 # (antonk52/cssmodules-language-server).
 cssmodules-language-server
 rome
