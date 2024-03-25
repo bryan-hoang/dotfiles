@@ -330,3 +330,10 @@ export DISABLE_OPENCOLLECTIVE=1
 export ADBLOCK=1
 export SUPPRESS_SUPPORT=1
 export WARP_THEMES_DIR="$XDG_DATA_HOME"/warp-terminal/themes
+# PostgreSQL
+export PSQLRC="$XDG_CONFIG_HOME/pg/psqlrc"
+export PSQL_HISTORY="$XDG_STATE_HOME/pg/history"
+export PGPASSFILE="$XDG_CONFIG_HOME/pg/pgpass"
+export PGSERVICEFILE="$XDG_CONFIG_HOME/pg/pg_service.conf"
+mkdir -p "$(dirname "$PSQLRC")"
+mkdir -p "$(dirname "$PSQL_HISTORY")"
