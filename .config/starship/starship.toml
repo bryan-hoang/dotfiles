@@ -195,6 +195,7 @@ disabled = false
 
 [shlvl]
 disabled = false
+symbol = '↕️ '
 
 [status]
 disabled = false
