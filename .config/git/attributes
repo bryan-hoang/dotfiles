@@ -15,3 +15,4 @@ AppData/Roaming/streamlink/config filter=streamlink-crunchyroll
 .config/git/config filter=git-config
 .config/macchina/macchina.toml filter=macchina
 .config/mise/config.toml filter=mise
+.config/docker/config.json filter=docker-config

@@ -203,6 +203,9 @@
 [filter "mise"]
 	smudge = cat
 	clean = "sed -E -e '/^\\[tools\\]/,/^\\[/{/^\\[tools\\]/!{/\\[/!d}}' -e '/^\\[env\\]/,/^\\[/{/^\\[env\\]/!{/\\[/!d}}' -e '/^\\[alias\\]/,/^\\[env/{/^\\[alias\\]/!{/\\[env/!d}}'"
+[filter "docker-config"]
+	smudge = cat
+	clean = "jaq '{ \"detachKeys\" }'"
 [help]
 	# Automatically correct and execute mistyped commands.
 	autocorrect = 0
