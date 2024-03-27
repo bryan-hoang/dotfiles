@@ -173,7 +173,7 @@ format = '[$symbol($version )]($style)'
 version_format = "v${major}"
 
 [os]
-disabled = true
+disabled = false
 
 [package]
 format = '[$symbol$version]($style) '
