@@ -1,6 +1,7 @@
 # Order these files over lockfile changes.
 *.md
 *package.json
+*Gemfile
 *.config.*
 *rc.*
 *index.*
@@ -10,3 +11,4 @@
 *tests/*
 *examples/*
 *.js
+*.rb
