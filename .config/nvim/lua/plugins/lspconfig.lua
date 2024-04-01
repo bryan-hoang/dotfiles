@@ -6,6 +6,13 @@ local util = require("util")
 return {
 	{
 		"neovim/nvim-lspconfig",
+		dependencies = {
+			{
+				-- nvim-lspconfig plugin for bundler.
+				"mihyaeru21/nvim-lspconfig-bundler",
+				opts = {},
+			},
+		},
 		lazy = false,
 		opts = function(_, opts)
 			vim.g.autoformat = false
@@ -94,14 +101,19 @@ return {
 					clangd = { mason = false },
 					taplo = { mason = false },
 					svelte = { mason = false },
+
 					-- Ruby
-					solargraph = {
-						mason = false,
-					},
+					solargraph = { mason = false },
+
 					-- TODO: Wait for v0.10.0 release to address push based diagnostics.
-					-- https://shopify.github.io/ruby-lsp/EDITORS_md.html#Neovim-LSP
+					-- https://shopify.github.io/ruby-lsp/EDITORS_md.html#label-Neovim+LSP
 					-- ruby_ls = {
+					-- 	autostart = false,
 					-- 	mason = false,
+					-- 	on_attach = function(client, buffer)
+					-- 		setup_diagnostics(client, buffer)
+					-- 		add_ruby_deps_command(client, buffer)
+					-- 	end,
 					-- },
 
 					-- C#/F#

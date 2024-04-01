@@ -16,9 +16,9 @@ neovim
 # guide.
 rubocop
 # A Ruby language server (castwide/solargraph).
-solargraph
+# solargraph
 # An opinionated language server for Ruby (Shopify/ruby-lsp).
 # ruby-lsp
 # Solargraph plugin to add awareness of Rails-specific code
 # (iftheshoefritz/solargraph-rails).
-solargraph-rails
+# solargraph-rails
