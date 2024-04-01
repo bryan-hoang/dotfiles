@@ -11,8 +11,6 @@ gc = true
 checkout = true
 fetch = true
 internal_use_git2 = false
-shallow_deps = true
-shallow_index = true
 
 # The [net] table controls networking configuration.
 [net]
