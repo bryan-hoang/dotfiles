@@ -783,6 +783,10 @@ install_nvim() {
 		automake cmake g++ pkg-config unzip curl doxygen liblua5.1-0-dev
 	make CMAKE_BUILD_TYPE=Release \
 		CMAKE_EXTRA_FLAGS="-DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX" || return
+	if [[ -f build/install_manifest.txt ]]; then
+		"$SUDO_CMD" cmake --build build/ --target uninstall || return
+		"$SUDO_CMD" rm -r "$INSTALL_PREFIX"/share/nvim/ || return
+	fi
 	"$SUDO_CMD" make install || return
 	nvim --version
 	cd - || return
