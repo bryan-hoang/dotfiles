@@ -130,11 +130,13 @@ return {
 					},
 					dockerls = { mason = false },
 					docker_compose_language_service = { mason = false },
+					-- JS/TS
 					denols = { mason = false },
 					tsserver = {
 						mason = false,
 						cmd = { "typescript-language-server", "--stdio", "--log-level=4" },
 					},
+					biome = { mason = false },
 					-- cssmodules_ls = {},
 					emmet_language_server = { mason = false },
 					starlark_rust = {
@@ -160,10 +162,6 @@ return {
 
 			-- FIXME: Performance with w/ tsserver freezing the program.
 			if not util.is_os_unix then
-				user_opts.servers.rome = {
-					mason = false,
-				}
-
 				-- Only install on windows.
 				user_opts.servers.powershell_es = {}
 			end

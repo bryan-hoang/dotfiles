@@ -23,10 +23,10 @@ bash-language-server
 yaml-language-server
 vscode-langservers-extracted
 @olrtg/emmet-language-server
+@biomejs/biome
 # Autocompletion and go-to-definition for cssmodules
 # (antonk52/cssmodules-language-server).
 cssmodules-language-server
-rome
 # A language server for Dockerfiles powered by Node.js, TypeScript, and VSCode
 # technologies (rcjsuen/dockerfile-language-server-nodejs).
 dockerfile-language-server-nodejs

@@ -73,7 +73,8 @@ return {
 		},
 		opts = function(_, opts)
 			local prettier = { "prettierd", "prettier" }
-			local jsFormatters = { prettier }
+			local biome = { "biome-check", "biome" }
+			local jsFormatters = biome
 			local cssFormatters = { "stylelint", prettier }
 			local shFormatters = { "shellcheck", "shellharden", "shfmt" }
 
@@ -84,7 +85,7 @@ return {
 					zsh = shFormatters,
 					toml = { "taplo" },
 					json = { prettier },
-					jsonc = { prettier },
+					jsonc = biome,
 					yaml = { prettier },
 					html = { prettier },
 					markdown = { "markdownlint", prettier },

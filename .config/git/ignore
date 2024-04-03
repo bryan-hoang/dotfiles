@@ -56,9 +56,6 @@ build
 # Neovim `.exrc` file.
 .nvim.lua
 
-# Rome config file.
-rome.json
-
 # `clangd` LS
 # https://clangd.llvm.org/installation.html#compile_commandsjson
 compile_commands.json
@@ -74,6 +71,3 @@ zsh-syntax-highlighting-dracula.plugin.zsh
 
 # LSP config file. e.g., to add plugins for rails.
 .solargraph.yml
-
-# Local `BUNDLE_PATH` in Ruby projects.
-vendor/bundle
