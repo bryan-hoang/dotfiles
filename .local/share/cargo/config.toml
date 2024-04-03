@@ -1,19 +1,10 @@
 # https://doc.rust-lang.org/cargo/reference/config.html
 
-[build]
-# https://blog.rust-lang.org/2023/11/09/parallel-rustc.html#how-to-use-it
-rustflags = ["-Z", "threads=8"]
-
 # https://doc.rust-lang.org/nightly/cargo/reference/unstable.html
 [unstable]
 gc = true
-[unstable.gitoxide]
-checkout = true
-fetch = true
-internal_use_git2 = false
-
-# The [net] table controls networking configuration.
-[net]
-# If this is true, then Cargo will use the git executable to fetch registry
-# indexes and git dependencies. If false, then it uses a built-in git library.
-git-fetch-with-cli = true
+# https://github.com/rust-lang/cargo/issues/11813
+# [unstable.gitoxide]
+# checkout = true
+# fetch = true
+# internal_use_git2 = false

@@ -295,8 +295,8 @@ NUM_JOBS="$(nproc)"
 export NUM_JOBS
 export MAKEFLAGS="--jobs $NUM_JOBS"
 export CARGO_MAKEFLAGS="$MAKEFLAGS"
-# https://github.com/jdxcode/mise#mise_use_toml0
-export RTX_USE_TOML=1
+# https://blog.rust-lang.org/2023/11/09/parallel-rustc.html
+export RUSTFLAGS="-Z threads=8"
 export SUDO_PROMPT='[sudo] password for %p@%H to run as %U: '
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME"/starship/starship.toml
 # https://wiki.archlinux.org/title/Alacritty#Different_font_size_on_multiple_monitors
