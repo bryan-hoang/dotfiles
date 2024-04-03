@@ -1,3 +1,5 @@
+# Fast, disk space efficient package manager (pnpm/pnpm).
+pnpm
 # Lint commit messages (conventional-changelog/commitlint).
 @commitlint/cli
 # Installed in `~/package.json` to avoid issues with failing to resolve the
