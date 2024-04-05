@@ -95,6 +95,8 @@ does_command_exist himalaya \
 	&& generate_completions himalaya himalaya completion "$SHELL_BASENAME"
 does_command_exist atuin \
 	&& generate_completions atuin atuin gen-completions --shell "$SHELL_BASENAME"
+does_command_exist kondo \
+	&& generate_completions kondo kondo --completions "$SHELL_BASENAME"
 
 # Doesn't support bash.
 does_command_exist bw \
