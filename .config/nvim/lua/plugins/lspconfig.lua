@@ -77,6 +77,10 @@ return {
 					-- Python
 					pyright = { mason = false },
 					ruff_lsp = { mason = false },
+					starlark_rust = {
+						mason = false,
+						filetypes = { "starlark", "bzl", "BUILD.bazel" },
+					},
 					-- Lua
 					lua_ls = { mason = false },
 					-- Shell script
@@ -92,11 +96,8 @@ return {
 							end
 						end,
 					},
-					cssls = { mason = false },
-					html = { mason = false },
 					-- LaTeX
 					texlab = { mason = false },
-					marksman = { mason = false },
 					rust_analyzer = { mason = false },
 					clangd = { mason = false },
 					taplo = { mason = false },
@@ -137,11 +138,24 @@ return {
 						cmd = { "typescript-language-server", "--stdio", "--log-level=4" },
 					},
 					biome = { mason = false },
-					-- cssmodules_ls = {},
+					-- HTML/CSS
+					html = { mason = false },
 					emmet_language_server = { mason = false },
-					starlark_rust = {
-						mason = false,
-						filetypes = { "starlark", "bzl", "BUILD.bazel" },
+					cssls = { mason = false },
+					-- cssmodules_ls = {},
+					tailwindcss = {
+						filetypes_include = { "markdown.mdx" },
+						filetypes_exclude = { "mdx" },
+					},
+					-- Markdown/MDX
+					marksman = { mason = false },
+					mdx_analyzer = {
+						init_options = {
+							typescript = { enabled = true },
+						},
+						capabilities = {
+							dynamicRegistration = true,
+						},
 					},
 					eslint = {
 						capabilities = {
