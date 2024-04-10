@@ -30,8 +30,8 @@ devDependencies:
     specifier: 13.1.0
     version: 13.1.0(postcss@8.4.38)(stylelint@16.3.1)
   typescript:
-    specifier: 5.4.4
-    version: 5.4.4
+    specifier: 5.4.5
+    version: 5.4.5
 
 packages:
 
@@ -333,7 +333,7 @@ packages:
       compare-func: 2.0.0
     dev: true
 
-  /cosmiconfig@9.0.0(typescript@5.4.4):
+  /cosmiconfig@9.0.0(typescript@5.4.5):
     resolution: {integrity: sha512-itvL5h8RETACmOTFc4UfIyB2RfEHi71Ax6E/PivVxq9NseKbOWpeyHEOIbmAw1rs8Ak0VursQNww7lf7YtUwzg==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -346,7 +346,7 @@ packages:
       import-fresh: 3.3.0
       js-yaml: 4.1.0
       parse-json: 5.2.0
-      typescript: 5.4.4
+      typescript: 5.4.5
     dev: true
 
   /cross-spawn@7.0.3:
@@ -1249,7 +1249,7 @@ packages:
     peerDependencies:
       stylelint: '>=15.0.0'
     dependencies:
-      stylelint: 16.3.1(typescript@5.4.4)
+      stylelint: 16.3.1(typescript@5.4.5)
     dev: true
 
   /stylelint-config-recommended-scss@14.0.0(postcss@8.4.38)(stylelint@16.3.1):
@@ -1264,7 +1264,7 @@ packages:
     dependencies:
       postcss: 8.4.38
       postcss-scss: 4.0.9(postcss@8.4.38)
-      stylelint: 16.3.1(typescript@5.4.4)
+      stylelint: 16.3.1(typescript@5.4.5)
       stylelint-config-recommended: 14.0.0(stylelint@16.3.1)
       stylelint-scss: 6.0.0(stylelint@16.3.1)
     dev: true
@@ -1275,7 +1275,7 @@ packages:
     peerDependencies:
       stylelint: ^16.0.0
     dependencies:
-      stylelint: 16.3.1(typescript@5.4.4)
+      stylelint: 16.3.1(typescript@5.4.5)
     dev: true
 
   /stylelint-config-standard-scss@13.1.0(postcss@8.4.38)(stylelint@16.3.1):
@@ -1289,7 +1289,7 @@ packages:
         optional: true
     dependencies:
       postcss: 8.4.38
-      stylelint: 16.3.1(typescript@5.4.4)
+      stylelint: 16.3.1(typescript@5.4.5)
       stylelint-config-recommended-scss: 14.0.0(postcss@8.4.38)(stylelint@16.3.1)
       stylelint-config-standard: 36.0.0(stylelint@16.3.1)
     dev: true
@@ -1300,7 +1300,7 @@ packages:
     peerDependencies:
       stylelint: ^16.1.0
     dependencies:
-      stylelint: 16.3.1(typescript@5.4.4)
+      stylelint: 16.3.1(typescript@5.4.5)
       stylelint-config-recommended: 14.0.0(stylelint@16.3.1)
     dev: true
 
@@ -1315,10 +1315,10 @@ packages:
       postcss-resolve-nested-selector: 0.1.1
       postcss-selector-parser: 6.0.13
       postcss-value-parser: 4.2.0
-      stylelint: 16.3.1(typescript@5.4.4)
+      stylelint: 16.3.1(typescript@5.4.5)
     dev: true
 
-  /stylelint@16.3.1(typescript@5.4.4):
+  /stylelint@16.3.1(typescript@5.4.5):
     resolution: {integrity: sha512-/JOwQnBvxEKOT2RtNgGpBVXnCSMBgKOL2k7w0K52htwCyJls4+cHvc4YZgXlVoAZS9QJd2DgYAiRnja96pTgxw==}
     engines: {node: '>=18.12.0'}
     hasBin: true
@@ -1330,7 +1330,7 @@ packages:
       '@dual-bundle/import-meta-resolve': 4.0.0
       balanced-match: 2.0.0
       colord: 2.9.3
-      cosmiconfig: 9.0.0(typescript@5.4.4)
+      cosmiconfig: 9.0.0(typescript@5.4.5)
       css-functions-list: 3.2.1
       css-tree: 2.3.1
       debug: 4.3.4
@@ -1428,8 +1428,8 @@ packages:
     engines: {node: '>=14.16'}
     dev: true
 
-  /typescript@5.4.4:
-    resolution: {integrity: sha512-dGE2Vv8cpVvw28v8HCPqyb08EzbBURxDpuhJvTrusShUfGnhHBafDsLdS1EhhxyL6BJQE+2cT3dDPAv+MQ6oLw==}
+  /typescript@5.4.5:
+    resolution: {integrity: sha512-vcI4UpRgg81oIRUFwR0WSIHKt11nJ7SAVlYNIu+QpqeyXP+gpQJy/Z4+F0aGxSE4MqwjyXvW/TzgkLAx2AGHwQ==}
     engines: {node: '>=14.17'}
     hasBin: true
     dev: true
