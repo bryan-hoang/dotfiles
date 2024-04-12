@@ -10,6 +10,7 @@ set_file_associations({
 	},
 	nginx = { "/etc/nginx/.*/.*%.conf" },
 	sshconfig = { ".*/%.ssh/conf%.d/.*%.conf" },
+	json = { ".*%.vil" },
 	jsonc = { ".*/%.config/markdownlint/config", ".*/%.vscode/.*%.json" },
 	just = { ".*justfile" },
 	xdefaults = { ".*/%.config/X11/xresources" },
