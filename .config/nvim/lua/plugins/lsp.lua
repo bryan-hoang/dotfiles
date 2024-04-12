@@ -84,7 +84,7 @@ return {
 					sh = shFormatters,
 					zsh = shFormatters,
 					toml = { "taplo" },
-					json = { prettier },
+					json = { "prettier" },
 					jsonc = biome,
 					yaml = { prettier },
 					html = { prettier },
@@ -102,14 +102,15 @@ return {
 				-- You can also define any custom formatters here.
 				---@type table<string,table>
 				formatters = {
-					-- -- Example of using dprint only when a dprint.json file is present
-					-- dprint = {
-					--   condition = function(ctx)
-					--     return vim.fs.find({ "dprint.json" }, { path = ctx.filename, upward = true })[1]
-					--   end,
-					-- },
 					shfmt = {
 						args = { "-filename", "$FILENAME", "-ci", "-bn", "--simplify" },
+					},
+					prettier = {
+						options = {
+							ft_parsers = {
+								json = "json",
+							},
+						},
 					},
 				},
 			}
