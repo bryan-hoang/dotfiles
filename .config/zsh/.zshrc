@@ -57,6 +57,10 @@ autoload -U compinit bashcompinit
 bashcompinit
 compinit
 
+# git-extras completions.
+[[ -s $HOME/src/github.com/tj/git-extras/etc/git-extras-completion.zsh ]] \
+	&& . "$HOME"/src/github.com/tj/git-extras/etc/git-extras-completion.zsh
+
 # endregion Completions
 
 # Make `mapfile` available in `zsh`

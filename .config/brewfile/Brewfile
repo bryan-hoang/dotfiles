@@ -8,7 +8,7 @@ tap "homebrew/bundle"
 # brew "pnpm"
 # Dockerfile linter, validate inline bash, written in Haskell
 # (hadolint/hadolint).
-brew "hadolint"
+# brew "hadolint"
 # A language server that offers Lua language support - programmed in Lua
 # (LuaLS/lua-language-server).
 brew "lua-language-server"
@@ -20,7 +20,7 @@ brew "marksman"
 brew "vale"
 # GIT utilities -- repo summary, repl, changelog population, author commit
 # percentages and more (tj/git-extras).
-brew "git-extras"
+# brew "git-extras"
 #  Ruby Autoformatter (fables-tales/rubyfmt)!
 brew "rubyfmt"
 # 😎🏖️🐬 Your new, 𝙧𝙞𝙙𝙤𝙣𝙠𝙪𝙡𝙞𝙘𝙞𝙤𝙪𝙨𝙡𝙮 smart clipboard manager
