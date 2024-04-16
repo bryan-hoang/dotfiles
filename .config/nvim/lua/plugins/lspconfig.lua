@@ -158,6 +158,19 @@ return {
 						},
 					},
 					eslint = {
+						filetypes = {
+							"javascript",
+							"javascriptreact",
+							"javascript.jsx",
+							"typescript",
+							"typescriptreact",
+							"typescript.tsx",
+							"vue",
+							"svelte",
+							"astro",
+							"markdown",
+							"markdown.mdx",
+						},
 						capabilities = {
 							workspace = {
 								didChangeWorkspaceFolders = {
