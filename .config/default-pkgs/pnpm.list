@@ -6,9 +6,6 @@ pnpm
 # sharable config package.
 # @commitlint/config-conventional
 @commitlint/types
-# Format all commitlint issues as a simple JSON string
-# (bycedric/commitlint-formats).
-commitlint-format-json
 # Neovim Node.js client and plugin host
 neovim
 # Opinionated Code Formatter.
@@ -43,13 +40,11 @@ markuplint
 sort-package-json
 # Fast, reliable, and secure dependency management.
 yarn
-# Find newer versions of package dependencies than what your package.json
-# allows.
-npm-check-updates
-# Check for outdated, incorrect, and unused dependencies (dylang/npm-check).
-npm-check
-# Check your npm module for unused dependencies (depcheck/depcheck).
-depcheck
+# 🥦 A modern cli tool that keeps your deps fresh (antfu/taze).
+taze
+# ✂️ Find unused files, dependencies and exports in your JavaScript and
+# TypeScript projects. Knip it before you ship it! (webpro/knip)
+knip
 # CLI tool for running Yeoman generators.
 # yo
 # Scaffold out a Standard Readme.
