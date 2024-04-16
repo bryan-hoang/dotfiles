@@ -1,6 +1,7 @@
 # Order these files over lockfile changes.
 *.md
 *package.json
+*pyproject.toml
 *Gemfile
 *.config.*
 *rc.*
