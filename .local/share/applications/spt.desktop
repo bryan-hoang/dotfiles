@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Spotify TUI
-Comment=Spotify for the terminal written in Rust rocket 🚀.
+Comment=Spotify for the terminal written in Rust 🚀.
 Keywords=shell;prompt;command;commandline;cmd;
 Icon=org.wezfurlong.wezterm
 StartupWMClass=org.wezfurlong.wezterm
