@@ -35,16 +35,23 @@ topgrade
 stylua
 # A cli system trash manager, alternative to rm and trash-cli.
 trashy
-# Terminal image viewer.
-viu
 # A jq clone focussed on correctness, speed, and simplicity.
 jaq
 # Executes commands in response to file modifications.
 watchexec-cli
-# Create beautiful image of your source code.
-# silicon
 # Yet another cross-platform graphical process/system monitor.
 bottom
+# The corrective bash syntax highlighter (anordal/shellharden).
+shellharden
+# A git tool to manage worktrees and integrate with GitHub and GitLab
+# (hakoerber/git-repo-manager).
+git-repo-manager
+# Fast, configurable, shell plugin manager.
+sheldon
+# Terminal image viewer.
+viu
+# Create beautiful image of your source code.
+# silicon
 # A themeable LS_COLORS generator with a rich filetype datebase (sharkdp/vivid).
 vivid
 # An implementation of the Language Server Protocol for LaTeX
@@ -59,8 +66,6 @@ languagetool-rust
 # A tool to format codeblocks inside markdown and org documents
 # (ukas-reineke/cbfmt).
 cbfmt
-# The corrective bash syntax highlighter (anordal/shellharden).
-shellharden
 # Lightning-fast linter for .env files. Written in Rust
 # (dotenv-linter/dotenv-linter).
 dotenv-linter
@@ -70,13 +75,10 @@ macchina
 # Filter out duplicates on the command line. Replacement for `sort | uniq`
 # (koraa/huniq).
 huniq
-# A git tool to manage worktrees and integrate with GitHub and GitLab
-# (hakoerber/git-repo-manager).
-git-repo-manager
-# Fast, configurable, shell plugin manager.
-sheldon
 # Pluggable and configurable code formatting platform written in Rust.
 dprint
+# A specification for CLIs (jdx/usage).
+usage-cli
 # ⚡ A CLI tool for code structrual search, lint and rewriting. Written in Rust.
 # (ast-grep/ast-grep).
 # ast-grep

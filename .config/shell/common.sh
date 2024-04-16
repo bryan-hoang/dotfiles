@@ -67,7 +67,7 @@ does_command_exist cht.sh \
 does_command_exist cog \
 	&& generate_completions cog cog generate-completions "$SHELL_BASENAME"
 does_command_exist mise \
-	&& generate_completions mise mise complete --shell "$SHELL_BASENAME"
+	&& generate_completions mise mise completion "$SHELL_BASENAME"
 does_command_exist watchexec \
 	&& generate_completions watchexec watchexec --completions "$SHELL_BASENAME" \
 	&& generate_man_pages watchexec watchexec --manual
