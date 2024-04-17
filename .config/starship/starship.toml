@@ -139,10 +139,6 @@ version_format = 'v${major}.${minor}'
 [direnv]
 disabled = true
 
-[docker_context]
-disabled = true
-format = "[$symbol$context]($style) "
-
 [gcloud]
 # The module isn't very useful :(
 disabled = true
