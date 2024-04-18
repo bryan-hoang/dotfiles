@@ -2,6 +2,7 @@
 *.md
 *package.json
 *tsconfig.json
+*jsconfig.json
 *pyproject.toml
 *Gemfile
 *.config.*
