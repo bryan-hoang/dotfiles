@@ -156,6 +156,6 @@ alias ec='emacsclient --tty'
 alias ruby='ruby --yjit'
 alias restart-tmux='systemctl --user stop tmux && update_tmux_env && tmux attach'
 command -v watchexec >/dev/null \
-	&& alias watchexec='watchexec --project-origin . --restart --clear --timings --notify --bell'
+	&& alias watchexec='watchexec --project-origin . --restart --clear --timings'
 alias xidlehook-client='xidlehook-client --socket $XIDLEHOOK_SOCK'
 command -v tidy-viewer >/dev/null && alias tv='tidy-viewer'
