@@ -5,7 +5,7 @@ cargo-cache
 # (starship/starship)!
 starship
 # 🐢 Magical shell history (ellie/atuin).
-antuin
+atuin
 # A cargo subcommand for checking and applying updates to installed
 # executables.
 cargo-update
