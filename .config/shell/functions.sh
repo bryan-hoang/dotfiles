@@ -1581,6 +1581,7 @@ ls_glab_mr_map() {
 update_tmux_env() {
 	(
 		unset SHLVL SSH_CONNECTION SSH_CLIENT SSH_TTY
+		mise deactivate
 
 		# Avoid triggering the starship prompt module in tmux server started by
 		# systemd. Remove lingering SSH env vars.
