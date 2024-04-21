@@ -1,8 +1,9 @@
 root = true
 
 [*]
-indent_style = tab
 indent_size = 2
+indent_style = tab
+
 charset = utf-8
 end_of_line = lf
 insert_final_newline = true
@@ -28,30 +29,30 @@ insert_final_newline = unset
 indent_size = unset
 
 [*.{md,mdx}]
-indent_style = unset
 indent_size = unset
+indent_style = unset
 
 # https://github.com/rust-lang/style-team/blob/master/guide/guide.md
 # https://github.com/rust-lang/style-team/blob/master/guide/cargo.md
 [{*.rs,Cargo.toml}]
-indent_style = space
 indent_size = 4
+indent_style = space
 
 [Dockerfile*]
-indent_style = unset
 indent_size = unset
+indent_style = unset
 
 [dunstrc]
-indent_style = space
 indent_size = 4
+indent_style = space
 
 [**/dunstrc.d/*.conf]
-indent_style = space
 indent_size = 4
+indent_style = space
 
 [{Makefile,*.mk,COMMIT_EDITMSG}]
 indent_size = unset
 
 [Tiltfile]
-indent_style = space
 indent_size = 4
+indent_style = space
