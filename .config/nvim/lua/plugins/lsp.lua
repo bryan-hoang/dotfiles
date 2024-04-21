@@ -74,7 +74,7 @@ return {
 		opts = function(_, opts)
 			local prettier = { "prettierd", "prettier" }
 			local biome = { "biome-check", "biome" }
-			local jsFormatters = biome
+			local jsFormatters = { "biome-check", "biome", prettier, "eslint_d" }
 			local cssFormatters = { "stylelint", prettier }
 			local shFormatters = { "shellcheck", "shellharden", "shfmt" }
 
@@ -105,12 +105,42 @@ return {
 					shfmt = {
 						args = { "-filename", "$FILENAME", "-ci", "-bn", "--simplify" },
 					},
+					biome = {
+						cwd = require("conform.util").root_file({
+							"biome.json",
+							"biome.jsonc",
+						}),
+						require_cwd = true,
+					},
+					["biome-check"] = {
+						cwd = require("conform.util").root_file({
+							"biome.json",
+							"biome.jsonc",
+						}),
+						require_cwd = true,
+					},
 					prettier = {
+						cwd = require("conform.util").root_file({
+							"prettier.config.js",
+						}),
+						require_cwd = true,
 						options = {
 							ft_parsers = {
 								json = "json",
 							},
 						},
+					},
+					prettierd = {
+						cwd = require("conform.util").root_file({
+							"prettier.config.js",
+						}),
+						require_cwd = true,
+					},
+					eslint_d = {
+						cwd = require("conform.util").root_file({
+							"eslint.config.js",
+						}),
+						require_cwd = true,
 					},
 				},
 			}
