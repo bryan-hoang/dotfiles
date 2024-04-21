@@ -100,7 +100,7 @@ does_command_exist kondo \
 
 # Doesn't support bash.
 does_command_exist bw \
-	&& generate_completions bw bw completion --shell zsh | sed -e 's/\x1b\[[0-9;]*m//g'
+	&& generate_completions bw bw completion --shell zsh
 does_command_exist pipenv \
 	&& generate_completions pipenv env _PIPENV_COMPLETE=zsh_source pipenv
 does_command_exist kubectl \
