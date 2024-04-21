@@ -120,9 +120,6 @@ return {
 						require_cwd = true,
 					},
 					prettier = {
-						cwd = require("conform.util").root_file({
-							"prettier.config.js",
-						}),
 						require_cwd = true,
 						options = {
 							ft_parsers = {
@@ -131,9 +128,6 @@ return {
 						},
 					},
 					prettierd = {
-						cwd = require("conform.util").root_file({
-							"prettier.config.js",
-						}),
 						require_cwd = true,
 					},
 					eslint_d = {
