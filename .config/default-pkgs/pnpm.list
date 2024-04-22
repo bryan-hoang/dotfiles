@@ -19,6 +19,7 @@ yaml-language-server
 vscode-langservers-extracted
 @olrtg/emmet-language-server
 @biomejs/biome
+@astrojs/language-server
 # Autocompletion and go-to-definition for cssmodules
 # (antonk52/cssmodules-language-server).
 cssmodules-language-server

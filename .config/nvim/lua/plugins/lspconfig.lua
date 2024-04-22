@@ -138,6 +138,7 @@ return {
 						cmd = { "typescript-language-server", "--stdio", "--log-level=4" },
 					},
 					biome = { mason = false },
+					astro = { mason = false },
 					-- HTML/CSS
 					html = { mason = false },
 					emmet_language_server = { mason = false },
