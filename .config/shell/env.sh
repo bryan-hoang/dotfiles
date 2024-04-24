@@ -323,7 +323,7 @@ export MOZBUILD_STATE_PATH="$XDG_DATA_HOME"/mozbuild
 export GHCUP_USE_XDG_DIRS=1
 # Preferred over GNU screen's default of `~/.screenrc`.
 export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
-export BOB_CONFIG="$XDG_CONFIG_HOME"/bob/config.json
+export BOB_CONFIG="$XDG_CONFIG_HOME"/bob/config.toml
 export TAPLO_CONFIG="$XDG_CONFIG_HOME"/taplo/.taplo.toml
 # Hide messages from npm installing.
 export DISABLE_OPENCOLLECTIVE=1

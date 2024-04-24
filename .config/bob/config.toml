@@ -1,0 +1,2 @@
+# https://github.com/MordechaiHadad/bob#syntax
+version_sync_file_location = '$HOME/.config/nvim/nvim-version.txt'
