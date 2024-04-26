@@ -71,3 +71,6 @@ zsh-syntax-highlighting-dracula.plugin.zsh
 
 # LSP config file. e.g., to add plugins for rails.
 .solargraph.yml
+
+# Files for clangd LSP.
+.cache/clangd/index/*.idx
