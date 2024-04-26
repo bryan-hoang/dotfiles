@@ -77,6 +77,38 @@ return {
 					pathPkill = "pkill",
 				},
 			}
+
+			-- https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#vscode-js-debug
+			dap.adapters["pwa-node"] = {
+				type = "server",
+				host = "localhost",
+				port = "${port}",
+				executable = {
+					command = "node",
+					args = {
+						os.getenv("GHQ_ROOT")
+							.. "/github.com/microsoft/vscode-js-debug/main/dist/src/dapDebugServer.js",
+						"${port}",
+					},
+				},
+			}
+			for _, language in ipairs({
+				"typescript",
+				"javascript",
+				"typescriptreact",
+				"javascriptreact",
+			}) do
+				dap.configurations[language] = {
+					{
+						type = "pwa-node",
+						request = "attach",
+						name = "Attach to (chosen) process",
+						processId = require("dap.utils").pick_process,
+						cwd = "${workspaceFolder}",
+						trace = true,
+					},
+				}
+			end
 		end,
 	},
 	{
@@ -118,48 +150,6 @@ return {
 		},
 		config = function()
 			require("telescope").load_extension("dap")
-		end,
-	},
-	{
-		"mxsdev/nvim-dap-vscode-js",
-		dependencies = {
-			"mfussenegger/nvim-dap",
-		},
-		ft = {
-			"javascript",
-			"typescript",
-		},
-		config = function()
-			local dap_vscode_js = require("dap-vscode-js")
-			local dap = require("dap")
-
-			dap_vscode_js.setup({
-				-- Path to vscode-js-debug installation.
-				debugger_path = os.getenv("GHQ_ROOT")
-					.. "/github.com/microsoft/vscode-js-debug",
-
-				-- Which adapters to register in nvim-dap.
-				adapters = { "pwa-node" },
-			})
-
-			for _, language in ipairs({ "typescript", "javascript" }) do
-				dap.configurations[language] = {
-					{
-						type = "pwa-node",
-						request = "launch",
-						name = "Launch file",
-						program = "${file}",
-						cwd = "${workspaceFolder}",
-					},
-					{
-						type = "pwa-node",
-						request = "attach",
-						name = "Attach to (chosen) process",
-						processId = require("dap.utils").pick_process,
-						cwd = "${workspaceFolder}",
-					},
-				}
-			end
 		end,
 	},
 	{

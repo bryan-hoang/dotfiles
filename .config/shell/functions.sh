@@ -869,11 +869,13 @@ install_direnv() {
 install_vscode_js_debug() {
 	ghq get https://github.com/microsoft/vscode-js-debug.git
 	cd "$GHQ_ROOT"/github.com/microsoft/vscode-js-debug || return
-	# https://github.com/mxsdev/nvim-dap-vscode-js/issues/19#issuecomment-1333564516
-	git switch -d v1.68.0
+	git worktree-convert 2>/dev/null
+	touch .mise.toml
+	mise use node@20
+	cd "$GHQ_ROOT"/github.com/microsoft/vscode-js-debug/main || return
 	pnpm import
 	pnpm install
-	pnpm compile
+	pnpm exec gulp dapDebugServer
 	cd - || return
 }
 
