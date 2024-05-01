@@ -165,6 +165,9 @@ disabled = true
 format = '$symbol[${ram}( | ${swap})]($style) '
 
 [nodejs]
+detect_extensions = []
+detect_files = ["package-lock.json", "pnpm-lock.yaml", "yarn.lock"]
+detect_folders = []
 format = '[$symbol($version )]($style)'
 version_format = "v${major}"
 
