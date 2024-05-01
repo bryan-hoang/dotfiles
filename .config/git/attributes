@@ -5,6 +5,10 @@
 *.{cmd,[cC][mM][dD]} text eol=crlf
 *.{bat,[bB][aA][tT]} text eol=crlf
 
+# Text conversion of non-text file types for diffs.
+# https://bun.sh/docs/install/lockfile#how-do-i-git-diff-bun-s-lockfile
+*.lockb binary diff=lockb
+
 # Apply filters to certain files that are either secrets, or machine specific.
 .config/npm/npmrc filter=npmrc
 .gnupg/gpg-agent.conf filter=gpg-agent

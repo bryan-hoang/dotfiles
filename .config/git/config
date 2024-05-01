@@ -320,3 +320,7 @@
 	annotate = yes
 [transfer]
 	fsckobjects = true
+# https://bun.sh/docs/install/lockfile#how-do-i-git-diff-bun-s-lockfile
+[diff "lockb"]
+	textconv = bun
+	binary = true
