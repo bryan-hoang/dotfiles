@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-readonly FONT="FiraCode Nerd Font Mono"
+readonly FONT="BerkeleyMonoVariable Nerd Font Mono"
 
 readonly ALPHA='dd'
 readonly BLANK='#00000000'
