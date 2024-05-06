@@ -137,6 +137,10 @@ export NODE_COMPILE_CACHE="$XDG_CACHE_HOME"/node/compile
 
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
 
+export RUBY_DEBUG_HISTORY_FILE="$XDG_STATE_HOME"/rdbg/history
+mkdir -p "$(dirname "$RUBY_DEBUG_HISTORY_FILE")"
+export RUBY_YJIT_ENABLE=1
+
 # Colors
 
 # -F|--quit-if-one-screen - makes less quit if the entire output can be
@@ -275,8 +279,6 @@ export COMPOSER_HOME="$XDG_CONFIG_HOME"/composer
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 export TERMINFO="$XDG_DATA_HOME"/terminfo
 export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
-export RUBY_DEBUG_HISTORY_FILE="$XDG_STATE_HOME"/rdbg/history
-mkdir -p "$(dirname "$RUBY_DEBUG_HISTORY_FILE")"
 export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
 export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle/config
 export PIPX_HOME="$XDG_DATA_HOME"/pipx
