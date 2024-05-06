@@ -201,6 +201,9 @@
 				},
 				{
 					"PackageIdentifier": "ImageMagick.ImageMagick"
+				},
+				{
+					"PackageIdentifier": "FontForge.FontForge"
 				}
 			],
 			"SourceDetails": {

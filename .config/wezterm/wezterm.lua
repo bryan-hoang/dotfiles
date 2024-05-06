@@ -19,7 +19,7 @@ config:set_strict_mode(true)
 
 -- config.color_scheme = "Dracula (Official)"
 config.color_scheme = "Catppuccin Mocha"
-config.font = wezterm.font("Berkeley Mono Variable")
+config.font = wezterm.font("BerkeleyMonoVariable Nerd Font Mono")
 -- Default is 12.0.
 config.font_size = 12.0
 config.default_cursor_style = "SteadyBlock"
