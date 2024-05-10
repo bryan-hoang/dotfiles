@@ -6,7 +6,7 @@ register_clang_version() {
 	version=$1
 	priority=$2
 
-	update-alternatives \
+	sudo update-alternatives \
 		--install /usr/bin/llvm-config llvm-config /usr/bin/llvm-config-"$version" "$priority" \
 		--slave /usr/bin/llvm-ar llvm-ar /usr/bin/llvm-ar-"$version" \
 		--slave /usr/bin/llvm-as llvm-as /usr/bin/llvm-as-"$version" \
@@ -29,7 +29,7 @@ register_clang_version() {
 		--slave /usr/bin/llvm-symbolizer llvm-symbolizer /usr/bin/llvm-symbolizer-"$version" \
 		--slave /usr/bin/llvm-tblgen llvm-tblgen /usr/bin/llvm-tblgen-"$version"
 
-	update-alternatives \
+	sudo update-alternatives \
 		--install /usr/bin/clang clang /usr/bin/clang-"$version" "$priority" \
 		--slave /usr/bin/clang++ clang++ /usr/bin/clang++-"$version" \
 		--slave /usr/bin/asan_symbolize asan_symbolize /usr/bin/asan_symbolize-"$version" \
