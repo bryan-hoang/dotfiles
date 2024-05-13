@@ -1,6 +1,8 @@
-# Symlink to /usr/local/share/xsessions/xsession.desktop
+# Symlink to /usr/share/xsessions/xsession.desktop
 [Desktop Entry]
 Name=Xsession
 Comment=Custom Xsession file
+TryExec=/etc/X11/Xsession
 Exec=/etc/X11/Xsession
 Type=Application
+DesktopNames=Xsession

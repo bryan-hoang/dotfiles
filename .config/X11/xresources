@@ -16,7 +16,7 @@ Xft.antialias: 1
 Xft.rgba: rgb
 
 ! Font settings.
-XTerm.vt100.faceName: BerkeleyMonoVariable Nerd Font Mono
+XTerm.vt100.faceName: BerkeleyMonoVariable Nerd Font
 XTerm.vt100.faceSize: 12
 XTerm.vt100.renderFont: true
 ! https://wiki.archlinux.org/title/Xterm#Configuration

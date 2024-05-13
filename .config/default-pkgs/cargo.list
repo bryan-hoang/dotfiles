@@ -15,10 +15,11 @@ taplo-cli --features lsp
 --git https://github.com/kaplanelad/shellfirm shellfirm
 # A command-line DNS client.
 # --git https://github.com/ogham/dog dog
-# Visualize your most used commands.
-# --git https://github.com/nate-sys/muc
 # An over-engineered rewrite of pipes.sh in Rust.
 # --git https://github.com/lhvy/pipes-rs
+# A general purpose application launcher for X and wayland inspired by
+# rofi/wofi and alfred (onagre-launcher/onagre).
+# --git https://github.com/onagre-launcher/onagre
 
 # Windows Incompatible.
 

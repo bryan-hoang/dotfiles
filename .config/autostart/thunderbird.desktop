@@ -1,1 +1,10 @@
-../../../../usr/local/share/applications/thunderbird.desktop
+[Desktop Entry]
+Encoding=UTF-8
+Name=Thunderbird Mail
+Comment=Send and receive mail with Thunderbird
+GenericName=Mail Client
+Keywords=Email;E-mail;Newsgroup;Feed;RSS
+Exec=bash -c "sleep 4 && thunderbird %u"
+Terminal=false
+Type=Application
+StartupNotify=true
