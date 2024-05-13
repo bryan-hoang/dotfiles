@@ -51,7 +51,7 @@
             "experimental.retroTerminalEffect": false,
             "font": 
             {
-                "face": "BerkeleyMonoVariable Nerd Font"
+                "face": "BerkeleyMono Nerd Font Mono"
             },
             "historySize": 20000,
             "opacity": 75,

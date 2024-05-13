@@ -341,4 +341,4 @@ export PGSERVICEFILE="$XDG_CONFIG_HOME/pg/pg_service.conf"
 mkdir -p "$(dirname "$PSQLRC")"
 mkdir -p "$(dirname "$PSQL_HISTORY")"
 export COREPACK_ENABLE_DOWNLOAD_PROMPT=0
-export FONT_MONO='BerkeleyMonoVariable Nerd Font'
+export FONT_MONO='BerkeleyMono Nerd Font Mono'
