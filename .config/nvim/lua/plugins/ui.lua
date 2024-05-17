@@ -10,19 +10,14 @@ return {
 		end,
 	},
 	{
-		"akinsho/bufferline.nvim",
-		event = require("util").buf_enter_event_list,
-	},
-	{
 		"nvim-lualine/lualine.nvim",
-		event = require("util").buf_enter_event_list,
 		opts = function(_, opts)
 			local function noeol()
 				local eol_indocator = (vim.opt.eol:get() and "" or "[noeol]")
 				return eol_indocator
 			end
-
 			table.insert(opts.sections.lualine_c, 4, { noeol })
+
 			return opts
 		end,
 	},

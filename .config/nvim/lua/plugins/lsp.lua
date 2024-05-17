@@ -158,11 +158,10 @@ return {
 					-- https://github.com/kampfkarren/selene/issues/340#issuecomment-1191992366
 					lua = { "selene" },
 					gitcommit = { "commitlint", "vale" },
-					["*"] = { "typos" },
+					html = { "markuplint" },
+					["*"] = { "typos", "editorconfig-checker" },
 				},
 				linters = {
-					-- TODO: Contribute `ltrs`, `markuplint`
-					-- `editorconfig_checker`, to `nvim-lint`!
 					stylelint = {
 						-- v16 switched from reporting on stdout to stderr.
 						stream = "stderr",

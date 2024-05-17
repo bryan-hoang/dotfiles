@@ -36,6 +36,10 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.editor.mini-files" },
 		{ import = "lazyvim.plugins.extras.linting.eslint" },
 		{ import = "lazyvim.plugins.extras.lsp.none-ls" },
+		-- Allows mapping "<C-/>" to comment lines more easily than built-in comment
+		-- support.
+		{ import = "lazyvim.plugins.extras.coding.mini-comment" },
+		{ import = "lazyvim.plugins.extras.ui.treesitter-context" },
 		-- Import/override with your plugins.
 		{ import = "plugins" },
 	},
