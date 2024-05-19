@@ -79,6 +79,8 @@ huniq
 dprint
 # A specification for CLIs (jdx/usage).
 usage-cli
+# 💥 Blazing fast terminal file manager written in Rust, based on async I/O.
+yazi-{fm,cli}
 # ⚡ A CLI tool for code structrual search, lint and rewriting. Written in Rust.
 # (ast-grep/ast-grep).
 # ast-grep

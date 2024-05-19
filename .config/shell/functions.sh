@@ -1616,3 +1616,16 @@ standup() {
 		| cut --delimiter ' ' --fields 3- \
 		| huniq
 }
+
+# https://yazi-rs.github.io/docs/quick-start#shell-wrapper
+yy() {
+	local tmp
+	tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+	readonly tmp
+
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(cat -- "$tmp")" && [[ -n $cwd ]] && [[ $cwd != "$PWD" ]]; then
+		cd -- "$cwd" || exit
+	fi
+	rm -f -- "$tmp"
+}
