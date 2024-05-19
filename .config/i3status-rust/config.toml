@@ -12,6 +12,7 @@ icons = "material-nf"
 
 [[block]]
 block = "focused_window"
+format = " $title.str(max_w:16,rot_interval:0.5) |"
 
 [[block]]
 block = "docker"
