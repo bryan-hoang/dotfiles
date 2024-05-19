@@ -43,9 +43,6 @@
 [submodule "redhat-documentation/RedHat"]
 	path = src/github.com/redhat-documentation/RedHat
 	url = https://github.com/redhat-documentation/vale-at-red-hat.git
-[submodule "LGUG2Z/komorebi"]
-	path = src/github.com/LGUG2Z/komorebi
-	url = https://github.com/LGUG2Z/komorebi.git
 [submodule "dandavison/delta"]
 	path = src/github.com/dandavison/delta
 	url = https://github.com/dandavison/delta.git

@@ -268,7 +268,6 @@ export JULIA_DEPOT_PATH="$XDG_DATA_HOME"/julia:"$JULIA_DEPOT_PATH"
 export MINIKUBE_HOME="$XDG_DATA_HOME"/minikube
 export MYPY_CACHE_DIR="$XDG_CACHE_HOME"/mypy
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
-export KOMOREBI_CONFIG_HOME="$XDG_CONFIG_HOME"/komorebi
 export BACKUPS_DIR="$XDG_DATA_HOME"/backups
 export SRC_DIR="$HOME"/src/localhost
 mkdir -p "$SRC_DIR"
