@@ -44,7 +44,8 @@ idle_fg = "#282A36"
 
 [[block]]
 block = "cpu"
-format = " $icon $barchart $utilization "
+format = " $icon $utilization "
+format_alt = " $icon $barchart $utilization "
 
 [[block]]
 block = "music"
