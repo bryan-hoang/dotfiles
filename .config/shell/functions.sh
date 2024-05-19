@@ -1459,7 +1459,8 @@ ln_sh_plugins() {
 	mkdir -p "$bash_target_dir"
 
 	for plugin in "${bash_plugins[@]}"; do
-		ln -sf "$HOME"/src/github.com/"$plugin" "$bash_target_dir"
+    ln -sf "$(realpath --relative-to="$bash_target_dir" "$HOME"/src/github.com/"$plugin")" \
+      "$bash_target_dir"
 	done
 }
 
