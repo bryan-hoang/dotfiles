@@ -204,6 +204,9 @@
 				},
 				{
 					"PackageIdentifier": "FontForge.FontForge"
+				},
+				{
+					"PackageIdentifier": "Ookla.Speedtest.CLI"
 				}
 			],
 			"SourceDetails": {
