@@ -21,6 +21,12 @@ export default {
 				parser: 'yaml',
 			},
 		},
+		{
+			files: '*.svg',
+			options: {
+				parser: 'html',
+			},
+		},
 	],
 	plugins: ['prettier-plugin-packagejson'],
 	proseWrap: 'always',

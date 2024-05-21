@@ -88,6 +88,7 @@ return {
 					jsonc = biome,
 					yaml = { prettier },
 					html = { prettier },
+					svg = { prettier },
 					markdown = { "markdownlint", prettier },
 					css = cssFormatters,
 					scss = cssFormatters,
