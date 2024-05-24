@@ -15,13 +15,6 @@ return {
 		},
 	},
 	{
-		"ThePrimeagen/refactoring.nvim",
-		dependencies = {
-			{ "nvim-lua/plenary.nvim" },
-			{ "nvim-treesitter/nvim-treesitter" },
-		},
-	},
-	{
 		"joechrisellis/lsp-format-modifications.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",

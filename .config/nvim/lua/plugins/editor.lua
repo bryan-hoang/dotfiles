@@ -178,14 +178,6 @@ return {
 		ft = "lua",
 	},
 	{
-		"ggandor/leap.nvim",
-		enabled = false,
-	},
-	{
-		"ggandor/flit.nvim",
-		enabled = false,
-	},
-	{
 		-- Markdown preview plugin for (neo)vim.
 		"iamcco/markdown-preview.nvim",
 		config = function()

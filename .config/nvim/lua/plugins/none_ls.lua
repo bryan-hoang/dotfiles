@@ -23,7 +23,6 @@ return {
 					b.code_actions.proselint,
 					b.code_actions.gitsigns,
 					b.code_actions.gitrebase,
-					b.code_actions.refactoring,
 					b.hover.printenv,
 				},
 			}
