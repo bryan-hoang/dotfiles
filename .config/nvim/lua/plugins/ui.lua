@@ -68,10 +68,17 @@ return {
 	{
 		-- Cloak allows you to overlay *'s over defined patterns in defined files.
 		"laytan/cloak.nvim",
-		ft = "dotenv",
+		ft = { "dotenv", "json" },
 		keys = {
 			{ "<Leader>ux", "<Cmd>CloakToggle<CR>", desc = "Toggle clocking state" },
 		},
-		opts = {},
+		opts = {
+			patterns = {
+				{
+					file_pattern = "*secret*.json",
+					cloak_pattern = ":.+",
+				},
+			},
+		},
 	},
 }
