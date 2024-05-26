@@ -146,6 +146,9 @@
 					"PackageIdentifier": "GnuWin32.Make"
 				},
 				{
+					"PackageIdentifier": "Kitware.CMake"
+				},
+				{
 					"PackageIdentifier": "rjpcomputing.luaforwindows"
 				},
 				{
