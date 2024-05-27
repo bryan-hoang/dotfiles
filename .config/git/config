@@ -79,7 +79,7 @@
 	# List all branches along with their most recent author.
 	branch-activity = "!git branch --color --all --format='%(committerdate:relative)\t%(color:yellow)%(refname:lstrip=3)%(color:reset)\t%(color:blue)%(authorname)%(color:reset)' --no-merged origin/HEAD"
 	# List local branches w/ additional info.
-	branch-list = "!git for-each-ref --color --sort=-committerdate --no-merged=HEAD --format='%(color:red)%(ahead-behind:HEAD)\t%(color:green)%(objectname:short) %(refname:short)\t%(color:blue)%(committerdate:relative)\t%(color:yellow)%(authorname)' refs/heads/ | sed 's/ /\t/' | column --separator='\t' --table --table-columns='Ahead,Behind,Branch,Last Commit,Latest Author'"
+	branch-list = "!git for-each-ref --color --sort=-committerdate --no-merged=HEAD --format='%(color:red)%(ahead-behind:HEAD)\t%(color:green)%(refname:short)\t%(color:blue)%(objectname:short) %(committerdate:relative)\t%(color:magenta)%(authorname)' refs/remotes/ | sed 's/ /\t/' | column --separator='\t' --table --table-columns='Ahead,Behind,Branch,Last Commit,Latest Author' | less"
 	# Prints the name of the upstream branch.
 	show-upstream-ref = rev-parse --abbrev-ref HEAD@{u}
 	# Prints the diff of the current branch (i.e., HEAD) against the remote
