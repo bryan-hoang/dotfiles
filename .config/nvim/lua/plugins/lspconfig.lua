@@ -40,7 +40,7 @@ return {
 				},
 				-- Be aware that you also will need to properly configure your LSP
 				-- server to provide the inlay hints.
-				inlay_hints = { enabled = true },
+				inlay_hints = { enabled = false },
 				format = { async = true },
 				---@type lspconfig.options
 				servers = {
