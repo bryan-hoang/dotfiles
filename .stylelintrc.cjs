@@ -1,1 +1,0 @@
-.config/stylelint/.stylelintrc.cjs
