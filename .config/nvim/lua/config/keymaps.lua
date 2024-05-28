@@ -50,12 +50,6 @@ vim.keymap.del("n", "<Leader>gs")
 local wk = require("which-key")
 
 wk.register({
-	m = {
-		name = "+minimap/md",
-	},
-	h = {
-		name = "+harpoon",
-	},
 	g = {
 		name = "+git/debug",
 		c = {

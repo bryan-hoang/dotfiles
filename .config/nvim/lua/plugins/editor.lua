@@ -117,30 +117,6 @@ return {
 		enabled = false,
 	},
 	{
-		"ThePrimeagen/harpoon",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		lazy = false,
-		keys = {
-			{
-				"<leader>hm",
-				"<cmd>lua require('harpoon.mark').add_file()<cr>",
-				desc = "Add Harpoon mark",
-			},
-			{
-				"<leader>ht",
-				"<cmd>lua require('harpoon.ui').toggle_quick_menu()<cr>",
-				desc = "Toggle Harpoon quick menu",
-			},
-			{
-				"<leader>hf",
-				"<cmd>lua require('harpoon.ui').nav_file(vim.v.count1)<cr>",
-				desc = "Navigate to harpooned file",
-			},
-		},
-	},
-	{
 		"mbbill/undotree",
 		cmd = "UndotreeToggle",
 		keys = {
