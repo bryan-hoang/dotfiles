@@ -25,7 +25,6 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.editor.mini-files" },
 		{ import = "lazyvim.plugins.extras.editor.navic" },
 		{ import = "lazyvim.plugins.extras.editor.refactoring" },
-		{ import = "lazyvim.plugins.extras.editor.trouble-v3" },
 		{ import = "lazyvim.plugins.extras.lang.json" },
 		{ import = "lazyvim.plugins.extras.lang.markdown" },
 		{ import = "lazyvim.plugins.extras.lang.toml" },
