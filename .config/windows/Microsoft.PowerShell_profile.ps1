@@ -3,28 +3,34 @@
 #region Functions
 
 # Lists the aliases for any cmdlet.
-function Get-CmdletAlias ($cmdletname) {
+function Get-CmdletAlias ($cmdletname)
+{
 	Get-Alias |
 		Where-Object -FilterScript {$_.Definition -like "$cmdletname"} |
-			Format-Table -Property Definition, Name -AutoSize
+		Format-Table -Property Definition, Name -AutoSize
 }
 
 # https://www.reddit.com/r/Windows11/comments/pu5aa3/howto_disable_new_context_menu_explorer_command/?utm_source=share&utm_medium=web2x&context=3
-function Disable-New-Context-Menu {
+function Disable-New-Context-Menu
+{
 	reg add 'HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32' /f /ve
 }
 
 # Print the values of all environment variables.
-function env {
+function env
+{
 	Get-ChildItem env:
 }
 
-function path {
+function path
+{
 	$Env:Path -split ";"
 }
 
-function Set-UserEnvVar($envname, $envvalue) {
-	if ([string]::IsNullOrEmpty([Environment]::GetEnvironmentVariable($envname, 'User'))) {
+function Set-UserEnvVar($envname, $envvalue)
+{
+	if ([string]::IsNullOrEmpty([Environment]::GetEnvironmentVariable($envname, 'User')))
+	{
 		[Environment]::SetEnvironmentVariable(
 			$envname,
 			$envvalue,
@@ -35,15 +41,37 @@ function Set-UserEnvVar($envname, $envvalue) {
 	Set-Item "env:$envname" $envvalue
 }
 
-function Add-UserPath($PathToAdd) {
+function Add-UserPath($PathToAdd)
+{
 	if (
 		([Environment]::GetEnvironmentVariable('Path', 'User') -notlike "*$PathToAdd*") -and (Test-Path -PathType Container "$PathToAdd")
-	) {
+	)
+	{
 		[Environment]::SetEnvironmentVariable(
 			'Path',
 			[Environment]::GetEnvironmentVariable('Path', 'User') + "$PathToAdd;",
 			'User'
 		)
+	}
+}
+
+function Test-CommandExists($command)
+{
+	$oldPreference = $ErrorActionPreference
+	$ErrorActionPreference = ‘stop’
+	try
+	{
+		if (Get-Command $command)
+		{
+			RETURN $true
+		}
+	} Catch
+	{
+		Write-Host “$command does not exist”
+		RETURN $false
+	} Finally
+	{
+		$ErrorActionPreference=$oldPreference
 	}
 }
 
@@ -75,10 +103,10 @@ Add-UserPath "$Env:XDG_BIN_HOME"
 #endregion
 
 # Hooking zoxide.
-Invoke-Expression (& {
-	$hook = if ($PSVersionTable.PSVersion.Major -lt 6) { 'prompt' } else { 'pwd' }
-	(zoxide init --hook $hook powershell | Out-String)
-})
+if (Test-CommandExists zoxide)
+{
+	Invoke-Expression (& { (zoxide init powershell | Out-String) })
+}
 
 # Initializing Starship prompt.
 Invoke-Expression (&starship init powershell)

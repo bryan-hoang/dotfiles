@@ -23,16 +23,13 @@
 					"PackageIdentifier": "Microsoft.OneDrive"
 				},
 				{
-					"PackageIdentifier": "ProtonTechnologies.ProtonMailBridge"
+					"PackageIdentifier": "Proton.ProtonMailBridge"
 				},
 				{
 					"PackageIdentifier": "Spotify.Spotify"
 				},
 				{
 					"PackageIdentifier": "Valve.Steam"
-				},
-				{
-					"PackageIdentifier": "pnpm.pnpm"
 				},
 				{
 					"PackageIdentifier": "Google.Chrome"
@@ -44,7 +41,7 @@
 					"PackageIdentifier": "Logitech.OptionsPlus"
 				},
 				{
-					"PackageIdentifier": "Neovim.Neovim.Nightly"
+					"PackageIdentifier": "Neovim.Neovim"
 				},
 				{
 					"PackageIdentifier": "OpenJS.NodeJS.LTS"
@@ -53,28 +50,13 @@
 					"PackageIdentifier": "wez.wezterm"
 				},
 				{
-					"PackageIdentifier": "EpicGames.EpicGamesLauncher"
-				},
-				{
-					"PackageIdentifier": "Microsoft.WindowsSDK"
-				},
-				{
 					"PackageIdentifier": "MSYS2.MSYS2"
 				},
 				{
 					"PackageIdentifier": "Microsoft.PowerToys"
 				},
 				{
-					"PackageIdentifier": "Python.Python.3.11"
-				},
-				{
-					"PackageIdentifier": "RubyInstallerTeam.RubyWithDevKit.3.1"
-				},
-				{
 					"PackageIdentifier": "Streamlink.Streamlink"
-				},
-				{
-					"PackageIdentifier": "Streamlink.Streamlink.TwitchGui"
 				},
 				{
 					"PackageIdentifier": "gerardog.gsudo"
@@ -98,9 +80,6 @@
 					"PackageIdentifier": "Caprine.Caprine"
 				},
 				{
-					"PackageIdentifier": "Elgato.StreamDeck"
-				},
-				{
 					"PackageIdentifier": "OBSProject.OBSStudio"
 				},
 				{
@@ -117,9 +96,6 @@
 				},
 				{
 					"PackageIdentifier": "DenoLand.Deno"
-				},
-				{
-					"PackageIdentifier": "Alacritty.Alacritty"
 				},
 				{
 					"PackageIdentifier": "GitHub.cli"
@@ -140,22 +116,7 @@
 					"PackageIdentifier": "GNU.Emacs"
 				},
 				{
-					"PackageIdentifier": "Microsoft.DotNet.SDK.Preview"
-				},
-				{
-					"PackageIdentifier": "GnuWin32.Make"
-				},
-				{
 					"PackageIdentifier": "Kitware.CMake"
-				},
-				{
-					"PackageIdentifier": "rjpcomputing.luaforwindows"
-				},
-				{
-					"PackageIdentifier": "Julialang.Julia"
-				},
-				{
-					"PackageIdentifier": "Oracle.JDK.17"
 				},
 				{
 					"PackageIdentifier": "JernejSimoncic.Wget"
@@ -165,12 +126,6 @@
 				},
 				{
 					"PackageIdentifier": "StrawberryPerl.StrawberryPerl"
-				},
-				{
-					"PackageIdentifier": "GnuWin32.Tree"
-				},
-				{
-					"PackageIdentifier": "rocksdanister.LivelyWallpaper"
 				},
 				{
 					"PackageIdentifier": "Google.Chrome.Canary"
@@ -186,9 +141,6 @@
 				},
 				{
 					"PackageIdentifier": "Element.Element"
-				},
-				{
-					"PackageIdentifier": "Obsidian.Obsidian"
 				},
 				{
 					"PackageIdentifier": "LGUG2Z.whkd"
