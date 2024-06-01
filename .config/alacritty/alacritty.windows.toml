@@ -1,0 +1,6 @@
+import = ['C:\Users\bryan\.config\alacritty\alacritty.common.toml']
+working_directory = 'C:\Users\bryan'
+
+[shell]
+args = ["--login"]
+program = 'C:\Program Files\Git\bin\bash.exe'
