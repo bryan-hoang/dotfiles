@@ -2,14 +2,16 @@
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
 
-if vim.g.neovide then
+local opt = vim.opt
+local g = vim.g
+local fn = vim.fn
+local env = vim.env
+
+if g.neovide then
 	require("config/neovide")
 end
 
 local util = require("util")
-
-local opt = vim.opt
-local g = vim.g
 
 -- Avoid https://github.com/neovim/neovim/issues/14605
 if not util.is_os_unix and string.match(opt.shell:get(), "bash%.exe") then
@@ -36,7 +38,7 @@ g.netrw_liststyle = 3
 
 -- Always use lemonade as the clipboard program, to avoid issues with
 -- `x{sel,clip}` taking precedence over lemonade.
-if vim.fn.executable("lemonade") == 1 then
+if fn.executable("lemonade") == 1 then
 	g.clipboard = {
 		name = "lemonade",
 		copy = {
@@ -134,7 +136,7 @@ opt.clipboard:append("unnamedplus")
 
 opt.jumpoptions:append("view")
 
-if vim.g.vscode then
+if g.vscode then
 	return
 end
 
@@ -144,4 +146,7 @@ end
 -- https://github.com/vscode-neovim/vscode-neovim/issues/1352
 opt.colorcolumn = { "+0", "+20", "+40" }
 
-vim.env.FORCE_COLOR = nil
+env.FORCE_COLOR = nil
+
+-- Deprecation warnings in LazyVim
+g.deprecation_warnings = true

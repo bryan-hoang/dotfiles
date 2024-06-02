@@ -13,7 +13,10 @@ set_file_associations({
 	json = { ".*%.vil" },
 	jsonc = { ".*/%.config/markdownlint/config", ".*/%.vscode/.*%.json" },
 	just = { ".*justfile" },
-	xdefaults = { ".*/%.config/X11/xresources" },
+	xdefaults = {
+		".*/%.config/X11/xresources",
+		".*/%.config/X11/xresources%.d/.*",
+	},
 	i3config = { ".*/i3/conf%.d/.*%.conf" },
 	cfg = { "dunstrc" },
 	starlark = { "Tiltfile" },

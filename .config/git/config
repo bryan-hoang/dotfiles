@@ -189,9 +189,6 @@
 [filter "i3status-rust-token"]
 	smudge = cat
 	clean = "sed '/^token/d'"
-[filter "xresources-dpi"]
-	smudge = cat
-	clean = "sed '/^Xft.dpi/d'"
 [filter "git-config"]
 	smudge = cat
 	# Using sed to delete all lines between two matching patterns:

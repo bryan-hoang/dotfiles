@@ -1,6 +1,5 @@
 #include "/home/bryan/src/github.com/dracula/xresources/Xresources"
-
-! DPI scaling (filtered through `git config filter.xresources-dpi.clean`).
+#include "xresources.d/dpi"
 
 ! Set consistent cursor theme.
 Xcursor.theme: Dracula-cursors

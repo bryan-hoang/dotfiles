@@ -1,4 +1,4 @@
-# Symlink to /usr/share/xsessions/xsession.desktop
+# `sudo cp ~/.config/X11/xsession.desktop /usr/share/xsessions/xsession.desktop`
 [Desktop Entry]
 Name=Xsession
 Comment=Custom Xsession file
