@@ -1,4 +1,4 @@
-import = ['C:\Users\bryan\src\github.com\dracula\alacritty\dracula.yml']
+import = ['~/src/github.com/dracula/alacritty/dracula.yml']
 live_config_reload = true
 
 [env]

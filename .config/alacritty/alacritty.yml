@@ -1,5 +1,0 @@
-# Unix specific config file directly loaded by Alacritty.
-# https://github.com/alacritty/alacritty#configuration
-
-import:
-  - ~/.config/alacritty/alacritty.common.yml
