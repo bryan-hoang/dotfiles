@@ -343,3 +343,4 @@ mkdir -p "$(dirname "$PSQLRC")"
 mkdir -p "$(dirname "$PSQL_HISTORY")"
 export COREPACK_ENABLE_DOWNLOAD_PROMPT=0
 export FONT_MONO='BerkeleyMono Nerd Font Mono'
+export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
