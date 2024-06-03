@@ -7,6 +7,8 @@ github.com/editorconfig-checker/editorconfig-checker/cmd/editorconfig-checker@la
 github.com/direnv/direnv@latest
 # A remote utility tool to copy, paste and open browser over TCP.
 # github.com/lemonade-command/lemonade@latest
+# A tool for exploring each layer in a docker image.
+github.com/wagoodman/dive@latest
 # Render markdown on the CLI, with pizzazz! 💅.
 # github.com/charmbracelet/glow@latest
 # github.com/dnnrly/abbreviate@latest
