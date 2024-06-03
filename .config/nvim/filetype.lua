@@ -22,6 +22,7 @@ set_file_associations({
 	starlark = { "Tiltfile" },
 	dotenv = { ".*%.env%..*" },
 	ruby = { ".*/%.config/pry/pryrc" },
+	ini = { ".*/%.config/redshift%.conf" },
 })
 
 vim.filetype.add({
