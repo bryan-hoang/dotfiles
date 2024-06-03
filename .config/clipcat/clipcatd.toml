@@ -1,0 +1,45 @@
+daemonize = true
+history_file_path = "/home/bryan/.cache/clipcat/clipcatd-history"
+max_history = 50
+pid_file = "/run/user/1000/clipcatd.pid"
+primary_threshold_ms = 5000
+snippets = []
+synchronize_selection_with_clipboard = true
+
+[log]
+emit_journald = true
+emit_stderr = false
+emit_stdout = false
+level = "INFO"
+
+[watcher]
+capture_image = true
+denied_text_regex_patterns = []
+enable_clipboard = true
+enable_primary = true
+enable_secondary = false
+filter_image_max_size = 5242880
+filter_text_max_length = 20000000
+filter_text_min_length = 1
+sensitive_x11_atoms = ["x-kde-passwordManagerHint"]
+
+[grpc]
+enable_http = true
+enable_local_socket = true
+host = "127.0.0.1"
+local_socket = "/run/user/1000/clipcat/grpc.sock"
+port = 45045
+
+[dbus]
+enable = true
+
+[metrics]
+enable = true
+host = "127.0.0.1"
+port = 45047
+
+[desktop_notification]
+enable = true
+icon = "accessories-clipboard"
+long_plaintext_length = 2000
+timeout_ms = 2000
