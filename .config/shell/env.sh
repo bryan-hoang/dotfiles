@@ -261,11 +261,13 @@ export TMUX_PLUGIN_MANAGER_PATH="$XDG_DATA_HOME"/tmux/plugins
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 mkdir -p "$(dirname "$WINEPREFIX")"
 
-# Avoid hard coded ~/.osh-update from oh-my-bash.
+export MINIKUBE_HOME="$XDG_DATA_HOME"/minikube
+export KUBECONFIG="$XDG_CONFIG_HOME"/kube
+export KUBECACHEDIR="$XDG_CACHE_HOME"/kube
+
 export DISABLE_AUTO_UPDATE=true
 export CLOUDSDK_CONFIG="$XDG_CONFIG_HOME"/gcloud
 export JULIA_DEPOT_PATH="$XDG_DATA_HOME"/julia:"$JULIA_DEPOT_PATH"
-export MINIKUBE_HOME="$XDG_DATA_HOME"/minikube
 export MYPY_CACHE_DIR="$XDG_CACHE_HOME"/mypy
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
 : "${KOMOREBI_CONFIG_HOME:="$XDG_CONFIG_HOME"/komorebi}"
