@@ -13,7 +13,7 @@
 	path = dotfiles.gitconfig
 [alias]
 	# Delete branches that are merged into the current branch.
-	dm = "!git branch --format '%(refname:short)' --merged | grep --invert-match $(git branch --show-current) | xargs --no-run-if-empty git branch --delete"
+	prune-merged = "!git worktree-prune && git ls-merged | xargs --no-run-if-empty git branch --delete"
 	# View abbreviated SHA, description, and history graph of the latest 20
 	# commits.
 	l = log --pretty=oneline -n 20 --graph --abbrev-commit
@@ -56,7 +56,7 @@
 	sub-branch = "!git submodule foreach --recursive 'git switch "$(basename $(git symbolic-ref --short refs/remotes/origin/HEAD))"; git pull'"
 	# Usage: git mr <id> [target branch]
 	# $ git review-mr 1337
-	# Switchs to the merge base with the overall changes as hunks.
+	# Switches to the merge base with the overall changes as hunks.
 	review-mr = "!f() { git fetch origin refs/merge-requests/$1/head && git switch --detach FETCH_HEAD && git reset $(git merge-base HEAD ${2:-$(git branch-default)}); }; f"
 	# Find the date a file was added. Source: https://stackoverflow.com/a/25633731/8714233
 	fd = "!f() { git log --follow --format=%ad $1 | tail -1; }; f"
@@ -106,6 +106,7 @@
 	# Converts normally cloned repo into one that better accommodates a "git
 	# worktree" based workflow.
 	worktree-convert = "!f() { grm wt convert && mv .git-main-working-tree .git && echo '' >| .git/index && git worktree add \"$(git branch-default)\" && git worktree lock \"$(git branch-default)\"; }; f"
+	ls-merged = "!git branch --format '%(refname:short)' --merged | grep --invert-match --line-regex "$(git branch --show-current)""
 [apply]
 	# Detect whitespace errors when applying a patch.
 	whitespace = fix

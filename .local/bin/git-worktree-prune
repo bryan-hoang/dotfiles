@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+# Deletes worktrees with branches that have been merged into the current branch.
+# Arguments:
+#   None
+main() {
+	local -a MERGED_BRANCHES=()
+	local WORKTREES
+	local -a worktrees_to_prune=()
+	local worktree_to_prune
+
+	mapfile -t MERGED_BRANCHES < <(git ls-merged)
+	readonly MERGED_BRANCHES
+
+	WORKTREES=$(git worktree list)
+	readonly WORKTREES
+
+	for merged_branch in "${MERGED_BRANCHES[@]}"; do
+		worktree_to_prune="$(grep -F "[$merged_branch]" <<<"$WORKTREES" | awk '{print $1}')"
+
+		# The current merged branch isn't checked out in a worktree currently.
+		if [[ -z "$worktree_to_prune" ]]; then
+			continue
+		fi
+
+		worktrees_to_prune+=("$worktree_to_prune")
+	done
+
+	for worktree_to_prune in "${worktrees_to_prune[@]}"; do
+		git worktree remove -f "$worktree_to_prune"
+	done
+}
+
+main "$@"
