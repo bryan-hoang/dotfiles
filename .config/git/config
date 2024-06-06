@@ -13,7 +13,7 @@
 	path = dotfiles.gitconfig
 [alias]
 	# Delete branches that are merged into the current branch.
-	prune-merged = "!git worktree-prune && git ls-merged | xargs --no-run-if-empty git branch --delete"
+	dm = "!git worktree-prune && git ls-merged | xargs --no-run-if-empty git branch --delete"
 	# View abbreviated SHA, description, and history graph of the latest 20
 	# commits.
 	l = log --pretty=oneline -n 20 --graph --abbrev-commit
