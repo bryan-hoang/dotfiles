@@ -4,7 +4,7 @@ return {
 		enabled = true,
 		keys = {
 			{
-				"<Leader>cn",
+				"<Leader>co",
 				"<Cmd>NullLsInfo<CR>",
 				desc = "null-ls Info",
 			},
