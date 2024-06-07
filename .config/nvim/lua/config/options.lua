@@ -57,7 +57,7 @@ opt.relativenumber = true
 
 -- Textwidth for hard wrapping. I want to encourage writing short lines of
 -- code. For long lines of code, use J where needed.
-opt.tw = 80
+opt.textwidth = 80
 
 -- Enable line wrap.
 opt.wrap = true
