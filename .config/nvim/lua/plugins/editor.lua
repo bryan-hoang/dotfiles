@@ -150,10 +150,6 @@ return {
 		},
 	},
 	{
-		"folke/neodev.nvim",
-		ft = "lua",
-	},
-	{
 		-- Markdown preview plugin for (neo)vim.
 		"iamcco/markdown-preview.nvim",
 		config = function()
