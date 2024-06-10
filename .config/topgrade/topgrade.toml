@@ -11,14 +11,16 @@
 # pre_sudo = false
 
 # Sudo command to be used
-#sudo_command = "sudo"
+# sudo_command = "sudo"
 
 # Disable specific steps - same options as the command line flag
 # emacs - Doom Emacs fails to update, likely due to it being symlinked to a
 # submodule.
 # bun - Fails with 403 status code. Installed through brew instead.
 # shell - oh-my-zsh tries pulling submodules which fails.
-disable = ["emacs", "bun", "shell"]
+# gnome_shell_extensions - `Error:
+# GDBus.Error:org.freedesktop.DBus.Error.NoReply: Remote peer disconnected`?
+disable = ["emacs", "bun", "shell", "gnome_shell_extensions"]
 
 # Ignore failures for these steps
 # ignore_failures = ["powershell"]
