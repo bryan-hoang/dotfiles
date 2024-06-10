@@ -195,6 +195,11 @@ export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc.py
 export PYTHON_HISTORY="$XDG_STATE_HOME"/python/history
 export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME"/python
 
+# https://wiki.archlinux.org/title/GTK#Themes
+export GTK_THEME=Dracula:dark
+export GTK_RC_FILES="$XDG_CONFIG_HOME"/gtk-1.0/gtkrc
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
+
 # https://wiki.archlinux.org/title/XDG_Base_Directory#Specification
 
 . "$XDG_CONFIG_HOME"/zsh/.zshenv
@@ -230,8 +235,6 @@ export WGETRC="$XDG_CONFIG_HOME"/wget/wgetrc
 # Separate the repo from the data files to make fixing submodule issues less of
 # a hassle.
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
-export GTK_RC_FILES="$XDG_CONFIG_HOME"/gtk-1.0/gtkrc
-export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 
 # startx doesn't respect the following variables.
 export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
