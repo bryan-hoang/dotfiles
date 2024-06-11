@@ -79,14 +79,14 @@ return {
 			},
 			{
 				"<leader>sd",
-				Util.telescope("diagnostics", {
+				Util.pick("diagnostics", {
 					bufnr = 0,
 				}),
 				desc = "Open diagnostic picker (current buffer)",
 			},
 			{
 				"<leader>sD",
-				Util.telescope("diagnostics", {
+				Util.pick("diagnostics", {
 					bufnr = nil,
 				}),
 				desc = "Open diagnostic picker (all buffers)",
