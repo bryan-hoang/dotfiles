@@ -268,6 +268,9 @@ export MINIKUBE_HOME="$XDG_DATA_HOME"/minikube
 export KUBECONFIG="$XDG_CONFIG_HOME"/kube
 export KUBECACHEDIR="$XDG_CACHE_HOME"/kube
 
+export TERMINFO="$XDG_DATA_HOME"/terminfo
+export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/etc/terminfo:/usr/share/terminfo
+
 export DISABLE_AUTO_UPDATE=true
 export CLOUDSDK_CONFIG="$XDG_CONFIG_HOME"/gcloud
 export JULIA_DEPOT_PATH="$XDG_DATA_HOME"/julia:"$JULIA_DEPOT_PATH"
@@ -283,8 +286,6 @@ mkdir -p "$BASH_COMPLETION_USER_DIR"/completions
 export COMPOSER_HOME="$XDG_CONFIG_HOME"/composer
 # shellcheck disable=SC2154
 export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
-export TERMINFO="$XDG_DATA_HOME"/terminfo
-export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
 export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
 export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle/config
 export PIPX_HOME="$XDG_DATA_HOME"/pipx
