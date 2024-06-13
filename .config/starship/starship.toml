@@ -185,6 +185,7 @@ python_binary = ["python3", "python", "python2"]
 version_format = "v${major}.${minor}"
 
 [ruby]
+detect_files = ["Gemfile", ".ruby-version", "Rakefile"]
 format = "[$symbol($version )]($style)"
 
 [rust]
