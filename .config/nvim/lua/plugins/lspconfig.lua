@@ -128,11 +128,6 @@ return {
 					dockerls = { mason = false },
 					docker_compose_language_service = { mason = false },
 					-- JS/TS
-					denols = { mason = false },
-					tsserver = {
-						mason = false,
-						cmd = { "typescript-language-server", "--stdio", "--log-level=4" },
-					},
 					biome = { mason = false },
 					astro = { mason = false },
 					-- HTML/CSS
