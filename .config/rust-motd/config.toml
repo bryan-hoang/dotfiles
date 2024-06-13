@@ -3,7 +3,7 @@
 [banner]
 color = 'blue'
 command = """
-echo "MOTD: Welcome, $(whoami)@$(hostname)" | figlet -f slant -w 100
+cfonts "MOTD: Welcome,|$(whoami)@$(hostname)" --font tiny
 """
 
 [service_status]
