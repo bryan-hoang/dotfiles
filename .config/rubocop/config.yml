@@ -1,44 +1,44 @@
+# https://docs.rubocop.org/rubocop/cops_style.html
 AllCops:
   NewCops: enable
-Layout/LineLength:
-  Max: 80
-Layout/FirstMethodArgumentLineBreak:
-  Enabled: true
-
-# https://github.com/rubocop/rubocop/issues/9373#issuecomment-760300711
-Layout/IndentationWidth:
-  Width: 1
-Layout/IndentationStyle:
-  EnforcedStyle: tabs
 Layout/FirstHashElementLineBreak:
   Enabled: true
-Layout/MultilineHashBraceLayout:
-  EnforcedStyle: new_line
-Layout/MultilineHashKeyLineBreaks:
+Layout/FirstMethodArgumentLineBreak:
   Enabled: true
 Layout/HashAlignment:
   Enabled: true
   EnforcedColonStyle: key
   EnforcedLastArgumentHashStyle: always_inspect
+# https://github.com/rubocop/rubocop/issues/9373#issuecomment-760300711
+Layout/IndentationStyle:
+  EnforcedStyle: tabs
+Layout/IndentationWidth:
+  Width: 1
+Layout/LineLength:
+  Max: 80
+Layout/MultilineHashBraceLayout:
+  EnforcedStyle: new_line
+Layout/MultilineHashKeyLineBreaks:
+  Enabled: true
+Layout/MultilineMethodArgumentLineBreaks:
+  Enabled: true
 Layout/MultilineMethodCallIndentation:
-  # `rubyfmt`
   EnforcedStyle: indented
-
-# https://docs.rubocop.org/rubocop/cops_style.html
+Layout/SpaceAroundOperators:
+  EnforcedStyleForExponentOperator: space
+Style/MethodCallWithArgsParentheses:
+  AllowParenthesesInCamelCaseMethod: true
+  AllowParenthesesInChaining: true
+  AllowParenthesesInMultilineCall: true
+  AllowParenthesesInStringInterpolation: true
+  Enabled: true
+  IgnoreMacros: false
+Style/MethodCallWithoutArgsParentheses:
+  AllowedPatterns:
+    - .*
 Style/TrailingCommaInArguments:
   EnforcedStyleForMultiline: consistent_comma
 Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: consistent_comma
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
-Style/MethodCallWithArgsParentheses:
-  Enabled: true
-  IgnoreMacros: false
-  AllowParenthesesInMultilineCall: true
-  AllowParenthesesInChaining: true
-  AllowParenthesesInCamelCaseMethod: true
-  AllowParenthesesInStringInterpolation: true
-Style/MethodCallWithoutArgsParentheses:
-  AllowedPatterns: ['.*']
-Layout/MultilineMethodArgumentLineBreaks:
-  Enabled: true
