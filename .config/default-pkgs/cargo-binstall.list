@@ -87,6 +87,8 @@ bob-nvim
 typos-cli
 # Modern, performance focused unix commands (SUPERCILEX/fuc).
 rmz
+# A formatter for kdl documents.
+kdlfmt
 # ⚡ A CLI tool for code structural search, lint and rewriting. Written in Rust.
 # (ast-grep/ast-grep).
 # ast-grep

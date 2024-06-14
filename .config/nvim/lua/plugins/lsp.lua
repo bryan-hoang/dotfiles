@@ -78,6 +78,7 @@ return {
 					javascriptreact = jsFormatters,
 					typescriptreact = jsFormatters,
 					ruby = { "rubyfmt", "rubocop" },
+					kdl = { "kdlfmt" },
 					-- rust = { "rustfmt" },
 				},
 				-- LazyVim will merge the options you set here with builtin formatters.
@@ -117,6 +118,11 @@ return {
 							"eslint.config.js",
 						}),
 						require_cwd = true,
+					},
+					kdlfmt = {
+						command = "kdlfmt",
+						args = { "format", "$FILENAME" },
+						stdin = false,
 					},
 				},
 			}
