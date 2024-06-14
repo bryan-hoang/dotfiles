@@ -322,3 +322,5 @@
 [diff "lockb"]
 	textconv = bun
 	binary = true
+[clean]
+	requireForce = false
