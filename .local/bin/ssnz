@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 #
-# Fuzzy finds folders to open tmux sessions in. Makes it easy to switch between
-# projects with their own individual tmux sessions. Give it a keybinding in a
-# shell to streamline its use.
+# Sessionizes a directory inside a terminal multiplexer.
 #
-# Usage: sessionize_in_tmux [-d] [path]
+# Makes it easy to switch between projects with their own individual multiplexer
+# sessions. Give it a keybinding in a shell to streamline its use.
+#
+# Usage: ssnz [-d] [path]
 #
 # Inspired by ThePrimeagen's dotfiles.
 
@@ -32,10 +33,10 @@ declare -a proj_dirs=(
 	# e.g., neovim configs.
 	"$XDG_CONFIG_HOME"
 	# Local projects not tracked by git.
-	~/src/localhost
+	"$HOME"/src/localhost
 )
 
-# Find git projects, e.g., `~/src/github.com/foo-bar/` Arbitrarily search for
+# Find git projects, e.g., `$HOME/src/github.com/foo-bar/` Arbitrarily search for
 # grandparents of `.git/` directories.
 while IFS='' read -r line; do proj_dirs+=("$line"); done < <(
 	fd --search-path="$HOME"/src --exclude=localhost --min-depth=4 --max-depth=4 \
@@ -69,15 +70,15 @@ if [[ -n ${debug-} ]]; then
 	exit
 fi
 
-declare selected
+declare session_cwd
 
 if [[ $# == 1 ]]; then
-	selected=$(realpath "$1")/
+	session_cwd=$(realpath "$1")/
 else
 	# Conditionally add the cwd to the project list if it isn't already present.
 	cwd=$PWD/
 	readonly cwd
-	selected=$(
+	session_cwd=$(
 		echo "$found_dirs" \
 			| if [[ ${proj_dirs[*]} =~ $cwd ]]; then cat - <(echo "$cwd"); else cat; fi \
 			| sort --reverse \
@@ -85,44 +86,38 @@ else
 	)
 fi
 
-readonly selected
+readonly session_cwd
 
-if [[ -z $selected ]]; then
+if [[ -z $session_cwd ]]; then
 	exit 0
 fi
 
-declare selected_name
-selected_name=$(basename "$selected" | sed 's/\./_/g')
-readonly selected_name
+declare session_name
+session_name=$(basename "$session_cwd" | sed 's/\./_/g')
+readonly session_name
 
 multiplex_tmux() {
 	# Ensure the session exists before switching to it. Need to specify `=` for
 	# exact matching rather than prefix matching.
-	if ! tmux has-session -t="$selected_name" 2>/dev/null; then
-		tmux new-session -c "$selected" -s "$selected_name" -d
+	if ! tmux has-session -t="$session_name" 2>/dev/null; then
+		tmux new-session -c "$session_cwd" -s "$session_name" -d
 	fi
 
 	if [[ -z ${TMUX-} ]]; then
-		tmux attach-session -c "$selected" -t "$selected_name"
+		tmux attach-session -c "$session_cwd" -t "$session_name"
 	else
-		tmux switch-client -t "$selected_name"
+		tmux switch-client -t "$session_name"
 	fi
 }
 
 multiplex_zellij() {
 	if [[ -z ${ZELLIJ-} ]]; then
-		mkdir -p "$HOME"/.config/zellij/layouts/
-		cat >"$HOME"/.config/zellij/layouts/"$selected_name".kdl <<EOF
-layout {
-		cwd "$selected"
-		pane
-		pane size=1 borderless=true {
-				plugin location="zellij:compact-bar"
-		}
-}
-EOF
-		zellij --layout "$selected_name" attach --create "$selected_name"
+		zellij attach --create "$session_name" options --default-cwd="$session_cwd"
+	else
+		zellij pipe \
+			--plugin https://github.com/mostafaqanbaryan/zellij-switch/releases/download/v0.1.0/zellij-switch.wasm \
+			-- "$session_name::$session_cwd"
 	fi
 }
 
-multiplex_"${MULTIPLEXER:-tmux}"
+multiplex_"${MULTIPLEXER:-zellij}"

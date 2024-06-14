@@ -176,10 +176,10 @@ if [[ -f "$XDG_DATA_HOME"/google-cloud-sdk/completion.zsh.inc ]]; then
 	. "$XDG_DATA_HOME"/google-cloud-sdk/completion.zsh.inc
 fi
 
-# Alt-s makes switching between tmux workspaces of projects easier. Inspired by
-# ThePrimeagen. Wrap the command in a custom widget so that the command isn't
-# typed out.
-bindkey -s '^[s' 'multiplex-session\n'
+# Alt-s makes switching between multiplexer workspaces of projects easier.
+# Inspired by ThePrimeagen. Wrap the command in a custom widget so that the
+# command isn't typed out.
+bindkey -s '^[s' 'ssnz\n'
 
 # bun completions
 [[ -s "$BUN_INSTALL/_bun" ]] \

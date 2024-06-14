@@ -19,7 +19,7 @@ stty werase undef
 bind '\C-w:backward-kill-word'
 
 # Bind Alt-s
-bind '"\es":"multiplex-session\n"'
+bind '"\es":"ssnz\n"'
 
 # If set, bash attempts to save all lines of a multiple-line command in the same
 # history entry. This allows easy re-editing of multi-line commands.  This
