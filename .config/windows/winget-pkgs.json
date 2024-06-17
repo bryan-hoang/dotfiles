@@ -162,6 +162,12 @@
 				},
 				{
 					"PackageIdentifier": "Ookla.Speedtest.CLI"
+				},
+				{
+					"PackageIdentifier": "WiresharkFoundation.Wireshark"
+				},
+				{
+					"PackageIdentifier": "Insecure.Npcap"
 				}
 			],
 			"SourceDetails": {
