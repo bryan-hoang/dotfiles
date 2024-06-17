@@ -120,4 +120,4 @@ multiplex_zellij() {
 	fi
 }
 
-multiplex_"${MULTIPLEXER:-zellij}"
+multiplex_"${MULTIPLEXER:-tmux}"
