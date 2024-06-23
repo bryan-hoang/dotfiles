@@ -78,7 +78,7 @@
 # should be specified here.
 #ffmpeg-ffmpeg=C:\Program Files (x86)\Streamlink\ffmpeg\ffmpeg.exe
 #ffmpeg-ffmpeg=C:\Program Files\Streamlink\ffmpeg\ffmpeg.exe
-ffmpeg-ffmpeg=ffmpeg.exe
+ffmpeg-ffmpeg=C:\Program Files\Streamlink\ffmpeg\ffmpeg.exe
 
 # Log level, default is info
 #loglevel=debug
