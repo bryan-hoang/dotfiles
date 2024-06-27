@@ -238,7 +238,7 @@ bindsym $mod+Shift+s exec flameshot gui
 
 # xautolock replacement written in RUST for automatically running commands after
 # a timer.
-exec_always --no-startup-id xidlehook --timer $((10 * 60)) 'loginctl lock-session' '' --socket $XIDLEHOOK_SOCK --detect-sleep --not-when-audio --not-when-fullscreen
+exec --no-startup-id xidlehook --timer $((10 * 60)) 'loginctl lock-session' '' --socket $XIDLEHOOK_SOCK --detect-sleep --not-when-audio --not-when-fullscreen
 
 # Try to increase compability between gnome-tweaks and gtk enabled
 # applications. Source:
