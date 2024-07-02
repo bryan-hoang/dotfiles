@@ -102,8 +102,24 @@ enable_pipupgrade = true       ###disabled by default
 # self_update = true
 
 [brew]
+# For the BrewCask step
+# If `Repo Cask Upgrade` exists, then use the `-a` option.
+# Otherwise, use the `--greedy` option.
+# greedy_cask = true
+
+# For the BrewCask step
+# If `Repo Cask Upgrade` does not exist, then use the `--greedy_latest` option.
+# NOTE: the above entry `greedy_cask` contains this entry, though you can enable
+# both of them, they won't clash with each other.
+# greedy_latest = true
+
+# For the BrewFormula step
+# Execute `brew autoremove` after the step.
 autoremove = true
-greedy_cask = true
+
+# For the BrewFormula step
+# Upgrade formulae built from the HEAD branch; `brew upgrade --fetch-HEAD`
+# fetch_head = true
 
 [linux]
 # Arch Package Manager to use.
@@ -150,6 +166,7 @@ greedy_cask = true
 # home_manager_arguments = ["--flake", "file"]
 
 [git]
+# How many repos to pull at max in parallel
 # max_concurrency = 5
 
 # Additional git repositories to pull
@@ -178,9 +195,6 @@ accept_all_updates = true
 # to upgrade it. Use this only if you installed Topgrade by using a package
 # manager such as Scoop or Cargo
 self_rename = true
-
-# Enable WinGet upgrade
-enable_winget = true
 
 [npm]
 # Use sudo if the NPM directory isn't owned by the current user
@@ -217,4 +231,12 @@ upgrade = true
 
 # containers = ["archlinux-latest"]
 [containers]
-# ignored_containers = ["ghcr.io/rancher-sandbox/rancher-desktop/rdx-proxy:latest"]
+# Specify the containers to ignore while updating (Wildcard supported)
+# ignored_containers = ["ghcr.io/rancher-sandbox/rancher-desktop/rdx-proxy:latest", "docker.io*"]
+
+[lensfun]
+# If disabled, Topgrade invokes `lensfun‑update‑data` without root priviledge,
+# then the update will be only available to you. Otherwise, `sudo` is required,
+# and the update will be installed system-wide, i.e., available to all users.
+# (default: false)
+# use_sudo = false
