@@ -20,7 +20,8 @@
 # shell - oh-my-zsh tries pulling submodules which fails.
 # gnome_shell_extensions - `Error:
 # GDBus.Error:org.freedesktop.DBus.Error.NoReply: Remote peer disconnected`?
-disable = ["emacs", "bun", "shell", "gnome_shell_extensions"]
+# helix - Avoid bloating disk space with grammars.
+disable = ["emacs", "bun", "shell", "gnome_shell_extensions", "helix"]
 
 # Ignore failures for these steps
 # ignore_failures = ["powershell"]
