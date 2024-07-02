@@ -1,5 +1,5 @@
 module.exports = {
-  gitRawCommitsOpts: {
-    from: 'HEAD~20',
-  },
+	gitRawCommitsOpts: {
+		from: "HEAD~20",
+	},
 };

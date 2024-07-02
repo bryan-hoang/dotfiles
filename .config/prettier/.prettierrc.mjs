@@ -4,32 +4,31 @@
 export default {
 	overrides: [
 		{
-			files: '*.keystore',
+			files: "*.keystore",
 			options: {
-				parser: 'json',
+				parser: "json",
 			},
 		},
 		{
-			files: '*.css',
+			files: "*.css",
 			options: {
 				singleQuote: false,
 			},
 		},
 		{
-			files: 'gemrc',
+			files: "gemrc",
 			options: {
-				parser: 'yaml',
+				parser: "yaml",
 			},
 		},
 		{
-			files: '*.svg',
+			files: "*.svg",
 			options: {
-				parser: 'html',
+				parser: "html",
 			},
 		},
 	],
-	plugins: ['prettier-plugin-packagejson'],
-	proseWrap: 'always',
-	singleQuote: true,
+	plugins: ["prettier-plugin-packagejson"],
+	proseWrap: "always",
 	useTabs: true,
 };

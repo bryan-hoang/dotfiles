@@ -3,9 +3,9 @@
  */
 const config = {
 	extends: [
-		'@stylistic/stylelint-config',
-		'stylelint-config-standard-scss',
-		'stylelint-config-prettier-scss',
+		"@stylistic/stylelint-config",
+		"stylelint-config-standard-scss",
+		"stylelint-config-prettier-scss",
 	],
 };
 
