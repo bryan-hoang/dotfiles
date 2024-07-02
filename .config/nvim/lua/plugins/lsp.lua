@@ -138,14 +138,14 @@ return {
 				linters_by_ft = {
 					dockerfile = { "hadolint" },
 					fish = {},
-					markdown = { "markdownlint", "vale" },
+					markdown = { "markdownlint" },
 					dotenv = { "dotenv_linter" },
 					css = cssLinters,
 					scss = cssLinters,
 					-- May or may not want
 					-- https://github.com/kampfkarren/selene/issues/340#issuecomment-1191992366
 					lua = { "selene" },
-					gitcommit = { "commitlint", "vale" },
+					gitcommit = { "commitlint" },
 					html = { "markuplint" },
 					["*"] = { "typos", "editorconfig-checker" },
 				},

@@ -176,6 +176,9 @@ return {
 							},
 						},
 					},
+					vale_ls = {
+						filetypes = { "markdown", "text", "tex", "gitcommit" },
+					},
 				},
 			}
 

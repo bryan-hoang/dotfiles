@@ -10,33 +10,9 @@
 [submodule "gpakosz/.tmux"]
 	path = src/github.com/gpakosz/.tmux
 	url = https://github.com/gpakosz/.tmux.git
-[submodule "errata-ai/Google"]
-	path = src/github.com/errata-ai/Google
-	url = https://github.com/errata-ai/Google.git
-[submodule "errata-ai/Microsoft"]
-	path = src/github.com/errata-ai/Microsoft
-	url = https://github.com/errata-ai/Microsoft.git
-[submodule "errata-ai/write-good"]
-	path = src/github.com/errata-ai/write-good
-	url = https://github.com/errata-ai/write-good.git
-[submodule "errata-ai/proselint"]
-	path = src/github.com/errata-ai/proselint
-	url = https://github.com/errata-ai/proselint.git
-[submodule "errata-ai/alex"]
-	path = src/github.com/errata-ai/alex
-	url = https://github.com/errata-ai/alex
-[submodule "errata-ai/readability"]
-	path = src/github.com/errata-ai/readability
-	url = https://github.com/errata-ai/readability
-[submodule "errata-ai/IBM"]
-	path = src/github.com/errata-ai/IBM
-	url = https://github.com/errata-ai/IBM.git
 [submodule "dracula/git"]
 	path = src/github.com/dracula/git
 	url = https://github.com/dracula/git
-[submodule "errata-ai/Joblint"]
-	path = src/github.com/errata-ai/Joblint
-	url = https://github.com/errata-ai/Joblint.git
 [submodule "errata-ai/MediaWiki"]
 	path = src/github.com/errata-ai/MediaWiki
 	url = https://github.com/errata-ai/MediaWiki.git
