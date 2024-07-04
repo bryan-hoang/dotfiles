@@ -130,6 +130,19 @@ return {
 					-- JS/TS
 					biome = { mason = false },
 					astro = { mason = false },
+					vtsls = {
+						settings = {
+							javascript = {
+								suggest = {
+									-- In Neovim, the names add noise, making it very difficult to
+									-- go through suggested fields interspersed throughout the
+									-- text based suggestions. I don't know how VS Code sorts it
+									-- the way I prefer.
+									names = false,
+								},
+							},
+						},
+					},
 					-- HTML/CSS
 					html = { mason = false },
 					emmet_language_server = { mason = false },
