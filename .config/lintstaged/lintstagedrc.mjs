@@ -1,9 +1,18 @@
 import { spawnSync } from "node:child_process";
 import { lstatSync } from "node:fs";
+import { join } from "node:path";
+
 import createDebug from "debug";
 import micromatch from "micromatch";
+import * as v from "valibot";
 
 const debug = createDebug("lint-staged:config");
+
+const EnvSchema = v.object({
+	XDG_CONFIG_HOME: v.string(),
+});
+const env = v.parse(EnvSchema, process.env);
+debug("env", env);
 
 const shellScriptExtensions = [
 	"*.sh",
@@ -75,6 +84,11 @@ export default {
 		processMatches(files, "shellcheck"),
 	"*.lua": (files) =>
 		processMatches(files, "stylua --search-parent-directories"),
+	"**/nvim/lua/**/*.lua": [
+		(files) => {
+			return `selene --config=${join(env.XDG_CONFIG_HOME, "nvim", "selene.toml")} ${files.join(" ")}`;
+		},
+	],
 	"*.sh": (files) => processMatches(files, "shfmt -bn -ci --simplify"),
 	"*.toml": (files) => processMatches(files, "taplo format"),
 };
