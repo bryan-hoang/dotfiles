@@ -33,6 +33,8 @@ require("lazy").setup({
 		{ import = "lazyvim.plugins.extras.lang.typescript" },
 		{ import = "lazyvim.plugins.extras.linting.eslint" },
 		{ import = "lazyvim.plugins.extras.lsp.none-ls" },
+		-- https://github.com/folke/neoconf.nvim#completion-and-validation-for-your-lua-settings-files
+		{ import = "lazyvim.plugins.extras.lsp.neoconf" },
 		{ import = "lazyvim.plugins.extras.test.core" },
 		{ import = "lazyvim.plugins.extras.util.dot" },
 		{ import = "lazyvim.plugins.extras.coding.neogen" },
