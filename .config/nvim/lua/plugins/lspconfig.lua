@@ -68,29 +68,7 @@ return {
 					-- JSON
 					jsonls = { mason = false },
 					-- YAML
-					yamlls = {
-						mason = false,
-						-- Lazy-load schemastore when needed.
-						on_new_config = function(new_config)
-							-- NOTE: Use `vim.tbl_extend` over `vim.list_extend` to fix
-							-- issues.
-							new_config.settings.yaml.schemas = vim.tbl_extend(
-								"error",
-								new_config.settings.yaml.schemas or {},
-								require("schemastore").yaml.schemas()
-							)
-						end,
-						settings = {
-							yaml = {
-								schemaStore = {
-									-- TODO: Remove after LazyVim Update happens.
-									--
-									-- Avoid TypeError: Cannot read properties of undefined (reading 'length')
-									url = "",
-								},
-							},
-						},
-					},
+					yamlls = { mason = false },
 					-- Python
 					pyright = { mason = false },
 					ruff_lsp = { mason = false },
@@ -121,18 +99,13 @@ return {
 					svelte = { mason = false },
 
 					-- Ruby
-					solargraph = { mason = false },
-
-					-- TODO: Wait for v0.10.0 release to address push based diagnostics.
-					-- https://shopify.github.io/ruby-lsp/EDITORS_md.html#label-Neovim+LSP
-					-- ruby_ls = {
-					-- 	autostart = false,
-					-- 	mason = false,
-					-- 	on_attach = function(client, buffer)
-					-- 		setup_diagnostics(client, buffer)
-					-- 		add_ruby_deps_command(client, buffer)
-					-- 	end,
-					-- },
+					solargraph = {
+						mason = false,
+						autostart = false,
+					},
+					ruby_lsp = {
+						autostart = true,
+					},
 
 					-- C#/F#
 					-- omnisharp = {
@@ -163,6 +136,13 @@ return {
 								},
 							},
 						},
+					},
+					denols = {
+						mason = false,
+						root_dir = require("lspconfig.util").root_pattern(
+							"deno.json",
+							"deno.jsonc"
+						),
 					},
 					-- HTML/CSS
 					html = { mason = false },
@@ -216,7 +196,6 @@ return {
 				},
 			}
 
-			-- FIXME: Performance with w/ tsserver freezing the program.
 			if not util.is_os_unix then
 				-- Only install on windows.
 				user_opts.servers.powershell_es = {}
