@@ -17,6 +17,27 @@ return {
 		opts = function(_, opts)
 			vim.g.autoformat = false
 
+			local keys = require("lazyvim.plugins.lsp.keymaps").get()
+
+			-- https://github.com/LazyVim/LazyVim/discussions/3880#discussioncomment-9975351
+			keys[#keys + 1] = { "K", "" }
+			keys[#keys + 1] = {
+				"<leader>k",
+				vim.lsp.buf.hover,
+				desc = "Show docs for item under cursor (Hover)",
+			}
+			keys[#keys + 1] = {
+				"gy",
+				"<cmd>Telescope lsp_type_definitions<cr>",
+				desc = "Goto type definition",
+			}
+			keys[#keys + 1] = { "gI", false }
+			keys[#keys + 1] = {
+				"gi",
+				"<cmd>Telescope lsp_implementations<cr>",
+				desc = "Goto implementation",
+			}
+
 			local function format_diagnostic_message(diagnostic)
 				if diagnostic.code ~= nil then
 					return " [" .. diagnostic.code .. "]"
@@ -204,36 +225,6 @@ return {
 			opts = vim.tbl_deep_extend("force", opts, user_opts)
 
 			return opts
-		end,
-		init = function()
-			local keys = require("lazyvim.plugins.lsp.keymaps").get()
-
-			keys[#keys + 1] = { "K", false }
-			keys[#keys + 1] = {
-				"<leader>k",
-				vim.lsp.buf.hover,
-				desc = "Show docs for item under cursor (Hover)",
-			}
-			keys[#keys + 1] = { "gt", false }
-			keys[#keys + 1] = {
-				"gy",
-				"<cmd>Telescope lsp_type_definitions<cr>",
-				desc = "Goto type definition",
-			}
-			keys[#keys + 1] = { "gI", false }
-			keys[#keys + 1] = {
-				"gi",
-				"<cmd>Telescope lsp_implementations<cr>",
-				desc = "Goto implementation",
-			}
-			keys[#keys + 1] = { "ca", false }
-			keys[#keys + 1] = {
-				"<leader>ca",
-				vim.lsp.buf.code_action,
-				desc = "Perform code action",
-				mode = { "n", "v" },
-				has = "codeAction",
-			}
 		end,
 	},
 }
