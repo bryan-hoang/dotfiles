@@ -277,6 +277,7 @@
 	addEmptyPathspec = false
 	statusHints = false
 	pushAlreadyExists = true
+	detachedHead = false
 [credential]
 	helper = cache
 [column]
