@@ -55,7 +55,7 @@ return {
 		opts = function(_, opts)
 			local prettier = { "prettierd", "prettier" }
 			local biome = { "biome-check", "biome" }
-			local jsFormatters = { "biome-check", "biome", prettier, "eslint_d" }
+			local jsFormatters = { prettier, "eslint_d", "biome-check", "biome" }
 			local cssFormatters = { "stylelint", prettier }
 			local shFormatters = { "shellcheck", "shellharden", "shfmt" }
 
