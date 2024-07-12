@@ -1,15 +1,19 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.7.1/schema.json",
-	"organizeImports": {
-		"enabled": true
-	},
-	"linter": {
+	// Local reference to avoid needing to updating the global version everywhere.
+	"$schema": ".local/share/pnpm/global/5/node_modules/@biomejs/biome/configuration_schema.json",
+	"vcs": {
 		"enabled": true,
-		"rules": {
-			"recommended": true
-		}
+		"clientKind": "git",
+		"useIgnoreFile": true,
+		"defaultBranch": "main"
 	},
 	"formatter": {
 		"formatWithErrors": true
+	},
+	"javascript": {
+		"formatter": {
+			// Match the common rule in more JS projects.
+			"quoteStyle": "single"
+		}
 	}
 }
