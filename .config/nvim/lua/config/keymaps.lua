@@ -44,20 +44,13 @@ if vim.g.vscode then
 end
 
 vim.keymap.del("n", "<Leader>`")
-vim.keymap.del("n", "<Leader>gc")
 vim.keymap.del("n", "<Leader>gs")
 
 local wk = require("which-key")
 
-wk.register({
-	g = {
-		name = "+git/debug",
-		c = {
-			name = "+conflict",
-		},
-	},
-}, {
-	prefix = "<Leader>",
+wk.add({
+	{ "<Leader>g", group = "Git/debuG" },
+	{ "<Leader>gc", group = "conflict" },
 })
 
 local mini_comment = require("mini.comment")
