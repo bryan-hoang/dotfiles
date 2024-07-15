@@ -115,7 +115,7 @@ multiplex_zellij() {
 		zellij attach --create "$session_name" options --default-cwd="$session_cwd"
 	else
 		zellij pipe \
-			--plugin https://github.com/mostafaqanbaryan/zellij-switch/releases/download/v0.1.0/zellij-switch.wasm \
+			--plugin https://github.com/mostafaqanbaryan/zellij-switch/releases/download/v0.1.1/zellij-switch.wasm \
 			-- "$session_name::$session_cwd"
 	fi
 }
