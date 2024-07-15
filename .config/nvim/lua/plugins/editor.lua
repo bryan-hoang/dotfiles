@@ -137,7 +137,7 @@ return {
 					g = false,
 				},
 			},
-			window = {
+			win = {
 				-- Match Helix's 'WhichKey' panel.
 				border = "single",
 			},
