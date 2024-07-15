@@ -1,0 +1,5 @@
+---
+# https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+UseTab: Always
+IndentWidth: 2
+TabWidth: 2
