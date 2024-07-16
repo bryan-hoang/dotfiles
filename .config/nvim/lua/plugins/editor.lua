@@ -130,22 +130,15 @@ return {
 	{
 		"folke/which-key.nvim",
 		-- https://github.com/folke/which-key.nvim#%EF%B8%8F-configuration
+		---@class wk.Opts
 		opts = {
+			---@type false | "classic" | "modern" | "helix"
+			preset = "helix",
 			plugins = {
 				presets = {
 					-- Avoid overwriting custom g<> keybindings.
 					g = false,
 				},
-			},
-			win = {
-				-- Match Helix's 'WhichKey' panel.
-				border = "single",
-			},
-			layout = {
-				-- Fit better on vertically split views.
-				height = { min = 4, max = 30 },
-				-- Min and max width of the columns
-				width = { min = 20, max = 40 },
 			},
 		},
 	},
