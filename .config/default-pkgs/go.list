@@ -7,8 +7,6 @@ github.com/editorconfig-checker/editorconfig-checker/cmd/editorconfig-checker@la
 github.com/direnv/direnv@latest
 # A tool for exploring each layer in a docker image.
 github.com/wagoodman/dive@latest
-# 💻 Git in your tmux status bar (arl/gitmux).
-github.com/arl/gitmux@latest
 # A remote utility tool to copy, paste and open browser over TCP.
 # github.com/lemonade-command/lemonade@latest
 # Render markdown on the CLI, with pizzazz! 💅.
@@ -25,3 +23,5 @@ github.com/arl/gitmux@latest
 # github.com/ankitpokhrel/jira-cli/cmd/jira@latest
 # rsync for cloud storage
 # github.com/rclone/rclone@latestI
+# 💻 Git in your tmux status bar (arl/gitmux).
+# github.com/arl/gitmux@latest
