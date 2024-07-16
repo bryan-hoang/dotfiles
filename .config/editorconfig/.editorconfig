@@ -12,7 +12,7 @@ trim_trailing_whitespace = true
 [*.{py,yml,yaml,kdl,hjson}]
 indent_style = space
 
-[*gemrc]
+[{*gemrc,CMakeLists.txt}]
 indent_style = space
 
 [*.{py,kdl}]
