@@ -76,8 +76,6 @@ return {
 						mason = false,
 						filetypes = { "starlark", "bzl", "BUILD.bazel" },
 					},
-					-- Lua
-					lua_ls = { mason = false },
 					-- Shell script
 					bashls = {
 						mason = false,
