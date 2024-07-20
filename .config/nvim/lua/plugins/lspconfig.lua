@@ -98,15 +98,6 @@ return {
 					taplo = { mason = false },
 					svelte = { mason = false },
 
-					-- Ruby
-					solargraph = {
-						mason = false,
-						autostart = false,
-					},
-					ruby_lsp = {
-						autostart = true,
-					},
-
 					-- C#/F#
 					-- omnisharp = {
 					-- 	mason = false,
