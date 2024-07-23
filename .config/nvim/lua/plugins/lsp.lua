@@ -53,10 +53,9 @@ return {
 			},
 		},
 		opts = function(_, opts)
-			local prettier = { "prettierd", "prettier" }
 			local biome = { "biome-check", "biome" }
-			local jsFormatters = { prettier, "eslint_d", "biome-check", "biome" }
-			local cssFormatters = { "stylelint", prettier }
+			local jsFormatters = { "prettierd", "eslint_d", "biome-check", "biome" }
+			local cssFormatters = { "prettierd", "stylelint" }
 			local shFormatters = { "shellcheck", "shellharden", "shfmt" }
 
 			local user_opts = {
@@ -67,10 +66,10 @@ return {
 					toml = { "taplo" },
 					json = { "prettier" },
 					jsonc = biome,
-					yaml = { prettier },
-					html = { prettier },
-					svg = { prettier },
-					markdown = { "markdownlint", prettier },
+					yaml = { "prettierd" },
+					html = { "prettierd" },
+					svg = { "prettierd" },
+					markdown = { "markdownlint", "prettierd" },
 					css = cssFormatters,
 					scss = cssFormatters,
 					javascript = jsFormatters,
