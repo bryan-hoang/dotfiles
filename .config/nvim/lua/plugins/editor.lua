@@ -225,18 +225,6 @@ return {
 		opts = {},
 	},
 	{
-		"pwntester/octo.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons",
-			"folke/which-key.nvim",
-			-- Breaks keymaps if uncommented.
-			-- "nvim-telescope/telescope.nvim",
-		},
-		cmd = "Octo",
-		opts = {},
-	},
-	{
 		"sindrets/diffview.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
