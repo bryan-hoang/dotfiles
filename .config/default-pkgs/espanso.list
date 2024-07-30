@@ -17,5 +17,6 @@ tableflip-package
 # An espanso package for getting the weather from Igor Chubin's
 # console-oriented weather service wttr.in.
 wttr
-# Commonly used symbols in predicate logic and boolean algebra.
-logic-symbols
+# Mathematical symbols such as for Boolean and set operations
+# (https://hub.espanso.org/math).
+math
