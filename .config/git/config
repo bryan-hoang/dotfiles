@@ -106,7 +106,7 @@
 	# Converts normally cloned repo into one that better accommodates a "git
 	# worktree" based workflow.
 	worktree-convert = "!f() { grm wt convert && mv .git-main-working-tree .git && echo '' >| .git/index && git worktree add \"$(git branch-default)\" && git worktree lock \"$(git branch-default)\"; }; f"
-	ls-merged = "!git branch --format '%(refname:short)' --merged | grep --invert-match --line-regex "$(git branch --show-current)""
+	ls-merged = "!git branch --format '%(refname:short)' --merged | grep --invert-match --line-regex \"$(git branch --show-current)\""
 [apply]
 	# Detect whitespace errors when applying a patch.
 	whitespace = fix
