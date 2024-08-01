@@ -325,3 +325,13 @@
 	binary = true
 [clean]
 	requireForce = false
+# https://gist.github.com/dbapl/e841d321bbb3ee77a3aa
+[diff "tar"]
+	binary = true
+	textconv = tar --to-stdout --absolute-names -tvf
+[diff "tar-gz"]
+	binary = true
+	textconv = tar --to-stdout --absolute-names -tvzf
+[diff "tar-bz2"]
+	binary = true
+	textconv = tar --to-stdout --absolute-names -tvjf

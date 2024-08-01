@@ -8,6 +8,11 @@
 # Text conversion of non-text file types for diffs.
 # https://bun.sh/docs/install/lockfile#how-do-i-git-diff-bun-s-lockfile
 *.lockb binary diff=lockb
+# https://gist.github.com/dbapl/e841d321bbb3ee77a3aa
+*.tar diff=tar
+*.tgz diff=tar-gz
+*.tar.gz binary diff=tar-gz
+*.tar.bz2 diff=tar-bz2
 
 # Apply filters to certain files that are either secrets, or machine specific.
 .config/npm/npmrc filter=npmrc
