@@ -15,3 +15,5 @@
 *examples/*
 *.js
 *.rb
+*.dev
+bin/*
