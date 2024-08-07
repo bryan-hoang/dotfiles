@@ -66,7 +66,22 @@ return {
 				---@type lspconfig.options
 				servers = {
 					-- JSON
-					jsonls = { mason = false },
+					jsonls = {
+						mason = false,
+						settings = {
+							json = {
+								schemas = require("schemastore").json.schemas({
+									ignore = {
+										-- Ignore files like "app.json" that may be used for
+										-- translations instead.
+										"Expo SDK",
+									},
+								}),
+							},
+						},
+						-- Don't auto extend the JSON schema defined previously.
+						on_new_config = function() end,
+					},
 					-- YAML
 					yamlls = { mason = false },
 					-- Python
