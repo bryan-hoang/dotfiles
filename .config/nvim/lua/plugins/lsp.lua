@@ -79,6 +79,7 @@ return {
 					ruby = { "rubyfmt", "rubocop" },
 					kdl = { "kdlfmt" },
 					python = { "ruff_fix", "ruff_format" },
+					cmake = { "cmake_format" },
 				},
 				-- LazyVim will merge the options you set here with builtin formatters.
 				-- You can also define any custom formatters here.
@@ -122,6 +123,9 @@ return {
 						command = "kdlfmt",
 						args = { "format", "$FILENAME" },
 						stdin = false,
+					},
+					cmake_format = {
+						args = { "--dangle-parens", "--enable-markup=no ", "-" },
 					},
 				},
 			}
