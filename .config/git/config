@@ -105,8 +105,9 @@
 	tag-latest = "!git describe --tags $(git rev-list --tags --max-count=1)"
 	# Converts normally cloned repo into one that better accommodates a "git
 	# worktree" based workflow.
-	worktree-convert = "!f() { grm wt convert && mv .git-main-working-tree .git && echo '' >| .git/index && git worktree add \"$(git branch-default)\" && git worktree lock \"$(git branch-default)\"; }; f"
+	worktree-convert = "!f() { grm wt convert && mv .git-main-working-tree .git && printf '' >| .git/index && git worktree add main \"$(git branch-default)\" && git worktree lock main; }; f"
 	ls-merged = "!git branch --format '%(refname:short)' --merged | grep --invert-match --line-regex \"$(git branch --show-current)\""
+	checkpoint = "!git commit -m \"wip: $@\n\n[skip ci]\""
 [apply]
 	# Detect whitespace errors when applying a patch.
 	whitespace = fix
