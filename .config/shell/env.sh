@@ -352,3 +352,4 @@ export FONT_MONO='BerkeleyMono Nerd Font Mono'
 export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 # https://docs.deno.com/runtime/manual/basics/env_variables/#special-environment-variables
 export DENO_INSTALL_ROOT="$XDG_LOCAL_HOME"
+export GRIT_USER_CONFIG="$XDG_CONFIG_HOME"/grit
