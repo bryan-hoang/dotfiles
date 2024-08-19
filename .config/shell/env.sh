@@ -135,7 +135,8 @@ export NODE_REPL_MODE=sloppy
 export NODE_INSPECT_RESUME_ON_START=1
 export NODE_COMPILE_CACHE="$XDG_CACHE_HOME"/node/compile
 
-export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME"/npm/npmrc
+export npm_config_userconfig="$XDG_CONFIG_HOME"/npm/npmrc
+export npm_config_cache="$XDG_CACHE_HOME"/npm
 
 export RUBY_DEBUG_HISTORY_FILE="$XDG_STATE_HOME"/rdbg/history
 mkdir -p "$(dirname "$RUBY_DEBUG_HISTORY_FILE")"
