@@ -2,11 +2,7 @@
  * @type {import('stylelint').Config}
  */
 const config = {
-	extends: [
-		"@stylistic/stylelint-config",
-		"stylelint-config-standard-scss",
-		"stylelint-config-prettier-scss",
-	],
+	extends: ['stylelint-config-standard-scss', '@stylistic/stylelint-config'],
 };
 
 export default config;
