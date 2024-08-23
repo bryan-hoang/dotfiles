@@ -29,6 +29,7 @@ while read -r local_ref local_oid remote_ref remote_oid; do
 	fi
 done
 
-pwd >|~/out.txt
-
-exit 0
+# Avoid accidentally pushing an invalid CI config file.
+if [ -s .gitlab-ci.yml ] && command -v glab >/dev/null; then
+	glab ci lint
+fi
