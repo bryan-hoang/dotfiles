@@ -1,6 +1,6 @@
 pip
 wheel
-pipx
+uv
 pynvim
 # Linter *plugin* for pylsp based on ruff.
 python-lsp-ruff
