@@ -21,7 +21,7 @@
 		"debug": "4.3.6",
 		"defu": "6.1.4",
 		"husky": "9.1.5",
-		"lint-staged": "15.2.9",
+		"lint-staged": "15.2.10",
 		"micromatch": "4.0.8",
 		"prettier": "3.3.3",
 		"prettier-plugin-packagejson": "2.5.2",
