@@ -15,6 +15,9 @@ neovim
 # A Ruby static code analyzer and formatter, based on the community Ruby style
 # guide.
 rubocop
+# A RuboCop extension focused on enforcing Rails best practices and coding
+# conventions (rubocop/rubocop-rails).
+rubocop-rails
 # A Ruby language server (castwide/solargraph).
 # solargraph
 # An opinionated language server for Ruby (Shopify/ruby-lsp).

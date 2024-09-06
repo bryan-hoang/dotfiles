@@ -1,14 +1,5 @@
 tap "homebrew/bundle"
 
-# 📝 A markup-aware linter for prose built with speed and extensibility in mind
-# (errata-ai/vale).
-brew "vale"
-# Command-line tools for working with Architecture Decision Records (ADRs).
-# (npryce/adr-tools)
-brew "adr-tools"
-# GIT utilities -- repo summary, repl, changelog population, author commit
-# percentages and more (tj/git-extras).
-# brew "git-extras"
 # # 😎🏖️🐬 Your new, 𝙧𝙞𝙙𝙤𝙣𝙠𝙪𝙡𝙞𝙘𝙞𝙤𝙪𝙨𝙡𝙮 smart clipboard manager
 # # (Slackadays/Clipboard).
 # brew "clipboard"

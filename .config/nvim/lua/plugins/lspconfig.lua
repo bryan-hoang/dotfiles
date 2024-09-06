@@ -158,7 +158,7 @@ return {
 						filetypes_exclude = { "mdx" },
 					},
 					-- Markdown/MDX
-					marksman = { mason = false },
+					marksman = {},
 					mdx_analyzer = {
 						init_options = {
 							typescript = { enabled = true },

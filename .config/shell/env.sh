@@ -354,3 +354,6 @@ export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 # https://docs.deno.com/runtime/manual/basics/env_variables/#special-environment-variables
 export DENO_INSTALL_ROOT="$XDG_LOCAL_HOME"
 export GRIT_USER_CONFIG="$XDG_CONFIG_HOME"/grit
+
+# Mise
+export MISE_RUBY_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/default-pkgs/gem.list
