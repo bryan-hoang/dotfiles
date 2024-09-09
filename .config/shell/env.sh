@@ -103,7 +103,7 @@ export SUDO_EDITOR="$EDITOR"
 export GOMODCACHE="$XDG_CACHE_HOME"/go
 
 # Increase history size.
-export HISTFILESIZE=65536
+export HISTFILESIZE=32768
 # From bash, default is 500 (see `man bash`).
 export HISTSIZE="$HISTFILESIZE"
 # From zsh (see `man zshparam`).
