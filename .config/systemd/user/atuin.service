@@ -1,0 +1,9 @@
+[Unit]
+Description=Atuin Daemon
+
+[Service]
+Restart=always
+ExecStart=/home/%u/.local/share/cargo/bin/atuin daemon
+
+[Install]
+WantedBy=default.target
