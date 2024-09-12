@@ -24,7 +24,8 @@ plugins=(
 
 export ZSH="$SHELDON_DATA_DIR"/repos/github.com/ohmyzsh/ohmyzsh
 
-command -v sheldon >/dev/null && eval "$(sheldon source)"
+command -v sheldon >/dev/null \
+	&& eval "$(sheldon source 2>>"$XDG_STATE_HOME/sheldon-stderr.log")"
 
 # Loaded after framework is loaded to preserve personal aliases.
 . "$XDG_CONFIG_HOME"/shell/common.sh

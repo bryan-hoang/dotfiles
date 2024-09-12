@@ -97,7 +97,7 @@ $character
 """
 
 add_newline = true
-command_timeout = 1000
+# command_timeout = 500
 continuation_prompt = '[>](bright-black) '
 scan_timeout = 30
 
