@@ -18,6 +18,15 @@ return {
 			end
 			table.insert(opts.sections.lualine_c, 4, { noeol })
 
+			local lint_progress = function()
+				local linters = require("lint").get_running()
+				if #linters == 0 then
+					return "󰦕"
+				end
+				return "󱉶 " .. table.concat(linters, ", ")
+			end
+			table.insert(opts.sections.lualine_x, 1, { lint_progress })
+
 			return opts
 		end,
 	},

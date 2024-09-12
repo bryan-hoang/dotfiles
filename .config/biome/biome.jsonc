@@ -7,13 +7,6 @@
 		"useIgnoreFile": true,
 		"defaultBranch": "main"
 	},
-	"files": {
-		"ignore": [
-			// Actually interpreted as JSONC files by zed. Currently no plans to
-			// rename to `.jsonc` :(
-			".config/zed/*.json"
-		]
-	},
 	"formatter": {
 		"formatWithErrors": true
 	},

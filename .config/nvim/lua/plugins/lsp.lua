@@ -60,7 +60,7 @@ return {
 		opts = function(_, opts)
 			local biome = { "biome-check", "biome" }
 			local jsFormatters = { "prettier", "eslint_d", "biome-check", "biome" }
-			local cssFormatters = { "prettierd", "stylelint" }
+			local cssFormatters = { biome, "stylelint" }
 			local shFormatters = { "shellcheck", "shellharden", "shfmt" }
 
 			local user_opts = {
@@ -94,17 +94,9 @@ return {
 						args = { "-filename", "$FILENAME", "-ci", "-bn", "--simplify" },
 					},
 					biome = {
-						cwd = require("conform.util").root_file({
-							"biome.json",
-							"biome.jsonc",
-						}),
 						require_cwd = true,
 					},
 					["biome-check"] = {
-						cwd = require("conform.util").root_file({
-							"biome.json",
-							"biome.jsonc",
-						}),
 						require_cwd = true,
 					},
 					prettier = {
@@ -140,7 +132,7 @@ return {
 	{
 		"mfussenegger/nvim-lint",
 		opts = function(_, opts)
-			local cssLinters = { "stylelint" }
+			local cssLinters = { "biomejs", "stylelint" }
 
 			local user_opts = {
 				linters_by_ft = {
