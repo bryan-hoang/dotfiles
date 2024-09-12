@@ -15,8 +15,8 @@
 		}
 	},
 	"devDependencies": {
-		"@commitlint/config-conventional": "19.4.1",
-		"@commitlint/types": "19.0.3",
+		"@commitlint/config-conventional": "19.5.0",
+		"@commitlint/types": "19.5.0",
 		"@stylistic/stylelint-config": "2.0.0",
 		"debug": "4.3.7",
 		"defu": "6.1.4",
