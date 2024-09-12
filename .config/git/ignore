@@ -74,3 +74,6 @@ zsh-syntax-highlighting-dracula.plugin.zsh
 
 # Files for clangd LSP.
 .cache/clangd/index/*.idx
+
+# Biome
+biome.jsonc

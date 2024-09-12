@@ -58,9 +58,8 @@ return {
 			},
 		},
 		opts = function(_, opts)
-			local biome = { "biome-check", "biome" }
 			local jsFormatters = { "prettier", "eslint_d", "biome-check", "biome" }
-			local cssFormatters = { biome, "stylelint" }
+			local cssFormatters = { "stylelint", "biome-check", "biome" }
 			local shFormatters = { "shellcheck", "shellharden", "shfmt" }
 
 			local user_opts = {
@@ -70,7 +69,7 @@ return {
 					zsh = shFormatters,
 					toml = { "taplo" },
 					json = { "prettier" },
-					jsonc = biome,
+					jsonc = { "biome-check", "biome" },
 					yaml = { "prettierd" },
 					html = { "prettierd" },
 					svg = { "prettierd" },
