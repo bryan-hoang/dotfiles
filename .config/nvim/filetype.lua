@@ -23,6 +23,7 @@ set_file_associations({
 	dotenv = { ".*%.env%..*" },
 	ruby = { ".*/%.config/pry/pryrc" },
 	ini = { ".*/%.config/redshift%.conf" },
+	toml = { "uv.lock" },
 })
 
 vim.filetype.add({

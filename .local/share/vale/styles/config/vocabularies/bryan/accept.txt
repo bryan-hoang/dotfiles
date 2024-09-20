@@ -36,3 +36,4 @@ Nvidia
 CI
 Vite
 CMake
+uv
