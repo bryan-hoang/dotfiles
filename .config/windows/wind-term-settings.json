@@ -92,6 +92,12 @@
 				"hidden": false,
 				"name": "Ubuntu",
 				"source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
+			},
+			{
+				"guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
+				"hidden": false,
+				"name": "Git Bash",
+				"source": "Git"
 			}
 		]
 	},
