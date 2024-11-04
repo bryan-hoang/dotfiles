@@ -62,14 +62,16 @@ config.set_environment_variables = {
 	SHLVL = "0",
 }
 
+local act = wezterm.action
+
 config.keys = {
 	-- Activate the Launcher Menu in the current tab.
-	{ key = "l", mods = "ALT", action = wezterm.action.ShowLauncher },
+	{ key = "l", mods = "ALT", action = act.ShowLauncher },
 	-- https://wezfurlong.org/wezterm/config/lua/keyassignment/QuickSelectArgs.html
 	{
 		key = "O",
 		mods = "CTRL",
-		action = wezterm.action.QuickSelectArgs({
+		action = act.QuickSelectArgs({
 			label = "Open url",
 			-- e.g., http://localhost:9323.
 			patterns = {
@@ -82,9 +84,9 @@ config.keys = {
 			end),
 		}),
 	},
+	{ key = "8", mods = "CTRL", action = act.PaneSelect },
 }
 
-local act = wezterm.action
 config.mouse_bindings = {
 	-- Change the default click behavior so that it only selects
 	-- text and doesn't open hyperlinks
