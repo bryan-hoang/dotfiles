@@ -2,7 +2,6 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"lint-staged": "lint-staged --config .config/lintstaged/lintstagedrc.mjs",
 		"prepare": "husky .config/husky"
 	},
 	"config": {
