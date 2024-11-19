@@ -1,11 +1,14 @@
+# : << EOF
+# https://github.com/gpakosz/.tmux
+# (‑●‑●)> dual licensed under the WTFPL v2 license and the MIT license,
+#         without any warranty.
+#         Copyright 2012— Gregory Pakosz (@gpakosz).
+
 # Personal config overrides of popular base/starter tmux config (loaded after
 # `~/.tmux.conf*`).
 
 # Re-apply above configuration changes properly.
 # run 'cut -c3- "$XDG_CONFIG_HOME"/tmux/tmux-base.conf | sh -s _apply_configuration'
-
-# Load default template before personal customizations.
-run '"$TMUX_PROGRAM" source "$XDG_CONFIG_HOME"/tmux/tmux-base.conf.local'
 
 # Fix for 'Command is only available in WSL or inside a Visual Studio Code
 # terminal.' error. Source:
@@ -18,6 +21,10 @@ set-option -ga update-environment 'VSCODE_GIT_ASKPASS_NODE VSCODE_GIT_ASKPASS_MA
 set -g allow-passthrough on
 set -ga update-environment TERM
 set -ga update-environment TERM_PROGRAM
+
+# Disable "Oh my tmux" status line theme from conflicting with catppuccin's
+# theme.
+tmux_conf_theme=disabled
 
 # -- windows & pane creation ---------------------------------------------------
 tmux_conf_new_window_retain_current_path=true
@@ -92,17 +99,57 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 
 # Catppuccin theme.
 set -g @plugin 'catppuccin/tmux'
-set -g @catppuccin_window_default_text "#W"
-set -g @catppuccin_window_current_text "#W"
-set -g @catppuccin_status_modules_left "session"
-set -g @catppuccin_status_modules_right "cpu load battery uptime date_time"
+# Make the status line pretty and add some modules
+set -g status-right-length 100
+set -g status-left-length 100
+set -g status-left ""
+set -g status-right ""
+set -g status-left "#{E:@catppuccin_status_session}"
+set -agF status-right "#{E:@catppuccin_status_cpu}"
+# set -agF status-right "#{E:@catppuccin_status_load}"
+set -agF status-right "#{E:@catppuccin_status_battery}"
+set -ag status-right "#{E:@catppuccin_status_uptime}"
+set -g @catppuccin_window_status_style "rounded"
+set -g @catppuccin_window_text " #W"
+set -g @catppuccin_window_current_text " #W"
+# set -g @catppuccin_status_modules_right "cpu load battery uptime date_time"
 set -g @catppuccin_date_time_text "%a %F %R %Z"
-set -g @plugin 'tmux-plugins/tmux-battery'
 set -g @plugin 'tmux-plugins/tmux-cpu'
-set -g @plugin 'jamesoff/tmux-loadavg'
+set -g @plugin 'tmux-plugins/tmux-battery'
+# set -g @plugin 'jamesoff/tmux-loadavg'
 
 # A lightning fast version of tmux-fingers written in Rust, copy/pasting tmux
 # like vimium/vimperator.
 set -g @plugin 'fcsonline/tmux-thumbs'
 run-shell "$TMUX_PLUGIN_MANAGER_PATH"/tmux-thumbs/tmux-thumbs.tmux
 set -g @thumbs-command 'echo -n {} | lemonade copy'
+
+# ------------------------------------------------------------------------------
+
+# # /!\ do not remove the following line
+# EOF
+#
+# # /!\ do not "uncomment" the functions: the leading "# " characters are needed
+#
+# weather() {                                         # see https://github.com/chubin/wttr.in#one-line-output
+#   curl -f -s -m 2 'wttr.in?format=3' || printf '\n' # /!\ make sure curl is installed
+#   sleep 900                                         # sleep for 15 minutes, throttle network requests whatever the value of status-interval
+# }
+#
+# online() {
+#   ping -c 1 1.1.1.1 >/dev/null 2>&1 && printf '✔' || printf '✘'
+# }
+#
+# wan_ip_v4() {
+#   curl -f -s -m 2 -4 ifconfig.me
+#   sleep 300                                         # sleep for 5 minutes, throttle network requests whatever the value of status-interval
+# }
+#
+# wan_ip_v6() {
+#   curl -f -s -m 2 -6 ifconfig.me
+#   sleep 300                                         # sleep for 5 minutes, throttle network requests whatever the value of status-interval
+# }
+#
+# "$@"
+# # /!\ do not remove the previous line
+# #     do not write below this line
