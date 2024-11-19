@@ -86,7 +86,7 @@ return {
 					yamlls = { mason = false },
 					-- Python
 					pyright = { mason = false },
-					ruff_lsp = { mason = false },
+					ruff = { mason = false },
 					starlark_rust = {
 						mason = false,
 						filetypes = { "starlark", "bzl", "BUILD.bazel" },
