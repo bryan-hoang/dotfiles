@@ -99,6 +99,8 @@ does_command_exist kondo \
 	&& generate_completions kondo kondo --completions "$SHELL_BASENAME"
 does_command_exist uv \
 	&& generate_completions uv uv generate-shell-completion "$SHELL_BASENAME"
+does_command_exist delta \
+	&& generate_completions delta delta --generate-completion "$SHELL_BASENAME"
 
 # Doesn't support bash.
 does_command_exist bw \

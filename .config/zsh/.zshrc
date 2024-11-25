@@ -24,21 +24,13 @@ plugins=(
 
 export ZSH="$SHELDON_DATA_DIR"/repos/github.com/ohmyzsh/ohmyzsh
 
-command -v sheldon >/dev/null \
-	&& eval "$(sheldon source 2>>"$XDG_STATE_HOME/sheldon-stderr.log")"
-
-# Loaded after framework is loaded to preserve personal aliases.
-. "$XDG_CONFIG_HOME"/shell/common.sh
-
 # region Completions
 
 compdef dot='git'
 
-# Zsh completions plugin.
-fpath+=$ZSH_CUSTOM_PLUGINS_DIR/zsh-completions/src
-fpath+=$HOMEBREW_PREFIX/share/zsh/site-functions
-# fpath+=$ASDF_DIR/completions
-fpath+=$ZSH_USER_FPATH
+# Prepend user specific folder containing completions.
+# shellcheck disable=SC2206
+fpath=("$ZSH_USER_FPATH" $fpath)
 
 # For enabling autocompletion of privileged environments in privileged commands
 # (e.g. if you complete a command starting with sudo, completion scripts will
@@ -63,6 +55,12 @@ compinit
 	&& . "$HOME"/src/github.com/tj/git-extras/etc/git-extras-completion.zsh
 
 # endregion Completions
+
+command -v sheldon >/dev/null \
+	&& eval "$(sheldon source 2>>"$XDG_STATE_HOME/sheldon-stderr.log")"
+
+# Loaded after framework is loaded to preserve personal aliases.
+. "$XDG_CONFIG_HOME"/shell/common.sh
 
 # Make `mapfile` available in `zsh`
 zmodload zsh/mapfile
@@ -156,13 +154,6 @@ setopt shwordsplit
 # duplicates of a line previously found, even if the duplicates are not
 # contiguous.
 setopt HIST_FIND_NO_DUPS
-
-# # Prevent the script from changing PATH, already handled in `env.sh`.
-# OLD_PATH=$PATH
-# . "$ASDF_DIR"/asdf.sh
-# PATH=$OLD_PATH
-# export PATH
-# unset OLD_PATH
 
 does_command_exist navi && eval "$(navi widget zsh)"
 does_command_exist broot && eval "$(broot --print-shell-function zsh)"
