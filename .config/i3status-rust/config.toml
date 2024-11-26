@@ -49,6 +49,7 @@ idle_fg = "#282A36"
 
 [[block]]
 block = "music"
+format = " $icon {$combo.str(max_w:16,rot_interval:0.5) $play |}"
 
 [[block]]
 block = "bluetooth"
@@ -76,7 +77,7 @@ block = "uptime"
 
 [[block]]
 block = "time"
-format = " $icon $timestamp.datetime(f:'%a %F %R %Z') "
+format = " $icon $timestamp.datetime(f:'%F %R') "
 [block.theme_overrides]
 idle_bg = "#BD93F9"
 idle_fg = "#21222C"
