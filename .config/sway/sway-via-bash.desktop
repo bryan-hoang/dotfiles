@@ -1,0 +1,10 @@
+# sudo mkdir -p /usr/local/share/wayland-sessions/
+# sudo ln -f ~/.config/sway/sway-via-bash.desktop /usr/local/share/wayland-sessions/sway-via-bash.desktop
+[Desktop Entry]
+Name=Sway via Bash
+Comment=An i3-compatible Wayland compositor
+# https://www.reddit.com/r/swaywm/comments/f98jlp/comment/fiqjpp2/
+Exec=bash -l -c 'exec sway'
+Type=Application
+# https://github.com/swaywm/sway/wiki#xdg_current_desktop-environment-variable-is-not-being-set
+DesktopNames=sway;wlroots

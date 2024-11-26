@@ -246,9 +246,6 @@ exec --no-startup-id xidlehook --timer $((10 * 60)) 'loginctl lock-session' '' -
 # https://www.reddit.com/r/i3wm/comments/kiy0v0/comment/gngcb5r/?utm_source=share&utm_medium=web2x&context=3
 exec --no-startup-id /usr/lib/gsd-xsettings
 
-# Set default wallpaper.
-exec --no-startup-id feh ~/Pictures/wallpapers/secondary.png ~/Pictures/wallpapers/primary.png
-
 # Geoclue agent for redshift.
 exec --no-startup-id /usr/libexec/geoclue-2.0/demos/agent
 
