@@ -34,12 +34,13 @@ exec_always --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-color --nof
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -10%
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +10%
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+# Special keys to adjust brightness via brightnessct
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 10%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set 10%+
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -240,7 +241,7 @@ bindsym $mod+Shift+s exec flameshot gui
 # a timer.
 exec --no-startup-id xidlehook --timer $((10 * 60)) 'loginctl lock-session' '' --socket $XIDLEHOOK_SOCK --detect-sleep --not-when-audio --not-when-fullscreen
 
-# Try to increase compability between gnome-tweaks and gtk enabled
+# Try to increase compatibility between gnome-tweaks and gtk enabled
 # applications. Source:
 # https://www.reddit.com/r/i3wm/comments/kiy0v0/comment/gngcb5r/?utm_source=share&utm_medium=web2x&context=3
 exec --no-startup-id /usr/lib/gsd-xsettings
