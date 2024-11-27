@@ -34,13 +34,18 @@ exec_always --no-startup-id xss-lock --transfer-sleep-lock -- i3lock-color --nof
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
-bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -10%
-bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +10%
-bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
-# Special keys to adjust brightness via brightnessct
-bindsym --locked XF86MonBrightnessDown exec brightnessctl set 10%-
-bindsym --locked XF86MonBrightnessUp exec brightnessctl set 10%+
+bindsym XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -10%
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +10%
+bindsym XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+bindsym XF86MonBrightnessUp exec brightnessctl set 10%+
+
+# Media player controls
+bindsym XF86AudioPlay exec --no-startup-id playerctl play
+bindsym XF86AudioPause exec --no-startup-id playerctl pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -159,17 +164,21 @@ for_window [class="(?i)epiphany"] move to workspace $ws1
 for_window [class="(?i)responsively"] move to workspace $ws1
 for_window [class="Sizzy"] move to workspace $ws1
 
+# Terminal/external previewers
 for_window [class="(?i)term"] move to workspace $ws2
 for_window [class="(?i)alacritty"] move to workspace $ws2
 for_window [class="Code"] move to workspace $ws2
 
+# Messaging
 for_window [class="discord"] move to workspace $ws3
 for_window [class="Slack"] move to workspace $ws3
 for_window [class="Caprine"] move to workspace $ws3
 
+# Mail
 for_window [class="(?i)mail"] move to workspace $ws4
 for_window [class="(?i)thunderbird"] move to workspace $ws4
 
+# Music
 for_window [title="spt"] move to workspace $ws5
 for_window [class="Spotify"] move to workspace $ws5
 
@@ -224,12 +233,6 @@ bindsym $mod+Shift+minus move scratchpad
 
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
-
-# Media player controls
-bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
-bindsym XF86AudioPause exec --no-startup-id playerctl play-pause
-bindsym XF86AudioNext exec --no-startup-id playerctl next
-bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # Lock the computer.
 bindsym $mod+Mod1+l exec --no-startup-id loginctl lock-session
