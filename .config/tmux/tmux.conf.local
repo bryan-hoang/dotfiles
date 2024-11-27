@@ -90,13 +90,12 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 
 # Dracula theme.
 set -g @plugin 'dracula/tmux'
-set -g @dracula-plugins 'cpu-usage ram-usage time'
+set -g @dracula-plugins 'cpu-usage time'
 set -g @dracula-show-powerline true
 set -g @dracula-show-left-icon session
 set -g @dracula-show-flags true
 set -g @dracula-cpu-display-load true
-set -g @dracula-time-format "%a %F %R %Z"
-set -g @dracula-ram-usage-colors "pink dark_gray"
+set -g @dracula-time-format "%F"
 set -g @dracula-time-colors "light_purple dark_gray"
 
 # # Catppuccin theme.

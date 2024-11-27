@@ -37,10 +37,22 @@ return {
 	},
 	{
 		"chomosuke/typst-preview.nvim",
-		ft = "typst",
+		cmd = { "TypstPreviewToggle", "TypstPreview", "TypstPreviewStop" },
 		version = "1.*",
-		config = function()
-			require("typst-preview").setup({})
+		keys = {
+			{
+				"<leader>cp",
+				ft = "typst",
+				"<cmd>TypstPreviewToggle<cr>",
+				desc = "Typst Preview",
+			},
+		},
+		opts = function(_, opts)
+			if os.getenv("SSH_CONNECTION") ~= nil then
+				opts.open_cmd = "lemonade open %s"
+			else
+				opts.open_cmd = "$BROWSER %s -P document-preview --class document-preview"
+			end
 		end,
 	},
 }
