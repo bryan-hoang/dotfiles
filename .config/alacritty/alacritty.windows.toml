@@ -1,3 +1,4 @@
+[general]
 import = ['C:\Users\bryan\.config\alacritty\alacritty.common.toml']
 working_directory = 'C:\Users\bryan'
 

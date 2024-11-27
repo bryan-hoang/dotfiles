@@ -1,5 +1,5 @@
 [theme]
-theme = "dracula"
+theme = "ctp-mocha"
 
 [theme.overrides]
 # Make powerline separators match height of blocks.

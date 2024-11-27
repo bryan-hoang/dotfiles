@@ -17,10 +17,9 @@ local config = wezterm.config_builder()
 
 config:set_strict_mode(true)
 
--- config.color_scheme = "Dracula (Official)"
 config.color_scheme = "Catppuccin Mocha"
 config.font = wezterm.font("BerkeleyMono Nerd Font Mono")
--- Default is 12.0.
+-- In points.
 config.font_size = 12.0
 config.default_cursor_style = "SteadyBlock"
 config.use_fancy_tab_bar = false

@@ -1,8 +1,13 @@
-import = ['~/src/github.com/dracula/alacritty/dracula.toml']
+[general]
+import = ['~/src/github.com/catppuccin/alacritty/catppuccin-mocha.toml']
 live_config_reload = true
 
 [env]
 SHLVL = "0"
+
+[font]
+# In point.
+size = 18
 
 [font.normal]
 family = "BerkeleyMono Nerd Font Mono"
