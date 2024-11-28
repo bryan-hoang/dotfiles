@@ -157,12 +157,19 @@ return {
 				vim.g.mkdp_open_ip = os.getenv("HOSTNAME")
 				vim.g.mkdp_port = 8080
 				vim.cmd([[
-					function! g:Open_browser(url)
-						silent exe "!lemonade open "a:url
+					function OpenMarkdownPreview(url)
+						execute "silent ! lemonade open " . a:url
 					endfunction
-					let g:mkdp_browserfunc = "g:Open_browser"
+				]])
+			else
+				vim.cmd([[
+					function OpenMarkdownPreview (url)
+						execute "silent ! $BROWSER " . a:url
+					endfunction
 				]])
 			end
+
+			vim.g.mkdp_browserfunc = "OpenMarkdownPreview"
 		end,
 	},
 	{
