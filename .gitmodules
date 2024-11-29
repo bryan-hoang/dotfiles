@@ -1,51 +1,35 @@
+[submodule "gpakosz/.tmux"]
+	path = src/github.com/gpakosz/.tmux
+	url = https://github.com/gpakosz/.tmux.git
+[submodule "dandavison/delta"]
+	path = src/github.com/dandavison/delta
+	url = https://github.com/dandavison/delta.git
+[submodule "akinomyoga/ble.sh"]
+	path = src/github.com/akinomyoga/ble.sh
+	url = https://github.com/akinomyoga/ble.sh.git
 [submodule "ohmybash/oh-my-bash"]
 	path = src/github.com/ohmybash/oh-my-bash
 	url = https://github.com/ohmybash/oh-my-bash.git
 [submodule "amix/vimrc"]
 	path = src/github.com/amix/vimrc
 	url = https://github.com/amix/vimrc.git
-[submodule "dracula/gtk"]
-	path = src/github.com/dracula/gtk
-	url = https://github.com/dracula/gtk.git
-[submodule "gpakosz/.tmux"]
-	path = src/github.com/gpakosz/.tmux
-	url = https://github.com/gpakosz/.tmux.git
-[submodule "dracula/git"]
-	path = src/github.com/dracula/git
-	url = https://github.com/dracula/git
-[submodule "errata-ai/MediaWiki"]
-	path = src/github.com/errata-ai/MediaWiki
-	url = https://github.com/errata-ai/MediaWiki.git
-[submodule "dandavison/delta"]
-	path = src/github.com/dandavison/delta
-	url = https://github.com/dandavison/delta.git
-[submodule "dracula/xresources"]
-	path = src/github.com/dracula/xresources
-	url = https://github.com/dracula/xresources.git
-[submodule "dracula/alacritty"]
-	path = src/github.com/dracula/alacritty
-	url = https://github.com/dracula/alacritty
-[submodule "dracula/kitty"]
-	path = src/github.com/dracula/kitty
-	url = https://github.com/dracula/kitty.git
-[submodule "dracula/zellij"]
-	path = src/github.com/dracula/zellij
-	url = https://github.com/dracula/zellij.git
-[submodule "doomemacs/doomemacs"]
-	path = src/github.com/doomemacs/doomemacs
-	url = https://github.com/doomemacs/doomemacs.git
-[submodule "dracula/dunst"]
-	path = src/github.com/dracula/dunst
-	url = https://github.com/dracula/dunst.git
-[submodule "dracula/lsd"]
-	path = src/github.com/dracula/lsd
-	url = https://github.com/dracula/lsd.git
-[submodule "akinomyoga/ble.sh"]
-	path = src/github.com/akinomyoga/ble.sh
-	url = https://github.com/akinomyoga/ble.sh.git
-[submodule "dracula/rofi"]
-	path = src/github.com/dracula/rofi
-	url = https://github.com/dracula/rofi
+# Catppuccin
 [submodule "catppuccin/lsd"]
 	path = src/github.com/catppuccin/lsd
 	url = https://github.com/catppuccin/lsd.git
+[submodule "catppuccin/xresources"]
+	path = src/github.com/catppuccin/xresources
+	url = https://github.com/catppuccin/xresources.git
+[submodule "catppuccin/dunst"]
+	path = src/github.com/catppuccin/dunst
+	url = https://github.com/catppuccin/dunst.git
+# Dracula
+[submodule "dracula/gtk"]
+	path = src/github.com/dracula/gtk
+	url = https://github.com/dracula/gtk.git
+[submodule "dracula/git"]
+	path = src/github.com/dracula/git
+	url = https://github.com/dracula/git
+[submodule "dracula/rofi"]
+	path = src/github.com/dracula/rofi
+	url = https://github.com/dracula/rofi.git

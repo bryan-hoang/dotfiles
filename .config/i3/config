@@ -261,6 +261,8 @@ exec_always --no-startup-id picom --daemon
 # Clipboard manager.
 exec_always --no-startup-id clipcatd
 
+exec_always --no-startup-id dunst
+
 set $launcher-clipboard-insert clipcat-menu insert
 set $launcher-clipboard-remove clipcat-menu remove
 bindsym $mod+v exec $launcher-clipboard-insert
