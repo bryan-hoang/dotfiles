@@ -34,7 +34,7 @@ padding-x = 8
 # (default is [0, 0])
 #
 # Example:
-padding-y = [0, 16]
+padding-y = [0, 0]
 
 # Option as Alt
 #
@@ -79,7 +79,7 @@ padding-y = [0, 16]
 # Confirm before exiting Rio
 # Default is `true`
 #
-# confirm-before-quit = false
+confirm-before-quit = false
 
 # Cursor
 #
@@ -207,7 +207,7 @@ family = "BerkeleyMono Nerd Font Mono"
 #
 # Example:
 # [fonts]
-size = 24
+size = 16
 #
 # [fonts.regular]
 # family = "cascadiamono"
