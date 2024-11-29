@@ -357,3 +357,4 @@ export GRIT_USER_CONFIG="$XDG_CONFIG_HOME"/grit
 
 # Mise
 export MISE_RUBY_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/default-pkgs/gem.list
+export MISE_PIPX_UVX=1
