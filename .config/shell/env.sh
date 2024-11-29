@@ -158,7 +158,7 @@ export LESS='-FIRXx2'
 # https://force-color.org/
 export FORCE_COLOR=1
 command -v vivid >/dev/null \
-	&& LS_COLORS="$(vivid generate dracula)" \
+	&& LS_COLORS="$(vivid generate catppuccin-mocha)" \
 	&& export LS_COLORS
 case ${TERM} in
 	# WSL in windows Terminal colour support.
