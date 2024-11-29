@@ -2,9 +2,9 @@
 theme = "ctp-mocha"
 
 [theme.overrides]
-# Make powerline separators match height of blocks.
-idle_bg = "#44475A"
-idle_fg = "#F8F8F2"
+idle_bg = "#1E1E2E"
+idle_fg = "#CDD6F4"
+# Remove powerline separators.
 separator = "<span></span>"
 
 [icons]
@@ -18,8 +18,8 @@ format = " $title.str(max_w:16,rot_interval:0.5) |"
 block = "docker"
 format = " $icon $running.eng(w:1)/$total.eng(w:1) "
 [block.theme_overrides]
-idle_bg = "#8BE9FD"
-idle_fg = "#282A36"
+idle_bg = "#89B4FA"
+idle_fg = "#1E1E2E"
 
 [[block]]
 block = "disk_space"
@@ -44,8 +44,8 @@ format_alt = " $icon $barchart $utilization "
 block = "load"
 format = " $icon $1m.eng(w:3) $5m.eng(w:3) $15m.eng(w:3) "
 [block.theme_overrides]
-idle_bg = "#50FA7B"
-idle_fg = "#282A36"
+idle_bg = "#A6E3A1"
+idle_fg = "#1E1E2E"
 
 [[block]]
 block = "music"
@@ -56,8 +56,8 @@ block = "bluetooth"
 # WH-1000XM5
 mac = "88:C9:E8:00:D0:F9"
 [block.theme_overrides]
-idle_bg = "#8BE9FD"
-idle_fg = "#21222C"
+idle_bg = "#74C7EC"
+idle_fg = "#1E1E2E"
 
 [[block]]
 block = "sound"
