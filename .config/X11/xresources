@@ -1,4 +1,4 @@
-#include "/home/bryan/src/github.com/catppuccin/themes/mocha.Xresources"
+#include "/home/bryan/src/github.com/catppuccin/xresources/themes/mocha.Xresources"
 #include "xresources.d/dpi"
 
 ! Set consistent cursor theme.
