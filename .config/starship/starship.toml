@@ -213,6 +213,9 @@ format = "[$symbol]($style)"
 [time]
 disabled = true
 
+[typst]
+format = "[$symbol($version )]($style)"
+
 [username]
 format = "[$user]($style)@"
 
