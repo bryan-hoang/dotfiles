@@ -161,15 +161,8 @@ return {
 						execute "silent ! lemonade open " . a:url
 					endfunction
 				]])
-			else
-				vim.cmd([[
-					function OpenMarkdownPreview (url)
-						execute "silent ! $BROWSER " . a:url
-					endfunction
-				]])
+				vim.g.mkdp_browserfunc = "OpenMarkdownPreview"
 			end
-
-			vim.g.mkdp_browserfunc = "OpenMarkdownPreview"
 		end,
 	},
 	{
