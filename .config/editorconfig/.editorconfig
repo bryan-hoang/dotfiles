@@ -9,7 +9,7 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{py,yml,yaml,kdl,hjson}]
+[*.{py,yml,yaml,kdl,hjson,typ}]
 indent_style = space
 
 [{*gemrc,CMakeLists.txt}]
