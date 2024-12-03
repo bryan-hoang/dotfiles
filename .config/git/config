@@ -140,6 +140,7 @@
 	fsmonitor = true
 	hooksPath = ~/.config/git/hooks
 	pager = delta
+	longPaths = true
 [interactive]
 	diffFilter = delta --color-only
 [include]
