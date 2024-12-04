@@ -6,11 +6,11 @@ case $GIT_EMAIL in
 	bryan@bryanhoang.dev)
 		GIT_EMAIL_SYMBOL='@'
 		;;
-	*distributive.network)
+	bryan@distributive.network)
 		GIT_EMAIL_SYMBOL='⊇'
 		;;
 	*)
-		GIT_EMAIL_SYMBOL='unset'
+		GIT_EMAIL_SYMBOL=$GIT_EMAIL
 		;;
 esac
 
