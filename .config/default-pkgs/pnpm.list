@@ -42,6 +42,11 @@ taze
 # ✂️ Find unused files, dependencies and exports in your JavaScript and
 # TypeScript projects. Knip it before you ship it! (webpro/knip)
 knip
+#  Lint packaging errors (bluwy/publint).
+publint
+# Tool for analyzing TypeScript types of npm packages
+# (arethetypeswrong/arethetypeswrong.github.io).
+@arethetypeswrong/cli
 # Fast, reliable, and secure dependency management.
 # yarn
 # CLI tool for running Yeoman generators.
