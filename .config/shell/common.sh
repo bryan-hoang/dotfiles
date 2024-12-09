@@ -132,7 +132,7 @@ export DIRENV_LOG_FORMAT=""
 set -o noclobber
 
 # Set tabs in the terminal to differ from the default of 8.
-tabs 2
+tabs -2
 
 # Set the environment variable per interactive session. Otherwise `tty` returns
 # "not a tty" if ran from `.profile`.
