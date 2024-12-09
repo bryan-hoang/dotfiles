@@ -255,15 +255,10 @@ exec --no-startup-id /usr/lib/gsd-xsettings
 # Compositor
 exec_always --no-startup-id picom --daemon
 
-# Clipboard manager.
-exec_always --no-startup-id clipcatd
-
+# Notification daemon.
 exec_always --no-startup-id dunst
 
-set $launcher-clipboard-insert clipcat-menu insert
-set $launcher-clipboard-remove clipcat-menu remove
-bindsym $mod+v exec $launcher-clipboard-insert
-bindsym $mod+o exec $launcher-clipboard-remove
+bindsym $mod+v exec /bin/sh -c "ps -p `cat /tmp/.ringboard/bryan.egui-sleep 2> /dev/null` > /dev/null 2>&1 && exec rm -f /tmp/.ringboard/bryan.egui-sleep || exec ringboard-egui"
 
 # Dracula theme.
 # class                 border  bground text    indicator child_border
