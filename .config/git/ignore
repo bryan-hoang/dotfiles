@@ -24,7 +24,6 @@ svgo.config.js
 .vscode/
 
 # "Personal" lockfiles.
-pnpm-lock.yaml
 bun.lockb
 # orogene
 package-lock.kdl
