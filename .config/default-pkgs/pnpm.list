@@ -8,8 +8,6 @@
 neovim
 # Opinionated Code Formatter.
 prettier
-# prettier, as a daemon, for improved formatting speed.
-@fsouza/prettierd
 # A mighty CSS linter that helps you avoid errors and enforce conventions
 # (stylelint/stylelint).
 stylelint
@@ -26,8 +24,10 @@ cssmodules-language-server
 # A language server for Dockerfiles powered by Node.js, TypeScript, and VSCode
 # technologies (rcjsuen/dockerfile-language-server-nodejs).
 dockerfile-language-server-nodejs
-# MarkdownLint Command Line Interface (igorshubovych/markdownlint-cli).
-markdownlint-cli
+# A fast, flexible, configuration-based command-line interface for linting
+# Markdown/CommonMark files with the markdownlint library
+# (DavidAnson/markdownlint-cli2)
+markdownlint-cli2
 # A Spell Checker for Code!
 cspell
 # Makes eslint the fastest linter on the planet (mantoni/eslint_d.js).

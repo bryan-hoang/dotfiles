@@ -70,10 +70,9 @@ return {
 					toml = { "taplo" },
 					json = { "prettier" },
 					jsonc = { "biome-check", "biome" },
-					yaml = { "prettierd" },
-					html = { "prettierd" },
-					svg = { "prettierd" },
-					markdown = { "markdownlint", "prettierd" },
+					yaml = { "prettier" },
+					html = { "prettier" },
+					svg = { "prettier" },
 					css = cssFormatters,
 					scss = cssFormatters,
 					javascript = jsFormatters,
@@ -106,9 +105,6 @@ return {
 							},
 						},
 					},
-					prettierd = {
-						require_cwd = true,
-					},
 					eslint_d = {
 						cwd = require("conform.util").root_file({
 							"eslint.config.js",
@@ -137,7 +133,7 @@ return {
 				linters_by_ft = {
 					dockerfile = { "hadolint" },
 					fish = {},
-					markdown = { "markdownlint" },
+					markdown = { "markdownlint-cli2" },
 					dotenv = { "dotenv_linter" },
 					css = cssLinters,
 					scss = cssLinters,
