@@ -77,12 +77,6 @@ mini_comment.setup({
 	},
 })
 
--- Set here instead of `keys` section for telescope.nvim to prevent race
--- condition.
-vim.keymap.set("n", "<Leader>bb", "<cmd>Telescope buffers<cr>", {
-	desc = "Open buffer picker",
-})
-
 -- Disable jumping to keyword definition to avoid conflicting with opening
 -- hyperlinks in Wezterm.
 vim.api.nvim_set_keymap("", "<C-LeftMouse>", "", {})

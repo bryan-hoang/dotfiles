@@ -1,22 +1,18 @@
 return {
 	{
-		-- Goto filenames with line info.
+		-- Go to filenames with line info.
 		"lewis6991/fileline.nvim",
 		lazy = false,
 	},
 	{
-		"eandrju/cellular-automaton.nvim",
-		cmd = "CellularAutomaton",
-		keys = {
-			{
-				"<leader>ua",
-				"<Cmd>CellularAutomaton make_it_rain<CR>",
-				desc = "Make it rain",
-			},
-		},
+		-- Work with several variants of a word at once. For example, search and
+		-- replacing variants.
+		"tpope/vim-abolish",
+		event = require("util").buf_enter_event_list,
 	},
 	{
-		"folke/persistence.nvim",
-		enabled = false,
+		-- Defaults everyone can agree on.
+		"tpope/vim-sensible",
+		event = require("util").buf_enter_event_list,
 	},
 }

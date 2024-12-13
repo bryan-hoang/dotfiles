@@ -2,117 +2,6 @@ local Util = require("lazyvim.util")
 
 return {
 	{
-		"nvim-telescope/telescope.nvim",
-		dependencies = {
-			{
-				"nvim-telescope/telescope-live-grep-args.nvim",
-				cmd = "Telescope",
-			},
-		},
-		config = function(_, opts)
-			local telescope = require("telescope")
-			telescope.setup(opts)
-			telescope.load_extension("live_grep_args")
-		end,
-		opts = function(_, opts)
-			local lga_actions = require("telescope-live-grep-args.actions")
-
-			return vim.tbl_deep_extend("force", opts, {
-				defaults = {
-					layout_strategy = "horizontal",
-					sorting_strategy = "ascending",
-					layout_config = {
-						prompt_position = "top",
-					},
-				},
-				extensions = {
-					live_grep_args = {
-						mappings = {
-							i = {
-								["<C-k>"] = lga_actions.quote_prompt(),
-							},
-						},
-					},
-				},
-			})
-		end,
-		keys = {
-			-- Search
-			{
-				"<leader>sS",
-				-- Work around certain language servers requiring a query.
-				-- https://github.com/nvim-telescope/telescope.nvim/issues/568#issuecomment-793748612
-				function()
-					require("telescope.builtin").lsp_workspace_symbols({
-						query = vim.fn.input("Query >"),
-					})
-				end,
-				desc = "Open workspace symbol picker",
-			},
-			{ "<leader>sg", false },
-			{
-				"<leader>sG",
-				function()
-					require("telescope").extensions.live_grep_args.live_grep_args({
-						cwd = false,
-					})
-				end,
-				desc = "Grep (cwd)",
-			},
-			{
-				"<leader>sb",
-				false,
-			},
-			{
-				"<leader>sj",
-				"<cmd>Telescope jumplist<cr>",
-				desc = "Open jumplist picker",
-			},
-			{
-				"<leader>sR",
-				false,
-			},
-			{
-				"<leader>s'",
-				"<cmd>Telescope resume<cr>",
-				desc = "Open last picker",
-			},
-			{
-				"<leader>sd",
-				Util.pick("diagnostics", {
-					bufnr = 0,
-				}),
-				desc = "Open diagnostic picker (current buffer)",
-			},
-			{
-				"<leader>sD",
-				Util.pick("diagnostics", {
-					bufnr = nil,
-				}),
-				desc = "Open diagnostic picker (all buffers)",
-			},
-			{
-				"<leader>/",
-				function()
-					require("telescope").extensions.live_grep_args.live_grep_args()
-				end,
-				desc = "Global search in workspace folder",
-			},
-			{
-				"<leader><space>",
-				false,
-			},
-			{
-				"<leader>,",
-				false,
-			},
-			{
-				"<leader>fb",
-				false,
-			},
-		},
-	},
-	{
 		"nvim-neo-tree/neo-tree.nvim",
 		enabled = false,
 	},
@@ -164,7 +53,7 @@ return {
 		end,
 	},
 	{
-		-- A plugin to visualise and resolve merge conflicts in neovim.
+		-- A plugin to visualize and resolve merge conflicts in Neovim.
 		"akinsho/git-conflict.nvim",
 		event = require("util").buf_enter_event_list,
 		opts = {
@@ -187,7 +76,7 @@ return {
 				end,
 			})
 
-			-- Fixes a bug where the conflicts arent' fetched at the right time.
+			-- Fixes a bug where the conflicts aren't fetched at the right time.
 			vim.api.nvim_create_autocmd("BufRead", {
 				callback = function()
 					vim.cmd([[GitConflictRefresh]])
@@ -196,7 +85,7 @@ return {
 
 			require("git-conflict").setup(opts)
 
-			-- Clear distraction background colors, defer to colorscheme.
+			-- Clear distraction background colors, defer to color scheme.
 			vim.api.nvim_set_hl(0, "GitConflictCurrent", {})
 			vim.api.nvim_set_hl(0, "GitConflictAncestor", {})
 		end,
@@ -233,19 +122,8 @@ return {
 		},
 	},
 	{
-		-- Work with several variants of a word at once. e.g., search and replacing
-		-- variants.
-		"tpope/vim-abolish",
-		event = require("util").buf_enter_event_list,
-	},
-	{
-		-- Defaults everyone can agree on.
-		"tpope/vim-sensible",
-		event = require("util").buf_enter_event_list,
-	},
-	{
 		"folke/flash.nvim",
-		-- Don't override default `s` keybind.
+		-- Don't override default `s` keybinding.
 		enabled = false,
 	},
 	{
@@ -259,9 +137,9 @@ return {
 		},
 	},
 	{
-		-- A lua neovim plugin to generate shareable file permalinks (with line
+		-- A lua Neovim plugin to generate shareable file permanent links (with line
 		-- ranges) for several git web frontend hosts. Inspired by
-		-- tpope/vim-fugitive's `:GBrowse`.
+		-- `tpope/vim-fugitive's` `:GBrowse`.
 		"ruifm/gitlinker.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		keys = {

@@ -5,21 +5,6 @@ local severities = {
 
 return {
 	{
-		"williamboman/mason.nvim",
-		-- I want to use the command in the editor as well as on the CLI.
-		enabled = true,
-		opts = {
-			ensure_installed = {},
-		},
-	},
-	{
-		"mason-nvim-dap.nvim",
-		enabled = true,
-		opts = {
-			automatic_installation = false,
-		},
-	},
-	{
 		"joechrisellis/lsp-format-modifications.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",

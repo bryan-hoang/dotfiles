@@ -1,13 +1,10 @@
 return {
 	{
-		"rcarriga/nvim-notify",
+		"snacks.nvim",
 		opts = {
-			background_colour = "#000000",
+			-- The scroll animation is too distracting.
+			scroll = { enabled = false },
 		},
-		config = function(_, opts)
-			require("notify").setup(opts)
-			require("telescope").load_extension("notify")
-		end,
 	},
 	{
 		"nvim-lualine/lualine.nvim",
@@ -45,22 +42,7 @@ return {
 		},
 	},
 	{
-		"folke/zen-mode.nvim",
-		dependencies = { "folke/twilight.nvim" },
-		cmd = "ZenMode",
-		opts = {
-			tmux = { enabled = true },
-		},
-		keys = {
-			{ "<Leader>uz", "<Cmd>ZenMode<CR>", desc = "Toggle Zen Mode" },
-		},
-	},
-	{
-		"nvimdev/dashboard-nvim",
-		enabled = false,
-	},
-	{
-		-- 🎈 Floating statuslines for Neovim.
+		-- 🎈 Floating status lines for Neovim.
 		"b0o/incline.nvim",
 		event = "VeryLazy",
 		opts = {
@@ -72,7 +54,7 @@ return {
 		},
 	},
 	{
-		-- Cloak allows you to overlay *'s over defined patterns in defined files.
+		-- Cloak allows you to overlay asterisks over defined patterns in defined files.
 		"laytan/cloak.nvim",
 		ft = { "dotenv", "json" },
 		keys = {

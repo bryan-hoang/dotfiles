@@ -1,7 +1,7 @@
 return {
 	{
 		"glacambre/firenvim",
-		-- Lazy load firenvim. Explanation:
+		-- Lazy load `firenvim`. Explanation:
 		-- https://github.com/folke/lazy.nvim/discussions/463#discussioncomment-4819297
 		cond = not not vim.g.started_by_firenvim,
 		lazy = false,
@@ -41,7 +41,7 @@ return {
 				group = "nvim_ghost_user_autocommands",
 				pattern = pattern,
 				callback = function(event)
-					-- Avoid "nofile" value to enable LSP attaching.
+					-- Avoid `nofile` value to enable LSP attaching.
 					vim.bo.buftype = "nowrite"
 
 					if event.match:match(pattern[1]) then
