@@ -1,5 +1,6 @@
 # Order these files over lockfile changes.
 *.md
+pnpm-workspace.yaml
 *package.json
 *tsconfig.json
 *jsconfig.json
