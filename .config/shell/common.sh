@@ -115,6 +115,8 @@ does_command_exist register-python-argcomplete pipx \
 # endregion
 
 does_command_exist thefuck && eval "$(thefuck --alias)"
+# Hook in before `atuin` to avoid overwriting CTRL-R keybind.
+does_command_exist fzf && eval "$(fzf --"$SHELL_BASENAME")"
 # Disable atuin on zfs file systems. See
 # https://github.com/atuinsh/atuin/issues/952
 [[ -d /home ]] && df --print-type /home | tail --lines=+2 | awk '{print $2}' | grep --quiet --invert-match zfs \

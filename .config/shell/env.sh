@@ -51,8 +51,6 @@ prepend_brew_to_path() {
 
 # Searched last
 
-# mise
-# prepend_to_path "$XDG_DATA_HOME"/mise/shims
 # Brew
 prepend_brew_to_path /home/linuxbrew/.linuxbrew
 prepend_brew_to_path "$HOME"/.linuxbrew
@@ -167,7 +165,6 @@ case ${TERM} in
 		;;
 	*) ;;
 esac
-export FZF_DEFAULT_OPTS='--color=fg:#f8f8f2,bg:#282a36,hl:#bd93f9 --color=fg+:#f8f8f2,bg+:#44475a,hl+:#bd93f9 --color=info:#ffb86c,prompt:#50fa7b,pointer:#ff79c6 --color=marker:#ff79c6,spinner:#ffb86c,header:#6272a4'
 
 # Hide the "default interactive shell is now zsh" warning on macOS.
 export BASH_SILENCE_DEPRECATION_WARNING=1
@@ -272,6 +269,23 @@ export KUBECACHEDIR="$XDG_CACHE_HOME"/kube
 export TERMINFO="$XDG_DATA_HOME"/terminfo
 export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/etc/terminfo:/usr/share/terminfo
 
+# Mise
+export MISE_RUBY_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/default-pkgs/gem.list
+export MISE_PIPX_UVX=1
+
+# fzf
+# catppuccin-mocha
+export FZF_DEFAULT_OPTS=" \
+	--color=spinner:#f5e0dc,hl:#f38ba8 \
+	--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+	--color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+	--multi \
+"
+FD_OPTIONS="--strip-cwd-prefix --hidden --no-ignore --follow"
+export FZF_DEFAULT_COMMAND="fd --type f $FD_OPTIONS"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
+
 export DISABLE_AUTO_UPDATE=true
 export CLOUDSDK_CONFIG="$XDG_CONFIG_HOME"/gcloud
 export JULIA_DEPOT_PATH="$XDG_DATA_HOME"/julia:"$JULIA_DEPOT_PATH"
@@ -355,7 +369,3 @@ export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 export DENO_INSTALL_ROOT="$XDG_LOCAL_HOME"
 export GRIT_USER_CONFIG="$XDG_CONFIG_HOME"/grit
 export NLTK_DATA="$XDG_CACHE_HOME/nltk"
-
-# Mise
-export MISE_RUBY_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/default-pkgs/gem.list
-export MISE_PIPX_UVX=1
