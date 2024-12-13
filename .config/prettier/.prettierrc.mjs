@@ -31,4 +31,5 @@ export default {
 	plugins: ["prettier-plugin-packagejson"],
 	proseWrap: "always",
 	useTabs: true,
+	singleQuote: true,
 };
