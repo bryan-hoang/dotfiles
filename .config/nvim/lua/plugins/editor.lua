@@ -132,8 +132,6 @@ return {
 		-- https://github.com/folke/which-key.nvim#%EF%B8%8F-configuration
 		---@class wk.Opts
 		opts = {
-			---@type false | "classic" | "modern" | "helix"
-			preset = "helix",
 			plugins = {
 				presets = {
 					-- Avoid overwriting custom g<> keybindings.

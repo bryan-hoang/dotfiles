@@ -8,6 +8,19 @@ return {
 		},
 	},
 	{
+		"catppuccin/nvim",
+		lazy = not should_load_colorschemes,
+		name = "catppuccin",
+		-- https://github.com/catppuccin/nvim#configuration
+		opts = {
+			transparent_background = true,
+			no_italic = true,
+			integrations = {
+				fzf = true,
+			},
+		},
+	},
+	{
 		-- Diff syntax highlighting is off.
 		"ellisonleao/gruvbox.nvim",
 		lazy = not should_load_colorschemes,
@@ -29,16 +42,6 @@ return {
 				floats = "transparent",
 				comments = { italic = false },
 			},
-		},
-	},
-	{
-		"catppuccin/nvim",
-		lazy = not should_load_colorschemes,
-		name = "catppuccin",
-		-- https://github.com/catppuccin/nvim#configuration
-		opts = {
-			transparent_background = true,
-			no_italic = true,
 		},
 	},
 	{

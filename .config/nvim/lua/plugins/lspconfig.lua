@@ -1,4 +1,4 @@
--- Suppress warnings in lspconfig.options table.
+-- Suppress warnings in `lspconfig.options` table.
 ---@diagnostic disable: missing-fields
 
 local util = require("util")
@@ -8,7 +8,7 @@ return {
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			{
-				-- nvim-lspconfig plugin for bundler.
+				-- `nvim-lspconfig` plugin for bundler.
 				"mihyaeru21/nvim-lspconfig-bundler",
 				opts = {},
 			},
@@ -47,7 +47,7 @@ return {
 			end
 
 			local user_opts = {
-				-- Options for vim.diagnostic.config()
+				-- Options for `vim.diagnostic.config()`
 				diagnostics = {
 					virtual_text = {
 						source = true,
@@ -72,7 +72,7 @@ return {
 							json = {
 								schemas = require("schemastore").json.schemas({
 									ignore = {
-										-- Ignore files like "app.json" that may be used for
+										-- Ignore files like `app.json` that may be used for
 										-- translations instead.
 										"Expo SDK",
 									},
@@ -96,7 +96,7 @@ return {
 						mason = false,
 						filetypes = { "sh", "zsh" },
 						on_attach = function(client, bufnr)
-							-- Disable `shellcheck` and semantic token highlighting in dotenv
+							-- Disable `shellcheck` and semantic token highlighting in `dotenv`
 							-- files.
 							local filename = vim.api.nvim_buf_get_name(bufnr)
 							if filename:find("%.env$") or filename:find("%.env%.") then
@@ -112,13 +112,6 @@ return {
 					svelte = { mason = false },
 
 					-- C#/F#
-					-- omnisharp = {
-					-- 	mason = false,
-					-- 	cmd = { "OmniSharp" },
-					-- 	handlers = {
-					-- 		["textDocument/definition"] = require("omnisharp_extended").handler,
-					-- 	},
-					-- },
 					neocmake = {
 						-- NOTE: Currently fails to install due to `--locked` option.
 						mason = false,
@@ -152,7 +145,6 @@ return {
 					html = { mason = false },
 					emmet_language_server = { mason = false },
 					cssls = { mason = false },
-					-- cssmodules_ls = {},
 					tailwindcss = {
 						filetypes_include = { "markdown.mdx" },
 						filetypes_exclude = { "mdx" },
@@ -185,7 +177,7 @@ return {
 							workspace = {
 								didChangeWorkspaceFolders = {
 									-- Workaround "The language server eslint triggers a
-									-- registerCapability handler for
+									-- `registerCapability` handler for
 									-- workspace/didChangeWorkspaceFolders despite
 									-- dynamicRegistration set to false. Report upstream, this
 									-- warning is harmless"
@@ -197,6 +189,7 @@ return {
 					vale_ls = {
 						filetypes = { "markdown", "text", "tex", "gitcommit" },
 					},
+					harper_ls = {},
 				},
 			}
 

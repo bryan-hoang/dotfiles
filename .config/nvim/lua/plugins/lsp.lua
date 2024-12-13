@@ -68,7 +68,7 @@ return {
 					sh = shFormatters,
 					zsh = shFormatters,
 					toml = { "taplo" },
-					json = { "prettier" },
+					json = { "biome-check" },
 					jsonc = { "biome-check", "biome" },
 					yaml = { "prettier" },
 					html = { "prettier" },
