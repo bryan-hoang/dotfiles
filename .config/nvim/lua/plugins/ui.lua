@@ -4,6 +4,11 @@ return {
 		opts = {
 			-- The scroll animation is too distracting.
 			scroll = { enabled = false },
+			indent = {
+				chunk = {
+					enabled = true,
+				},
+			},
 		},
 	},
 	{
