@@ -17,6 +17,9 @@
 [submodule "catppuccin/lsd"]
 	path = src/github.com/catppuccin/lsd
 	url = https://github.com/catppuccin/lsd.git
+[submodule "catppuccin/bat"]
+	path = src/github.com/catppuccin/bat
+	url = https://github.com/catppuccin/bat.git
 [submodule "catppuccin/xresources"]
 	path = src/github.com/catppuccin/xresources
 	url = https://github.com/catppuccin/xresources.git
