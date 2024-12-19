@@ -30,7 +30,7 @@ compdef dot='git'
 
 # Prepend user specific folder containing completions.
 # shellcheck disable=SC2206
-fpath=("$ZSH_USER_FPATH" $fpath)
+fpath=("$ZSH_USER_FPATH" "${fpath[@]}")
 
 # For enabling autocompletion of privileged environments in privileged commands
 # (e.g. if you complete a command starting with sudo, completion scripts will
