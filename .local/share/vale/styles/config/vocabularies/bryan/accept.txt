@@ -37,3 +37,4 @@ CI
 Vite
 CMake
 uv
+Typst
