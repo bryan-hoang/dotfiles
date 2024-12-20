@@ -15,9 +15,6 @@ return {
 		opts = {
 			transparent_background = true,
 			no_italic = true,
-			integrations = {
-				fzf = true,
-			},
 		},
 	},
 	{
