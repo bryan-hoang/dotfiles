@@ -32,16 +32,6 @@ return {
 	{
 		-- Lightweight yet powerful formatter plugin for Neovim.
 		"stevearc/conform.nvim",
-		keys = {
-			{
-				"<Leader>cc",
-				function()
-					vim.cmd([[ConformInfo]])
-				end,
-				mode = { "n", "v" },
-				desc = "Conform Info",
-			},
-		},
 		opts = function(_, opts)
 			local jsFormatters = { "prettier", "eslint_d", "biome-check", "biome" }
 			local cssFormatters = { "stylelint", "biome-check", "biome" }
@@ -84,6 +74,9 @@ return {
 					},
 					prettier = {
 						require_cwd = true,
+						cwd = require("conform.util").root_file({
+							".prettierrc",
+						}),
 						options = {
 							ft_parsers = {
 								json = "json",
@@ -91,9 +84,6 @@ return {
 						},
 					},
 					eslint_d = {
-						cwd = require("conform.util").root_file({
-							"eslint.config.js",
-						}),
 						require_cwd = true,
 					},
 					kdlfmt = {
