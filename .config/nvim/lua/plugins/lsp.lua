@@ -85,6 +85,9 @@ return {
 					},
 					eslint_d = {
 						require_cwd = true,
+						cwd = require("conform.util").root_file({
+							"eslint.config.js",
+						}),
 					},
 					kdlfmt = {
 						command = "kdlfmt",
