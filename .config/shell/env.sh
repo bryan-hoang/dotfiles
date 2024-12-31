@@ -286,6 +286,7 @@ export FZF_DEFAULT_COMMAND="fd --type f $FD_OPTIONS"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
 
+export BAT_THEME=catppuccin-mocha
 export DISABLE_AUTO_UPDATE=true
 export CLOUDSDK_CONFIG="$XDG_CONFIG_HOME"/gcloud
 export JULIA_DEPOT_PATH="$XDG_DATA_HOME"/julia:"$JULIA_DEPOT_PATH"

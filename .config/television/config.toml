@@ -8,7 +8,7 @@ theme = "catppuccin"
 # The theme to use for syntax highlighting.
 # Bulitin syntax highlighting uses the same syntax highlighting engine as bat.
 # To get a list of your currently available themes, run `bat --list-themes`
-theme = "catppuccin-mocha"
+# theme = "catppuccin-mocha"
 
 # Keybindings
 # ----------------------------------------------------------------------------
