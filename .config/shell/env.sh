@@ -194,7 +194,7 @@ export PYTHON_HISTORY="$XDG_STATE_HOME"/python/history
 export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME"/python
 
 # https://wiki.archlinux.org/title/GTK#Themes
-export GTK_THEME=Dracula:dark
+export GTK_THEME=Dracula-dark:dark
 export GTK_RC_FILES="$XDG_CONFIG_HOME"/gtk-1.0/gtkrc
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc
 
