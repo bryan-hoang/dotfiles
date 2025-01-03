@@ -55,9 +55,10 @@ prepend_brew_to_path() {
 prepend_brew_to_path /home/linuxbrew/.linuxbrew
 prepend_brew_to_path "$HOME"/.linuxbrew
 # Misc.
-prepend_to_path "$XDG_CONFIG_HOME"/rofi/scripts
 prepend_to_path "$XDG_DATA_HOME"/google-cloud-sdk/bin
 prepend_to_path "$XDG_DATA_HOME"/omnisharp
+# Mise shims.
+prepend_to_path "$XDG_DATA_HOME"/mise/shims
 # Doom Emacs.
 prepend_to_path "$XDG_CONFIG_HOME"/emacs/bin
 # Neovim managed by bob (MordechaiHadad/bob).
@@ -71,8 +72,6 @@ prepend_to_path "$DENO_INSTALL"/bin
 prepend_to_path "$BUN_INSTALL"/bin
 # Go
 prepend_to_path "$GOPATH"/bin
-# Python managed by rye
-[ -s "$RYE_HOME"/env ] && . "$RYE_HOME"/env
 # Rust
 [ -s "$CARGO_HOME"/env ] && . "$CARGO_HOME"/env
 # Personal
