@@ -337,3 +337,5 @@
 [diff "tar-bz2"]
 	binary = true
 	textconv = tar --to-stdout --absolute-names -tvjf
+[remote "origin"]
+	followRemoteHEAD = warn
