@@ -11,24 +11,16 @@ done
 
 # Source: https://unix.stackexchange.com/a/37535
 SHELL_BASENAME=$(basename "$(readlink -f /proc/$$/exe)")
-
-# https://github.com/jdxcode/mise#mise-inside-of-direnv-use-mise-in-envrc
-[[ ! -s ~/.config/direnv/lib/use_mise.sh ]] \
-	&& does_command_exist direnv \
-	&& does_command_exist mise \
-	&& mkdir -p "$XDG_CONFIG_HOME"/direnv/lib \
-	&& mise direnv activate >"$XDG_CONFIG_HOME"/direnv/lib/use_mise.sh
+export SHELL_BASENAME
 
 # NOTE: Activate starship before `mise` to avoid `_mise_hook` in
 # `$PROMPT_COMMAND` (bash) from getting saved into `$_PRESERVED_PROMPT_COMMAND`.
 # This avoids getting "command not found: _mise_hook" for every prompt due too
 # starship's hook trying to to eval the ones it "saved".
 does_command_exist zoxide && eval "$(zoxide init "$SHELL_BASENAME")"
-does_command_exist direnv && eval "$(direnv hook "$SHELL_BASENAME")"
 does_command_exist starship && eval "$(starship init "$SHELL_BASENAME")"
 
-does_command_exist mise && eval "$(mise activate "$SHELL_BASENAME")" \
-	&& eval "$(mise hook-env --shell "$SHELL_BASENAME")"
+does_command_exist mise && eval "$(mise activate "$SHELL_BASENAME")"
 
 if [[ -n $SSH_CONNECTION ]] \
 	&& [[ -z $TMUX ]] \
@@ -40,75 +32,34 @@ fi
 
 # region: Completions
 
-does_command_exist dra \
-	&& generate_completions dra dra completion "$SHELL_BASENAME"
-does_command_exist rustup \
-	&& generate_completions cargo rustup completions "$SHELL_BASENAME" cargo \
-	&& generate_completions rustup rustup completions "$SHELL_BASENAME" rustup
-does_command_exist trash \
-	&& generate_completions trash trash completions "$SHELL_BASENAME"
-does_command_exist deno \
-	&& generate_completions deno deno completions "$SHELL_BASENAME"
-does_command_exist glab \
-	&& generate_completions glab glab completion --shell "$SHELL_BASENAME"
-does_command_exist just \
-	&& generate_completions just just --completions "$SHELL_BASENAME"
-does_command_exist starship \
-	&& generate_completions starship starship completions "$SHELL_BASENAME"
-does_command_exist ruff \
-	&& generate_completions ruff ruff generate-shell-completion "$SHELL_BASENAME"
-does_command_exist poetry \
-	&& generate_completions poetry poetry completions "$SHELL_BASENAME"
-does_command_exist gh \
-	&& generate_completions gh gh completion -s "$SHELL_BASENAME"
-does_command_exist cht.sh \
-	&& generate_completions cht.sh curl https://cheat.sh/:bash_completion \
-	&& generate_completions cht.sh curl https://cheat.sh/:zsh
-does_command_exist cog \
-	&& generate_completions cog cog generate-completions "$SHELL_BASENAME"
-does_command_exist mise \
-	&& generate_completions mise mise completion "$SHELL_BASENAME"
-does_command_exist watchexec \
-	&& generate_completions watchexec watchexec --completions "$SHELL_BASENAME" \
-	&& generate_man_pages watchexec watchexec --manual
-does_command_exist git-absorb \
-	&& generate_completions git-absorb git-absorb --gen-completions "$SHELL_BASENAME"
-does_command_exist dufs \
-	&& generate_completions dufs dufs --completions "$SHELL_BASENAME"
-does_command_exist genact \
-	&& generate_completions genact genact --print-completions "$SHELL_BASENAME" \
-	&& generate_man_pages genact genact --print-manpage
-does_command_exist sheldon \
-	&& generate_completions sheldon sheldon completions --shell "$SHELL_BASENAME"
-does_command_exist zellij \
-	&& generate_completions zellij zellij setup --generate-completion "$SHELL_BASENAME"
-does_command_exist ast-grep \
-	&& generate_completions ast-grep ast-grep completions \
-	&& generate_completions sg sg completions
-does_command_exist bob \
-	&& generate_completions bob bob complete "$SHELL_BASENAME"
-does_command_exist rye \
-	&& generate_completions rye rye self completion --shell "$SHELL_BASENAME"
-does_command_exist gt \
-	&& generate_completions gt gt completion
-does_command_exist himalaya \
-	&& generate_completions himalaya himalaya completion "$SHELL_BASENAME"
-does_command_exist atuin \
-	&& generate_completions atuin atuin gen-completions --shell "$SHELL_BASENAME"
-does_command_exist kondo \
-	&& generate_completions kondo kondo --completions "$SHELL_BASENAME"
-does_command_exist uv \
-	&& generate_completions uv uv generate-shell-completion "$SHELL_BASENAME"
-does_command_exist delta \
-	&& generate_completions delta delta --generate-completion "$SHELL_BASENAME"
+generate_completions ast-grep ast-grep completions
+generate_completions atuin atuin gen-completions --shell "$SHELL_BASENAME"
+generate_completions bob bob complete "$SHELL_BASENAME"
+generate_completions cargo rustup completions "$SHELL_BASENAME" cargo
+generate_completions delta delta --generate-completion "$SHELL_BASENAME"
+generate_completions deno deno completions "$SHELL_BASENAME"
+generate_completions dufs dufs --completions "$SHELL_BASENAME"
+generate_completions genact genact --print-completions "$SHELL_BASENAME"
+generate_man_pages genact genact --print-manpage
+generate_completions gh gh completion -s "$SHELL_BASENAME"
+generate_completions git-absorb git-absorb --gen-completions "$SHELL_BASENAME"
+generate_completions glab glab completion --shell "$SHELL_BASENAME"
+generate_completions just just --completions "$SHELL_BASENAME"
+generate_completions mise mise completion "$SHELL_BASENAME"
+generate_completions poetry poetry completions "$SHELL_BASENAME"
+generate_completions ruff ruff generate-shell-completion "$SHELL_BASENAME"
+generate_completions rustup rustup completions "$SHELL_BASENAME" rustup
+generate_completions sheldon sheldon completions --shell "$SHELL_BASENAME"
+generate_completions starship starship completions "$SHELL_BASENAME"
+generate_completions uv uv generate-shell-completion "$SHELL_BASENAME"
+generate_completions watchexec watchexec --completions "$SHELL_BASENAME"
+generate_man_pages watchexec watchexec --manual
+generate_completions zellij zellij setup --generate-completion "$SHELL_BASENAME"
 
 # Doesn't support bash.
-does_command_exist bw \
-	&& generate_completions bw bw completion --shell zsh
-does_command_exist pipenv \
-	&& generate_completions pipenv env _PIPENV_COMPLETE=zsh_source pipenv
-does_command_exist kubectl \
-	&& generate_completions kubectl kubectl completion zsh
+generate_completions bw bw completion --shell zsh
+generate_completions kubectl kubectl completion zsh
+generate_completions pipenv env _PIPENV_COMPLETE=zsh_source pipenv
 does_command_exist register-python-argcomplete pipx \
 	&& eval "$(register-python-argcomplete pipx)"
 
@@ -117,10 +68,13 @@ does_command_exist register-python-argcomplete pipx \
 does_command_exist thefuck && eval "$(thefuck --alias)"
 # Hook in before `atuin` to avoid overwriting CTRL-R keybind.
 does_command_exist fzf && eval "$(fzf --"$SHELL_BASENAME")"
+
 # Disable atuin on zfs file systems. See
 # https://github.com/atuinsh/atuin/issues/952
-[[ -d /home ]] && df --print-type /home | tail --lines=+2 | awk '{print $2}' | grep --quiet --invert-match zfs \
-	&& does_command_exist atuin && eval "$(atuin init --disable-up-arrow "$SHELL_BASENAME")"
+# if [[ -d /home ]] && df --print-type /home | tail --lines=+2 \
+# 	| awk '{print $2}' | grep --quiet --invert-match zfs; then
+does_command_exist atuin && eval "$(atuin init --disable-up-arrow "$SHELL_BASENAME")"
+# fi
 
 # https://wiki.archlinux.org/title/XDG_Base_Directory
 mkdir -p "$XDG_DATA_HOME"/tig
@@ -149,7 +103,3 @@ unset SHELL_BASENAME
 # Automatic transparency for xterm.
 # https://wiki.archlinux.org/title/Xterm#Automatic_transparency
 [[ -n $XTERM_VERSION ]] && transset --id "$WINDOWID" >/dev/null
-
-# shellcheck disable=SC1091
-[[ -s $XDG_CONFIG_HOME/broot/launcher/bash/br ]] \
-	&& . "$XDG_CONFIG_HOME"/broot/launcher/bash/br

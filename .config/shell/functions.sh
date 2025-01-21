@@ -12,45 +12,144 @@ println() {
 	printf '%s\n' "$*"
 }
 
+generate_completions() {
+	local -r command_to_complete="${1}"
+	if ! does_command_exist "$command_to_complete"; then
+		return 0;
+	fi
+	local -ra completion_cmd=("${@:2}")
+	local -r shell="$SHELL_BASENAME"
+	case "$shell" in
+		# `FORCE_COLOR` to disable ANSI escape codes. *cough* bw *cough*
+		bash)
+			local -r bash_completion_file="$BASH_COMPLETION_USER_DIR"/completions/"$command_to_complete"
+			if [[ ! -s ${bash_completion_file} ]]; then
+				FORCE_COLOR=0 "${completion_cmd[@]}" >|"$bash_completion_file"
+			fi
+			;;
+		zsh)
+			local -r zsh_completion_file="$ZSH_USER_FPATH"/_"$command_to_complete"
+			if [[ ! -s ${zsh_completion_file} ]]; then
+				FORCE_COLOR=0 "${completion_cmd[@]}" >|"$zsh_completion_file"
+			fi
+			;;
+		*)
+			echo "Invalid shell: ${shell}"
+			return 1
+			;;
+	esac
+}
+
+generate_man_pages() {
+	local -r command_with_man_page="${1}"
+	if ! does_command_exist "$command_with_man_page"; then
+		return 0;
+	fi
+	local -r man_page_file="$XDG_DATA_HOME/man/man1/$command_with_man_page".1
+	# sed to strip ANSI escape codes. *cough* bw *cough*
+	if [[ ! -s ${man_page_file} ]]; then
+		local -ra generation_command=("${@:2}")
+		"${generation_command[@]}" | sed -e 's/\x1b\[[0-9;]*m//g' >|"$man_page_file"
+	fi
+}
+
+# region Boolean functions
+
+does_function_exist() {
+	declare -f -F "$1" >/dev/null 2>&1
+}
+
+does_command_exist() {
+	command -v "$1" >/dev/null
+}
+
+is_bash_shell() {
+	[[ -n ${BASH_VERSION} ]]
+}
+
+is_zsh_shell() {
+	[[ -n ${ZSH_NAME} ]]
+}
+
+is_login_shell() {
+	{ is_bash_shell && shopt -q login_shell; } \
+		|| { is_zsh_shell && [[ -o login ]]; }
+}
+
+is_interactive_shell() {
+	{ is_bash_shell && [[ $- == *i* ]]; } \
+		|| { is_zsh_shell && [[ -o interactive ]]; }
+}
+
+is_windows_os() {
+	filter_system_information "Msys|WSL"
+}
+
+is_linux_os() {
+	filter_system_information "Linux"
+}
+
+# Source: https://unix.stackexchange.com/a/210656/460126
+is_debian_os() {
+	[[ -f "/etc/debian_version" ]]
+}
+
+is_ubuntu_os() {
+	cat /etc/*ease | grep -qE "ubuntu"
+}
+
+is_git_bash() {
+	filter_system_information "Msys"
+}
+
+is_wsl() {
+	filter_system_information "WSL"
+}
+
+is_ssh_session() {
+	[[ $SSH_CONNECTION != "" ]]
+}
+
+is_root() {
+	[[ "$(id -u)" == 0 ]]
+}
+
+is_asdf_plugin_installed() {
+	asdf plugin list 2>&1 | grep -q "$1" \
+		&& asdf list "$1" 2>&1 | grep -q "\."
+}
+
+is_arm32_architecture() {
+	lscpu | grep -q armv7
+}
+
+is_arm64_architecture() {
+	lscpu | grep -q aarch64
+}
+
+is_x86_64() {
+	[[ $(uname -m) == x86_64 ]]
+}
+
+has_sudo() {
+	local prompt
+
+	if prompt=$(sudo -nv 2>&1); then
+		return 0
+	elif echo "$prompt" | grep -q '^sudo:'; then
+		return 0
+	else
+		return 1
+	fi
+}
+
+# endregion Boolean functions
+
 # region Installation
 
 DOWNLOAD_DIR="$HOME"/Downloads
 FONT_DIR="$XDG_DATA_HOME"/fonts
 DEFAULT_PKGS_DIR="$XDG_CONFIG_HOME"/default-pkgs
-
-install_gh() {
-	echo "Installing gh..."
-	if is_git_bash; then
-		winget install GitHub.cli
-		echo "You may need to reload your shell for your path to update with the new program."
-	elif does_command_exist brew; then
-		brew install gh
-	elif is_arm64_architecture; then
-		curl -s https://api.github.com/repos/cli/cli/releases/latest \
-			| grep "browser_download_url.*deb" \
-			| cut -d : -f 2,3 \
-			| tr -d \" \
-			| wget -P "$DOWNLOAD_DIR" -qi -
-		sudo apt install "$DOWNLOAD_DIR"/gh_*_linux_arm64.deb
-	fi
-
-	gh --version
-	if ! gh auth status; then
-		gh auth login --web
-	fi
-	echo "Installed gh successfully!"
-}
-
-install_wget() {
-	echo "Installing wget..."
-	if is_git_bash; then
-		gh release download -R webfolderio/wget-windows -p 'wget-*-64bit-OpenSSL.zip' -D "$DOWNLOAD_DIR"
-		unzip "${HOME}/Downloads/wget-*-64bit-OpenSSL.zip" -d "$DOWNLOAD_DIR"
-		mv "${HOME}/Downloads/wget.exe" "$XDG_BIN_HOME"
-	fi
-	wget --version
-	echo "Installed wget successfully!"
-}
 
 install_git() {
 	require gh jq
@@ -81,61 +180,6 @@ install_git_lfs() {
 		git lfs install
 	fi
 	echo "Installed git-lfs successfully!"
-}
-
-install_starship() {
-	echo "Installing starship..."
-	mkdir -p "$XDG_BIN_HOME"
-	curl -sS https://starship.rs/install.sh \
-		| sh -s -- -b "$XDG_BIN_HOME" -y >/dev/null
-	starship --version
-	echo "Installed starship successfully!"
-}
-
-install_unzip() {
-	echo "Installing unzip..."
-	install_apt_packages unzip
-	unzip --version
-	echo "Installed unzip successfully!"
-}
-
-install_deno() {
-	if ! is_arm32_architecture && ! is_arm64_architecture; then
-		require unzip || return
-		echo "Installing deno..."
-		curl -fsSL https://deno.land/x/install/install.sh \
-			| sh >/dev/null
-		deno --version
-		echo "Installed deno successfully!"
-	fi
-}
-
-install_pandoc() {
-	if ! is_arm32_architecture; then
-		if has_sudo; then
-			echo "Installing pandoc..."
-			gh release download -R jgm/pandoc -p 'pandoc-*-*.deb' -D "$DOWNLOAD_DIR"
-
-			local arch_tag
-			if is_arm64_architecture; then
-				arch_tag='arm64'
-			else
-				arch_tag='amd64'
-			fi
-
-			sudo apt install "$DOWNLOAD_DIR"/pandoc*"$arch_tag".deb
-
-			pandoc --version
-			echo "Installed pandoc successfully!"
-		elif is_git_bash; then
-			echo "Installing pandoc..."
-			winget install JohnMacFarlane.Pandoc
-			echo "You may need to reload your shell for your path to update with the new program."
-
-			pandoc --version
-			echo "Installed pandoc successfully!"
-		fi
-	fi
 }
 
 install_shellcheck() {
@@ -204,40 +248,6 @@ install_brew() {
 	fi
 }
 
-install_vale() {
-	local file_archive
-	if is_x86_64; then
-		echo "Installing vale..."
-		file_archive='vale_*_Linux_64-bit.tar.gz'
-		readonly file_archive
-
-		local DOWNLOAD_DIR="$DOWNLOAD_DIR"
-		rm -f "$DOWNLOAD_DIR"/*{Windows,Linux}*
-		gh release download \
-			-R errata-ai/vale \
-			-p "$file_archive" \
-			-D "$DOWNLOAD_DIR"
-		local -r file_archive_path="$(find "$DOWNLOAD_DIR" -name "$file_archive")"
-		tar -xzvf "$file_archive_path" --directory "$XDG_BIN_HOME" vale
-
-		vale -v
-		echo "Installed vale successfully!"
-	fi
-}
-
-install_rename() {
-	install_apt_packages rename
-}
-
-install_keychain() {
-	if ! is_git_bash && has_sudo; then
-		echo "Installing keychain..."
-		install_apt_packages keychain
-		keychain --version
-		echo "Installed keychain successfully!"
-	fi
-}
-
 install_tex() {
 	echo "Installing tex..."
 	local -r filename=install-tl-unx.tar.gz
@@ -251,19 +261,6 @@ install_tex() {
 	echo "Installed tex successfully!"
 }
 
-install_jq() {
-	require dra
-	if ! is_git_bash; then
-		echo "Installing jq..."
-		dra download stedolan/jq \
-			--select jq-linux64 \
-			--output "$XDG_BIN_HOME"/jq
-		chmod u+x "$XDG_BIN_HOME"/jq
-		jq --version
-		echo "Installed jq successfully!"
-	fi
-}
-
 install_cht.sh() {
 	echo "Installing cht..."
 	# Note: The package `rlwrap` is a required dependency to run in shell mode.
@@ -272,29 +269,6 @@ install_cht.sh() {
 	chmod +x "${XDG_BIN_HOME}/cht.sh"
 	cht.sh --help
 	echo "Installed cht successfully!"
-}
-
-install_rustc() {
-	echo "Installing rust..."
-	if ! is_git_bash; then
-		# C linker, `silicon`, `spotify-tui` and `spotifyd` dependencies.
-		install_apt_packages expat libxml2-dev pkg-config libasound2-dev \
-			libssl-dev libfreetype6-dev libexpat1-dev libxcb-composite0-dev \
-			libssl-dev libxcb1-dev libxcb-render0-dev libxcb-shape0-dev \
-			libxcb-xfixes0-dev libpulse-dev libdbus-1-dev xcb-proto libx11-dev \
-			libx11-xcb-dev libxcursor-dev libfontconfig1-dev libxkbcommon-dev \
-			libegl1-mesa-dev build-essential
-		curl https://sh.rustup.rs -sSf | sh -s -- --no-modify-path -y --default-toolchain nightly
-		# shellcheck disable=SC1091
-		. "$CARGO_HOME"/env
-	else
-		wget -P "$DOWNLOAD_DIR" \
-			https://static.rust-lang.org/rustup/dist/x86_64-pc-windows-msvc/rustup-init.exe
-		"$DOWNLOAD_DIR"/rustup-init.exe --no-modify-path -y
-	fi
-	rustc --version
-	install_default_pkgs cargo
-	echo "Installed rust successfully!"
 }
 
 install_nerd_fonts() {
@@ -360,86 +334,6 @@ install_dotenv-linter() {
 		dotenv-linter --version
 		echo "Installed dotenv-linter successfully!"
 	fi
-}
-
-install_asdf_plugin() {
-	if [[ -z ${1:-1} ]]; then
-		echo "No plugin argument supplied"
-		return 1
-	fi
-
-	local version='latest'
-
-	if [[ -n ${2-} ]]; then
-		version="$2"
-	fi
-
-	local plugin_git_repo=''
-
-	case "${1}" in
-		nodejs)
-			plugin_git_repo='https://github.com/asdf-vm/asdf-nodejs.git'
-			if [[ -n $version ]]; then
-				version='lts'
-			fi
-			;;
-		python)
-			plugin_git_repo='https://github.com/asdf-community/asdf-python.git'
-			install_python_deps
-			;;
-		golang)
-			plugin_git_repo='https://github.com/kennyp/asdf-golang.git'
-			;;
-		ruby)
-			plugin_git_repo='https://github.com/asdf-vm/asdf-ruby.git'
-			install_ruby_deps
-			;;
-		java)
-			version='openjdk-17.0.2'
-			;;
-		perl)
-			plugin_git_repo='https://github.com/ouest/asdf-perl.git'
-			;;
-		R)
-			plugin_git_repo='https://github.com/asdf-community/asdf-r.git'
-			install_apt_packages build-essential libcurl3-dev libreadline-dev gfortran \
-				liblzma-dev liblzma5 libbz2-1.0 libbz2-dev \
-				xorg-dev libbz2-dev liblzma-dev libpcre2-dev \
-				build-essential libcurl4-openssl-dev libssl-dev libxml2-dev r-base || return
-			export R_EXTRA_CONFIGURE_OPTIONS='--enable-R-shlib --with-cairo'
-			;;
-		php)
-			plugin_git_repo='https://github.com/asdf-community/asdf-php.git'
-			install_apt_packages autoconf bison build-essential curl gettext git \
-				libgd-dev libcurl4-openssl-dev libedit-dev libicu-dev libjpeg-dev \
-				libmysqlclient-dev libonig-dev libpng-dev libpq-dev libreadline-dev \
-				libsqlite3-dev libssl-dev libxml2-dev libzip-dev openssl pkg-config \
-				re2c zlib1g-dev
-			;;
-		lua)
-			install_apt_packages linux-headers-"$(uname -r)" build-essential
-			plugin_git_repo='https://github.com/Stratus3D/asdf-lua.git'
-			;;
-		direnv)
-			plugin_git_repo='https://github.com/asdf-community/asdf-direnv.git'
-			;;
-		*) ;;
-	esac
-
-	echo "Installing ${1} plugin from ${plugin_git_repo}"
-	asdf plugin add "${1}" "$plugin_git_repo"
-	case "${1}" in
-		direnv)
-			asdf "${1}" setup --shell "$SHELL" --version "$version"
-			;;
-		*)
-			cd ~ || exit
-			asdf direnv local "${1}" "$version"
-			cd - || exit
-			;;
-	esac
-
-	asdf global "${1}" "$version"
 }
 
 install_default_pkgs() {
@@ -525,16 +419,6 @@ install_default_pkgs() {
 	echo "Installed default ${1} packages successfully!"
 }
 
-install_espanso() {
-	echo "Installing espanso"
-	if is_git_bash; then
-		winget install espanso
-	fi
-	espanso --version
-	echo "Installed espanso successfully!"
-	install_default_pkgs espanso
-}
-
 install_nircmd() {
 	echo "Installing nircmd"
 	if is_git_bash; then
@@ -543,40 +427,6 @@ install_nircmd() {
 	fi
 	nircmd --version
 	echo "Installed nircmd successfully!"
-}
-
-install_check_if_email_exists() {
-	echo "Installing check_if_email_exists"
-	if is_arm32_architecture; then
-		ghq get https://github.com/reacherhq/check-if-email-exists
-		cd "$HOME"/git/github.com/reacherhq/check-if-email-exists || return 1
-		cargo build --release
-		mv ./target/release/check_if_email_exists "$XDG_BIN_HOME"/check-if-email-exists
-		cd -- || return 1
-	else
-		local file_to_download=''
-		if is_arm64_architecture; then
-			file_to_download+='*aarch64-'
-		else
-			file_to_download+='*x86_64-'
-		fi
-
-		if ! is_git_bash; then
-			file_to_download+='unknown-linux-gnu'
-		else
-			file_to_download+='pc-windows-msvc'
-		fi
-
-		file_to_download+='*'
-		rm -f "$DOWNLOAD_DIR"/"$file_to_download"
-		gh release download -R reacherhq/check-if-email-exists \
-			-p "$file_to_download" \
-			-D "$DOWNLOAD_DIR"
-		local -r filename="$(find "$DOWNLOAD_DIR" -name "$file_to_download")"
-		tar xzfv "$filename" -C "$XDG_BIN_HOME"
-	fi
-	check_if_email_exists --version
-	echo "Installed installing check_if_email_exists successfully!"
 }
 
 install_rustdesk() {
@@ -619,24 +469,6 @@ install_node() {
 	fi
 }
 
-install_poetry() {
-	if ! is_git_bash; then
-		echo "Installing poetry..."
-		curl -sSL https://install.python-poetry.org | python3 -
-		poetry --version
-		echo "Installed poetry successfully!"
-	fi
-}
-
-install_volta() {
-	if ! is_git_bash; then
-		echo "Installing volta..."
-		curl https://get.volta.sh | bash -s -- --skip-setup
-		volta --version
-		echo "Installed volta successfully!"
-	fi
-}
-
 install_pnpm() {
 	if ! is_git_bash; then
 		echo "Installing pnpm..."
@@ -646,41 +478,6 @@ install_pnpm() {
 		pnpm --version
 		echo "Installed pnpm successfully!"
 	fi
-}
-
-install_curl() {
-	if is_ubuntu_os; then
-		echo "Installing curl..."
-		install_apt_packages curl
-		curl --version
-		echo "Installed curl successfully!"
-	fi
-}
-
-install_lua-language-server() {
-	echo "Installing lua-language-server..."
-	if is_git_bash; then
-		local -r file_pattern='lua-language-server-*-win32-x64.zip'
-		local -r install_dir="$XDG_DATA_HOME"/lua-language-server
-		gh release download --repo LuaLS/lua-language-server \
-			--pattern "$file_pattern" \
-			--dir "$DOWNLOAD_DIR" \
-			--clobber \
-			|| return
-		local -r file="$(fd --glob "$file_pattern" "$DOWNLOAD_DIR")"
-		rm -rf "$install_dir" && mkdir -p "$install_dir"
-		unzip -q "$file" -d "$install_dir"
-	else
-		brew install lua-language-server
-	fi
-	command -v lua-language-server || return
-	echo "Installed lua-language-server successfully!"
-}
-
-install_pinentry-tty() {
-	echo "Installing pinentry-tty..."
-	install_apt_packages pinentry-tty
-	echo "Installed pinentry-tty successfully!"
 }
 
 install_gcloud() {
@@ -1016,98 +813,6 @@ install_lemurs() {
 }
 
 # endregion Installation.
-
-# region Boolean functions
-
-is_bash_shell() {
-	[[ -n ${BASH_VERSION} ]]
-}
-
-is_zsh_shell() {
-	[[ -n ${ZSH_NAME} ]]
-}
-
-is_login_shell() {
-	{ is_bash_shell && shopt -q login_shell; } \
-		|| { is_zsh_shell && [[ -o login ]]; }
-}
-
-is_interactive_shell() {
-	{ is_bash_shell && [[ $- == *i* ]]; } \
-		|| { is_zsh_shell && [[ -o interactive ]]; }
-}
-
-is_windows_os() {
-	filter_system_information "Msys|WSL"
-}
-
-is_linux_os() {
-	filter_system_information "Linux"
-}
-
-# Source: https://unix.stackexchange.com/a/210656/460126
-is_debian_os() {
-	[[ -f "/etc/debian_version" ]]
-}
-
-is_ubuntu_os() {
-	cat /etc/*ease | grep -qE "ubuntu"
-}
-
-is_git_bash() {
-	filter_system_information "Msys"
-}
-
-is_wsl() {
-	filter_system_information "WSL"
-}
-
-is_ssh_session() {
-	[[ $SSH_CONNECTION != "" ]]
-}
-
-is_root() {
-	[[ "$(id -u)" == 0 ]]
-}
-
-is_asdf_plugin_installed() {
-	asdf plugin list 2>&1 | grep -q "$1" \
-		&& asdf list "$1" 2>&1 | grep -q "\."
-}
-
-is_arm32_architecture() {
-	lscpu | grep -q armv7
-}
-
-is_arm64_architecture() {
-	lscpu | grep -q aarch64
-}
-
-is_x86_64() {
-	[[ $(uname -m) == x86_64 ]]
-}
-
-has_sudo() {
-	local prompt
-
-	if prompt=$(sudo -nv 2>&1); then
-		return 0
-	elif echo "$prompt" | grep -q '^sudo:'; then
-		return 0
-	else
-		return 1
-	fi
-}
-
-does_function_exist() {
-	declare -f -F "$1" >/dev/null 2>&1
-}
-
-does_command_exist() {
-	command -v "$1" >/dev/null
-}
-
-# endregion Boolean functions
 
 count_files_in_directory() {
 	# shellcheck disable=SC2012
@@ -1495,42 +1200,6 @@ uninstall_global_npm_pkgs() {
 		| xargs npm -g rm
 }
 
-generate_completions() {
-	local -r shell="$(basename "$(readlink -f /proc/$$/exe)")"
-	local -r command_to_complete="${1}"
-	local -ra completion_cmd=("${@:2}")
-	local -r bash_completion_file="$BASH_COMPLETION_USER_DIR"/completions/"$command_to_complete"
-	local -r zsh_completion_file="$ZSH_USER_FPATH"/_"$command_to_complete"
-
-	case "$shell" in
-		# `FORCE_COLOR` to disable ANSI escape codes. *cough* bw *cough*
-		bash)
-			if [[ ! -s ${bash_completion_file} ]]; then
-				FORCE_COLOR=0 "${completion_cmd[@]}" >|"$bash_completion_file"
-			fi
-			;;
-		zsh)
-			if [[ ! -s ${zsh_completion_file} ]]; then
-				FORCE_COLOR=0 "${completion_cmd[@]}" >|"$zsh_completion_file"
-			fi
-			;;
-		*)
-			echo "Invalid shell: ${shell}"
-			return 1
-			;;
-	esac
-}
-
-generate_man_pages() {
-	local -r command_with_man_page="${1}"
-	local -r man_page_file="$XDG_DATA_HOME/man/man1/$command_with_man_page".1
-	# sed to strip ANSI escape codes. *cough* bw *cough*
-	if [[ ! -s ${man_page_file} ]]; then
-		local -ra generation_command=("${@:2}")
-		"${generation_command[@]}" | sed -e 's/\x1b\[[0-9;]*m//g' >|"$man_page_file"
-	fi
-}
-
 kill_window_manager() {
 	pkill -15 -t tty"$XDG_VTNR" Xorg
 }
@@ -1549,13 +1218,6 @@ trim_trailing_whitespace() {
 search() {
 	xdg-open https://duckduckgo.com/\?q="$*"
 }
-
-if asdf list direnv &>/dev/null; then
-	# A shortcut for asdf managed direnv.
-	direnv() {
-		asdf exec direnv "$@"
-	}
-fi
 
 install_wezterm_terminfo() {
 	local tempfile

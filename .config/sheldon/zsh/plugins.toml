@@ -12,36 +12,28 @@
 
 shell = "zsh"
 
-[templates]
-defer = "{{ hooks | get: \"pre\" | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks | get: \"post\" | nl }}"
-
-[plugins]
-
+# [templates]
+# defer = "{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks?.post | nl }}"
 # [plugins.zsh-defer]
 # github = "romkatv/zsh-defer"
 
-[plugins.oh-my-zsh]
-github = 'ohmyzsh/ohmyzsh'
-
-[plugins.zsh-syntax-highlighting]
-github = 'zsh-users/zsh-syntax-highlighting'
+# [plugins.oh-my-zsh]
+# apply = ["defer"]
+# github = "ohmyzsh/ohmyzsh"
+# [plugins.oh-my-zsh.hooks]
+# # Remove function defined in ohmyzsh conflicting with `title` command.
+# post = "zsh-defer unfunction title"
 
 [plugins.zsh-autosuggestions]
-github = 'zsh-users/zsh-autosuggestions'
-use = ['{{ name }}.zsh']
+# apply = ["defer"]
+github = "zsh-users/zsh-autosuggestions"
+use = ["{{ name }}.zsh"]
 
-# [plugins.zsh-completions]
-# github = "zsh-users/zsh-completions"
+[plugins.zsh-syntax-highlighting]
+# apply = ["defer"]
+github = "zsh-users/zsh-syntax-highlighting"
 
-[plugins.zsh-syntax-highlighting-dracula]
-github = 'dracula/zsh-syntax-highlighting'
-
-[plugins.shellfirm]
-github = 'kaplanelad/shellfirm'
-use = ["{{ name }}.plugin.oh-my-zsh.zsh"]
-
-[plugins.pyvenv-activate]
-github = 'Intersec/pyvenv-activate'
-
-# [plugins.zsh-hist]
-# github = 'marlonrichert/zsh-hist'
+[plugins.zsh-syntax-highlighting-catppuccin]
+# apply = ["defer"]
+github = "catppuccin/zsh-syntax-highlighting"
+use = ["catppuccin_mocha-zsh-syntax-highlighting.zsh"]

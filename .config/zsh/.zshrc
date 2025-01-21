@@ -16,10 +16,6 @@ export SHELDON_CONFIG_DIR="$XDG_CONFIG_HOME"/sheldon/zsh
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
 	command-not-found
-	gitfast
-	# Completions
-	docker
-	docker-compose
 )
 
 export ZSH="$SHELDON_DATA_DIR"/repos/github.com/ohmyzsh/ohmyzsh
@@ -45,11 +41,6 @@ zstyle ':completion:*' rehash true
 mkdir -p "$XDG_CACHE_HOME"/zsh
 zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
 
-# Enable user specific completions.
-autoload -U compinit bashcompinit
-bashcompinit
-compinit
-
 # git-extras completions.
 [[ -s $HOME/src/github.com/tj/git-extras/etc/git-extras-completion.zsh ]] \
 	&& . "$HOME"/src/github.com/tj/git-extras/etc/git-extras-completion.zsh
@@ -64,11 +55,6 @@ command -v sheldon >/dev/null \
 
 # Make `mapfile` available in `zsh`
 zmodload zsh/mapfile
-
-# Remove function defined in ohmyzsh conflicting with `title` command.
-does_function_exist title && unfunction title
-
-does_command_exist pyvenv_auto_activate_enable && pyvenv_auto_activate_enable
 
 # Options
 # Disabling Zsh's nomatch option
@@ -168,6 +154,8 @@ if [[ -f "$XDG_DATA_HOME"/google-cloud-sdk/completion.zsh.inc ]]; then
 	. "$XDG_DATA_HOME"/google-cloud-sdk/completion.zsh.inc
 fi
 
+# Emacs keymap emulation (i.e., default for bash).
+bindkey -e
 # Alt-s makes switching between multiplexer workspaces of projects easier.
 # Inspired by ThePrimeagen. Wrap the command in a custom widget so that the
 # command isn't typed out.
