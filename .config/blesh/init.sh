@@ -1,8 +1,7 @@
 #!/usr/bin/env sh
 
-# Change to match `zsh-autosuggestions`.
-ble-face -s auto_complete fg=008
-
+# Meow
+bleopt color_scheme=catppuccin_mocha
 # Disable error exit marker like "[ble: exit %d]"
 bleopt exec_errexit_mark=
 # Disable exit marker like "[ble: exit]"

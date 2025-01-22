@@ -19,7 +19,6 @@ export SHELL_BASENAME
 # starship's hook trying to to eval the ones it "saved".
 does_command_exist zoxide && eval "$(zoxide init "$SHELL_BASENAME")"
 does_command_exist starship && eval "$(starship init "$SHELL_BASENAME")"
-
 does_command_exist mise && eval "$(mise activate "$SHELL_BASENAME")"
 
 if [[ -n $SSH_CONNECTION ]] \
@@ -78,9 +77,6 @@ does_command_exist atuin && eval "$(atuin init --disable-up-arrow "$SHELL_BASENA
 
 # https://wiki.archlinux.org/title/XDG_Base_Directory
 mkdir -p "$XDG_DATA_HOME"/tig
-
-# Make direnv silent by default. Doesn't work in `.exports` for some reason.
-export DIRENV_LOG_FORMAT=""
 
 # If set, bash/zsh does not overwrite an existing file with the >, >&, and <>
 # redirection operators. This may be overridden when creating output files by

@@ -1,9 +1,6 @@
 [submodule "gpakosz/.tmux"]
 	path = src/github.com/gpakosz/.tmux
 	url = https://github.com/gpakosz/.tmux.git
-[submodule "dandavison/delta"]
-	path = src/github.com/dandavison/delta
-	url = https://github.com/dandavison/delta.git
 [submodule "akinomyoga/ble.sh"]
 	path = src/github.com/akinomyoga/ble.sh
 	url = https://github.com/akinomyoga/ble.sh.git
@@ -26,6 +23,9 @@
 [submodule "catppuccin/dunst"]
 	path = src/github.com/catppuccin/dunst
 	url = https://github.com/catppuccin/dunst.git
+[submodule "catppuccin/delta"]
+	path = src/github.com/catppuccin/delta
+	url = https://github.com/catppuccin/delta.git
 # Dracula
 [submodule "dracula/gtk"]
 	path = src/github.com/dracula/gtk

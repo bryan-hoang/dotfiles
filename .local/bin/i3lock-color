@@ -1,22 +1,25 @@
 #!/usr/bin/env bash
 
-readonly FONT="BerkeleyMono Nerd Font Mono"
-
 readonly ALPHA='dd'
 readonly BLANK='#00000000'
 readonly SELECTION='#44475a'
 
-readonly ORANGE='#ffb86c'
-readonly RED='#ff5555'
-readonly MAGENTA='#ff79c6'
-readonly BLUE='#6272a4'
-readonly GREEN='#50fa7b'
+# Catppucin Mocha
+readonly RED='#f38ba8'
+readonly GREEN='#a6e3a1'
+readonly BLUE='#89b4fa'
+# Mauve
+readonly MAGENTA='#cba6f7'
+# Peach
+readonly ORANGE='#fab387'
 
 # https://github.com/cruegge/pam-gnupg#setup-guide
 gpg-connect-agent --no-autostart reloadagent /bye
 
 dunstctl set-paused true
 
+# FONT_MONO defined as env var.
+# shellcheck disable=SC2154
 i3lock \
 	--color "$BLANK" \
 	--insidever-color "$SELECTION$ALPHA" \
@@ -36,7 +39,7 @@ i3lock \
 	--date-color "$BLUE" \
 	--time-color "$BLUE" \
 	--line-uses-ring \
-	--{time,date,layout,verif,wrong,greeter}-font="$FONT" \
+	--{time,date,layout,verif,wrong,greeter}-font="$FONT_MONO" \
 	--{time,date,layout,verif,wrong,greeter}-size=24 \
 	--time-str "%H:%M:%S" \
 	--date-str "%Y-%m-%d" \

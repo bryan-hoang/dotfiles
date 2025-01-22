@@ -4,3 +4,4 @@ biome
 LazyVim
 bundler
 formatter
+Catppuccin

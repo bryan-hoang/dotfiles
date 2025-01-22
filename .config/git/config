@@ -144,13 +144,12 @@
 [interactive]
 	diffFilter = delta --color-only
 [include]
-	path = ~/src/github.com/dandavison/delta/themes.gitconfig
+	path = ~/src/github.com/catppuccin/delta/catppuccin.gitconfig
 [delta]
 	navigate = true
-	syntax-theme = Dracula
 	side-by-side = true
 	tabs = 2
-	features = decorations zebra-dark
+	features = decorations zebra-dark catppuccin-mocha
 [delta "decorations"]
 	hunk-header-style = file line-number syntax
 [diff]

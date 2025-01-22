@@ -21,5 +21,11 @@ enable=quote-safe-variables
 # Require [[ and warn about [ in Bash/Ksh.
 enable=require-double-brackets
 
+# Allow opening any 'source'd file, even if not specified as input.
+#
+# Disabled to avoid timing out as formatter in neovim when files like
+# `/usr/share/bash-completion/bash_completion` are sourced.
+external-sources=false
+
 # Literal carriage return. Fine on windows when using version control.
 disable=SC1017

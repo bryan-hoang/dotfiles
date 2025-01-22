@@ -8,7 +8,8 @@
 # - `sheldon edit` to open up the config file in the default editor
 # - `sheldon remove` to remove a plugin from the config file
 #
-# See the documentation for more https://github.com/rossmacarthur/sheldon#readme
+# See the documentation for more
+# https://github.com/rossmacarthur/sheldon#readme
 
 shell = "zsh"
 
@@ -17,23 +18,20 @@ shell = "zsh"
 # [plugins.zsh-defer]
 # github = "romkatv/zsh-defer"
 
-# [plugins.oh-my-zsh]
-# apply = ["defer"]
-# github = "ohmyzsh/ohmyzsh"
+[plugins.oh-my-zsh]
+github = "ohmyzsh/ohmyzsh"
+# Mainly interested in bash key-bindings.
+use = ["lib/completion.zsh", "lib/key-bindings.zsh"]
 # [plugins.oh-my-zsh.hooks]
 # # Remove function defined in ohmyzsh conflicting with `title` command.
-# post = "zsh-defer unfunction title"
+# post = "unfunction title"
 
 [plugins.zsh-autosuggestions]
-# apply = ["defer"]
 github = "zsh-users/zsh-autosuggestions"
-use = ["{{ name }}.zsh"]
 
 [plugins.zsh-syntax-highlighting]
-# apply = ["defer"]
 github = "zsh-users/zsh-syntax-highlighting"
 
 [plugins.zsh-syntax-highlighting-catppuccin]
-# apply = ["defer"]
 github = "catppuccin/zsh-syntax-highlighting"
 use = ["catppuccin_mocha-zsh-syntax-highlighting.zsh"]

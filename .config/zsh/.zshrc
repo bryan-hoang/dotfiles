@@ -4,10 +4,11 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC1091
 
+# Make `mapfile` available in `zsh`
+zmodload zsh/mapfile
+
 # Uncomment the following line to disable auto-setting terminal title.
 DISABLE_AUTO_TITLE="true"
-
-export SHELDON_CONFIG_DIR="$XDG_CONFIG_HOME"/sheldon/zsh
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
@@ -17,8 +18,6 @@ export SHELDON_CONFIG_DIR="$XDG_CONFIG_HOME"/sheldon/zsh
 plugins=(
 	command-not-found
 )
-
-export ZSH="$SHELDON_DATA_DIR"/repos/github.com/ohmyzsh/ohmyzsh
 
 # region Completions
 
@@ -47,14 +46,14 @@ zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
 
 # endregion Completions
 
+export SHELDON_CONFIG_DIR="$XDG_CONFIG_HOME"/sheldon/zsh
+export ZSH="$SHELDON_DATA_DIR"/repos/github.com/ohmyzsh/ohmyzsh
+
 command -v sheldon >/dev/null \
 	&& eval "$(sheldon source 2>>"$XDG_STATE_HOME/sheldon-stderr.log")"
 
 # Loaded after framework is loaded to preserve personal aliases.
 . "$XDG_CONFIG_HOME"/shell/common.sh
-
-# Make `mapfile` available in `zsh`
-zmodload zsh/mapfile
 
 # Options
 # Disabling Zsh's nomatch option
@@ -141,26 +140,7 @@ setopt shwordsplit
 # contiguous.
 setopt HIST_FIND_NO_DUPS
 
-does_command_exist navi && eval "$(navi widget zsh)"
-does_command_exist broot && eval "$(broot --print-shell-function zsh)"
-does_command_exist conda && eval "$(conda shell.zsh hook 2>/dev/null)"
-
-# tabtab source for packages (e.g., pnpm).
-[[ -f "$HOME"/.config/tabtab/zsh/__tabtab.zsh ]] \
-	&& . "$HOME"/.config/tabtab/zsh/__tabtab.zsh
-
-# Enable shell command completion for gcloud.
-if [[ -f "$XDG_DATA_HOME"/google-cloud-sdk/completion.zsh.inc ]]; then
-	. "$XDG_DATA_HOME"/google-cloud-sdk/completion.zsh.inc
-fi
-
-# Emacs keymap emulation (i.e., default for bash).
-bindkey -e
 # Alt-s makes switching between multiplexer workspaces of projects easier.
 # Inspired by ThePrimeagen. Wrap the command in a custom widget so that the
 # command isn't typed out.
 bindkey -s '^[s' 'ssnz\n'
-
-# bun completions
-[[ -s "$BUN_INSTALL/_bun" ]] \
-	&& . "/home/bryan/.local/share/bun/_bun"
