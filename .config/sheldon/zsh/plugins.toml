@@ -21,7 +21,11 @@ shell = "zsh"
 [plugins.oh-my-zsh]
 github = "ohmyzsh/ohmyzsh"
 # Mainly interested in bash key-bindings.
-use = ["lib/completion.zsh", "lib/key-bindings.zsh"]
+use = [
+	"lib/completion.zsh",
+	"lib/key-bindings.zsh",
+	"plugins/command-not-found/command-not-found.plugin.zsh",
+]
 # [plugins.oh-my-zsh.hooks]
 # # Remove function defined in ohmyzsh conflicting with `title` command.
 # post = "unfunction title"
