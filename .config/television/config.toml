@@ -4,69 +4,8 @@ show_help_bar = false
 input_bar_position = "bottom"
 theme = "catppuccin"
 
-[previewers.file]
-# The theme to use for syntax highlighting.
-# Bulitin syntax highlighting uses the same syntax highlighting engine as bat.
-# To get a list of your currently available themes, run `bat --list-themes`
-# theme = "catppuccin-mocha"
-
-# Keybindings
-# ----------------------------------------------------------------------------
-#
-# Channel mode
-# ------------------------
 [keybindings.Channel]
 # Quit the application
-quit = "ctrl-c"
-# Scrolling through entries
-select_next_entry = "ctrl-n"
-select_next_page = "ctrl-f"
-select_prev_entry = "ctrl-p"
-select_prev_page = "ctrl-b"
-# Scrolling the preview pane
-scroll_preview_half_page_down = "ctrl-d"
-scroll_preview_half_page_up = "ctrl-u"
-# Select an entry
-select_entry = "enter"
-# Copy the selected entry to the clipboard
-copy_entry_to_clipboard = "ctrl-y"
-# Toggle the remote control mode
-toggle_remote_control = "ctrl-r"
-# Toggle the send to channel mode
-toggle_send_to_channel = "ctrl-s"
+quit = ["esc", "ctrl-c", "ctrl-g"]
 # Toggle the help bar
 toggle_help = "ctrl-h"
-
-# Remote control mode
-# -------------------------------
-[keybindings.RemoteControl]
-# Quit the application
-quit = "ctrl-c"
-# Scrolling through entries
-select_next_entry = "ctrl-n"
-select_next_page = "ctrl-f"
-select_prev_entry = "ctrl-p"
-select_prev_page = "ctrl-b"
-# Select an entry
-select_entry = "enter"
-# Toggle the remote control mode
-toggle_remote_control = "ctrl-r"
-# Toggle the help bar
-toggle_help = "ctrl-h"
-
-# Send to channel mode
-# --------------------------------
-[keybindings.SendToChannel]
-# Quit the application
-quit = "ctrl-c"
-# Scrolling through entries
-select_next_entry = "ctrl-n"
-select_next_page = "ctrl-f"
-select_prev_entry = "ctrl-p"
-select_prev_page = "ctrl-b"
-# Select an entry
-select_entry = "enter"
-# Toggle the send to channel mode
-toggle_send_to_channel = "ctrl-s"
-# Toggle the help bar
-toggle_help = "ctrl-f"
