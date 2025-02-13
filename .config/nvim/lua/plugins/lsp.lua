@@ -72,17 +72,6 @@ return {
 					["biome-check"] = {
 						require_cwd = true,
 					},
-					prettier = {
-						require_cwd = true,
-						cwd = require("conform.util").root_file({
-							".prettierrc",
-						}),
-						options = {
-							ft_parsers = {
-								json = "json",
-							},
-						},
-					},
 					eslint_d = {
 						require_cwd = true,
 						cwd = require("conform.util").root_file({
