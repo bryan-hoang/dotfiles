@@ -3,6 +3,9 @@ experimental = true
 go_set_gobin = false
 legacy_version_file = false
 
+[settings.python]
+uv_venv_auto = true
+
 [alias]
 [env]
 [tools]

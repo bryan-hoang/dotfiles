@@ -33,7 +33,7 @@ return {
 		-- Lightweight yet powerful formatter plugin for Neovim.
 		"stevearc/conform.nvim",
 		opts = function(_, opts)
-			local jsFormatters = { "prettier", "eslint_d", "biome-check", "biome" }
+			local jsFormatters = { "eslint_d", "biome-check", "biome" }
 			local cssFormatters = { "stylelint", "biome-check", "biome" }
 			local shFormatters = { "shellcheck", "shellharden", "shfmt" }
 

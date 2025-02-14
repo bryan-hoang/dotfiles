@@ -38,3 +38,5 @@ Vite
 CMake
 uv
 Typst
+(?i)hoang
+Astro

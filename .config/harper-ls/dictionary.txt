@@ -1,6 +1,7 @@
 lua
 Hoang
 biome
+README
 LazyVim
 bundler
 formatter
