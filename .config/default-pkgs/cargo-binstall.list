@@ -25,6 +25,10 @@ git-delta
 bat
 # A very fast implementation of tldr in Rust.
 tealdeer
+# A blazingly fast general purpose fuzzy finder TUI (alexpasmantier/television).
+television
+# Modern, performance focused unix commands (SUPERCILEX/fuc).
+rmz
 # A more intuitive version of du in rust.
 du-dust
 # 🌀 A nonsense activity generator.
@@ -52,11 +56,8 @@ sheldon
 viu
 # Create beautiful image of your source code.
 # silicon
-# A themeable LS_COLORS generator with a rich filetype datebase (sharkdp/vivid).
+# A themeable LS_COLORS generator with a rich filetype database (sharkdp/vivid).
 vivid
-# An implementation of the Language Server Protocol for LaTeX
-# (latex-lsp/texlab).
-texlab
 # A blazing-fast modern Lua linter written in Rust (Kampfkarren/selene).
 selene
 # An incremental parsing system for programming tools (tree-sitter/tree-sitter).
@@ -85,10 +86,11 @@ yazi-{fm,cli}
 bob-nvim
 # Source code spell checker (crate-ci/typos).
 typos-cli
-# Modern, performance focused unix commands (SUPERCILEX/fuc).
-rmz
-# A blazingly fast general purpose fuzzy finder TUI (alexpasmantier/television).
-television
+# Painless compression and decompression in the terminal (ouch-org/ouch).
+ouch
+# An implementation of the Language Server Protocol for LaTeX
+# (latex-lsp/texlab).
+# texlab
 # A formatter for kdl documents.
 # kdlfmt
 # ⚡ A CLI tool for code structural search, lint and rewriting. Written in Rust.
