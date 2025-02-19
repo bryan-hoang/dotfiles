@@ -4,5 +4,6 @@ biome
 README
 LazyVim
 bundler
+Kenwoods
 formatter
 Catppuccin
