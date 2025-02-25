@@ -1,8 +1,8 @@
 [user]
 	name = Bryan Hoang
 	email = bryan@bryanhoang.dev
-	useConfigOnly = true
 	signingKey = bryan@bryanhoang.dev
+	useConfigOnly = true
 [include]
 	# Machine specific configuration. e.g., Different user.name/user.email based
 	# on current project.
@@ -120,6 +120,7 @@
 	# https://help.github.com/articles/signing-commits-using-gpg/
 	gpgsign = true
 	template = ~/.config/git/COMMIT_EDITMSG
+	verbose = true
 [core]
 	# Treat spaces before tabs and all kinds of trailing whitespace as an error.
 	# [default] trailing-space: looks for spaces at the end of a line
@@ -136,99 +137,87 @@
 	untrackedCache = true
 	autocrlf = input
 	eol = lf
-	symlinks = true
 	fsmonitor = true
 	hooksPath = ~/.config/git/hooks
-	pager = delta
 	longPaths = true
+	pager = delta
+	symlinks = true
 [interactive]
 	diffFilter = delta --color-only
 [include]
 	path = ~/src/github.com/catppuccin/delta/catppuccin.gitconfig
 [delta]
+	features = decorations zebra-dark catppuccin-mocha
 	navigate = true
 	side-by-side = true
 	tabs = 2
-	features = decorations zebra-dark catppuccin-mocha
 [delta "decorations"]
 	hunk-header-style = file line-number syntax
 [diff]
+	algorithm = histogram
+	colorMoved = default
+	colorMovedWS = allow-indentation-change
+	mnemonicPrefix = true
+	orderFile = ~/.config/git/order
 	# Detect copies as well as renames.
 	renames = copies
-	# If set, 'git diff' uses a prefix pair that is different from the standard
-	# "a/" and "b/" depending on what is being compared. When this configuration
-	# is in effect, reverse diff output also swaps the order of the prefixes:
-	mnemonicPrefix = true
-	algorithm = histogram
-	colormoved = default
-	orderFile = ~/.config/git/order
-	colorMovedWS = allow-indentation-change
 	submodule = log
 	tool = difftastic
 [difftool "difftastic"]
 	cmd = difft "$LOCAL" "$REMOTE"
 [filter "lfs"]
-	smudge = git-lfs smudge -- %f
+	clean = git-lfs clean -- %f
 	process = git-lfs filter-process
 	required = true
-	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 [filter "npmrc"]
-	smudge = cat
 	clean = "sed '/_authToken/d'"
+	smudge = cat
 [filter "gpg-agent"]
-	# The command which is used to convert the content of a worktree file to a blob upon checkin. See
-	# gitattributes[5] for details.
-	#
 	# Filter out pinentry program on WSL 2 on windows in VS Code
-	smudge = cat
 	clean = "sed '/pinentry./d'"
+	smudge = cat
 [filter "spotify-tui"]
-	smudge = cat
 	clean = "sed '/^client_secret/d;/device_id/d'"
+	smudge = cat
 [filter "streamlink-crunchyroll"]
-	smudge = cat
 	clean = "sed '/^crunchyroll-password=/d'"
+	smudge = cat
 [filter "i3status-rust-token"]
-	smudge = cat
 	clean = "sed '/^token/d'"
-[filter "git-config"]
 	smudge = cat
+[filter "git-config"]
 	# Using sed to delete all lines between two matching patterns:
 	# https://stackoverflow.com/a/6287940/8714233
 	clean = "sed -e '/\\[gpg\\]/d' -e '/^	program = /d' -e '/^\\[bulkworkspaces\\]/,/^\\[/{/^\\[bulkworkspaces\\]/!{/\\[/!d}}'"
+	smudge = cat
 [filter "macchina"]
-	smudge = cat
 	clean = "sed '/^interface =/d'"
+	smudge = cat
 [filter "mise"]
-	smudge = cat
 	clean = "sed -E -e '/^\\[tools\\]/,/^\\[/{/^\\[tools\\]/!{/\\[/!d}}' -e '/^\\[env\\]/,/^\\[/{/^\\[env\\]/!{/\\[/!d}}' -e '/^\\[alias\\]/,/^\\[env/{/^\\[alias\\]/!{/\\[env/!d}}'"
-[filter "docker-config"]
 	smudge = cat
+[filter "docker-config"]
 	clean = "jaq '{ \"detachKeys\" }'"
-[help]
-	# Automatically correct and execute mistyped commands.
-	autocorrect = 0
+	smudge = cat
 [init]
-	# Allows overriding the default branch name e.g. when initializing a new
-	# repository.
 	defaultBranch = main
 [log]
 	abbrevCommit = true
 	date = iso
 	follow = true
 [merge]
-	# Include summaries of merged commits in newly created merge commit messages
+	# Include summaries of merged commits in newly created merge commit
+	# messages.
 	log = true
-	tool = nvimdiff
 	conflictStyle = zdiff3
 	ff = only
-	strategy = ort
 	renormalize = true
+	strategy = ort
+	tool = nvimdiff
 [push]
-	# https://git-scm.com/docs/git-config#git-config-pushdefault
-	default = current
 	autoSetupRemote = true
-	# Make `git push` push relevant annotated tags when pushing branches out.
+	default = current
 	followTags = true
 	recurseSubmodules = check
 [status]
@@ -236,8 +225,8 @@
 	submoduleSummary = true
 [url "git@github.com:"]
 	insteadOf = "gh:"
-	pushInsteadOf = "github:"
 	pushInsteadOf = "git://github.com/"
+	pushInsteadOf = "github:"
 [url "git://github.com/"]
 	insteadOf = "github:"
 [url "git@gist.github.com:"]
@@ -249,71 +238,64 @@
 [pull]
 	rebase = true
 [fetch]
+	all = true
+	parallel = 0
 	prune = true
 	pruneTags = true
-	parallel = 0
 [submodule]
-	recurse = true
 	fetchJobs = 0
-[pack]
-	writeReverseIndex = true
-	# v2.44.0
-	# allowPackReuse = multi
+	recurse = true
 [maintenance]
 	strategy = incremental
 [grep]
-	# If set to true, enable -n option by default.
-	lineNumber = true
-	# If set to true, enable the --column option by default.
 	column = true
+	lineNumber = true
+	patternType = perl
 [tag]
-	gpgsign = true
-	# A boolean to specify whether annotated tags created should be GPG signed.
-	# If --annotate is specified on the command line, it takes precedence over
-	# this option.
 	forceSignAnnotated = true
+	gpgsign = true
+	sort = version:refname
 [advice]
-	# Advice shown if a user attempts to add an ignored file to the index.
-	addIgnoredFile = false
 	addEmptyPathspec = false
-	statusHints = false
-	pushAlreadyExists = true
+	addIgnoredFile = false
 	detachedHead = false
+	pushAlreadyExists = true
+	statusHints = false
 [credential]
 	helper = cache
 [column]
 	ui = auto
 [color "grep"]
-	match = green bold reverse
 	column = white
+	match = green bold reverse
 [color "status"]
-	changed = green
 	added = yellow
+	changed = green
 	untracked = cyan
 [feature]
-	manyFiles = true
 	experimental = true
+	manyFiles = true
 [rerere]
-	enabled = true
 	autoupdate = true
+	enabled = true
 [rebase]
-	stat = true
-	autosquash = true
-	missingCommitsCheck = error
 	abbreviateCommands = true
+	autoSquash = true
 	autoStash = true
+	missingCommitsCheck = error
+	stat = true
 	updateRefs = true
 [mergetool]
-	writeToTemp = true
-	prompt = true
 	keepBackup = false
+	prompt = true
+	writeToTemp = true
 [checkout]
 	defaultRemote = origin
 [worktree]
 	guessRemote = true
 [format]
-	signOff = true
 	pretty = fuller
+	signOff = true
 [index]
 	skipHash = false
 [sendemail]
