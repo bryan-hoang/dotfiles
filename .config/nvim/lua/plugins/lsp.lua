@@ -157,6 +157,13 @@ return {
 							return diagnostics
 						end,
 					},
+					["editorconfig-checker"] = {
+						condition = function()
+							-- Make `git.commit = verbose` setting less noisy with diagnostic
+							-- messages.
+							return vim.bo.filetype ~= "gitcommit"
+						end,
+					},
 				},
 			}
 
