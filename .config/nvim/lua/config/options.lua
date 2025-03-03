@@ -154,3 +154,7 @@ g.deprecation_warnings = true
 -- Enable the option to require a Prettier config file
 -- If no prettier config file is found, the formatter will not be used
 g.lazyvim_prettier_needs_config = true
+
+-- LSP Server to use for Python.
+-- Set to "basedpyright" to use basedpyright instead of pyright.
+g.lazyvim_python_lsp = "basedpyright"
