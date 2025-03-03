@@ -1,10 +1,10 @@
 github.com/x-motemen/ghq@latest
 mvdan.cc/sh/v3/cmd/shfmt@latest
-# 🌸 A command-line fuzzy finder.
-github.com/junegunn/fzf@latest
 github.com/editorconfig-checker/editorconfig-checker/cmd/editorconfig-checker@latest
 # A tool for exploring each layer in a docker image.
 github.com/wagoodman/dive@latest
+# # 🌸 A command-line fuzzy finder.
+# github.com/junegunn/fzf@latest
 # A remote utility tool to copy, paste and open browser over TCP.
 # github.com/lemonade-command/lemonade@latest
 # # Unclutter your .profile.
