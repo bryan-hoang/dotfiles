@@ -4,6 +4,9 @@ import os
 import readline
 from pathlib import Path
 
+# https://github.com/astral-sh/ruff/issues/6242
+# ruff: noqa: F821
+
 histfile = Path(
     os.path.join(
         os.environ.get("XDG_STATE_HOME")
@@ -23,25 +26,28 @@ if os.environ.get("DEBUG"):
 logger.addHandler(logging.StreamHandler())
 
 logger.debug(f"Loading history from {histfile}")
-readline.read_history_file(histfile)
-H_LEN = readline.get_current_history_length()
+try:
+    readline.read_history_file(histfile)
+    H_LEN = readline.get_current_history_length()
 
+    def save_history_file():
+        old_histfile = Path(os.path.join(os.path.expanduser("~"), ".python_history"))
+        if os.path.exists(old_histfile):
+            os.remove(old_histfile)
 
-def save_history_file():
-    old_histfile = Path(os.path.join(os.path.expanduser("~"), ".python_history"))
-    if os.path.exists(old_histfile):
-        os.remove(old_histfile)
+        readline.set_history_length(int(os.environ.get("HISTSIZE") or 2**13))
 
-    readline.set_history_length(int(os.environ.get("HISTSIZE") or 2**13))
+        if hasattr(readline, "append_history_file"):
+            logger.debug(f"Appending history to {histfile}")
+            new_h_len = readline.get_current_history_length()
+            readline.append_history_file(new_h_len - H_LEN, histfile)
+            return
 
-    if hasattr(readline, "append_history_file"):
-        logger.debug(f"Appending history to {histfile}")
-        new_h_len = readline.get_current_history_length()
-        readline.append_history_file(new_h_len - H_LEN, histfile)
-        return
+        logger.debug(f"Writing history to {histfile}")
+        readline.write_history_file(histfile)
 
-    logger.debug(f"Writing history to {histfile}")
-    readline.write_history_file(histfile)
+    atexit.register(save_history_file)
+except OSError:
+    pass
 
-
-atexit.register(save_history_file)
+del atexit, logging, os, readline, Path
