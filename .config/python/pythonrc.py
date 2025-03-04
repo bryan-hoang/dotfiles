@@ -1,32 +1,35 @@
-import atexit
-import logging
-import os
-import readline
-from pathlib import Path
-
 # https://github.com/astral-sh/ruff/issues/6242
 # ruff: noqa: F821
 
-histfile = Path(
-    os.path.join(
-        os.environ.get("XDG_STATE_HOME")
-        or os.path.expanduser(os.path.join("~", ".local", "state")),
-        "python",
-        "history",
+import sys
+
+# https://github.com/python/cpython/pull/13208
+if sys.version_info < (3, 13):
+    import atexit  # pyright: ignore [reportUnreachable]
+    import logging
+    import os
+    import readline
+    from pathlib import Path
+
+    histfile = Path(
+        os.path.join(
+            os.environ.get("XDG_STATE_HOME")
+            or os.path.expanduser(os.path.join("~", ".local", "state")),
+            "python",
+            "history",
+        )
     )
-)
 
-if not os.path.exists(histfile):
-    histfile.parent.mkdir(exist_ok=True)
-    readline.write_history_file(histfile)
+    if not os.path.exists(histfile):
+        histfile.parent.mkdir(exist_ok=True)
+        readline.write_history_file(histfile)
 
-logger = logging.getLogger(__name__)
-if os.environ.get("DEBUG"):
-    logger.setLevel(logging.DEBUG)
-logger.addHandler(logging.StreamHandler())
+    logger = logging.getLogger(__name__)
+    if os.environ.get("DEBUG"):
+        logger.setLevel(logging.DEBUG)
+    logger.addHandler(logging.StreamHandler())
 
-logger.debug(f"Loading history from {histfile}")
-try:
+    logger.debug(f"Loading history from {histfile}")
     readline.read_history_file(histfile)
     H_LEN = readline.get_current_history_length()
 
@@ -47,7 +50,4 @@ try:
         readline.write_history_file(histfile)
 
     atexit.register(save_history_file)
-except OSError:
-    pass
-
-del atexit, logging, os, readline, Path
+del sys
