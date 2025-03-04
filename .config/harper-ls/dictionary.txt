@@ -1,4 +1,6 @@
 lua
+XHR
+ONNX
 Hoang
 biome
 typst
