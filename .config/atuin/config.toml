@@ -5,3 +5,6 @@
 filter_mode = "session"
 keymap_mode = "auto"
 show_preview = true
+
+[daemon]
+enabled = true
