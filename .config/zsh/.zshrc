@@ -4,6 +4,10 @@
 # shellcheck disable=SC2034
 # shellcheck disable=SC1091
 
+if [[ -n $PROFILING ]]; then
+	zmodload zsh/zprof
+fi
+
 # Make `mapfile` available in `zsh`
 zmodload zsh/mapfile
 
@@ -20,8 +24,6 @@ plugins=(
 )
 
 # region Completions
-
-compdef dot='git'
 
 # Prepend user specific folder containing completions.
 # shellcheck disable=SC2206
@@ -43,6 +45,13 @@ zstyle ':completion:*' cache-path "$XDG_CACHE_HOME"/zsh/zcompcache
 # git-extras completions.
 [[ -s $HOME/src/github.com/tj/git-extras/etc/git-extras-completion.zsh ]] \
 	&& . "$HOME"/src/github.com/tj/git-extras/etc/git-extras-completion.zsh
+
+# https://www.danielmoch.com/posts/2018/11/zsh-compinit-rtfm/
+# RTFM
+autoload -Uz compinit
+compinit
+
+compdef dot='git'
 
 # endregion Completions
 
@@ -144,3 +153,7 @@ setopt HIST_FIND_NO_DUPS
 # Inspired by ThePrimeagen. Wrap the command in a custom widget so that the
 # command isn't typed out.
 bindkey -s '^[s' 'ssnz\n'
+
+if [[ -n $PROFILING ]]; then
+	zprof
+fi
