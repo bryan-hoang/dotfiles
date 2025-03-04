@@ -164,6 +164,41 @@ return {
 							return vim.bo.filetype ~= "gitcommit"
 						end,
 					},
+					-- Modifying to show warnings as warnings.
+					-- https://github.com/mfussenegger/nvim-lint/blob/master/lua/lint/linters/commitlint.lua
+					commitlint = {
+						parser = function(output)
+							local diagnostics = {}
+							local result = vim.fn.split(output, "\n")
+							for _, line in ipairs(result) do
+								local label = line:sub(1, 3)
+								if label == "✖" then
+									if not string.find(line, "found") then
+										table.insert(diagnostics, {
+											source = "commitlint",
+											lnum = 0,
+											col = 0,
+											severity = vim.diagnostic.severity.ERROR,
+											message = vim.fn.split(line, "   ")[2],
+										})
+									end
+								end
+								-- Add warnings as well.
+								if label == "⚠" then
+									if not string.find(line, "found") then
+										table.insert(diagnostics, {
+											source = "commitlint",
+											lnum = 0,
+											col = 0,
+											severity = vim.diagnostic.severity.WARN,
+											message = vim.fn.split(line, "   ")[2],
+										})
+									end
+								end
+							end
+							return diagnostics
+						end,
+					},
 				},
 			}
 
