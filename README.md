@@ -4,14 +4,6 @@
 
 My dotfiles repo.
 
-## Table of Contents
-
-- [Install](#install)
-- [Usage](#usage)
-- [Maintainers](#maintainers)
-- [Contributing](#contributing)
-- [License](#license)
-
 ## Install
 
 I used to use the `.local/bin/install-dotfiles` script. But nowadays, I
