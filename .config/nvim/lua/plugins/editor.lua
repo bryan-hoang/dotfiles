@@ -161,4 +161,17 @@ return {
 		},
 		opts = {},
 	},
+	{
+		"folke/snacks.nvim",
+		keys = {
+			{
+				-- Helix keybinding for last picker.
+				"<leader>s'",
+				function()
+					require('snacks').picker.resume()
+				end,
+				desc = "Resume",
+			},
+		},
+	},
 }
