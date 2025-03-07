@@ -181,7 +181,7 @@ return {
 					vale_ls = {
 						filetypes = { "markdown", "text", "tex", "gitcommit" },
 					},
-					harper_ls = {},
+					harper_ls = { mason = false },
 				},
 			}
 

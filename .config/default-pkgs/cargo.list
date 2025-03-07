@@ -5,6 +5,8 @@ cargo-binstall
 ripgrep --features pcre2
 # A TOML toolkit.
 taplo-cli --features lsp
+# The Grammar Checker for Developers (Automattic/harper).
+harper-ls --locked
 # Beautiful, useful, configurable MOTD generation with zero runtime
 # dependencies.
 --git https://github.com/rust-motd/rust-motd.git
