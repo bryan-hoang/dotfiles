@@ -1,9 +1,28 @@
-# Manage cargo cache (${CARGO_HOME}, ~/.cargo/), print sizes of dirs and
-# remove dirs selectively.
-cargo-cache
 # The minimal, blazing-fast, and infinitely customizable prompt for any shell
 # (starship/starship)!
 starship
+# The next gen ls command (lsd-rs/lsd).
+lsd
+# A syntax-highlighting pager for git and diff output.
+git-delta
+# Manage cargo cache (${CARGO_HOME}, ~/.cargo/), print sizes of dirs and
+# remove dirs selectively.
+cargo-cache
+# A cat(1) clone with wings.
+bat
+# A very fast implementation of tldr in Rust.
+tealdeer
+# A blazingly fast general purpose fuzzy finder TUI (alexpasmantier/television).
+television
+# Filter out duplicates on the command line. Replacement for `sort | uniq`
+# (koraa/huniq).
+huniq
+# Upgrade everything.
+topgrade
+# Fast, configurable, shell plugin manager.
+sheldon
+# Painless compression and decompression in the terminal (ouch-org/ouch).
+ouch
 # 🐢 Magical shell history (ellie/atuin).
 atuin
 # A cargo subcommand for checking and applying updates to installed
@@ -11,30 +30,18 @@ atuin
 cargo-update
 # Query crates.io for crates details <https://gitlab.com/imp/cargo-info>
 cargo-info
-# The next gen ls command (lsd-rs/lsd).
-lsd
 # A smarter cd command, inspired by z and autojump. It remembers which
 # directories you use most frequently, so you can "jump" to them in just a few
 # keystrokes.
 zoxide
 # A simple, fast and user-friendly alternative to 'find'.
 fd-find
-# A syntax-highlighting pager for git and diff output.
-git-delta
-# A cat(1) clone with wings.
-bat
-# A very fast implementation of tldr in Rust.
-tealdeer
-# A blazingly fast general purpose fuzzy finder TUI (alexpasmantier/television).
-television
 # Modern, performance focused unix commands (SUPERCILEX/fuc).
 rmz
 # A more intuitive version of du in rust.
 du-dust
 # 🌀 A nonsense activity generator.
 genact
-# Upgrade everything.
-topgrade
 # An opinionated Lua code formatter.
 stylua
 # A cli system trash manager, alternative to rm and trash-cli.
@@ -50,8 +57,6 @@ shellharden
 # A git tool to manage worktrees and integrate with GitHub and GitLab
 # (hakoerber/git-repo-manager).
 git-repo-manager
-# Fast, configurable, shell plugin manager.
-sheldon
 # Terminal image viewer.
 viu
 # Create beautiful image of your source code.
@@ -73,9 +78,6 @@ dotenv-linter
 # A system information frontend with an emphasis on performance
 # (Macchina-CLI/macchina).
 macchina
-# Filter out duplicates on the command line. Replacement for `sort | uniq`
-# (koraa/huniq).
-huniq
 # Pluggable and configurable code formatting platform written in Rust.
 dprint
 # A specification for CLIs (jdx/usage).
@@ -86,8 +88,6 @@ yazi-{fm,cli}
 bob-nvim
 # Source code spell checker (crate-ci/typos).
 typos-cli
-# Painless compression and decompression in the terminal (ouch-org/ouch).
-ouch
 # An implementation of the Language Server Protocol for LaTeX
 # (latex-lsp/texlab).
 # texlab
