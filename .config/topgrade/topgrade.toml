@@ -21,7 +21,7 @@
 # gnome_shell_extensions - `Error:
 # GDBus.Error:org.freedesktop.DBus.Error.NoReply: Remote peer disconnected`?
 # helix - Avoid bloating disk space with grammars.
-disable = ["emacs", "bun", "shell", "gnome_shell_extensions", "helix"]
+disable = ["emacs", "bun", "shell", "gnome_shell_extensions", "helix", "helm"]
 
 # Ignore failures for these steps
 # ignore_failures = ["powershell"]
