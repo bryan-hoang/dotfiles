@@ -8,17 +8,12 @@ cfonts "MOTD: Welcome,|$(whoami)@$(hostname)" --font tiny
 
 [service_status]
 dbus-broker = 'dbus-broker'
-docker = 'docker'
-nginx = 'nginx'
 systemd-timesyncd = 'systemd-timesyncd'
 
 [user_service_status]
 docuum = 'docuum'
-dunst = 'dunst'
-emacs = 'emacs'
 gpg-agent = 'gpg-agent'
 lemonade = 'lemonade'
-spotifyd = 'spotifyd'
 ssh-agent = 'ssh-agent'
 tmux = 'tmux'
 
@@ -28,10 +23,17 @@ root = '/'
 [memory]
 swap_pos = 'beside'
 
-[last_login]
-bryan = 2
+[cg_stats]
+state_file = ".cache/cg_stats.toml"
+threshold = 0.01
+
+[load_avg]
+format = "Load: {one:.02}, {five:.02}, {fifteen:.02}"
 
 [uptime]
 prefix = 'Uptime:'
+
+[last_login]
+bryan = 2
 
 [last_run]
