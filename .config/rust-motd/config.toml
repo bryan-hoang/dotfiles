@@ -3,6 +3,7 @@
 [banner]
 color = 'blue'
 command = """
+macchina -o machine,kernel,distribution,operating-system,packages,processor,gpu
 cfonts "MOTD: Welcome,|$(whoami)@$(hostname)" --font tiny
 """
 
@@ -11,9 +12,7 @@ dbus-broker = 'dbus-broker'
 systemd-timesyncd = 'systemd-timesyncd'
 
 [user_service_status]
-docuum = 'docuum'
 gpg-agent = 'gpg-agent'
-lemonade = 'lemonade'
 ssh-agent = 'ssh-agent'
 tmux = 'tmux'
 
@@ -23,9 +22,9 @@ root = '/'
 [memory]
 swap_pos = 'beside'
 
-[cg_stats]
-state_file = ".cache/cg_stats.toml"
-threshold = 0.01
+# [cg_stats]
+# state_file = ".cache/cg_stats.toml"
+# threshold = 0.01
 
 [load_avg]
 format = "Load: {one:.02}, {five:.02}, {fifteen:.02}"
@@ -36,4 +35,4 @@ prefix = 'Uptime:'
 [last_login]
 bryan = 2
 
-[last_run]
+# [last_run]

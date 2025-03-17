@@ -26,7 +26,6 @@ if [[ -n $SSH_CONNECTION ]] \
 	&& [[ -z $ZELLIJ ]] \
 	&& [[ -z $VSCODE_INJECTION ]]; then
 	does_command_exist rust-motd && rust-motd
-	does_command_exist macchina && macchina
 fi
 
 # region: Completions
