@@ -1,5 +1,6 @@
 lua
 XHR
+DCP
 ONNX
 Hoang
 biome
@@ -8,5 +9,6 @@ README
 LazyVim
 bundler
 Kenwoods
+Polyfill
 formatter
 Catppuccin
