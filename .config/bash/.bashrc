@@ -50,8 +50,6 @@ shopt -s globstar
 # export SHELDON_CONFIG_DIR="$XDG_CONFIG_HOME"/sheldon/bash
 # command -v sheldon >/dev/null && eval "$(sheldon source)"
 
-. "$XDG_CONFIG_HOME"/shell/common.sh
-
 # Remove timestamps from history file to let zsh history parse it.
 unset HISTTIMEFORMAT
 
@@ -80,6 +78,8 @@ fi
 	&& . /usr/share/bash-completion/completions/git
 # dot
 __git_complete dot __git_main
+
+. "$XDG_CONFIG_HOME"/shell/common.sh
 
 if is_git_bash; then
 	start_ssh_agent

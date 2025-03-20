@@ -17,7 +17,6 @@ export SHELL_BASENAME
 # `$PROMPT_COMMAND` (bash) from getting saved into `$_PRESERVED_PROMPT_COMMAND`.
 # This avoids getting "command not found: _mise_hook" for every prompt due too
 # starship's hook trying to to eval the ones it "saved".
-does_command_exist zoxide && eval "$(zoxide init "$SHELL_BASENAME")"
 does_command_exist starship && eval "$(starship init "$SHELL_BASENAME")"
 does_command_exist mise && eval "$(mise activate "$SHELL_BASENAME")"
 
@@ -93,8 +92,10 @@ if command -v gpg-connect-agent >/dev/null; then
 	gpg-connect-agent updatestartuptty /bye &>/dev/null
 fi
 
-unset SHELL_BASENAME
-
 # Automatic transparency for xterm.
 # https://wiki.archlinux.org/title/Xterm#Automatic_transparency
 [[ -n $XTERM_VERSION ]] && transset --id "$WINDOWID" >/dev/null
+
+does_command_exist zoxide && eval "$(zoxide init "$SHELL_BASENAME")"
+
+unset SHELL_BASENAME
