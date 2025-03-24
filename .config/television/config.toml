@@ -4,7 +4,7 @@ show_help_bar = false
 input_bar_position = "bottom"
 theme = "catppuccin"
 
-[keybindings.Channel]
+[keybindings]
 # Quit the application
 quit = ["esc", "ctrl-c", "ctrl-g"]
 # Toggle the help bar
