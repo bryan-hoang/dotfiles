@@ -168,9 +168,6 @@ esac
 # Hide the "default interactive shell is now zsh" warning on macOS.
 export BASH_SILENCE_DEPRECATION_WARNING=1
 
-# Locale
-export LC_ALL=C.UTF-8
-
 export SHELLCHECK_OPTS='-x'
 export GHQ_ROOT="$HOME"/src
 
