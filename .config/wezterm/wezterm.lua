@@ -28,6 +28,7 @@ config.hide_tab_bar_if_only_one_tab = true
 -- https://stackoverflow.com/a/14425862/8714233
 config.default_prog = is_os_unix and zsh or git_bash
 config.window_close_confirmation = "NeverPrompt"
+config.exit_behavior = "CloseOnCleanExit"
 
 -- Background
 config.window_background_opacity = 0.75
