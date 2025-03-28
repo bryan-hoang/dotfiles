@@ -49,7 +49,7 @@ idle_fg = "#1E1E2E"
 
 [[block]]
 block = "music"
-format = " $icon {$combo.str(max_w:16,rot_interval:0.5) $play |}"
+format = " $icon {$combo.str(max_w:8,rot_interval:0.5) $play |}"
 
 [[block]]
 block = "bluetooth"
