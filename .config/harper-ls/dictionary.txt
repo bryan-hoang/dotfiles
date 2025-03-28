@@ -6,6 +6,7 @@ Hoang
 biome
 typst
 README
+Kanban
 LazyVim
 bundler
 Kenwoods
