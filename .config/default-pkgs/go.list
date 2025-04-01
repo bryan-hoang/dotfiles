@@ -3,6 +3,8 @@ mvdan.cc/sh/v3/cmd/shfmt@latest
 github.com/editorconfig-checker/editorconfig-checker/cmd/editorconfig-checker@latest
 # A tool for exploring each layer in a docker image.
 github.com/wagoodman/dive@latest
+# A GitLab CLI tool bringing GitLab to your command line
+gitlab.com/gitlab-org/cli/cmd/glab@latest
 # # 🌸 A command-line fuzzy finder.
 # github.com/junegunn/fzf@latest
 # A remote utility tool to copy, paste and open browser over TCP.
