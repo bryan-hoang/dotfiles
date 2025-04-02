@@ -1,8 +1,8 @@
 [user]
-	name = Bryan Hoang
 	email = bryan@bryanhoang.dev
 	signingKey = bryan@bryanhoang.dev
 	useConfigOnly = true
+	name = Bryan Hoang
 [include]
 	# Machine specific configuration. e.g., Different user.name/user.email based
 	# on current project.
