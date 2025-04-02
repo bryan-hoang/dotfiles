@@ -40,6 +40,10 @@ fd-find
 rmz
 # A more intuitive version of du in rust.
 du-dust
+# Executes commands in response to file modifications.
+watchexec-cli
+# Clone a git repository into a standard location organised by domain and path.
+git-grab
 # 🌀 A nonsense activity generator.
 genact
 # An opinionated Lua code formatter.
@@ -48,8 +52,6 @@ stylua
 trashy
 # A jq clone focussed on correctness, speed, and simplicity.
 jaq
-# Executes commands in response to file modifications.
-watchexec-cli
 # Yet another cross-platform graphical process/system monitor.
 bottom
 # The corrective bash syntax highlighter (anordal/shellharden).
