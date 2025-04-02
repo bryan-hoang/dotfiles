@@ -150,9 +150,11 @@ setopt shwordsplit
 setopt HIST_FIND_NO_DUPS
 
 # Alt-s makes switching between multiplexer workspaces of projects easier.
-# Inspired by ThePrimeagen. Wrap the command in a custom widget so that the
-# command isn't typed out.
-bindkey -s '^[s' 'ssnz\n'
+# Inspired by ThePrimeagen.
+# https://unix.stackexchange.com/a/668986
+function run-ssnz { ssnz; zle redisplay; }
+zle -N run-ssnz
+bindkey '^[s' run-ssnz
 
 if [[ -n $PROFILING ]]; then
 	zprof
