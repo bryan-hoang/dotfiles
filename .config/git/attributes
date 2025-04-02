@@ -14,6 +14,15 @@
 *.tar.gz binary diff=tar-gz
 *.tar.bz2 diff=tar-bz2
 
+# https://github.com/ewanmellor/git-diff-image
+*.bmp diff=image
+*.gif diff=image
+*.heic diff=image
+*.jpeg diff=image
+*.jpg diff=image
+*.png diff=image
+*.svg diff=image
+
 # Apply filters to certain files that are either secrets, or machine specific.
 .config/npm/npmrc filter=npmrc
 .gnupg/gpg-agent.conf filter=gpg-agent
