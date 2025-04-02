@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-# -*- coding: utf-8 -*-
 
 # Make Tab autocomplete regardless of filename case
 set completion-ignore-case on
@@ -52,3 +51,6 @@ set convert-meta off
 
 # https://code.visualstudio.com/docs/editor/integrated-terminal#_i-see-1-or-201-when-i-paste-something
 set enable-bracketed-paste on
+
+# Configure Ctrl-w to delete words like ZSH.
+\C-w:backward-kill-word

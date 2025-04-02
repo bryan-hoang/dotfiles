@@ -53,11 +53,8 @@ shopt -s globstar
 # Remove timestamps from history file to let zsh history parse it.
 unset HISTTIMEFORMAT
 
-# Configure Ctrl-w to delete words like ZSH.
-stty werase undef
-bind '\C-w:backward-kill-word'
-# Bind Alt-s
-bind '"\es":"ssnz\n"'
+# Bind Alt-s (see `help bind`)
+bind -x '"\es":"ssnz"'
 
 # Add tab completion for many Bash commands
 if ! shopt -oq posix; then
