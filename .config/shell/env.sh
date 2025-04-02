@@ -74,6 +74,8 @@ prepend_to_path "$BUN_INSTALL"/bin
 prepend_to_path "$GOPATH"/bin
 # Rust
 [ -s "$CARGO_HOME"/env ] && . "$CARGO_HOME"/env
+# Soar
+prepend_to_path "$XDG_DATA_HOME"/soar/bin
 # Personal
 prepend_to_path "$XDG_BIN_HOME"
 

@@ -1,0 +1,28 @@
+default_profile = "default"
+
+[[repositories]]
+desktop_integration = false
+name = "bincache"
+pubkey = "https://meta.pkgforge.dev/bincache/minisign.pub"
+signature_verification = true
+sync_interval = "3h"
+url = "https://meta.pkgforge.dev/bincache/x86_64-Linux.sdb.zstd"
+
+[[repositories]]
+desktop_integration = true
+name = "pkgcache"
+pubkey = "https://meta.pkgforge.dev/pkgcache/minisign.pub"
+signature_verification = true
+sync_interval = "3h"
+url = "https://meta.pkgforge.dev/pkgcache/x86_64-Linux.sdb.zstd"
+
+[[repositories]]
+name = "cargo-bins"
+url = "https://meta.pkgforge.dev/external/cargo-bins/x86_64-Linux.json.zstd"
+
+[[repositories]]
+name = "ivan-hc-am"
+url = "https://meta.pkgforge.dev/external/am/x86_64-Linux.json.zstd"
+
+[profile.default]
+root_path = "~/.local/share/soar"
