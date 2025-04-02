@@ -1,22 +1,5 @@
-git_protocol: ssh
-# What editor gh should run when creating issues, pull requests, etc. If blank,
-
-# will refer to environment.
-editor: code
-# When to interactively prompt. This is a global config that cannot be
-
-# overridden by hostname. Supported values: enabled, disabled
-prompt: enabled
-# A pager program to send command output to, e.g. "less". Set the value to "cat"
-
-# to disable the pager.
-pager: less
-# Aliases allow you to create nicknames for gh commands
-
-aliases:
-  co: pr checkout
-# The path to a unix socket through which send HTTP connections. If blank, HTTP
-
-# traffic will be handled by net/http.DefaultTransport.
-http_unix_socket:
 version: '1'
+git_protocol: ssh
+# Aliases allow you to create nicknames for gh commands
+aliases:
+  grab: '!git grab "git@github.com:$1.git"'
