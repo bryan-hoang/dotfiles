@@ -1,22 +1,21 @@
-# All emojis, with all non-conflicting alt names, provided by gemoji.
-all-emojis
-# Blackboard characters in Espanso, such as 𝔸 or ℤ or ℂ.
-blackboardletters
-# An espanso package for getting code snippets from Igor Chubin's
-# console-oriented cheat sheet service cht.sh.
-cht
-# An espanso package to convert latex symbol commands to latex symbols.
-espanso-latex
-# A simple package to generate random lorem ipsum sentences or paragraphs based
-# on free macOS app LoremBuilder.
-lorem
 # This package inserts ¯\(ツ)/¯ (the Shruggie) when you type :shrug.
 shruggie
 # An espanso package for flipping tables. (╯°□°）╯︵ ┻━┻) ... ┬─┬ノ( º _ ºノ)
 tableflip-package
-# An espanso package for getting the weather from Igor Chubin's
-# console-oriented weather service wttr.in.
-wttr
-# Mathematical symbols such as for Boolean and set operations
-# (https://hub.espanso.org/math).
-math
+# An updated package providing all v.15 emojis - fetched from unicode.org
+# (jobiewong/espanso-emojis).
+actually-all-emojis
+# A simple package to make writing Markdown easier
+# (jpmvferreira/espanso-mega-pack).
+markdown-shortcuts
+# A collection of subscripts and superscripts with Latex based naming scheme
+# (jpmvferreira/espanso-mega-pack).
+super-sub-scripts
+# Displays math symbols using Latex based naming scheme
+# (jpmvferreira/espanso-mega-pack).
+math-symbols
+# A package containing most of the Greek alphabet and some common variatons
+# using Latex based naming scheme (jpmvferreira/espanso-mega-pack).
+greek-letters-improved
+# Get a hilarious random commit message (omrilotan/espanso-package-wtc).
+wtc
