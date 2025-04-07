@@ -37,7 +37,7 @@ return {
 
 				return ""
 			end
-
+			---@class PluginLspOpts
 			local user_opts = {
 				-- Options for `vim.diagnostic.config()`
 				diagnostics = {
@@ -98,8 +98,6 @@ return {
 					},
 					-- LaTeX
 					texlab = { mason = false },
-					rust_analyzer = { mason = false },
-					clangd = { mason = false },
 					taplo = { mason = false },
 					svelte = { mason = false },
 
