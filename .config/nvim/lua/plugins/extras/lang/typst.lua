@@ -51,7 +51,8 @@ return {
 			if os.getenv("SSH_CONNECTION") ~= nil then
 				opts.open_cmd = "lemonade open %s"
 			else
-				opts.open_cmd = "$BROWSER %s -P document-preview --class document-preview"
+				-- NOTE: Should set `WM_CLASS` to 'doc-prvw'.
+				opts.open_cmd = "firefox-devedition -P doc-prvw --class doc-prvw %s"
 			end
 		end,
 	},
