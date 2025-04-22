@@ -151,10 +151,7 @@ setopt HIST_FIND_NO_DUPS
 
 # Alt-s makes switching between multiplexer workspaces of projects easier.
 # Inspired by ThePrimeagen.
-# https://unix.stackexchange.com/a/668986
-function run-ssnz { ssnz; zle redisplay; }
-zle -N run-ssnz
-bindkey '^[s' run-ssnz
+bindkey -s '^[s' '^ussnz\n'
 
 if [[ -n $PROFILING ]]; then
 	zprof
