@@ -31,6 +31,7 @@ $elixir\
 $elm\
 $erlang\
 $fennel\
+$gleam\
 $golang\
 $guix_shell\
 $haskell\
@@ -81,6 +82,7 @@ $azure\
 $nats\
 $direnv\
 $env_var\
+$mise\
 $crystal\
 $custom\
 $sudo\
@@ -91,6 +93,7 @@ $time\
 $status\
 $os\
 $container\
+$netns\
 $shell\
 $line_break\
 $character
@@ -165,6 +168,13 @@ format = '[$symbol($version )]($style)'
 [memory_usage]
 disabled = true
 format = '$symbol[${ram}( | ${swap})]($style) '
+
+[mise]
+disabled = false
+format = "[$symbol$health]($style) "
+healthy_symbol = "✓"
+symbol = "󰭼 "
+unhealthy_symbol = "✗"
 
 [nodejs]
 detect_extensions = []
