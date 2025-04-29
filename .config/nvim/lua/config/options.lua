@@ -109,13 +109,13 @@ opt.exrc = true
 -- otherwise messes with wezterm's hyperlink detection.
 opt.list = true
 opt.listchars = {
+	-- eol = "⏎",
+	extends = ">",
+	lead = "·",
+	nbsp = "+",
+	precedes = "<",
 	tab = "->",
 	trail = "·",
-	extends = ">",
-	precedes = "<",
-	nbsp = "+",
-	lead = "·",
-	-- eol = "⏎",
 }
 
 -- https://vim.fandom.com/wiki/Learn_to_use_help#Comments
