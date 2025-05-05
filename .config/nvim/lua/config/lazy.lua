@@ -77,4 +77,6 @@ require("lazy").setup({
 			},
 		},
 	},
+	-- https://github.com/folke/lazy.nvim/issues/1568
+	concurrency = vim.uv.available_parallelism(),
 })
