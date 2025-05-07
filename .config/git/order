@@ -6,6 +6,7 @@ pnpm-workspace.yaml
 *jsconfig.json
 *pyproject.toml
 *Gemfile
+Cargo.toml
 *.config.*
 *rc.*
 *index.*
