@@ -95,8 +95,8 @@ Set-UserEnvVar 'PNPM_HOME' "$Env:XDG_DATA_HOME\pnpm"
 Set-UserEnvVar 'GOPATH' "$Env:XDG_DATA_HOME\go"
 Set-UserEnvVar 'VSCODE_PORTABLE' "$Env:XDG_DATA_HOME\vscode"
 Set-UserEnvVar 'WHKD_CONFIG_HOME' "$Env:XDG_CONFIG_HOME\whkd"
-# For programs like nvim in neovide.
-Set-UserEnvVar 'GHQ_ROOT' "$Env:USERPROFILE\src"
+Set-UserEnvVar 'AZURE_CONFIG_DIR' "$Env:XDG_DATA_HOME\azure"
+Set-UserEnvVar 'DOCKER_CONFIG' "$Env:XDG_CONFIG_HOME\docker"
 
 Add-UserPath "$Env:XDG_BIN_HOME"
 

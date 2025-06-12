@@ -24,6 +24,7 @@ set_file_associations({
 	ruby = { ".*/%.config/pry/pryrc" },
 	ini = { ".*/%.config/redshift%.conf" },
 	toml = { "uv.lock" },
+	conf = { ".*/sudoers%.d/.*" },
 })
 
 vim.filetype.add({
