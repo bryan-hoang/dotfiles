@@ -58,7 +58,7 @@ function Add-UserPath($PathToAdd)
 function Test-CommandExists($command)
 {
 	$oldPreference = $ErrorActionPreference
-	$ErrorActionPreference = ‘stop’
+	$ErrorActionPreference = 'stop'
 	try
 	{
 		if (Get-Command $command)
@@ -73,6 +73,13 @@ function Test-CommandExists($command)
 	{
 		$ErrorActionPreference=$oldPreference
 	}
+}
+
+function Find-WslVhdx {
+	param (
+		$DistributionName
+	)
+	(Get-ChildItem -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss | Where-Object { $_.GetValue("DistributionName") -eq $DistributionName }).GetValue("BasePath") + "\ext4.vhdx"
 }
 
 #endregion
@@ -97,6 +104,8 @@ Set-UserEnvVar 'VSCODE_PORTABLE' "$Env:XDG_DATA_HOME\vscode"
 Set-UserEnvVar 'WHKD_CONFIG_HOME' "$Env:XDG_CONFIG_HOME\whkd"
 Set-UserEnvVar 'AZURE_CONFIG_DIR' "$Env:XDG_DATA_HOME\azure"
 Set-UserEnvVar 'DOCKER_CONFIG' "$Env:XDG_CONFIG_HOME\docker"
+Set-UserEnvVar 'STARSHIP_CONFIG' "$Env:XDG_CONFIG_HOME\starship\starship.toml"
+Set-UserEnvVar 'GNUPGHOME' "$Env:XDG_DATA_HOME\gnupg"
 
 Add-UserPath "$Env:XDG_BIN_HOME"
 

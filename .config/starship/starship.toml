@@ -96,8 +96,7 @@ $container\
 $netns\
 $shell\
 $line_break\
-$character
-"""
+$character"""
 
 add_newline = true
 # command_timeout = 500
