@@ -123,7 +123,7 @@ version_format = "v${major}.${minor}"
 
 [cmd_duration]
 format = '[$duration]($style) '
-min_time = 2_000
+min_time = 0
 show_notifications = true
 
 [conda]
@@ -183,7 +183,7 @@ format = '[$symbol($version )]($style)'
 version_format = "v${major}"
 
 [os]
-disabled = false
+disabled = true
 
 [package]
 format = '[$symbol$version]($style) '
@@ -202,7 +202,7 @@ format = '[$symbol($version )]($style)'
 version_format = 'v${major}.${minor}'
 
 [shell]
-disabled = false
+disabled = true
 
 [shlvl]
 disabled = false
@@ -220,13 +220,33 @@ disabled = true
 format = "[$symbol]($style)"
 
 [time]
-disabled = true
+disabled = false
+format = "[$time]($style) "
+time_format = "%T"
 
 [typst]
 format = "[$symbol($version )]($style)"
 
 [username]
 format = "[$user]($style)@"
+
+[custom.git_url]
+command = "check-git-remote"
+description = "Display symbol for remote Git server"
+disabled = true
+format = "[$output]($style) "
+require_repo = true
+style = "white"
+when = "true"
+
+[custom.git_email]
+command = 'print-git-email-symbol'
+description = 'The currently configured Git user.email'
+disabled = true
+format = '[<$output> ]($style)'
+require_repo = true
+style = 'blue'
+when = 'true'
 
 [custom.pnpm]
 command = "pnpm --version | awk -F '.' '{print \"v\"$1}'"
@@ -238,16 +258,6 @@ style = "bold yellow"
 symbol = 'p '
 
 # To help switch between npm versions when it matters -_-
-[custom.yarn]
-command = "yarn --version | awk -F '.' '{print \"v\"$1}'"
-description = "The currently installed version of yarn"
-detect_files = ['yarn.lock']
-disabled = true
-format = '[$symbol($output )]($style)'
-style = "bold blue"
-symbol = ' '
-
-# To help switch between npm versions when it matters -_-
 [custom.npm]
 command = "npm --version | awk -F '.' '{print $1}'"
 description = "The currently installed version of npm"
@@ -257,26 +267,11 @@ format = '[$symbol(v$output )]($style)'
 style = "bold red"
 symbol = ' '
 
-[custom.git_url]
-command = "check-git-remote"
-description = "Display symbol for remote Git server"
-format = "[$output]($style) "
-require_repo = true
-style = "white"
-when = "true"
-
-[custom.git_email]
-command = 'print-git-email-symbol'
-description = 'The currently configured Git user.email'
-format = '[<$output> ]($style)'
-require_repo = true
-style = 'blue'
-when = 'true'
-
-[custom.direnv]
-command = "echo 'direnv'"
-description = "The fact that direnv is being used"
+[custom.yarn]
+command = "yarn --version | awk -F '.' '{print \"v\"$1}'"
+description = "The currently installed version of yarn"
+detect_files = ['yarn.lock']
 disabled = true
-format = "using [$output]($style) "
-style = "purple"
-when = "[[ -n \"${DIRENV_DIR}\" ]]"
+format = '[$symbol($output )]($style)'
+style = "bold blue"
+symbol = ' '
