@@ -65,8 +65,6 @@ config.set_environment_variables = {
 local act = wezterm.action
 
 config.keys = {
-	-- Activate the Launcher Menu in the current tab.
-	{ key = "l", mods = "ALT", action = act.ShowLauncher },
 	-- https://wezfurlong.org/wezterm/config/lua/keyassignment/QuickSelectArgs.html
 	{
 		key = "O",
