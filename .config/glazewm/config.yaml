@@ -164,7 +164,7 @@ window_rules:
   - commands: ['move --workspace 3']
     match:
       # Chat
-      - window_process: { regex: 'Discord|Slack|ms-teams' }
+      - window_process: { regex: 'Discord|Slack|ms-teams|Caprine' }
   - commands: ['move --workspace 4']
     match:
       # Mail
