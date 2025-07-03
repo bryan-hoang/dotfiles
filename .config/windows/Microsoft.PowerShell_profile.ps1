@@ -75,7 +75,8 @@ function Test-CommandExists($command)
 	}
 }
 
-function Find-WslVhdx {
+function Find-WslVhdx
+{
 	param (
 		$DistributionName
 	)
@@ -106,6 +107,8 @@ Set-UserEnvVar 'AZURE_CONFIG_DIR' "$Env:XDG_DATA_HOME\azure"
 Set-UserEnvVar 'DOCKER_CONFIG' "$Env:XDG_CONFIG_HOME\docker"
 Set-UserEnvVar 'STARSHIP_CONFIG' "$Env:XDG_CONFIG_HOME\starship\starship.toml"
 Set-UserEnvVar 'GNUPGHOME' "$Env:XDG_DATA_HOME\gnupg"
+Set-UserEnvVar 'GLAZEWM_CONFIG_PATH' "$Env:XDG_CONFIG_HOME\glazewm\config.yaml"
+Set-UserEnvVar 'ZEBAR_CONFIG_DIR' "$Env:XDG_CONFIG_HOME\zebar"
 
 Add-UserPath "$Env:XDG_BIN_HOME"
 

@@ -10,7 +10,9 @@ local mux = wezterm.mux
 wezterm.on("gui-startup", function(cmd)
 	---@diagnostic disable-next-line: unused-local
 	local _tab, _pane, window = mux.spawn_window(cmd or {})
-	window:gui_window():maximize()
+	if is_os_unix then
+		window:gui_window():maximize()
+	end
 end)
 
 local config = wezterm.config_builder()
