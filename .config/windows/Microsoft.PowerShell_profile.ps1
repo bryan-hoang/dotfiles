@@ -24,7 +24,7 @@ function env
 
 function path
 {
-	$Env:Path -split ";"
+	$env:Path -split ";"
 }
 
 function Set-UserEnvVar($envname, $envvalue)
@@ -91,25 +91,31 @@ function Find-WslVhdx
 
 # Enable symlinking.
 Set-UserEnvVar 'MSYS' 'winsymlinks:nativestrict'
-Set-UserEnvVar 'XDG_CONFIG_HOME' "$Env:USERPROFILE\.config"
-Set-UserEnvVar 'XDG_LOCAL_HOME' "$Env:USERPROFILE\.local"
-Set-UserEnvVar 'XDG_BIN_HOME' "$Env:XDG_LOCAL_HOME\bin"
-Set-UserEnvVar 'XDG_DATA_HOME' "$Env:XDG_LOCAL_HOME\share"
-Set-UserEnvVar 'CARGO_HOME' "$Env:XDG_DATA_HOME\cargo"
-Set-UserEnvVar 'RUSTUP_HOME' "$Env:XDG_DATA_HOME\rustup"
-Set-UserEnvVar 'KOMOREBI_CONFIG_HOME' "$Env:XDG_CONFIG_HOME\komorebi"
-Set-UserEnvVar 'PNPM_HOME' "$Env:XDG_DATA_HOME\pnpm"
-Set-UserEnvVar 'GOPATH' "$Env:XDG_DATA_HOME\go"
-Set-UserEnvVar 'VSCODE_PORTABLE' "$Env:XDG_DATA_HOME\vscode"
-Set-UserEnvVar 'WHKD_CONFIG_HOME' "$Env:XDG_CONFIG_HOME\whkd"
-Set-UserEnvVar 'AZURE_CONFIG_DIR' "$Env:XDG_DATA_HOME\azure"
-Set-UserEnvVar 'DOCKER_CONFIG' "$Env:XDG_CONFIG_HOME\docker"
-Set-UserEnvVar 'STARSHIP_CONFIG' "$Env:XDG_CONFIG_HOME\starship\starship.toml"
-Set-UserEnvVar 'GNUPGHOME' "$Env:XDG_DATA_HOME\gnupg"
-Set-UserEnvVar 'GLAZEWM_CONFIG_PATH' "$Env:XDG_CONFIG_HOME\glazewm\config.yaml"
-Set-UserEnvVar 'ZEBAR_CONFIG_DIR' "$Env:XDG_CONFIG_HOME\zebar"
+Set-UserEnvVar 'XDG_CONFIG_HOME' "$env:USERPROFILE\.config"
+Set-UserEnvVar 'XDG_LOCAL_HOME' "$env:USERPROFILE\.local"
+Set-UserEnvVar 'XDG_BIN_HOME' "$env:XDG_LOCAL_HOME\bin"
+Set-UserEnvVar 'XDG_DATA_HOME' "$env:XDG_LOCAL_HOME\share"
+Set-UserEnvVar 'CARGO_HOME' "$env:XDG_DATA_HOME\cargo"
+Set-UserEnvVar 'RUSTUP_HOME' "$env:XDG_DATA_HOME\rustup"
+Set-UserEnvVar 'KOMOREBI_CONFIG_HOME' "$env:XDG_CONFIG_HOME\komorebi"
+Set-UserEnvVar 'PNPM_HOME' "$env:XDG_DATA_HOME\pnpm"
+Set-UserEnvVar 'GOPATH' "$env:XDG_DATA_HOME\go"
+Set-UserEnvVar 'VSCODE_PORTABLE' "$env:XDG_DATA_HOME\vscode"
+Set-UserEnvVar 'WHKD_CONFIG_HOME' "$env:XDG_CONFIG_HOME\whkd"
+Set-UserEnvVar 'AZURE_CONFIG_DIR' "$env:XDG_DATA_HOME\azure"
+Set-UserEnvVar 'DOCKER_CONFIG' "$env:XDG_CONFIG_HOME\docker"
+Set-UserEnvVar 'STARSHIP_CONFIG' "$env:XDG_CONFIG_HOME\starship\starship.toml"
+Set-UserEnvVar 'GNUPGHOME' "$env:XDG_DATA_HOME\gnupg"
+Set-UserEnvVar 'GLAZEWM_CONFIG_PATH' "$env:XDG_CONFIG_HOME\glazewm\config.yaml"
+Set-UserEnvVar 'ZEBAR_CONFIG_DIR' "$env:XDG_CONFIG_HOME\zebar"
 
-Add-UserPath "$Env:XDG_BIN_HOME"
+Add-UserPath "$env:XDG_BIN_HOME"
+Add-UserPath "$env:APPDATA\npm"
+
+if (Test-Path -Path "$env:XDG_CONFIG_HOME\windows\pwsh-machine-profile.ps1")
+{
+  Invoke-Expression (Get-Content -Path "$env:XDG_CONFIG_HOME\windows\pwsh-machine-profile.ps1" -Raw)
+}
 
 #endregion
 
