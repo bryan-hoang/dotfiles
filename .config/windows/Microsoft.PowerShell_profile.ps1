@@ -89,9 +89,11 @@ function Find-WslVhdx
 # Enable symlinking.
 Set-UserEnvVar 'MSYS' 'winsymlinks:nativestrict'
 Set-UserEnvVar 'XDG_CONFIG_HOME' "$env:USERPROFILE\.config"
+Set-UserEnvVar 'XDG_CACHE_HOME' "$env:USERPROFILE\.cache"
 Set-UserEnvVar 'XDG_LOCAL_HOME' "$env:USERPROFILE\.local"
 Set-UserEnvVar 'XDG_BIN_HOME' "$env:XDG_LOCAL_HOME\bin"
 Set-UserEnvVar 'XDG_DATA_HOME' "$env:XDG_LOCAL_HOME\share"
+Set-UserEnvVar 'XDG_STATE_HOME' "$env:XDG_LOCAL_HOME\state"
 Set-UserEnvVar 'CARGO_HOME' "$env:XDG_DATA_HOME\cargo"
 Set-UserEnvVar 'RUSTUP_HOME' "$env:XDG_DATA_HOME\rustup"
 Set-UserEnvVar 'KOMOREBI_CONFIG_HOME' "$env:XDG_CONFIG_HOME\komorebi"

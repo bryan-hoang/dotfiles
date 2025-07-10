@@ -111,6 +111,9 @@ export SAVEHIST="$HISTFILESIZE"
 # Omit duplicates and commands that begin with a space from history.
 export HISTCONTROL='ignoreboth:erasedups'
 
+export HISTFILE="$XDG_STATE_HOME"/shell/history
+mkdir -p "$(dirname "$HISTFILE")"
+
 # Pager settings
 export PAGER=less
 
@@ -202,8 +205,6 @@ export ZSH_USER_FPATH="$XDG_DATA_HOME"/zsh/completions
 mkdir -p "$ZSH_USER_FPATH"
 export ZSH_CACHE_DIR="$XDG_CACHE_HOME"/zsh
 export ZSH_COMPDUMP="$ZSH_CACHE_DIR"/.zcompdump
-export HISTFILE="$XDG_STATE_HOME"/shell/history
-mkdir -p "$(dirname "$HISTFILE")"
 export TEXMFHOME="$XDG_DATA_HOME"/texmf
 export TEXMFVAR="$XDG_CACHE_HOME"/texlive/texmf-var
 export TEXMFCONFIG="$XDG_CONFIG_HOME"/texlive/texmf-config
