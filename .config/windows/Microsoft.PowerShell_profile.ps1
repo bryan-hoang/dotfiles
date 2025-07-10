@@ -114,12 +114,19 @@ Add-UserPath "$Env:XDG_BIN_HOME"
 
 #endregion
 
+# I hecking love having a consistent editing mode.
+Set-PSReadLineOption -EditMode Emacs
+
 # Hooking zoxide.
 if (Test-CommandExists zoxide)
 {
 	Invoke-Expression (& { (zoxide init powershell | Out-String) })
 }
 
-# Initializing Starship prompt.
-Invoke-Expression (&starship init powershell)
-Set-UserEnvVar 'STARSHIP_SHELL' 'C:\Program Files\Git\bin\bash.exe --noprofile --norc'
+# Hooking zoxide.
+if (Test-CommandExists starship)
+{
+  # Initializing Starship prompt.
+  Invoke-Expression (&starship init powershell)
+  Set-UserEnvVar 'STARSHIP_SHELL' 'C:\Program Files\Git\bin\bash.exe --noprofile --norc'
+}
