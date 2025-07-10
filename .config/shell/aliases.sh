@@ -134,6 +134,9 @@ fi
 [ -f '/mnt/c/Windows/System32/clip.exe' ] \
 	&& alias xclip='/mnt/c/Windows/System32/clip.exe'
 
+# https://commandbox.ortusbooks.com/setup/installation
+command -v box >/dev/null && alias box="box -commandbox_home=${XDG_DATA_HOME//\\/\/}/commandbox"
+
 alias conventional-changelog='conventional-changelog -p conventionalcommits -n "${XDG_CONFIG_HOME}"/conventional-changelog/config.js'
 alias yarn='yarn --use-yarnrc "${XDG_CONFIG_HOME}"/yarn/config'
 alias sqlite='sqlite3 -init "${XDG_CONFIG_HOME}"/sqlite3/sqliterc'

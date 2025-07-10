@@ -84,9 +84,6 @@ function Find-WslVhdx
 
 #endregion
 
-#region Aliases
-#endregion
-
 #region Environment Variables
 
 # Enable symlinking.
@@ -115,6 +112,19 @@ Add-UserPath "$env:APPDATA\npm"
 if (Test-Path -Path "$env:XDG_CONFIG_HOME\windows\pwsh-machine-profile.ps1")
 {
   Invoke-Expression (Get-Content -Path "$env:XDG_CONFIG_HOME\windows\pwsh-machine-profile.ps1" -Raw)
+}
+
+#endregion
+
+#region Aliases
+
+# https://commandbox.ortusbooks.com/setup/installation
+if (Test-CommandExists box.exe)
+{
+  function box
+  {
+    box.exe -commandbox_home="$env:XDG_DATA_HOME/commandbox" @args
+  }
 }
 
 #endregion
