@@ -67,7 +67,6 @@ function Test-CommandExists($command)
 		}
 	} Catch
 	{
-		Write-Host “$command does not exist”
 		RETURN $false
 	} Finally
 	{
