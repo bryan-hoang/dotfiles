@@ -82,7 +82,7 @@ else
 		echo "$found_dirs" \
 			| if [[ ${proj_dirs[*]} =~ $cwd ]]; then cat - <(echo "$cwd"); else cat; fi \
 			| sort --reverse \
-			| tv --preview 'lsd --group-directories-first {0}'
+			| tv --preview-command 'lsd --group-directories-first {0}'
 	)
 fi
 
