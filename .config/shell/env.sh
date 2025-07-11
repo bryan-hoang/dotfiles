@@ -371,3 +371,5 @@ export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
 export DOTNET_CLI_HOME="$XDG_DATA_HOME"/dotnet
 export NUGET_PACKAGES="$XDG_CACHE_HOME"/nuget-packages
 export OMNISHARPHOME="$XDG_CONFIG_HOME"/omnisharp
+# https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_update_notifications?view=powershell-7.5#manage-notification-behavior
+export POWERSHELL_UPDATECHECK=LTS

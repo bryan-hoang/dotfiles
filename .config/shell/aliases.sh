@@ -161,3 +161,4 @@ command -v watchexec >/dev/null \
 	&& alias watchexec='watchexec --project-origin . --restart --clear --timings --stop-timeout=0ns'
 alias xidlehook-client='xidlehook-client --socket $XIDLEHOOK_SOCK'
 command -v tidy-viewer >/dev/null && alias tv='tidy-viewer'
+command -v pwsh >/dev/null && alias pwsh='pwsh -nologo'
