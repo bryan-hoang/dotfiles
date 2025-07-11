@@ -118,6 +118,7 @@ Set-UserEnvVar 'KUBECACHEDIR' "$env:XDG_CACHE_HOME\kube"
 
 Add-UserPath "$env:XDG_BIN_HOME"
 Add-UserPath "$env:APPDATA\npm"
+Add-UserPath "$env:XDG_DATA_HOME\pnpm"
 
 if (Test-Path -Path "$env:XDG_CONFIG_HOME\windows\pwsh-machine-profile.ps1")
 {
@@ -142,16 +143,31 @@ if (Test-CommandExists box.exe)
 # I hecking love having a consistent editing mode.
 Set-PSReadLineOption -EditMode Emacs
 
-# Hooking zoxide.
 if (Test-CommandExists zoxide)
 {
 	Invoke-Expression (& { (zoxide init powershell | Out-String) })
 }
 
-# Hooking zoxide.
 if (Test-CommandExists starship)
 {
   # Initializing Starship prompt.
   Invoke-Expression (&starship init powershell)
   Set-UserEnvVar 'STARSHIP_SHELL' 'C:\Program Files\Git\bin\bash.exe --noprofile --norc'
+}
+else
+{
+  # Customize the prompt
+  function prompt {
+    $identity = [Security.Principal.WindowsIdentity]::GetCurrent()
+    $principal = [Security.Principal.WindowsPrincipal] $identity
+    $adminRole = [Security.Principal.WindowsBuiltInRole]::Administrator
+  
+    $prefix = if (Test-Path Variable:/PSDebugContext) { '[DBG]: ' } else { '' }
+    if ($principal.IsInRole($adminRole)) {
+        $prefix = "[ADMIN]:$prefix"
+    }
+    $body = 'PS ' + $PWD.path
+    $suffix = $(if ($NestedPromptLevel -ge 1) { '>>' }) + '> '
+    "${prefix}${body}${suffix}"
+  }
 }
