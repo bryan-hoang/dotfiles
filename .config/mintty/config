@@ -1,0 +1,7 @@
+ThemeFile=dracula
+CursorType=block
+Transparency=high
+Font=FiraCode Nerd Font Mono
+FontHeight=12
+CtrlShiftShortcuts=yes
+Term=xterm-256color
