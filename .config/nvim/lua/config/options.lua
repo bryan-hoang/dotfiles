@@ -36,25 +36,6 @@ g.netrw_liststyle = 3
 -- Open previews vertically.
 -- g.netrw_preview = 1
 
--- If in WSL, use suggested (`:h clipboard-wsl`) config
-if fn.executable("clip.exe") == 1 then
-	g.clipboard = {
-		name = "wsl-clipboard",
-		copy = {
-			["+"] = { "clip.exe" },
-			["*"] = { "clip.exe" },
-		},
-		paste = {
-			["+"] = {
-				'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-			},
-			["*"] = {
-				'powershell.exe -NoLogo -NoProfile -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
-			},
-		},
-	}
-end
-
 -- Always use lemonade as the clipboard program, to avoid issues with
 -- `x{sel,clip}` taking precedence over lemonade.
 if fn.executable("lemonade") == 1 then
