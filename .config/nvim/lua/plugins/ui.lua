@@ -35,7 +35,7 @@ return {
 	{
 		"folke/noice.nvim",
 		-- Disable when `ext_{cmdline,messages}` are enabled by `firenvim`.
-		cond = not vim.g.started_by_firenvim and not vim.g.neovide,
+		cond = not vim.g.started_by_firenvim and not vim.g.neovide and not vim.g.vscode,
 		opts = {
 			lsp = {
 				hover = {
