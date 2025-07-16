@@ -149,6 +149,13 @@ if (Test-CommandExists box.exe)
 # I hecking love having a consistent editing mode.
 Set-PSReadLineOption -EditMode Emacs
 
+# Completions
+if (Test-CommandExists uv)
+{
+  (& uv generate-shell-completion powershell) | Out-String | Invoke-Expression
+  (& uvx --generate-shell-completion powershell) | Out-String | Invoke-Expression
+}
+
 if (Test-CommandExists zoxide)
 {
 	Invoke-Expression (& { (zoxide init powershell | Out-String) })
