@@ -140,7 +140,7 @@ if (Test-CommandExists box.exe)
 {
 	function box
 	{
-		box.exe -commandbox_home="$env:XDG_DATA_HOME/commandbox" @args
+		box.exe -commandbox_home="$(Join-Path $env:XDG_DATA_HOME 'commandbox')" @args
 	}
 }
 
@@ -159,17 +159,7 @@ Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 
 # Completions
 
-# https://github.com/dahlbyk/posh-git#installing-posh-git-via-powershellget-on-linux-macos-and-windows
-if (Get-Module -ListAvailable -Name post-git)
-{
-	Import-Module posh-git
-}
-
-if (Test-CommandExists uv)
-{
-	(& uv generate-shell-completion powershell) | Out-String | Invoke-Expression
-	(& uvx --generate-shell-completion powershell) | Out-String | Invoke-Expression
-}
+. $(Join-Path $HOME '.config' 'windows' 'Initialize-Completions')
 
 if (Test-CommandExists zoxide)
 {
