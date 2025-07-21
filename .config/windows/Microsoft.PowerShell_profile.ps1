@@ -146,14 +146,29 @@ if (Test-CommandExists box.exe)
 
 #endregion
 
+$PSReadLineOptions = @{
+	EditMode = "Emacs"
+	# https://learn.microsoft.com/en-us/powershell/module/psreadline/about/about_psreadline?view=powershell-7.5#enable-predictive-intellisense
+	PredictionSource = "HistoryAndPlugin"
+	HistorySearchCursorMovesToEnd = $true
+}
+Set-PSReadLineOption @PSReadLineOptions
+
 # I hecking love having a consistent editing mode.
-Set-PSReadLineOption -EditMode Emacs
+Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 
 # Completions
+
+# https://github.com/dahlbyk/posh-git#installing-posh-git-via-powershellget-on-linux-macos-and-windows
+if (Get-Module -ListAvailable -Name post-git)
+{
+	Import-Module posh-git
+}
+
 if (Test-CommandExists uv)
 {
-  (& uv generate-shell-completion powershell) | Out-String | Invoke-Expression
-  (& uvx --generate-shell-completion powershell) | Out-String | Invoke-Expression
+	(& uv generate-shell-completion powershell) | Out-String | Invoke-Expression
+	(& uvx --generate-shell-completion powershell) | Out-String | Invoke-Expression
 }
 
 if (Test-CommandExists zoxide)
