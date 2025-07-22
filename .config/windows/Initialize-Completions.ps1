@@ -13,8 +13,6 @@ if (!(Get-Module -ListAvailable -Name DockerCompletion))
 }
 Import-Module DockerCompletion
 
-# Import
-Import-Module DockerCompletion
 if (Test-CommandExists uv)
 {
 	(& uv generate-shell-completion powershell) | Out-String | Invoke-Expression
@@ -26,3 +24,7 @@ if (Test-CommandExists sqlcmd)
 	(& sqlcmd completion powershell) | Out-String | Invoke-Expression
 }
 
+if (Test-CommandExists kubectl)
+{
+	(& kubectl completion powershell) | Out-String | Invoke-Expression
+}
