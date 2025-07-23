@@ -54,6 +54,8 @@ build
 
 # Neovim `.exrc` file.
 .nvim.lua
+# lazy.nvim spec file.
+.lazy.lua
 
 # `clangd` LS
 # https://clangd.llvm.org/installation.html#compile_commandsjson
