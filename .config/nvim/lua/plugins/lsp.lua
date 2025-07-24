@@ -203,7 +203,6 @@ return {
 			}
 
 			local merged_opts = vim.tbl_deep_extend("force", opts, user_opts)
-
 			return merged_opts
 		end,
 	},

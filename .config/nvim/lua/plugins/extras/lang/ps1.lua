@@ -9,7 +9,6 @@ return {
 	},
 	{
 		"TheLeoP/powershell.nvim",
-		---@type powershell.user_config
 		opts = {
 			bundle_path = vim.fn.stdpath("data")
 				.. "/mason/packages/powershell-editor-services",
@@ -17,19 +16,84 @@ return {
 	},
 	{
 		"conform.nvim",
+		optional = true,
 		opts = function(_, opts)
-			opts.formatters.psscriptanalyzer = {
-				command = "pwsh",
-				stdin = true,
-				args = {
-					"-NoProfile",
-					"-Command",
-					"Invoke-Formatter",
-					"-ScriptDefinition",
-					"($input | Out-String)",
+			local user_opts = {
+				formatters = {
+					ps_script_analyzer = {
+						command = "pwsh",
+						stdin = true,
+						args = {
+							"-NoProfile",
+							"-Command",
+							"Invoke-Formatter",
+							"-ScriptDefinition",
+							"($input | Out-String)",
+						},
+					},
+				},
+				formatters_by_ft = {
+					ps1 = { "ps_script_analyzer" },
 				},
 			}
-			opts.formatters_by_ft.ps1 = { "psscriptanalyzer" }
+
+			local merged_opts = vim.tbl_deep_extend("force", opts, user_opts)
+
+			return merged_opts
+		end,
+	},
+	{
+		"mfussenegger/nvim-lint",
+		optional = true,
+		opts = function(_, opts)
+			local severity = {
+				[0] = vim.diagnostic.severity.ERROR,
+				[1] = vim.diagnostic.severity.WARN,
+			}
+			local user_opts = {
+				linters = {
+					ps_script_analyzer = {
+						cmd = "pwsh",
+						stdin = true,
+						args = {
+							"-NoProfile",
+							"-Command",
+							"Invoke-ScriptAnalyzer",
+							"-ScriptDefinition",
+							"($input | Out-String) | ConvertTo-Json -Depth 3",
+						},
+						parser = function(output)
+							local decoded = vim.json.decode(output)
+							local messages = {}
+							if vim.isarray(decoded) then
+								messages = decoded
+							else
+								table.insert(messages, 1, decoded)
+							end
+							local diagnostics = {}
+							for _, item in ipairs(messages) do
+								table.insert(diagnostics, {
+									lnum = item.Extent.StartLineNumber - 1,
+									col = item.Extent.StartColumnNumber - 1,
+									end_lnum = item.Extent.EndLineNumber - 1,
+									end_col = item.Extent.EndColumnNumber - 1,
+									code = item.RuleName,
+									source = "ps_script_analyzer",
+									severity = severity[item.Severity],
+									message = item.Message,
+								})
+							end
+							return diagnostics
+						end,
+					},
+				},
+				linters_by_ft = {
+					ps1 = { "ps_script_analyzer" },
+				},
+			}
+
+			local merged_opts = vim.tbl_deep_extend("force", opts, user_opts)
+			return merged_opts
 		end,
 	},
 }

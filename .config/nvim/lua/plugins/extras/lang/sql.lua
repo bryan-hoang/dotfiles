@@ -3,10 +3,8 @@ return {
 		"stevearc/conform.nvim",
 		optional = true,
 		opts = function(_, opts)
-			opts.formatters = {
-				sqlfluff = {
-					args = { "format", "-" },
-				},
+			opts.formatters.sqlfluff = {
+				args = { "format", "-" },
 			}
 		end,
 	},
@@ -14,14 +12,19 @@ return {
 		"mfussenegger/nvim-lint",
 		optional = true,
 		opts = function(_, opts)
-			opts.linters = {
-				sqlfluff = {
-					args = {
-						"lint",
-						"--format=json",
+			local user_opts = {
+				linters = {
+					sqlfluff = {
+						args = {
+							"lint",
+							"--format=json",
+						},
 					},
 				},
 			}
+
+			local merged_opts = vim.tbl_deep_extend("force", opts, user_opts)
+			return merged_opts
 		end,
 	},
 }
