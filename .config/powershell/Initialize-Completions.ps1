@@ -1,4 +1,4 @@
-#!/usr/bin/env pswh
+#!/usr/bin/env pwsh
 
 # https://github.com/dahlbyk/posh-git#installing-posh-git-via-powershellget-on-linux-macos-and-windows
 if (!(Get-Module -ListAvailable -Name posh-git))

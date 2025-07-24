@@ -1,1 +1,0 @@
-../../.config/windows/Microsoft.PowerShell_profile.ps1
