@@ -1,0 +1,14 @@
+[sqlfluff]
+
+# Supported dialects https://docs.sqlfluff.com/en/stable/perma/dialects.html
+# Or run 'sqlfluff dialects'
+dialect = tsql
+
+[sqlfluff:indentation]
+# See https://docs.sqlfluff.com/en/stable/perma/indent_locations.html
+indent_unit = tab
+
+[sqlfluff:rules:layout.long_lines]
+# Line length
+ignore_comment_lines = True
+ignore_comment_clauses = False

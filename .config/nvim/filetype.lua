@@ -18,7 +18,7 @@ set_file_associations({
 		".*/%.config/X11/xresources%.d/.*",
 	},
 	i3config = { ".*/i3/conf%.d/.*%.conf" },
-	cfg = { "dunstrc" },
+	cfg = { "dunstrc", ".sqlfluff" },
 	starlark = { "Tiltfile" },
 	dotenv = { ".*%.env%..*" },
 	ruby = { ".*/%.config/pry/pryrc" },
