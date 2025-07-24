@@ -183,11 +183,6 @@ return {
 				},
 			}
 
-			if not util.is_os_unix then
-				-- Only install on windows.
-				user_opts.servers.powershell_es = {}
-			end
-
 			opts = vim.tbl_deep_extend("force", opts, user_opts)
 
 			return opts
