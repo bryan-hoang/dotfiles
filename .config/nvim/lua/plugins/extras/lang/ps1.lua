@@ -47,8 +47,9 @@ return {
 		optional = true,
 		opts = function(_, opts)
 			local severity = {
-				[0] = vim.diagnostic.severity.ERROR,
+				[0] = vim.diagnostic.severity.INFO,
 				[1] = vim.diagnostic.severity.WARN,
+				[2] = vim.diagnostic.severity.ERROR,
 			}
 			local user_opts = {
 				linters = {
@@ -78,7 +79,7 @@ return {
 									end_lnum = item.Extent.EndLineNumber - 1,
 									end_col = item.Extent.EndColumnNumber - 1,
 									code = item.RuleName,
-									source = "ps_script_analyzer",
+									source = "PSScriptAnalyzer",
 									severity = severity[item.Severity],
 									message = item.Message,
 								})
