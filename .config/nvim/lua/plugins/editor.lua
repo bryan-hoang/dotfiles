@@ -35,11 +35,10 @@ return {
 			vim.g.mkdp_echo_preview_url = 1
 			-- Preview markdown over SSH.
 			-- https://github.com/iamcco/markdown-preview.nvim/pull/9
-			-- $HOSTNAME would usually be defined per remote machine.
-			-- e.g., in ~/.config/shell/extra.
 			if os.getenv("SSH_CONNECTION") ~= nil then
 				vim.g.mkdp_open_to_the_world = 1
-				vim.g.mkdp_open_ip = os.getenv("HOSTNAME")
+				-- Where `MDP_HOST` is the machine defined host to connect to.
+				vim.g.mkdp_open_ip = os.getenv("MDP_HOST")
 				vim.g.mkdp_port = 8080
 				vim.cmd([[
 					function OpenMarkdownPreview(url)
