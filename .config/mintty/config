@@ -10,3 +10,5 @@ Charset=UTF-8
 DeleteSendsDEL=yes
 ClickTargetMod=off
 CopyTab=yes
+Scrollbar=none
+StatusLine=no
