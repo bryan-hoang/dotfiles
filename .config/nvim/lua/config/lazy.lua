@@ -55,7 +55,7 @@ require("lazy").setup({
 	install = {
 		-- Try to load one of these colorschemes when starting an installation
 		-- during startup.
-		colorscheme = { "tokyonight" },
+		colorscheme = { "catppuccin" },
 	},
 	checker = {
 		-- Automatically check for plugin updates.
