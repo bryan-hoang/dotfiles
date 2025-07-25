@@ -41,7 +41,11 @@ declare -a proj_dirs=(
 while IFS='' read -r line; do proj_dirs+=("$line"); done < <(
 	fd --search-path="$HOME"/src --exclude=localhost --min-depth=4 --max-depth=4 \
 		--no-ignore --hidden '^\.git$' \
-		| xargs dirname | xargs dirname | huniq
+		| while IFS= read -r git_dir; do
+			parent_dir=$(dirname "$git_dir")
+			grandparent_dir=$(dirname "$parent_dir")
+			echo "$grandparent_dir"
+		done | huniq
 )
 
 # Read `PROJ_DIRS` for machine specific project directories. e.g., `/mnt/...`
