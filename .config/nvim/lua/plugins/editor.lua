@@ -165,9 +165,23 @@ return {
 				-- Helix keybinding for last picker.
 				"<leader>s'",
 				function()
-					require('snacks').picker.resume()
+					require("snacks").picker.resume()
 				end,
 				desc = "Resume",
+			},
+		},
+		---@type snacks.Config
+		opts = {
+			gitbrowse = {
+				what = "permalink",
+				url_patterns = {
+					["dev%.azure%.com"] = {
+						branch = "?version=GB{branch}",
+						file = "?path=/{file}&version=GB{branch}&line={line_start}&lineEnd={line_end}&lineStartColumn=1&lineEndColumn=999",
+						permalink = "?path=/{file}&version=GC{commit}&line={line_start}&lineEnd={line_end}&lineStartColumn=1&lineEndColumn=999",
+						commit = "/commit/{commit}",
+					},
+				},
 			},
 		},
 	},
