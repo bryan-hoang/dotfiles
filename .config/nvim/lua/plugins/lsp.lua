@@ -58,6 +58,7 @@ return {
 					kdl = { "kdlfmt" },
 					python = { "ruff_fix", "ruff_format" },
 					cmake = { "cmake_format" },
+					xml = { "xmlstarlet" },
 				},
 				-- LazyVim will merge the options you set here with builtin formatters.
 				-- You can also define any custom formatters here.
