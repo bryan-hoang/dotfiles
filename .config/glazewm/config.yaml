@@ -160,7 +160,7 @@ window_rules:
   - commands: ['move --workspace 2']
     match:
       # Programming
-      - window_process: { regex: 'wezterm|neovide|terminal' }
+      - window_process: { regex: 'wezterm|neovide|WindowsTerminal' }
   - commands: ['move --workspace 3']
     match:
       # Chat
@@ -168,11 +168,16 @@ window_rules:
   - commands: ['move --workspace 4']
     match:
       # Mail
-      - window_process: { regex: 'thunderbird|outlook' }
+      - window_process: { regex: 'thunderbird' }
+      - window_title: { regex: 'Outlook' }
   - commands: ['move --workspace 5']
     match:
       # Music
       - window_process: { regex: 'Spotify' }
+  - commands: ['move --workspace 6']
+    match:
+      # SQL Server Management Studio
+      - window_process: { regex: 'SSMS' }
 
 binding_modes:
   # When enabled, the focused window can be resized via arrow keys or HJKL.
