@@ -47,6 +47,9 @@ shopt -s nullglob
 # a /, only directories and subdirectories match.
 shopt -s globstar
 
+# Enable the extended pattern matching features described in "Pattern Matching".
+shopt -s extglob
+
 # export SHELDON_CONFIG_DIR="$XDG_CONFIG_HOME"/sheldon/bash
 # command -v sheldon >/dev/null && eval "$(sheldon source)"
 
