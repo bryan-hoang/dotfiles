@@ -14,7 +14,11 @@ return {
 		-- https://github.com/catppuccin/nvim#configuration
 		opts = {
 			transparent_background = true,
+			float = {
+				transparent = true,
+			},
 			no_italic = true,
+			auto_integrations = true,
 		},
 	},
 	{
