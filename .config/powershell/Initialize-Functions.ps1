@@ -80,11 +80,13 @@ function Find-WslVhdx
 	(Get-ChildItem -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss | Where-Object { $_.GetValue("DistributionName") -eq $DistributionName }).GetValue("BasePath") + "\ext4.vhdx"
 }
 
-# https://commandbox.ortusbooks.com/setup/installation
-if (Test-CommandExists box.exe)
-{
-	function box
-	{
-		box.exe -commandbox_home="$(Join-Path $env:XDG_DATA_HOME 'commandbox')" @args
-	}
-}
+# FIXME: Can't share home w/ `cmd.exe`.
+#
+# # https://commandbox.ortusbooks.com/setup/installation
+# if (Test-CommandExists box.exe)
+# {
+# 	function box
+# 	{
+# 		box.exe -commandbox_home="$(Join-Path $env:XDG_DATA_HOME 'commandbox')" @args
+# 	}
+# }
