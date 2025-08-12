@@ -3,21 +3,28 @@ return {
 		"mfussenegger/nvim-lint",
 		optional = true,
 		opts = function(_, opts)
-			local function get_file_name()
-				return vim.api.nvim_buf_get_name(0)
+			local function get_path_arg()
+				return "path=" .. vim.api.nvim_buf_get_name(0)
 			end
+
 			local severities = {
 				[1] = vim.diagnostic.severity.INFO,
 				[2] = vim.diagnostic.severity.WARN,
 				[3] = vim.diagnostic.severity.ERROR,
 			}
+
 			local user_opts = {
 				linters = {
 					fixinator = {
 						cmd = "box",
+						stdin = false,
+						append_fname = false,
+						ignore_exitcode = true,
 						-- https://github.com/foundeo/fixinator#command-line-arguments
 						args = {
-							"path=" .. get_file_name(),
+							"fixinator",
+							"json=true",
+							get_path_arg,
 						},
 						parser = function(output)
 							local diagnostics = {}
@@ -29,21 +36,21 @@ return {
 
 							for _, result in ipairs(decoded.results or {}) do
 								local diagnostic = {
-									message = result.description,
-									lnum = result.row,
-									end_lnum = result.row,
+									lnum = result.line - 1,
 									col = result.column,
-									end_col = result.column,
-									code = result.id,
 									severity = severities[result.severity],
+									message = result.description,
 									source = "fixinator",
+									code = result.id,
 								}
 								table.insert(diagnostics, diagnostic)
 							end
+
 							return diagnostics
 						end,
 					},
 				},
+
 				linters_by_ft = {
 					cf = { "fixinator" },
 				},
