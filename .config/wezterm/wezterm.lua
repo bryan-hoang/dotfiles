@@ -4,6 +4,7 @@ local is_os_unix = string.sub(package.config, 1, 1) == "/"
 local zsh = { "zsh", "--interactive" }
 local bash = { "bash", "-i" }
 local git_bash = { "C:\\Program Files\\Git\\bin\\bash.exe", "--login" }
+local pwsh = { "pwsh", "-nologo" }
 
 local mux = wezterm.mux
 -- Max window on startup.
@@ -28,7 +29,7 @@ config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
 -- http://lua-users.org/wiki/TernaryOperator
 -- https://stackoverflow.com/a/14425862/8714233
-config.default_prog = is_os_unix and zsh or git_bash
+config.default_prog = is_os_unix and zsh or pwsh
 config.window_close_confirmation = "NeverPrompt"
 config.exit_behavior = "CloseOnCleanExit"
 
@@ -56,7 +57,7 @@ config.launch_menu = {
 	},
 	{
 		label = "Powershell Core",
-		args = { "pwsh" },
+		args = pwsh,
 	},
 }
 
@@ -211,5 +212,10 @@ table.insert(hyperlink_rules, {
 })
 
 config.hyperlink_rules = hyperlink_rules
+
+local machine_exists, machine = pcall(require, "machine")
+if machine_exists then
+	machine.apply_to_config(config)
+end
 
 return config
