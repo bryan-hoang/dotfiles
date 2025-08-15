@@ -6,7 +6,7 @@
 [include]
 	# Machine specific configuration. e.g., Different user.name/user.email based
 	# on current project.
-	path = src.gitconfig
+	path = local.gitconfig
 	# Include Dracula colors.
 	path = ~/src/github.com/dracula/git/config/gitconfig
 [includeIf "gitdir:~/.git"]
