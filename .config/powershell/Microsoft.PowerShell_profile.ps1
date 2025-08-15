@@ -24,11 +24,6 @@ Set-PSReadLineOption @PSReadLineOptions
 # I hecking love having a consistent editing mode.
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 
-if (Test-CommandExists zoxide)
-{
-	Invoke-Expression (& { (zoxide init powershell | Out-String) })
-}
-
 if (Test-CommandExists starship)
 {
 	# Initializing Starship prompt.
@@ -50,4 +45,11 @@ else
 		$suffix = $(if ($NestedPromptLevel -ge 1) { '>>' }) + '> '
 		"${prefix}${body}${suffix}"
 	}
+}
+
+# NOTE: `zoxide` should be initialized after `starship`.
+# https://github.com/ajeetdsouza/zoxide/issues/1021#issuecomment-2810261891
+if (Test-CommandExists zoxide)
+{
+	Invoke-Expression (& { (zoxide init powershell | Out-String) })
 }
