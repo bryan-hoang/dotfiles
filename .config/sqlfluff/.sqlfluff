@@ -12,3 +12,7 @@ indent_unit = tab
 # Line length
 ignore_comment_lines = True
 ignore_comment_clauses = False
+
+[sqlfluff:rules:capitalisation.identifiers]
+# Unquoted identifiers
+extended_capitalisation_policy = upper
