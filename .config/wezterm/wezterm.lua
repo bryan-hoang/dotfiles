@@ -39,7 +39,6 @@ config.window_background_opacity = 0.75
 config.initial_cols = 120
 config.initial_rows = 32
 config.selection_word_boundary = " \t\n{}[]()\"'`"
-config.enable_kitty_keyboard = true
 config.window_decorations = "RESIZE"
 
 config.launch_menu = {
