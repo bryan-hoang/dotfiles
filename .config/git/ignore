@@ -78,3 +78,6 @@ zsh-syntax-highlighting-dracula.plugin.zsh
 
 # Biome
 biome.jsonc
+
+# Run multiple processes in parallel.
+mprocs.yaml
