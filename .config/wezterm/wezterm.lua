@@ -29,7 +29,7 @@ config.use_fancy_tab_bar = false
 config.hide_tab_bar_if_only_one_tab = true
 -- http://lua-users.org/wiki/TernaryOperator
 -- https://stackoverflow.com/a/14425862/8714233
-config.default_prog = is_os_unix and zsh or pwsh
+config.default_prog = is_os_unix and zsh or git_bash
 config.window_close_confirmation = "NeverPrompt"
 config.exit_behavior = "CloseOnCleanExit"
 
