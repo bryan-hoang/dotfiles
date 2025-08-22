@@ -64,6 +64,12 @@ config.set_environment_variables = {
 	SHLVL = "0",
 }
 
+config.quick_select_patterns = {
+	-- Windows Path.
+	-- https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file#naming-conventions
+	"(?:[A-Z]:\\\\)(?:[^<>:/\\\\|?*]+\\\\?)*",
+}
+
 local act = wezterm.action
 
 config.keys = {
