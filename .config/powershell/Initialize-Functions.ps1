@@ -80,6 +80,18 @@ function Find-WslVhdx
 	(Get-ChildItem -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss | Where-Object { $_.GetValue("DistributionName") -eq $DistributionName }).GetValue("BasePath") + "\ext4.vhdx"
 }
 
+if (Test-CommandExists yazi.exe) {
+	function y {
+		$tmp = (New-TemporaryFile).FullName
+		yazi $args --cwd-file="$tmp"
+		$cwd = Get-Content -Path $tmp -Encoding UTF8
+		if (-not [String]::IsNullOrEmpty($cwd) -and $cwd -ne $PWD.Path) {
+			Set-Location -LiteralPath (Resolve-Path -LiteralPath $cwd).Path
+		}
+		Remove-Item -Path $tmp
+	}
+}
+
 # FIXME: Can't share home w/ `cmd.exe`.
 #
 # # https://commandbox.ortusbooks.com/setup/installation

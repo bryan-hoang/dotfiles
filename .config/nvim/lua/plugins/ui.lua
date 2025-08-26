@@ -35,7 +35,9 @@ return {
 	{
 		"folke/noice.nvim",
 		-- Disable when `ext_{cmdline,messages}` are enabled by `firenvim`.
-		cond = not vim.g.started_by_firenvim and not vim.g.neovide and not vim.g.vscode,
+		cond = not vim.g.started_by_firenvim
+			and not vim.g.neovide
+			and not vim.g.vscode,
 		opts = {
 			lsp = {
 				hover = {
@@ -73,5 +75,14 @@ return {
 				},
 			},
 		},
+	},
+	{
+		"akinsho/bufferline.nvim",
+		init = function()
+			local bufline = require("catppuccin.groups.integrations.bufferline")
+			function bufline.get()
+				return bufline.get_theme()
+			end
+		end,
 	},
 }
