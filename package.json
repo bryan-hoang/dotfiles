@@ -17,7 +17,7 @@
 		"@commitlint/config-conventional": "19.8.1",
 		"@commitlint/types": "19.8.1",
 		"@stylistic/stylelint-config": "3.0.1",
-		"debug": "4.4.1",
+		"debug": "4.4.3",
 		"defu": "6.1.4",
 		"husky": "9.1.7",
 		"lint-staged": "16.1.6",
