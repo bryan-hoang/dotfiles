@@ -1,0 +1,1 @@
+vim.lsp.enable("adobe-cfml-lsp")
