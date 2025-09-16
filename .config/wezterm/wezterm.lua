@@ -67,7 +67,8 @@ config.set_environment_variables = {
 config.quick_select_patterns = {
 	-- Windows Path.
 	-- https://learn.microsoft.com/en-us/windows/win32/fileio/naming-a-file#naming-conventions
-	"(?:[A-Z]:\\\\)(?:[^<>:/\\\\|?*]+\\\\?)*",
+	-- https://github.com/wezterm/wezterm/blob/main/wezterm-gui/src/overlay/quickselect.rs
+	"(?:[A-Z]:|\\w+)?(?:\\\\+[.\\w\\-@]+)+",
 }
 
 local act = wezterm.action
