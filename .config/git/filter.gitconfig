@@ -1,0 +1,35 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	process = git-lfs filter-process
+	required = true
+	smudge = git-lfs smudge -- %f
+[filter "npmrc"]
+	clean = "sed '/_authToken/d'"
+	smudge = cat
+[filter "gpg-agent"]
+	# Filter out pinentry program on WSL 2 on windows in VS Code
+	clean = "sed '/pinentry./d'"
+	smudge = cat
+[filter "spotify-tui"]
+	clean = "sed '/^client_secret/d;/device_id/d'"
+	smudge = cat
+[filter "streamlink-crunchyroll"]
+	clean = "sed '/^crunchyroll-password=/d'"
+	smudge = cat
+[filter "i3status-rust-token"]
+	clean = "sed '/^token/d'"
+	smudge = cat
+[filter "git-config"]
+	# Using sed to delete all lines between two matching patterns:
+	# https://stackoverflow.com/a/6287940/8714233
+	clean = "sed -e '/\\[gpg\\]/d' -e '/^	program = /d' -e '/^\\[bulkworkspaces\\]/,/^\\[/{/^\\[bulkworkspaces\\]/!{/\\[/!d}}'"
+	smudge = cat
+[filter "macchina"]
+	clean = "sed '/^interface =/d'"
+	smudge = cat
+[filter "mise"]
+	clean = "sed -E -e '/^\\[tools\\]/,/^\\[/{/^\\[tools\\]/!{/\\[/!d}}' -e '/^\\[env\\]/,/^\\[/{/^\\[env\\]/!{/\\[/!d}}' -e '/^\\[alias\\]/,/^\\[env/{/^\\[alias\\]/!{/\\[env/!d}}'"
+	smudge = cat
+[filter "docker-config"]
+	clean = "jaq '{ \"detachKeys\" }'"
+	smudge = cat

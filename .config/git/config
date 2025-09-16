@@ -1,114 +1,16 @@
+[include]
+	# Include Dracula colors.
+	path = ~/src/github.com/dracula/git/config/gitconfig
+	path = alias.gitconfig
+	path = diff.gitconfig
+	path = filter.gitconfig
+[includeIf "gitdir:~/.git"]
+	path = dotfiles.gitconfig
 [user]
 	email = bryan@bryanhoang.dev
 	signingKey = bryan@bryanhoang.dev
 	useConfigOnly = true
 	name = Bryan Hoang
-[include]
-	# Machine specific configuration. e.g., Different user.name/user.email based
-	# on current project.
-	path = local.gitconfig
-	# Include Dracula colors.
-	path = ~/src/github.com/dracula/git/config/gitconfig
-[includeIf "gitdir:~/.git"]
-	path = dotfiles.gitconfig
-[alias]
-	# Delete branches that are merged into the current branch.
-	dm = "!git worktree-prune && git ls-merged | xargs --no-run-if-empty git branch --delete"
-	# View abbreviated SHA, description, and history graph of the latest 20
-	# commits.
-	l = log --pretty=oneline -n 20 --graph --abbrev-commit
-	# View the current working tree status using the short format.
-	s = status -s
-	# Show the diff between the latest commit and the current state.
-	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
-	# `git di $number` shows the diff between the state `$number` revisions ago and the current state.
-	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d"
-	ds = !"git diff --staged"
-	# Clone a repository including all submodules.
-	# Commit all changes.
-	ca = !git add -A && git commit -av
-	# Switch to a branch, creating it if necessary.
-	go = "!f() { git checkout -b \"$1\" 2>/dev/null || git checkout \"$1\"; }; f"
-	# Show verbose output about tags, branches or remotes
-	tags = tag -l
-	branches = branch --all
-	remotes = remote --verbose
-	# Amend the currently staged files to the latest commit.
-	amend = commit --amend --no-edit
-	# Credit an author on the latest commit.
-	credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
-	# Interactive rebase with the given number of latest commits.
-	reb = "!r() { git rebase -i HEAD~$1; }; r"
-	# Remove the old tag with this name and tag the latest commit with it.
-	retag = "!r() { git tag -d $1 && git push origin :refs/tags/$1 && git tag $1; }; r"
-	# Find branches containing commit
-	fb = "!f() { git branch -a --contains $1; }; f"
-	# Find tags containing commit
-	ft = "!f() { git describe --always --contains $1; }; f"
-	# Find the branch that a commit came from.
-	#
-	# https://stackoverflow.com/a/57562208
-	find-branch = name-rev --name-only --exclude=tags/*
-	# List contributors with number of commits.
-	contributors = shortlog --summary --numbered --no-merges --email
-	# Find and replace text in the entire git repo
-	fr = "!gr() { git grep -l "$1" | xargs sed -i '' -e "s/$1/$2/g" 2>/dev/null; }; gr"
-	sub-branch = "!git submodule foreach --recursive 'git switch "$(basename $(git symbolic-ref --short refs/remotes/origin/HEAD))"; git pull'"
-	# Usage: git mr <id> [target branch]
-	# $ git review-mr 1337
-	# Switches to the merge base with the overall changes as hunks.
-	review-mr = "!f() { git fetch origin refs/merge-requests/$1/head && git switch --detach FETCH_HEAD && git reset $(git merge-base HEAD ${2:-$(git branch-default)}); }; f"
-	# Find the date a file was added. Source: https://stackoverflow.com/a/25633731/8714233
-	fd = "!f() { git log --follow --format=%ad $1 | tail -1; }; f"
-	# Make local index and working tree match remote.
-	#
-	# Source: https://stackoverflow.com/a/9753364/8714233
-	reset-remote = !git fetch origin && git reset --hard "$(git rev-parse --abbrev-ref --symbolic-full-name '@{u}')" && git clean -fd
-	# <Commit before merge commit to rebase onto> <Merge commit before range of commits to rebase>
-	# <Current branch to end range of commits to rebase>
-	rebase-merge = "!f() { git rebase --onto $(git rev-list --max-count 1 HEAD@{1}) $(git rev-list --merges --max-count=1 HEAD) $(git branch --show-current); }; f"
-	# Print the current default branch on the remote.
-	branch-default = "!f() { git rev-parse --abbrev-ref origin | sed 's/origin\\///'; }; f"
-	# https://stackoverflow.com/questions/65837109/when-should-i-use-git-push-force-if-includes
-	push-force-safely = push --force-with-lease --force-if-includes
-	# https://stackoverflow.com/a/54408181/8714233
-	wt-fix-refs = "!git for-each-ref --format='%(refname:short)' refs/heads | xargs git branch -D 2>/dev/null || true"
-	switch-time = "!f() { git switch -d $(git rev-list -n 1 --first-parent --before \"$1 23:59\" $(git branch-default)) ; }; f"
-	# Delete a branch locally and on the remote.
-	branch-delete = "!f() { git branch --delete --force $1 || true && git push origin --delete $1; }; f"
-	# List all branches along with their most recent author.
-	branch-activity = "!git branch --color --all --format='%(committerdate:relative)\t%(color:yellow)%(refname:lstrip=3)%(color:reset)\t%(color:blue)%(authorname)%(color:reset)' --no-merged origin/HEAD"
-	# List local branches w/ additional info.
-	branch-list = "!git for-each-ref --color --sort=-committerdate --no-merged=HEAD --format='%(color:red)%(ahead-behind:HEAD)\t%(color:green)%(refname:short)\t%(color:blue)%(objectname:short) %(committerdate:relative)\t%(color:magenta)%(authorname)' refs/remotes/ | sed 's/ /\t/' | column --separator='\t' --table --table-columns='Ahead,Behind,Branch,Last Commit,Latest Author' | less"
-	# Prints the name of the upstream branch.
-	show-upstream-ref = rev-parse --abbrev-ref HEAD@{u}
-	# Prints the diff of the current branch (i.e., HEAD) against the remote
-	# default branch. e.g., origin/main
-	diff-changes = "!f() { git diff origin... "$@" 2>/dev/null; }; f"
-	# Logs the diff of commits between the default branch and the current branch.
-	log-changes = "!f() { git log --oneline --graph \"$@\" origin/$(git branch-default)..$(git branch --show-current); }; f"
-	# Logs commits that haven't been pushed to a remote yet.
-	log-local = "!f() { git log --oneline --decorate=no $(git show-upstream-ref)..HEAD \"$@\"; }; f"
-	# Diffs the current branch against the remote branch of the same name.
-	diff-local = "!f() { git diff $(git show-upstream-ref)..HEAD \"$@\"; }; f"
-	# Takes a file path as an argument. Prints the date the file was first added
-	# to the repository.
-	log-added-date = "log --format='format:%ci' --name-status --diff-filter=A --follow"
-	# Opens all modified, untracked, and staged files in the editor of choice.
-	# Respects the current working directory. Source:
-	# https://stackoverflow.com/a/32231077/8714233
-	edit = !"$EDITOR $(git status --short | awk '$1 ~ /^M|A|U|\\?\\?/ {print $2}');"
-	# Logs dangling commits, helpfulin recovering lost states.
-	# https://stackoverflow.com/a/91795/8714233
-	log-dangling = "!f() { git log --oneline --graph "$@" $(git fsck --no-reflog | awk '/dangling commit/ {print $3}'); }; f"
-	# Print the latest tag across all branches.
-	tag-latest = "!git describe --tags $(git rev-list --tags --max-count=1)"
-	# Converts normally cloned repo into one that better accommodates a "git
-	# worktree" based workflow.
-	worktree-convert = "!f() { grm wt convert && mv .git-main-working-tree .git && printf '' >| .git/index && git worktree add main \"$(git branch-default)\" && git worktree lock main; }; f"
-	ls-merged = "!git branch --format '%(refname:short)' --merged | grep --invert-match --line-regex \"$(git branch --show-current)\""
-	checkpoint = "!git commit -m \"wip: $@\n\n[skip ci]\""
-	diff-image = "!f() { cd -- \"${GIT_PREFIX:-.}\"; GIT_DIFF_IMAGE_ENABLED=1 git diff \"$@\"; }; f"
 [apply]
 	# Detect whitespace errors when applying a patch.
 	whitespace = fix
@@ -166,43 +68,13 @@
 	tool = difftastic
 [difftool "difftastic"]
 	cmd = difft "$LOCAL" "$REMOTE"
-[filter "lfs"]
-	clean = git-lfs clean -- %f
-	process = git-lfs filter-process
-	required = true
-	smudge = git-lfs smudge -- %f
-[filter "npmrc"]
-	clean = "sed '/_authToken/d'"
-	smudge = cat
-[filter "gpg-agent"]
-	# Filter out pinentry program on WSL 2 on windows in VS Code
-	clean = "sed '/pinentry./d'"
-	smudge = cat
-[filter "spotify-tui"]
-	clean = "sed '/^client_secret/d;/device_id/d'"
-	smudge = cat
-[filter "streamlink-crunchyroll"]
-	clean = "sed '/^crunchyroll-password=/d'"
-	smudge = cat
-[filter "i3status-rust-token"]
-	clean = "sed '/^token/d'"
-	smudge = cat
-[filter "git-config"]
-	# Using sed to delete all lines between two matching patterns:
-	# https://stackoverflow.com/a/6287940/8714233
-	clean = "sed -e '/\\[gpg\\]/d' -e '/^	program = /d' -e '/^\\[bulkworkspaces\\]/,/^\\[/{/^\\[bulkworkspaces\\]/!{/\\[/!d}}'"
-	smudge = cat
-[filter "macchina"]
-	clean = "sed '/^interface =/d'"
-	smudge = cat
-[filter "mise"]
-	clean = "sed -E -e '/^\\[tools\\]/,/^\\[/{/^\\[tools\\]/!{/\\[/!d}}' -e '/^\\[env\\]/,/^\\[/{/^\\[env\\]/!{/\\[/!d}}' -e '/^\\[alias\\]/,/^\\[env/{/^\\[alias\\]/!{/\\[env/!d}}'"
-	smudge = cat
-[filter "docker-config"]
-	clean = "jaq '{ \"detachKeys\" }'"
-	smudge = cat
 [init]
 	defaultBranch = main
+	# FIXME(bryan-hoang): https://github.com/folke/lazy.nvim/issues/2046
+	defaultRefFormat = files
+[feature]
+	experimental = true
+	manyFiles = true
 [log]
 	abbrevCommit = true
 	date = iso
@@ -254,7 +126,6 @@
 	patternType = perl
 [tag]
 	forceSignAnnotated = true
-	gpgsign = true
 	sort = version:refname
 [advice]
 	addEmptyPathspec = false
@@ -273,9 +144,10 @@
 	added = yellow
 	changed = green
 	untracked = cyan
-[feature]
-	experimental = true
-	manyFiles = true
+[clean]
+	requireForce = false
+[remote "origin"]
+	followRemoteHEAD = warn
 [rerere]
 	autoupdate = true
 	enabled = true
@@ -303,23 +175,12 @@
 	annotate = yes
 [transfer]
 	fsckobjects = true
-# https://bun.sh/docs/install/lockfile#how-do-i-git-diff-bun-s-lockfile
-[diff "lockb"]
-	textconv = bun
-	binary = true
-[clean]
-	requireForce = false
-# https://gist.github.com/dbapl/e841d321bbb3ee77a3aa
-[diff "tar"]
-	binary = true
-	textconv = tar --to-stdout --absolute-names -tvf
-[diff "tar-gz"]
-	binary = true
-	textconv = tar --to-stdout --absolute-names -tvzf
-[diff "tar-bz2"]
-	binary = true
-	textconv = tar --to-stdout --absolute-names -tvjf
-[remote "origin"]
-	followRemoteHEAD = warn
-[diff "image"]
-	command = git_diff_image
+[absorb]
+	autoStageIfNothingStaged = true
+	oneFixupPerCommit = true
+[include]
+	# Machine specific configuration. e.g., Different user.name/user.email based
+	# on current project. e.g.,
+	# `includeIf "gitdir:~/src/..."`
+	# `includeIf "hasconfig:remote.*.url:git@.../**"`
+	path = machine.gitconfig

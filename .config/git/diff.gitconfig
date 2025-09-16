@@ -1,0 +1,16 @@
+# https://bun.sh/docs/install/lockfile#how-do-i-git-diff-bun-s-lockfile
+[diff "lockb"]
+	textconv = bun
+	binary = true
+# https://gist.github.com/dbapl/e841d321bbb3ee77a3aa
+[diff "tar"]
+	binary = true
+	textconv = tar --to-stdout --absolute-names -tvf
+[diff "tar-gz"]
+	binary = true
+	textconv = tar --to-stdout --absolute-names -tvzf
+[diff "tar-bz2"]
+	binary = true
+	textconv = tar --to-stdout --absolute-names -tvjf
+[diff "image"]
+	command = git_diff_image
