@@ -3,7 +3,7 @@ return {
 	dependencies = {
 		"nvim-treesitter/nvim-treesitter",
 		{
-			"williamboman/mason.nvim",
+			"mason-org/mason.nvim",
 			opts = {
 				ensure_installed = {
 					"pkl-lsp",
