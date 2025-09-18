@@ -75,7 +75,26 @@ return {
 						on_new_config = function() end,
 					},
 					-- YAML
-					yamlls = { mason = false },
+					yamlls = {
+						-- `npm` package.
+						mason = false,
+						-- Avoid extending to allow replacing.
+						before_init = function(_, _) end,
+						settings = {
+							yaml = {
+								schemas = require("schemastore").yaml.schemas({
+									replace = {
+										["skaffold.yaml"] = {
+											description = "Skaffold v4beta6",
+											fileMatch = { "skaffold.yaml" },
+											name = "skaffold.yaml",
+											url = "https://raw.githubusercontent.com/GoogleContainerTools/skaffold/main/docs-v2/content/en/schemas/v4beta6.json",
+										},
+									},
+								}),
+							},
+						},
+					},
 					-- Python
 					pyright = { mason = false },
 					ruff = { mason = false },
