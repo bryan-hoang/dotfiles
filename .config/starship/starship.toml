@@ -158,6 +158,9 @@ format = "[$ssh_symbol$hostname]($style):"
 ssh_symbol = ""
 trim_at = ""
 
+[java]
+format = "[${symbol}(${version})]($style) "
+
 [line_break]
 disabled = false
 
