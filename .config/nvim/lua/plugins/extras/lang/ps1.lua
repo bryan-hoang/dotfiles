@@ -61,7 +61,7 @@ return {
 							"-Command",
 							"Invoke-ScriptAnalyzer",
 							"-ScriptDefinition",
-							"($input | Out-String) | ConvertTo-Json -Depth 3",
+							"($input | Out-String) | ConvertTo-Json -Depth 4",
 						},
 						parser = function(output)
 							local decoded = vim.json.decode(output)
