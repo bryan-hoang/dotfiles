@@ -45,7 +45,7 @@ return {
 							for _, result in ipairs(decoded.results or {}) do
 								local diagnostic = {
 									lnum = result.line - 1,
-									col = result.column,
+									col = result.column - 1,
 									severity = fixinatorSeverities[result.severity],
 									message = result.description,
 									source = "fixinator",
