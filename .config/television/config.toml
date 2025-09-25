@@ -5,7 +5,8 @@ input_bar_position = "bottom"
 theme = "catppuccin"
 
 [keybindings]
-# Quit the application
-quit = ["esc", "ctrl-c", "ctrl-g"]
-# Toggle the help bar
-toggle_help = "ctrl-h"
+# Application control
+# ------------------
+esc = "quit"
+ctrl-c = "quit"
+ctrl-g = "quit"
