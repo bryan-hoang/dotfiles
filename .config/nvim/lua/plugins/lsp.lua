@@ -60,7 +60,7 @@ return {
 					cmake = { "cmake_format" },
 					xml = { "xmlstarlet" },
 				},
-				-- LazyVim will merge the options you set here with builtin formatters.
+				-- LazyVim will merge the options you set here with built-in formatters.
 				-- You can also define any custom formatters here.
 				---@type table<string,table>
 				formatters = {
