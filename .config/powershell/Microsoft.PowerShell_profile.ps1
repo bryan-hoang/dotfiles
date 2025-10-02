@@ -2,7 +2,7 @@
 
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles
 
-foreach ($noun in 'Functions','Environment','Completions','Machine')
+foreach ($noun in 'Functions', 'Environment', 'Completions', 'Aliases', 'Machine')
 {
 	$script = Join-Path $HOME '.config' 'powershell' "Initialize-$noun.ps1"
 	if (!(Test-Path -Path $script))

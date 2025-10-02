@@ -40,3 +40,7 @@ Add-UserPath "$env:PNPM_HOME"
 if ($IsWindows) {
 		$env:PATH = "$([Environment]::GetEnvironmentVariable("Path", "User"))$([Environment]::GetEnvironmentVariable("Path", "Machine"))"
 }
+
+if (Test-CommandExists 'vivid') {
+	Set-UserEnvVar 'LS_COLORS' (vivid generate catppuccin-mocha)
+}
