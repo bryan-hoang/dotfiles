@@ -178,6 +178,8 @@
 [absorb]
 	autoStageIfNothingStaged = true
 	oneFixupPerCommit = true
+[includeIf "gitdir/i:C:/"]
+	path = windows.gitconfig
 [include]
 	# Machine specific configuration. e.g., Different user.name/user.email based
 	# on current project. e.g.,
