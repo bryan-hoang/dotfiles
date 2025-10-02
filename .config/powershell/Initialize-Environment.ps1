@@ -37,4 +37,6 @@ Add-UserPath (Join-Path $env:APPDATA 'npm')
 Set-UserEnvVar 'PNPM_HOME' (Join-Path $env:XDG_DATA_HOME 'pnpm')
 Add-UserPath "$env:PNPM_HOME"
 
-$env:PATH = "$([Environment]::GetEnvironmentVariable("Path", "User"))$([Environment]::GetEnvironmentVariable("Path", "Machine"))"
+if ($IsWindows) {
+		$env:PATH = "$([Environment]::GetEnvironmentVariable("Path", "User"))$([Environment]::GetEnvironmentVariable("Path", "Machine"))"
+}
