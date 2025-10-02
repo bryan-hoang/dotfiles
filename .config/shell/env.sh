@@ -367,7 +367,8 @@ export DENO_INSTALL_ROOT="$XDG_LOCAL_HOME"
 export GRIT_USER_CONFIG="$XDG_CONFIG_HOME"/grit
 export NLTK_DATA="$XDG_CACHE_HOME/nltk"
 export AZURE_CONFIG_DIR="$XDG_DATA_HOME"/azure
-export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+# https://learn.microsoft.com/en-us/dotnet/core/runtime-config/globalization#invariant-mode
+export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=0
 export DOTNET_CLI_HOME="$XDG_DATA_HOME"/dotnet
 export NUGET_PACKAGES="$XDG_CACHE_HOME"/nuget-packages
 export OMNISHARPHOME="$XDG_CONFIG_HOME"/omnisharp
