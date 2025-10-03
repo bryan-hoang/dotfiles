@@ -66,6 +66,7 @@
 	renames = copies
 	submodule = log
 	tool = difftastic
+	renameLimit = 0
 [difftool "difftastic"]
 	cmd = difft "$LOCAL" "$REMOTE"
 [init]
