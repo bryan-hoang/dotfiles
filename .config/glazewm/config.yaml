@@ -258,7 +258,7 @@ keybindings:
 
   # Change the focused window to be fullscreen.
   - commands: ['toggle-fullscreen']
-    bindings: ['alt+shift+f']
+    bindings: ['alt+ctrl+f']
 
   # Minimize focused window.
   - commands: ['toggle-minimized']
