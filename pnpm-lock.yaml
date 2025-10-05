@@ -16,7 +16,7 @@ importers:
         version: 20.0.0
       '@stylistic/stylelint-config':
         specifier: 3.0.1
-        version: 3.0.1(stylelint@16.24.0(typescript@5.9.3))
+        version: 3.0.1(stylelint@16.25.0(typescript@5.9.3))
       debug:
         specifier: 4.4.3
         version: 4.4.3
@@ -39,11 +39,11 @@ importers:
         specifier: 2.5.19
         version: 2.5.19(prettier@3.6.2)
       stylelint:
-        specifier: 16.24.0
-        version: 16.24.0(typescript@5.9.3)
+        specifier: 16.25.0
+        version: 16.25.0(typescript@5.9.3)
       stylelint-config-standard-scss:
         specifier: 16.0.0
-        version: 16.0.0(postcss@8.5.6)(stylelint@16.24.0(typescript@5.9.3))
+        version: 16.0.0(postcss@8.5.6)(stylelint@16.25.0(typescript@5.9.3))
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -92,8 +92,8 @@ packages:
     peerDependencies:
       postcss-selector-parser: ^7.0.0
 
-  '@dual-bundle/import-meta-resolve@4.1.0':
-    resolution: {integrity: sha512-+nxncfwHM5SgAtrVzgpzJOI1ol0PkumhVo469KCf9lUi21IGcY90G98VuHm9VRrUypmAzawAHO9bs6hqeADaVg==}
+  '@dual-bundle/import-meta-resolve@4.2.1':
+    resolution: {integrity: sha512-id+7YRUgoUX6CgV0DtuhirQWodeeA7Lf4i2x71JS/vtA5pRb/hIGWlw+G6MeXvsM+MXrz0VAydTGElX1rAfgPg==}
 
   '@keyv/serialize@1.1.0':
     resolution: {integrity: sha512-RlDgexML7Z63Q8BSaqhXdCYNBy/JQnqYIwxofUrNLGCblOMHp+xux2Q8nLMLlPpgHQPoU0Do8Z6btCpRBEqZ8g==}
@@ -713,8 +713,8 @@ packages:
     peerDependencies:
       stylelint: ^16.0.2
 
-  stylelint@16.24.0:
-    resolution: {integrity: sha512-7ksgz3zJaSbTUGr/ujMXvLVKdDhLbGl3R/3arNudH7z88+XZZGNLMTepsY28WlnvEFcuOmUe7fg40Q3lfhOfSQ==}
+  stylelint@16.25.0:
+    resolution: {integrity: sha512-Li0avYWV4nfv1zPbdnxLYBGq4z8DVZxbRgx4Kn6V+Uftz1rMoF1qiEI3oL4kgWqyYgCgs7gT5maHNZ82Gk03vQ==}
     engines: {node: '>=18.12.0'}
     hasBin: true
 
@@ -816,7 +816,7 @@ snapshots:
     dependencies:
       postcss-selector-parser: 7.1.0
 
-  '@dual-bundle/import-meta-resolve@4.1.0': {}
+  '@dual-bundle/import-meta-resolve@4.2.1': {}
 
   '@keyv/serialize@1.1.0': {}
 
@@ -834,12 +834,12 @@ snapshots:
 
   '@pkgr/core@0.2.9': {}
 
-  '@stylistic/stylelint-config@3.0.1(stylelint@16.24.0(typescript@5.9.3))':
+  '@stylistic/stylelint-config@3.0.1(stylelint@16.25.0(typescript@5.9.3))':
     dependencies:
-      '@stylistic/stylelint-plugin': 4.0.0(stylelint@16.24.0(typescript@5.9.3))
-      stylelint: 16.24.0(typescript@5.9.3)
+      '@stylistic/stylelint-plugin': 4.0.0(stylelint@16.25.0(typescript@5.9.3))
+      stylelint: 16.25.0(typescript@5.9.3)
 
-  '@stylistic/stylelint-plugin@4.0.0(stylelint@16.24.0(typescript@5.9.3))':
+  '@stylistic/stylelint-plugin@4.0.0(stylelint@16.25.0(typescript@5.9.3))':
     dependencies:
       '@csstools/css-parser-algorithms': 3.0.5(@csstools/css-tokenizer@3.0.4)
       '@csstools/css-tokenizer': 3.0.4
@@ -848,7 +848,7 @@ snapshots:
       postcss-selector-parser: 7.1.0
       postcss-value-parser: 4.2.0
       style-search: 0.1.0
-      stylelint: 16.24.0(typescript@5.9.3)
+      stylelint: 16.25.0(typescript@5.9.3)
 
   '@types/conventional-commits-parser@5.0.1':
     dependencies:
@@ -1310,33 +1310,33 @@ snapshots:
 
   style-search@0.1.0: {}
 
-  stylelint-config-recommended-scss@16.0.1(postcss@8.5.6)(stylelint@16.24.0(typescript@5.9.3)):
+  stylelint-config-recommended-scss@16.0.1(postcss@8.5.6)(stylelint@16.25.0(typescript@5.9.3)):
     dependencies:
       postcss-scss: 4.0.9(postcss@8.5.6)
-      stylelint: 16.24.0(typescript@5.9.3)
-      stylelint-config-recommended: 17.0.0(stylelint@16.24.0(typescript@5.9.3))
-      stylelint-scss: 6.12.1(stylelint@16.24.0(typescript@5.9.3))
+      stylelint: 16.25.0(typescript@5.9.3)
+      stylelint-config-recommended: 17.0.0(stylelint@16.25.0(typescript@5.9.3))
+      stylelint-scss: 6.12.1(stylelint@16.25.0(typescript@5.9.3))
     optionalDependencies:
       postcss: 8.5.6
 
-  stylelint-config-recommended@17.0.0(stylelint@16.24.0(typescript@5.9.3)):
+  stylelint-config-recommended@17.0.0(stylelint@16.25.0(typescript@5.9.3)):
     dependencies:
-      stylelint: 16.24.0(typescript@5.9.3)
+      stylelint: 16.25.0(typescript@5.9.3)
 
-  stylelint-config-standard-scss@16.0.0(postcss@8.5.6)(stylelint@16.24.0(typescript@5.9.3)):
+  stylelint-config-standard-scss@16.0.0(postcss@8.5.6)(stylelint@16.25.0(typescript@5.9.3)):
     dependencies:
-      stylelint: 16.24.0(typescript@5.9.3)
-      stylelint-config-recommended-scss: 16.0.1(postcss@8.5.6)(stylelint@16.24.0(typescript@5.9.3))
-      stylelint-config-standard: 39.0.0(stylelint@16.24.0(typescript@5.9.3))
+      stylelint: 16.25.0(typescript@5.9.3)
+      stylelint-config-recommended-scss: 16.0.1(postcss@8.5.6)(stylelint@16.25.0(typescript@5.9.3))
+      stylelint-config-standard: 39.0.0(stylelint@16.25.0(typescript@5.9.3))
     optionalDependencies:
       postcss: 8.5.6
 
-  stylelint-config-standard@39.0.0(stylelint@16.24.0(typescript@5.9.3)):
+  stylelint-config-standard@39.0.0(stylelint@16.25.0(typescript@5.9.3)):
     dependencies:
-      stylelint: 16.24.0(typescript@5.9.3)
-      stylelint-config-recommended: 17.0.0(stylelint@16.24.0(typescript@5.9.3))
+      stylelint: 16.25.0(typescript@5.9.3)
+      stylelint-config-recommended: 17.0.0(stylelint@16.25.0(typescript@5.9.3))
 
-  stylelint-scss@6.12.1(stylelint@16.24.0(typescript@5.9.3)):
+  stylelint-scss@6.12.1(stylelint@16.25.0(typescript@5.9.3)):
     dependencies:
       css-tree: 3.1.0
       is-plain-object: 5.0.0
@@ -1346,15 +1346,15 @@ snapshots:
       postcss-resolve-nested-selector: 0.1.6
       postcss-selector-parser: 7.1.0
       postcss-value-parser: 4.2.0
-      stylelint: 16.24.0(typescript@5.9.3)
+      stylelint: 16.25.0(typescript@5.9.3)
 
-  stylelint@16.24.0(typescript@5.9.3):
+  stylelint@16.25.0(typescript@5.9.3):
     dependencies:
       '@csstools/css-parser-algorithms': 3.0.5(@csstools/css-tokenizer@3.0.4)
       '@csstools/css-tokenizer': 3.0.4
       '@csstools/media-query-list-parser': 4.0.3(@csstools/css-parser-algorithms@3.0.5(@csstools/css-tokenizer@3.0.4))(@csstools/css-tokenizer@3.0.4)
       '@csstools/selector-specificity': 5.0.0(postcss-selector-parser@7.1.0)
-      '@dual-bundle/import-meta-resolve': 4.1.0
+      '@dual-bundle/import-meta-resolve': 4.2.1
       balanced-match: 2.0.0
       colord: 2.9.3
       cosmiconfig: 9.0.0(typescript@5.9.3)
