@@ -31,11 +31,14 @@ Set-UserEnvVar 'PYTHON_HISTORY' (Join-Path $env:XDG_STATE_HOME 'python' 'history
 Set-UserEnvVar 'MINIKUBE_HOME' (Join-Path $env:XDG_DATA_HOME 'minikube')
 Set-UserEnvVar 'KUBECONFIG' (Join-Path $env:XDG_CONFIG_HOME 'kube')
 Set-UserEnvVar 'KUBECACHEDIR' (Join-Path $env:XDG_CACHE_HOME 'kube')
+Set-UserEnvVar 'PNPM_HOME' (Join-Path $env:XDG_DATA_HOME 'pnpm')
 
 Add-UserPath "$env:XDG_BIN_HOME"
-Add-UserPath (Join-Path $env:APPDATA 'npm')
-Set-UserEnvVar 'PNPM_HOME' (Join-Path $env:XDG_DATA_HOME 'pnpm')
+Add-UserPath (Join-Path $env:APPDATA "npm")
 Add-UserPath "$env:PNPM_HOME"
+if (Test-Path $(Join-Path "$env:CARGO_HOME" "bin")) {
+  Add-UserPath $(Join-Path "$env:CARGO_HOME" "bin")
+}
 
 if ($IsWindows) {
 		$env:PATH = "$([Environment]::GetEnvironmentVariable("Path", "User"))$([Environment]::GetEnvironmentVariable("Path", "Machine"))"
