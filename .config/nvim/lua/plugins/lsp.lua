@@ -87,6 +87,9 @@ return {
 					cmake_format = {
 						args = { "--dangle-parens", "--enable-markup=no ", "-" },
 					},
+					xmlstarlet = {
+						args = { "format", "--indent-tab", "-" },
+					},
 				},
 			}
 			return vim.tbl_deep_extend("force", opts, user_opts)
