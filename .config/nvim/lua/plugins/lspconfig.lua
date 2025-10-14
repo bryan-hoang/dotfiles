@@ -117,7 +117,6 @@ return {
 					},
 					-- LaTeX
 					texlab = { mason = false },
-					taplo = { mason = false },
 					svelte = { mason = false },
 
 					-- C#/F#

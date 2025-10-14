@@ -143,6 +143,9 @@ version_format = 'v${major}.${minor}'
 [direnv]
 disabled = true
 
+[dotnet]
+format = "[$symbol($version )(🎯 $tfm)]($style) "
+
 [gcloud]
 # The module isn't very useful :(
 disabled = true
