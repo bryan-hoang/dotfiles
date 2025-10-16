@@ -1,27 +1,23 @@
 #!/usr/bin/env pwsh
 
-# https://github.com/dahlbyk/posh-git#installing-posh-git-via-powershellget-on-linux-macos-and-windows
-if (!(Get-Module -ListAvailable -Name posh-git)) {
-	Install-Module posh-git -Scope CurrentUser -Force
+if (!(Get-Module -ListAvailable -Name PSCompletions )) {
+	Install-Module PSCompletions -Scope CurrentUser -Force
 }
-Import-Module posh-git
-
-if (!(Get-Module -ListAvailable -Name DockerCompletion)) {
-	Install-Module DockerCompletion -Scope CurrentUser -Force
-}
-Import-Module DockerCompletion
-
-if (Test-CommandExists uv) {
-	(& uv generate-shell-completion powershell) | Out-String | Invoke-Expression
-	(& uvx --generate-shell-completion powershell) | Out-String | Invoke-Expression
-}
+Import-Module PSCompletions
 
 if (Test-CommandExists sqlcmd.exe) {
 	(& sqlcmd completion powershell) | Out-String | Invoke-Expression
 }
 
-if (Test-CommandExists kubectl) {
-	(& kubectl completion powershell) | Out-String | Invoke-Expression
+if (Test-CommandExists dotnet) {
+	# https://learn.microsoft.com/en-us/dotnet/core/tools/enable-tab-autocomplete#powershell
+	# PowerShell parameter completion shim for the dotnet CLI
+	Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
+		param($wordToComplete, $commandAst, $cursorPosition)
+		dotnet complete --position $cursorPosition "$commandAst" | ForEach-Object {
+			[System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
+		}
+	}
 }
 
 # Import the Chocolatey Profile that contains the necessary code to enable

@@ -14,7 +14,7 @@ foreach ($noun in 'Functions', 'Environment', 'Completions', 'Aliases', 'Machine
 $PSReadLineOptions = @{
 	EditMode = "Emacs"
 	# https://learn.microsoft.com/en-us/powershell/module/psreadline/about/about_psreadline?view=powershell-7.5#enable-predictive-intellisense
-	PredictionSource = "HistoryAndPlugin"
+	PredictionSource = "History"
 	HistorySearchCursorMovesToEnd = $true
 }
 Set-PSReadLineOption @PSReadLineOptions
