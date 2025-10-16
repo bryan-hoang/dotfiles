@@ -21,6 +21,7 @@ Set-PSReadLineOption @PSReadLineOptions
 
 # I hecking love having a consistent editing mode.
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+Set-PSReadlineKeyHandler -Key Ctrl+w -Function BackwardKillWord
 
 if (Test-CommandExists starship) {
 	# Initializing Starship prompt.
