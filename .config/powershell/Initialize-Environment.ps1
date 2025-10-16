@@ -32,6 +32,7 @@ Set-UserEnvVar 'MINIKUBE_HOME' (Join-Path $env:XDG_DATA_HOME 'minikube')
 Set-UserEnvVar 'KUBECONFIG' (Join-Path $env:XDG_CONFIG_HOME 'kube')
 Set-UserEnvVar 'KUBECACHEDIR' (Join-Path $env:XDG_CACHE_HOME 'kube')
 Set-UserEnvVar 'PNPM_HOME' (Join-Path $env:XDG_DATA_HOME 'pnpm')
+Set-UserEnvVar 'MISE_WINDOWS_DEFAULT_INLINE_SHELL_ARGS' 'pwsh -NoProfile -NonInteractive -Command'
 
 Add-UserPath $env:XDG_BIN_HOME
 Add-UserPath (Join-Path $env:APPDATA 'npm')
@@ -52,5 +53,5 @@ if (Test-CommandExists 'vivid') {
 }
 
 if (Test-CommandExists 'nvim') {
-  Set-UserEnvVar 'EDITOR' 'nvim'
+	Set-UserEnvVar 'EDITOR' 'nvim'
 }
