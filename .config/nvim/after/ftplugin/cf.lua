@@ -1,1 +1,1 @@
-vim.lsp.enable("adobe-cfml-lsp")
+-- vim.lsp.enable("adobe-cfml-lsp")
