@@ -2,11 +2,9 @@
 
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles
 
-foreach ($noun in 'Functions', 'Environment', 'Completions', 'Aliases', 'Machine')
-{
+foreach ($noun in 'Functions', 'Environment', 'Completions', 'Aliases', 'Machine') {
 	$script = Join-Path $HOME '.config' 'powershell' "Initialize-$noun.ps1"
-	if (!(Test-Path -Path $script))
-	{
+	if (!(Test-Path -Path $script)) {
 		continue
 	}
 
@@ -24,13 +22,10 @@ Set-PSReadLineOption @PSReadLineOptions
 # I hecking love having a consistent editing mode.
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 
-if (Test-CommandExists starship)
-{
+if (Test-CommandExists starship) {
 	# Initializing Starship prompt.
 	Invoke-Expression (&starship init powershell)
-}
-else
-{
+} else {
 	# Customize the prompt
 	function prompt {
 		$identity = [Security.Principal.WindowsIdentity]::GetCurrent()
@@ -49,7 +44,10 @@ else
 
 # NOTE: `zoxide` should be initialized after `starship`.
 # https://github.com/ajeetdsouza/zoxide/issues/1021#issuecomment-2810261891
-if (Test-CommandExists zoxide)
-{
+if (Test-CommandExists zoxide) {
 	Invoke-Expression (& { (zoxide init powershell | Out-String) })
+}
+
+if (Test-CommandExists tabs) {
+  tabs 2
 }

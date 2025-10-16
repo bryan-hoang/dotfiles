@@ -2,7 +2,7 @@
 
 Set-UserEnvVar 'POWERSHELL_UPDATECHECK' 'LTS'
 Set-UserEnvVar 'MSYS' 'winsymlinks:nativestrict'
-Set-UserEnvVar 'USERPROFILE' "$HOME"
+Set-UserEnvVar 'USERPROFILE' $HOME
 Set-UserEnvVar 'APPDATA' (Join-Path -Resolve $env:USERPROFILE 'AppData' 'Roaming')
 Set-UserEnvVar 'XDG_CONFIG_HOME' (Join-Path $env:USERPROFILE '.config')
 Set-UserEnvVar 'XDG_CONFIG_HOME' (Join-Path $env:USERPROFILE '.config')
@@ -33,20 +33,24 @@ Set-UserEnvVar 'KUBECONFIG' (Join-Path $env:XDG_CONFIG_HOME 'kube')
 Set-UserEnvVar 'KUBECACHEDIR' (Join-Path $env:XDG_CACHE_HOME 'kube')
 Set-UserEnvVar 'PNPM_HOME' (Join-Path $env:XDG_DATA_HOME 'pnpm')
 
-Add-UserPath "$env:XDG_BIN_HOME"
-Add-UserPath (Join-Path $env:APPDATA "npm")
-Add-UserPath "$env:PNPM_HOME"
-if (Test-Path $(Join-Path "$env:CARGO_HOME" "bin")) {
-	Add-UserPath $(Join-Path "$env:CARGO_HOME" "bin")
+Add-UserPath $env:XDG_BIN_HOME
+Add-UserPath (Join-Path $env:APPDATA 'npm')
+Add-UserPath $env:PNPM_HOME
+if (Test-Path $(Join-Path $env:CARGO_HOME 'bin')) {
+	Add-UserPath $(Join-Path $env:CARGO_HOME 'bin')
 }
-if (Test-Path $(Join-Path $env:XDG_DATA_HOME "nvim-data" "mason" "bin")) {
-	Add-UserPath $(Join-Path $env:XDG_DATA_HOME "nvim-data" "mason" "bin")
+if (Test-Path $(Join-Path $env:XDG_DATA_HOME 'nvim-data' 'mason' 'bin')) {
+	Add-UserPath $(Join-Path $env:XDG_DATA_HOME 'nvim-data' 'mason' 'bin')
 }
 
 if ($IsWindows) {
-	$env:PATH = "$([Environment]::GetEnvironmentVariable("Path", "User"))$([Environment]::GetEnvironmentVariable("Path", "Machine"))"
+	$env:PATH = "$([Environment]::GetEnvironmentVariable('Path', 'User'))$([Environment]::GetEnvironmentVariable('Path', 'Machine'))"
 }
 
 if (Test-CommandExists 'vivid') {
 	Set-UserEnvVar 'LS_COLORS' (vivid generate catppuccin-mocha)
+}
+
+if (Test-CommandExists 'nvim') {
+  Set-UserEnvVar 'EDITOR' 'nvim'
 }
