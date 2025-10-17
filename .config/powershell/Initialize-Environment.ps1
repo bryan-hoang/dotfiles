@@ -36,6 +36,18 @@ Set-UserEnvVar 'MISE_WINDOWS_DEFAULT_INLINE_SHELL_ARGS' 'pwsh -NoProfile -NonInt
 Set-UserEnvVar 'NUGET_PACKAGES' $(Join-Path $env:XDG_CACHE_HOME 'nuget-packages')
 Set-UserEnvVar 'NUGET_PLUGINS_CACHE_PATH' $(Join-Path $env:XDG_CACHE_HOME 'nuget-plugins')
 
+if ($IsWindows) {
+	# Normalize ending with semi-colon. Some installers don't add it -_-
+	if (-not [Environment]::GetEnvironmentVariable('Path', 'User').EndsWith(';')) {
+		[Environment]::SetEnvironmentVariable(
+			'Path',
+			"$([Environment]::GetEnvironmentVariable('Path', 'User'));",
+			'User'
+		)
+	}
+}
+
+# PATH
 Add-UserPath $env:XDG_BIN_HOME
 Add-UserPath $(Join-Path $env:APPDATA 'npm')
 Add-UserPath $env:PNPM_HOME
