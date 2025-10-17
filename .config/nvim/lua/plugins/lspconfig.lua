@@ -59,7 +59,6 @@ return {
 				servers = {
 					-- JSON
 					jsonls = {
-						mason = false,
 						settings = {
 							json = {
 								schemas = require("schemastore").json.schemas({
@@ -76,8 +75,6 @@ return {
 					},
 					-- YAML
 					yamlls = {
-						-- `npm` package.
-						mason = false,
 						-- Avoid extending to allow replacing.
 						before_init = function(_, _) end,
 						settings = {
