@@ -134,6 +134,7 @@
 	detachedHead = false
 	pushAlreadyExists = true
 	statusHints = false
+	forceDeleteBranch = false
 [credential]
 	helper = cache
 [column]
