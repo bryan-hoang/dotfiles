@@ -62,7 +62,7 @@ if ($IsWindows) {
 	$env:PATH = "$([Environment]::GetEnvironmentVariable('Path', 'User'))$([Environment]::GetEnvironmentVariable('Path', 'Machine'))"
 }
 
-if (Test-CommandExists 'vivid') {
+if ((Test-CommandExists 'vivid') -and (-not [Environment]::GetEnvironmentVariable('LS_COLORS', 'User'))) {
 	Set-UserEnvVar 'LS_COLORS' (vivid generate catppuccin-mocha)
 }
 

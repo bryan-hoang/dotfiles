@@ -1,34 +1,52 @@
 #!/usr/bin/env pwsh
 
-if (!(Get-Module -ListAvailable -Name PSCompletions )) {
+if (-not (Get-Module -ListAvailable -Name PSCompletions)) {
 	Install-Module PSCompletions -Scope CurrentUser -Force
 }
-Import-Module PSCompletions
+# Import-Module PSCompletions
 
-if (Test-CommandExists kubectl) {
-	kubectl completion powershell | Out-String | Invoke-Expression
+If (-not (Get-Module -ListAvailable -Name posh-git)) {
+	Install-Module posh-git -Scope CurrentUser -Force
+}
+Import-Module posh-git
+
+$PwshCompletionDir = $(Join-Path $env:XDG_DATA_HOME 'powershell' 'completions')
+if (-not (Test-Path $PwshCompletionDir)) {
+	New-Item -ItemType Directory -Force -Path $PwshCompletionDir > $null
 }
 
-if (Test-CommandExists sqlcmd.exe) {
-	(& sqlcmd completion powershell) | Out-String | Invoke-Expression
-}
-
-if (Test-CommandExists dotnet) {
-	# https://learn.microsoft.com/en-us/dotnet/core/tools/enable-tab-autocomplete#powershell
-	# PowerShell parameter completion shim for the dotnet CLI
-	Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
-		param($wordToComplete, $commandAst, $cursorPosition)
-		dotnet complete --position $cursorPosition "$commandAst" | ForEach-Object {
-			[System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
-		}
+function Add-Completion {
+	[CmdletBinding()]
+	param (
+		[Parameter(Mandatory)]
+		[string]$CommandToComplete,
+		[Parameter(Mandatory)]
+		[string]$CompletionCommand
+	)
+	$completionFile = $(Join-Path $PwshCompletionDir "${CommandToComplete}.ps1")
+	if (-not (Test-CommandExists $CommandToComplete)) {
+		return
+	}
+	if (-not (Test-Path $completionFile)) {
+		Invoke-Expression $CompletionCommand > $completionFile
 	}
 }
 
-# Import the Chocolatey Profile that contains the necessary code to enable
-# tab-completions to function for `choco`.
-# Be aware that if you are missing these lines from your profile, tab completion
-# for `choco` will not function.
-# See https://ch0.co/tab-completion for details.
-if (($IsWindows) -and ($env:ChocolateyInstall) -and (Test-Path(Join-Path $env:ChocolateyInstall "helpers" "chocolateyProfile.psm1"))) {
-	Import-Module "$ChocolateyProfile"
+Add-Completion 'kubectl' 'kubectl completion powershell'
+# Add-Completion 'sqlcmd' 'sqlcmd completion powershell'
+
+$completionFiles = Get-ChildItem $PwshCompletionDir -Filter *.ps1
+foreach ($file in $completionFiles) {
+	. $file.FullName
 }
+
+# if (Test-CommandExists dotnet) {
+# 	# https://learn.microsoft.com/en-us/dotnet/core/tools/enable-tab-autocomplete#powershell
+# 	# PowerShell parameter completion shim for the dotnet CLI
+# 	Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
+# 		param($wordToComplete, $commandAst, $cursorPosition)
+# 		dotnet complete --position $cursorPosition "$commandAst" | ForEach-Object {
+# 			[System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
+# 		}
+# 	}
+# }
