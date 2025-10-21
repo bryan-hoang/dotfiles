@@ -5,6 +5,10 @@ if (!(Get-Module -ListAvailable -Name PSCompletions )) {
 }
 Import-Module PSCompletions
 
+if (Test-CommandExists kubectl) {
+	kubectl completion powershell | Out-String | Invoke-Expression
+}
+
 if (Test-CommandExists sqlcmd.exe) {
 	(& sqlcmd completion powershell) | Out-String | Invoke-Expression
 }
