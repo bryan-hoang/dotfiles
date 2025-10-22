@@ -43,6 +43,10 @@ if (Test-CommandExists starship) {
 	}
 }
 
+if (Test-CommandExists mise) {
+	mise activate pwsh | Out-String | Invoke-Expression
+}
+
 # NOTE: `zoxide` should be initialized after `starship`.
 # https://github.com/ajeetdsouza/zoxide/issues/1021#issuecomment-2810261891
 if (Test-CommandExists zoxide) {
