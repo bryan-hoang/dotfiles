@@ -156,6 +156,9 @@ format = "[$symbol$branch(:$remote_branch)]($style) "
 [git_metrics]
 disabled = false
 
+[gradle]
+format = "[$symbol($version)]($style) "
+
 [hostname]
 format = "[$ssh_symbol$hostname]($style):"
 ssh_symbol = ""
