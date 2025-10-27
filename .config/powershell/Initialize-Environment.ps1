@@ -28,11 +28,19 @@ Set-UserEnvVar 'OMNISHARPHOME' $(Join-Path $env:XDG_CONFIG_HOME 'omnisharp')
 Set-UserEnvVar 'NODE_REPL_HISTORY' $(Join-Path $env:XDG_STATE_HOME 'node' 'history')
 Set-UserEnvVar 'PYTHON_HISTORY' $(Join-Path $env:XDG_STATE_HOME 'python' 'history')
 Set-UserEnvVar 'MINIKUBE_HOME' $(Join-Path $env:XDG_DATA_HOME 'minikube')
-Set-UserEnvVar 'KUBECONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'kube')
+Set-UserEnvVar 'KUBECONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'kube' 'config.yaml')
 Set-UserEnvVar 'KUBECACHEDIR' $(Join-Path $env:XDG_CACHE_HOME 'kube')
 Set-UserEnvVar 'PNPM_HOME' $(Join-Path $env:XDG_DATA_HOME 'pnpm')
 Set-UserEnvVar 'MISE_WINDOWS_DEFAULT_INLINE_SHELL_ARGS' 'pwsh -NoProfile -NonInteractive -Command'
 Set-UserEnvVar 'GRADLE_USER_HOME' $(Join-Path $env:XDG_DATA_HOME 'gradle')
+Set-UserEnvVar 'TEALDEER_CONFIG_DIR' $(Join-Path $env:XDG_CONFIG_HOME 'tealdeer')
+Set-UserEnvVar 'FZF_DEFAULT_OPTS' @"
+--color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8
+--color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC
+--color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8
+--color=selected-bg:#45475A
+--color=border:#6C7086,label:#CDD6F4
+"@
 
 Set-UserEnvVar 'NUGET_PACKAGES' $(Join-Path $env:XDG_CACHE_HOME 'nuget-packages')
 Set-UserEnvVar 'NUGET_PLUGINS_CACHE_PATH' $(Join-Path $env:XDG_CACHE_HOME 'nuget-plugins')
