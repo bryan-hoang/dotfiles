@@ -167,6 +167,11 @@ trim_at = ""
 [java]
 format = "[${symbol}(${version})]($style) "
 
+[kubernetes]
+disabled = false
+format = "[$symbol$context(\\($namespace\\))]($style) "
+style = "blue bold"
+
 [line_break]
 disabled = false
 
