@@ -18,7 +18,8 @@ export SHELL_BASENAME
 # This avoids getting "command not found: _mise_hook" for every prompt due too
 # starship's hook trying to to eval the ones it "saved".
 does_command_exist starship && eval "$(starship init "$SHELL_BASENAME")"
-does_command_exist mise && eval "$(mise activate "$SHELL_BASENAME")"
+# Bug w/ mise on windows in Git Bash.
+does_command_exist mise && ! is_git_bash && eval "$(mise activate "$SHELL_BASENAME")"
 
 if [[ -n $SSH_CONNECTION ]] \
 	&& [[ -z $TMUX ]] \
