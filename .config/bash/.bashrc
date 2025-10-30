@@ -86,4 +86,4 @@ if is_git_bash; then
 	start_ssh_agent
 fi
 
-[[ -n ${BLE_VERSION-} ]] && ble-attach
+[[ -z ${BLE_VERSION-} ]] || ble-attach
