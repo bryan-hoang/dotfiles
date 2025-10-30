@@ -26,9 +26,11 @@ Set-UserEnvVar 'ZEBAR_CONFIG_DIR' $(Join-Path $env:XDG_CONFIG_HOME 'zebar')
 Set-UserEnvVar 'DOTNET_CLI_HOME' $(Join-Path $env:XDG_DATA_HOME 'dotnet')
 Set-UserEnvVar 'OMNISHARPHOME' $(Join-Path $env:XDG_CONFIG_HOME 'omnisharp')
 Set-UserEnvVar 'NODE_REPL_HISTORY' $(Join-Path $env:XDG_STATE_HOME 'node' 'history')
+
 Set-UserEnvVar 'MINIKUBE_HOME' $(Join-Path $env:XDG_DATA_HOME 'minikube')
 Set-UserEnvVar 'KUBECONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'kube' 'config.yaml')
 Set-UserEnvVar 'KUBECACHEDIR' $(Join-Path $env:XDG_CACHE_HOME 'kube')
+
 Set-UserEnvVar 'PNPM_HOME' $(Join-Path $env:XDG_DATA_HOME 'pnpm')
 Set-UserEnvVar 'MISE_WINDOWS_DEFAULT_INLINE_SHELL_ARGS' 'pwsh -NoProfile -NonInteractive -Command'
 Set-UserEnvVar 'GRADLE_USER_HOME' $(Join-Path $env:XDG_DATA_HOME 'gradle')
