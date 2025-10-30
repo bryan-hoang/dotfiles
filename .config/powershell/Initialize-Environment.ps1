@@ -26,7 +26,6 @@ Set-UserEnvVar 'ZEBAR_CONFIG_DIR' $(Join-Path $env:XDG_CONFIG_HOME 'zebar')
 Set-UserEnvVar 'DOTNET_CLI_HOME' $(Join-Path $env:XDG_DATA_HOME 'dotnet')
 Set-UserEnvVar 'OMNISHARPHOME' $(Join-Path $env:XDG_CONFIG_HOME 'omnisharp')
 Set-UserEnvVar 'NODE_REPL_HISTORY' $(Join-Path $env:XDG_STATE_HOME 'node' 'history')
-Set-UserEnvVar 'PYTHON_HISTORY' $(Join-Path $env:XDG_STATE_HOME 'python' 'history')
 Set-UserEnvVar 'MINIKUBE_HOME' $(Join-Path $env:XDG_DATA_HOME 'minikube')
 Set-UserEnvVar 'KUBECONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'kube' 'config.yaml')
 Set-UserEnvVar 'KUBECACHEDIR' $(Join-Path $env:XDG_CACHE_HOME 'kube')
@@ -41,6 +40,11 @@ Set-UserEnvVar 'FZF_DEFAULT_OPTS' @"
 --color=selected-bg:#45475A
 --color=border:#6C7086,label:#CDD6F4
 "@
+
+Set-UserEnvVar 'PYTHON_HISTORY' $(Join-Path -Path $env:XDG_STATE_HOME 'python' 'history')
+if (-not (Test-Path $env:PYTHON_HISTORY)) {
+	New-Item -ItemType File -Force $env:PYTHON_HISTORY > $null
+}
 
 Set-UserEnvVar 'NUGET_PACKAGES' $(Join-Path $env:XDG_CACHE_HOME 'nuget-packages')
 Set-UserEnvVar 'NUGET_PLUGINS_CACHE_PATH' $(Join-Path $env:XDG_CACHE_HOME 'nuget-plugins')
