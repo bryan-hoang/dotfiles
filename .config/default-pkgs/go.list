@@ -31,3 +31,5 @@ github.com/wagoodman/dive@latest
 # # Faster way to switch between clusters and namespaces in kubectl
 # github.com/ahmetb/kubectx/cmd/kubectx@latest
 # github.com/ahmetb/kubectx/cmd/kubens@latest
+# # 🐶 Kubernetes CLI To Manage Your Clusters In Style!
+# github.com/derailed/k9s@latest
