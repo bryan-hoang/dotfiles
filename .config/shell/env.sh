@@ -261,7 +261,7 @@ export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 mkdir -p "$(dirname "$WINEPREFIX")"
 
 export MINIKUBE_HOME="$XDG_DATA_HOME"/minikube
-export KUBECONFIG="$XDG_CONFIG_HOME"/kube/config.yaml
+export KUBECONFIG="$XDG_CONFIG_HOME"/kube/kube.yaml
 export KUBECACHEDIR="$XDG_CACHE_HOME"/kube
 
 export TERMINFO="$XDG_DATA_HOME"/terminfo
