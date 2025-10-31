@@ -8,6 +8,9 @@ case $- in
 	*i*) ;;
 	*) return ;;
 esac
+if [[ -z $PS1 ]]; then
+	return
+fi
 
 [[ -f "$XDG_DATA_HOME"/blesh/ble.sh ]] \
 	&& . "$XDG_DATA_HOME"/blesh/ble.sh --noattach
@@ -60,15 +63,13 @@ unset HISTTIMEFORMAT
 bind -x '"\es":"ssnz"'
 
 # Add tab completion for many Bash commands
-if ! shopt -oq posix; then
+if [[ -z ${BASH_COMPLETION_VERSINFO:-} ]]; then
 	if [[ -f /usr/local/share/bash-completion/bash_completion ]]; then
 		# Locally installed completions. e.g., Git Bash on Windows, newer version
 		# compared to distribution's version.
 		. /usr/local/share/bash-completion/bash_completion
 	elif [[ -f /usr/share/bash-completion/bash_completion ]]; then
 		. /usr/share/bash-completion/bash_completion
-	elif [[ -f /etc/bash_completion ]]; then
-		. /etc/bash_completion
 	fi
 fi
 

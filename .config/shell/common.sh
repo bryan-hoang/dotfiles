@@ -53,10 +53,10 @@ generate_completions uv uv generate-shell-completion "$SHELL_BASENAME"
 generate_completions watchexec watchexec --completions "$SHELL_BASENAME"
 generate_man_pages watchexec watchexec --manual
 generate_completions zellij zellij setup --generate-completion "$SHELL_BASENAME"
+generate_completions kubectl kubectl completion "$SHELL_BASENAME"
 
 # Doesn't support bash.
 generate_completions bw bw completion --shell zsh
-generate_completions kubectl kubectl completion zsh
 generate_completions pipenv env _PIPENV_COMPLETE=zsh_source pipenv
 does_command_exist register-python-argcomplete pipx \
 	&& eval "$(register-python-argcomplete pipx)"
