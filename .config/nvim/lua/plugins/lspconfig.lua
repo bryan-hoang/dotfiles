@@ -102,7 +102,6 @@ return {
 					},
 					-- Shell script
 					bashls = {
-						mason = false,
 						filetypes = { "sh", "zsh" },
 						on_attach = function(client, bufnr)
 							-- Disable `shellcheck` and semantic token highlighting in `dotenv`

@@ -12,7 +12,7 @@ prettier
 # (stylelint/stylelint).
 stylelint
 # LS for editors.
-bash-language-server
+# bash-language-server
 yaml-language-server
 vscode-langservers-extracted
 @olrtg/emmet-language-server
