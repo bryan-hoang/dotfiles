@@ -124,7 +124,6 @@ return {
 					dockerls = { mason = false },
 					docker_compose_language_service = { mason = false },
 					-- JS/TS
-					biome = { mason = false },
 					astro = { mason = false },
 					vtsls = {
 						settings = {
