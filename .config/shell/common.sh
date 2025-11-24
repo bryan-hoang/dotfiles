@@ -2,9 +2,7 @@
 #
 # shellcheck disable=SC2154
 
-# Load the shell dotfiles, and then some:
-# * ~/.extra can be used for other settings you don't want to commit.
-for file in "$XDG_CONFIG_HOME"/shell/{aliases,functions,extra}.sh; do
+for file in "$XDG_CONFIG_HOME"/shell/{aliases,functions,machine}.sh; do
 	# shellcheck disable=SC1090
 	[[ -f $file ]] && . "$file"
 done
