@@ -2,7 +2,7 @@
 *.md
 pnpm-workspace.yaml
 *package.json
-*tsconfig.json
+*tsconfig*.json
 *jsconfig.json
 *pyproject.toml
 *Gemfile
@@ -15,6 +15,7 @@ Cargo.toml
 *lib/*
 *tests/*
 *examples/*
+*.ts
 *.js
 *.rb
 *.dev
