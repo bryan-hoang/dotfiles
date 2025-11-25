@@ -176,6 +176,10 @@ window_rules:
       - window_process: { regex: 'Spotify' }
   - commands: ['move --workspace 6']
     match:
+      # VS Code
+      - window_process: { equals: 'Code' }
+  - commands: ['move --workspace 7']
+    match:
       # SQL Server Management Studio
       - window_process: { regex: 'SSMS' }
       # v20 -_-
