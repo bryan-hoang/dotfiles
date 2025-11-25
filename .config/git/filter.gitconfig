@@ -27,9 +27,6 @@
 [filter "macchina"]
 	clean = "sed '/^interface =/d'"
 	smudge = cat
-[filter "mise"]
-	clean = "sed -E -e '/^\\[tools\\]/,/^\\[/{/^\\[tools\\]/!{/\\[/!d}}' -e '/^\\[env\\]/,/^\\[/{/^\\[env\\]/!{/\\[/!d}}' -e '/^\\[alias\\]/,/^\\[env/{/^\\[alias\\]/!{/\\[env/!d}}'"
-	smudge = cat
 [filter "docker-config"]
 	clean = "jaq '{ \"detachKeys\" }'"
 	smudge = cat
