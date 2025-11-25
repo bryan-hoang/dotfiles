@@ -36,28 +36,6 @@ return {
 				format = { async = true },
 				---@type lspconfig.options
 				servers = {
-					["*"] = {
-						keys = {
-							-- https://github.com/LazyVim/LazyVim/discussions/3880#discussioncomment-9975351
-							{ "K", "" },
-							{
-								"<leader>k",
-								vim.lsp.buf.hover,
-								desc = "Show docs for item under cursor (Hover)",
-							},
-							{
-								"gy",
-								"<cmd>Telescope lsp_type_definitions<cr>",
-								desc = "Goto type definition",
-							},
-							{ "gI", false },
-							{
-								"gi",
-								"<cmd>Telescope lsp_implementations<cr>",
-								desc = "Goto implementation",
-							},
-						},
-					},
 					-- JSON
 					jsonls = {
 						settings = {

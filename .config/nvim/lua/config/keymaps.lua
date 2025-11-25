@@ -43,14 +43,11 @@ if vim.g.vscode then
 	return
 end
 
-vim.keymap.del("n", "<Leader>`")
-vim.keymap.del("n", "<Leader>gs")
-
 local wk = require("which-key")
 
 wk.add({
 	{ "<Leader>g", group = "Git/debuG" },
-	{ "<Leader>gc", group = "conflict" },
+	{ "<Leader>gc", group = "Conflict" },
 })
 
 -- Remove default open terminal mapping.

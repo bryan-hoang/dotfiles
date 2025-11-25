@@ -11,6 +11,7 @@ return {
 			end
 
 			local fixinatorSeverities = {
+				[0] = vim.diagnostic.severity.HINT,
 				[1] = vim.diagnostic.severity.INFO,
 				[2] = vim.diagnostic.severity.WARN,
 				[3] = vim.diagnostic.severity.ERROR,
