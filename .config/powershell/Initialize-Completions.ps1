@@ -33,6 +33,7 @@ function Add-Completion {
 }
 
 Add-Completion 'kubectl' 'kubectl completion powershell'
+Add-Completion 'op' 'op completion powershell'
 # Add-Completion 'sqlcmd' 'sqlcmd completion powershell'
 
 $completionFiles = Get-ChildItem $PwshCompletionDir -Filter *.ps1
