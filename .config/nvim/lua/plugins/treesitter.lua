@@ -7,8 +7,4 @@ return {
 			vim.treesitter.language.register("bash", "dotenv")
 		end,
 	},
-	{
-		"nvim-treesitter/playground",
-		cmd = "TSPlaygroundToggle",
-	},
 }
