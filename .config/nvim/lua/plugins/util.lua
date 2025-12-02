@@ -15,4 +15,10 @@ return {
 		"tpope/vim-sensible",
 		event = require("util").buf_enter_event_list,
 	},
+	{
+		"m4xshen/hardtime.nvim",
+		lazy = false,
+		dependencies = { "MunifTanjim/nui.nvim" },
+		opts = {},
+	},
 }
