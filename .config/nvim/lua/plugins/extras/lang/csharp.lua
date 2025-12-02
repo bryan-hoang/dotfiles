@@ -4,12 +4,12 @@ return {
 		"seblyng/roslyn.nvim",
 		ft = { "cs", "razor" },
 		dependencies = {
-			{
-				-- By loading as a dependencies, we ensure that we are available to set
-				-- the handlers for Roslyn.
-				"tris203/rzls.nvim",
-				config = true,
-			},
+			-- {
+			-- 	-- By loading as a dependencies, we ensure that we are available to set
+			-- 	-- the handlers for Roslyn.
+			-- 	"tris203/rzls.nvim",
+			-- 	config = true,
+			-- },
 			-- https://github.com/tris203/rzls.nvim#installing-the-lsp
 			{
 				"mason-org/mason.nvim",
@@ -20,7 +20,7 @@ return {
 					},
 					ensure_installed = {
 						"roslyn",
-						"rzls",
+						-- "rzls",
 					},
 				},
 			},
@@ -28,33 +28,33 @@ return {
 		config = function()
 			-- Use one of the methods in the Integration section to compose the
 			-- command.
-			local rzls_path = vim.fn.expand("$MASON/packages/rzls/libexec")
-			local cmd = {
-				"roslyn",
-				"--stdio",
-				"--logLevel=Information",
-				"--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
-				"--razorSourceGenerator=" .. vim.fs.joinpath(
-					rzls_path,
-					"Microsoft.CodeAnalysis.Razor.Compiler.dll"
-				),
-				"--razorDesignTimePath=" .. vim.fs.joinpath(
-					rzls_path,
-					"Targets",
-					"Microsoft.NET.Sdk.Razor.DesignTime.targets"
-				),
-				"--extension",
-				vim.fs.joinpath(
-					rzls_path,
-					"RazorExtension",
-					"Microsoft.VisualStudioCode.RazorExtension.dll"
-				),
-			}
+			-- local rzls_path = vim.fn.expand("$MASON/packages/rzls/libexec")
+			-- local cmd = {
+			-- 	"roslyn",
+			-- 	"--stdio",
+			-- 	"--logLevel=Information",
+			-- 	"--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
+			-- 	"--razorSourceGenerator=" .. vim.fs.joinpath(
+			-- 		rzls_path,
+			-- 		"Microsoft.CodeAnalysis.Razor.Compiler.dll"
+			-- 	),
+			-- 	"--razorDesignTimePath=" .. vim.fs.joinpath(
+			-- 		rzls_path,
+			-- 		"Targets",
+			-- 		"Microsoft.NET.Sdk.Razor.DesignTime.targets"
+			-- 	),
+			-- 	"--extension",
+			-- 	vim.fs.joinpath(
+			-- 		rzls_path,
+			-- 		"RazorExtension",
+			-- 		"Microsoft.VisualStudioCode.RazorExtension.dll"
+			-- 	),
+			-- }
 
 			vim.lsp.config("roslyn", {
-				cmd = cmd,
 				filetypes = { "cs", "razor" },
-				handlers = require("rzls.roslyn_handlers"),
+				-- cmd = cmd,
+				-- handlers = require("rzls.roslyn_handlers"),
 				settings = {
 					["csharp|inlay_hints"] = {
 						csharp_enable_inlay_hints_for_implicit_object_creation = true,
