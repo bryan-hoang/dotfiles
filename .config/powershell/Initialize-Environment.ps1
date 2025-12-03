@@ -87,3 +87,9 @@ if ((Test-CommandExists 'vivid') -and (-not [Environment]::GetEnvironmentVariabl
 if (Test-CommandExists 'nvim') {
 	Set-UserEnvVar 'EDITOR' 'nvim'
 }
+
+# Improve `git <command> --stat` output.
+# https://stackoverflow.com/a/75490052
+if (Test-CommandExists 'tput') {
+	$env:COLUMNS = $(tput cols)
+}
