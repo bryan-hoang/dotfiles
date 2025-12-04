@@ -117,11 +117,7 @@ return {
 						},
 					},
 					denols = {
-						mason = false,
-						root_dir = require("lspconfig.util").root_pattern(
-							"deno.json",
-							"deno.jsonc"
-						),
+						mason = false
 					},
 					-- HTML/CSS
 					html = { mason = false },
