@@ -11,10 +11,10 @@ pyright
 # 📝 A markup-aware linter for prose built with speed and extensibility in mind
 # (errata-ai/vale).
 vale
+# A youtube-dl fork with additional features and fixes (yt-dlp/yt-dlp).
+"yt-dlp[default,curl-cffi]"
 # Build system.
 # meson
-# A youtube-dl fork with additional features and fixes (yt-dlp/yt-dlp).
-# yt-dlp
 # Magnificent app which corrects your previous console command (nvbn/thefuck).
 # thefuck
 # pytest

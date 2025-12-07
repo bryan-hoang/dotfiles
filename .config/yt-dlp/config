@@ -18,25 +18,25 @@
 # Video Format Options:
 
 # Video format code, see the "FORMAT SELECTION" for all the info
---format mp4
+# --format mp4
 
 # Subtitle Options:
 
 # Write subtitle file
---write-sub
+# --write-sub
 
 # Write automatically generated subtitle file (YouTube only)
---write-auto-sub
+# --write-auto-sub
 
 # Subtitle format, accepts formats preference, for example: "srt" or
 # "ass/srt/best"
---sub-format srt
+# --sub-format srt
 
 # Languages of the subtitles to download (optional) separated by commas, use
 # --list-subs for available language tags
---sub-lang en
+# --sub-lang en
 
 # Post-processing Options:
 
 # Write metadata to the video file
---add-metadata
+# --add-metadata
