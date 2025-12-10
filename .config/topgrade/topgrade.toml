@@ -45,7 +45,7 @@ remote_topgrade_path = ".local/share/cargo/bin/topgrade"
 # display_time = true
 
 # Don't ask for confirmations (no default value)
-# assume_yes = true
+assume_yes = true
 
 # Do not ask to retry failed steps (default: false)
 # no_retry = true
