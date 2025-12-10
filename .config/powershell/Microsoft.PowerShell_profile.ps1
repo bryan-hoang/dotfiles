@@ -26,7 +26,7 @@ $PSReadLineOptions = @{
 	HistorySearchCursorMovesToEnd = $true
 	# Adding `_` as a delimiter.
 	# https://learn.microsoft.com/en-us/powershell/module/psreadline/set-psreadlineoption?view=powershell-7.5#-worddelimiters
-	WordDelimiters = ';:,.[]{}()/\|^&*-=+''"---_'
+	WordDelimiters = ';:,.[]{}()/\|^&*-=+''"---_@'
 }
 Set-PSReadLineOption @PSReadLineOptions
 
