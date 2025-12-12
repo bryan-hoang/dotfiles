@@ -16,3 +16,6 @@ ignore_comment_clauses = False
 [sqlfluff:rules:capitalisation.identifiers]
 # Unquoted identifiers
 extended_capitalisation_policy = upper
+
+[sqlfluff:rules:convention.terminator]
+require_final_semicolon = True
