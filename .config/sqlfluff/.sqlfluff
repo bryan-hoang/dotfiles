@@ -6,7 +6,7 @@ dialect = tsql
 [sqlfluff:indentation]
 # See https://docs.sqlfluff.com/en/stable/perma/indent_locations.html
 indent_unit = space
-tab_space_size = 3
+tab_space_size = 4
 
 [sqlfluff:rules:layout.long_lines]
 # Line length
