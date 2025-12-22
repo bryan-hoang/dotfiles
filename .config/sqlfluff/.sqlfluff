@@ -19,3 +19,7 @@ extended_capitalisation_policy = upper
 
 [sqlfluff:rules:convention.terminator]
 require_final_semicolon = True
+
+[sqlfluff:rules:references.special_chars]
+# Allow special characters when making quoted aliases for columns.
+quoted_identifiers_policy = table_aliases
