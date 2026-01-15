@@ -1,11 +1,18 @@
+# https://docs.sqlfluff.com/en/stable/reference/rules.html#ruleref
+
 [sqlfluff]
 # Supported dialects https://docs.sqlfluff.com/en/stable/perma/dialects.html
 # Or run 'sqlfluff dialects'
 dialect = tsql
 
+# Max line length is set by default to be in line with the dbt style guide.
+# https://github.com/dbt-labs/corp/blob/main/dbt_style_guide.md
+# Set to zero or negative to disable checks.
+max_line_length = 120
+
 [sqlfluff:indentation]
 # See https://docs.sqlfluff.com/en/stable/perma/indent_locations.html
-indent_unit = space
+indent_unit = tab
 tab_space_size = 4
 
 [sqlfluff:rules:layout.long_lines]
