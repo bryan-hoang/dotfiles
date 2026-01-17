@@ -16,7 +16,7 @@
 	"devDependencies": {
 		"@commitlint/config-conventional": "20.3.1",
 		"@commitlint/types": "20.3.1",
-		"@stylistic/stylelint-config": "3.0.1",
+		"@stylistic/stylelint-config": "4.0.0",
 		"debug": "4.4.3",
 		"defu": "6.1.4",
 		"husky": "9.1.7",
