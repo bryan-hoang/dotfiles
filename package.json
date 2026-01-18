@@ -23,7 +23,7 @@
 		"lint-staged": "16.2.7",
 		"micromatch": "4.0.8",
 		"prettier": "3.8.0",
-		"prettier-plugin-packagejson": "2.5.21",
+		"prettier-plugin-packagejson": "2.5.22",
 		"stylelint": "17.0.0",
 		"stylelint-config-standard-scss": "17.0.0",
 		"typescript": "5.9.3",
