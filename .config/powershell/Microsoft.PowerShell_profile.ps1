@@ -34,6 +34,10 @@ Set-PSReadLineOption @PSReadLineOptions
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadlineKeyHandler -Key Ctrl+w -Function BackwardKillWord
 
+if (Test-CommandExists atuin) {
+	atuin init powershell | Out-String | Invoke-Expression
+}
+
 if (Test-CommandExists starship) {
 	# Initializing Starship prompt.
 	Invoke-Expression (&starship init powershell)
