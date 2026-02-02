@@ -35,7 +35,7 @@ Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadlineKeyHandler -Key Ctrl+w -Function BackwardKillWord
 
 if (Test-CommandExists atuin) {
-	atuin init powershell | Out-String | Invoke-Expression
+	atuin init --disable-up-arrow powershell | Out-String | Invoke-Expression
 }
 
 if (Test-CommandExists starship) {
