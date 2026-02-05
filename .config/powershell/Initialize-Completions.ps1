@@ -35,6 +35,7 @@ function Add-Completion {
 Add-Completion 'kubectl' 'kubectl completion powershell'
 Add-Completion 'op' 'op completion powershell'
 # Add-Completion 'sqlcmd' 'sqlcmd completion powershell'
+Add-Completion 'minikube' 'minikube completion powershell'
 
 $completionFiles = Get-ChildItem $PwshCompletionDir -Filter *.ps1
 foreach ($file in $completionFiles) {
