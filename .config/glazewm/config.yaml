@@ -160,7 +160,7 @@ window_rules:
   - commands: ['move --workspace 2']
     match:
       # Programming
-      - window_process: { regex: 'wezterm|neovide|WindowsTerminal' }
+      - window_process: { regex: 'wezterm|neovide|WindowsTerminal|mintty' }
   - commands: ['move --workspace 3']
     match:
       # Chat
