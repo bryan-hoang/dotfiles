@@ -171,6 +171,7 @@ window_rules:
       - window_process: { regex: 'thunderbird' }
       # Be specific, otherwise browser w/ outlook in title can be moved as well.
       - window_title: { regex: '- Outlook$' }
+      - window_title: { regex: 'Proton Mail Bridge' }
   - commands: ['move --workspace 5']
     match:
       # Music
