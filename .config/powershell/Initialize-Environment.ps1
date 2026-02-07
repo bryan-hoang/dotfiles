@@ -1,40 +1,43 @@
 #!/usr/bin/env pwsh
 
-Set-UserEnvVar 'POWERSHELL_UPDATECHECK' 'LTS'
 Set-UserEnvVar 'MSYS' 'winsymlinks:nativestrict'
+Set-UserEnvVar 'POWERSHELL_UPDATECHECK' 'LTS'
 Set-UserEnvVar 'USERPROFILE' $HOME
 Set-UserEnvVar 'APPDATA' $(Join-Path -Resolve $env:USERPROFILE 'AppData' 'Roaming')
-Set-UserEnvVar 'XDG_CONFIG_HOME' $(Join-Path $env:USERPROFILE '.config')
-Set-UserEnvVar 'XDG_CONFIG_HOME' $(Join-Path $env:USERPROFILE '.config')
 Set-UserEnvVar 'XDG_CACHE_HOME' $(Join-Path $env:USERPROFILE '.cache')
+Set-UserEnvVar 'XDG_CONFIG_HOME' $(Join-Path $env:USERPROFILE '.config')
+Set-UserEnvVar 'XDG_CONFIG_HOME' $(Join-Path $env:USERPROFILE '.config')
 Set-UserEnvVar 'XDG_LOCAL_HOME' $(Join-Path $env:USERPROFILE '.local')
+
 Set-UserEnvVar 'XDG_BIN_HOME' $(Join-Path $env:XDG_LOCAL_HOME 'bin')
 Set-UserEnvVar 'XDG_DATA_HOME' $(Join-Path $env:XDG_LOCAL_HOME 'share')
 Set-UserEnvVar 'XDG_STATE_HOME' $(Join-Path $env:XDG_LOCAL_HOME 'state')
+
+Set-UserEnvVar 'AZURE_CONFIG_DIR' $(Join-Path $env:XDG_DATA_HOME 'azure')
 Set-UserEnvVar 'CARGO_HOME' $(Join-Path $env:XDG_DATA_HOME 'cargo')
-Set-UserEnvVar 'RUSTUP_HOME' $(Join-Path $env:XDG_DATA_HOME 'rustup')
-Set-UserEnvVar 'KOMOREBI_CONFIG_HOME' $(Join-Path $env:XDG_CONFIG_HOME 'komorebi')
+Set-UserEnvVar 'DOCKER_CONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'docker')
+Set-UserEnvVar 'DOTNET_CLI_HOME' $(Join-Path $env:XDG_DATA_HOME 'dotnet')
+Set-UserEnvVar 'GLAZEWM_CONFIG_PATH' $(Join-Path $env:XDG_CONFIG_HOME 'glazewm' 'config.yaml')
+# FIXME: Setting to windows path breaks gpg commit signing. e.g.,
+# `/c/Users/bryan/C:/Users/bryan/.local/share/gnupg/pubring.kbx`
+# Set-UserEnvVar 'GNUPGHOME' $(Join-Path $env:XDG_DATA_HOME 'gnupg')
 Set-UserEnvVar 'GOPATH' $(Join-Path $env:XDG_DATA_HOME 'go')
+Set-UserEnvVar 'GRADLE_USER_HOME' $(Join-Path $env:XDG_DATA_HOME 'gradle')
+Set-UserEnvVar 'KOMOREBI_CONFIG_HOME' $(Join-Path $env:XDG_CONFIG_HOME 'komorebi')
+Set-UserEnvVar 'KUBECACHEDIR' $(Join-Path $env:XDG_CACHE_HOME 'kube')
+Set-UserEnvVar 'KUBECONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'kube' 'kube.yaml')
+Set-UserEnvVar 'MINIKUBE_HOME' $(Join-Path $env:XDG_DATA_HOME 'minikube')
+Set-UserEnvVar 'MISE_WINDOWS_DEFAULT_INLINE_SHELL_ARGS' 'pwsh -NoProfile -NonInteractive -Command'
+Set-UserEnvVar 'NODE_REPL_HISTORY' $(Join-Path $env:XDG_STATE_HOME 'node' 'history')
+Set-UserEnvVar 'OMNISHARPHOME' $(Join-Path $env:XDG_CONFIG_HOME 'omnisharp')
+Set-UserEnvVar 'PNPM_HOME' $(Join-Path $env:XDG_DATA_HOME 'pnpm')
+Set-UserEnvVar 'RUSTUP_HOME' $(Join-Path $env:XDG_DATA_HOME 'rustup')
+Set-UserEnvVar 'STARSHIP_CONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'starship' 'starship.toml')
+Set-UserEnvVar 'TEALDEER_CONFIG_DIR' $(Join-Path $env:XDG_CONFIG_HOME 'tealdeer')
 Set-UserEnvVar 'VSCODE_PORTABLE' $(Join-Path $env:XDG_DATA_HOME 'vscode')
 Set-UserEnvVar 'WHKD_CONFIG_HOME' $(Join-Path $env:XDG_CONFIG_HOME 'whkd')
-Set-UserEnvVar 'AZURE_CONFIG_DIR' $(Join-Path $env:XDG_DATA_HOME 'azure')
-Set-UserEnvVar 'DOCKER_CONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'docker')
-Set-UserEnvVar 'STARSHIP_CONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'starship' 'starship.toml')
-Set-UserEnvVar 'GNUPGHOME' $(Join-Path $env:XDG_DATA_HOME 'gnupg')
-Set-UserEnvVar 'GLAZEWM_CONFIG_PATH' $(Join-Path $env:XDG_CONFIG_HOME 'glazewm' 'config.yaml')
 Set-UserEnvVar 'ZEBAR_CONFIG_DIR' $(Join-Path $env:XDG_CONFIG_HOME 'zebar')
-Set-UserEnvVar 'DOTNET_CLI_HOME' $(Join-Path $env:XDG_DATA_HOME 'dotnet')
-Set-UserEnvVar 'OMNISHARPHOME' $(Join-Path $env:XDG_CONFIG_HOME 'omnisharp')
-Set-UserEnvVar 'NODE_REPL_HISTORY' $(Join-Path $env:XDG_STATE_HOME 'node' 'history')
 
-Set-UserEnvVar 'MINIKUBE_HOME' $(Join-Path $env:XDG_DATA_HOME 'minikube')
-Set-UserEnvVar 'KUBECONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'kube' 'kube.yaml')
-Set-UserEnvVar 'KUBECACHEDIR' $(Join-Path $env:XDG_CACHE_HOME 'kube')
-
-Set-UserEnvVar 'PNPM_HOME' $(Join-Path $env:XDG_DATA_HOME 'pnpm')
-Set-UserEnvVar 'MISE_WINDOWS_DEFAULT_INLINE_SHELL_ARGS' 'pwsh -NoProfile -NonInteractive -Command'
-Set-UserEnvVar 'GRADLE_USER_HOME' $(Join-Path $env:XDG_DATA_HOME 'gradle')
-Set-UserEnvVar 'TEALDEER_CONFIG_DIR' $(Join-Path $env:XDG_CONFIG_HOME 'tealdeer')
 Set-UserEnvVar 'FZF_DEFAULT_OPTS' @"
 --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8
 --color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC
