@@ -21,7 +21,8 @@
 [bulkworkspaces]
 [commit]
 	# https://help.github.com/articles/signing-commits-using-gpg/
-	gpgsign = true
+	# Too annoying to deal with
+	# gpgsign = true
 	template = ~/.config/git/COMMIT_EDITMSG
 	verbose = true
 [core]
