@@ -11,6 +11,6 @@ bleopt exec_elapsed_mark=
 # Change EOF marker from "[ble: EOF]"
 bleopt prompt_eol_mark='⏎'
 # Disable auto-complete on windows due to perf issues searching PATH.
-if [ "$(uname -o)" = 'Msys' ]; then
-	bleopt complete_auto_complete=
-fi
+# if [ "$(uname -o)" = 'Msys' ]; then
+# 	bleopt complete_auto_complete=
+# fi
