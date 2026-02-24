@@ -102,7 +102,6 @@ return {
 					dockerls = { mason = false },
 					docker_compose_language_service = { mason = false },
 					-- JS/TS
-					astro = { mason = false },
 					vtsls = {
 						settings = {
 							javascript = {
@@ -123,10 +122,10 @@ return {
 					html = { mason = false },
 					emmet_language_server = { mason = false },
 					cssls = { mason = false },
-					tailwindcss = {
-						filetypes_include = { "markdown.mdx" },
-						filetypes_exclude = { "mdx" },
-					},
+					-- tailwindcss = {
+					-- 	filetypes_include = { "markdown.mdx" },
+					-- 	filetypes_exclude = { "mdx" },
+					-- },
 					-- Markdown/MDX
 					marksman = {},
 					mdx_analyzer = {
@@ -168,6 +167,8 @@ return {
 						filetypes = { "markdown", "text", "tex", "gitcommit" },
 					},
 					harper_ls = { mason = false },
+					oxlint = { mason = false },
+					oxfmt = { mason = false },
 				},
 			}
 
