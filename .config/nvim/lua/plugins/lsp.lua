@@ -48,6 +48,7 @@ return {
 					-- json = { "oxfmt" },
 					-- jsonc = { "oxfmt" },
 					kdl = { "kdlfmt" },
+					markdown = { "oxfmt", "markdownlint-cli2", "markdown-toc" },
 					python = { "ruff_fix", "ruff_format" },
 					ruby = { "rubyfmt", "rubocop" },
 					-- scss = cssFormatters,
