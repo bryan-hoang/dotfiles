@@ -192,4 +192,18 @@ return {
 			},
 		},
 	},
+	{
+		"nicolas-martin/region-folding.nvim",
+		event = { "BufReadPost", "BufNewFile" },
+		opts = {},
+	},
+	{
+		"chrisgrieser/nvim-scissors",
+		dependencies = "folke/snacks.nvim", -- either snacks, fzf-lua, telescope
+		cmd = {
+			"ScissorsAddNewSnippet",
+			"ScissorsEditSnippet",
+		},
+		opts = {},
+	},
 }

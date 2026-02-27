@@ -33,32 +33,33 @@ return {
 		-- Lightweight yet powerful formatter plugin for Neovim.
 		"stevearc/conform.nvim",
 		opts = function(_, opts)
-			local jsFormatters = { "eslint_d", "biome-check", "biome" }
-			local cssFormatters = { "stylelint", "biome-check", "biome" }
+			-- local jsFormatters = { "oxlint", "oxfmt", }
+			-- local cssFormatters = { "oxlint", "oxfmt", }
 			local shFormatters = { "shellcheck", "shellharden", "shfmt" }
 
 			local user_opts = {
 				formatters_by_ft = {
-					fish = {},
-					sh = shFormatters,
-					zsh = shFormatters,
-					toml = { "taplo" },
-					json = { "biome-check", "biome" },
-					jsonc = { "biome-check", "biome" },
-					yaml = { "prettier" },
-					html = { "prettier" },
-					svg = { "prettier" },
-					css = cssFormatters,
-					scss = cssFormatters,
-					javascript = jsFormatters,
-					typescript = jsFormatters,
-					javascriptreact = jsFormatters,
-					typescriptreact = jsFormatters,
-					ruby = { "rubyfmt", "rubocop" },
-					kdl = { "kdlfmt" },
-					python = { "ruff_fix", "ruff_format" },
 					cmake = { "cmake_format" },
+					-- css = cssFormatters,
+					fish = {},
+					-- html = { "oxfmt" },
+					-- javascript = jsFormatters,
+					-- javascriptreact = jsFormatters,
+					-- json = { "oxfmt" },
+					-- jsonc = { "oxfmt" },
+					kdl = { "kdlfmt" },
+					markdown = { "oxfmt", "markdownlint-cli2", "markdown-toc" },
+					python = { "ruff_fix", "ruff_format" },
+					ruby = { "rubyfmt", "rubocop" },
+					-- scss = cssFormatters,
+					sh = shFormatters,
+					svg = { "prettier" },
+					toml = { "oxfmt", "taplo" },
+					-- typescript = jsFormatters,
+					-- typescriptreact = jsFormatters,
 					xml = { "xmlstarlet" },
+					-- yaml = { "oxfmt" },
+					zsh = shFormatters,
 				},
 				-- LazyVim will merge the options you set here with built-in formatters.
 				-- You can also define any custom formatters here.
@@ -102,18 +103,18 @@ return {
 
 			local user_opts = {
 				linters_by_ft = {
-					dockerfile = { "hadolint" },
-					fish = {},
-					markdown = { "markdownlint-cli2" },
-					dotenv = { "dotenv_linter" },
+					["*"] = { "typos", "editorconfig-checker" },
 					css = cssLinters,
-					scss = cssLinters,
+					dockerfile = { "hadolint" },
+					dotenv = { "dotenv_linter" },
+					fish = {},
+					gitcommit = { "commitlint" },
+					html = { "markuplint" },
 					-- May or may not want
 					-- https://github.com/kampfkarren/selene/issues/340#issuecomment-1191992366
 					lua = { "selene" },
-					gitcommit = { "commitlint" },
-					html = { "markuplint" },
-					["*"] = { "typos", "editorconfig-checker" },
+					markdown = { "markdownlint-cli2" },
+					scss = cssLinters,
 				},
 				linters = {
 					stylelint = {

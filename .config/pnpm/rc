@@ -1,3 +1,7 @@
 enable-global-virtual-store=true
 minimum-release-age=1440
 minimum-release-age-exclude[]=@pnpm/win-x64
+minimum-release-age-exclude[]=oxfmt
+minimum-release-age-exclude[]=oxlint
+minimum-release-age-exclude[]=@oxfmt/*
+minimum-release-age-exclude[]=@oxlint/*
