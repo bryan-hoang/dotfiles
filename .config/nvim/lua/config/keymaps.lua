@@ -94,3 +94,27 @@ vim.keymap.set("n", "<Leader>Y", '"+Y', {
 -- vim.keymap.set("x", "<Leader>p", '"_dP', {
 -- 	desc = "Paste and preserve clipboard",
 -- })
+
+-- https://vi.stackexchange.com/questions/3686/copy-the-full-path-of-current-buffer-to-clipboard
+vim.keymap.set("n", "<Leader>L", function()
+	local file_location =
+		vim.fs.normalize(vim.fn.expand("%:.") .. ":" .. vim.fn.line("."))
+	local status, _ = pcall(vim.fn.setreg, "*", file_location)
+
+	if not status then
+		vim.notify(
+			"Error: Location could not be copied.",
+			vim.log.levels.ERROR,
+			{ title = "File Location" }
+		)
+		return
+	end
+
+	vim.notify(
+		"Copied to your clipboard!",
+		vim.log.levels.INFO,
+		{ title = "File Location" }
+	)
+end, {
+	desc = "Copy buffer's relative path to clipboard",
+})

@@ -98,17 +98,6 @@ return {
 		},
 	},
 	{
-		"diegoulloao/nvim-file-location",
-		keys = {
-			{
-				"<leader>L",
-				"<cmd>lua require('nvim-file-location').copy_file_location('workdir', true, false)<cr>",
-				desc = "Copy file location",
-			},
-		},
-		opts = {},
-	},
-	{
 		"sindrets/diffview.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",

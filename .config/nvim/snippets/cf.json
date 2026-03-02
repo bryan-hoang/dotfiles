@@ -2,5 +2,6 @@
   "cfdump": {
     "body": "<cfdump var=\"#${1:variable}#\" output=\"${2:output}\">",
     "prefix": "cfdump"
-  }
+  },
+  "<!---": { "prefix": "<!---", "body": "<!--- ${1:comment} --->" }
 }
