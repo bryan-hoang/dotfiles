@@ -1,4 +1,18 @@
 {
 	"$schema": "https://opencode.ai/config.json",
-	"autoupdate": true
+	"autoupdate": true,
+	"formatter": {
+		"oxfmt": {
+			"command": [
+				"oxfmt",
+				"$FILE"
+			],
+			"extensions": [
+				".md",
+				".json",
+				".yaml",
+				".yml"
+			]
+		}
+	}
 }
