@@ -4,13 +4,12 @@ return {
 	{
 		"LazyVim/LazyVim",
 		opts = {
-			colorscheme = "catppuccin",
+			colorscheme = "catppuccin-nvim",
 		},
 	},
 	{
 		"catppuccin/nvim",
 		lazy = not should_load_colorschemes,
-		name = "catppuccin",
 		-- https://github.com/catppuccin/nvim#configuration
 		opts = {
 			transparent_background = true,

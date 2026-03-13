@@ -14,7 +14,7 @@ return {
 		opts = function(_, opts)
 			local user_opts = {
 				linters_by_ft = {
-					yaml = { "spectral" },
+					-- yaml = { "spectral" },
 				},
 				linters = {
 					spectral = {

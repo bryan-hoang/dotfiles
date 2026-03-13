@@ -54,7 +54,7 @@ require("lazy").setup({
 	install = {
 		-- Try to load one of these colorschemes when starting an installation
 		-- during startup.
-		colorscheme = { "catppuccin" },
+		colorscheme = { "catppuccin-nvim" },
 	},
 	checker = {
 		-- Automatically check for plugin updates.
