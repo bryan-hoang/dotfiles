@@ -115,9 +115,7 @@ return {
 							},
 						},
 					},
-					denols = {
-						mason = false
-					},
+					denols = { mason = false },
 					-- HTML/CSS
 					html = { mason = false },
 					emmet_language_server = { mason = false },
@@ -163,10 +161,10 @@ return {
 							},
 						},
 					},
-					vale_ls = {
-						filetypes = { "markdown", "text", "tex", "gitcommit" },
-					},
-					harper_ls = { mason = false },
+					-- vale_ls = {
+					-- 	filetypes = { "markdown", "text", "tex", "gitcommit" },
+					-- },
+					harper_ls = {},
 					oxlint = { mason = false },
 					oxfmt = { mason = false },
 				},
