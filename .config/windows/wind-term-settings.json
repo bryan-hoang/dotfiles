@@ -29,21 +29,19 @@
             "id": "User.find"
         }
     ],
+    "alwaysShowTabs": true,
     "centerOnLaunch": true,
     "compatibility.allowHeadless": true,
     "copyFormatting": "none",
-    "copyOnSelect": false,
+    "copyOnSelect": true,
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+    "firstWindowPreference": "defaultProfile",
     "focusFollowMouse": true,
     "keybindings": 
     [
         {
             "id": "User.copy.644BA8F2",
             "keys": "ctrl+c"
-        },
-        {
-            "id": "User.paste",
-            "keys": "ctrl+v"
         },
         {
             "id": "User.find",
@@ -54,7 +52,7 @@
             "keys": "alt+shift+d"
         }
     ],
-    "launchMode": "maximized",
+    "launchMode": "default",
     "newTabMenu": 
     [
         {
@@ -67,12 +65,13 @@
         {
             "closeOnExit": "graceful",
             "colorScheme": "Catppuccin Mocha",
+            "compatibility.allowDECRQCRA": true,
             "cursorShape": "filledBox",
             "font": 
             {
                 "face": "BerkeleyMono Nerd Font Mono"
             },
-            "historySize": 20000,
+            "historySize": 32768,
             "opacity": 75,
             "showMarksOnScrollbar": true,
             "startingDirectory": "%USERPROFILE%"
@@ -80,26 +79,15 @@
         "list": 
         [
             {
+                "commandline": "\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\" -nologo",
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
                 "name": "PowerShell",
                 "source": "Windows.Terminal.PowershellCore"
             },
             {
-                "guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
-                "hidden": false,
-                "name": "Git Bash",
-                "source": "Git"
-            },
-            {
-                "guid": "{2c4de342-38b7-51cf-b940-2309a097f518}",
-                "hidden": false,
-                "name": "Ubuntu",
-                "source": "Windows.Terminal.Wsl"
-            },
-            {
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
-                "hidden": false,
+                "hidden": true,
                 "name": "Windows PowerShell"
             },
             {
@@ -108,51 +96,33 @@
                 "name": "Command Prompt"
             },
             {
-                "guid": "{60df5cd0-187f-52f3-a18f-fdba002c463e}",
-                "hidden": false,
-                "name": "Developer Command Prompt for VS 21",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{8036baea-c5ad-5000-ac8e-ad59503ada4b}",
-                "hidden": false,
-                "name": "Developer PowerShell for VS 21",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
                 "guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
-                "hidden": false,
+                "hidden": true,
                 "name": "Azure Cloud Shell",
                 "source": "Windows.Terminal.Azure"
             },
             {
-                "guid": "{9a096de5-8814-53a5-96cf-b1e7988ff480}",
-                "hidden": true,
-                "name": "Developer Command Prompt for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{f889e2ad-bb0c-5ece-af12-29b063865d55}",
-                "hidden": true,
-                "name": "Developer PowerShell for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{51855cb2-8cce-5362-8f54-464b92b32386}",
+                "guid": "{ac7de26b-38b4-599b-939d-edb35b79f2b1}",
                 "hidden": false,
                 "name": "Ubuntu",
-                "source": "CanonicalGroupLimited.Ubuntu_79rhkp1fndgsc"
+                "source": "Microsoft.WSL"
             },
             {
-                "guid": "{76cde3f1-c17c-532e-b691-4cb16f236299}",
-                "hidden": false,
-                "name": "Developer Command Prompt for VS 2022",
+                "guid": "{16208362-94fc-5b1f-a491-5b2624d5ab56}",
+                "hidden": true,
+                "name": "Visual Studio Debug Console",
+                "source": "VSDebugConsole"
+            },
+            {
+                "guid": "{1a7e8b39-a761-5061-b387-7565f614df88}",
+                "hidden": true,
+                "name": "Developer Command Prompt for VS 18",
                 "source": "Windows.Terminal.VisualStudio"
             },
             {
-                "guid": "{c7e7c669-72ea-5843-a69c-c0dba42f565e}",
-                "hidden": false,
-                "name": "Developer PowerShell for VS 2022",
+                "guid": "{61fc9a27-5ba5-52db-be01-23625f0f7907}",
+                "hidden": true,
+                "name": "Developer PowerShell for VS 18",
                 "source": "Windows.Terminal.VisualStudio"
             }
         ]
@@ -183,6 +153,8 @@
             "yellow": "#F9E2AF"
         }
     ],
+    "searchWebDefaultQueryUrl": "https://duckduckgo.com/?q=%22%s%22",
+    "showTabsInTitlebar": true,
     "themes": 
     [
         {
