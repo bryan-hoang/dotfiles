@@ -37,6 +37,7 @@ Set-UserEnvVar 'TEALDEER_CONFIG_DIR' $(Join-Path $env:XDG_CONFIG_HOME 'tealdeer'
 Set-UserEnvVar 'VSCODE_PORTABLE' $(Join-Path $env:XDG_DATA_HOME 'vscode')
 Set-UserEnvVar 'WHKD_CONFIG_HOME' $(Join-Path $env:XDG_CONFIG_HOME 'whkd')
 Set-UserEnvVar 'ZEBAR_CONFIG_DIR' $(Join-Path $env:XDG_CONFIG_HOME 'zebar')
+Set-UserEnvVar 'ZELLIJ_CONFIG_DIR' $(Join-Path $env:XDG_CONFIG_HOME 'zellij')
 
 Set-UserEnvVar 'FZF_DEFAULT_OPTS' @"
 --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8
@@ -46,7 +47,7 @@ Set-UserEnvVar 'FZF_DEFAULT_OPTS' @"
 --color=border:#6C7086,label:#CDD6F4
 "@
 
-Set-UserEnvVar 'PYTHON_HISTORY' $(Join-Path -Path $env:XDG_STATE_HOME 'python' 'history')
+Set-UserEnvVar 'PYTHON_HISTORY' $(Join-Path $env:XDG_STATE_HOME 'python' 'history')
 if (-not (Test-Path $env:PYTHON_HISTORY)) {
 	New-Item -ItemType File -Force $env:PYTHON_HISTORY > $null
 }
