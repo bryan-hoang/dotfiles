@@ -169,7 +169,6 @@ format = "[${symbol}(${version})]($style) "
 
 [kubernetes]
 disabled = false
-detect_folders = ["iac"]
 detect_files = [".show-k8s-in-starship-prompt.txt"]
 format = "[$symbol $context(\\($namespace\\))]($style) "
 style = "blue bold"
