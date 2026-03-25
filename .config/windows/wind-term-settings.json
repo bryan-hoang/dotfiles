@@ -16,10 +16,6 @@
             "id": "User.paste"
         },
         {
-            "command": "find",
-            "id": "User.find"
-        },
-        {
             "command": 
             {
                 "action": "splitPane",
@@ -27,6 +23,26 @@
                 "splitMode": "duplicate"
             },
             "id": "User.splitPane.A6751878"
+        },
+        {
+            "command": "find",
+            "id": "User.find"
+        },
+        {
+            "command":
+            {
+                "action": "moveTab",
+                "direction": "backward"
+            },
+            "id": "User.moveTab.EF07D31B"
+        },
+        {
+            "command":
+            {
+                "action": "moveTab",
+                "direction": "forward"
+            },
+            "id": "User.moveTab.793E2350"
         }
     ],
     "alwaysShowTabs": true,
@@ -46,6 +62,14 @@
         {
             "id": "User.find",
             "keys": "ctrl+shift+f"
+        },
+        {
+            "id": "User.moveTab.793E2350",
+            "keys": "ctrl+shift+right"
+        },
+        {
+            "id": "User.moveTab.EF07D31B",
+            "keys": "ctrl+shift+left"
         },
         {
             "id": "User.splitPane.A6751878",
