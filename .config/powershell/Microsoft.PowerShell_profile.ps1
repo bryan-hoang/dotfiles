@@ -41,15 +41,18 @@ if (Test-CommandExists atuin) {
 if (Test-CommandExists starship) {
 	# Initializing Starship prompt.
 	Invoke-Expression (&starship init powershell)
+
 	# https://learn.microsoft.com/en-us/windows/terminal/tutorials/new-tab-same-directory#powershell-with-starship
-	function Invoke-Starship-PreCommand {
-		$loc = $executionContext.SessionState.Path.CurrentLocation;
-		$prompt = "$([char]27)]9;12$([char]7)"
-		if ($loc.Provider.Name -eq "FileSystem")
-		{
-			$prompt += "$([char]27)]9;9;`"$($loc.ProviderPath)`"$([char]27)\"
+	if ($env:WT_SESSION) {
+		function Invoke-Starship-PreCommand {
+			$loc = $executionContext.SessionState.Path.CurrentLocation;
+			$prompt = "$([char]27)]9;12$([char]7)"
+			if ($loc.Provider.Name -eq "FileSystem")
+			{
+				$prompt += "$([char]27)]9;9;`"$($loc.ProviderPath)`"$([char]27)\"
+			}
+			$host.ui.Write($prompt)
 		}
-		$host.ui.Write($prompt)
 	}
 } else {
 	# Customize the prompt
