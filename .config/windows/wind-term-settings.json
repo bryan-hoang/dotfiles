@@ -16,6 +16,10 @@
             "id": "User.paste"
         },
         {
+            "command": "find",
+            "id": "User.find"
+        },
+        {
             "command": 
             {
                 "action": "splitPane",
@@ -25,11 +29,7 @@
             "id": "User.splitPane.A6751878"
         },
         {
-            "command": "find",
-            "id": "User.find"
-        },
-        {
-            "command":
+            "command": 
             {
                 "action": "moveTab",
                 "direction": "backward"
@@ -37,7 +37,7 @@
             "id": "User.moveTab.EF07D31B"
         },
         {
-            "command":
+            "command": 
             {
                 "action": "moveTab",
                 "direction": "forward"
@@ -64,16 +64,16 @@
             "keys": "ctrl+shift+f"
         },
         {
-            "id": "User.moveTab.793E2350",
-            "keys": "ctrl+shift+right"
+            "id": "User.splitPane.A6751878",
+            "keys": "alt+shift+d"
         },
         {
             "id": "User.moveTab.EF07D31B",
             "keys": "ctrl+shift+left"
         },
         {
-            "id": "User.splitPane.A6751878",
-            "keys": "alt+shift+d"
+            "id": "User.moveTab.793E2350",
+            "keys": "ctrl+shift+right"
         }
     ],
     "launchMode": "default",
@@ -160,6 +160,18 @@
                 "hidden": false,
                 "name": "Git Bash",
                 "source": "Git"
+            },
+            {
+                "guid": "{3b363ed5-32d5-5e0e-96ae-acc2e9e0fd73}",
+                "hidden": false,
+                "name": "Developer Command Prompt for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{6456fa29-d6f4-56f7-80e6-6b5c05a39379}",
+                "hidden": false,
+                "name": "Developer PowerShell for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
             }
         ]
     },
