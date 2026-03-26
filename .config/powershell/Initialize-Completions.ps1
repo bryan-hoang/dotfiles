@@ -38,6 +38,7 @@ Add-Completion 'op' 'op completion powershell'
 Add-Completion 'minikube' 'minikube completion powershell'
 Add-Completion 'atuin' 'atuin gen-completions --shell powershell'
 Add-Completion 'mise' 'mise completion powershell'
+Add-Completion 'uv' 'uv generate-shell-completion powershell'
 
 $completionFiles = Get-ChildItem $PwshCompletionDir -Filter *.ps1
 foreach ($file in $completionFiles) {
