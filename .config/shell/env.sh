@@ -20,7 +20,7 @@ export DENO_INSTALL="$XDG_DATA_HOME"/deno
 export GOPATH="$XDG_DATA_HOME"/go
 export PNPM_HOME="$XDG_DATA_HOME"/pnpm
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
-export RYE_HOME="$XDG_DATA_HOME"/rye
+export VITE_PLUS_HOME="$XDG_DATA_HOME"/vite-plus
 export WASMER_CACHE_DIR="$XDG_CACHE_HOME"/wasmer
 export WASMER_DIR="$XDG_DATA_HOME"/wasmer
 # [ -s "$WASMER_DIR"/wasmer.sh ] && . "$WASMER_DIR"/wasmer.sh
@@ -70,6 +70,7 @@ prepend_to_path "$PNPM_HOME"
 prepend_to_path "$WASMER_DIR"/bin
 prepend_to_path "$DENO_INSTALL"/bin
 prepend_to_path "$BUN_INSTALL"/bin
+prepend_to_path "$VITE_PLUS_HOME"/bin
 # Go
 prepend_to_path "$GOPATH"/bin
 # Rust
@@ -374,4 +375,3 @@ export NUGET_PACKAGES="$XDG_CACHE_HOME"/nuget-packages
 export OMNISHARPHOME="$XDG_CONFIG_HOME"/omnisharp
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_update_notifications?view=powershell-7.5#manage-notification-behavior
 export POWERSHELL_UPDATECHECK=LTS
-export VITE_PLUS_HOME="$XDG_DATA_HOME"/vite-plus
