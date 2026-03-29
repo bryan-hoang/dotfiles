@@ -38,6 +38,7 @@ Set-UserEnvVar 'VSCODE_PORTABLE' $(Join-Path $env:XDG_DATA_HOME 'vscode')
 Set-UserEnvVar 'WHKD_CONFIG_HOME' $(Join-Path $env:XDG_CONFIG_HOME 'whkd')
 Set-UserEnvVar 'ZEBAR_CONFIG_DIR' $(Join-Path $env:XDG_CONFIG_HOME 'zebar')
 Set-UserEnvVar 'ZELLIJ_CONFIG_DIR' $(Join-Path $env:XDG_CONFIG_HOME 'zellij')
+Set-UserEnvVar 'VITE_PLUS_HOME' $(Join-Path $env:XDG_DATA_HOME 'vite-plus')
 
 Set-UserEnvVar 'FZF_DEFAULT_OPTS' @"
 --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8
