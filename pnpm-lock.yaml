@@ -15,8 +15,8 @@ importers:
         specifier: 20.5.0
         version: 20.5.0
       '@stylistic/stylelint-config':
-        specifier: 4.0.0
-        version: 4.0.0(stylelint@17.6.0(typescript@6.0.2))
+        specifier: 5.0.0
+        version: 5.0.0(stylelint@17.6.0(typescript@6.0.2))
       debug:
         specifier: 4.4.3
         version: 4.4.3
@@ -148,11 +148,11 @@ packages:
     resolution: {integrity: sha512-tlqY9xq5ukxTUZBmoOp+m61cqwQD5pHJtFY3Mn8CA8ps6yghLH/Hw8UPdqg4OLmFW3IFlcXnQNmo/dh8HzXYIQ==}
     engines: {node: '>=18'}
 
-  '@stylistic/stylelint-config@4.0.0':
-    resolution: {integrity: sha512-04H8xfsIR/pWpAPQI5aGxwgjeikb8vy4OSNvzRdRcAITYSfX1UUTgGL5jm8iZxN8MSWfN77hMlV1LknE0Ho6tg==}
+  '@stylistic/stylelint-config@5.0.0':
+    resolution: {integrity: sha512-AW6S27wEm4DzB+uOZMvRkONIu0ba50VRbFte7qYJgGP4dacS8kAuj8HZJ+s+8kE4GK3XXBcSKLb75a+NfJlbiQ==}
     engines: {node: '>=20.19.0'}
     peerDependencies:
-      stylelint: ^17.0.0
+      stylelint: ^17.6.0
 
   '@stylistic/stylelint-plugin@5.1.0':
     resolution: {integrity: sha512-TFvKCbJUEWUYCD+rDv45qhnStO6nRtbBngaCblS2JGh8c95S3jJi3fIotfF6EDo4IVM15UPa65WP+kp6GNvXRA==}
@@ -880,7 +880,7 @@ snapshots:
 
   '@sindresorhus/merge-streams@4.0.0': {}
 
-  '@stylistic/stylelint-config@4.0.0(stylelint@17.6.0(typescript@6.0.2))':
+  '@stylistic/stylelint-config@5.0.0(stylelint@17.6.0(typescript@6.0.2))':
     dependencies:
       '@stylistic/stylelint-plugin': 5.1.0(stylelint@17.6.0(typescript@6.0.2))
       stylelint: 17.6.0(typescript@6.0.2)
