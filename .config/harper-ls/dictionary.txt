@@ -1,10 +1,15 @@
+AKS
+ATC
 Catppuccin
+ColdFusion
 DCP
 Hoang
 Kanban
 Kenwoods
 LazyVim
+Novari
 ONNX
+PIM
 Polyfill
 README
 TODO

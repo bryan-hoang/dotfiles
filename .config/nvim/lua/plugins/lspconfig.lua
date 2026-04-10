@@ -164,7 +164,13 @@ return {
 					-- vale_ls = {
 					-- 	filetypes = { "markdown", "text", "tex", "gitcommit" },
 					-- },
-					harper_ls = {},
+					harper_ls = {
+						settings = {
+							["harper-ls"] = {
+								userDictPath = "~/.config/harper-ls/dictionary.txt",
+							},
+						},
+					},
 					oxlint = { mason = false },
 					oxfmt = { mason = false },
 				},

@@ -7,13 +7,6 @@ return {
 			-- "razor"
 		},
 		dependencies = {
-			-- {
-			-- 	-- By loading as a dependencies, we ensure that we are available to set
-			-- 	-- the handlers for Roslyn.
-			-- 	"tris203/rzls.nvim",
-			-- 	config = true,
-			-- },
-			-- https://github.com/tris203/rzls.nvim#installing-the-lsp
 			{
 				"mason-org/mason.nvim",
 				opts = {
@@ -23,42 +16,18 @@ return {
 					},
 					ensure_installed = {
 						"roslyn",
-						-- "rzls",
 					},
 				},
 			},
 		},
 		config = function()
-			-- Use one of the methods in the Integration section to compose the
-			-- command.
-			-- local rzls_path = vim.fn.expand("$MASON/packages/rzls/libexec")
-			-- local cmd = {
-			-- 	"roslyn",
-			-- 	"--stdio",
-			-- 	"--logLevel=Information",
-			-- 	"--extensionLogDirectory=" .. vim.fs.dirname(vim.lsp.get_log_path()),
-			-- 	"--razorSourceGenerator=" .. vim.fs.joinpath(
-			-- 		rzls_path,
-			-- 		"Microsoft.CodeAnalysis.Razor.Compiler.dll"
-			-- 	),
-			-- 	"--razorDesignTimePath=" .. vim.fs.joinpath(
-			-- 		rzls_path,
-			-- 		"Targets",
-			-- 		"Microsoft.NET.Sdk.Razor.DesignTime.targets"
-			-- 	),
-			-- 	"--extension",
-			-- 	vim.fs.joinpath(
-			-- 		rzls_path,
-			-- 		"RazorExtension",
-			-- 		"Microsoft.VisualStudioCode.RazorExtension.dll"
-			-- 	),
-			-- }
-
 			vim.lsp.config("roslyn", {
 				filetypes = { "cs", "razor" },
-				-- cmd = cmd,
-				-- handlers = require("rzls.roslyn_handlers"),
 				settings = {
+					["csharp|background_analysis"] = {
+						dotnet_analyzer_diagnostics_scope = "openFiles",
+						dotnet_compiler_diagnostics_scope = "openFiles",
+					},
 					["csharp|inlay_hints"] = {
 						csharp_enable_inlay_hints_for_implicit_object_creation = true,
 						csharp_enable_inlay_hints_for_implicit_variable_types = true,
