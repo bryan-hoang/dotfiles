@@ -3,7 +3,7 @@
 [sqlfluff]
 dialect = tsql
 exclude_rules = ambiguous.column_count, structure.column_order
-large_file_skip_byte_limit = 32768
+large_file_skip_byte_limit = 65536
 max_line_length = 120
 
 [sqlfluff:indentation]
