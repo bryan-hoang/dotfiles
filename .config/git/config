@@ -149,8 +149,6 @@
 	untracked = cyan
 [clean]
 	requireForce = false
-[remote "origin"]
-	followRemoteHEAD = warn
 [rerere]
 	autoupdate = true
 	enabled = true

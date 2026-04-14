@@ -172,7 +172,6 @@ return {
 						},
 					},
 					oxlint = { mason = false },
-					oxfmt = { mason = false },
 				},
 			}
 

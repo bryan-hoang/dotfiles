@@ -48,8 +48,8 @@ wk.add({
 
 -- Remove default open terminal mapping.
 -- https://www.lazyvim.org/keymaps#general
-vim.keymap.del({ "n" }, "<C-/>")
-vim.keymap.del({ "n" }, "<C-_>")
+vim.keymap.del({ "n", "t" }, "<C-/>")
+vim.keymap.del({ "n", "t" }, "<C-_>")
 
 local mini_comment = require("mini.comment")
 -- https://github.com/wez/wezterm/issues/3180#issuecomment-1517896371
