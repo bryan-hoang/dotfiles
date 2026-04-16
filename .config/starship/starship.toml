@@ -185,9 +185,9 @@ format = '$symbol[${ram}( | ${swap})]($style) '
 
 [mise]
 disabled = false
-format = "[$symbol$health]($style) "
+format = "[$symbol]($style) "
 healthy_symbol = "✓"
-symbol = "󰭼 "
+symbol = "󰭼"
 unhealthy_symbol = "✗"
 
 [nodejs]
