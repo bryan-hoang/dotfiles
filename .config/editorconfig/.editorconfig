@@ -34,7 +34,7 @@ indent_style = unset
 
 # https://github.com/rust-lang/style-team/blob/master/guide/guide.md
 # https://github.com/rust-lang/style-team/blob/master/guide/cargo.md
-[{*.rs,Cargo.toml}]
+[{*.rs,Cargo.toml,*.jq}]
 indent_size = 4
 indent_style = space
 
