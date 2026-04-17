@@ -14,5 +14,12 @@
 				".yml"
 			]
 		}
+	},
+	"mcp": {
+		"exa": {
+			"type": "remote",
+			"url": "https://mcp.exa.ai/mcp",
+			"enabled": true
+		},
 	}
 }

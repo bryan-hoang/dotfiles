@@ -7,4 +7,5 @@ keymap_mode = "auto"
 show_preview = true
 
 [daemon]
+autostart = true
 enabled = true
