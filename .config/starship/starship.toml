@@ -144,7 +144,9 @@ version_format = 'v${major}.${minor}'
 disabled = true
 
 [dotnet]
-format = "[$symbol($version )(🎯 $tfm)]($style) "
+format = "[$symbol($version)( 🎯 $tfm)]($style) "
+heuristic = false
+symbol = "󰌛 "
 
 [gcloud]
 # The module isn't very useful :(
@@ -168,8 +170,8 @@ trim_at = ""
 format = "[${symbol}(${version})]($style) "
 
 [kubernetes]
-disabled = false
 detect_files = [".show-k8s-in-starship-prompt.txt"]
+disabled = false
 format = "[$symbol $context(\\($namespace\\))]($style) "
 style = "blue bold"
 
