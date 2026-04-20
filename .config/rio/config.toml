@@ -20,21 +20,10 @@
 #
 # Example:
 theme = "catppuccin-mocha"
+padding = [0]
 
-# Padding-x
-#
-# define x axis padding (default is 0)
-#
-# Example:
-padding-x = 8
-
-# Padding-y
-#
-# define y axis padding based on a format [top, left]
-# (default is [0, 0])
-#
-# Example:
-padding-y = [0, 0]
+[panel]
+padding = [0]
 
 # Option as Alt
 #
@@ -102,37 +91,17 @@ confirm-before-quit = false
 #
 # Whenever the key binding `OpenConfigEditor` is triggered it will
 # use the value of the editor along with the rio configuration path.
-# [editor]
-# program = "vi"
+[editor]
+program = "nvim"
 # args = []
 
-# Window configuration
-#
-# • width - define the initial window width.
-#   Default: 600
-#
-# • height - define the initial window height.
-#   Default: 400
-#
-# • mode - define how the window will be created
-#     - "Windowed" (default) is based on width and height
-#     - "Maximized" window is created with maximized
-#     - "Fullscreen" window is created with fullscreen
-#
-# • opacity - Set window opacity
-#
-# • blur - Set blur on the window background. Changing this config requires restarting Rio to take effect.
-#
-# • decorations - Set window decorations, options: "Enabled", "Disabled", "Transparent", "Buttonless"
-#
-# Example:
 [window]
-# width = 600
-# height = 400
+rows = 30
+columns = 120
 # mode = "windowed"
+blur = true
+decorations = "Disabled"
 opacity = 0.75
-# blur = false
-# decorations = "enabled"
 
 # Renderer
 #
@@ -149,23 +118,15 @@ opacity = 0.75
 #
 # • disable-unfocused-render: This property disable renderer processes while Rio is unfocused.
 #
-# • level: Configure renderer level
-#   - Available options: 0 and 1.
-#       Higher the level more rendering features and computations
-#       will be done like enable font ligatures or emoji support.
-#       For more information please check the docs.
-#
 # • filters: A list of paths to RetroArch slang shaders. Might not work with OpenGL.
 #
 # Example:
 [renderer]
-# performance = "high"
-# backend = "automatic"
+backend = "Automatic"
+# disable-occluded-render = false
 # disable-unfocused-render = false
-# level = 1
-filters = [
-	"/home/bryan/src/github.com/libretro/slang-shaders/crt/newpixie-crt.slangp"
-]
+performance = "high"
+use-cpu = false
 
 # Keyboard
 #
@@ -343,14 +304,14 @@ size = 16
 # program = "/bin/fish"
 # args = ["--login"]
 #
-# [platform]
-# # Microsoft Windows overwrite
-# windows.shell.program = "pwsh"
-# windows.shell.args = ["-l"]
-#
-# # Linux overwrite
-# linux.shell.program = "tmux"
-# linux.shell.args = ["new-session", "-c", "/var/www"]
+[platform]
+# Microsoft Windows overwrite
+windows.shell.program = "pwsh"
+windows.shell.args = ["-nologo"]
+
+# Linux overwrite
+linux.shell.program = "tmux"
+linux.shell.args = ["new-session", "-c", "/var/www"]
 
 # Log level
 #
@@ -360,4 +321,3 @@ size = 16
 # [developer]
 # log-level = "OFF"
 # enable-log-file = false
-

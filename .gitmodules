@@ -10,6 +10,7 @@
 [submodule "amix/vimrc"]
 	path = src/github.com/amix/vimrc
 	url = https://github.com/amix/vimrc.git
+
 # Catppuccin
 [submodule "catppuccin/lsd"]
 	path = src/github.com/catppuccin/lsd
@@ -26,6 +27,10 @@
 [submodule "catppuccin/delta"]
 	path = src/github.com/catppuccin/delta
 	url = https://github.com/catppuccin/delta.git
+[submodule "catppuccin/rio"]
+	path = src/github.com/catppuccin/rio
+	url = https://github.com/catppuccin/rio.git
+
 # Dracula
 [submodule "dracula/gtk"]
 	path = src/github.com/dracula/gtk
