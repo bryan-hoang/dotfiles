@@ -79,7 +79,7 @@ prepend_to_path "$GOPATH"/bin
 prepend_to_path "$XDG_DATA_HOME"/soar/bin
 # Personal
 prepend_to_path "$XDG_BIN_HOME"
-
+prepend_to_path "$XDG_DATA_HOME"/dotnet/.dotnet/tools
 # Searched first
 
 export XCURSOR_PATH="$XDG_DATA_HOME"/icons
@@ -268,10 +268,40 @@ export KUBECACHEDIR="$XDG_CACHE_HOME"/kube
 export TERMINFO="$XDG_DATA_HOME"/terminfo
 export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/etc/terminfo:/usr/share/terminfo
 
+export AZURE_CONFIG_DIR="$XDG_DATA_HOME"/azure
+export BACKUPS_DIR="$XDG_DATA_HOME"/backups
+export BAT_THEME='Catppuccin Mocha'
+export BOB_CONFIG="$XDG_CONFIG_HOME"/bob/config.toml
+export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
+export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle/config
+export CARGO_MAKEFLAGS="$MAKEFLAGS"
+export CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
+export CLOUDSDK_CONFIG="$XDG_CONFIG_HOME"/gcloud
+export COMPOSER_HOME="$XDG_CONFIG_HOME"/composer
+export COREPACK_ENABLE_DOWNLOAD_PROMPT=0
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
+export DCP_HOMEDIR="$XDG_DATA_HOME"
+export DISABLE_AUTO_UPDATE=true
+export FONT_MONO='BerkeleyMono Nerd Font Mono'
+export GRIT_USER_CONFIG="$XDG_CONFIG_HOME"/grit
+export JULIA_DEPOT_PATH="$XDG_DATA_HOME"/julia:"$JULIA_DEPOT_PATH"
+export MAKEFLAGS="--jobs $NUM_JOBS"
+export MYPY_CACHE_DIR="$XDG_CACHE_HOME"/mypy
+export NLTK_DATA="$XDG_CACHE_HOME/nltk"
+export NUGET_PACKAGES="$XDG_CACHE_HOME"/nuget-packages
+export OMNISHARPHOME="$XDG_CONFIG_HOME"/omnisharp
+export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
+export PIPX_HOME="$XDG_DATA_HOME"/pipx
+export SHELDON_DATA_DIR="$XDG_DATA_HOME"/sheldon
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
+export STARSHIP_CONFIG="$XDG_CONFIG_HOME"/starship/starship.toml
+export SUDO_PROMPT='[sudo] password for %p@%H to run as %U: '
+export TAPLO_CONFIG="$XDG_CONFIG_HOME"/taplo/.taplo.toml
+export WARP_THEMES_DIR="$XDG_DATA_HOME"/warp-terminal/themes
+
 # Mise
 export MISE_RUBY_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/default-pkgs/gem.list
 export MISE_PIPX_UVX=1
-
 # fzf
 # catppuccin-mocha
 export FZF_DEFAULT_OPTS=" \
@@ -284,26 +314,13 @@ FD_OPTIONS="--strip-cwd-prefix --hidden --no-ignore --follow"
 export FZF_DEFAULT_COMMAND="fd --type f $FD_OPTIONS"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
-
-export BAT_THEME='Catppuccin Mocha'
-export DISABLE_AUTO_UPDATE=true
-export CLOUDSDK_CONFIG="$XDG_CONFIG_HOME"/gcloud
-export JULIA_DEPOT_PATH="$XDG_DATA_HOME"/julia:"$JULIA_DEPOT_PATH"
-export MYPY_CACHE_DIR="$XDG_CACHE_HOME"/mypy
-export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
+# Komorebi
 : "${KOMOREBI_CONFIG_HOME:="$XDG_CONFIG_HOME"/komorebi}"
 export KOMOREBI_CONFIG_HOME
-export BACKUPS_DIR="$XDG_DATA_HOME"/backups
 export SRC_DIR="$HOME"/src/localhost
 mkdir -p "$SRC_DIR"
 export BASH_COMPLETION_USER_DIR="$XDG_DATA_HOME"/bash-completion
 mkdir -p "$BASH_COMPLETION_USER_DIR"/completions
-export COMPOSER_HOME="$XDG_CONFIG_HOME"/composer
-# shellcheck disable=SC2154
-export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
-export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
-export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle/config
-export PIPX_HOME="$XDG_DATA_HOME"/pipx
 export SDIRS="$XDG_STATE_HOME"/bashmarks/sdirs
 mkdir -p "$(dirname "$SDIRS")"
 # https://github.com/mozilla/sccache#usage
@@ -318,41 +335,28 @@ export CMAKE_EXPORT_COMPILE_COMMANDS=1
 # https://doc.rust-lang.org/stable/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-build-scripts
 NUM_JOBS="$(nproc)"
 export NUM_JOBS
-export MAKEFLAGS="--jobs $NUM_JOBS"
-export CARGO_MAKEFLAGS="$MAKEFLAGS"
 # https://blog.rust-lang.org/2023/11/09/parallel-rustc.html
 export RUSTFLAGS="-Z threads=8"
-export SUDO_PROMPT='[sudo] password for %p@%H to run as %U: '
-export STARSHIP_CONFIG="$XDG_CONFIG_HOME"/starship/starship.toml
 # https://wiki.archlinux.org/title/Alacritty#Different_font_size_on_multiple_monitors
 export WINIT_X11_SCALE_FACTOR=1
 # https://github.com/jD91mZM2/xidlehook#configuring-via-systemd
 export XIDLEHOOK_SOCK="$XDG_RUNTIME_DIR"/xidlehook.socket
-export CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 # Default Brewfile location. See `brew bundle --help`.
 export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME"/brewfile/Brewfile
-# Disable marksman crashing due to missing icu dependency.
-# https://learn.microsoft.com/en-us/dotnet/core/runtime-config/globalization#invariant-mode
-# https://stackoverflow.com/questions/59119904/process-terminated-couldnt-find-a-valid-icu-package-installed-on-the-system-in
-export SHELDON_DATA_DIR="$XDG_DATA_HOME"/sheldon
-export DCP_HOMEDIR="$XDG_DATA_HOME"
-# Make Emscripten XDG Base Directory sped compliant.
+# Make Emscripten XDG Base Directory spec compliant.
 export EM_CONFIG="$XDG_CONFIG_HOME"/emscripten/config
 export EM_CACHE="$XDG_CACHE_HOME"/emscripten/cache
 export EM_PORTS="$XDG_DATA_HOME"/emscripten/cache
-# Make mozbuild tooling comply w/ XDG sped.
+# Make mozbuild tooling comply w/ XDG spec.
 export MOZBUILD_STATE_PATH="$XDG_DATA_HOME"/mozbuild
 # https://www.haskell.org/ghcup/guide/#xdg-support
 export GHCUP_USE_XDG_DIRS=1
 # Preferred over GNU screen's default of `~/.screenrc`.
 export SCREENRC="$XDG_CONFIG_HOME"/screen/screenrc
-export BOB_CONFIG="$XDG_CONFIG_HOME"/bob/config.toml
-export TAPLO_CONFIG="$XDG_CONFIG_HOME"/taplo/.taplo.toml
 # Hide messages from npm installing.
 export DISABLE_OPENCOLLECTIVE=1
 export ADBLOCK=1
 export SUPPRESS_SUPPORT=1
-export WARP_THEMES_DIR="$XDG_DATA_HOME"/warp-terminal/themes
 # PostgreSQL
 export PSQLRC="$XDG_CONFIG_HOME/pg/psqlrc"
 export PSQL_HISTORY="$XDG_STATE_HOME/pg/history"
@@ -360,18 +364,10 @@ export PGPASSFILE="$XDG_CONFIG_HOME/pg/pgpass"
 export PGSERVICEFILE="$XDG_CONFIG_HOME/pg/pg_service.conf"
 mkdir -p "$(dirname "$PSQLRC")"
 mkdir -p "$(dirname "$PSQL_HISTORY")"
-export COREPACK_ENABLE_DOWNLOAD_PROMPT=0
-export FONT_MONO='BerkeleyMono Nerd Font Mono'
-export PARALLEL_HOME="$XDG_CONFIG_HOME"/parallel
 # https://docs.deno.com/runtime/manual/basics/env_variables/#special-environment-variables
 export DENO_INSTALL_ROOT="$XDG_LOCAL_HOME"
-export GRIT_USER_CONFIG="$XDG_CONFIG_HOME"/grit
-export NLTK_DATA="$XDG_CACHE_HOME/nltk"
-export AZURE_CONFIG_DIR="$XDG_DATA_HOME"/azure
 # https://learn.microsoft.com/en-us/dotnet/core/runtime-config/globalization#invariant-mode
 export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=0
 export DOTNET_CLI_HOME="$XDG_DATA_HOME"/dotnet
-export NUGET_PACKAGES="$XDG_CACHE_HOME"/nuget-packages
-export OMNISHARPHOME="$XDG_CONFIG_HOME"/omnisharp
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_update_notifications?view=powershell-7.5#manage-notification-behavior
 export POWERSHELL_UPDATECHECK=LTS
