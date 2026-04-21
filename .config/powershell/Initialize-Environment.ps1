@@ -2,6 +2,7 @@
 
 Set-UserEnvVar 'MSYS' 'winsymlinks:nativestrict'
 Set-UserEnvVar 'POWERSHELL_UPDATECHECK' 'LTS'
+Set-UserEnvVar 'HOME' $HOME
 Set-UserEnvVar 'USERPROFILE' $HOME
 Set-UserEnvVar 'APPDATA' $(Join-Path -Resolve $env:USERPROFILE 'AppData' 'Roaming')
 Set-UserEnvVar 'XDG_CACHE_HOME' $(Join-Path $env:USERPROFILE '.cache')
