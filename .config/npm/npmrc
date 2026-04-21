@@ -1,11 +1,13 @@
-cache=/home/bryan/.cache/npm
+cache=${XDG_CACHE_HOME}/npm
 color=always
 fund=false
 init-author-email=bryan@bryanhoang.dev
 init-author-name=Bryan Hoang
 init-author-url=https://bryanhoang.dev/
-init-module=/home/bryan/.config/npm/npm-init.js
+init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
 init-version=0.0.0-development
+logs-dir=${XDG_STATE_HOME}/npm/logs
+prefix=${XDG_DATA_HOME}/npm
 preid=rc
 save-exact=true
 sign-git-commit=true

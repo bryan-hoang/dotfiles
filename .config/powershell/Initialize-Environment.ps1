@@ -6,14 +6,15 @@ Set-UserEnvVar 'USERPROFILE' $HOME
 Set-UserEnvVar 'APPDATA' $(Join-Path -Resolve $env:USERPROFILE 'AppData' 'Roaming')
 Set-UserEnvVar 'XDG_CACHE_HOME' $(Join-Path $env:USERPROFILE '.cache')
 Set-UserEnvVar 'XDG_CONFIG_HOME' $(Join-Path $env:USERPROFILE '.config')
-Set-UserEnvVar 'XDG_CONFIG_HOME' $(Join-Path $env:USERPROFILE '.config')
 Set-UserEnvVar 'XDG_LOCAL_HOME' $(Join-Path $env:USERPROFILE '.local')
 
 Set-UserEnvVar 'XDG_BIN_HOME' $(Join-Path $env:XDG_LOCAL_HOME 'bin')
 Set-UserEnvVar 'XDG_DATA_HOME' $(Join-Path $env:XDG_LOCAL_HOME 'share')
 Set-UserEnvVar 'XDG_STATE_HOME' $(Join-Path $env:XDG_LOCAL_HOME 'state')
 
-Set-UserEnvVar 'AZURE_CONFIG_DIR' $(Join-Path $env:XDG_DATA_HOME 'azure')
+Set-UserEnvVar 'AWS_CONFIG_FILE' $(Join-Path "$env:XDG_CONFIG_HOME" 'aws' 'config')
+Set-UserEnvVar 'AWS_SHARED_CREDENTIALS_FILE' $(Join-Path "$env:XDG_CONFIG_HOME" 'aws' 'credentials')
+Set-UserEnvVar 'AZURE_CONFIG_DIR' $(Join-Path $env:XDG_CONFIG_HOME 'azure')
 Set-UserEnvVar 'CARGO_HOME' $(Join-Path $env:XDG_DATA_HOME 'cargo')
 Set-UserEnvVar 'DOCKER_CONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'docker')
 
@@ -23,9 +24,6 @@ Set-UserEnvVar 'DOTNET_CLI_TELEMETRY_OPTOUT' 'true'
 Set-UserEnvVar 'DOTNET_NOLOGO' 'true'
 
 Set-UserEnvVar 'GLAZEWM_CONFIG_PATH' $(Join-Path $env:XDG_CONFIG_HOME 'glazewm' 'config.yaml')
-# FIXME: Setting to windows path breaks gpg commit signing. e.g.,
-# `/c/Users/bryan/C:/Users/bryan/.local/share/gnupg/pubring.kbx`
-# Set-UserEnvVar 'GNUPGHOME' $(Join-Path $env:XDG_DATA_HOME 'gnupg')
 Set-UserEnvVar 'GOPATH' $(Join-Path $env:XDG_DATA_HOME 'go')
 Set-UserEnvVar 'GRADLE_USER_HOME' $(Join-Path $env:XDG_DATA_HOME 'gradle')
 Set-UserEnvVar 'KOMOREBI_CONFIG_HOME' $(Join-Path $env:XDG_CONFIG_HOME 'komorebi')
@@ -33,21 +31,20 @@ Set-UserEnvVar 'KUBECACHEDIR' $(Join-Path $env:XDG_CACHE_HOME 'kube')
 Set-UserEnvVar 'KUBECONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'kube' 'kube.yaml')
 Set-UserEnvVar 'MINIKUBE_HOME' $(Join-Path $env:XDG_DATA_HOME 'minikube')
 Set-UserEnvVar 'MISE_WINDOWS_DEFAULT_INLINE_SHELL_ARGS' 'pwsh -NoProfile -NonInteractive -Command'
-
+Set-UserEnvVar 'NODE_REPL_HISTORY' $(Join-Path $env:XDG_STATE_HOME 'node' 'history')
 Set-UserEnvVar 'NUGET_PACKAGES' $(Join-Path $env:XDG_CACHE_HOME 'nuget-packages')
 Set-UserEnvVar 'NUGET_PLUGINS_CACHE_PATH' $(Join-Path $env:XDG_CACHE_HOME 'nuget-plugins')
-
-Set-UserEnvVar 'NODE_REPL_HISTORY' $(Join-Path $env:XDG_STATE_HOME 'node' 'history')
 Set-UserEnvVar 'OMNISHARPHOME' $(Join-Path $env:XDG_CONFIG_HOME 'omnisharp')
 Set-UserEnvVar 'PNPM_HOME' $(Join-Path $env:XDG_DATA_HOME 'pnpm')
+Set-UserEnvVar 'NPM_CONFIG_USERCONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'npm' 'npmrc')
 Set-UserEnvVar 'RUSTUP_HOME' $(Join-Path $env:XDG_DATA_HOME 'rustup')
 Set-UserEnvVar 'STARSHIP_CONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'starship' 'starship.toml')
 Set-UserEnvVar 'TEALDEER_CONFIG_DIR' $(Join-Path $env:XDG_CONFIG_HOME 'tealdeer')
+Set-UserEnvVar 'VITE_PLUS_HOME' $(Join-Path $env:XDG_DATA_HOME 'vite-plus')
 Set-UserEnvVar 'VSCODE_PORTABLE' $(Join-Path $env:XDG_DATA_HOME 'vscode')
 Set-UserEnvVar 'WHKD_CONFIG_HOME' $(Join-Path $env:XDG_CONFIG_HOME 'whkd')
 Set-UserEnvVar 'ZEBAR_CONFIG_DIR' $(Join-Path $env:XDG_CONFIG_HOME 'zebar')
 Set-UserEnvVar 'ZELLIJ_CONFIG_DIR' $(Join-Path $env:XDG_CONFIG_HOME 'zellij')
-Set-UserEnvVar 'VITE_PLUS_HOME' $(Join-Path $env:XDG_DATA_HOME 'vite-plus')
 
 Set-UserEnvVar 'FZF_DEFAULT_OPTS' @"
 --color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8
@@ -61,6 +58,10 @@ Set-UserEnvVar 'PYTHON_HISTORY' $(Join-Path $env:XDG_STATE_HOME 'python' 'histor
 if (-not (Test-Path $env:PYTHON_HISTORY)) {
 	New-Item -ItemType File -Force $env:PYTHON_HISTORY > $null
 }
+
+# FIXME: Setting to windows path breaks gpg commit signing. e.g.,
+# `/c/Users/bryan/C:/Users/bryan/.local/share/gnupg/pubring.kbx`
+# Set-UserEnvVar 'GNUPGHOME' $(Join-Path $env:XDG_DATA_HOME 'gnupg')
 
 if ($IsWindows) {
 	# Normalize ending with semi-colon. Some installers don't add it -_-

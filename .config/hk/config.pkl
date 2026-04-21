@@ -4,10 +4,15 @@ import "package://github.com/jdx/hk/releases/download/v1.43.0/hk@1.43.0#/Builtin
 local linters = new Mapping<String, Step> {
   ["editorconfig_checker"] = Builtins.editorconfig_checker
   ["betterleaks"] = (Builtins.gitleaks) {
-    check = "betterleaks dir --redact --verbose --no-banner {{ files }}"
+    check = "betterleaks dir --redact --verbose --no-banner --log-level warn {{ files }}"
   }
   ["ox_lint"] = Builtins.ox_lint
   ["typos"] = Builtins.typos
+  ["taplo"] = Builtins.taplo
+  ["taplo_format"] = Builtins.taplo_format
+  ["harper"] = (Builtins.harper) {
+    exclude = List("**/*.pkl", "**/*.ps1", "*npmrc")
+  }
 }
 
 exclude = List("node_modules", "dist", "build")
