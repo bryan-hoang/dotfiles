@@ -4,6 +4,7 @@ Catppuccin
 ColdFusion
 DCP
 Hoang
+Jspreadsheet
 Kanban
 Kenwoods
 LazyVim
