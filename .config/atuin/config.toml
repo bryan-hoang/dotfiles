@@ -1,10 +1,10 @@
 # https://docs.atuin.sh/configuration/config/
 
-# Search by session by default to avoid history from other sessions messing up
-# the expected search order for previous commands in the current session.
-filter_mode = "session"
+history_filter = ["Password"]
 keymap_mode = "auto"
-show_preview = true
+search_mode = "daemon-fuzzy"
+store_failed = false
+style = "auto"
 
 [daemon]
 autostart = true
@@ -12,3 +12,9 @@ enabled = true
 
 [logs]
 dir = "~/.local/share/atuin/logs"
+
+[theme]
+name = "catppuccin-mocha-blue"
+
+[sync]
+records = true
