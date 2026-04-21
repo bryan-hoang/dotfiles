@@ -4,15 +4,6 @@
 	"scripts": {
 		"prepare": "hk install --silent"
 	},
-	"config": {
-		"commitizen": {
-			"disableScopeLowerCase": true,
-			"disableSubjectLowerCase": true,
-			"maxHeaderWidth": 50,
-			"maxLineWidth": 72,
-			"path": "cz-conventional-changelog"
-		}
-	},
 	"devDependencies": {
 		"@commitlint/config-conventional": "20.5.0",
 		"@commitlint/types": "20.5.0",
@@ -26,6 +17,15 @@
 		"stylelint-config-standard-scss": "17.0.0",
 		"typescript": "6.0.3",
 		"valibot": "1.3.1"
+	},
+	"config": {
+		"commitizen": {
+			"disableScopeLowerCase": true,
+			"disableSubjectLowerCase": true,
+			"maxHeaderWidth": 50,
+			"maxLineWidth": 72,
+			"path": "cz-conventional-changelog"
+		}
 	},
 	"engines": {
 		"node": ">=18"

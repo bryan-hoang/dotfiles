@@ -11,14 +11,14 @@ local linters = new Mapping<String, Step> {
   ["taplo"] = Builtins.taplo
   ["taplo_format"] = Builtins.taplo_format
   ["harper"] = (Builtins.harper) {
-    exclude = List("**/*.pkl", "**/*.ps1", "*npmrc")
+    exclude = List("*.pkl", "*.ps1", "*npmrc", "*.json*")
   }
 }
 
 exclude = List("node_modules", "dist", "build")
 hooks {
   ["pre-commit"] {
-    fix = true
+    fix = false
     stash = "git"
     steps = linters
   }
