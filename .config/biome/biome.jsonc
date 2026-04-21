@@ -1,18 +1,18 @@
 {
 	// Local reference to avoid needing to updating the global version everywhere.
-	"$schema": ".local/share/pnpm/global/5/node_modules/@biomejs/biome/configuration_schema.json",
+	"$schema": "https://raw.githubusercontent.com/biomejs/biome/refs/heads/main/packages/%40biomejs/biome/configuration_schema.json",
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
-		"useIgnoreFile": true
+		"useIgnoreFile": false,
 	},
 	"formatter": {
-		"formatWithErrors": true
+		"formatWithErrors": true,
 	},
 	"javascript": {
 		"formatter": {
 			// Match the common rule in more JS projects.
-			"quoteStyle": "single"
-		}
-	}
+			"quoteStyle": "single",
+		},
+	},
 }
