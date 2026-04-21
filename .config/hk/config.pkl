@@ -1,0 +1,27 @@
+amends "package://github.com/jdx/hk/releases/download/v1.43.0/hk@1.43.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v1.43.0/hk@1.43.0#/Builtins.pkl"
+
+local linters = new Mapping<String, Step> {
+  ["editorconfig_checker"] = Builtins.editorconfig_checker
+  ["betterleaks"] = (Builtins.gitleaks) {
+    check = "betterleaks dir --redact --verbose --no-banner {{ files }}"
+  }
+  ["ox_lint"] = Builtins.ox_lint
+  ["typos"] = Builtins.typos
+}
+
+exclude = List("node_modules", "dist", "build")
+hooks {
+  ["pre-commit"] {
+    fix = true
+    stash = "git"
+    steps = linters
+  }
+  ["fix"] {
+    fix = true
+    steps = linters
+  }
+  ["check"] {
+    steps = linters
+  }
+}

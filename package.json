@@ -2,7 +2,7 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"prepare": "husky .config/husky"
+		"prepare": "hk install --silent"
 	},
 	"config": {
 		"commitizen": {
@@ -19,8 +19,6 @@
 		"@stylistic/stylelint-config": "5.0.0",
 		"debug": "4.4.3",
 		"defu": "6.1.7",
-		"husky": "9.1.7",
-		"lint-staged": "16.4.0",
 		"micromatch": "4.0.8",
 		"prettier": "3.8.3",
 		"prettier-plugin-packagejson": "3.0.2",

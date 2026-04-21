@@ -1,7 +1,0 @@
-#!/usr/bin/env sh
-
-files="$(git diff --cached --name-only --diff-filter=ACM)"
-
-if command -v ripsecrets >/dev/null && [ "$files" != "" ]; then
-	ripsecrets --strict-ignore "$files"
-fi

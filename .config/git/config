@@ -41,8 +41,8 @@
 	untrackedCache = true
 	autocrlf = input
 	eol = lf
+	hooksPath = ~/.git/hooks/
 	fsmonitor = true
-	hooksPath = ~/.config/git/hooks
 	longPaths = true
 	pager = delta
 	symlinks = true
@@ -187,3 +187,9 @@
 	# `includeIf "gitdir:~/src/..."`
 	# `includeIf "hasconfig:remote.*.url:git@.../**"`
 	path = machine.gitconfig
+[safe]
+	directory = *
+[safe]
+	directory = *
+[safe]
+	directory = *
