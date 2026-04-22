@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 #
-# shellcheck disable=SC2154
+# shellcheck disable=2154
 
 for file in "$XDG_CONFIG_HOME"/shell/{aliases,functions,machine}.sh; do
-	# shellcheck disable=SC1090
+	# shellcheck disable=1090
 	[[ -f $file ]] && . "$file"
 done
 
@@ -11,12 +11,14 @@ done
 SHELL_BASENAME=$(basename "$(readlink -f /proc/$$/exe)")
 export SHELL_BASENAME
 
+does_command_exist pitchfork && eval "$(pitchfork activate "$SHELL_BASENAME")"
+
 # NOTE: Activate starship before `mise` to avoid `_mise_hook` in
 # `$PROMPT_COMMAND` (bash) from getting saved into `$_PRESERVED_PROMPT_COMMAND`.
-# This avoids getting "command not found: _mise_hook" for every prompt due too
-# starship's hook trying to to eval the ones it "saved".
+# This avoids getting "command not found: _mise_hook" for every prompt due to
+# starship's hook trying to eval the ones it "saved".
 does_command_exist starship && eval "$(starship init "$SHELL_BASENAME")"
-# Bug w/ mise on windows in Git Bash.
+# Bug with mise on windows in Git Bash.
 does_command_exist mise && ! is_git_bash && eval "$(mise activate "$SHELL_BASENAME")"
 
 if [[ -n $SSH_CONNECTION ]] \
@@ -35,23 +37,25 @@ generate_completions cargo rustup completions "$SHELL_BASENAME" cargo
 generate_completions delta delta --generate-completion "$SHELL_BASENAME"
 generate_completions deno deno completions "$SHELL_BASENAME"
 generate_completions dufs dufs --completions "$SHELL_BASENAME"
-generate_completions genact genact --print-completions "$SHELL_BASENAME"
-generate_man_pages genact genact --print-manpage
 generate_completions gh gh completion -s "$SHELL_BASENAME"
 generate_completions git-absorb git-absorb --gen-completions "$SHELL_BASENAME"
 generate_completions glab glab completion --shell "$SHELL_BASENAME"
 generate_completions just just --completions "$SHELL_BASENAME"
+generate_completions kubectl kubectl completion "$SHELL_BASENAME"
 generate_completions mise mise completion "$SHELL_BASENAME"
+generate_completions pitchfork pitchfork completion "$SHELL_BASENAME"
 generate_completions poetry poetry completions "$SHELL_BASENAME"
 generate_completions ruff ruff generate-shell-completion "$SHELL_BASENAME"
 generate_completions rustup rustup completions "$SHELL_BASENAME" rustup
 generate_completions sheldon sheldon completions --shell "$SHELL_BASENAME"
 generate_completions starship starship completions "$SHELL_BASENAME"
 generate_completions uv uv generate-shell-completion "$SHELL_BASENAME"
+generate_completions zellij zellij setup --generate-completion "$SHELL_BASENAME"
+
+generate_completions genact genact --print-completions "$SHELL_BASENAME"
+generate_man_pages genact genact --print-manpage
 generate_completions watchexec watchexec --completions "$SHELL_BASENAME"
 generate_man_pages watchexec watchexec --manual
-generate_completions zellij zellij setup --generate-completion "$SHELL_BASENAME"
-generate_completions kubectl kubectl completion "$SHELL_BASENAME"
 
 # Doesn't support bash.
 generate_completions bw bw completion --shell zsh
@@ -62,15 +66,10 @@ does_command_exist register-python-argcomplete pipx \
 # endregion
 
 does_command_exist thefuck && eval "$(thefuck --alias)"
-# Hook in before `atuin` to avoid overwriting CTRL-R keybind.
+# Hook in before `atuin` to avoid overwriting `CTRL-R` keybind.
 does_command_exist tv && eval "$(tv init "$SHELL_BASENAME")"
 
-# Disable atuin on zfs file systems. See
-# https://github.com/atuinsh/atuin/issues/952
-# if [[ -d /home ]] && df --print-type /home | tail --lines=+2 \
-# 	| awk '{print $2}' | grep --quiet --invert-match zfs; then
 does_command_exist atuin && eval "$(atuin init --disable-up-arrow "$SHELL_BASENAME")"
-# fi
 
 # https://wiki.archlinux.org/title/XDG_Base_Directory
 mkdir -p "$XDG_DATA_HOME"/tig
@@ -83,7 +82,7 @@ set -o noclobber
 # Set tabs in the terminal to differ from the default of 8.
 tabs -2
 
-# Set the environment variable per interactive session. Otherwise `tty` returns
+# Set the environment variable per interactive session. Otherwise, `tty` returns
 # "not a tty" if ran from `.profile`.
 # https://wiki.archlinux.org/title/GnuPG#Configure_pinentry_to_use_the_correct_TTY
 export GPG_TTY=${TTY:-$(tty)}

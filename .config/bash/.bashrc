@@ -63,14 +63,10 @@ unset HISTTIMEFORMAT
 bind -x '"\es":"ssnz"'
 
 # Add tab completion for many Bash commands
-if [[ -z ${BASH_COMPLETION_VERSINFO:-} ]]; then
-	if [[ -f /usr/local/share/bash-completion/bash_completion ]]; then
-		# Locally installed completions. e.g., Git Bash on Windows, newer version
-		# compared to distribution's version.
-		. /usr/local/share/bash-completion/bash_completion
-	elif [[ -f /usr/share/bash-completion/bash_completion ]]; then
-		. /usr/share/bash-completion/bash_completion
-	fi
+if [[ -f /usr/local/share/bash-completion/bash_completion ]]; then
+	# Locally installed completions. e.g., Git Bash on Windows, newer version
+	# compared to distribution's version.
+	. /usr/local/share/bash-completion/bash_completion
 fi
 
 # Completions
