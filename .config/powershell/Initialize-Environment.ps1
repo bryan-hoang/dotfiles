@@ -27,17 +27,18 @@ Set-UserEnvVar 'DOTNET_NOLOGO' 'true'
 Set-UserEnvVar 'GLAZEWM_CONFIG_PATH' $(Join-Path $env:XDG_CONFIG_HOME 'glazewm' 'config.yaml')
 Set-UserEnvVar 'GOPATH' $(Join-Path $env:XDG_DATA_HOME 'go')
 Set-UserEnvVar 'GRADLE_USER_HOME' $(Join-Path $env:XDG_DATA_HOME 'gradle')
+Set-UserEnvVar 'HK_MISE' '1'
 Set-UserEnvVar 'KOMOREBI_CONFIG_HOME' $(Join-Path $env:XDG_CONFIG_HOME 'komorebi')
 Set-UserEnvVar 'KUBECACHEDIR' $(Join-Path $env:XDG_CACHE_HOME 'kube')
 Set-UserEnvVar 'KUBECONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'kube' 'kube.yaml')
 Set-UserEnvVar 'MINIKUBE_HOME' $(Join-Path $env:XDG_DATA_HOME 'minikube')
 Set-UserEnvVar 'MISE_WINDOWS_DEFAULT_INLINE_SHELL_ARGS' 'pwsh -NoProfile -NonInteractive -Command'
 Set-UserEnvVar 'NODE_REPL_HISTORY' $(Join-Path $env:XDG_STATE_HOME 'node' 'history')
+Set-UserEnvVar 'NPM_CONFIG_USERCONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'npm' 'npmrc')
 Set-UserEnvVar 'NUGET_PACKAGES' $(Join-Path $env:XDG_CACHE_HOME 'nuget-packages')
 Set-UserEnvVar 'NUGET_PLUGINS_CACHE_PATH' $(Join-Path $env:XDG_CACHE_HOME 'nuget-plugins')
 Set-UserEnvVar 'OMNISHARPHOME' $(Join-Path $env:XDG_CONFIG_HOME 'omnisharp')
 Set-UserEnvVar 'PNPM_HOME' $(Join-Path $env:XDG_DATA_HOME 'pnpm')
-Set-UserEnvVar 'NPM_CONFIG_USERCONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'npm' 'npmrc')
 Set-UserEnvVar 'RUSTUP_HOME' $(Join-Path $env:XDG_DATA_HOME 'rustup')
 Set-UserEnvVar 'STARSHIP_CONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'starship' 'starship.toml')
 Set-UserEnvVar 'TEALDEER_CONFIG_DIR' $(Join-Path $env:XDG_CONFIG_HOME 'tealdeer')
@@ -102,7 +103,7 @@ if (Test-CommandExists 'nvim') {
 }
 
 # Improve `git <command> --stat` output.
-# https://stackoverflow.com/a/75490052
+# https://stackoverflow.com/questions/75482606/how-can-width-of-git-stat-be-configured/75490052#75490052
 if (Test-CommandExists 'tput') {
 	$env:COLUMNS = $(tput cols)
 }
