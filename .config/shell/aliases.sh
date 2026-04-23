@@ -155,7 +155,6 @@ command -v bq >/dev/null && alias bq='bq --bigqueryrc "${XDG_CONFIG_HOME}"/bigqu
 command -v shfmt >/dev/null && alias shfmt='shfmt -ci -bn --simplify'
 alias watch='watch --color'
 alias muc='muc --count 16'
-alias ec='emacsclient --tty'
 alias restart-tmux='systemctl --user stop tmux && update_tmux_env && tmux attach'
 command -v watchexec >/dev/null \
 	&& alias watchexec='watchexec --project-origin . --restart --clear --timings --stop-timeout=0ns'

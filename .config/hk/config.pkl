@@ -11,7 +11,8 @@ local linters = new Mapping<String, Step> {
   ["taplo"] = Builtins.taplo
   ["taplo_format"] = Builtins.taplo_format
   ["harper"] = (Builtins.harper) {
-    exclude = List("*.pkl", "*.ps1", "*npmrc", "*.json*", "**/.bashrc", "**/dictionary.txt")
+    exclude =
+      List("*.pkl", "*.ps1", "*npmrc", "*.json*", "**/.bashrc", "**/dictionary.txt", "*.css", "*.cshtml")
   }
   ["shellcheck"] = Builtins.shellcheck
 }
