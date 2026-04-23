@@ -11,7 +11,6 @@ local linters = new Mapping<String, Step> {
   ["detect_private_key"] = Builtins.detect_private_key
   ["editorconfig_checker"] = Builtins.editorconfig_checker
   ["fix_smart_quotes"] = Builtins.fix_smart_quotes
-  ["jq"] = Builtins.jq
   ["lychee"] = Builtins.lychee
   ["mise"] = Builtins.mise
   ["ox_lint"] = Builtins.ox_lint
@@ -25,7 +24,6 @@ local linters = new Mapping<String, Step> {
   ["sql_fluff"] = Builtins.sql_fluff
   ["taplo"] = Builtins.taplo
   ["taplo_format"] = Builtins.taplo_format
-  ["yq"] = Builtins.yq
   ["zizmor"] = Builtins.zizmor
 
   ["betterleaks"] = (Builtins.gitleaks) {
