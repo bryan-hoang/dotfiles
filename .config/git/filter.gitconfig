@@ -22,7 +22,7 @@
 [filter "git-config"]
 	# Using sed to delete all lines between two matching patterns:
 	# https://stackoverflow.com/a/6287940/8714233
-	clean = "sed -e '/\\[gpg\\]/d' -e '/^	program = /d' -e '/^\\[bulkworkspaces\\]/,/^\\[/{/^\\[bulkworkspaces\\]/!{/\\[/!d}}'"
+	clean = "sed -e '/^\\[bulkworkspaces\\]/,/^\\[/{/^\\[bulkworkspaces\\]/!{/\\[/!d}}'"
 	smudge = cat
 [filter "macchina"]
 	clean = "sed '/^interface =/d'"

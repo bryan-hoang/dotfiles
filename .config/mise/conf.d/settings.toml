@@ -1,7 +1,10 @@
 [settings]
+color_theme = "catppuccin"
 experimental = true
 go_set_gobin = false
+install_before = "7d"
 legacy_version_file = false
+paranoid = true
 
 [settings.python]
 uv_venv_auto = true

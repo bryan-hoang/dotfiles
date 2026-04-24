@@ -8,9 +8,8 @@
 	path = dotfiles.gitconfig
 [user]
 	email = bryan@bryanhoang.dev
-	signingKey = bryan@bryanhoang.dev
-	useConfigOnly = true
 	name = Bryan Hoang
+	useConfigOnly = true
 [apply]
 	# Detect whitespace errors when applying a patch.
 	whitespace = fix
@@ -20,9 +19,7 @@
 # Config for `git bulk` from `git-extras`.`
 [bulkworkspaces]
 [commit]
-	# https://help.github.com/articles/signing-commits-using-gpg/
-	# Too annoying to deal with
-	# gpgsign = true
+	gpgsign = true
 	template = ~/.config/git/COMMIT_EDITMSG
 	verbose = true
 [core]
@@ -122,12 +119,21 @@
 	recurse = true
 [maintenance]
 	strategy = incremental
+[gitsign]
+	connectorID = https://github.com/login/oauth
+	matchCommitter = true
+	format = x509
+[gpg]
+	format = x509
+[gpg "x509"]
+	program = gitsign
 [grep]
 	column = true
 	lineNumber = true
 	patternType = perl
 [tag]
 	forceSignAnnotated = true
+	gpgsign = true
 	sort = version:refname
 [advice]
 	addEmptyPathspec = false
@@ -179,6 +185,8 @@
 [absorb]
 	autoStageIfNothingStaged = true
 	oneFixupPerCommit = true
+[safe]
+	directory = *
 [includeIf "gitdir/i:C:/"]
 	path = windows.gitconfig
 [include]
@@ -187,9 +195,3 @@
 	# `includeIf "gitdir:~/src/..."`
 	# `includeIf "hasconfig:remote.*.url:git@.../**"`
 	path = machine.gitconfig
-[safe]
-	directory = *
-[safe]
-	directory = *
-[safe]
-	directory = *

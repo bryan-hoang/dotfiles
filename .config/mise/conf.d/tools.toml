@@ -1,5 +1,6 @@
 [tools]
 "aqua:betterleaks/betterleaks" = "latest"
+"aqua:sigstore/gitsign" = "latest"
 aube = "latest"
 editorconfig-checker = "latest"
 "github:anomalyco/opencode" = "latest"
