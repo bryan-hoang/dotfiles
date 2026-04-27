@@ -1,12 +1,9 @@
 [tools]
 "aqua:betterleaks/betterleaks" = "latest"
 "aqua:sigstore/gitsign" = "latest"
-aube = "latest"
 editorconfig-checker = "latest"
-"github:anomalyco/opencode" = "latest"
 go = "latest"
 harper-cli = "latest"
-hk = "latest"
 jq = "latest"
 lychee = "latest"
 node = "latest"
@@ -14,4 +11,17 @@ pkl = "latest"
 shellcheck = "latest"
 shfmt = "latest"
 taplo = "latest"
+usage = "latest"
 uv = "latest"
+
+[tools.aube]
+minimum_release_age = "1d"
+version = "latest"
+
+[tools."github:anomalyco/opencode"]
+minimum_release_age = "0d"
+version = "latest"
+
+[tools.hk]
+minimum_release_age = "1d"
+version = "latest"
