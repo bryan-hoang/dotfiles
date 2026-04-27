@@ -41,6 +41,7 @@ local linters = new Mapping<String, Step> {
         "*.pkl",
         "*.ps1",
         "*npmrc",
+				"*.sql",
       )
   }
   ["lychee"] = (Builtins.lychee) {
