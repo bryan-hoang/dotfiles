@@ -32,8 +32,8 @@ function Add-Completion {
 	}
 }
 
-# Add-Completion 'sqlcmd' 'sqlcmd completion powershell'
 Add-Completion 'atuin' 'atuin gen-completions --shell powershell'
+Add-Completion 'aube' 'aube completion powershell'
 Add-Completion 'bob' 'bob complete power-shell'
 Add-Completion 'dotnet' 'dotnet completions script pwsh'
 Add-Completion 'kubectl' 'kubectl completion powershell'
