@@ -3,31 +3,23 @@
 	"autoupdate": true,
 	"formatter": {
 		"oxfmt": {
-			"command": [
-				"oxfmt",
-				"$FILE"
-			],
-			"extensions": [
-				".md",
-				".json",
-				".yaml",
-				".yml"
-			]
-		}
+			"command": ["oxfmt", "$FILE"],
+			"extensions": [".md", ".json", ".yaml", ".yml"],
+		},
 	},
 	"mcp": {
 		"chrome-devtools": {
 			"type": "local",
-			"command": [
-				"bun",
-				"x",
-				"chrome-devtools-mcp@latest"
-			]
+			"command": ["bun", "x", "chrome-devtools-mcp@latest"],
 		},
 		"exa": {
 			"type": "remote",
 			"url": "https://mcp.exa.ai/mcp",
-			"enabled": true
+			"enabled": true,
 		},
-	}
+		"pitchfork": {
+			"type": "local",
+			"command": ["pitchfork", "mcp"],
+		},
+	},
 }

@@ -3,23 +3,22 @@ return {
 		-- Lightweight yet powerful formatter plugin for Neovim.
 		"stevearc/conform.nvim",
 		opts = function(_, opts)
-			-- local cssFormatters = { "oxlint", "oxfmt", }
 			local shFormatters = { "shellcheck", "shellharden", "shfmt" }
 
 			local user_opts = {
 				formatters_by_ft = {
 					cmake = { "cmake_format" },
 					fish = {},
+					json = { "oxfmt" },
+					jsonc = { "oxfmt" },
 					kdl = { "kdlfmt" },
 					markdown = { "oxfmt", "markdownlint-cli2", "markdown-toc" },
 					python = { "ruff_fix", "ruff_format" },
 					ruby = { "rubyfmt", "rubocop" },
-					-- scss = cssFormatters,
 					sh = shFormatters,
 					svg = { "prettier" },
 					toml = { "oxfmt", "taplo" },
 					xml = { "xmlstarlet" },
-					-- yaml = { "oxfmt" },
 					zsh = shFormatters,
 				},
 				-- LazyVim will merge the options you set here with built-in formatters.
