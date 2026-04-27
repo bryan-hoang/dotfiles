@@ -7,7 +7,7 @@ for file in "$XDG_CONFIG_HOME"/shell/{aliases,functions,machine}.sh; do
 	[[ -f $file ]] && . "$file"
 done
 
-# Source: https://unix.stackexchange.com/a/37535
+# Source: https://unix.stackexchange.com/questions/37534/determine-current-shell-name/37535#37535
 SHELL_BASENAME=$(basename "$(readlink -f /proc/$$/exe)")
 export SHELL_BASENAME
 
@@ -32,6 +32,7 @@ fi
 
 generate_completions ast-grep ast-grep completions
 generate_completions atuin atuin gen-completions --shell "$SHELL_BASENAME"
+generate_completions aube aube completion "$SHELL_BASENAME"
 generate_completions bob bob complete "$SHELL_BASENAME"
 generate_completions cargo rustup completions "$SHELL_BASENAME" cargo
 generate_completions delta delta --generate-completion "$SHELL_BASENAME"

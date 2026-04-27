@@ -13,13 +13,13 @@ local linters = new Mapping<String, Step> {
   ["fix_smart_quotes"] = Builtins.fix_smart_quotes
   ["mise"] = Builtins.mise
   ["ox_lint"] = Builtins.ox_lint
-  // ["pkl"] = Builtins.pkl
-  // ["pkl_format"] = Builtins.pkl_format
   ["ruff"] = Builtins.ruff
   ["ruff_format"] = Builtins.ruff_format
   ["rumdl"] = Builtins.rumdl
   ["shellcheck"] = Builtins.shellcheck
-  ["shfmt"] = Builtins.shfmt
+  ["shfmt"] = (Builtins.shfmt) {
+    check = "shfmt -bn -ci --simplify {{ files }}"
+  }
   ["sql_fluff"] = Builtins.sql_fluff
   ["taplo"] = Builtins.taplo
   ["taplo_format"] = Builtins.taplo_format
@@ -44,7 +44,7 @@ local linters = new Mapping<String, Step> {
       )
   }
   ["lychee"] = (Builtins.lychee) {
-    exclude = List("**/git/config")
+    exclude = List("**/git/config", "**/opencode.json*")
   }
 }
 

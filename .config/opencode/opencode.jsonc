@@ -16,6 +16,14 @@
 		}
 	},
 	"mcp": {
+		"chrome-devtools": {
+			"type": "local",
+			"command": [
+				"aube",
+				"dlx",
+				"chrome-devtools-mcp@latest"
+			]
+		},
 		"exa": {
 			"type": "remote",
 			"url": "https://mcp.exa.ai/mcp",
