@@ -37,6 +37,7 @@ generate_completions bob bob complete "$SHELL_BASENAME"
 generate_completions cargo rustup completions "$SHELL_BASENAME" cargo
 generate_completions delta delta --generate-completion "$SHELL_BASENAME"
 generate_completions deno deno completions "$SHELL_BASENAME"
+generate_completions dotnet dotnet completions script "$SHELL_BASENAME"
 generate_completions dufs dufs --completions "$SHELL_BASENAME"
 generate_completions gh gh completion -s "$SHELL_BASENAME"
 generate_completions git-absorb git-absorb --gen-completions "$SHELL_BASENAME"
