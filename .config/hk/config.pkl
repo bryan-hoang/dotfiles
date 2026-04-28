@@ -1,5 +1,6 @@
 amends "package://github.com/jdx/hk/releases/download/v1.44.2/hk@1.44.2#/Config.pkl"
 import "package://github.com/jdx/hk/releases/download/v1.44.2/hk@1.44.2#/Builtins.pkl"
+import "./oxfmt.pkl"
 
 local linters = new Mapping<String, Step> {
   ["bom"] = Builtins.byte_order_marker
@@ -12,6 +13,7 @@ local linters = new Mapping<String, Step> {
   ["editorconfig_checker"] = Builtins.editorconfig_checker
   ["fix_smart_quotes"] = Builtins.fix_smart_quotes
   ["mise"] = Builtins.mise
+  ["oxfmt"] = oxfmt.oxfmt
   ["ox_lint"] = Builtins.ox_lint
   ["ruff"] = Builtins.ruff
   ["ruff_format"] = Builtins.ruff_format
