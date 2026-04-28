@@ -4,6 +4,7 @@
 	path = alias.gitconfig
 	path = diff.gitconfig
 	path = filter.gitconfig
+	path = hook.gitconfig
 [includeIf "gitdir:~/.git"]
 	path = dotfiles.gitconfig
 [user]
@@ -38,7 +39,6 @@
 	untrackedCache = true
 	autocrlf = input
 	eol = lf
-	hooksPath = ~/.git/hooks/
 	fsmonitor = true
 	longPaths = true
 	pager = delta

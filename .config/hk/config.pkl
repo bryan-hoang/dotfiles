@@ -1,5 +1,5 @@
-amends "package://github.com/jdx/hk/releases/download/v1.43.0/hk@1.43.0#/Config.pkl"
-import "package://github.com/jdx/hk/releases/download/v1.43.0/hk@1.43.0#/Builtins.pkl"
+amends "package://github.com/jdx/hk/releases/download/v1.44.2/hk@1.44.2#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v1.44.2/hk@1.44.2#/Builtins.pkl"
 
 local linters = new Mapping<String, Step> {
   ["bom"] = Builtins.byte_order_marker
@@ -40,8 +40,9 @@ local linters = new Mapping<String, Step> {
         "*.json*",
         "*.pkl",
         "*.ps1",
+        "*.sql",
+        "*.yaml",
         "*npmrc",
-				"*.sql",
       )
   }
   ["lychee"] = (Builtins.lychee) {
@@ -51,16 +52,22 @@ local linters = new Mapping<String, Step> {
 
 exclude = List("node_modules", "dist", "build")
 hooks {
-  ["pre-commit"] {
-    fix = false
-    stash = "git"
+  ["check"] {
     steps = linters
   }
   ["fix"] {
     fix = true
     steps = linters
   }
-  ["check"] {
+  ["commit-msg"] {
+    steps = new Mapping<String, Step> {
+      ["check-conventional-commit"] = Builtins.check_conventional_commit
+      ["cocogitto_commit_msg"] = Builtins.cocogitto_commit_msg
+    }
+  }
+  ["pre-commit"] {
+    fix = false
+    stash = "git"
     steps = linters
   }
 }
