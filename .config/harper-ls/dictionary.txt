@@ -3,10 +3,12 @@ ATC
 Catppuccin
 ColdFusion
 DCP
+Emscripten
 Hoang
 Jspreadsheet
 KanBan
 Kenwoods
+Komorebi
 LazyVim
 Lua
 Novari
@@ -17,7 +19,9 @@ README
 TODO
 Topgrade
 Typst
+UTF
 WTIS
+XDG
 XHR
 biome
 bundler

@@ -23,11 +23,10 @@ export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export VITE_PLUS_HOME="$XDG_DATA_HOME"/vite-plus
 export WASMER_CACHE_DIR="$XDG_CACHE_HOME"/wasmer
 export WASMER_DIR="$XDG_DATA_HOME"/wasmer
-# [ -s "$WASMER_DIR"/wasmer.sh ] && . "$WASMER_DIR"/wasmer.sh
 
 prepend_to_path() {
 	for folder in "$@"; do
-		# https://stackoverflow.com/a/20460402/8714233
+		# https://stackoverflow.com/questions/229551/how-to-check-if-a-string-contains-a-substring-in-bash/20460402#20460402
 		case "$PATH" in
 			*"$folder"*) ;;
 			*) [ -d "$folder" ] && export PATH="$folder":"$PATH" ;;
@@ -37,7 +36,7 @@ prepend_to_path() {
 
 prepend_brew_to_path() {
 	for brew_prefix in "$@"; do
-		# https://stackoverflow.com/a/20460402/8714233
+		# https://stackoverflow.com/questions/229551/how-to-check-if-a-string-contains-a-substring-in-bash/20460402#20460402
 		case "$PATH" in
 			# Do nothing if it's already added.
 			*"$brew_prefix"*) ;;
@@ -61,12 +60,12 @@ prepend_to_path "$XDG_DATA_HOME"/omnisharp
 prepend_to_path "$XDG_DATA_HOME"/mise/shims
 # Doom Emacs.
 prepend_to_path "$XDG_CONFIG_HOME"/emacs/bin
-# Neovim managed by bob (MordechaiHadad/bob).
+# Neovim managed by bob.
 prepend_to_path "$XDG_DATA_HOME"/bob/nvim-bin
-# shellcheck disable=SC2154
+# shellcheck disable=2154
 prepend_to_path "$LOCALAPPDATA"/bob/nvim-bin
-# JS eCoSyTeM
-prepend_to_path "$PNPM_HOME"
+# JS
+prepend_to_path "$PNPM_HOME"/bin
 prepend_to_path "$WASMER_DIR"/bin
 prepend_to_path "$DENO_INSTALL"/bin
 prepend_to_path "$BUN_INSTALL"/bin
@@ -122,14 +121,10 @@ export PAGER=less
 command -v nvim >/dev/null \
 	&& export MANPAGER='nvim +Man!'
 
-# Remove linuxbrew man pages by default.
-unset MANPATH
-mkdir -p "$XDG_DATA_HOME"/man/man1
-
 # Enable persistent REPL history for `node`.
-[ $NODE_REPL_HISTORY ] || export NODE_REPL_HISTORY="$XDG_STATE_HOME"/node/history
+[ -n "$NODE_REPL_HISTORY" ] || export NODE_REPL_HISTORY="$XDG_STATE_HOME"/node/history
 mkdir -p "$(dirname "$NODE_REPL_HISTORY")"
-touch $NODE_REPL_HISTORY
+touch "$NODE_REPL_HISTORY"
 
 # Allow 32^3 entries; the default is 1000.
 export NODE_REPL_HISTORY_SIZE="$HISTFILESIZE"
@@ -146,18 +141,7 @@ export RUBY_DEBUG_HISTORY_FILE="$XDG_STATE_HOME"/rdbg/history
 mkdir -p "$(dirname "$RUBY_DEBUG_HISTORY_FILE")"
 export RUBY_YJIT_ENABLE=1
 
-# Colors
-
-# -F|--quit-if-one-screen - makes less quit if the entire output can be
-# displayed on one screen.
-#
-# -R|--RAW-CONTROL-CHARS - displays ANSI color escape sequences in "raw" form.
-#
-# -I|--IGNORE-CASE
-#
-# -X|--no-init - leaves file contents on the screen when less exits.
-#
-# -xn|--tabs=n Sets tab stops.
+# Colours
 export LESS='-FIRXx2'
 # https://force-color.org/
 export FORCE_COLOR=1
@@ -181,17 +165,16 @@ export GHQ_ROOT="$HOME"/src
 export WEZTERM_CONFIG_FILE="$XDG_CONFIG_HOME"/wezterm/wezterm.lua
 
 # `exa` options
-
 # Sets how to format the time used in the long view's time column.
 export TIME_STYLE=long-iso
-# Enables strict mode, which will make exa error when two command-line options
+# Enables strict mode, which will make `exa` error when two command-line options
 # are incompatible.
 export EXA_STRICT=true
 
-# Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
+# Make Python use UTF-8 encoding for output to standard input, standard output,
+# and standard error.
 export PYTHONIOENCODING=UTF-8
 
-# Don't set PYTHONUSERBASE to avoid issues with asdf installing python.
 export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/pythonrc.py
 export PYTHON_HISTORY="$XDG_STATE_HOME"/python/history
 export PYTHONPYCACHEPREFIX="$XDG_CACHE_HOME"/python
@@ -233,7 +216,7 @@ export WGETRC="$XDG_CONFIG_HOME"/wget/wgetrc
 # a hassle.
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 
-# startx doesn't respect the following variables.
+# `startx` doesn't respect the following variables.
 export XINITRC="$XDG_CONFIG_HOME"/X11/xinitrc
 export XSERVERRC="$XDG_CONFIG_HOME"/X11/xserverrc
 
@@ -241,7 +224,6 @@ export NVIM_APPNAME=nvim
 
 # Don't set on git bash.
 if ! uname -a | grep -q 'Msys'; then
-	# https://blog.joren.ga/vim-xdg#viminit-environmental-variable
 	export VIMINIT="if has('nvim') | so \$XDG_CONFIG_HOME/\$NVIM_APPNAME/init.lua | else | set nocp | so \$XDG_CONFIG_HOME/vim/vimrc | endif"
 fi
 
@@ -251,9 +233,6 @@ export PYLINTRC="$XDG_CONFIG_HOME"/pylint/pylintrc
 export CALCHISTFILE="$XDG_STATE_HOME"/calc/history
 mkdir -p "$(dirname "$CALCHISTFILE")"
 
-# FIXME: Changing the default causes a login loop in Ubuntu :(
-#
-# export XAUTHORITY="$HOME"/.Xauthority
 export ICEAUTHORITY="$XDG_CACHE_HOME"/ICEauthority
 export KDEHOME="$XDG_CONFIG_HOME"/kde
 export OSH="$XDG_CONFIG_HOME"/oh-my-bash
@@ -302,8 +281,8 @@ export WARP_THEMES_DIR="$XDG_DATA_HOME"/warp-terminal/themes
 # Mise
 export MISE_RUBY_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/default-pkgs/gem.list
 export MISE_PIPX_UVX=1
-# fzf
-# catppuccin-mocha
+# `fzf`
+# `catppuccin-mocha`
 export FZF_DEFAULT_OPTS=" \
 	--color=spinner:#f5e0dc,hl:#f38ba8 \
 	--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
@@ -341,13 +320,13 @@ export RUSTFLAGS="-Z threads=8"
 export WINIT_X11_SCALE_FACTOR=1
 # https://github.com/jD91mZM2/xidlehook#configuring-via-systemd
 export XIDLEHOOK_SOCK="$XDG_RUNTIME_DIR"/xidlehook.socket
-# Default Brewfile location. See `brew bundle --help`.
+# Default `Brewfile` location. See `brew bundle --help`.
 export HOMEBREW_BUNDLE_FILE="$XDG_CONFIG_HOME"/brewfile/Brewfile
 # Make Emscripten XDG Base Directory spec compliant.
 export EM_CONFIG="$XDG_CONFIG_HOME"/emscripten/config
 export EM_CACHE="$XDG_CACHE_HOME"/emscripten/cache
 export EM_PORTS="$XDG_DATA_HOME"/emscripten/cache
-# Make mozbuild tooling comply w/ XDG spec.
+# Make `mozbuild` tooling comply with XDG spec.
 export MOZBUILD_STATE_PATH="$XDG_DATA_HOME"/mozbuild
 # https://www.haskell.org/ghcup/guide/#xdg-support
 export GHCUP_USE_XDG_DIRS=1

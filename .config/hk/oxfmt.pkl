@@ -1,0 +1,59 @@
+import "package://github.com/jdx/hk/releases/download/v1.44.2/hk@1.44.2#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v1.44.2/hk@1.44.2#/Builtins.pkl"
+
+@Builtins.meta {
+  category = "JavaScript/TypeScript"
+  description = "Fast Rust-powered code formatter (Prettier compatible)"
+  project_indicators {
+    new { file = "package.json"; contains = "\"oxfmt\"" }
+    // https://oxc.rs/docs/guide/usage/formatter/config.html#create-a-config-file
+    new { file = ".oxfmtrc.json" }
+    new { file = ".oxfmtrc.jsonc" }
+    new { file = "oxfmt.config.ts" }
+  }
+}
+oxfmt = new Config.Step {
+  // Supported file types:
+  //   https://oxc.rs/docs/guide/usage/formatter.html
+  //   https://github.com/oxc-project/oxc/blob/apps_v1.56.0/apps/oxfmt/src/core/support.rs#L147
+  glob =
+    List(
+      // JS/TS
+      "**/*.js",
+      "**/*.jsx",
+      "**/*.mjs",
+      "**/*.cjs",
+      "**/*.ts",
+      "**/*.tsx",
+      "**/*.mts",
+      "**/*.cts",
+      // JSON
+      "**/*.json",
+      "**/*.jsonc",
+      "**/*.json5",
+      // YAML
+      "**/*.yaml",
+      "**/*.yml",
+      // Markdown
+      "**/*.md",
+      "**/*.mdx",
+      // HTML
+      "**/*.html",
+      "**/*.htm",
+      "**/*.vue",
+      // CSS
+      "**/*.css",
+      "**/*.scss",
+      "**/*.less",
+      // GraphQL
+      "**/*.graphql",
+      "**/*.gql",
+      // Handlebars
+      "**/*.handlebars",
+      "**/*.hbs",
+      // TOML
+      "**/*.toml",
+    )
+  check = "oxfmt --check {{ files }}"
+  fix = "oxfmt --write {{ files }}"
+}

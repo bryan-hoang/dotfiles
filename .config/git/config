@@ -19,10 +19,6 @@
 	sort = -committerdate
 # Config for `git bulk` from `git-extras`.`
 [bulkworkspaces]
-[commit]
-	gpgsign = true
-	template = ~/.config/git/COMMIT_EDITMSG
-	verbose = true
 [core]
 	# Treat spaces before tabs and all kinds of trailing whitespace as an error.
 	# [default] trailing-space: looks for spaces at the end of a line
@@ -122,19 +118,22 @@
 [gitsign]
 	connectorID = https://github.com/login/oauth
 	matchCommitter = true
-	format = x509
 [gpg]
 	format = x509
 [gpg "x509"]
 	program = gitsign
-[grep]
-	column = true
-	lineNumber = true
-	patternType = perl
+[commit]
+	gpgsign = true
+	template = ~/.config/git/COMMIT_EDITMSG
+	verbose = true
 [tag]
 	forceSignAnnotated = true
 	gpgsign = true
 	sort = version:refname
+[grep]
+	column = true
+	lineNumber = true
+	patternType = perl
 [advice]
 	addEmptyPathspec = false
 	addIgnoredFile = false
