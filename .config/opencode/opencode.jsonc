@@ -22,4 +22,5 @@
 			"command": ["pitchfork", "mcp"],
 		},
 	},
+	"plugin": [],
 }
