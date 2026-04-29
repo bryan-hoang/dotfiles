@@ -194,3 +194,5 @@
 	# `includeIf "gitdir:~/src/..."`
 	# `includeIf "hasconfig:remote.*.url:git@.../**"`
 	path = machine.gitconfig
+[trailer "assist"]
+	key = Assisted-by

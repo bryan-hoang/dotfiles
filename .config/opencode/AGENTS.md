@@ -1,6 +1,6 @@
 # Personal Coding Agent Rules
 
-This is a personal `AGENTS.md` for `opencode`, shared across machines via a
+This is a personal `AGENTS.md` for coding agents, shared across machines via a
 `dotfiles` git repo.
 
 ## Repository Context
@@ -28,6 +28,7 @@ This is a personal `AGENTS.md` for `opencode`, shared across machines via a
 - Never use `pip` to manage python packages or install python CLI tools. Use
   `uv` instead.
 - Use `pnpm dlx` over `npx`.
+- Use `git filter-repo` over `git filter-branch`.
 
 ## Formatting Generated Code or Prose
 
@@ -40,4 +41,28 @@ This is a personal `AGENTS.md` for `opencode`, shared across machines via a
 ## Git Commit Messages
 
 - Hard wrap commit messages to 80 columns.
-- Include an explanation of why the changes are being made.
+
+> [!IMPORTANT] Always include an explanation of why the changes are being made.
+
+### Attribution
+
+Commit messages written by the coding agent should include an "Assisted-by"
+tag/trailer in the following format:
+
+```text
+Assisted-by: AGENT_NAME:MODEL_VERSION [TOOL1] [TOOL2]
+```
+
+Where:
+
+- `AGENT_NAME` is the name of the AI tool or framework
+- `MODEL_VERSION` is the specific model version used
+- `[TOOL1] [TOOL2]` are optional specialized analysis tools used
+
+Basic development tools (e.g., `git`, editors) should not be listed.
+
+Example:
+
+```text
+Assisted-by: OpenCode:gemini-3.1-pro-preview
+```

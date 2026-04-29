@@ -36,6 +36,7 @@ local linters = new Mapping<String, Step> {
       List(
         "**/.bashrc",
         "**/dictionary.txt",
+        "**/git/COMMIT_EDITMSG",
         "**/git/config",
         "*.cshtml",
         "*.css",

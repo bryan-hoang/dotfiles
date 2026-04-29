@@ -1,6 +1,7 @@
 type(scope)!: summary
 
-# BREAKING CHANGE:
 # Refs:
+# Assisted-by: AGENT_NAME:MODEL_VERSION [TOOL1] [TOOL2]
+# BREAKING CHANGE:
 # Co-authored-by:
 # Reviewed-by:
