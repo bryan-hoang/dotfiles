@@ -31,7 +31,7 @@ local linters = new Mapping<String, Step> {
     check = "betterleaks dir --redact --verbose --no-banner --log-level warn {{ files }}"
   }
   ["harper"] = (Builtins.harper) {
-    check = "harper-cli lint --dialect ca {{ files }}"
+    check = "harper-cli lint --dialect us {{ files }}"
     exclude =
       List(
         "**/.bashrc",

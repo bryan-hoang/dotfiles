@@ -26,6 +26,7 @@ XHR
 biome
 bundler
 endregion
+eslint
 formatter
 mise
 shellcheck

@@ -66,6 +66,9 @@ generate_completions pipenv env _PIPENV_COMPLETE=zsh_source pipenv
 does_command_exist register-python-argcomplete pipx \
 	&& eval "$(register-python-argcomplete pipx)"
 
+# Only supports bash.
+generate_completions opencode opencode completion
+
 # endregion
 
 does_command_exist thefuck && eval "$(thefuck --alias)"
