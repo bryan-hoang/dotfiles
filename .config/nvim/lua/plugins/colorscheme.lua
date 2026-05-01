@@ -77,7 +77,7 @@ return {
 		},
 	},
 	{
-		-- A mcdonald's inspired theme.
+		-- A McDonald's inspired theme.
 		"dundargoc/fakedonalds.nvim",
 		lazy = not should_load_colorschemes,
 	},
