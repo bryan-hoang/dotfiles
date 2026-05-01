@@ -40,11 +40,17 @@ Add-Completion 'kubectl' 'kubectl completion powershell'
 Add-Completion 'minikube' 'minikube completion powershell'
 Add-Completion 'mise' 'mise completion powershell'
 Add-Completion 'op' 'op completion powershell'
+Add-Completion 'tv' 'tv completions power-shell'
 Add-Completion 'uv' 'uv generate-shell-completion powershell'
 
 $completionFiles = Get-ChildItem $PwshCompletionDir -Filter *.ps1
 foreach ($file in $completionFiles) {
 	. $file.FullName
+}
+
+if (Test-CommandExists tv) {
+	# Adds CTRL-R & CTRL-T keybinds.
+	tv init power-shell | Out-String | Invoke-Expression
 }
 
 if (Test-CommandExists az) {

@@ -1,12 +1,15 @@
 [ui]
-use_nerd_font_icons = true
-show_help_bar = false
 input_bar_position = "bottom"
+show_help_bar = false
 theme = "catppuccin"
+use_nerd_font_icons = true
 
 [keybindings]
 # Application control
 # ------------------
-esc = "quit"
 ctrl-c = "quit"
 ctrl-g = "quit"
+esc = "quit"
+
+[shell_integration.channel_triggers]
+"git-branch-local" = ["git switch"]
