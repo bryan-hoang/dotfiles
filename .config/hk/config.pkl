@@ -34,18 +34,18 @@ local linters = new Mapping<String, Step> {
     check = "harper-cli lint --dialect us {{ files }}"
     exclude =
       List(
-        "**/.bashrc",
+        "**/.bash*",
+        "**/.profile",
         "**/dictionary.txt",
-        "**/git/COMMIT_EDITMSG",
-        "**/git/config",
         "*.cshtml",
         "*.css",
-        "*.gitconfig",
         "*.json*",
         "*.pkl",
         "*.ps1",
         "*.sql",
         "*.yaml",
+        "*config",
+        "*git*",
         "*npmrc",
       )
   }
