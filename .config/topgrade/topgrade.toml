@@ -22,7 +22,7 @@ sudo_loop = true
 disable = ["emacs", "gnome_shell_extensions", "helix"]
 
 # Run these steps before all others
-first = ["git", "system"]
+first = ["git_repos", "mise", "system"]
 
 # Run these steps after all others
 last = ["winget"]
