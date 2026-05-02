@@ -48,11 +48,6 @@ foreach ($file in $completionFiles) {
 	. $file.FullName
 }
 
-if (Test-CommandExists tv) {
-	# Adds CTRL-R & CTRL-T keybinds.
-	tv init power-shell | Out-String | Invoke-Expression
-}
-
 if (Test-CommandExists az) {
 	Register-ArgumentCompleter -Native -CommandName az -ScriptBlock {
 		param($commandName, $wordToComplete, $cursorPosition)
@@ -72,14 +67,3 @@ if (Test-CommandExists az) {
 		Remove-Item $completion_file, Env:\_ARGCOMPLETE_STDOUT_FILENAME, Env:\ARGCOMPLETE_USE_TEMPFILES, Env:\COMP_LINE, Env:\COMP_POINT, Env:\_ARGCOMPLETE, Env:\_ARGCOMPLETE_SUPPRESS_SPACE, Env:\_ARGCOMPLETE_IFS, Env:\_ARGCOMPLETE_SHELL
 	}
 }
-
-# if (Test-CommandExists dotnet) {
-# 	# https://learn.microsoft.com/en-us/dotnet/core/tools/enable-tab-autocomplete#powershell
-# 	# PowerShell parameter completion shim for the dotnet CLI
-# 	Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
-# 		param($wordToComplete, $commandAst, $cursorPosition)
-# 		dotnet complete --position $cursorPosition "$commandAst" | ForEach-Object {
-# 			[System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
-# 		}
-# 	}
-# }

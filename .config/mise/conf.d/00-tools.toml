@@ -35,3 +35,7 @@ version = "latest"
 [tools.hk]
 minimum_release_age = "1d"
 version = "latest"
+
+[tools.pnpm]
+minimum_release_age = "1d"
+version = "latest"

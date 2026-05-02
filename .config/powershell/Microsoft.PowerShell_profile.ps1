@@ -34,6 +34,11 @@ Set-PSReadLineOption @PSReadLineOptions
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadlineKeyHandler -Key Ctrl+w -Function BackwardKillWord
 
+if (Test-CommandExists tv) {
+	# Adds CTRL-R & CTRL-T keybinds.
+	tv init power-shell | Out-String | Invoke-Expression
+}
+
 if (Test-CommandExists atuin) {
 	atuin init --disable-up-arrow powershell | Out-String | Invoke-Expression
 }
@@ -82,5 +87,5 @@ if (Test-CommandExists zoxide) {
 }
 
 if (Test-CommandExists tabs) {
-  tabs 2
+	tabs 2
 }
