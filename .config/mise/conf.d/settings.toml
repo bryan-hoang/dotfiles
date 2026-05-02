@@ -1,5 +1,8 @@
+# https://mise.jdx.dev/configuration/settings.html
+
 [settings]
 color_theme = "catppuccin"
+env_cache = true
 experimental = true
 go_set_gobin = false
 install_before = "7d"

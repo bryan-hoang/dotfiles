@@ -34,6 +34,8 @@ Set-PSReadLineOption @PSReadLineOptions
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadlineKeyHandler -Key Ctrl+w -Function BackwardKillWord
 
+# Activate/init scripts
+
 if (Test-CommandExists tv) {
 	# Adds CTRL-R & CTRL-T keybinds.
 	tv init power-shell | Out-String | Invoke-Expression

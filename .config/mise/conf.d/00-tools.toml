@@ -1,6 +1,8 @@
 [tools]
 "aqua:betterleaks/betterleaks" = "latest"
 "aqua:sigstore/gitsign" = "latest"
+"aqua:str4d/rage" = "latest"
+bitwarden = "latest"
 cargo-binstall = "latest"
 cocogitto = "latest"
 editorconfig-checker = "latest"
@@ -29,7 +31,7 @@ minimum_release_age = "1d"
 version = "latest"
 
 [tools."github:anomalyco/opencode"]
-minimum_release_age = "0d"
+minimum_release_age = "1d"
 version = "latest"
 
 [tools.hk]
