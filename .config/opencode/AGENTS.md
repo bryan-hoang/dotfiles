@@ -43,6 +43,9 @@ This is a personal `AGENTS.md` for coding agents, shared across machines via a
 - Hard wrap commit messages to 80 columns.
 - Include links to websites/sources when relevant using the `Refs:` trailer
   (e.g., when referencing documentation from a library).
+- Include the ticket ID using the `Refs:` trailer if the commit is functionally
+  related to the work item the branch is for (e.g., if the branch is for an ADO
+  ticket like `#123`, use `Refs: #123`).
 
 > [!IMPORTANT] Always include an explanation of why the changes are being made.
 
