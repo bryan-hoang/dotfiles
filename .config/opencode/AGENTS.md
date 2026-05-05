@@ -1,73 +1,48 @@
 # Personal Coding Agent Rules
 
-This is a personal `AGENTS.md` for coding agents, shared across machines via a
-`dotfiles` git repo.
+Personal dotfiles and environment constraints shared across machines.
 
-## Repository Context
+## Environment & Tooling
 
-- **Dotfiles Repo:** The root directory (`~`, `$HOME`) is a git repository
-  managing dotfiles. Use caution when running git commands here.
-- **Environment Management:** Use `mise` for installing tools/languages
-  (`mise use -g <tool>`).
-- **Package Manager:** Use `pnpm` (run via `pnpm dlx` instead of `npx`).
-- **Git Hooks:** `hk` is used for git hooks (`hk install`).
-- **Cloned Repos:** The `src/` directory contains cloned repositories organized
-  by host (e.g., `src/github.com/`).
+- **Dotfiles Repo**: Root (`~`/`$HOME`) is a dotfiles git repo. Exercise caution
+  with git commands here.
+- **Cloned Repos**: Located in `src/<host>/` (e.g., `src/github.com/`).
+- **Package & Env Managers**:
+  - `mise`: Install tools/languages (`mise use -g <tool>`).
+  - `uv`: Use exclusively for Python packages/CLI tools (NEVER `pip`).
+  - `pnpm dlx`: Use instead of `npx`.
+- **Git Hooks**: Managed by `hk` (`hk install`).
+- **CLI Preferences**: Use `jq`/`jaq` for JSON, `git filter-repo` (not
+  `filter-branch`).
 
-## Skills
+## Agent Skills
 
-- Use the `azure-devops-cli` skill when doing tasks relating to Azure DevOps
-  (ADO). I.e., using the `az` CLI.
-- Use the `git-commit` skill when writing git commit messages.
-- Use the `agent-browser` skill or `chrome-devtools` MCP server to do browser
-  related tasks.
+- `azure-devops-cli`: For Azure DevOps (ADO) and `az` CLI tasks.
+- `git-commit`: For generating git commit messages.
+- `agent-browser` / `chrome-devtools` (MCP): For browser automation/tasks.
 
-## Tool Usage
+## Formatting Constraints
 
-- When parsing JSON output, use `jq` or `jaq`.
-- Never use `pip` to manage python packages or install python CLI tools. Use
-  `uv` instead.
-- Use `pnpm dlx` over `npx`.
-- Use `git filter-repo` over `git filter-branch`.
+- **Markdown**: Use `oxfmt`.
+- **SQL**: Use `sqlfluff`.
+- **JSON**: Do NOT use `prettier`.
+- **Line Length**: Soft cap at 80, 100, or 120 columns (especially comments).
 
-## Formatting Generated Code or Prose
+## Git Commit Standards
 
-- Don't use `prettier` to format `.json` files.
-- Use `oxfmt` to format generated Markdown code.
-- Use `sqlfluff` to format generated SQL code.
-- Try to maintain a max line length of 80, 100, or 120 columns, especially for
-  comments.
+- **Context**: ALWAYS explain _why_ changes are made.
+- **Formatting**: Hard wrap at 80 columns. Group all trailers together (no blank
+  lines between).
+- **Trailers**:
+  - `Refs: <ticket>`: For ADO/work items (e.g., `Refs: #123`).
+  - `Link: <url> # [X]`: Bracketed footnote notation for references.
 
-## Git Commit Messages
+    ```text
+    Context referencing a doc [1].
 
-- Hard wrap commit messages to 80 columns.
-- Include links to websites/sources when relevant using the `Refs:` trailer
-  (e.g., when referencing documentation from a library).
-- Include the ticket ID using the `Refs:` trailer if the commit is functionally
-  related to the work item the branch is for (e.g., if the branch is for an ADO
-  ticket like `#123`, use `Refs: #123`).
+    Link: https://example.com/docs # [1]
+    ```
 
-> [!IMPORTANT] Always include an explanation of why the changes are being made.
-
-### Attribution
-
-Commit messages written by the coding agent should include an "Assisted-by"
-tag/trailer in the following format:
-
-```text
-Assisted-by: AGENT_NAME:MODEL_VERSION [TOOL1] [TOOL2]
-```
-
-Where:
-
-- `AGENT_NAME` is the name of the AI tool or framework
-- `MODEL_VERSION` is the specific model version used
-- `[TOOL1] [TOOL2]` are optional specialized analysis tools used
-
-Basic development tools (e.g., `git`, editors) should not be listed.
-
-Example:
-
-```text
-Assisted-by: OpenCode:gemini-3.1-pro-preview
-```
+  - `Assisted-by: <AGENT_NAME>:<MODEL_VERSION> [OPTIONAL_TOOLS]`: Required
+    attribution for agent-authored commits (exclude basic tools like
+    git/editor). _Example: `Assisted-by: OpenCode:gemini-3.1-pro-preview`_
