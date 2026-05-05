@@ -41,6 +41,8 @@ This is a personal `AGENTS.md` for coding agents, shared across machines via a
 ## Git Commit Messages
 
 - Hard wrap commit messages to 80 columns.
+- Include links to websites/sources when relevant using the `Refs:` trailer
+  (e.g., when referencing documentation from a library).
 
 > [!IMPORTANT] Always include an explanation of why the changes are being made.
 
