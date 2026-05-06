@@ -33,8 +33,11 @@ Personal dotfiles and environment constraints shared across machines.
 - **Context**: ALWAYS explain _why_ changes are made.
 - **Formatting**: Hard wrap at 80 columns. Group all trailers together (no blank
   lines between).
-- **Trailers**:
+- **Trailers** (in the following order):
   - `Refs: <ticket>`: For ADO/work items (e.g., `Refs: #123`).
+  - `Assisted-by: <AGENT_NAME>:<MODEL_VERSION> [OPTIONAL_TOOLS]`: Required
+    attribution for agent-authored commits (exclude basic tools like
+    git/editor). _Example: `Assisted-by: OpenCode:gemini-3.1-pro-preview`_
   - `Link: <url> # [X]`: Bracketed footnote notation for references.
 
     ```text
@@ -42,7 +45,3 @@ Personal dotfiles and environment constraints shared across machines.
 
     Link: https://example.com/docs # [1]
     ```
-
-  - `Assisted-by: <AGENT_NAME>:<MODEL_VERSION> [OPTIONAL_TOOLS]`: Required
-    attribution for agent-authored commits (exclude basic tools like
-    git/editor). _Example: `Assisted-by: OpenCode:gemini-3.1-pro-preview`_
