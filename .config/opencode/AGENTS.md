@@ -9,8 +9,8 @@ Personal dotfiles and environment constraints shared across machines.
 - **Cloned Repos**: Located in `src/<host>/` (e.g., `src/github.com/`).
 - **Package & Environment Managers**:
   - `mise`: Install tools/languages (`mise use -g <tool>`).
+  - `aube`: Use exclusively instead of `npm` (NEVER `npm`).
   - `uv`: Use exclusively for Python packages/CLI tools (NEVER `pip`).
-  - `pnpm dlx`: Use instead of `npx`.
 - **Git Hooks**: Managed by `hk` (`hk install`).
 - **CLI Preferences**: Use `jq`/`jaq` for JSON, `git filter-repo` (not
   `filter-branch`).
