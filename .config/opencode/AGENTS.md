@@ -7,7 +7,7 @@ Personal dotfiles and environment constraints shared across machines.
 - **Dotfiles Repo**: Root (`~`/`$HOME`) is a dotfiles git repo. Exercise caution
   with git commands here.
 - **Cloned Repos**: Located in `src/<host>/` (e.g., `src/github.com/`).
-- **Package & Env Managers**:
+- **Package & Environment Managers**:
   - `mise`: Install tools/languages (`mise use -g <tool>`).
   - `uv`: Use exclusively for Python packages/CLI tools (NEVER `pip`).
   - `pnpm dlx`: Use instead of `npx`.
@@ -28,7 +28,9 @@ Personal dotfiles and environment constraints shared across machines.
 - **JSON**: Do NOT use `prettier`.
 - **Line Length**: Soft cap at 80, 100, or 120 columns (especially comments).
 
-## Git Commit Standards
+## Git Commit Standards (CRITICAL)
+
+**THESE STANDARDS MUST BE FOLLOWED FOR ALL COMMITS IN ALL REPOSITORIES.**
 
 - **Context**: ALWAYS explain _why_ changes are made.
 - **Formatting**: Hard wrap at 80 columns. Group all trailers together (no blank
