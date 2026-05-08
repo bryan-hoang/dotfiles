@@ -12,6 +12,11 @@
 			"type": "local",
 			"command": ["bun", "x", "chrome-devtools-mcp@latest"],
 		},
+		"fff": {
+			"type": "local",
+			"command": ["fff-mcp"],
+			"enabled": true,
+		},
 		"exa": {
 			"type": "remote",
 			"url": "https://mcp.exa.ai/mcp",

@@ -12,8 +12,12 @@ Personal dotfiles and environment constraints shared across machines.
   - `aube`: Use exclusively instead of `npm` (NEVER `npm`).
   - `uv`: Use exclusively for Python packages/CLI tools (NEVER `pip`).
 - **Git Hooks**: Managed by `hk` (`hk install`).
-- **CLI Preferences**: Use `jq`/`jaq` for JSON, `git filter-repo` (not
-  `filter-branch`).
+- **CLI Preferences**: `rg` (not `grep`), `fd` (not `find`). `git filter-repo` (not
+  `filter-branch`), `jaq` for parsing/reading JSON.
+- **Search/Grep**: ALWAYS use the custom `fff` tools (`fff_find_files`,
+  `fff_grep`, `fff_multi_grep`).
+  - CRITICAL: DO NOT use the built-in `grep` or `glob` tools.
+  - CRITICAL: DO NOT use command-line `grep`, `find` in bash.
 
 ## Agent Skills
 
