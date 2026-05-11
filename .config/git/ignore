@@ -1,5 +1,5 @@
-# Ignore direnv files.
-.envrc
+# [dot/dir]env files
+.env*
 
 # Ignore .secret files be default (e.g., testing GitHub Actions with act
 # locally).
