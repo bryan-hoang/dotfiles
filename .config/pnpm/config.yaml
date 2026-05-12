@@ -1,0 +1,10 @@
+enableGlobalVirtualStore: true
+minimumReleaseAge: 10080
+minimumReleaseAgeExclude:
+  - "@oxfmt/*"
+  - "@oxlint/*"
+  - "@pnpm/*"
+  - "oxfmt"
+  - "oxlint"
+savePrefix: ""
+trustPolicy: no-downgrade
