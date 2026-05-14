@@ -15,6 +15,7 @@ Lua
 MDX
 Novari
 ONNX
+OpenCode
 PIM
 Polyfill
 README
