@@ -1,8 +1,6 @@
 -- Suppress warnings in `lspconfig.options` table.
 ---@diagnostic disable: missing-fields
 
-local util = require("util")
-
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -120,10 +118,6 @@ return {
 					html = { mason = false },
 					emmet_language_server = { mason = false },
 					cssls = { mason = false },
-					-- tailwindcss = {
-					-- 	filetypes_include = { "markdown.mdx" },
-					-- 	filetypes_exclude = { "mdx" },
-					-- },
 					-- Markdown/MDX
 					marksman = {},
 					mdx_analyzer = {
@@ -151,20 +145,18 @@ return {
 						capabilities = {
 							workspace = {
 								didChangeWorkspaceFolders = {
-									-- Workaround "The language server eslint triggers a
+									-- Workaround "The language server `eslint` triggers a
 									-- `registerCapability` handler for
-									-- workspace/didChangeWorkspaceFolders despite
-									-- dynamicRegistration set to false. Report upstream, this
+									-- `workspace/didChangeWorkspaceFolders` despite
+									-- `dynamicRegistration` set to false. Report upstream, this
 									-- warning is harmless"
 									dynamicRegistration = true,
 								},
 							},
 						},
 					},
-					-- vale_ls = {
-					-- 	filetypes = { "markdown", "text", "tex", "gitcommit" },
-					-- },
 					harper_ls = {
+						mason = false,
 						settings = {
 							["harper-ls"] = {
 								userDictPath = "~/.config/harper-ls/dictionary.txt",

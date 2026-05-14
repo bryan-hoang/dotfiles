@@ -7,10 +7,12 @@ Emscripten
 Hoang
 Jspreadsheet
 KanBan
+Karpathy's
 Kenwoods
 Komorebi
 LazyVim
 Lua
+MDX
 Novari
 ONNX
 PIM
