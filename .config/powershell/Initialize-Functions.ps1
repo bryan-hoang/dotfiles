@@ -98,3 +98,35 @@ if (Test-CommandExists lsd) {
 		lsd --long --almost-all --classify --group-directories-first $args
 	}
 }
+
+# https://docs.socket.dev/docs/socket-firewall-enterprise-wrapper-mode#windows-setup-powershell
+if (Test-CommandExists sfw) {
+	# Socket Firewall Function Wrappers
+
+	# JavaScript/TypeScript
+	function npm { sfw npm @args }
+	function yarn { sfw yarn @args }
+	function pnpm { sfw pnpm @args }
+
+	# Python
+	function pip { sfw pip @args }
+	function pip3 { sfw pip3 @args }
+	function uv { sfw uv @args }
+
+	# Rust
+	function cargo { sfw cargo @args }
+
+	# Go
+	function go { sfw go @args }
+
+	# Java/Scala/Kotlin
+	function mvn { sfw mvn @args }
+	function gradle { sfw gradle @args }
+
+	# Ruby
+	function gem { sfw gem @args }
+	function bundle { sfw bundle @args }
+
+	# .NET
+	function dotnet { sfw dotnet @args }
+}
