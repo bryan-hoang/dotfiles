@@ -20,6 +20,7 @@ return {
 				},
 				linters = {
 					["editorconfig-checker"] = {
+						cmd = "ec",
 						condition = function()
 							-- Make `git.commit = verbose` setting less noisy with diagnostic
 							-- messages.

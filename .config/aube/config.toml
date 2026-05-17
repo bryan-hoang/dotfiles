@@ -1,2 +1,4 @@
 minimumReleaseAge = 10080
+minimumReleaseAgeExclude = []
 paranoid = true
+trustPolicyExclude = ["skills"]

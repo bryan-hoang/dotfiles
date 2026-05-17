@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 #
-# shellcheck disable=SC1091,SC2154
+# shellcheck disable=1091,2154
 
 if [ "${USER:-}" = "" ]; then
 	USER="$(id -un 2>/dev/null)"
@@ -141,7 +141,6 @@ export RUBY_DEBUG_HISTORY_FILE="$XDG_STATE_HOME"/rdbg/history
 mkdir -p "$(dirname "$RUBY_DEBUG_HISTORY_FILE")"
 export RUBY_YJIT_ENABLE=1
 
-# Colours
 export LESS='-FIRXx2'
 # https://force-color.org/
 export FORCE_COLOR=1
@@ -149,7 +148,6 @@ command -v vivid >/dev/null \
 	&& LS_COLORS="$(vivid generate catppuccin-mocha)" \
 	&& export LS_COLORS
 case ${TERM} in
-	# WSL in windows Terminal colour support.
 	xterm-256color | wezterm)
 		export COLORTERM=truecolor
 		;;
@@ -264,6 +262,9 @@ export DISABLE_AUTO_UPDATE=true
 export FONT_MONO='BerkeleyMono Nerd Font Mono'
 export GRIT_USER_CONFIG="$XDG_CONFIG_HOME"/grit
 export JULIA_DEPOT_PATH="$XDG_DATA_HOME"/julia:"$JULIA_DEPOT_PATH"
+# https://doc.rust-lang.org/stable/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-build-scripts
+NUM_JOBS="$(nproc)"
+export NUM_JOBS
 export MAKEFLAGS="--jobs $NUM_JOBS"
 export MYPY_CACHE_DIR="$XDG_CACHE_HOME"/mypy
 export NLTK_DATA="$XDG_CACHE_HOME/nltk"
@@ -311,9 +312,6 @@ fi
 # Enable the generation of `compile_commands.json` by default.
 # https://clangd.llvm.org/installation#project-setup
 export CMAKE_EXPORT_COMPILE_COMMANDS=1
-# https://doc.rust-lang.org/stable/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-build-scripts
-NUM_JOBS="$(nproc)"
-export NUM_JOBS
 # https://blog.rust-lang.org/2023/11/09/parallel-rustc.html
 export RUSTFLAGS="-Z threads=8"
 # https://wiki.archlinux.org/title/Alacritty#Different_font_size_on_multiple_monitors
