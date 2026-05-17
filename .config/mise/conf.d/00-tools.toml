@@ -5,6 +5,8 @@
 atuin = "latest"
 bitwarden = "latest"
 cargo-binstall = "latest"
+"cargo:git-absorb" = "latest"
+"cargo:git-grab" = "latest"
 "cargo:tealdeer" = "latest"
 cocogitto = "latest"
 delta = "latest"
