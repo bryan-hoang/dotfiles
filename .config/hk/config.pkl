@@ -36,18 +36,19 @@ local linters = new Mapping<String, Step> {
     exclude =
       List(
         "**/.bash*",
-        "**/.profile",
-        "**/dictionary.txt",
+        "*config",
         "*.cshtml",
         "*.css",
+        "**/dictionary.txt",
+        "*git*",
         "*.json*",
+        "*npmrc",
         "*.pkl",
+        "**/.profile",
         "*.ps1",
+        "*.sh",
         "*.sql",
         "*.yaml",
-        "*config",
-        "*git*",
-        "*npmrc",
       )
   }
   ["lychee"] = (Builtins.lychee) {

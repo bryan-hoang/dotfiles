@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 #
 # shellcheck disable=SC2154
 
@@ -44,7 +44,7 @@ command -v sha1sum >/dev/null || alias sha1sum="shasum"
 # JavaScriptCore REPL
 jscbin="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc"
 # shellcheck disable=SC2139
-[ -e "$jscbin" ] && alias jsc="$jscbin"
+[[ -e $jscbin ]] && alias jsc="$jscbin"
 unset jscbin
 
 # Trim new lines and copy to clipboard
@@ -113,7 +113,7 @@ alias path='echo "${PATH}" | tr ":" "\n"'
 # To make cp uninteractive by default
 unalias cp 2>/dev/null
 
-# Produce an ASCII tree of the directory structure with directoreis listed
+# Produce an ASCII tree of the directory structure with directories listed
 # first.
 alias tree="tree --dirsfirst --charset=ascii"
 
@@ -131,11 +131,11 @@ fi
 # endregion ls vs. exa
 
 # xclip workaround in WSL 2.
-[ -f '/mnt/c/Windows/System32/clip.exe' ] \
+[[ -f '/mnt/c/Windows/System32/clip.exe' ]] \
 	&& alias xclip='/mnt/c/Windows/System32/clip.exe'
 
 # https://commandbox.ortusbooks.com/setup/installation
-command -v box >/dev/null && alias box="box -commandbox_home=${XDG_DATA_HOME//\\/\/}/commandbox"
+command -v box >/dev/null && alias box='box -commandbox_home=${XDG_DATA_HOME//\\/\/}/commandbox'
 
 alias conventional-changelog='conventional-changelog -p conventionalcommits -n "${XDG_CONFIG_HOME}"/conventional-changelog/config.js'
 alias yarn='yarn --use-yarnrc "${XDG_CONFIG_HOME}"/yarn/config'
@@ -161,3 +161,34 @@ command -v watchexec >/dev/null \
 alias xidlehook-client='xidlehook-client --socket $XIDLEHOOK_SOCK'
 command -v tidy-viewer >/dev/null && alias tv='tidy-viewer'
 command -v pwsh >/dev/null && alias pwsh='pwsh -nologo'
+
+# https://docs.socket.dev/docs/socket-firewall-enterprise-wrapper-mode#macos--linux-setup
+if command -v sfw >/dev/null; then
+	# Socket Firewall Aliases
+	# JavaScript/TypeScript
+	alias npm="sfw npm"
+	alias yarn="sfw yarn"
+	alias pnpm="sfw pnpm"
+
+	# Python
+	alias pip="sfw pip"
+	alias pip3="sfw pip3"
+	alias uv="sfw uv"
+
+	# Rust
+	alias cargo="sfw cargo"
+
+	# Go
+	alias go="sfw go"
+
+	# Java/Scala/Kotlin
+	alias mvn="sfw mvn"
+	alias gradle="sfw gradle"
+
+	# Ruby
+	alias gem="sfw gem"
+	alias bundle="sfw bundle"
+
+	# .NET
+	alias dotnet="sfw dotnet"
+fi

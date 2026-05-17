@@ -15,7 +15,7 @@ println() {
 generate_completions() {
 	local -r command_to_complete="${1}"
 	if ! does_command_exist "$command_to_complete"; then
-		return 0;
+		return 0
 	fi
 	local -ra completion_cmd=("${@:2}")
 	local -r shell="$SHELL_BASENAME"
@@ -43,7 +43,7 @@ generate_completions() {
 generate_man_pages() {
 	local -r command_with_man_page="${1}"
 	if ! does_command_exist "$command_with_man_page"; then
-		return 0;
+		return 0
 	fi
 	local -r man_page_file="$XDG_DATA_HOME/man/man1/$command_with_man_page".1
 	# sed to strip ANSI escape codes. *cough* bw *cough*
@@ -60,7 +60,7 @@ does_function_exist() {
 }
 
 does_command_exist() {
-	command -v "$1" >/dev/null
+	type -P "$1" >/dev/null
 }
 
 is_bash_shell() {
@@ -182,52 +182,6 @@ install_git_lfs() {
 	echo "Installed git-lfs successfully!"
 }
 
-install_shellcheck() {
-	echo "Installing shellcheck..."
-	local -r SHELLCHECK_DOWNLOAD_DIR="${DOWNLOAD_DIR}/shellcheck-latest"
-	rm -rf "$SHELLCHECK_DOWNLOAD_DIR"
-
-	# Binary
-	mkdir -p "$SHELLCHECK_DOWNLOAD_DIR"
-	gh release download -R koalaman/shellcheck \
-		-D "$SHELLCHECK_DOWNLOAD_DIR" \
-		-p 'shellcheck-*.linux.*.tar.xz' \
-		-p 'shellcheck-*.zip'
-
-	if ! is_git_bash; then
-		local arch_tag
-		if is_arm64_architecture; then
-			arch_tag='aarch64'
-		else
-			arch_tag='amd64'
-		fi
-
-		local -r filename_pattern="shellcheck-*.linux.$(uname -m).tar.xz"
-		local -r filepath="$(find "$SHELLCHECK_DOWNLOAD_DIR" -name "$filename_pattern")"
-
-		tar -xJv -C "$SHELLCHECK_DOWNLOAD_DIR" --strip-components=1 \
-			-f "$filepath"
-		sudo cp "${SHELLCHECK_DOWNLOAD_DIR}/shellcheck" /usr/bin/
-
-		# Man page
-		if does_command_exist pandoc; then
-			wget -qO "${SHELLCHECK_DOWNLOAD_DIR}/shellcheck.1.md" \
-				"https://raw.githubusercontent.com/koalaman/shellcheck/master/shellcheck.1.md"
-			pandoc -s -f markdown-smart \
-				-t man "${SHELLCHECK_DOWNLOAD_DIR}/shellcheck.1.md" \
-				-o "${SHELLCHECK_DOWNLOAD_DIR}/shellcheck.1"
-			sudo mv "${SHELLCHECK_DOWNLOAD_DIR}/shellcheck.1" /usr/share/man/man1
-		fi
-	else
-		unzip "$SHELLCHECK_DOWNLOAD_DIR"/shellcheck-*.zip \
-			-d "$XDG_BIN_HOME"
-	fi
-
-	shellcheck --version
-
-	echo "Installed shellcheck successfully!"
-}
-
 install_brew() {
 	if ! is_git_bash && ! is_arm32_architecture && ! is_arm64_architecture; then
 		echo "Installing brew..."
@@ -259,16 +213,6 @@ install_tex() {
 		-profile "$HOME"/.config/texlive.profile
 	tex --version
 	echo "Installed tex successfully!"
-}
-
-install_cht.sh() {
-	echo "Installing cht..."
-	# Note: The package `rlwrap` is a required dependency to run in shell mode.
-	install_apt_packages rlwrap
-	curl https://cht.sh/:cht.sh >"${XDG_BIN_HOME}/cht.sh"
-	chmod +x "${XDG_BIN_HOME}/cht.sh"
-	cht.sh --help
-	echo "Installed cht successfully!"
 }
 
 install_nerd_fonts() {
@@ -480,32 +424,6 @@ install_pnpm() {
 	fi
 }
 
-install_gcloud() {
-	if is_ubuntu_os; then
-		echo "Installing gcloud..."
-
-		# install apt-transport-https ca-certificates gnupg
-		install_apt_packages apt-transport-https ca-certificates gnupg
-
-		# Add the gcloud CLI distribution URI as a package source.
-		echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] \
-			https://packages.cloud.google.com/apt cloud-sdk main" \
-			| sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list >/dev/null
-
-		# Import the Google Cloud public key.
-		curl https://packages.cloud.google.com/apt/doc/apt-key.gpg \
-			| sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
-
-		# Update and install the gcloud CLI
-		install_apt_packages google-cloud-sdk
-
-		# Initialize the gcloud environment.
-		gcloud init
-
-		echo "Installed gcloud successfully!"
-	fi
-}
-
 install_terraform() {
 	if is_ubuntu_os; then
 		echo "Installing terraform..."
@@ -600,30 +518,6 @@ install_neovide() {
 		libexpat1-dev libxcb-composite0-dev libbz2-dev libsndio-dev freeglut3-dev \
 		libxmu-dev libxi-dev libfontconfig1-dev libxcursor-dev libxkbcommon-x11-a
 	cargo install --git https://github.com/neovide/neovide
-}
-
-# https://github.com/emacs-mirror/emacs/blob/master/INSTALL.REPO
-# https://www.emacswiki.org/emacs/BuildingEmacs
-install_emacs() {
-	echo "Installing emacs..."
-	mkdir -p "$GHQ_ROOT"/github.com/emacs-mirror
-	git clone --filter=blob:none --depth=1 https://github.com/emacs-mirror/emacs \
-		"$GHQ_ROOT"/github.com/emacs-mirror/emacs >/dev/null 2>&1
-	cd "$GHQ_ROOT"/github.com/emacs-mirror/emacs || return
-	install_apt_packages autoconf texinfo libgtk-3-dev libwebkit2gtk-4.0-dev \
-		libgccjit-9-dev libjansson-dev editorconfig pandoc
-	sudo apt build-dep -qqy emacs
-	./autogen.sh
-	./configure --with-native-compilation --with-json \
-		--with-cairo --with-xwidgets --with-x-toolkit=gtk3 \
-		--prefix="${1:-$XDG_LOCAL_HOME}" || return
-	make --jobs "$(nproc)" || return
-	make install || return
-	emacs --version || return
-	doom install --force || return
-	doom doctor || return
-	cd - || return
-	echo "Installed emacs successfully!"
 }
 
 install_hx() {
@@ -1225,13 +1119,6 @@ install_wezterm_terminfo() {
 	curl -o "$tempfile" https://raw.githubusercontent.com/wez/wezterm/master/termwiz/data/wezterm.terminfo
 	tic -x -o "$TERMINFO" "$tempfile"
 	rm "$tempfile"
-}
-
-# https://yazi-rs.github.io/docs/usage/installation/
-install_yazi() {
-	install_apt_packages ffmpegthumbnailer unar jq poppler-utils
-	cargo install --git https://github.com/sxyazi/yazi.git
-	yazi --version
 }
 
 setup_windows() {
