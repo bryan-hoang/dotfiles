@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@stylistic/stylelint-config':
         specifier: 5.0.0
-        version: 5.0.0(stylelint@17.10.0(typescript@6.0.3))
+        version: 5.0.0(stylelint@17.11.0(typescript@6.0.3))
       debug:
         specifier: 4.4.3
         version: 4.4.3
@@ -21,8 +21,8 @@ importers:
         specifier: 4.0.8
         version: 4.0.8
       stylelint:
-        specifier: 17.10.0
-        version: 17.10.0(typescript@6.0.3)
+        specifier: 17.11.0
+        version: 17.11.0(typescript@6.0.3)
       typescript:
         specifier: 6.0.3
         version: 6.0.3
@@ -474,8 +474,8 @@ packages:
   style-search@0.1.0:
     resolution: {integrity: sha512-Dj1Okke1C3uKKwQcetra4jSuk0DqbzbYtXipzFlFMZtowbF1x7BKJwB9AayVMyFARvU8EDrZdcax4At/452cAg==}
 
-  stylelint@17.10.0:
-    resolution: {integrity: sha512-cI7I6HHEYOHHVNVci+s92WlA3QfmNhjwFdgCgYV3TLEysilOjk+B3EFxMED1xY9GYB0Kre3OD+mSLj19VLTIvA==}
+  stylelint@17.11.0:
+    resolution: {integrity: sha512-/3czzmbF9XdGWvReDF3Ex4R23Ajolo7j8RB2bFNEqk6Ht356nlpVV+G5bG2Qt8AW1ofJzXztBRDnAtd7cgowWA==}
     engines: {node: '>=20.19.0'}
     hasBin: true
 
@@ -598,12 +598,12 @@ snapshots:
 
   '@sindresorhus/merge-streams@4.0.0': {}
 
-  '@stylistic/stylelint-config@5.0.0(stylelint@17.10.0(typescript@6.0.3))':
+  '@stylistic/stylelint-config@5.0.0(stylelint@17.11.0(typescript@6.0.3))':
     dependencies:
-      '@stylistic/stylelint-plugin': 5.1.0(stylelint@17.10.0(typescript@6.0.3))
-      stylelint: 17.10.0(typescript@6.0.3)
+      '@stylistic/stylelint-plugin': 5.1.0(stylelint@17.11.0(typescript@6.0.3))
+      stylelint: 17.11.0(typescript@6.0.3)
 
-  '@stylistic/stylelint-plugin@5.1.0(stylelint@17.10.0(typescript@6.0.3))':
+  '@stylistic/stylelint-plugin@5.1.0(stylelint@17.11.0(typescript@6.0.3))':
     dependencies:
       '@csstools/css-parser-algorithms': 4.0.0(@csstools/css-tokenizer@4.0.0)
       '@csstools/css-tokenizer': 4.0.0
@@ -612,7 +612,7 @@ snapshots:
       postcss-selector-parser: 7.1.1
       postcss-value-parser: 4.2.0
       style-search: 0.1.0
-      stylelint: 17.10.0(typescript@6.0.3)
+      stylelint: 17.11.0(typescript@6.0.3)
 
   ajv@8.20.0:
     dependencies:
@@ -909,7 +909,7 @@ snapshots:
 
   style-search@0.1.0: {}
 
-  stylelint@17.10.0(typescript@6.0.3):
+  stylelint@17.11.0(typescript@6.0.3):
     dependencies:
       '@csstools/css-calc': 3.2.1(@csstools/css-parser-algorithms@4.0.0(@csstools/css-tokenizer@4.0.0))(@csstools/css-tokenizer@4.0.0)
       '@csstools/css-parser-algorithms': 4.0.0(@csstools/css-tokenizer@4.0.0)
