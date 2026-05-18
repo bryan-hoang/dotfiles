@@ -129,6 +129,10 @@ touch "$NODE_REPL_HISTORY"
 # Allow 32^3 entries; the default is 1000.
 export NODE_REPL_HISTORY_SIZE="$HISTFILESIZE"
 
+if uname -a | grep -q -E "WSL"; then
+	export BROWSER='browser-wsl.sh'
+fi
+
 # Use sloppy mode by default, matching web browsers.
 export NODE_REPL_MODE=sloppy
 export NODE_INSPECT_RESUME_ON_START=1

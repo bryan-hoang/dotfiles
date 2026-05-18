@@ -36,6 +36,7 @@ local linters = new Mapping<String, Step> {
     exclude =
       List(
         "**/.bash*",
+        "*.conf",
         "*config",
         "*.cshtml",
         "*.css",
