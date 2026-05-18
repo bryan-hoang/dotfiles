@@ -39,6 +39,7 @@ tree-sitter = "latest"
 typos = "latest"
 usage = "latest"
 uv = "latest"
+zizmor = "latest"
 zoxide = "latest"
 
 [tools.aube]
