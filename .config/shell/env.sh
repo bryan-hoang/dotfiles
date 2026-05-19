@@ -19,7 +19,10 @@ export CARGO_HOME="$XDG_DATA_HOME"/cargo
 export DENO_INSTALL="$XDG_DATA_HOME"/deno
 export GOPATH="$XDG_DATA_HOME"/go
 export PNPM_HOME="$XDG_DATA_HOME"/pnpm
+# https://blog.rust-lang.org/2023/11/09/parallel-rustc.html
+export RUSTFLAGS="-Z threads=8"
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+export RUSTUP_TOOLCHAIN=nightly
 export VITE_PLUS_HOME="$XDG_DATA_HOME"/vite-plus
 export WASMER_CACHE_DIR="$XDG_CACHE_HOME"/wasmer
 export WASMER_DIR="$XDG_DATA_HOME"/wasmer
@@ -316,8 +319,6 @@ fi
 # Enable the generation of `compile_commands.json` by default.
 # https://clangd.llvm.org/installation#project-setup
 export CMAKE_EXPORT_COMPILE_COMMANDS=1
-# https://blog.rust-lang.org/2023/11/09/parallel-rustc.html
-export RUSTFLAGS="-Z threads=8"
 # https://wiki.archlinux.org/title/Alacritty#Different_font_size_on_multiple_monitors
 export WINIT_X11_SCALE_FACTOR=1
 # https://github.com/jD91mZM2/xidlehook#configuring-via-systemd
