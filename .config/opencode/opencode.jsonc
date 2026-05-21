@@ -4,7 +4,7 @@
 	"formatter": {
 		"oxfmt": {
 			"command": ["oxfmt", "$FILE"],
-			"extensions": [".json", ".yaml", ".yml"],
+			"extensions": [".yaml", ".yml"],
 		},
 	},
 	"mcp": {
