@@ -1,8 +1,8 @@
 [tools]
-"aqua:betterleaks/betterleaks" = "latest"
-"aqua:sigstore/gitsign" = "latest"
 "aqua:str4d/rage" = "latest"
 atuin = "latest"
+aube = { version = "latest", minimum_release_age = "1d" }
+betterleaks = "latest"
 bitwarden = "latest"
 cargo-binstall = "latest"
 "cargo:cargo-cache" = "latest"
@@ -14,20 +14,24 @@ cocogitto = "latest"
 delta = "latest"
 editorconfig-checker = "latest"
 gh = "latest"
+git-filter-repo = "latest"
+gitsign = "latest"
 go = "latest"
 "go:github.com/dnnrly/abbreviate" = "latest"
 harper-cli = "latest"
 harper-ls = "latest"
+hk = { version = "latest", minimum_release_age = "1d" }
 jaq = "latest"
 jq = "latest"
 lychee = "latest"
 node = "latest"
 "npm:sfw" = "latest"
 "npm:skills" = "latest"
+opencode = { version = "latest", minimum_release_age = "1d" }
 oxfmt = "latest"
 oxlint = "latest"
-"pipx:git-filter-repo" = "latest"
 pkl = "latest"
+pnpm = { version = "latest", minimum_release_age = "1d" }
 rmz = "latest"
 rumdl = "latest"
 rust = "nightly"
@@ -44,19 +48,3 @@ usage = "latest"
 uv = "latest"
 zizmor = "latest"
 zoxide = "latest"
-
-[tools.aube]
-minimum_release_age = "1d"
-version = "latest"
-
-[tools."github:anomalyco/opencode"]
-minimum_release_age = "1d"
-version = "latest"
-
-[tools.hk]
-minimum_release_age = "1d"
-version = "latest"
-
-[tools.pnpm]
-minimum_release_age = "1d"
-version = "latest"
