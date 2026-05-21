@@ -22,6 +22,7 @@
 *.jpg diff=image
 *.png diff=image
 *.svg diff=image
+*.pdf diff=diff-pdf
 
 # Apply filters to certain files that are either secrets, or machine specific.
 .config/npm/npmrc filter=npmrc

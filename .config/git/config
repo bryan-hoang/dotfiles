@@ -186,6 +186,11 @@
 	oneFixupPerCommit = true
 [safe]
 	directory = *
+[trailer "assist"]
+	key = Assisted-by
+[diff "diff-pdf"]
+	command = "!f() { diff-pdf --view \"$2\" \"$1\"; } ; f"
+
 [includeIf "gitdir/i:C:/"]
 	path = windows.gitconfig
 [include]
@@ -194,5 +199,3 @@
 	# `includeIf "gitdir:~/src/..."`
 	# `includeIf "hasconfig:remote.*.url:git@.../**"`
 	path = machine.gitconfig
-[trailer "assist"]
-	key = Assisted-by
