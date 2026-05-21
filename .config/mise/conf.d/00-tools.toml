@@ -5,6 +5,7 @@
 atuin = "latest"
 bitwarden = "latest"
 cargo-binstall = "latest"
+"cargo:cargo-cache" = "latest"
 "cargo:git-absorb" = "latest"
 "cargo:git-grab" = "latest"
 "cargo:tailspin" = "latest"
