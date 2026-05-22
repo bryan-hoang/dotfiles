@@ -23,7 +23,7 @@ export PNPM_HOME="$XDG_DATA_HOME"/pnpm
 export RUSTFLAGS="-Z threads=8"
 export RUSTUP_HOME="$XDG_DATA_HOME"/rustup
 export RUSTUP_TOOLCHAIN=nightly
-export VITE_PLUS_HOME="$XDG_DATA_HOME"/vite-plus
+export VP_HOME="$XDG_DATA_HOME"/vite-plus
 export WASMER_CACHE_DIR="$XDG_CACHE_HOME"/wasmer
 export WASMER_DIR="$XDG_DATA_HOME"/wasmer
 
@@ -72,7 +72,7 @@ prepend_to_path "$PNPM_HOME"/bin
 prepend_to_path "$WASMER_DIR"/bin
 prepend_to_path "$DENO_INSTALL"/bin
 prepend_to_path "$BUN_INSTALL"/bin
-prepend_to_path "$VITE_PLUS_HOME"/bin
+prepend_to_path "$VP_HOME"/bin
 # Go
 prepend_to_path "$GOPATH"/bin
 # Rust
