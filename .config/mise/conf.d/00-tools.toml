@@ -1,4 +1,5 @@
 [tools]
+"aqua:sigstore/gitsign" = "latest"
 "aqua:str4d/rage" = "latest"
 atuin = "latest"
 aube = { version = "latest", minimum_release_age = "1d" }
@@ -15,7 +16,6 @@ delta = "latest"
 editorconfig-checker = "latest"
 gh = "latest"
 git-filter-repo = "latest"
-gitsign = "latest"
 go = "latest"
 "go:github.com/dnnrly/abbreviate" = "latest"
 harper-cli = "latest"
