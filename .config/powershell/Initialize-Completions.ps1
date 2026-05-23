@@ -41,6 +41,7 @@ Add-Completion 'minikube' 'minikube completion powershell'
 Add-Completion 'mise' 'mise completion powershell'
 Add-Completion 'op' 'op completion powershell'
 Add-Completion 'tv' 'tv completions power-shell'
+Add-Completion 'typst' 'typst completions powershell'
 Add-Completion 'uv' 'uv generate-shell-completion powershell'
 
 $completionFiles = Get-ChildItem $PwshCompletionDir -Filter *.ps1

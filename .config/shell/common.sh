@@ -52,6 +52,7 @@ generate_completions ruff ruff generate-shell-completion "$SHELL_BASENAME"
 generate_completions rustup rustup completions "$SHELL_BASENAME" rustup
 generate_completions sheldon sheldon completions --shell "$SHELL_BASENAME"
 generate_completions starship starship completions "$SHELL_BASENAME"
+generate_completions typst typst completions "$SHELL_BASENAME"
 generate_completions uv uv generate-shell-completion "$SHELL_BASENAME"
 generate_completions zellij zellij setup --generate-completion "$SHELL_BASENAME"
 
