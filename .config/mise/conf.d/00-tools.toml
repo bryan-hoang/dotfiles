@@ -5,6 +5,7 @@ atuin = "latest"
 aube = { version = "latest", minimum_release_age = "1d" }
 betterleaks = "latest"
 bitwarden = "latest"
+bun = "latest"
 cargo-binstall = "latest"
 "cargo:cargo-cache" = "latest"
 "cargo:git-absorb" = "latest"
