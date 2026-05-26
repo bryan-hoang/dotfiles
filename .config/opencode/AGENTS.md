@@ -19,11 +19,14 @@ Personal dotfiles and environment constraints shared across machines.
 - **Search/Grep**: ALWAYS use the custom `fff` tools (`fff_find_files`,
   `fff_grep`, `fff_multi_grep`).
   - CRITICAL: DO NOT use the built-in `grep` or `glob` tools.
-  - CRITICAL: DO NOT use command-line `grep`, `find`, or `Select-String` in
-    bash.
-  - EXCEPTION: You may use `rg` (ripgrep) or `fd` via the `bash` tool ONLY when
-    counting matches, piping results to other commands, or using advanced
-    regex/find capabilities not supported by `fff`.
+  - CRITICAL: DO NOT use command-line `grep`, `find`, or `Select-String` in bash
+    (even for pipeline filtering like `| grep`).
+  - EXCEPTION: Use `rg` (ripgrep) instead of `grep` when filtering pipeline
+    output (e.g., `cmd | rg`), counting matches, piping results to other
+    commands, or using advanced regex/find capabilities not supported by `fff`.
+- **File Reading**: ALWAYS use the built-in `read` tool.
+  - CRITICAL: DO NOT use `cat`, `type`, or `Get-Content` via bash to read file
+    contents.
 
 ## Agent Skills
 

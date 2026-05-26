@@ -16,7 +16,7 @@
 		"fff": {
 			"type": "local",
 			"command": ["fff-mcp"],
-			"enabled": false,
+			"enabled": true,
 		},
 		"exa": {
 			"type": "remote",
@@ -35,6 +35,9 @@
 			"cat *": "deny",
 			"find *": "deny",
 			"grep *": "deny",
+		},
+		"external_directory": {
+			"~/AppData/Local/Temp/opencode": "allow",
 		},
 	},
 }
