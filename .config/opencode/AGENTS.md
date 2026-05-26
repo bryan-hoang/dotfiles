@@ -18,6 +18,8 @@ Personal dotfiles and environment constraints shared across machines.
     bash instead of text-search tools (`fff_grep`, `rg`, `grep`).
 - **Search/Grep**: ALWAYS use the custom `fff` tools (`fff_find_files`,
   `fff_grep`, `fff_multi_grep`).
+  - CRITICAL: These are built-in API/MCP tools, NOT shell commands. NEVER try to
+    execute `fff_grep` or `fff_find_files` inside the `bash` tool.
   - CRITICAL: DO NOT use the built-in `grep` or `glob` tools.
   - CRITICAL: DO NOT use command-line `grep`, `find`, or `Select-String` in bash
     (even for pipeline filtering like `| grep`).
@@ -26,7 +28,9 @@ Personal dotfiles and environment constraints shared across machines.
     commands, or using advanced regex/find capabilities not supported by `fff`.
 - **File Reading**: ALWAYS use the built-in `read` tool.
   - CRITICAL: DO NOT use `cat`, `type`, or `Get-Content` via bash to read file
-    contents.
+    contents. DO NOT use these tools to pipe into other commands (e.g., NEVER do
+    `cat file | cmd` If a CLI tool needs to process a file, pass the file path
+    directly as an argument (e.g., `rg pattern file`).
 
 ## Agent Skills
 
