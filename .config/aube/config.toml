@@ -1,4 +1,15 @@
+# `hunkdiff` uses `bun` in its `postinstall` script :/
+jailBuildExclusions = ["bun"]
 minimumReleaseAge = 10080
-minimumReleaseAgeExclude = []
+minimumReleaseAgeExclude = [
+	# To allow `hunkdiff` config in mise to bypass `aube` minimum release age
+	# config -_-
+	"hunkdiff",
+	"hunkdiff-darwin-arm64",
+	"hunkdiff-darwin-x64",
+	"hunkdiff-linux-arm64",
+	"hunkdiff-linux-x64",
+	"hunkdiff-windows-x64",
+]
 paranoid = true
 trustPolicyExclude = ["skills"]

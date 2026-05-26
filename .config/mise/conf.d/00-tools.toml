@@ -26,6 +26,7 @@ jaq = "latest"
 jq = "latest"
 lychee = "latest"
 node = "latest"
+"npm:hunkdiff" = { version = "latest", aube_args = "--allow-build=bun", minimum_release_age = "1d" }
 "npm:sfw" = "latest"
 "npm:skills" = "latest"
 opencode = { version = "latest", minimum_release_age = "1d" }
