@@ -28,9 +28,10 @@ Personal dotfiles and environment constraints shared across machines.
     commands, or using advanced regex/find capabilities not supported by `fff`.
 - **File Reading**: ALWAYS use the built-in `read` tool.
   - CRITICAL: DO NOT use `cat`, `type`, or `Get-Content` via bash to read file
-    contents. DO NOT use these tools to pipe into other commands (e.g., NEVER do
-    `cat file | cmd` If a CLI tool needs to process a file, pass the file path
-    directly as an argument (e.g., `rg pattern file`).
+    contents. DO NOT try to bypass this rule by wrapping them in `pwsh -Command`
+    or `pwsh -c`. DO NOT use these tools to pipe into other commands (e.g.,
+    NEVER do `cat file | cmd` If a CLI tool needs to process a file, pass the
+    file path directly as an argument (e.g., `rg pattern file`).
 
 ## Agent Skills
 

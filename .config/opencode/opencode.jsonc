@@ -36,6 +36,7 @@
 			"cat *": "deny",
 			"find *": "deny",
 			"grep *": "deny",
+			"pwsh -Command \"Get-Content *": "deny",
 		},
 		"external_directory": {
 			"~/AppData/Local/Temp/opencode": "allow",
