@@ -33,6 +33,8 @@
 	"permission": {
 		"bash": {
 			"Get-Content *": "deny",
+			// `--target-branch` doesn't seem to work...
+			"az repos pr create *": "deny",
 			"cat *": "deny",
 			"find *": "deny",
 			"grep *": "deny",
