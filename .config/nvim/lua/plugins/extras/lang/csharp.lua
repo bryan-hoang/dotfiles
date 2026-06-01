@@ -4,7 +4,6 @@ return {
 		"seblyng/roslyn.nvim",
 		ft = {
 			"cs",
-			-- "razor"
 		},
 		dependencies = {
 			{
@@ -12,15 +11,26 @@ return {
 				opts = {
 					registries = {
 						"github:mason-org/mason-registry",
-						"github:Crashdummyy/mason-registry",
 					},
 					ensure_installed = {
-						"roslyn",
+						"roslyn-language-server",
+					},
+				},
+			},
+			{
+				"neovim/nvim-lspconfig",
+				opts = {
+					servers = {
+						-- Ensure it only one instance of the LS is started.
+						roslyn_ls = {
+							enabled = false,
+						},
 					},
 				},
 			},
 		},
-		config = function()
+		config = function(_, opts)
+			require("roslyn").setup(opts)
 			vim.lsp.config("roslyn", {
 				filetypes = { "cs", "razor" },
 				settings = {
@@ -42,12 +52,19 @@ return {
 						dotnet_suppress_inlay_hints_for_parameters_that_match_argument_name = true,
 						dotnet_suppress_inlay_hints_for_parameters_that_match_method_intent = true,
 					},
+					["csharp|symbol_search"] = {
+						dotnet_search_reference_assemblies = true,
+					},
+					["csharp|completion"] = {
+						dotnet_show_name_completion_suggestions = true,
+						dotnet_show_completion_items_from_unimported_namespaces = true,
+						dotnet_provide_regex_completions = true,
+					},
 					["csharp|code_lens"] = {
 						dotnet_enable_references_code_lens = true,
 					},
 				},
 			})
-			vim.lsp.enable("roslyn")
 		end,
 	},
 	{
