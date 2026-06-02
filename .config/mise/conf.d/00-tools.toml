@@ -1,5 +1,7 @@
+[tool_alias]
+fff-mcp = "github:dmtrKovalenko/fff"
+
 [tools]
-"aqua:sigstore/gitsign" = "latest"
 "aqua:str4d/rage" = "latest"
 atuin = "latest"
 aube = { version = "latest", minimum_release_age = "1d" }
@@ -17,8 +19,10 @@ delta = "latest"
 editorconfig-checker = "latest"
 gh = "latest"
 git-filter-repo = "latest"
+"github:vslavik/diff-pdf" = "latest"
 go = "latest"
 "go:github.com/dnnrly/abbreviate" = "latest"
+"go:github.com/sigstore/gitsign" = "latest"
 harper-cli = "latest"
 harper-ls = "latest"
 hk = { version = "latest", minimum_release_age = "1d" }
