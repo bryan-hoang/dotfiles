@@ -32,6 +32,9 @@ Personal dotfiles and environment constraints shared across machines.
     or `pwsh -c`. DO NOT use these tools to pipe into other commands (e.g.,
     NEVER do `cat file | cmd` If a CLI tool needs to process a file, pass the
     file path directly as an argument (e.g., `rg pattern file`).
+  - CRITICAL: DO NOT use `sed`, `awk`, `head`, `tail`, `more`, or `less` to
+    print or read file contents. If you need to read specific line ranges, use
+    the built-in `read` tool with the `offset` and `limit` parameters.
 
 ## Agent Skills
 
