@@ -41,7 +41,7 @@
 			"pwsh -Command \"Get-Content *": "deny",
 		},
 		"external_directory": {
-			"~/AppData/Local/Temp/opencode": "allow",
+			"~/AppData/Local/Temp/opencode/**": "allow",
 		},
 	},
 }
