@@ -21,8 +21,8 @@ Personal dotfiles and environment constraints shared across machines.
   - CRITICAL: These are built-in API/MCP tools, NOT shell commands. NEVER try to
     execute `fff_grep` or `fff_find_files` inside the `bash` tool.
   - CRITICAL: DO NOT use the built-in `grep` or `glob` tools.
-  - CRITICAL: DO NOT use command-line `grep`, `find`, or `Select-String` in bash
-    (even for pipeline filtering like `| grep`).
+  - CRITICAL: DO NOT use command-line `grep`, `find`, or `Select-String` in
+    shell (even for pipeline filtering like `| grep` or getting context lines).
   - EXCEPTION: Use `rg` (ripgrep) instead of `grep` when filtering pipeline
     output (e.g., `cmd | rg`), counting matches, piping results to other
     commands, or using advanced regex/find capabilities not supported by `fff`.
