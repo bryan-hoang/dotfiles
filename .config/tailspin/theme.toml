@@ -1,8 +1,8 @@
-[[regexps]]
+[[regexes]]
 # Ethereum addresses. `dcp-worker` truncates them down to 20 characters long.
-regular_expression = '(?:0x)?[0-9a-fA-F]{20,40}'
+regex = '(?:0x)?[0-9a-fA-F]{20,40}'
 style = { fg = "blue" }
 
 [[keywords]]
-words = ['Error', 'error']
 style = { fg = "red" }
+words = ['Error', 'error']
