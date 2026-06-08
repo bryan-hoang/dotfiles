@@ -15,23 +15,22 @@ Personal dotfiles and environment constraints shared across machines.
 - **CLI Preferences**: Use `git filter-repo` (not `filter-branch`).
   - **JSON Processing**: For structural parsing, reading, or extracting specific
     fields from JSON files, ALWAYS use `jaq` (another `jq` implementation) via
-    bash instead of text-search tools (`fff_grep`, `rg`, `grep`).
+    bash instead of text-search tools (`fff_grep`, `grep`).
 - **Search/Grep**: ALWAYS use the custom `fff` tools (`fff_find_files`,
   `fff_grep`, `fff_multi_grep`).
   - CRITICAL: These are built-in API/MCP tools, NOT shell commands. NEVER try to
     execute `fff_grep` or `fff_find_files` inside the `bash` tool.
-  - CRITICAL: DO NOT use the built-in `grep` or `glob` tools.
-  - CRITICAL: DO NOT use command-line `grep`, `find`, or `Select-String` in
-    shell (even for pipeline filtering like `| grep` or getting context lines).
-  - EXCEPTION: Use `rg` (ripgrep) instead of `grep` when filtering pipeline
-    output (e.g., `cmd | rg`), counting matches, piping results to other
-    commands, or using advanced regex/find capabilities not supported by `fff`.
+  - CRITICAL: Fall back to the built-in `grep` tools if needed.
+  - CRITICAL: DO NOT use command-line `grep`, `find`, `findstr`, `Select-String`,
+    `sls`, or `rg` to search files or the codebase.
+  - EXCEPTION: You may use `Select-String` or `grep` ONLY for filtering pipeline
+    output in the shell (e.g., `cmd | Select-String`).
 - **File Reading**: ALWAYS use the built-in `read` tool.
   - CRITICAL: DO NOT use `cat`, `type`, or `Get-Content` via bash to read file
     contents. DO NOT try to bypass this rule by wrapping them in `pwsh -Command`
     or `pwsh -c`. DO NOT use these tools to pipe into other commands (e.g.,
-    NEVER do `cat file | cmd` If a CLI tool needs to process a file, pass the
-    file path directly as an argument (e.g., `rg pattern file`).
+    NEVER do `cat file | cmd`). If a CLI tool needs to process a file, pass the
+    file path directly as an argument.
   - CRITICAL: DO NOT use `sed`, `awk`, `head`, `tail`, `more`, or `less` to
     print or read file contents. If you need to read specific line ranges, use
     the built-in `read` tool with the `offset` and `limit` parameters.

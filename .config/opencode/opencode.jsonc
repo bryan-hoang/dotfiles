@@ -1,6 +1,6 @@
 {
 	"$schema": "https://opencode.ai/config.json",
-	"autoupdate": true,
+	"autoupdate": false,
 	"formatter": {
 		"oxfmt": {
 			"command": ["oxfmt", "$FILE"],
@@ -10,8 +10,8 @@
 	"mcp": {
 		"chrome-devtools": {
 			"type": "local",
-			"command": ["bun", "x", "chrome-devtools-mcp@latest"],
-			"enabled": false,
+			"command": ["aube", "dlx", "chrome-devtools-mcp@latest"],
+			"enabled": true,
 		},
 		"fff": {
 			"type": "local",
@@ -22,6 +22,11 @@
 			"type": "remote",
 			"url": "https://mcp.exa.ai/mcp",
 			"enabled": true,
+		},
+		"obscura": {
+			"type": "local",
+			"command": ["obscura", "mcp"],
+			"enabled": false,
 		},
 		"pitchfork": {
 			"type": "local",
@@ -38,7 +43,9 @@
 			"az repos pr create *": "deny",
 			"cat *": "deny",
 			"find *": "deny",
+			"findstr *": "deny",
 			"grep *": "deny",
+			"rtk grep *": "deny",
 			"pwsh -Command \"Get-Content *": "deny",
 		},
 		"external_directory": {
