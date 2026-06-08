@@ -19,7 +19,8 @@ sudo_loop = true
 # `gnome_shell_extensions` -
 #		`Error: GDBus.Error:org.freedesktop.DBus.Error.NoReply: Remote peer disconnected`?
 # `helix` - Avoid bloating disk space with grammars.
-disable = ["emacs", "gnome_shell_extensions", "helix"]
+# `typst` - Managed by `mise`.
+disable = ["emacs", "gnome_shell_extensions", "helix", "typst"]
 
 # Run these steps before all others
 first = ["git_repos", "mise", "system"]
