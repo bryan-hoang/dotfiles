@@ -1,8 +1,10 @@
 [tool_alias]
 fff-mcp = "github:dmtrKovalenko/fff"
+monaco = "github:dynatrace/dynatrace-configuration-as-code"
+pac = "dotnet:Microsoft.PowerApps.CLI.Tool"
+rage = "aqua:str4d/rage"
 
 [tools]
-"aqua:str4d/rage" = "latest"
 atuin = "latest"
 aube = { version = "latest", minimum_release_age = "1d" }
 betterleaks = "latest"
@@ -40,6 +42,7 @@ oxfmt = "latest"
 oxlint = "latest"
 pkl = "latest"
 pnpm = { version = "latest", minimum_release_age = "1d" }
+rage = "latest"
 rmz = "latest"
 rumdl = "latest"
 rust = "nightly"
@@ -58,8 +61,8 @@ zizmor = "latest"
 zoxide = "latest"
 
 [tools.fff-mcp]
-version = "latest"
 minimum_release_age = "1d"
+version = "latest"
 
 [tools.fff-mcp.platforms]
 windows-x64 = { asset_pattern = "fff-mcp-x86_64-pc-windows-msvc.exe", bin = "fff-mcp.exe" }
