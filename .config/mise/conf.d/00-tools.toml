@@ -19,6 +19,7 @@ delta = "latest"
 editorconfig-checker = "latest"
 gh = "latest"
 git-filter-repo = "latest"
+"github:rtk-ai/rtk" = "latest"
 "github:vslavik/diff-pdf" = "latest"
 go = "latest"
 "go:github.com/dnnrly/abbreviate" = "latest"
@@ -30,6 +31,7 @@ jaq = "latest"
 jq = "latest"
 lychee = "latest"
 node = "latest"
+"npm:chrome-devtools-mcp" = "latest"
 "npm:hunkdiff" = { version = "latest", aube_args = "--allow-build=bun", minimum_release_age = "1d" }
 "npm:sfw" = "latest"
 "npm:skills" = "latest"
@@ -54,3 +56,10 @@ usage = "latest"
 uv = "latest"
 zizmor = "latest"
 zoxide = "latest"
+
+[tools.fff-mcp]
+version = "latest"
+minimum_release_age = "1d"
+
+[tools.fff-mcp.platforms]
+windows-x64 = { asset_pattern = "fff-mcp-x86_64-pc-windows-msvc.exe", bin = "fff-mcp.exe" }
