@@ -21,10 +21,10 @@ Personal dotfiles and environment constraints shared across machines.
   - CRITICAL: These are built-in API/MCP tools, NOT shell commands. NEVER try to
     execute `fff_grep` or `fff_find_files` inside the `bash` tool.
   - CRITICAL: Fall back to the built-in `grep` tools if needed.
-  - CRITICAL: DO NOT use command-line `grep`, `find`, `findstr`, `Select-String`,
-    `sls`, or `rg` to search files or the codebase.
-  - EXCEPTION: You may use `Select-String` or `grep` ONLY for filtering pipeline
-    output in the shell (e.g., `cmd | Select-String`).
+  - CRITICAL: DO NOT use command-line `grep`, `find`, `findstr`,
+    `Select-String`, or `sls` to search files or the codebase.
+  - EXCEPTION: You may use `rg` ONLY for filtering pipeline output in the shell
+    (e.g., `cmd | rg`).
 - **File Reading**: ALWAYS use the built-in `read` tool.
   - CRITICAL: DO NOT use `cat`, `type`, or `Get-Content` via bash to read file
     contents. DO NOT try to bypass this rule by wrapping them in `pwsh -Command`

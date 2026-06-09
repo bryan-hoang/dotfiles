@@ -41,16 +41,20 @@
 	"plugin": [],
 	"permission": {
 		"bash": {
-			"Get-Content *": "deny",
-			"Select-String *": "deny",
 			// `--target-branch` doesn't seem to work...
 			"az repos pr create *": "deny",
+
+			"Get-Content *": "deny",
 			"cat *": "deny",
 			"find *": "deny",
+			"pwsh -Command \"Get-Content *": "deny",
+
+			// `grep` & friends...
+			"Select-String *": "deny",
 			"findstr *": "deny",
 			"grep *": "deny",
-			"rtk grep *": "deny",
-			"pwsh -Command \"Get-Content *": "deny",
+			"sls *": "deny",
+			"type *": "deny",
 		},
 		"external_directory": {
 			"~/AppData/Local/Temp/opencode/**": "allow",
