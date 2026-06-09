@@ -6,11 +6,15 @@
 			"command": ["oxfmt", "$FILE"],
 			"extensions": [".yaml", ".yml"],
 		},
+		"taplo": {
+			"command": ["taplo", "format", "$FILE"],
+			"extensions": [".toml"],
+		},
 	},
 	"mcp": {
 		"chrome-devtools": {
 			"type": "local",
-			"command": ["aube", "dlx", "chrome-devtools-mcp@latest"],
+			"command": ["chrome-devtools-mcp"],
 			"enabled": true,
 		},
 		"fff": {
