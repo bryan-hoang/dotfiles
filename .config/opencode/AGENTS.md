@@ -43,9 +43,6 @@ Personal dotfiles and environment constraints shared across machines.
 
 ## Formatting Constraints
 
-- **Markdown**: Use `oxfmt`.
-- **SQL**: Use `sqlfluff`.
-- **JSON**: Do NOT use `prettier`.
 - **Line Length**: Soft cap at 80, 100, or 120 columns (especially comments).
 
 ## Git Commit Standards (CRITICAL)

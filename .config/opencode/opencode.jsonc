@@ -15,7 +15,7 @@
 		"chrome-devtools": {
 			"type": "local",
 			"command": ["chrome-devtools-mcp"],
-			"enabled": true,
+			"enabled": false,
 		},
 		"fff": {
 			"type": "local",
