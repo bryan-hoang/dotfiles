@@ -20,6 +20,7 @@ set_file_associations({
 	sshconfig = { ".*/%.ssh/conf%.d/.*%.conf" },
 	starlark = { "Tiltfile" },
 	toml = { "uv.lock" },
+	tmux = { "rmux.conf" },
 	xdefaults = {
 		".*/%.config/X11/xresources",
 		".*/%.config/X11/xresources%.d/.*",

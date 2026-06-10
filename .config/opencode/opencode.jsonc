@@ -17,14 +17,14 @@
 			"command": ["chrome-devtools-mcp"],
 			"enabled": false,
 		},
-		"fff": {
-			"type": "local",
-			"command": ["fff-mcp"],
-			"enabled": true,
-		},
 		"exa": {
 			"type": "remote",
 			"url": "https://mcp.exa.ai/mcp",
+			"enabled": true,
+		},
+		"fff": {
+			"type": "local",
+			"command": ["fff-mcp"],
 			"enabled": true,
 		},
 		"obscura": {
