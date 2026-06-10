@@ -5,6 +5,7 @@ hunkdiff = "npm:hunkdiff"
 monaco = "github:dynatrace/dynatrace-configuration-as-code"
 pac = "dotnet:Microsoft.PowerApps.CLI.Tool"
 rage = "aqua:str4d/rage"
+sonarqube-cli = "http:sonarqube-cli"
 
 [tools]
 actionlint = "latest"
