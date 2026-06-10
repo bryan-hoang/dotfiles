@@ -1,10 +1,13 @@
 [tool_alias]
+aube = "github:jdx/aube"
 fff-mcp = "github:dmtrKovalenko/fff"
+hunkdiff = "npm:hunkdiff"
 monaco = "github:dynatrace/dynatrace-configuration-as-code"
 pac = "dotnet:Microsoft.PowerApps.CLI.Tool"
 rage = "aqua:str4d/rage"
 
 [tools]
+actionlint = "latest"
 atuin = "latest"
 aube = { version = "latest", minimum_release_age = "1d" }
 betterleaks = "latest"
@@ -14,6 +17,7 @@ cargo-binstall = "latest"
 "cargo:cargo-cache" = "latest"
 "cargo:git-absorb" = "latest"
 "cargo:git-grab" = "latest"
+"cargo:ryl" = { version = "latest", minimum_release_age = "1d" }
 "cargo:tailspin" = "latest"
 "cargo:tealdeer" = "latest"
 cocogitto = "latest"
@@ -34,7 +38,6 @@ jq = "latest"
 lychee = "latest"
 node = "latest"
 "npm:chrome-devtools-mcp" = "latest"
-"npm:hunkdiff" = { version = "latest", aube_args = "--allow-build=bun", minimum_release_age = "1d" }
 "npm:sfw" = "latest"
 "npm:skills" = "latest"
 opencode = { version = "latest", minimum_release_age = "1d" }
@@ -66,3 +69,8 @@ version = "latest"
 
 [tools.fff-mcp.platforms]
 windows-x64 = { asset_pattern = "fff-mcp-x86_64-pc-windows-msvc.exe", bin = "fff-mcp.exe" }
+
+[tools.hunkdiff]
+aube_args = "--allow-build=bun"
+minimum_release_age = "1d"
+version = "latest"
