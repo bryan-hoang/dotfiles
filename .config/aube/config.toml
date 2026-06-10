@@ -12,4 +12,4 @@ minimumReleaseAgeExclude = [
 	"hunkdiff-windows-x64",
 ]
 paranoid = true
-trustPolicyExclude = ["skills"]
+trustPolicyExclude = []
