@@ -80,17 +80,11 @@ if ($IsWindows) {
 
 # PATH
 Add-UserPath $env:XDG_BIN_HOME
-Add-UserPath $(Join-Path $env:APPDATA 'npm')
+Add-UserPath $(Join-Path $env:XDG_DATA_HOME 'mise' 'shims')
+Add-UserPath $(Join-Path $env:CARGO_HOME 'bin')
 Add-UserPath $(Join-Path $env:PNPM_HOME 'bin')
-if (Test-Path $(Join-Path $env:CARGO_HOME 'bin')) {
-	Add-UserPath $(Join-Path $env:CARGO_HOME 'bin')
-}
-if (Test-Path $(Join-Path $env:XDG_DATA_HOME 'nvim-data' 'mason' 'bin')) {
-	Add-UserPath $(Join-Path $env:XDG_DATA_HOME 'nvim-data' 'mason' 'bin')
-}
-if (Test-CommandExists mise) {
-	Add-UserPath $(Join-Path $env:XDG_DATA_HOME 'mise' 'shims')
-}
+Add-UserPath $(Join-Path $env:XDG_DATA_HOME 'npm')
+Add-UserPath $(Join-Path $env:XDG_DATA_HOME 'nvim-data' 'mason' 'bin')
 
 if ($IsWindows) {
 	$env:PATH = "$([Environment]::GetEnvironmentVariable('Path', 'User'))$([Environment]::GetEnvironmentVariable('Path', 'Machine'))"
