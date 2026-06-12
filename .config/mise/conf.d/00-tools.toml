@@ -1,5 +1,6 @@
 [tool_alias]
 aube = "github:jdx/aube"
+dab = "dotnet:microsoft.dataapibuilder"
 fff-mcp = "github:dmtrKovalenko/fff"
 hunkdiff = "npm:hunkdiff"
 monaco = "github:dynatrace/dynatrace-configuration-as-code"
