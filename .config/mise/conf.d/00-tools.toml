@@ -3,6 +3,7 @@ aube = "github:jdx/aube"
 fff-mcp = "github:dmtrKovalenko/fff"
 hunkdiff = "npm:hunkdiff"
 monaco = "github:dynatrace/dynatrace-configuration-as-code"
+op = "http:op"
 pac = "dotnet:Microsoft.PowerApps.CLI.Tool"
 rage = "aqua:str4d/rage"
 sonarqube-cli = "http:sonarqube-cli"
@@ -69,7 +70,7 @@ minimum_release_age = "1d"
 version = "latest"
 
 [tools.fff-mcp.platforms]
-windows-x64 = { asset_pattern = "fff-mcp-x86_64-pc-windows-msvc.exe", bin = "fff-mcp.exe" }
+windows-x64 = { asset_pattern = 'fff-mcp-{{arch(x64="x86_64")}}-pc-{{os()}}-msvc.exe', bin = "fff-mcp.exe" }
 
 [tools.hunkdiff]
 aube_args = "--allow-build=bun"
