@@ -6,7 +6,7 @@ hunkdiff = "npm:hunkdiff"
 monaco = "github:dynatrace/dynatrace-configuration-as-code"
 op = "http:op"
 pac = "dotnet:Microsoft.PowerApps.CLI.Tool"
-rage = "aqua:str4d/rage"
+rage = "github:str4d/rage"
 sonarqube-cli = "http:sonarqube-cli"
 
 [tools]
