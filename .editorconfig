@@ -9,6 +9,9 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
+[COMMIT_EDITMSG]
+indent_style = space
+
 [*.{py,yml,yaml,kdl,hjson,typ,pkl}]
 indent_style = space
 
@@ -50,7 +53,7 @@ indent_style = space
 indent_size = 4
 indent_style = space
 
-[{Makefile,*.mk,COMMIT_EDITMSG}]
+[{Makefile,*.mk}]
 indent_size = unset
 
 [Tiltfile]
