@@ -12,7 +12,7 @@ sonarqube-cli = "http:sonarqube-cli"
 [tools]
 actionlint = "latest"
 atuin = "latest"
-aube = { version = "latest", minimum_release_age = "1d" }
+aube = { version = "latest", minimum_release_age = "0d" }
 betterleaks = "latest"
 bitwarden = "latest"
 bun = "latest"
@@ -43,11 +43,11 @@ node = "latest"
 "npm:chrome-devtools-mcp" = "latest"
 "npm:sfw" = "latest"
 "npm:skills" = "latest"
-opencode = { version = "latest", minimum_release_age = "1d" }
+opencode = { version = "latest", minimum_release_age = "0d" }
 oxfmt = "latest"
 oxlint = "latest"
 pkl = "latest"
-pnpm = { version = "latest", minimum_release_age = "1d" }
+pnpm = { version = "latest", minimum_release_age = "0d" }
 rage = "latest"
 rmz = "latest"
 rumdl = "latest"
