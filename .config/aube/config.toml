@@ -1,4 +1,4 @@
-jailBuildExclusions = ["bun"]
+jailBuildExclusions = ["bun", "core-js"]
 minimumReleaseAge = 10080
 minimumReleaseAgeExclude = []
 paranoid = true

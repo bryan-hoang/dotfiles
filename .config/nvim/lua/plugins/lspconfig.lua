@@ -36,6 +36,7 @@ return {
 				servers = {
 					-- JSON
 					jsonls = {
+						mason = false,
 						settings = {
 							json = {
 								schemas = require("schemastore").json.schemas({
@@ -52,6 +53,7 @@ return {
 					},
 					-- YAML
 					yamlls = {
+						mason = false,
 						-- Avoid extending to allow replacing.
 						before_init = function(_, _) end,
 						settings = {
@@ -101,6 +103,7 @@ return {
 					docker_compose_language_service = { mason = false },
 					-- JS/TS
 					vtsls = {
+						mason = false,
 						settings = {
 							javascript = {
 								suggest = {
@@ -129,6 +132,7 @@ return {
 						},
 					},
 					eslint = {
+						mason = false,
 						filetypes = {
 							"javascript",
 							"javascriptreact",
