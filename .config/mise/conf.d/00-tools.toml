@@ -54,7 +54,7 @@ television = "latest"
 topgrade = "latest"
 tree-sitter = "latest"
 typos = "latest"
-usage = "latest"
+usage = { version = "latest", minimum_release_age = "0d" }
 uv = "latest"
 zoxide = "latest"
 
