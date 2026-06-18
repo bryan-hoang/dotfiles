@@ -14,7 +14,7 @@
 	"mcp": {
 		"chrome-devtools": {
 			"type": "local",
-			"command": ["chrome-devtools-mcp"],
+			"command": ["aube", "dlx", "chrome-devtools-mcp@latest"],
 			"enabled": false,
 		},
 		"exa": {
@@ -41,21 +41,20 @@
 	"plugin": [],
 	"permission": {
 		"bash": {
-			// `--target-branch` doesn't seem to work...
-			"az repos pr create *": "deny",
-
 			"Get-Content *": "deny",
 			"cat *": "deny",
 			"find *": "deny",
 			"pwsh -Command \"Get-Content *": "deny",
 			"rtk read *": "deny",
-
+			"echo *": "deny",
 			// `grep` & friends...
 			"Select-String *": "deny",
 			"findstr *": "deny",
 			"grep *": "deny",
 			"sls *": "deny",
 			"type *": "deny",
+			// `--target-branch` doesn't seem to work...
+			"az repos pr create *": "deny",
 		},
 		"external_directory": {
 			"~/AppData/Local/Temp/opencode/**": "allow",

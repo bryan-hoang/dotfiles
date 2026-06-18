@@ -34,7 +34,6 @@ hk = { version = "latest", minimum_release_age = "1d" }
 jaq = "latest"
 lychee = "latest"
 node = "latest"
-"npm:chrome-devtools-mcp" = "latest"
 "npm:sfw" = "latest"
 "npm:skills" = "latest"
 opencode = { version = "latest", minimum_release_age = "0d" }
