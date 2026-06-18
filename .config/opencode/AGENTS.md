@@ -1,5 +1,10 @@
 # Personal Coding Agent Rules
 
+**CRITICAL: You MUST read `~/.config/opencode/CONTEXT.md` (or the equivalent
+absolute path for your environment) to understand the exact definitions of terms
+like "Agent Tool", "Shell Command", "Native Fallback", "Subshell Bypass",
+"Searching", and "Filtering" used in these rules.**
+
 Personal dotfiles and environment constraints shared across machines.
 
 ## Environment & Tooling
@@ -15,25 +20,36 @@ Personal dotfiles and environment constraints shared across machines.
 - **CLI Preferences**: Use `git filter-repo` (not `filter-branch`).
   - **JSON Processing**: For structural parsing, reading, or extracting specific
     fields from JSON files, ALWAYS use `jaq` (another `jq` implementation) via
-    bash instead of text-search tools (`fff_grep`, `grep`).
-- **Search/Grep**: ALWAYS use the custom `fff` tools (`fff_find_files`,
+    bash instead of text-search Agent Tools (`fff_grep`, `grep`). For modifying
+    JSON, prefer the `edit` Agent Tool for simple string replacements. For
+    complex structural changes, use `jaq` or read/modify/write the file.
+- **Search/Grep**: ALWAYS use the custom `fff` Agent Tools (`fff_find_files`,
   `fff_grep`, `fff_multi_grep`).
-  - CRITICAL: These are built-in API/MCP tools, NOT shell commands. NEVER try to
-    execute `fff_grep` or `fff_find_files` inside the `bash` tool.
-  - CRITICAL: Fall back to the built-in `grep` tools if needed.
-  - CRITICAL: DO NOT use command-line `grep`, `find`, `findstr`,
-    `Select-String`, or `sls` to search files or the codebase.
-  - EXCEPTION: You may use `rg` ONLY for filtering pipeline output in the shell
+  - CRITICAL: These are built-in Agent Tools, NOT Shell Commands. NEVER try to
+    execute `fff_grep` or `fff_find_files` inside the `bash` Agent Tool.
+  - CRITICAL: Fall back to the built-in `grep` Agent Tools if needed.
+  - CRITICAL: DO NOT use Native Fallbacks (`grep`, `find`, `findstr`,
+    `Select-String`, `sls`, or `rg`) for Searching files or the codebase.
+  - EXCEPTION: You may use `rg` ONLY for Filtering pipeline output in the shell
     (e.g., `cmd | rg`).
-- **File Reading**: ALWAYS use the built-in `read` tool.
-  - CRITICAL: DO NOT use `cat`, `type`, or `Get-Content` via bash to read file
-    contents. DO NOT try to bypass this rule by wrapping them in `pwsh -Command`
-    or `pwsh -c`. DO NOT use these tools to pipe into other commands (e.g.,
-    NEVER do `cat file | cmd`). If a CLI tool needs to process a file, pass the
-    file path directly as an argument.
-  - CRITICAL: DO NOT use `sed`, `awk`, `head`, `tail`, `more`, or `less` to
-    print or read file contents. If you need to read specific line ranges, use
-    the built-in `read` tool with the `offset` and `limit` parameters.
+- **File Reading**: ALWAYS use the built-in `read` Agent Tool.
+  - CRITICAL: DO NOT use Native Fallbacks (`cat`, `type`, or `Get-Content`) via
+    bash to read file contents. DO NOT attempt a Subshell Bypass by wrapping
+    them in `pwsh -Command` or `pwsh -c`. DO NOT use these tools to pipe into
+    other commands (e.g., NEVER do `cat file | cmd`). If a Shell Command needs
+    to process a file, pass the file path directly as an argument.
+  - CRITICAL: DO NOT use Native Fallbacks (`sed`, `awk`, `head`, `tail`, `more`,
+    or `less`) to print or read file contents. If you need to read specific line
+    ranges, use the built-in `read` Agent Tool with the `offset` and `limit`
+    parameters.
+- **File Writing/Editing**: ALWAYS use the built-in `write` and `edit` Agent
+  Tools.
+  - CRITICAL: DO NOT use Native Fallbacks (`New-Item`, `Set-Content`,
+    `Out-File`, `Add-Content`, `echo`, or `cat` with redirection `>`) via bash
+    to create or modify files.
+  - EXCEPTION: You may execute Shell Commands (like formatters, linters, or
+    scaffolding tools like `aube create`) that modify files as part of their
+    intended automated workflow.
 
 ## Agent Skills
 
@@ -43,6 +59,10 @@ Personal dotfiles and environment constraints shared across machines.
 
 ## Formatting Constraints
 
+- **Markdown**: Use `oxfmt`. Run manually via bash ONLY after creating a new
+  file.
+- **SQL**: Use `sqlfluff`. Run manually via bash ONLY after creating a new file.
+- **JSON**: Do NOT use `prettier`.
 - **Line Length**: Soft cap at 80, 100, or 120 columns (especially comments).
 
 ## Git Commit Standards (CRITICAL)
@@ -55,8 +75,10 @@ Personal dotfiles and environment constraints shared across machines.
 - **Trailers** (in the following order):
   - `Refs: <ticket>`: For ADO/work items (e.g., `Refs: #123`).
   - `Assisted-by: <AGENT_NAME>:<MODEL_VERSION> [OPTIONAL_TOOLS]`: Required
-    attribution for agent-authored commits (exclude basic tools like
-    git/editor). _Example: `Assisted-by: OpenCode:gemini-3.1-pro-preview`_
+    attribution for agent-authored commits. Omit `[OPTIONAL_TOOLS]` unless a
+    specialized skill (e.g., `domain-modeling`) was used. Do not list basic
+    Agent Tools (e.g., `read`, `write`, `bash`, `edit`, `fff_grep`). _Example:
+    `Assisted-by: OpenCode:gemini-3.1-pro-preview`_
   - `Link: <url> # [X]`: Bracketed footnote notation for references.
 
     ```text

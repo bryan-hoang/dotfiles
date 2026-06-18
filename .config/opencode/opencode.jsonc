@@ -47,6 +47,7 @@
 			"pwsh -Command \"Get-Content *": "deny",
 			"rtk read *": "deny",
 			"echo *": "deny",
+			"New-Item *": "deny",
 			// `grep` & friends...
 			"Select-String *": "deny",
 			"findstr *": "deny",
