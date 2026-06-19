@@ -12,6 +12,12 @@ Tools".
 An executable program or script run strictly _inside_ the payload of the `bash`
 Agent Tool (e.g., `git`, `jaq`, `mise`, `pwsh`).
 
+## Host Shell
+
+The actual command-line interpreter executing behind the `bash` Agent Tool,
+determined dynamically by the OS environment. On Windows (`win32`), the Host
+Shell is `pwsh`. On Unix-like systems, it may be `bash` or `zsh`.
+
 ## Native Fallback
 
 A Shell Command (like `findstr`, `Select-String`, `cat`, `New-Item`) that an

@@ -1,5 +1,5 @@
 jailBuildExclusions = ["bun", "core-js"]
 minimumReleaseAge = 10080
-minimumReleaseAgeExclude = []
+minimumReleaseAgeExclude = ["chrome-devtools-mcp"]
 paranoid = true
 trustPolicyExclude = []

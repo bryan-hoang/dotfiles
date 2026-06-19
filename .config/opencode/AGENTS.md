@@ -9,6 +9,11 @@ Personal dotfiles and environment constraints shared across machines.
 
 ## Environment & Tooling
 
+- **Host Shell Awareness**: The `bash` Agent Tool executes the **Host Shell**,
+  not necessarily `bash`. You MUST check your environment data (OS/Platform). If
+  the Host Shell is `pwsh` (e.g., on `win32`), you MUST use PowerShell syntax,
+  quoting, and escaping rules (e.g., backticks, \`, for escaping, `&` call
+  operator), completely ignoring the `bash` name.
 - **Dotfiles Repo**: Root (`~`/`$HOME`) is a dotfiles git repo. Exercise caution
   with git commands here.
 - **Cloned Repos**: Located in `src/<host>/` (e.g., `src/github.com/`).

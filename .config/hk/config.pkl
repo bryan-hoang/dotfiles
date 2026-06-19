@@ -1,5 +1,5 @@
-amends "package://github.com/jdx/hk/releases/download/v1.47.0/hk@1.47.0#/Config.pkl"
-import "package://github.com/jdx/hk/releases/download/v1.47.0/hk@1.47.0#/Builtins.pkl"
+amends "package://github.com/jdx/hk/releases/download/v1.48.0/hk@1.48.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v1.48.0/hk@1.48.0#/Builtins.pkl"
 
 local linters = new Mapping<String, Step> {
   ["actionlint"] = Builtins.actionlint
@@ -18,12 +18,6 @@ local linters = new Mapping<String, Step> {
   ["ruff"] = Builtins.ruff
   ["ruff_format"] = Builtins.ruff_format
   ["rumdl"] = Builtins.rumdl
-  ["ryl"] = (Builtins.ryl) {
-    check = "ryl --config-data=\"extends: default\" {{ files }}"
-  }
-  ["ryl_markdown"] = (Builtins.ryl_markdown) {
-    check = "ryl --markdown --config-data=\"extends: default\" {{ files }}"
-  }
   ["shellcheck"] = Builtins.shellcheck
   ["shfmt"] = (Builtins.shfmt) {
     check = "shfmt -bn -ci --simplify {{ files }}"
@@ -41,20 +35,21 @@ local linters = new Mapping<String, Step> {
     exclude =
       List(
         "**/.bash*",
+        "**/.profile",
+        "**/dictionary.txt",
         "*.conf",
-        "*config",
         "*.cshtml",
         "*.css",
-        "**/dictionary.txt",
-        "*git*",
         "*.json*",
-        "*npmrc",
         "*.pkl",
-        "**/.profile",
+        "*.prettierrc*",
         "*.ps1",
         "*.sh",
         "*.sql",
         "*.yaml",
+        "*config",
+        "*git*",
+        "*npmrc",
       )
   }
   ["lychee"] = (Builtins.lychee) {
