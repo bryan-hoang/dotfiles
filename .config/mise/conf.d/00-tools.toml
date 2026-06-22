@@ -50,7 +50,6 @@ shfmt = "latest"
 starship = "latest"
 taplo = "latest"
 television = "latest"
-topgrade = "latest"
 tree-sitter = "latest"
 typos = "latest"
 usage = { version = "latest", minimum_release_age = "0d" }
