@@ -54,6 +54,7 @@
 			"grep *": "deny",
 			"sls *": "deny",
 			"type *": "deny",
+			"node -c *": "deny",
 			// `--target-branch` doesn't seem to work...
 			"az repos pr create *": "deny",
 		},

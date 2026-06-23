@@ -34,15 +34,17 @@ Personal dotfiles and environment constraints shared across machines.
     execute `fff_grep` or `fff_find_files` inside the `bash` Agent Tool.
   - CRITICAL: Fall back to the built-in `grep` Agent Tools if needed.
   - CRITICAL: DO NOT use Native Fallbacks (`grep`, `find`, `findstr`,
-    `Select-String`, `sls`, or `rg`) for Searching files or the codebase.
+    `Select-String`, `sls`, or `rg`) or inline language scripts (e.g.,
+    `node -e`, `python -c`) for Searching files or the codebase.
   - EXCEPTION: You may use `rg` ONLY for Filtering pipeline output in the shell
     (e.g., `cmd | rg`).
 - **File Reading**: ALWAYS use the built-in `read` Agent Tool.
-  - CRITICAL: DO NOT use Native Fallbacks (`cat`, `type`, or `Get-Content`) via
-    bash to read file contents. DO NOT attempt a Subshell Bypass by wrapping
-    them in `pwsh -Command` or `pwsh -c`. DO NOT use these tools to pipe into
-    other commands (e.g., NEVER do `cat file | cmd`). If a Shell Command needs
-    to process a file, pass the file path directly as an argument.
+  - CRITICAL: DO NOT use Native Fallbacks (`cat`, `type`, or `Get-Content`) or
+    inline language scripts (e.g., `node -e`, `python -c`) via bash to read file
+    contents. DO NOT attempt a Subshell Bypass by wrapping them in
+    `pwsh -Command` or `pwsh -c`. DO NOT use these tools to pipe into other
+    commands (e.g., NEVER do `cat file | cmd`). If a Shell Command needs to
+    process a file, pass the file path directly as an argument.
   - CRITICAL: DO NOT use Native Fallbacks (`sed`, `awk`, `head`, `tail`, `more`,
     or `less`) to print or read file contents. If you need to read specific line
     ranges, use the built-in `read` Agent Tool with the `offset` and `limit`
