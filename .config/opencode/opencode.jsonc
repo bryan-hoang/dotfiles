@@ -49,6 +49,7 @@
 			"rtk read *": "deny",
 			"echo *": "deny",
 			"New-Item *": "deny",
+			"Set-Content *": "deny",
 			// `grep` & friends...
 			"Select-String *": "deny",
 			"findstr *": "deny",
