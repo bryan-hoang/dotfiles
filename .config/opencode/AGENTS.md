@@ -38,6 +38,9 @@ Personal dotfiles and environment constraints shared across machines.
     `node -e`, `python -c`) for Searching files or the codebase.
   - EXCEPTION: You may use `rg` ONLY for Filtering pipeline output in the shell
     (e.g., `cmd | rg`).
+  - EXCEPTION: You may use the `fd` Shell Command ONLY when you need to search
+    for files in directories _outside_ the current workspace (since built-in
+    tools may be restricted).
 - **File Reading**: ALWAYS use the built-in `read` Agent Tool.
   - CRITICAL: DO NOT use Native Fallbacks (`cat`, `type`, or `Get-Content`) or
     inline language scripts (e.g., `node -e`, `python -c`) via bash to read file
@@ -53,7 +56,7 @@ Personal dotfiles and environment constraints shared across machines.
   Tools.
   - CRITICAL: DO NOT use Native Fallbacks (`New-Item`, `Set-Content`,
     `Out-File`, `Add-Content`, `echo`, or `cat` with redirection `>`) via bash
-    to create or modify files.
+    to create, modify, or append to files.
   - EXCEPTION: You may execute Shell Commands (like formatters, linters, or
     scaffolding tools like `aube create`) that modify files as part of their
     intended automated workflow.

@@ -43,6 +43,7 @@
 		"bash": {
 			"Get-Content *": "deny",
 			"cat *": "deny",
+			"Add-Content *": "deny",
 			"find *": "deny",
 			"pwsh -Command \"Get-Content *": "deny",
 			"rtk read *": "deny",
@@ -54,7 +55,7 @@
 			"grep *": "deny",
 			"sls *": "deny",
 			"type *": "deny",
-			"node -c *": "deny",
+			"node -e *": "deny",
 			// `--target-branch` doesn't seem to work...
 			"az repos pr create *": "deny",
 		},
