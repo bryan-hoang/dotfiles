@@ -20,11 +20,12 @@ Shell is `pwsh`. On Unix-like systems, it may be `bash` or `zsh`.
 
 ## Native Fallback
 
-A Shell Command (like `findstr`, `Select-String`, `cat`, `New-Item`) or an
-inline language script (like `node -e`, `python -c`) that an agent attempts to
-use to perform a task (like file searching or writing) when it should be using a
-dedicated Agent Tool instead. These are explicitly banned for specific operations
-to prevent bypassing constraints.
+A Shell Command (like `findstr`, `Select-String`, `cat`, `New-Item`), an inline
+language script (like `node -e`, `python -c`), or a .NET interop call (like
+`[System.IO.File]`) that an agent attempts to use to perform a task (like file
+searching or writing) when it should be using a dedicated Agent Tool instead.
+These are explicitly banned for specific operations to prevent bypassing
+constraints.
 
 ## Subshell Bypass
 

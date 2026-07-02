@@ -1,12 +1,12 @@
 [tool_alias]
-aube = "github:jdx/aube"
 dab = "dotnet:microsoft.dataapibuilder"
 fff-mcp = "github:dmtrKovalenko/fff"
+# Aqua backend doesn't support windows
 hunkdiff = "npm:hunkdiff"
 monaco = "github:dynatrace/dynatrace-configuration-as-code"
-op = "http:op"
 pac = "dotnet:Microsoft.PowerApps.CLI.Tool"
 rage = "github:str4d/rage"
+# Aqua backend doesn't support renaming the binary to `.exe` on windows
 sonarqube-cli = "http:sonarqube-cli"
 vscode-langservers-extracted = "npm:vscode-langservers-extracted"
 

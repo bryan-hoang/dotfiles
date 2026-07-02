@@ -2,7 +2,7 @@
 fnox-env = "https://github.com/jdx/mise-env-fnox"
 
 [tools]
-fnox = "latest"
+fnox = { version = "latest", minimum_release_age = "0d" }
 
 [env]
 _.fnox-env = { tools = true }

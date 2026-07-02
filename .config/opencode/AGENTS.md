@@ -42,12 +42,13 @@ Personal dotfiles and environment constraints shared across machines.
     for files in directories _outside_ the current workspace (since built-in
     tools may be restricted).
 - **File Reading**: ALWAYS use the built-in `read` Agent Tool.
-  - CRITICAL: DO NOT use Native Fallbacks (`cat`, `type`, or `Get-Content`) or
-    inline language scripts (e.g., `node -e`, `python -c`) via bash to read file
-    contents. DO NOT attempt a Subshell Bypass by wrapping them in
-    `pwsh -Command` or `pwsh -c`. DO NOT use these tools to pipe into other
-    commands (e.g., NEVER do `cat file | cmd`). If a Shell Command needs to
-    process a file, pass the file path directly as an argument.
+  - CRITICAL: DO NOT use Native Fallbacks (`cat`, `type`, or `Get-Content`),
+    inline language scripts (e.g., `node -e`, `python -c`), or .NET interop
+    (e.g., `[System.IO.File]::ReadAllText`) via bash to read file contents. DO
+    NOT attempt a Subshell Bypass by wrapping them in `pwsh -Command` or
+    `pwsh -c`. DO NOT use these tools to pipe into other commands (e.g., NEVER
+    do `cat file | cmd`). If a Shell Command needs to process a file, pass the
+    file path directly as an argument.
   - CRITICAL: DO NOT use Native Fallbacks (`sed`, `awk`, `head`, `tail`, `more`,
     or `less`) to print or read file contents. If you need to read specific line
     ranges, use the built-in `read` Agent Tool with the `offset` and `limit`
@@ -55,11 +56,15 @@ Personal dotfiles and environment constraints shared across machines.
 - **File Writing/Editing**: ALWAYS use the built-in `write` and `edit` Agent
   Tools.
   - CRITICAL: DO NOT use Native Fallbacks (`New-Item`, `Set-Content`,
-    `Out-File`, `Add-Content`, `echo`, or `cat` with redirection `>`) via bash
-    to create, modify, or append to files.
+    `Out-File`, `Add-Content`, `echo`, or `cat` with redirection `>`) or .NET
+    interop (e.g., `[System.IO.File]::WriteAllText`) via bash to create, modify,
+    or append to files.
   - EXCEPTION: You may execute Shell Commands (like formatters, linters, or
     scaffolding tools like `aube create`) that modify files as part of their
     intended automated workflow.
+  - EXCEPTION: If you need to perform complex regex-based string replacements across
+    files where the `edit` tool is too brittle, you may use the `sd` (search and
+    replace) Shell Command.
 
 ## Agent Skills
 
