@@ -1,3 +1,4 @@
+globalBinDir = ["~/.local/bin"]
 jailBuildExclusions = ["bun", "core-js"]
 minimumReleaseAge = 10080
 minimumReleaseAgeExclude = ["chrome-devtools-mcp"]
