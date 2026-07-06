@@ -20,7 +20,7 @@
 		"exa": {
 			"type": "remote",
 			"url": "https://mcp.exa.ai/mcp",
-			"enabled": true,
+			"enabled": false,
 		},
 		"fff": {
 			"type": "local",
