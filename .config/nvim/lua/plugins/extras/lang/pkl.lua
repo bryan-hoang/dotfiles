@@ -5,12 +5,15 @@ return {
 		dependencies = {
 			{
 				"nvim-treesitter/nvim-treesitter",
-				{
-					"mason-org/mason.nvim",
-					opts = {
-						ensure_installed = {
-							"pkl-lsp",
-						},
+				build = function(_)
+					vim.cmd("TSUpdate")
+				end,
+			},
+			{
+				"mason-org/mason.nvim",
+				opts = {
+					ensure_installed = {
+						"pkl-lsp",
 					},
 				},
 			},
