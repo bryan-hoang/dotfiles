@@ -245,13 +245,6 @@ export TMUX_PLUGIN_MANAGER_PATH="$XDG_DATA_HOME"/tmux/plugins
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 mkdir -p "$(dirname "$WINEPREFIX")"
 
-export MINIKUBE_HOME="$XDG_DATA_HOME"/minikube
-export KUBECONFIG="$XDG_CONFIG_HOME"/kube/kube.yaml
-export KUBECACHEDIR="$XDG_CACHE_HOME"/kube
-
-export TERMINFO="$XDG_DATA_HOME"/terminfo
-export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/etc/terminfo:/usr/share/terminfo
-
 export AZURE_CONFIG_DIR="$XDG_DATA_HOME"/azure
 export BACKUPS_DIR="$XDG_DATA_HOME"/backups
 export BAT_THEME='Catppuccin Mocha'
@@ -268,11 +261,12 @@ export DCP_HOMEDIR="$XDG_DATA_HOME"
 export DISABLE_AUTO_UPDATE=true
 export FONT_MONO='BerkeleyMono Nerd Font Mono'
 export GRIT_USER_CONFIG="$XDG_CONFIG_HOME"/grit
+export HK_PKL_BACKEND='pkl'
 export JULIA_DEPOT_PATH="$XDG_DATA_HOME"/julia:"$JULIA_DEPOT_PATH"
-# https://doc.rust-lang.org/stable/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-build-scripts
-NUM_JOBS="$(nproc)"
-export NUM_JOBS
+export KUBECACHEDIR="$XDG_CACHE_HOME"/kube
+export KUBECONFIG="$XDG_CONFIG_HOME"/kube/kube.yaml
 export MAKEFLAGS="--jobs $NUM_JOBS"
+export MINIKUBE_HOME="$XDG_DATA_HOME"/minikube
 export MYPY_CACHE_DIR="$XDG_CACHE_HOME"/mypy
 export NLTK_DATA="$XDG_CACHE_HOME/nltk"
 export NUGET_PACKAGES="$XDG_CACHE_HOME"/nuget-packages
@@ -284,6 +278,8 @@ export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR}/ssh-agent.socket"
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME"/starship/starship.toml
 export SUDO_PROMPT='[sudo] password for %p@%H to run as %U: '
 export TAPLO_CONFIG="$XDG_CONFIG_HOME"/taplo/.taplo.toml
+export TERMINFO="$XDG_DATA_HOME"/terminfo
+export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/etc/terminfo:/usr/share/terminfo
 export WARP_THEMES_DIR="$XDG_DATA_HOME"/warp-terminal/themes
 
 # Mise
@@ -353,3 +349,6 @@ export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=0
 export DOTNET_CLI_HOME="$XDG_DATA_HOME"/dotnet
 # https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_update_notifications?view=powershell-7.5#manage-notification-behavior
 export POWERSHELL_UPDATECHECK=LTS
+# https://doc.rust-lang.org/stable/cargo/reference/environment-variables.html#environment-variables-cargo-sets-for-build-scripts
+NUM_JOBS="$(nproc)"
+export NUM_JOBS
