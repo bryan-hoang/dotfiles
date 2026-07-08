@@ -40,6 +40,7 @@ Set-UserEnvVar 'NUGET_PACKAGES' $(Join-Path $env:XDG_CACHE_HOME 'nuget-packages'
 Set-UserEnvVar 'NUGET_PLUGINS_CACHE_PATH' $(Join-Path $env:XDG_CACHE_HOME 'nuget-plugins')
 Set-UserEnvVar 'OMNISHARPHOME' $(Join-Path $env:XDG_CONFIG_HOME 'omnisharp')
 Set-UserEnvVar 'PNPM_HOME' $(Join-Path $env:XDG_DATA_HOME 'pnpm')
+Set-UserEnvVar 'RUSTC_WRAPPER' 'sccache'
 Set-UserEnvVar 'RUSTUP_HOME' $(Join-Path $env:XDG_DATA_HOME 'rustup')
 Set-UserEnvVar 'RUSTUP_TOOLCHAIN' 'nightly'
 Set-UserEnvVar 'STARSHIP_CONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'starship' 'starship.toml')
@@ -82,7 +83,6 @@ if ($IsWindows) {
 Add-UserPath $env:XDG_BIN_HOME
 Add-UserPath $(Join-Path $env:XDG_DATA_HOME 'mise' 'shims')
 Add-UserPath $(Join-Path $env:CARGO_HOME 'bin')
-Add-UserPath $(Join-Path $env:PNPM_HOME 'bin')
 Add-UserPath $(Join-Path $env:XDG_DATA_HOME 'npm')
 Add-UserPath $(Join-Path $env:XDG_DATA_HOME 'nvim-data' 'mason' 'bin')
 

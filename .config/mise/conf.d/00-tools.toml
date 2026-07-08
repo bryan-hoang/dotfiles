@@ -20,6 +20,8 @@ skills = "npm:skills"
 television = "cargo:television"
 tspin = "cargo:tailspin"
 vscode-lsp = "npm:vscode-langservers-extracted"
+# `pipx` backend doesn't work on windows
+azure-cli = "github:azure/azure-cli"
 # Built-in alias doesn't work on windows
 gs = "go:github.com/sigstore/gitsign"
 # Aqua backend doesn't support windows
