@@ -1,14 +1,29 @@
 [tool_alias]
+cargo-cache = "cargo:cargo-cache"
+cocogitto = "cargo:cocogitto"
 dab = "dotnet:microsoft.dataapibuilder"
+delta = "cargo:git-delta"
+diff-pdf = "github:vslavik/diff-pdf"
+dtctl = "github:dynatrace-oss/dtctl"
+ec = "aqua:editorconfig-checker/editorconfig-checker"
 fff-mcp = "github:dmtrKovalenko/fff"
-# Aqua backend doesn't support windows
-hunkdiff = "npm:hunkdiff"
+gfr = "pipx:git-filter-repo"
+git-absorb = "cargo:git-absorb"
+git-grab = "cargo:git-grab"
+lychee = "cargo:lychee"
 monaco = "github:dynatrace/dynatrace-configuration-as-code"
 pac = "dotnet:Microsoft.PowerApps.CLI.Tool"
 rage = "github:str4d/rage"
+rtk = "github:rtk-ai/rtk"
+sccache = "cargo:sccache"
+television = "cargo:television"
+vscode-lsp = "npm:vscode-langservers-extracted"
+# Built-in alias doesn't work on windows
+gs = "go:github.com/sigstore/gitsign"
+# Aqua backend doesn't support windows
+hunkdiff = "npm:hunkdiff"
 # Aqua backend doesn't support renaming the binary to `.exe` on windows
 sonarqube-cli = "http:sonarqube-cli"
-vscode-langservers-extracted = "npm:vscode-langservers-extracted"
 
 [tools]
 atuin = "latest"
@@ -16,18 +31,16 @@ aube = { version = "latest", minimum_release_age = "0d" }
 betterleaks = "latest"
 bun = "latest"
 cargo-binstall = "latest"
-"cargo:cargo-cache" = "latest"
-"cargo:git-absorb" = "latest"
-"cargo:git-grab" = "latest"
+cargo-cache = "latest"
 cocogitto = "latest"
 delta = "latest"
-editorconfig-checker = "latest"
+ec = "latest"
+gfr = "latest"
 gh = "latest"
-git-filter-repo = "latest"
-"github:rtk-ai/rtk" = "latest"
-"github:vslavik/diff-pdf" = "latest"
+git-absorb = "latest"
+git-grab = "latest"
 go = "latest"
-"go:github.com/sigstore/gitsign" = "latest"
+gs = "latest"
 harper-cli = "latest"
 harper-ls = "latest"
 hk = { version = "latest", minimum_release_age = "1d" }
@@ -42,8 +55,8 @@ oxlint = "latest"
 pkl = "latest"
 pnpm = { version = "latest", minimum_release_age = "0d" }
 rmz = "latest"
+rtk = "latest"
 rumdl = "latest"
-rust = "nightly"
 sccache = "latest"
 shellcheck = "latest"
 shfmt = "latest"
@@ -55,8 +68,9 @@ typos = "latest"
 usage = { version = "latest", minimum_release_age = "0d" }
 uv = "latest"
 zoxide = "latest"
+# diff-pdf = "latest"
 
-[tools.vscode-langservers-extracted]
+[tools.vscode-lsp]
 aube_args = "--allow-build=core-js"
 version = "latest"
 
