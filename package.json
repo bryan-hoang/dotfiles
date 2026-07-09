@@ -5,11 +5,9 @@
 		"prepare": "hk install --silent"
 	},
 	"devDependencies": {
-		"@stylistic/stylelint-config": "5.0.0",
 		"debug": "4.4.3",
 		"defu": "6.1.7",
 		"micromatch": "4.0.8",
-		"stylelint": "17.12.0",
 		"typescript": "6.0.3",
 		"valibot": "1.4.0"
 	}
