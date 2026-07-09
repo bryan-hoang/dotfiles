@@ -1,6 +1,5 @@
 globalBinDir = ["~/.local/bin"]
-jailBuildExclusions = ["bun", "core-js"]
-minimumReleaseAge = 10080
-minimumReleaseAgeExclude = ["chrome-devtools-mcp"]
+jailBuildExclusions = ["bun", "core-js", "@nubjs/nub"]
+minimumReleaseAgeExclude = []
 paranoid = true
 trustPolicyExclude = []

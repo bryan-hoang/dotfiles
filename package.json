@@ -1,14 +1,14 @@
 {
-	"private": true,
-	"type": "module",
-	"scripts": {
-		"prepare": "hk install --silent"
-	},
-	"devDependencies": {
-		"debug": "4.4.3",
-		"defu": "6.1.7",
-		"micromatch": "4.0.8",
-		"typescript": "6.0.3",
-		"valibot": "1.4.0"
-	}
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prepare": "hk install --silent"
+  },
+  "devDependencies": {
+    "debug": "4.4.3",
+    "defu": "6.1.7",
+    "micromatch": "4.0.8",
+    "typescript": "7.0.2",
+    "valibot": "1.4.0"
+  }
 }
