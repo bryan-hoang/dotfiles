@@ -34,6 +34,13 @@ The act of invoking a new shell instance (e.g., `pwsh -c`, `pwsh -Command`,
 Fallbacks, attempting to hide the violation from static rule checks. This is
 strictly prohibited.
 
+## Command Interceptor
+
+A plugin (like `rtk` via the `tool.execute.before` hook) that silently
+intercepts and rewrites an agent's `bash` payload _before_ execution in the Host
+Shell (e.g., rewriting `npx prettier` to `rtk prettier`). Agents must be aware
+that what they execute may be mutated in-flight.
+
 ## Searching
 
 The act of scanning the file system (directories or file contents on disk) for

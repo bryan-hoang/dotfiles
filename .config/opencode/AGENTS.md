@@ -14,6 +14,12 @@ Personal dotfiles and environment constraints shared across machines.
   the Host Shell is `pwsh` (e.g., on `win32`), you MUST use PowerShell syntax,
   quoting, and escaping rules (e.g., backticks, \`, for escaping, `&` call
   operator), completely ignoring the `bash` name.
+- **Command Interceptors (Rewrite Shock)**: Plugins (like `rtk`) may intercept
+  and rewrite your shell commands via `tool.execute.before` (e.g., `npx` ->
+  `rtk`). If a command fails and the error output shows a command you did _not_
+  write, recognize that it was intercepted. DO NOT enter an infinite loop
+  retrying your original command. Analyze the failure of the _rewritten_ command
+  instead.
 - **Dotfiles Repo**: Root (`~`/`$HOME`) is a dotfiles git repo. Exercise caution
   with git commands here.
 - **Cloned Repos**: Located in `src/<host>/` (e.g., `src/github.com/`).
@@ -62,9 +68,9 @@ Personal dotfiles and environment constraints shared across machines.
   - EXCEPTION: You may execute Shell Commands (like formatters, linters, or
     scaffolding tools like `aube create`) that modify files as part of their
     intended automated workflow.
-  - EXCEPTION: If you need to perform complex regex-based string replacements across
-    files where the `edit` tool is too brittle, you may use the `sd` (search and
-    replace) Shell Command.
+  - EXCEPTION: If you need to perform complex regex-based string replacements
+    across files where the `edit` tool is too brittle, you may use the `sd`
+    (search and replace) Shell Command.
 
 ## Agent Skills
 
