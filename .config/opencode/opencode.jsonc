@@ -50,6 +50,8 @@
 			"rtk git push *": "deny",
 			"cat *": "deny",
 			"sed *": "deny",
+			"rtk perl *": "deny",
+			"rtk sed *": "deny",
 			"rtk cat *": "deny",
 			"rtk awk *": "deny",
 			"find *": "deny",
