@@ -1,7 +1,7 @@
 [tool_alias]
 box = "http:command-box"
 cargo-cache = "cargo:cargo-cache"
-cflint = "github:cflint/cflint"
+cflint = "github:cfmleditor/cflint"
 cocogitto = "cargo:cocogitto"
 dab = "dotnet:microsoft.dataapibuilder"
 delta = "cargo:git-delta"

@@ -1,5 +1,6 @@
 ASK
 ATC
+CD
 Catppuccin
 ColdFusion
 DCP
@@ -31,6 +32,7 @@ bundler
 endregion
 eslint
 formatter
+minification
 mise
 shellcheck
 tty

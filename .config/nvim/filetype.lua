@@ -12,7 +12,7 @@ set_file_associations({
 	},
 	i3config = { ".*/i3/conf%.d/.*%.conf" },
 	ini = { ".*/%.config/redshift%.conf" },
-	json = { ".*%.vil", ".swcrc" },
+	json = { ".*%.vil", ".swcrc", ".cflintrc" },
 	jsonc = { ".*/%.config/markdownlint/config", ".*/%.vscode/.*%.json" },
 	just = { ".*justfile" },
 	nginx = { "/etc/nginx/.*/.*%.conf" },
