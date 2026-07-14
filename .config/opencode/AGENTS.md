@@ -34,6 +34,9 @@ Personal dotfiles and environment constraints shared across machines.
     bash instead of text-search Agent Tools (`fff_grep`, `grep`). For modifying
     JSON, prefer the `edit` Agent Tool for simple string replacements. For
     complex structural changes, use `jaq` or read/modify/write the file.
+  - **HTML Processing**: For extracting or cleaning up HTML content (e.g.,
+    parsing HTML descriptions embedded in JSON payloads from APIs like
+    `az boards`), ALWAYS use `htmlq` via bash.
 - **Search/Grep**: ALWAYS use the custom `fff` Agent Tools (`fff_find_files`,
   `fff_grep`, `fff_multi_grep`).
   - CRITICAL: These are built-in Agent Tools, NOT Shell Commands. NEVER try to

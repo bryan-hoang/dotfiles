@@ -47,7 +47,8 @@
 	"plugin": ["@dietrichgebert/ponytail"],
 	"permission": {
 		"bash": {
-			"rtk git push *": "deny",
+			"rtk git commit *": "ask",
+			"rtk git push *": "ask",
 			"cat *": "deny",
 			"sed *": "deny",
 			"rtk perl *": "deny",

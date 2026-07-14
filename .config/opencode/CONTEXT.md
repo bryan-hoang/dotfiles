@@ -50,7 +50,7 @@ for searching is prohibited.
 
 ## Filtering
 
-The act of narrowing down the standard output (`stdout`) of a legitimate Shell
-Command (like `git log`, `docker ps`) via a pipeline operator (`|`). This is the
-_only_ context where Shell Commands like `rg` are permitted. Filtering is
-distinct from Searching.
+The act of narrowing down or structurally extracting the standard output
+(`stdout`) of a legitimate Shell Command via a pipeline operator (`|`). Shell
+Commands like `rg`, `jaq`, and `htmlq` are permitted in this context. Filtering
+is distinct from Searching.
