@@ -1,5 +1,5 @@
 globalBinDir = ["~/.local/bin"]
-jailBuildExclusions = ["bun", "core-js", "@nubjs/nub"]
+jailBuildExclusions = ["bun", "core-js", "@nubjs/nub", "@azure-devops/mcp"]
 minimumReleaseAgeExclude = []
 paranoid = true
 trustPolicyExclude = []

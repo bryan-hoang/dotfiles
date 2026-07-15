@@ -1,4 +1,5 @@
 [tool_alias]
+ado-mcp = "npm:@azure-devops/mcp"
 box = "http:command-box"
 cargo-cache = "cargo:cargo-cache"
 cflint = "github:cfmleditor/cflint"
@@ -43,7 +44,6 @@ cargo-cache = "latest"
 cocogitto = "latest"
 delta = "latest"
 ec = "latest"
-gfr = "latest"
 gh = "latest"
 git-absorb = "latest"
 git-grab = "latest"
@@ -51,7 +51,7 @@ go = "latest"
 gs = "latest"
 harper-cli = "latest"
 harper-ls = "latest"
-hk = { version = "latest", minimum_release_age = "1d" }
+hk = { version = "latest", minimum_release_age = "0d" }
 jaq = "latest"
 lychee = "latest"
 node = "latest"
@@ -77,7 +77,6 @@ typos = "latest"
 usage = { version = "latest", minimum_release_age = "0d" }
 uv = "latest"
 zoxide = "latest"
-# diff-pdf = "latest"
 
 [tools.vscode-lsp]
 aube_args = "--allow-build=core-js"

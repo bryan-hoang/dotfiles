@@ -28,7 +28,6 @@ Set-UserEnvVar 'GLAZEWM_CONFIG_PATH' $(Join-Path $env:XDG_CONFIG_HOME 'glazewm' 
 Set-UserEnvVar 'GOPATH' $(Join-Path $env:XDG_DATA_HOME 'go')
 Set-UserEnvVar 'GRADLE_USER_HOME' $(Join-Path $env:XDG_DATA_HOME 'gradle')
 Set-UserEnvVar 'HK_MISE' '1'
-Set-UserEnvVar 'HK_PKL_BACKEND' 'pkl'
 Set-UserEnvVar 'KOMOREBI_CONFIG_HOME' $(Join-Path $env:XDG_CONFIG_HOME 'komorebi')
 Set-UserEnvVar 'KUBECACHEDIR' $(Join-Path $env:XDG_CACHE_HOME 'kube')
 Set-UserEnvVar 'KUBECONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'kube' 'kube.yaml')
