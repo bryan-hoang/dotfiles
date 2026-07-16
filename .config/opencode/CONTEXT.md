@@ -52,5 +52,5 @@ for searching is prohibited.
 
 The act of narrowing down or structurally extracting the standard output
 (`stdout`) of a legitimate Shell Command via a pipeline operator (`|`). Shell
-Commands like `rg`, `jaq`, and `htmlq` are permitted in this context. Filtering
+Commands like `rg`, `jaq`, `yq`, and `htmlq` are permitted in this context. Filtering
 is distinct from Searching.

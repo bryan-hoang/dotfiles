@@ -31,9 +31,13 @@ Personal dotfiles and environment constraints shared across machines.
 - **CLI Preferences**: Use `git filter-repo` (not `filter-branch`).
   - **JSON Processing**: For structural parsing, reading, or extracting specific
     fields from JSON files, ALWAYS use `jaq` (another `jq` implementation) via
-    bash instead of text-search Agent Tools (`fff_grep`, `grep`). For modifying
-    JSON, prefer the `edit` Agent Tool for simple string replacements. For
-    complex structural changes, use `jaq` or read/modify/write the file.
+    bash instead of text-search Agent Tools (`fff_grep`, `grep`). DO NOT use
+    `jaq` for raw text search (`jaq -R`). For modifying JSON, prefer the `edit`
+    Agent Tool for simple string replacements. For complex structural changes,
+    use `jaq` or read/modify/write the file.
+  - **YAML Processing**: For structural parsing, reading, or extracting specific
+    fields from YAML files, ALWAYS use `yq` via bash instead of text-search
+    Agent Tools (`fff_grep`, `grep`).
   - **HTML Processing**: For extracting or cleaning up HTML content (e.g.,
     parsing HTML descriptions embedded in JSON payloads from APIs like
     `az boards`), ALWAYS use `htmlq` via bash.

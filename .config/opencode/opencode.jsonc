@@ -47,8 +47,6 @@
 	"plugin": ["@dietrichgebert/ponytail"],
 	"permission": {
 		"bash": {
-			"rtk git commit *": "ask",
-			"rtk git push *": "ask",
 			"cat *": "deny",
 			"sed *": "deny",
 			"rtk perl *": "deny",
@@ -66,14 +64,20 @@
 			"echo *": "deny",
 			"New-Item *": "deny",
 			"Set-Content *": "deny",
+			// Ask for commands I want to double check first.
+			"rtk git commit *": "ask",
+			"rtk git push *": "ask",
+			"az *": "ask",
+			"kubectl *": "ask",
+			"sqlcmd *": "ask",
 			// `grep` & friends...
 			"Select-String *": "deny",
 			"findstr *": "deny",
 			"grep *": "deny",
-			"rtk grep *": "deny",
 			"sls *": "deny",
 			"type *": "deny",
 			"node -e *": "deny",
+			"jaq -R *": "deny",
 			// `--target-branch` doesn't seem to work...
 			"az repos pr create *": "deny",
 		},
