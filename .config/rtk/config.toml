@@ -28,7 +28,7 @@ mode = "failures"
 enabled = false
 
 [hooks]
-exclude_commands = ["grep", "rg"]
+exclude_commands = ["git diff"]
 transparent_prefixes = []
 
 [limits]
