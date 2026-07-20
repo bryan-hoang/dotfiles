@@ -1,0 +1,17 @@
+onboarding = false
+
+[ui.toast]
+delivery = "system"
+
+[ui]
+show_agent_labels_on_pane_borders = true
+
+[experimental]
+pane_history = true
+
+[terminal]
+shell_mode = "auto"
+
+[theme]
+auto_switch = false
+name = "catppuccin"
