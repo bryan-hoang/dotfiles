@@ -67,13 +67,17 @@
 			// Ask for commands I want to double check first.
 			"rtk git commit *": "ask",
 			"rtk git push *": "ask",
+			"rtk git pull *": "ask",
 			"az *": "ask",
 			"kubectl *": "ask",
 			"sqlcmd *": "ask",
 			// `grep` & friends...
+			"grep *": "deny",
+			"rtk grep *": "deny",
+			"rg *": "allow",
+			"rtk rg *": "allow",
 			"Select-String *": "deny",
 			"findstr *": "deny",
-			"grep *": "deny",
 			"sls *": "deny",
 			"type *": "deny",
 			"node -e *": "deny",
