@@ -10,7 +10,7 @@ if (
 	exit
 }
 
-foreach ($noun in 'Functions', 'Environment', 'Completions', 'Aliases', 'Machine') {
+foreach ($noun in 'Functions', 'Environment', 'Preferences', 'Completions', 'Aliases', 'Machine') {
 	$script = Join-Path $HOME '.config' 'powershell' "Initialize-$noun.ps1"
 	if (!(Test-Path -Path $script)) {
 		continue
@@ -18,22 +18,6 @@ foreach ($noun in 'Functions', 'Environment', 'Completions', 'Aliases', 'Machine
 
 	. $script
 }
-
-$PSReadLineOptions = @{
-	EditMode = "Emacs"
-	HistorySearchCursorMovesToEnd = $true
-	MaximumHistoryCount = [Math]::Pow(2, 14)
-	# https://learn.microsoft.com/en-us/powershell/module/psreadline/about/about_psreadline?view=powershell-7.5#enable-predictive-intellisense
-	PredictionSource = "History"
-	# Adding `_` as a delimiter.
-	# https://learn.microsoft.com/en-us/powershell/module/psreadline/set-psreadlineoption?view=powershell-7.5#-worddelimiters
-	WordDelimiters = ';:,.[]{}()/\|^&*-=+''"---_@'
-}
-Set-PSReadLineOption @PSReadLineOptions
-
-# I hecking love having a consistent editing mode.
-Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
-Set-PSReadlineKeyHandler -Key Ctrl+w -Function BackwardKillWord
 
 # Activate/init scripts
 

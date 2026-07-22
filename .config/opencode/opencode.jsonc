@@ -68,6 +68,7 @@
 			"rtk git commit *": "ask",
 			"rtk git push *": "ask",
 			"rtk git pull *": "ask",
+			"rtk git reset *": "ask",
 			"az *": "ask",
 			"kubectl *": "ask",
 			"sqlcmd *": "ask",

@@ -3,7 +3,15 @@ return {
 		"neovim/nvim-lspconfig",
 		opts = {
 			servers = {
-				powershell_es = {},
+				powershell_es = {
+					settings = {
+						powershell = {
+							codeFormatting = {
+								preset = "OTBS",
+							},
+						},
+					},
+				},
 			},
 		},
 	},

@@ -9,13 +9,10 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[COMMIT_EDITMSG]
+[*.{py,yml,yaml,kdl,hjson,typ,pkl,bicepparam}]
 indent_style = space
 
-[*.{py,yml,yaml,kdl,hjson,typ,pkl}]
-indent_style = space
-
-[{*gemrc,CMakeLists.txt}]
+[{COMMIT_EDITMSG,*gemrc,CMakeLists.txt}]
 indent_style = space
 
 [*.{py,kdl}]
