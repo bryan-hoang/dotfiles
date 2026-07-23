@@ -25,6 +25,7 @@ sqlcmd = "github:microsoft/go-sqlcmd"
 television = "cargo:television"
 tspin = "cargo:tailspin"
 vscode-lsp = "npm:vscode-langservers-extracted"
+xmlstarlet = "http:xmlstarlet"
 # `pipx` backend doesn't work on windows
 azure-cli = "github:azure/azure-cli"
 # Built-in alias doesn't work on windows
@@ -78,10 +79,6 @@ usage = { version = "latest", minimum_release_age = "0d" }
 uv = "latest"
 zoxide = "latest"
 
-[tools.vscode-lsp]
-aube_args = "--allow-build=core-js"
-version = "latest"
-
 [tools.fff-mcp]
 minimum_release_age = "1d"
 version = "latest"
@@ -92,3 +89,16 @@ windows-x64 = { asset_pattern = 'fff-mcp-{{arch(x64="x86_64")}}-pc-{{os()}}-msvc
 [tools.hunkdiff]
 aube_args = "--allow-build=bun"
 version = "latest"
+
+[tools.vscode-lsp]
+aube_args = "--allow-build=core-js"
+version = "latest"
+
+# [tools.xmlstarlet]
+# version = "latest"
+# version_list_url = 'https://sourceforge.net/projects/xmlstar/rss'
+# # Regex to capture the exact version group from the RSS titles
+# version_regex = '/xmlstarlet/(\d+\.\d+\.\d+)/xmlstarlet'
+#
+# [tools.xmlstarlet.platforms]
+# windows-x64 = { url = 'https://netactuate.dl.sourceforge.net/project/xmlstar/xmlstarlet/{{version}}/xmlstarlet-{{version}}-win32.zip' }
