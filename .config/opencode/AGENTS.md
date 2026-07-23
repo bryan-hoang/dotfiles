@@ -34,7 +34,9 @@ Personal dotfiles and environment constraints shared across machines.
     bash instead of text-search Agent Tools (`fff_grep`, `grep`). DO NOT use
     `jaq` for raw text search (`jaq -R`). For modifying JSON, prefer the `edit`
     Agent Tool for simple string replacements. For complex structural changes,
-    use `jaq` or read/modify/write the file.
+    use `jaq` or read/modify/write the file. When modifying with `jaq`, ALWAYS
+    use `--in-place` (or `-i`) and match the original formatting by explicitly
+    passing `--indent` or `--tab`.
   - **YAML Processing**: For structural parsing, reading, or extracting specific
     fields from YAML files, ALWAYS use `yq` via bash instead of text-search
     Agent Tools (`fff_grep`, `grep`).
@@ -75,9 +77,10 @@ Personal dotfiles and environment constraints shared across machines.
   - EXCEPTION: You may execute Shell Commands (like formatters, linters, or
     scaffolding tools like `aube create`) that modify files as part of their
     intended automated workflow.
-  - EXCEPTION: If you need to perform complex regex-based string replacements
-    across files where the `edit` tool is too brittle, you may use the `sd`
-    (search and replace) Shell Command.
+  - EXCEPTION: If you need to perform complex structural or regex-based
+    modifications across files where the `edit` tool is too brittle, you may use
+    dedicated CLI tools like `sd` (for string replace) or `jaq -i` (for JSON
+    structure).
 
 ## Agent Skills
 
