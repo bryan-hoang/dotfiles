@@ -48,6 +48,12 @@ information. This MUST be done using the custom `fff` Agent Tools (like
 `fff_grep`, `fff_find_files`) or built-in fallback tools. Using Shell Commands
 for searching is prohibited.
 
+## Structural XML Operation
+
+An inspection that depends on XML semantics, such as selecting elements or
+attributes, resolving namespaces, or validating document structure. It is
+distinct from Searching for literal text that happens to appear in an XML file.
+
 ## Filtering
 
 The act of narrowing down or structurally extracting the standard output

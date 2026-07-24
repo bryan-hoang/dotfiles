@@ -94,11 +94,13 @@ version = "latest"
 aube_args = "--allow-build=core-js"
 version = "latest"
 
-# [tools.xmlstarlet]
-# version = "latest"
-# version_list_url = 'https://sourceforge.net/projects/xmlstar/rss'
-# # Regex to capture the exact version group from the RSS titles
-# version_regex = '/xmlstarlet/(\d+\.\d+\.\d+)/xmlstarlet'
-#
-# [tools.xmlstarlet.platforms]
-# windows-x64 = { url = 'https://netactuate.dl.sourceforge.net/project/xmlstar/xmlstarlet/{{version}}/xmlstarlet-{{version}}-win32.zip' }
+[tools.xmlstarlet]
+rename_exe = "xmlstarlet.exe"
+version = "latest"
+version_expr = "sortVersions(versions)"
+version_list_url = 'https://sourceforge.net/projects/xmlstar/rss'
+version_regex = '/xmlstarlet/(\d+\.\d+\.\d+)/xmlstarlet-\d+\.\d+\.\d+-win32\.zip'
+
+[tools.xmlstarlet.platforms.windows-x64]
+format = "zip"
+url = 'https://sourceforge.net/projects/xmlstar/files/xmlstarlet/{{version}}/xmlstarlet-{{version}}-win32.zip/download'

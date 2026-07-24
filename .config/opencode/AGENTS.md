@@ -40,6 +40,11 @@ Personal dotfiles and environment constraints shared across machines.
   - **YAML Processing**: For structural parsing, reading, or extracting specific
     fields from YAML files, ALWAYS use `yq` via bash instead of text-search
     Agent Tools (`fff_grep`, `grep`).
+  - **XML Processing**: For structural reading or querying XML, ALWAYS use
+    `xmlstarlet` via bash instead of text-search Agent Tools, regardless of file
+    size. Literal text searches and malformed XML diagnosis remain Searching;
+    use Agent Tools. If `xmlstarlet` cannot process valid XML, report the
+    limitation instead of approximating a structural query with text search.
   - **HTML Processing**: For extracting or cleaning up HTML content (e.g.,
     parsing HTML descriptions embedded in JSON payloads from APIs like
     `az boards`), ALWAYS use `htmlq` via bash.
