@@ -24,6 +24,7 @@ skills = "npm:skills"
 sqlcmd = "github:microsoft/go-sqlcmd"
 television = "cargo:television"
 tspin = "cargo:tailspin"
+vp = "github:voidzero-dev/vite-plus"
 vscode-lsp = "npm:vscode-langservers-extracted"
 xmlstarlet = "http:xmlstarlet"
 # `pipx` backend doesn't work on windows
@@ -77,6 +78,7 @@ tspin = "latest"
 typos = "latest"
 usage = { version = "latest", minimum_release_age = "0d" }
 uv = "latest"
+yq = "latest"
 zoxide = "latest"
 
 [tools.fff-mcp]

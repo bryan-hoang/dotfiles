@@ -88,6 +88,7 @@
 		},
 		"external_directory": {
 			"~/AppData/Local/Temp/opencode/**": "allow",
+			"~/.config/opencode/**": "allow",
 		},
 	},
 }

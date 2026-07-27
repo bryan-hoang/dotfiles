@@ -1,5 +1,4 @@
 enableGlobalVirtualStore: true
-minimumReleaseAge: 10080
 savePrefix: ""
 trustPolicy: no-downgrade
 updateNotifier: false
