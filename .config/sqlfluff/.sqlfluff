@@ -5,15 +5,27 @@ dialect = tsql
 exclude_rules = ambiguous.column_count, structure.column_order
 large_file_skip_byte_limit = 65536
 max_line_length = 120
+processes = -1
+warn_unused_ignores = False
 
 [sqlfluff:indentation]
 # See https://docs.sqlfluff.com/en/stable/perma/indent_locations.html
 indent_unit = tab
-tab_space_size = 4
+
+[sqlfluff:rules:capitalisation.functions]
+capitalisation_policy = upper
 
 [sqlfluff:rules:capitalisation.identifiers]
-# Unquoted identifiers
-extended_capitalisation_policy = upper
+capitalisation_policy = consistent
+
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = upper
+
+[sqlfluff:rules:capitalisation.literals]
+capitalisation_policy = upper
+
+[sqlfluff:rules:capitalisation.types]
+capitalisation_policy = upper
 
 [sqlfluff:rules:convention.terminator]
 require_final_semicolon = True
