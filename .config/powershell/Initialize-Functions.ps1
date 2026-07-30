@@ -48,17 +48,13 @@ function Add-UserPath($PathToAdd) {
 function Test-CommandExists($command) {
 	$oldPreference = $ErrorActionPreference
 	$ErrorActionPreference = 'stop'
-	try
-	{
-		if (Get-Command $command)
-		{
+	try {
+		if (Get-Command $command) {
 			RETURN $true
 		}
-	} Catch
-	{
+	} Catch {
 		RETURN $false
-	} Finally
-	{
+	} Finally {
 		$ErrorActionPreference=$oldPreference
 	}
 }
@@ -67,7 +63,7 @@ function Find-WslVhdx {
 	param (
 		$DistributionName
 	)
-	(Get-ChildItem -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss | Where-Object { $_.GetValue("DistributionName") -eq $DistributionName }).GetValue("BasePath") + "\ext4.vhdx"
+	(Get-ChildItem -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss | Where-Object { $_.GetValue("DistributionName") -eq $DistributionName	}).GetValue("BasePath") + "\ext4.vhdx"
 }
 
 if (Test-CommandExists yazi.exe) {
@@ -91,11 +87,15 @@ if (Test-CommandExists yazi.exe) {
 # 	{
 # 		box.exe -commandbox_home="$(Join-Path $env:XDG_DATA_HOME 'commandbox')" @args
 # 	}
-# }
+#	}
 
-if (Test-CommandExists lsd) {
+if (Test-CommandExists eza) {
 	function ll {
-		lsd --long --almost-all --classify --group-directories-first $args
+		eza --long --almost-all --classify --group-directories-first `
+			--icons=always `
+			--hyperlink=always `
+			--time-style=long-iso `
+			$args
 	}
 }
 
@@ -104,29 +104,55 @@ if (Test-CommandExists sfw) {
 	# Socket Firewall Function Wrappers
 
 	# JavaScript/TypeScript
-	function npm { sfw npm @args }
-	function yarn { sfw yarn @args }
-	function pnpm { sfw pnpm @args }
+	function npm {
+		sfw npm @args
+	}
+	function yarn {
+		sfw yarn @args
+	}
+	function pnpm {
+		sfw pnpm @args
+	}
 
 	# Python
-	function pip { sfw pip @args }
-	function pip3 { sfw pip3 @args }
-	function uv { sfw uv @args }
+	function pip {
+		sfw pip @args
+	}
+	function pip3 {
+		sfw pip3 @args
+	}
+	function uv {
+		sfw uv @args
+	}
 
 	# Rust
-	function cargo { sfw cargo @args }
+	function cargo {
+		sfw cargo @args
+	}
 
 	# Go
-	function go { sfw go @args }
+	function go {
+		sfw go @args
+	}
 
 	# Java/Scala/Kotlin
-	function mvn { sfw mvn @args }
-	function gradle { sfw gradle @args }
+	function mvn {
+		sfw mvn @args
+	}
+	function gradle {
+		sfw gradle @args
+	}
 
 	# Ruby
-	function gem { sfw gem @args }
-	function bundle { sfw bundle @args }
+	function gem {
+		sfw gem @args
+	}
+	function bundle {
+		sfw bundle @args
+	}
 
 	# .NET
-	function dotnet { sfw dotnet @args }
+	function dotnet {
+		sfw dotnet @args
+	}
 }
