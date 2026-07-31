@@ -15,6 +15,7 @@ git-absorb = "cargo:git-absorb"
 git-grab = "cargo:git-grab"
 lychee = "cargo:lychee"
 monaco = "github:dynatrace/dynatrace-configuration-as-code"
+mpv = "github:mpv-player/mpv"
 pac = "dotnet:Microsoft.PowerApps.CLI.Tool"
 rage = "github:str4d/rage"
 rtk = "github:rtk-ai/rtk"
@@ -27,6 +28,7 @@ tspin = "cargo:tailspin"
 vp = "github:voidzero-dev/vite-plus"
 vscode-lsp = "npm:vscode-langservers-extracted"
 xmlstarlet = "http:xmlstarlet"
+
 # `pipx` backend doesn't work on windows
 azure-cli = "github:azure/azure-cli"
 # Built-in alias doesn't work on windows

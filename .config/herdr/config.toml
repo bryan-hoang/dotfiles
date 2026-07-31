@@ -3,14 +3,6 @@ onboarding = false
 [experimental]
 pane_history = true
 
-[keys]
-next_tab = "prefix+ctrl+l"
-next_workspace = "prefix+ctrl+j"
-prefix = "ctrl+a"
-previous_tab = "prefix+ctrl+h"
-previous_workspace = "prefix+ctrl+k"
-switch_workspace = "prefix+alt+1..9"
-
 [terminal]
 # Can't configure `herdr` to auto detect `pwsh` over `powershell` on Windows.
 default_shell = "pwsh"
@@ -27,3 +19,23 @@ delivery = "terminal"
 
 [worktrees]
 directory = "~/src/localhost/herdr-worktrees"
+
+[keys]
+next_tab = "prefix+ctrl+l"
+next_workspace = "prefix+ctrl+j"
+prefix = "ctrl+a"
+previous_tab = "prefix+ctrl+h"
+previous_workspace = "prefix+ctrl+k"
+switch_workspace = "prefix+alt+1..9"
+
+# [[keys.command]]
+# command = "rmarganti.herdr-pluck.pluck"
+# description = "Pluck visible token"
+# key = "prefix+space"
+# type = "plugin_action"
+#
+# [[keys.command]]
+# command = "rmarganti.herdr-pluck.open-url"
+# description = "Open visible URL"
+# key = "prefix+o"
+# type = "plugin_action"
