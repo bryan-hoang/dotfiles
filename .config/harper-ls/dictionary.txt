@@ -24,6 +24,7 @@ TODO
 Topgrade
 Typst
 UTF
+UserScript
 WTIS
 XDG
 XHR
@@ -34,6 +35,7 @@ eslint
 formatter
 minification
 mise
+oxlint
 shellcheck
 tty
 zsh
