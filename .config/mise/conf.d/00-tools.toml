@@ -54,7 +54,9 @@ go = "latest"
 gs = "latest"
 harper-cli = "latest"
 harper-ls = "latest"
+herdr = { version = "latest", version_prefix = "preview-", prerelease = "true", minimum_release_age = "0d" }
 hk = { version = "latest", minimum_release_age = "0d" }
+hunkdiff = { version = "latest", aube_args = "--allow-build=bun" }
 jaq = "latest"
 lychee = "latest"
 node = "latest"
@@ -79,23 +81,16 @@ tspin = "latest"
 typos = "latest"
 usage = { version = "latest", minimum_release_age = "0d" }
 uv = "latest"
+vscode-lsp = { version = "latest", aube_args = "--allow-build=core-js" }
 yq = "latest"
 zoxide = "latest"
 
 [tools.fff-mcp]
-minimum_release_age = "1d"
 version = "latest"
 
-[tools.fff-mcp.platforms]
-windows-x64 = { asset_pattern = 'fff-mcp-{{arch(x64="x86_64")}}-pc-{{os()}}-msvc.exe', bin = "fff-mcp.exe" }
-
-[tools.hunkdiff]
-aube_args = "--allow-build=bun"
-version = "latest"
-
-[tools.vscode-lsp]
-aube_args = "--allow-build=core-js"
-version = "latest"
+[tools.fff-mcp.platforms.windows-x64]
+asset_pattern = 'fff-mcp-{{arch(x64="x86_64")}}-pc-{{os()}}-msvc.exe'
+bin = "fff-mcp.exe"
 
 [tools.xmlstarlet]
 rename_exe = "xmlstarlet.exe"
