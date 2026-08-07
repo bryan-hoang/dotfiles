@@ -70,3 +70,5 @@ biome.jsonc
 
 # Run multiple processes in parallel.
 mprocs.yaml
+
+AGENTS.md

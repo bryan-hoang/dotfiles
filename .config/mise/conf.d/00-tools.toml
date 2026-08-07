@@ -26,6 +26,7 @@ sd = "github:chmln/sd"
 sfw = "npm:sfw"
 skills = "npm:skills"
 sqlcmd = "github:microsoft/go-sqlcmd"
+sqlfluff = "pipx:sqlfluff"
 television = "cargo:television"
 tspin = "cargo:tailspin"
 vp = "github:voidzero-dev/vite-plus"
@@ -43,7 +44,6 @@ hunkdiff = "npm:hunkdiff"
 sonarqube-cli = "http:sonarqube-cli"
 
 [tools]
-atuin = "latest"
 aube = { version = "latest", minimum_release_age = "0d" }
 betterleaks = "latest"
 bun = "latest"
