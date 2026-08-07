@@ -18,6 +18,7 @@ herdr = "github:herdrdev/herdr"
 lychee = "cargo:lychee"
 monaco = "github:dynatrace/dynatrace-configuration-as-code"
 mpv = "github:mpv-player/mpv"
+opencode2 = "npm:@opencode-ai/cli"
 pac = "dotnet:Microsoft.PowerApps.CLI.Tool"
 rage = "github:str4d/rage"
 rtk = "github:rtk-ai/rtk"
@@ -93,6 +94,7 @@ yq = "latest"
 zoxide = "latest"
 
 [tools.fff-mcp]
+minimum_release_age = "0d"
 version = "latest"
 
 [tools.fff-mcp.platforms.windows-x64]
