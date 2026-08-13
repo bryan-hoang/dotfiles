@@ -63,7 +63,7 @@ harper-cli = "latest"
 harper-ls = "latest"
 herdr = { version = "latest", version_prefix = "preview-", prerelease = "true", minimum_release_age = "0d" }
 hk = { version = "latest", minimum_release_age = "0d" }
-hunkdiff = { version = "latest", aube_args = "--allow-build=bun" }
+hunkdiff = { version = "latest" }
 jaq = "latest"
 lychee = "latest"
 node = "latest"
@@ -89,7 +89,7 @@ tspin = "latest"
 typos = "latest"
 usage = { version = "latest", minimum_release_age = "0d" }
 uv = "latest"
-vscode-lsp = { version = "latest", aube_args = "--allow-build=core-js" }
+vscode-lsp = { version = "latest" }
 yq = "latest"
 zoxide = "latest"
 

@@ -125,10 +125,10 @@ if (Test-CommandExists sfw) {
 		sfw uv @args
 	}
 
-	# Rust
-	function cargo {
-		sfw cargo @args
-	}
+	# # Rust
+	# function cargo {
+	# 	sfw cargo @args
+	# }
 
 	# Go
 	function go {

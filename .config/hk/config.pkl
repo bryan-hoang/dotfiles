@@ -78,7 +78,6 @@ hooks {
   ["commit-msg"] {
     steps = new Mapping<String, Step> {
       ["check-conventional-commit"] = Builtins.check_conventional_commit
-      ["cocogitto_commit_msg"] = Builtins.cocogitto_commit_msg
     }
   }
   ["pre-commit"] {
