@@ -12,5 +12,16 @@
 			NewLineAfter = $true
 			IgnoreOneLineBlock = $true
 		}
+		PSPlaceCloseBrace = @{
+			Enable = $true
+			NoEmptyLineBefore = $true
+			IgnoreOneLineBlock = $true
+			NewLineAfter = $true
+		}
+		PSUseConsistentIndentation = @{
+			Enable = $true
+			IndentationSize = 2
+			Kind = 'tab'
+		}
 	}
 }

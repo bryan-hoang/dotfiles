@@ -1,7 +1,6 @@
 # https://docs.atuin.sh/configuration/config/
 
-history_filter = ["Password"]
-keymap_mode = "auto"
+history_filter = ["Password="]
 search_mode = "daemon-fuzzy"
 store_failed = false
 style = "auto"
@@ -15,6 +14,3 @@ dir = "~/.local/share/atuin/logs"
 
 [theme]
 name = "catppuccin-mocha-blue"
-
-[sync]
-records = true

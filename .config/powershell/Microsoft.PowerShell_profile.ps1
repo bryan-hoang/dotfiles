@@ -4,8 +4,8 @@
 
 if (
 	(-not [System.Environment]::UserInteractive ) `
-	-or ([Environment]::GetCommandLineArgs() | Where-Object{ $_ -like '-NonI*' }) `
-	-or ([Console]::IsOutputRedirected) 	# Can't set PredictionSource = "History" if output is redirected.
+		-or ([Environment]::GetCommandLineArgs() | Where-Object{ $_ -like '-NonI*' }) `
+		-or ([Console]::IsOutputRedirected) 	# Can't set PredictionSource = "History" if output is redirected.
 ) {
 	exit
 }
@@ -39,27 +39,11 @@ if (Test-CommandExists starship) {
 		function Invoke-Starship-PreCommand {
 			$loc = $executionContext.SessionState.Path.CurrentLocation;
 			$prompt = "$([char]27)]9;12$([char]7)"
-			if ($loc.Provider.Name -eq "FileSystem")
-			{
+			if ($loc.Provider.Name -eq "FileSystem") {
 				$prompt += "$([char]27)]9;9;`"$($loc.ProviderPath)`"$([char]27)\"
 			}
 			$host.ui.Write($prompt)
 		}
-	}
-} else {
-	# Customize the prompt
-	function prompt {
-		$identity = [Security.Principal.WindowsIdentity]::GetCurrent()
-		$principal = [Security.Principal.WindowsPrincipal] $identity
-		$adminRole = [Security.Principal.WindowsBuiltInRole]::Administrator
-
-		$prefix = if (Test-Path Variable:/PSDebugContext) { '[DBG]: ' } else { '' }
-		if ($principal.IsInRole($adminRole)) {
-				$prefix = "[ADMIN]:$prefix"
-		}
-		$body = 'PS ' + $PWD.path
-		$suffix = $(if ($NestedPromptLevel -ge 1) { '>>' }) + '> '
-		"${prefix}${body}${suffix}"
 	}
 }
 
