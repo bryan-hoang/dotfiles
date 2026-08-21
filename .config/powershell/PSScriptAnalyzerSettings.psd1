@@ -16,7 +16,7 @@
 			Enable = $true
 			NoEmptyLineBefore = $true
 			IgnoreOneLineBlock = $true
-			NewLineAfter = $true
+			NewLineAfter = $false
 		}
 		PSUseConsistentIndentation = @{
 			Enable = $true

@@ -63,7 +63,7 @@ harper-cli = "latest"
 harper-ls = "latest"
 herdr = { version = "latest", version_prefix = "preview-", prerelease = "true", minimum_release_age = "0d" }
 hk = { version = "latest", minimum_release_age = "0d" }
-hunkdiff = { version = "latest" }
+hunkdiff = { version = "latest", trust_policy_excludes = ["@pierre/theme"] }
 jaq = "latest"
 lychee = "latest"
 node = "latest"
