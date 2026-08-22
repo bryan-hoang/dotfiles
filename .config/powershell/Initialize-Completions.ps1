@@ -1,13 +1,5 @@
 #!/usr/bin/env pwsh
 
-# ponytail: keep startup offline; install missing modules separately.
-if (Get-Module -ListAvailable -Name PSCompletions) {
-	Import-Module PSCompletions
-}
-if (Get-Module -ListAvailable -Name posh-git) {
-	Import-Module posh-git
-}
-
 $PwshCompletionDir = $(Join-Path $env:XDG_DATA_HOME 'powershell' 'completions')
 if (-not (Test-Path $PwshCompletionDir)) {
 	New-Item -ItemType Directory -Force -Path $PwshCompletionDir > $null
