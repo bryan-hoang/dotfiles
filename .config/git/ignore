@@ -63,7 +63,7 @@ biome.jsonc
 .lazy.lua
 
 # mise config file for tool versions.
-.mise.local.toml
+mise.local.toml
 
 # LSP config file. e.g., to add plugins for rails.
 .solargraph.yml
@@ -73,4 +73,6 @@ mprocs.yaml
 
 AGENTS.md
 CONTEXT.md
-.agents/
+/.agents/
+tmp/
+fnox.local.toml

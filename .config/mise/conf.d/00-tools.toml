@@ -68,6 +68,9 @@ jaq = "latest"
 lychee = "latest"
 node = "latest"
 opencode = { version = "latest", minimum_release_age = "0d" }
+opencode2 = { version = "next", minimum_release_age = "0d", allow_builds = [
+	"@opencode-ai/cli",
+] }
 oxfmt = "latest"
 oxlint = "latest"
 pkl = "latest"

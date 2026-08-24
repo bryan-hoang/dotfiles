@@ -1,9 +1,12 @@
+# https://learn.microsoft.com/en-us/powershell/utility-modules/psscriptanalyzer/rules/readme?view=ps-modules
 @{
 	# PSScriptAnalyzer default settings file.
 	# Used implicitly by Invoke-ScriptAnalyzer and Invoke-Formatter
 	# via $PSDefaultParameterValues.
 
-	# ExcludeRules = @()
+	ExcludeRules = @(
+		'PSAvoidUsingInvokeExpression'
+	)
 	# IncludeRules = @()
 	Rules = @{
 		PSPlaceOpenBrace = @{

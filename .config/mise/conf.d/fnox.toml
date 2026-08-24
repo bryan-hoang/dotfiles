@@ -1,3 +1,5 @@
+# https://fnox.jdx.dev/guide/mise-integration.html
+
 [plugins]
 fnox-env = "https://github.com/jdx/mise-env-fnox"
 
@@ -6,3 +8,4 @@ fnox = { version = "latest", minimum_release_age = "0d" }
 
 [env]
 _.fnox-env = { tools = true }
+# FNOX_SHELL_OUTPUT = "none"

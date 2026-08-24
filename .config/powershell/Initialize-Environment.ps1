@@ -33,6 +33,7 @@ Set-UserEnvVar 'KOMOREBI_CONFIG_HOME' $(Join-Path $env:XDG_CONFIG_HOME 'komorebi
 Set-UserEnvVar 'KUBECACHEDIR' $(Join-Path $env:XDG_CACHE_HOME 'kube')
 Set-UserEnvVar 'KUBECONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'kube' 'kube.yaml')
 Set-UserEnvVar 'MINIKUBE_HOME' $(Join-Path $env:XDG_DATA_HOME 'minikube')
+Set-UserEnvVar 'MISE_ENV_CACHE' '1'
 Set-UserEnvVar 'MISE_WINDOWS_DEFAULT_INLINE_SHELL_ARGS' 'pwsh -NoProfile -NonInteractive -Command'
 Set-UserEnvVar 'NODE_REPL_HISTORY' $(Join-Path $env:XDG_STATE_HOME 'node' 'history')
 Set-UserEnvVar 'NPM_CONFIG_USERCONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'npm' 'npmrc')
