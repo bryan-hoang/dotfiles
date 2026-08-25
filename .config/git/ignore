@@ -75,4 +75,4 @@ AGENTS.md
 CONTEXT.md
 /.agents/
 tmp/
-fnox.local.toml
+fnox*.toml

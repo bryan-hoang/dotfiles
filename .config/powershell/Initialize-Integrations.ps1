@@ -18,9 +18,9 @@ if (Test-CommandExists starship) {
 	# https://learn.microsoft.com/en-us/windows/terminal/tutorials/new-tab-same-directory#powershell-with-starship
 	if ($env:WT_SESSION) {
 		function Invoke-Starship-PreCommand {
-			$loc = $executionContext.SessionState.Path.CurrentLocation;
+			$loc = $executionContext.SessionState.Path.CurrentLocation
 			$prompt = "$([char]27)]9;12$([char]7)"
-			if ($loc.Provider.Name -eq "FileSystem") {
+			if ($loc.Provider.Name -eq 'FileSystem') {
 				$prompt += "$([char]27)]9;9;`"$($loc.ProviderPath)`"$([char]27)\"
 			}
 			$host.ui.Write($prompt)
