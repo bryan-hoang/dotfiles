@@ -20,7 +20,7 @@ foreach (
 	'Machine',
 	'Integrations'
 ) {
-	$script = Join-Path $HOME '.config' 'powershell' "Initialize-$noun.ps1"
+	$script = Join-Path $HOME '.config' 'pwsh' "Initialize-$noun.ps1"
 	if (!(Test-Path -Path $script)) {
 		continue
 	}

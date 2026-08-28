@@ -16,7 +16,7 @@ Set-PSReadLineOption @PSReadLineOptions
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadlineKeyHandler -Key Ctrl+w -Function BackwardKillWord
 
-$globalPssaSettings = Join-Path -Resolve $env:XDG_CONFIG_HOME 'powershell' 'PSScriptAnalyzerSettings.psd1'
+$globalPssaSettings = Join-Path $PSScriptRoot 'PSScriptAnalyzerSettings.psd1'
 
 if (Test-Path -LiteralPath $globalPssaSettings) {
 	$PSDefaultParameterValues['Invoke-ScriptAnalyzer:Settings'] = $globalPssaSettings
