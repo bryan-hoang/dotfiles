@@ -24,6 +24,7 @@ Set-UserEnvVar 'DOTNET_CLI_HOME' $(Join-Path $env:XDG_DATA_HOME 'dotnet')
 Set-UserEnvVar 'DOTNET_CLI_TELEMETRY_OPTOUT' 'true'
 Set-UserEnvVar 'DOTNET_NOLOGO' 'true'
 
+Set-UserEnvVar 'COPILOT_HOME' $(Join-Path $env:XDG_DATA_HOME 'copilot')
 Set-UserEnvVar 'GLAZEWM_CONFIG_PATH' $(Join-Path $env:XDG_CONFIG_HOME 'glazewm' 'config.yaml')
 Set-UserEnvVar 'GOPATH' $(Join-Path $env:XDG_DATA_HOME 'go')
 Set-UserEnvVar 'GRADLE_USER_HOME' $(Join-Path $env:XDG_DATA_HOME 'gradle')

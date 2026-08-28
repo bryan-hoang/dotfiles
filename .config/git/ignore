@@ -76,3 +76,4 @@ CONTEXT.md
 /.agents/
 tmp/
 fnox*.toml
+.venv
