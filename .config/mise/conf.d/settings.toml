@@ -9,5 +9,10 @@ legacy_version_file = false
 minimum_release_age = "1d"
 paranoid = true
 
+[settings.cargo]
+binstall_native = true
+binstall_only = true
+binstall_quickinstall = true
+
 [settings.python]
 uv_venv_auto = true

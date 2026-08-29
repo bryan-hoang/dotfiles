@@ -130,10 +130,12 @@ if (Test-CommandExists sfw) {
 	# 	sfw cargo @args
 	# }
 
-	# Go
-	function go {
-		sfw go @args
-	}
+	# Causes certificate errors when running `go install ...`
+	# See # <https://github.com/SocketDev/sfw-free/issues/43#issuecomment-4528050415>
+	# # Go
+	# function go {
+	# 	sfw go @args
+	# }
 
 	# Java/Scala/Kotlin
 	function mvn {
