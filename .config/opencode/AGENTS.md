@@ -1,6 +1,6 @@
-# Global OpenCode Rules
+# Global Agent Rules
 
-These are personal defaults for every OpenCode session. Read the glossary at
+These are personal defaults for every agent session. Read the glossary at
 `~/.config/opencode/CONTEXT.md` (or its equivalent absolute path) before
 applying rules involving `Agent Tool`, `Question Agent Tool`, `Shell Command`,
 `Host Shell`, `Command Interceptor`, `Searching`, `Filtering`,
@@ -26,6 +26,12 @@ applying rules involving `Agent Tool`, `Question Agent Tool`, `Shell Command`,
   that was not written, diagnose that rewritten command.
 - Permission prompts and denials are intentional. Use the dedicated Agent Tool
   or obtain approval rather than bypassing the configured constraint.
+
+## Subagent Models
+
+- For every delegated subagent and child session, honor an explicitly selected
+  model first. Otherwise inherit the parent model when one is available; if no
+  parent model is available, use `gpt-5.6-luna` by default for cost efficiency.
 
 ## Grilling
 
@@ -59,7 +65,7 @@ applying rules involving `Agent Tool`, `Question Agent Tool`, `Shell Command`,
 - Commit messages explain why, are hard-wrapped at 80 columns, and group
   trailers with no blank lines in this order when applicable: `Refs: <ticket>`,
   `Assisted-by: <agent>:<model> [optional tools]`, `Link: <url> # [n]`.
-  Agent-authored commits include `Assisted-by: OpenCode:<model>`; mention a
+  Agent-authored commits include `Assisted-by: <agent>:<model>`; mention a
   specialized skill only when one was used.
 
 ## Engineering Defaults
