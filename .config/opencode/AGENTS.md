@@ -1,3 +1,7 @@
+---
+applyTo: "**"
+---
+
 # Global Agent Rules
 
 These are personal defaults for every agent session. Read the glossary at

@@ -94,5 +94,4 @@
 	# worktree" based workflow.
 	worktree-convert = "!f() { grm wt convert && mv .git-main-working-tree .git && printf '' >| .git/index && git worktree add main \"$(git branch-default)\" && git worktree lock main; }; f"
 	ls-merged = "!git branch --format '%(refname:short)' --merged | grep --invert-match --line-regex \"$(git branch --show-current)\""
-	checkpoint = "!git commit -m \"wip: $@\n\n[skip ci]\""
 	diff-image = "!f() { cd -- \"${GIT_PREFIX:-.}\"; GIT_DIFF_IMAGE_ENABLED=1 git diff \"$@\"; }; f"
