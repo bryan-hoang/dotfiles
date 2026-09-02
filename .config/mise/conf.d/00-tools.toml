@@ -47,7 +47,7 @@ sonarqube-cli = "http:sonarqube-cli"
 [tools]
 aube = { version = "latest", minimum_release_age = "0d" }
 betterleaks = "latest"
-bun = "latest"
+bun = { version = "latest", lazy = true}
 cargo-binstall = "latest"
 cargo-cache = "latest"
 cocogitto = "latest"
@@ -61,14 +61,16 @@ go = "latest"
 gs = "latest"
 harper-cli = "latest"
 harper-ls = "latest"
-herdr = { version = "latest", version_prefix = "preview-", prerelease = "true", minimum_release_age = "0d" }
+herdr = { version = "latest", lazy = true, version_prefix = "preview-", prerelease = "true", minimum_release_age = "0d" }
 hk = { version = "latest", minimum_release_age = "0d" }
-hunkdiff = { version = "latest", trust_policy_excludes = ["@pierre/theme"] }
+hunkdiff = { version = "latest", lazy = true, trust_policy_excludes = ["@pierre/theme"] }
 jaq = "latest"
 lychee = "latest"
 node = "latest"
-opencode = { version = "latest", minimum_release_age = "0d" }
-opencode2 = { version = "next", minimum_release_age = "0d", allow_builds = [
+opencode = { version = "latest", lazy = true, minimum_release_age = "0d" }
+opencode2 = { version = "next", lazy = true, lazy_bins = [
+  "opencode2",
+], minimum_release_age = "0d", allow_builds = [
   "@opencode-ai/cli",
 ] }
 oxfmt = "latest"
