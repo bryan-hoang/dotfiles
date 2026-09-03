@@ -9,7 +9,7 @@ delta = "cargo:git-delta"
 diff-pdf = "github:vslavik/diff-pdf"
 dtctl = "github:dynatrace-oss/dtctl"
 ec = "aqua:editorconfig-checker/editorconfig-checker"
-fff-mcp = "github:dmtrKovalenko/fff"
+fff-mcp = "github:dmtrkovalenko/fff"
 ffmpeg = "github:btbn/ffmpeg-builds"
 gfr = "pipx:git-filter-repo"
 git-absorb = "cargo:git-absorb"
@@ -19,7 +19,7 @@ lychee = "cargo:lychee"
 monaco = "github:dynatrace/dynatrace-configuration-as-code"
 mpv = "github:mpv-player/mpv"
 opencode2 = "npm:@opencode-ai/cli"
-pac = "dotnet:Microsoft.PowerApps.CLI.Tool"
+pac = "dotnet:microsoft.powerapps.cli.tool"
 rage = "github:str4d/rage"
 rtk = "github:rtk-ai/rtk"
 sccache = "cargo:sccache"
@@ -47,7 +47,7 @@ sonarqube-cli = "http:sonarqube-cli"
 [tools]
 aube = { version = "latest", minimum_release_age = "0d" }
 betterleaks = "latest"
-bun = { version = "latest", lazy = true}
+bun = { version = "latest", lazy = true }
 cargo-binstall = "latest"
 cargo-cache = "latest"
 cocogitto = "latest"
@@ -63,7 +63,9 @@ harper-cli = "latest"
 harper-ls = "latest"
 herdr = { version = "latest", lazy = true, version_prefix = "preview-", prerelease = "true", minimum_release_age = "0d" }
 hk = { version = "latest", minimum_release_age = "0d" }
-hunkdiff = { version = "latest", lazy = true, trust_policy_excludes = ["@pierre/theme"] }
+hunkdiff = { version = "latest", lazy = true, trust_policy_excludes = [
+  "@pierre/theme",
+] }
 jaq = "latest"
 lychee = "latest"
 node = "latest"
@@ -76,7 +78,7 @@ opencode2 = { version = "next", lazy = true, lazy_bins = [
 oxfmt = "latest"
 oxlint = "latest"
 pkl = "latest"
-pnpm = { version = "latest", minimum_release_age = "0d" }
+pnpm = { version = "latest", lazy = true, minimum_release_age = "0d" }
 rmz = "latest"
 rtk = "latest"
 rumdl = "latest"
