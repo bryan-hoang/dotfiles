@@ -1,6 +1,15 @@
 #!/usr/bin/env pwsh
 
-$PwshCompletionDir = $(Join-Path $env:XDG_DATA_HOME 'powershell' 'completions')
+if (-not (Get-Module -ListAvailable git-completion)) {
+	Install-Module git-completion
+}
+Import-Module git-completion
+Register-ArgumentCompleter -CommandName git -Native -ScriptBlock {
+	param($wordToComplete, $CommandAst, $CursorPosition)
+	return (Complete-Git -CommandAst $CommandAst -CursorPosition $CursorPosition)
+}
+
+$PwshCompletionDir = $(Join-Path $env:XDG_DATA_HOME 'pwsh' 'completions')
 if (-not (Test-Path $PwshCompletionDir)) {
 	New-Item -ItemType Directory -Force -Path $PwshCompletionDir > $null
 }
@@ -24,7 +33,6 @@ function Add-Completion {
 
 Add-Completion 'atuin' 'atuin gen-completions --shell powershell'
 Add-Completion 'aube' 'aube completion powershell'
-Add-Completion 'bob' 'bob complete power-shell'
 Add-Completion 'dotnet' 'dotnet completions script pwsh'
 Add-Completion 'kubectl' 'kubectl completion powershell'
 Add-Completion 'minikube' 'minikube completion powershell'
