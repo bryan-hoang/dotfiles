@@ -26,6 +26,7 @@ Typst
 UTF
 UserScript
 WTIS
+Worktree
 XDG
 XHR
 biome

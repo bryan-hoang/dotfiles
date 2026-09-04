@@ -45,6 +45,7 @@ hunkdiff = "npm:hunkdiff"
 sonarqube-cli = "http:sonarqube-cli"
 
 [tools]
+actionlint = { version = "latest", lazy = true }
 aube = { version = "latest", minimum_release_age = "0d" }
 betterleaks = "latest"
 bun = { version = "latest", lazy = true }
@@ -98,6 +99,7 @@ usage = { version = "latest", minimum_release_age = "0d" }
 uv = "latest"
 vscode-lsp = { version = "latest" }
 yq = "latest"
+zizmor = { version = "latest", lazy = true }
 zoxide = "latest"
 
 [tools.fff-mcp]

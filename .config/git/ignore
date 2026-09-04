@@ -77,3 +77,4 @@ CONTEXT.md
 tmp/
 fnox*.toml
 .venv
+.oxfmtrc.json

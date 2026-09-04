@@ -34,7 +34,7 @@ applying rules involving `Agent Tool`, `Question Agent Tool`, `Shell Command`,
 ## Subagent Models
 
 - For every delegated subagent and child session, honor an explicitly selected
-  model first. Otherwise inherit the parent model when one is available; if no
+  model first. Otherwise, inherit the parent model when one is available; if no
   parent model is available, use `gpt-5.6-luna` by default for cost efficiency.
 
 ## Grilling
@@ -68,9 +68,10 @@ applying rules involving `Agent Tool`, `Question Agent Tool`, `Shell Command`,
   stage only intended files.
 - Commit messages explain why, are hard-wrapped at 80 columns, and group
   trailers with no blank lines in this order when applicable: `Refs: <ticket>`,
-  `Assisted-by: <agent>:<model> [optional tools]`, `Link: <url> # [n]`.
-  Agent-authored commits include `Assisted-by: <agent>:<model>`; mention a
-  specialized skill only when one was used.
+  `Assisted-by: LLM [specialized tools]`, `Link: <url> # [n]`. Agent-authored
+  commits include one `Assisted-by: LLM` trailer. Append only specialized
+  analysis tools actually used; do not list basic development tools, skills, or
+  model/harness names.
 
 ## Engineering Defaults
 
