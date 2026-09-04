@@ -104,6 +104,7 @@
 [url "git://gist.github.com/"]
 	insteadOf = "gist:"
 [pull]
+	ff = false
 	rebase = true
 [fetch]
 	all = true

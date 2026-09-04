@@ -1,55 +1,57 @@
 return {
 	{
+		"mason-org/mason.nvim",
+		opts = {
+			ensure_installed = {
+				"powershell-editor-services",
+			},
+		},
+	},
+	{
 		"neovim/nvim-lspconfig",
 		opts = {
 			servers = {
-				powershell_es = {
-					settings = {
-						powershell = {
-							codeFormatting = {
-								preset = "OTBS",
-							},
-						},
-					},
-				},
+				-- PowerShell is managed by `powershell.nvim`.
+				powershell_es = { enabled = false },
 			},
 		},
 	},
 	{
 		"TheLeoP/powershell.nvim",
+		ft = "ps1",
 		opts = {
 			bundle_path = vim.fn.stdpath("data")
 				.. "/mason/packages/powershell-editor-services",
 		},
 	},
-	-- {
-	-- 	"conform.nvim",
-	-- 	optional = true,
-	-- 	opts = function(_, opts)
-	-- 		local user_opts = {
-	-- 			formatters = {
-	-- 				ps_script_analyzer = {
-	-- 					command = "pwsh",
-	-- 					stdin = true,
-	-- 					args = {
-	-- 						"-NoProfile",
-	-- 						"-Command",
-	-- 						"Invoke-Formatter",
-	-- 						"-ScriptDefinition",
-	-- 						"($input | Out-String)",
-	-- 					},
-	-- 				},
-	-- 			},
-	-- 			formatters_by_ft = {
-	-- 				ps1 = { "ps_script_analyzer" },
-	-- 			},
-	-- 		}
-	--
-	-- 		local merged_opts = vim.tbl_deep_extend("force", opts, user_opts)
-	--
-	-- 		return merged_opts
-	-- 	end,
-	-- },
+	{
+		"conform.nvim",
+		optional = true,
+		opts = function(_, opts)
+			local user_opts = {
+				formatters = {
+					ps_script_analyzer = {
+						command = "pwsh",
+						-- Profiles provide the shared `PSScriptAnalyzer` settings.
+						stdin = true,
+						args = {
+							"-Command",
+							"Invoke-Formatter",
+							"-ScriptDefinition",
+							"($input | Out-String)",
+						},
+					},
+				},
+				formatters_by_ft = {
+					ps1 = { "ps_script_analyzer" },
+				},
+			}
+
+			local merged_opts = vim.tbl_deep_extend("force", opts, user_opts)
+
+			return merged_opts
+		end,
+	},
 	{
 		"mfussenegger/nvim-lint",
 		optional = true,
@@ -65,7 +67,6 @@ return {
 						cmd = "pwsh",
 						stdin = true,
 						args = {
-							"-NoProfile",
 							"-Command",
 							"Invoke-ScriptAnalyzer",
 							"-ScriptDefinition",

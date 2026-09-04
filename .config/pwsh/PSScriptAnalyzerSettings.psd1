@@ -9,6 +9,10 @@
 	)
 	# IncludeRules = @()
 	Rules = @{
+		PSAvoidUsingPositionalParameters = @{
+			Enable           = $true
+			CommandAllowList = 'Join-Path'
+		}
 		PSPlaceOpenBrace = @{
 			Enable = $true
 			OnSameLine = $true
