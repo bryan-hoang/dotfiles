@@ -35,6 +35,8 @@ config.exit_behavior = "CloseOnCleanExit"
 
 -- Background
 config.window_background_opacity = 0.75
+-- Fix opacity issue on certain machines.
+config.prefer_egl = true
 
 config.initial_cols = 120
 config.initial_rows = 32
