@@ -3,9 +3,11 @@
 [plugins]
 fnox-env = "https://github.com/jdx/mise-env-fnox"
 
+[tool_alias]
+fnox = "cargo:fnox"
+
 [tools]
 fnox = { version = "latest", minimum_release_age = "0d" }
 
 [env]
 _.fnox-env = { tools = true }
-# FNOX_SHELL_OUTPUT = "none"
