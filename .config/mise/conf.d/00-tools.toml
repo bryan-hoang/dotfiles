@@ -8,7 +8,7 @@ dab = "dotnet:microsoft.dataapibuilder"
 delta = "cargo:git-delta"
 diff-pdf = "github:vslavik/diff-pdf"
 dtctl = "github:dynatrace-oss/dtctl"
-ec = "aqua:editorconfig-checker/editorconfig-checker"
+ec = "github:editorconfig-checker/editorconfig-checker"
 fff-mcp = "github:dmtrkovalenko/fff"
 ffmpeg = "github:btbn/ffmpeg-builds"
 gfr = "pipx:git-filter-repo"
@@ -54,7 +54,6 @@ cargo-binstall = "latest"
 cargo-cache = "latest"
 cocogitto = "latest"
 delta = "latest"
-ec = "latest"
 eza = "latest"
 gh = "latest"
 git-absorb = "latest"
@@ -102,6 +101,12 @@ vscode-lsp = { version = "latest" }
 yq = "latest"
 zizmor = { version = "latest", lazy = true }
 zoxide = "latest"
+
+[tools.ec]
+version = "latest"
+
+[tools.ec.platforms.windows-x64]
+asset_pattern = 'editorconfig-checker-{{os()}}-{{arch(x64="amd64")}}.zip'
 
 [tools.fff-mcp]
 minimum_release_age = "0d"
