@@ -14,8 +14,5 @@ binstall_native = true
 binstall_only = true
 binstall_quickinstall = true
 
-[settings.github]
-credential_command = "gh auth token"
-
 [settings.python]
 uv_venv_auto = true

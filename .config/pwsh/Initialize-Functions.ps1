@@ -104,9 +104,9 @@ if (Test-CommandExists sfw) {
 	# Socket Firewall Function Wrappers
 
 	# JavaScript/TypeScript
-	function npm {
-		sfw npm @args
-	}
+	# function npm {
+	# 	sfw npm @args
+	# }
 	function yarn {
 		sfw yarn @args
 	}
