@@ -9,7 +9,7 @@ Register-ArgumentCompleter -CommandName git -Native -ScriptBlock {
 	return (Complete-Git -CommandAst $CommandAst -CursorPosition $CursorPosition)
 }
 
-$PwshCompletionDir = $(Join-Path $env:XDG_DATA_HOME 'pwsh' 'completions')
+$PwshCompletionDir = $(Join-Path $env:LOCALAPPDATA 'PowerShell' 'completions')
 if (-not (Test-Path $PwshCompletionDir)) {
 	New-Item -ItemType Directory -Force -Path $PwshCompletionDir > $null
 }
