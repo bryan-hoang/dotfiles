@@ -34,6 +34,7 @@ function Add-Completion {
 Add-Completion 'atuin' 'atuin gen-completions --shell powershell'
 Add-Completion 'aube' 'aube completion powershell'
 Add-Completion 'dotnet' 'dotnet completions script pwsh'
+Add-Completion 'helm' 'helm completion powershell'
 Add-Completion 'kubectl' 'kubectl completion powershell'
 Add-Completion 'minikube' 'minikube completion powershell'
 Add-Completion 'mise' 'mise completion powershell'
