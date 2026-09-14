@@ -282,8 +282,9 @@ export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/etc/terminfo:/usr/share/terminfo
 export WARP_THEMES_DIR="$XDG_DATA_HOME"/warp-terminal/themes
 
 # Mise
-export MISE_RUBY_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/default-pkgs/gem.list
+export MISE_AUTO_ENV=1
 export MISE_PIPX_UVX=1
+export MISE_RUBY_DEFAULT_PACKAGES_FILE="$XDG_CONFIG_HOME"/default-pkgs/gem.list
 # `fzf`
 # `catppuccin-mocha`
 export FZF_DEFAULT_OPTS=" \
