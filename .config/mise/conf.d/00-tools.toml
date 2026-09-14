@@ -118,6 +118,8 @@ asset_pattern = 'fff-mcp-{{arch(x64="x86_64")}}-pc-{{os()}}-msvc.exe'
 bin = "fff-mcp.exe"
 
 [tools.xmlstarlet]
+lazy = true
+lazy_bins = ["xmlstarlet"]
 rename_exe = "xmlstarlet.exe"
 version = "latest"
 version_expr = "sortVersions(versions)"
