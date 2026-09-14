@@ -21,6 +21,7 @@ ONNX
 OS
 OpenCode
 PIM
+Pkl
 Polyfill
 README
 Selene's
@@ -43,6 +44,7 @@ formatter
 minification
 mise
 oxlint
+pyright
 shellcheck
 tty
 zsh

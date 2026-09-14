@@ -1,7 +1,7 @@
-amends "package://github.com/jdx/hk/releases/download/v1.50.0/hk@1.50.0#/Config.pkl"
-import "package://github.com/jdx/hk/releases/download/v1.50.0/hk@1.50.0#/Builtins.pkl"
+amends "package://github.com/jdx/hk/releases/download/v2.0.0/hk@2.0.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v2.0.0/hk@2.0.0#/Builtins.pkl"
 
-local linters = new Mapping<String, Step> {
+steps {
   ["actionlint"] = Builtins.actionlint
   ["bom"] = Builtins.byte_order_marker
   ["check_add_large_files"] = Builtins.check_added_large_files
@@ -27,9 +27,11 @@ local linters = new Mapping<String, Step> {
   ["taplo_format"] = Builtins.taplo_format
   ["zizmor"] = Builtins.zizmor
 
-  ["betterleaks"] = (Builtins.gitleaks) {
-    check = "betterleaks dir --redact --verbose --no-banner --log-level warn {{ files }}"
-  }
+  // FIXME: Infinite loop when ran by an agent to validate changes during hk v2
+  // migration.
+  // ["betterleaks"] = (Builtins.gitleaks) {
+  //   check = "betterleaks dir --redact --verbose --no-banner --log-level warn {{ files }}"
+  // }
   ["harper"] = (Builtins.harper) {
     check = "harper-cli lint --dialect us {{ files }}"
     exclude =
@@ -59,13 +61,6 @@ local linters = new Mapping<String, Step> {
 
 exclude = List("node_modules", "dist", "build")
 hooks {
-  ["check"] {
-    steps = linters
-  }
-  ["fix"] {
-    fix = true
-    steps = linters
-  }
   ["fix-minimal"] {
     fix = true
     stash = "git"
@@ -82,7 +77,6 @@ hooks {
   }
   ["pre-commit"] {
     fix = false
-    stash = "git"
-    steps = linters
+    stash = false
   }
 }

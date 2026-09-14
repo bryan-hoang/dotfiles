@@ -1,11 +1,10 @@
 # https://github.com/astral-sh/ruff/issues/6242
-# ruff: noqa: F821
 
 import sys
 
 # https://github.com/python/cpython/pull/13208
 if sys.version_info < (3, 13):
-    import atexit  # pyright: ignore [reportUnreachable]
+    import atexit  # pyright: ignore[reportUnreachable]
     import logging
     import os
     import readline
