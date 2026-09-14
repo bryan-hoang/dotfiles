@@ -261,7 +261,6 @@ export DCP_HOMEDIR="$XDG_DATA_HOME"
 export DISABLE_AUTO_UPDATE=true
 export FONT_MONO='BerkeleyMono Nerd Font Mono'
 export GRIT_USER_CONFIG="$XDG_CONFIG_HOME"/grit
-export HK_PKL_BACKEND='pkl'
 export JULIA_DEPOT_PATH="$XDG_DATA_HOME"/julia:"$JULIA_DEPOT_PATH"
 export KUBECACHEDIR="$XDG_CACHE_HOME"/kube
 export KUBECONFIG="$XDG_CONFIG_HOME"/kube/kube.yaml
