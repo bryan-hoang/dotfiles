@@ -24,6 +24,11 @@ Set-UserEnvVar 'DOTNET_CLI_HOME' $(Join-Path $env:XDG_DATA_HOME 'dotnet')
 Set-UserEnvVar 'DOTNET_CLI_TELEMETRY_OPTOUT' 'true'
 Set-UserEnvVar 'DOTNET_NOLOGO' 'true'
 
+# `mbx` intentionally passes registry/Git `cargo install` through to Cargo.
+# Keep sccache as the compiler wrapper so those installs remain cached.
+Set-UserEnvVar 'RUSTC_WRAPPER' 'sccache'
+Set-UserEnvVar 'RUSTUP_HOME' $(Join-Path $env:XDG_DATA_HOME 'rustup')
+
 Set-UserEnvVar 'COPILOT_HOME' $(Join-Path $env:XDG_DATA_HOME 'copilot')
 Set-UserEnvVar 'GLAZEWM_CONFIG_PATH' $(Join-Path $env:XDG_CONFIG_HOME 'glazewm' 'config.yaml')
 Set-UserEnvVar 'GOPATH' $(Join-Path $env:XDG_DATA_HOME 'go')
@@ -42,10 +47,7 @@ Set-UserEnvVar 'NUGET_PACKAGES' $(Join-Path $env:XDG_CACHE_HOME 'nuget-packages'
 Set-UserEnvVar 'NUGET_PLUGINS_CACHE_PATH' $(Join-Path $env:XDG_CACHE_HOME 'nuget-plugins')
 Set-UserEnvVar 'OMNISHARPHOME' $(Join-Path $env:XDG_CONFIG_HOME 'omnisharp')
 Set-UserEnvVar 'PNPM_HOME' $(Join-Path $env:XDG_DATA_HOME 'pnpm')
-# `mbx` intentionally passes registry/Git `cargo install` through to Cargo.
-# Keep sccache as the compiler wrapper so those installs remain cached.
-Set-UserEnvVar 'RUSTC_WRAPPER' 'sccache'
-Set-UserEnvVar 'RUSTUP_HOME' $(Join-Path $env:XDG_DATA_HOME 'rustup')
+Set-UserEnvVar 'RUFF_CACHE_DIR' $(Join-Path $env:XDG_CACHE_HOME 'ruff')
 Set-UserEnvVar 'STARSHIP_CONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'starship' 'starship.toml')
 Set-UserEnvVar 'TEALDEER_CONFIG_DIR' $(Join-Path $env:XDG_CONFIG_HOME 'tealdeer')
 Set-UserEnvVar 'VP_HOME' $(Join-Path $env:XDG_DATA_HOME 'vite-plus')
