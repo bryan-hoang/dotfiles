@@ -70,6 +70,7 @@ hunkdiff = { version = "latest", lazy = true, trust_policy_excludes = [
 ] }
 jaq = "latest"
 lychee = "latest"
+mr-boxington = "latest"
 node = "latest"
 opencode = { version = "latest", lazy = true, minimum_release_age = "0d" }
 opencode2 = { version = "next", lazy = true, lazy_bins = [
@@ -84,6 +85,7 @@ pnpm = { version = "latest", lazy = true, minimum_release_age = "0d" }
 rmz = "latest"
 rtk = "latest"
 rumdl = "latest"
+rust = { version = "nightly", profile = "minimal", mr_boxington = true }
 sccache = "latest"
 sd = "latest"
 sfw = "latest"

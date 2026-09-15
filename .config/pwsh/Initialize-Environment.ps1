@@ -42,9 +42,10 @@ Set-UserEnvVar 'NUGET_PACKAGES' $(Join-Path $env:XDG_CACHE_HOME 'nuget-packages'
 Set-UserEnvVar 'NUGET_PLUGINS_CACHE_PATH' $(Join-Path $env:XDG_CACHE_HOME 'nuget-plugins')
 Set-UserEnvVar 'OMNISHARPHOME' $(Join-Path $env:XDG_CONFIG_HOME 'omnisharp')
 Set-UserEnvVar 'PNPM_HOME' $(Join-Path $env:XDG_DATA_HOME 'pnpm')
+# `mbx` intentionally passes registry/Git `cargo install` through to Cargo.
+# Keep sccache as the compiler wrapper so those installs remain cached.
 Set-UserEnvVar 'RUSTC_WRAPPER' 'sccache'
 Set-UserEnvVar 'RUSTUP_HOME' $(Join-Path $env:XDG_DATA_HOME 'rustup')
-Set-UserEnvVar 'RUSTUP_TOOLCHAIN' 'nightly'
 Set-UserEnvVar 'STARSHIP_CONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'starship' 'starship.toml')
 Set-UserEnvVar 'TEALDEER_CONFIG_DIR' $(Join-Path $env:XDG_CONFIG_HOME 'tealdeer')
 Set-UserEnvVar 'VP_HOME' $(Join-Path $env:XDG_DATA_HOME 'vite-plus')
@@ -84,6 +85,7 @@ if ($IsWindows) {
 # PATH
 Add-UserPath $env:XDG_BIN_HOME
 Add-UserPath $(Join-Path $env:XDG_DATA_HOME 'mise' 'shims')
+# Add-UserPath $(Join-Path $env:LOCALAPPDATA 'mbx' 'bin')
 Add-UserPath $(Join-Path $env:CARGO_HOME 'bin')
 Add-UserPath $(Join-Path $env:XDG_DATA_HOME 'npm')
 Add-UserPath $(Join-Path $env:XDG_DATA_HOME 'nvim-data' 'mason' 'bin')

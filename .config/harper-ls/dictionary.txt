@@ -47,4 +47,5 @@ oxlint
 pyright
 shellcheck
 tty
+uncached
 zsh
