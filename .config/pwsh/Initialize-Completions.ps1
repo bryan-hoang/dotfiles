@@ -9,6 +9,11 @@ Register-ArgumentCompleter -CommandName git -Native -ScriptBlock {
 	return (Complete-Git -CommandAst $CommandAst -CursorPosition $CursorPosition)
 }
 
+if (-not(Get-Module -ListAvailable DockerCompletion)) {
+	Install-Module DockerCompletion
+}
+Import-Module DockerCompletion
+
 $PwshCompletionDir = $(Join-Path $env:LOCALAPPDATA 'PowerShell' 'completions')
 if (-not (Test-Path $PwshCompletionDir)) {
 	New-Item -ItemType Directory -Force -Path $PwshCompletionDir > $null
