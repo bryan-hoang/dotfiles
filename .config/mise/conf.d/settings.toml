@@ -4,8 +4,6 @@
 color_theme = "catppuccin"
 env_cache = true
 experimental = true
-go_set_gobin = false
-legacy_version_file = false
 minimum_release_age = "1d"
 paranoid = true
 

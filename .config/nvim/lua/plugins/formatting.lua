@@ -17,7 +17,7 @@ return {
 					ruby = { "rubyfmt", "rubocop" },
 					sh = shFormatters,
 					svg = { "prettier" },
-					toml = { "taplo" },
+					toml = { "tombi" },
 					xml = { "xmlstarlet" },
 					zsh = shFormatters,
 				},

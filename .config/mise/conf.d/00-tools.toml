@@ -23,8 +23,10 @@ opencode2 = "npm:@opencode-ai/cli"
 pac = "dotnet:microsoft.powerapps.cli.tool"
 rage = "github:str4d/rage"
 rtk = "github:rtk-ai/rtk"
+ryl = "aqua:owenlamont/ryl"
 sccache = "cargo:sccache"
 sd = "github:chmln/sd"
+selene = "aqua:Kampfkarren/selene"
 sfw = "npm:sfw"
 skills = "npm:skills"
 sqlcmd = "github:microsoft/go-sqlcmd"
@@ -49,7 +51,6 @@ sonarqube-cli = "http:sonarqube-cli"
 [tools]
 actionlint = { version = "latest", lazy = true }
 aube = { version = "latest", minimum_release_age = "0d" }
-betterleaks = "latest"
 bun = { version = "latest", lazy = true }
 cargo-binstall = "latest"
 cargo-cache = "latest"
@@ -63,21 +64,12 @@ go = "latest"
 gs = "latest"
 harper-cli = "latest"
 harper-ls = "latest"
-herdr = { version = "latest", lazy = true, version_prefix = "preview-", prerelease = "true", minimum_release_age = "0d" }
 hk = { version = "latest", minimum_release_age = "0d" }
-hunkdiff = { version = "latest", lazy = true, trust_policy_excludes = [
-  "@pierre/theme",
-] }
 jaq = "latest"
+kingfisher = "latest"
 lychee = "latest"
 mr-boxington = "latest"
 node = "latest"
-opencode = { version = "latest", lazy = true, minimum_release_age = "0d" }
-opencode2 = { version = "next", lazy = true, lazy_bins = [
-  "opencode2",
-], minimum_release_age = "0d", allow_builds = [
-  "@opencode-ai/cli",
-] }
 oxfmt = "latest"
 oxlint = "latest"
 pkl = "latest"
@@ -86,15 +78,18 @@ rmz = "latest"
 rtk = "latest"
 rumdl = "latest"
 rust = { version = "nightly", profile = "minimal", mr_boxington = true }
+ryl = { version = "latest", lazy = true, lazy_bins = ["ryl"] }
 sccache = "latest"
 sd = "latest"
+selene = "latest"
 sfw = "latest"
 shellcheck = "latest"
+shellharden = "latest"
 shfmt = "latest"
 skills = "latest"
 starship = "latest"
-taplo = "latest"
 television = "latest"
+tombi = "latest"
 tree-sitter = "latest"
 tspin = "latest"
 typos = "latest"
@@ -104,6 +99,17 @@ vscode-lsp = { version = "latest" }
 yq = "latest"
 zizmor = { version = "latest", lazy = true }
 zoxide = "latest"
+
+herdr = { version = "latest", lazy = true, version_prefix = "preview-", prerelease = "true", minimum_release_age = "0d" }
+hunkdiff = { version = "latest", lazy = true, trust_policy_excludes = [
+  "@pierre/theme",
+] }
+opencode = { version = "latest", lazy = true, minimum_release_age = "0d" }
+opencode2 = { version = "next", lazy = true, lazy_bins = [
+  "opencode2",
+], minimum_release_age = "0d", allow_builds = [
+  "@opencode-ai/cli",
+] }
 
 [tools.ec]
 version = "latest"
@@ -125,9 +131,9 @@ lazy_bins = ["xmlstarlet"]
 rename_exe = "xmlstarlet.exe"
 version = "latest"
 version_expr = "sortVersions(versions)"
-version_list_url = 'https://sourceforge.net/projects/xmlstar/rss'
+version_list_url = "https://sourceforge.net/projects/xmlstar/rss"
 version_regex = '/xmlstarlet/(\d+\.\d+\.\d+)/xmlstarlet-\d+\.\d+\.\d+-win32\.zip'
 
 [tools.xmlstarlet.platforms.windows-x64]
 format = "zip"
-url = 'https://sourceforge.net/projects/xmlstar/files/xmlstarlet/{{version}}/xmlstarlet-{{version}}-win32.zip/download'
+url = "https://sourceforge.net/projects/xmlstar/files/xmlstarlet/{{version}}/xmlstarlet-{{version}}-win32.zip/download"

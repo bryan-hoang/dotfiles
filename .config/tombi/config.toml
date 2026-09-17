@@ -1,0 +1,15 @@
+# Root Schema
+[[schemas]]
+path = "https://example.com/schema.json"
+include = ["*.toml"]
+format.rules = {
+  array-values-order.enabled = true,
+  table-keys-order.enabled = true,
+}
+overrides = [
+  {
+    targets = ["", "tool.*"],
+    format.rules.array-values-order = "version-sort",
+    format.rules.table-keys-order = "version-sort",
+  },
+]

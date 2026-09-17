@@ -1,4 +1,5 @@
 amends "package://github.com/jdx/hk/releases/download/v2.0.0/hk@2.0.0#/Config.pkl"
+
 import "package://github.com/jdx/hk/releases/download/v2.0.0/hk@2.0.0#/Builtins.pkl"
 
 steps {
@@ -8,30 +9,34 @@ steps {
   ["check_case_conflict"] = Builtins.check_case_conflict
   ["check_executables_have_shebangs"] = Builtins.check_executables_have_shebangs
   ["check_merge_conflict"] = Builtins.check_merge_conflict
+  ["check_shebang_scripts_are_executable"] = Builtins.check_shebang_scripts_are_executable
   ["check_symlinks"] = Builtins.check_symlinks
+  ["destroyed_symlinks"] = Builtins.destroyed_symlinks
   ["detect_private_key"] = Builtins.detect_private_key
   ["editorconfig_checker"] = Builtins.editorconfig_checker
   ["fix_smart_quotes"] = Builtins.fix_smart_quotes
+  ["kingfisher"] = Builtins.kingfisher
+  ["lychee"] = (Builtins.lychee) { exclude = List("**/git/config", "**/opencode.json*") }
   ["mise"] = Builtins.mise
+  ["mixed_line_ending"] = Builtins.mixed_line_ending
+  ["newlines"] = Builtins.newlines
   ["oxfmt"] = Builtins.oxfmt
   ["oxlint"] = Builtins.ox_lint
   ["ruff"] = Builtins.ruff
   ["ruff_format"] = Builtins.ruff_format
   ["rumdl"] = Builtins.rumdl
+  ["ryl"] = (Builtins.ryl) { check = "ryl check -d 'extends: default' {{ files }}" }
   ["shellcheck"] = Builtins.shellcheck
-  ["shfmt"] = (Builtins.shfmt) {
-    check = "shfmt -bn -ci --simplify {{ files }}"
-  }
+  ["shellharden"] = Builtins.shellharden
+  ["shfmt"] = (Builtins.shfmt) { check = "shfmt -bn -ci --simplify {{ files }}" }
   ["sql_fluff"] = Builtins.sql_fluff
-  ["taplo"] = Builtins.taplo
-  ["taplo_format"] = Builtins.taplo_format
+  ["stylua"] = Builtins.stylua
+  ["tombi"] = Builtins.tombi
+  ["tombi_format"] = Builtins.tombi_format
+  ["trailing_whitespace"] = Builtins.trailing_whitespace
+  ["ty"] = Builtins.ty
   ["zizmor"] = Builtins.zizmor
 
-  // FIXME: Infinite loop when ran by an agent to validate changes during hk v2
-  // migration.
-  // ["betterleaks"] = (Builtins.gitleaks) {
-  //   check = "betterleaks dir --redact --verbose --no-banner --log-level warn {{ files }}"
-  // }
   ["harper"] = (Builtins.harper) {
     check = "harper-cli lint --dialect us {{ files }}"
     exclude =
@@ -54,9 +59,6 @@ steps {
         "*npmrc",
       )
   }
-  ["lychee"] = (Builtins.lychee) {
-    exclude = List("**/git/config", "**/opencode.json*")
-  }
 }
 
 exclude = List("node_modules", "dist", "build")
@@ -73,6 +75,7 @@ hooks {
   ["commit-msg"] {
     steps = new Mapping<String, Step> {
       ["check-conventional-commit"] = Builtins.check_conventional_commit
+      ["harper_commit_message"] = Builtins.harper_commit_message
     }
   }
   ["pre-commit"] {

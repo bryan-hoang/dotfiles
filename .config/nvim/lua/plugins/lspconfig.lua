@@ -168,6 +168,8 @@ return {
 						},
 					},
 					oxlint = { mason = false },
+					-- TOML
+					tombi = { mason = false },
 				},
 			}
 
