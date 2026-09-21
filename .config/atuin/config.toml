@@ -1,6 +1,6 @@
-# https://docs.atuin.sh/configuration/config/
+# https://docs.atuin.sh/latest/configuration/config/
 
-history_filter = ["Password=", "BW_SESSION="]
+history_filter = ["BW_SESSION="]
 search_mode = "daemon-fuzzy"
 store_failed = false
 style = "auto"

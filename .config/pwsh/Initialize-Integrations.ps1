@@ -38,7 +38,6 @@ if (Test-CommandExists zoxide) {
 	Invoke-Expression (& { (zoxide init powershell | Out-String) })
 }
 
-# if (Test-CommandExists fnox) {
-# 	(&fnox activate pwsh) | Out-String | Invoke-Expression
-# }
-
+if (Test-CommandExists fnox) {
+	(&fnox activate pwsh) | Out-String | Invoke-Expression
+}

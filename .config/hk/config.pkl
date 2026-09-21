@@ -37,6 +37,9 @@ steps {
   ["ty"] = Builtins.ty
   ["zizmor"] = Builtins.zizmor
 
+  ["biome"] = (Builtins.biome) {
+    glob = List("**/*.css")
+  }
   ["harper"] = (Builtins.harper) {
     check = "harper-cli lint --dialect us {{ files }}"
     exclude =
