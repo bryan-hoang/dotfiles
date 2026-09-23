@@ -48,6 +48,7 @@ Set-UserEnvVar 'NUGET_PLUGINS_CACHE_PATH' $(Join-Path $env:XDG_CACHE_HOME 'nuget
 Set-UserEnvVar 'OMNISHARPHOME' $(Join-Path $env:XDG_CONFIG_HOME 'omnisharp')
 Set-UserEnvVar 'PNPM_HOME' $(Join-Path $env:XDG_DATA_HOME 'pnpm')
 Set-UserEnvVar 'RUFF_CACHE_DIR' $(Join-Path $env:XDG_CACHE_HOME 'ruff')
+Set-UserEnvVar 'RUMDL_CACHE_DIR' $(Join-Path $env:XDG_CACHE_HOME 'rumdl')
 Set-UserEnvVar 'STARSHIP_CONFIG' $(Join-Path $env:XDG_CONFIG_HOME 'starship' 'starship.toml')
 Set-UserEnvVar 'TEALDEER_CONFIG_DIR' $(Join-Path $env:XDG_CONFIG_HOME 'tealdeer')
 Set-UserEnvVar 'VP_HOME' $(Join-Path $env:XDG_DATA_HOME 'vite-plus')

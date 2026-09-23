@@ -29,7 +29,7 @@ if (Test-CommandExists starship) {
 }
 
 if (Test-CommandExists mise) {
-	mise activate pwsh | Out-String | Invoke-Expression
+	mise activate --shims pwsh | Out-String | Invoke-Expression
 }
 
 # NOTE: `zoxide` should be initialized after `starship`.
