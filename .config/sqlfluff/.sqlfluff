@@ -16,7 +16,7 @@ indent_unit = tab
 capitalisation_policy = upper
 
 [sqlfluff:rules:capitalisation.identifiers]
-capitalisation_policy = consistent
+extended_capitalisation_policy = consistent
 
 [sqlfluff:rules:capitalisation.keywords]
 capitalisation_policy = upper
