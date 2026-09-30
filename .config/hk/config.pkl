@@ -1,6 +1,6 @@
-amends "package://github.com/jdx/hk/releases/download/v2.0.0/hk@2.0.0#/Config.pkl"
+amends "package://github.com/jdx/hk/releases/download/v2.4.0/hk@2.4.0#/Config.pkl"
 
-import "package://github.com/jdx/hk/releases/download/v2.0.0/hk@2.0.0#/Builtins.pkl"
+import "package://github.com/jdx/hk/releases/download/v2.4.0/hk@2.4.0#/Builtins.pkl"
 
 steps {
   ["actionlint"] = Builtins.actionlint
@@ -42,25 +42,10 @@ steps {
   }
   ["harper"] = (Builtins.harper) {
     check = "harper-cli lint --dialect us {{ files }}"
-    exclude =
-      List(
-        "**/.bash*",
-        "**/.profile",
-        "**/dictionary.txt",
-        "*.conf",
-        "*.cshtml",
-        "*.css",
-        "*.json*",
-        "*.pkl",
-        "*.prettierrc*",
-        "*.ps1",
-        "*.sh",
-        "*.sql",
-        "*.yaml",
-        "*config",
-        "*git*",
-        "*npmrc",
-      )
+    glob = List("*.md")
+  }
+  ["typos"] = (Builtins.typos) {
+    check = "typos --force-exclude {{files}}"
   }
 }
 
