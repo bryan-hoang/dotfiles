@@ -29,6 +29,7 @@ readonly debug
 shift $((OPTIND - 1))
 
 # List of project directories that we want to make a session in tmux for.
+# shellcheck disable=SC2154
 declare -a proj_dirs=(
 	# e.g., neovim configs.
 	"$XDG_CONFIG_HOME"

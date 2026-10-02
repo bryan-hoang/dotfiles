@@ -1,0 +1,5 @@
+# https://github.com/crate-ci/typos/blob/v1.50.3/docs/reference.md
+
+[default]
+# Tool names that typos reads as misspellings.
+extend-ignore-re = ["commandbox", "muc --count", "tre-command"]
