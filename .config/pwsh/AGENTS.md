@@ -18,8 +18,8 @@ sequentially loads the `Initialize-*.ps1` scripts.
 - **XDG Base Directory Compliance**: The environment heavily overrides tool
   homes (AWS, Azure, Docker, Cargo, Kube, npm, Node, etc.) to use
   `$env:XDG_CONFIG_HOME`, `$env:XDG_DATA_HOME`, `$env:XDG_CACHE_HOME`, and
-  `$env:XDG_STATE_HOME` (`Initialize-Environment.ps1`). Do not assume configs
-  are in standard `~/.<tool>` paths.
+  `$env:XDG_STATE_HOME` (`Initialize-Environment.ps1`). Do not assume
+  configurations are in standard `~/.<tool>` paths.
 - **Important Helper Functions** (`Initialize-Functions.ps1`):
   - `Test-CommandExists <command>`: Use to safely check for a tool's presence.
   - `Set-UserEnvVar <name> <value>`: Sets environment variables for the current

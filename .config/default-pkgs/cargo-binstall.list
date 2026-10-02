@@ -196,7 +196,6 @@ typos-cli
 # Dev tools, env vars, task runner.
 # mise
 # 🤖 The Modern Port Scanner 🤖.
-# https://github.com/RustScan/RustScan/issues/412#issue-1045541309
 # rustscan
 # Lightweight color picker for X11.
 # xcolor
