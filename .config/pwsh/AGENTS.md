@@ -14,7 +14,7 @@ sequentially loads the `Initialize-*.ps1` scripts.
   binaries (like `curl` or `wget`) are intentionally removed in
   `Initialize-Aliases.ps1` to force the use of native commands. A strict
   allowlist preserves internal shell navigation (`cd`, `pushd`, etc.). `ls` is
-  aliased to `lsd`.
+  aliased to `eza`.
 - **XDG Base Directory Compliance**: The environment heavily overrides tool
   homes (AWS, Azure, Docker, Cargo, Kube, npm, Node, etc.) to use
   `$env:XDG_CONFIG_HOME`, `$env:XDG_DATA_HOME`, `$env:XDG_CACHE_HOME`, and

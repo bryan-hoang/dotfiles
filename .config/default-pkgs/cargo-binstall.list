@@ -1,8 +1,8 @@
 # The minimal, blazing-fast, and infinitely customizable prompt for any shell
 # (starship/starship)!
 starship
-# The next gen ls command (lsd-rs/lsd).
-lsd
+# A modern, maintained replacement for ls (eza-community/eza).
+eza
 # A syntax-highlighting pager for git and diff output.
 git-delta
 # Manage cargo cache (${CARGO_HOME}, ~/.cargo/), print sizes of dirs and

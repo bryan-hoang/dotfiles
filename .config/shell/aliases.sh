@@ -117,18 +117,18 @@ unalias cp 2>/dev/null
 # first.
 alias tree="tree --dirsfirst --charset=ascii"
 
-# region ls vs. exa
+# region ls vs. eza
 
 alias ls="ls --color"
 alias ll="ls -l --almost-all --classify --group-directories-first --human-readable --color"
 
-# Override `ls` with `exa` if it exists.
-if command -v lsd >/dev/null 2>&1; then
-	alias ls=lsd
-	alias ll='lsd --long --almost-all --classify --group-directories-first'
+# Override `ls` with `eza` if it exists.
+if command -v eza >/dev/null 2>&1; then
+	alias ls=eza
+	alias ll='eza --long --almost-all --classify --group-directories-first'
 fi
 
-# endregion ls vs. exa
+# endregion ls vs. eza
 
 # xclip workaround in WSL 2.
 [[ -f '/mnt/c/Windows/System32/clip.exe' ]] \
