@@ -48,6 +48,14 @@ M .typos.toml E177
 
 <!-- audit-gate-dispositions:end -->
 
+Amended 2026-10-03 by
+[Author the public and Git mirrored sources and the Linux managed destinations](https://github.com/bryan-hoang/dotfiles/issues/371):
+the human accepted that mise overwrites changed Linux generated outputs as a
+recorded limit, made `E176` a manual WSL procedure step, and chose local
+capability selection. The rows are unchanged; the
+[Linux Managed Destinations](#linux-managed-destinations) section records the
+decisions and the capability gates.
+
 ## Approved Counts
 
 | Measure                                                                                          |                                   Approved count |
@@ -119,8 +127,9 @@ Review codes have these complete meanings:
 introduces additional managed destinations. `generated` destinations are
 excluded from history. Writable destinations require a verified link or junction
 with no copy fallback. `copy-ok` marks a read-only, replaceable copy that must
-be reapplied after source changes. Changed generated outputs hold or quarantine
-rather than overwrite.
+be reapplied after source changes. On Windows, changed generated outputs hold or
+quarantine rather than overwrite. On Linux, mise overwrites them; see
+[Linux Managed Destinations](#linux-managed-destinations).
 
 Every row inherits the plaintext-only policy from ticket 05 and the
 canonical-source/dependency policy from ticket 06. Provenance codes `07`, `08`,
@@ -459,6 +468,57 @@ deferred repositories are unreachable from active setup declarations.
   can continue until manual validation detects drift.
 - The built-in history watcher remains inactive until the downstream home
   validation and automatic-sync decision.
+
+## Linux Managed Destinations
+
+`lab/prototype-plan.ps1` generates one `E011` declaration for each Linux managed
+destination in a shared or Linux row's `destination` field:
+
+| Destination form                         | Declaration                                                        |
+| ---------------------------------------- | ------------------------------------------------------------------ |
+| Writable link or read-only alias         | `mode = "symlink"` to the row's source                             |
+| `generated`                              | `mode = "copy"`, or `"template"` for a `.tmpl` source; mode `0644` |
+| `managed` with mode `0755`               | `mode = "copy"` with `permissions = "0755"`                        |
+| `copy-ok`                                | `mode = "copy"` with `permissions = "0644"`                        |
+| `AppData`, `%APPDATA%`, setup-root alias | None; Windows destinations belong to `E161`, aliases to the tree   |
+| Local include, `/etc`, systemd enabling  | None; see the limits below                                         |
+
+Every declaration selects `variants = [{ os = "linux" }]`. A row in the block
+below also selects that capability as the variant's `profile`. A `wsl` or
+`native-linux` condition covers every Linux machine, so it needs no profile.
+Destinations are not enrollment roots, so they never enter history; the managed
+`Stylua` link inside `E138` is excluded by the history exclusion.
+
+<!-- linux-capability-gates:start -->
+
+```text
+E170 wsl
+E172 vscode-remote
+```
+
+<!-- linux-capability-gates:end -->
+
+Capabilities are mise configuration environments. Each machine lists its local
+capabilities in the excluded `~/.config/mise/miserc.local.toml`, for example
+`env = ["wsl", "vscode-remote"]`. Mise never captures `*.local.toml` files, and
+`MISE_ENV` or `-E` overrides the list for one command. Public capability names
+are `wsl`, `native-linux`, `systemd`, `vscode-remote`, `kitty-graphics`, and
+application names. The `E101` template reads `kitty-graphics` from `mise_env`.
+
+Recorded limits in mise `2026.10.0`:
+
+- Applying a `copy` or `template` entry overwrites a changed generated output
+  without `--force`. The human accepted this for Linux: edits belong in the
+  canonical source or a local input, and `mise dot status` reports the changed
+  output as `differs` before the next apply. Windows `E161` still holds or
+  quarantines changed outputs.
+- `E011` does not declare `E176`. `[bootstrap.files]` has no OS or capability
+  gate and fails on Windows, and `[dotfiles]` cannot set root ownership. The
+  manual WSL procedure installs the source at `/etc/wsl.conf` as `root:root`
+  `0644`, next to the manual WSL restart.
+- `E011` does not declare the systemd user enabling of `E173` to `E175`. Mise
+  user services and systemd units write their own unit files instead of enabling
+  an enrolled one, and neither takes a capability gate.
 
 ## Repository-Only Guard
 
