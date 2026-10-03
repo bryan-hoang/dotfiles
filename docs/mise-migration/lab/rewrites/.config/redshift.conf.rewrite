@@ -1,0 +1,10 @@
+; https://github.com/jonls/redshift/blob/master/redshift.conf.sample
+[redshift]
+fade=0
+temp-night=1500
+; Difficult to use `geoclue` w/ Mozilla's location service being sunset ;
+; earlier this year.
+; https://gitlab.freedesktop.org/geoclue/geoclue/-/issues/186
+location-provider=manual
+
+[manual]

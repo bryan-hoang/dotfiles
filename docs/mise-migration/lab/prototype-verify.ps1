@@ -146,6 +146,16 @@ Check legacy_kept_missing @($kept | Where-Object { -not $t.ContainsKey($_) }).Co
 # rewrite counts as changed only where it differs from the audited tip.
 $rewriteRoot = Join-Path $PSScriptRoot 'rewrites'
 $rewrites = [ordered]@{ '.config/shell/functions.sh' = $null; 'README.md' = Join-Path $workspace 'README.md'; 'package.json' = $null; 'pnpm-lock.yaml' = $null }
+# Private-data sanitization (#389): the removed values never appear here.
+foreach ($k in @(
+		'.config/X11/xresources', '.config/bspwm/bspwmrc', '.config/git/distributive.gitconfig', '.local/bin/print-git-email-symbol', '.config/clipcat/clipcat-menu.toml', '.config/clipcat/clipcatctl.toml', '.config/clipcat/clipcatd.toml'
+		'.config/emscripten/config', '.config/himalaya/config.toml', '.config/i3/config', '.config/i3status-rust/config.toml'
+		'.config/meli/config.toml', '.config/pam-gnupg', '.config/redshift.conf', '.config/rust-motd/config.toml'
+		'.config/spotify-tui/client.yml', '.config/spotifyd/spotifyd.conf', '.config/systemd/user/emacs.service'
+		'.config/systemd/user/gpg-agent-browser.socket', '.config/systemd/user/gpg-agent-extra.socket'
+		'.config/systemd/user/gpg-agent-ssh.socket', '.config/systemd/user/gpg-agent.socket'
+		'.config/systemd/user/lemonade.service', '.config/systemd/user/tmux.service', '.local/bin/run-as-cron'
+	)) { $rewrites[$k] = $null }
 foreach ($k in @($rewrites.Keys)) { if (-not $rewrites[$k]) { $rewrites[$k] = Join-Path $rewriteRoot "$k.rewrite" } }
 $staged = @(Get-ChildItem -LiteralPath $rewriteRoot -Recurse -File -Force | ForEach-Object { $_.FullName.Substring($rewriteRoot.Length + 1) -replace '\\', '/' -replace '\.rewrite$', '' })
 Check rewrites_unexpected_files @($staged | Where-Object { -not $rewrites.Contains($_) }).Count 0
@@ -175,9 +185,17 @@ Check repository_only_guard_negative_control "$(@(Guard $bad $rootFiles).Count),
 
 $x11 = Block 'deferred-x11-sources'
 $e011Text = [IO.File]::ReadAllText($e011)
-Check x11_sources_repository_only_unchanged_content @($x11 | Where-Object { $t[$_] -and ($t[$_] -split ' ')[1] -eq ($old[$_] -split ' ')[1] }).Count $x11.Count
+Check x11_sources_repository_only_expected_content @($x11 | Where-Object { $t[$_] -and ($t[$_] -split ' ')[1] -eq $(if ($rewrites.Contains($_)) { $rewriteBlobs[$_] } else { ($old[$_] -split ' ')[1] }) }).Count $x11.Count
 Check x11_in_manifest @($m.enrollment.path | Where-Object { $p2 = $_; @($x11 | Where-Object { $p2 -like "*/$_" }).Count }).Count 0
 Check x11_in_e011 @(@($x11) + 'xresources', 'dunst', 'dracula/gtk', 'dracula/rofi' | Where-Object { $e011Text.Contains($_) }).Count 0
+
+# Forbidden private-data classes (#389): any hit anywhere in the built tip
+# fails. Rows carry path, class, and line count only, never values.
+$forbidden = @(& (Join-Path $PSScriptRoot 'forbidden-scan.ps1') -Repo $repo -Rev $tipFull)
+foreach ($h in $forbidden) { Say forbidden_hit ($h -replace "`t", ':') }
+Check forbidden_hits $forbidden.Count 0
+$probe = @(('a@corp-mail' + '.test'), ('signing' + 'key = 0123456789' + 'ABCDEF'), ('pass' + 'word = s3cr3tvalue'), ('Host' + 'Name 10.1' + '.2.3'), 'personal bryan@bryanhoang.dev', ('pass' + 'word = "password"'))
+Check forbidden_negative_control ((& (Join-Path $PSScriptRoot 'forbidden-scan.ps1') -Text $probe) -join ',') 'work-identity,key-identifier,credential,private-endpoint,,'
 
 if ($Kingfisher) {
 	if (-not $OutDir) { throw '-OutDir is required with -Kingfisher' }

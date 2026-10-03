@@ -1,0 +1,30 @@
+finder = "rofi"
+preview_length = 80
+
+[rofi]
+extra_arguments = []
+line_length = 100
+menu_length = 30
+menu_prompt = "Clipcat"
+
+[dmenu]
+extra_arguments = []
+line_length = 100
+menu_length = 30
+menu_prompt = "Clipcat"
+
+[choose]
+extra_arguments = []
+line_length = 100
+menu_length = 30
+menu_prompt = "Clipcat"
+
+[custom_finder]
+args = []
+program = "fzf"
+
+[log]
+emit_journald = true
+emit_stderr = false
+emit_stdout = false
+level = "INFO"

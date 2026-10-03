@@ -2,12 +2,6 @@
 #
 # shellcheck disable=2154
 
-# Repository-only legacy record from the home-root checkout. It is inert: the
-# return below stops it when sourced or run. The live helpers are tracked by
-# mise history as home/.config/shell/functions.sh.
-# shellcheck disable=2317,2329
-return 0 2>/dev/null || exit 0
-
 # https://github.com/anordal/shellharden/blob/master/how_to_do_things_safely_in_bash.md#assert-that-command-dependencies-are-installed
 require() {
 	hash "$@" || return 127
@@ -1027,13 +1021,13 @@ generate_ssh_key() {
 }
 
 export_gpg_key() {
-	gpg --export-secret-key --armor "$GPG_KEY_ID" >|"$HOME"/.gnupg/secret.asc
+	gpg --export-secret-key --armor "${GPG_KEY_ID:?set GPG_KEY_ID in ~/.config/shell/extra.sh}" >|"$HOME"/.gnupg/secret.asc
 	scp "$HOME"/.gnupg/secret.asc "${1}":"$HOME"/.gnupg
 }
 
 import_gpg_key() {
 	gpg --import "$HOME"/.gnupg/secret.asc
-	gpg --edit-key "$GPG_KEY_ID" trust
+	gpg --edit-key "${GPG_KEY_ID:?set GPG_KEY_ID in ~/.config/shell/extra.sh}" trust
 	gpg --update-trustdb
 }
 

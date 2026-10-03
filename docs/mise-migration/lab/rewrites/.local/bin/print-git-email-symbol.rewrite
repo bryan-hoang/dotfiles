@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+GIT_EMAIL=$(git config user.email)
+
+case $GIT_EMAIL in
+	bryan@bryanhoang.dev)
+		GIT_EMAIL_SYMBOL='@'
+		;;
+	*)
+		GIT_EMAIL_SYMBOL=$GIT_EMAIL
+		;;
+esac
+
+echo "$GIT_EMAIL_SYMBOL"

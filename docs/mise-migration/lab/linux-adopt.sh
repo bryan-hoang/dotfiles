@@ -176,6 +176,18 @@ run fresh_changed_status mise dot status "$HOME/package.json"
 say fresh_changed_generated_status "$(grep -q differs "$out/fresh_changed_status.log" && echo differs || echo other)"
 run fresh_changed_apply mise dot apply --yes "$HOME/package.json"
 say fresh_changed_generated_after_apply "$(same_bytes "$HOME/package.json" "$HOME/.config/mise/dotfiles/package.json" && echo overwritten || echo kept)"
+# E030 (#389): the GnuPG key identifier comes from the guarded local input
+# ~/.config/shell/extra.sh; without it the helper refuses to run gpg.
+mkdir -p "$HOME/.config/shell"
+printf 'export GPG_KEY_ID=lab-key-id\n' >"$HOME/.config/shell/extra.sh"
+# shellcheck disable=SC2016
+gpg_args=$(timeout 30 bash -c '. "$HOME"/.config/shell/extra.sh; . "$HOME"/.config/shell/functions.sh; gpg() { printf "%s " "$@"; }; import_gpg_key' 2>&1)
+say fresh_e030_key_from_local_input "$([[ $gpg_args == *'--edit-key lab-key-id trust'* ]] && echo yes || echo no)"
+rm "$HOME/.config/shell/extra.sh"
+# shellcheck disable=SC2016
+timeout 30 env -u GPG_KEY_ID bash -c '. "$HOME"/.config/shell/functions.sh; gpg() { printf "%s " "$@"; }; import_gpg_key' >"$out/fresh_e030_unset.log" 2>&1
+say fresh_e030_unset_key_exit "$?"
+say fresh_e030_unset_key_ran_edit "$(grep -c -- '--edit-key' "$out/fresh_e030_unset.log")"
 
 # a: preliminary sequence
 export HOME=$base/a

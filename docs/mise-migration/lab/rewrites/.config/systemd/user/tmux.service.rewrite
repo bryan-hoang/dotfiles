@@ -1,0 +1,13 @@
+# https://wiki.archlinux.org/title/Tmux#Autostart_with_systemd
+# https://wiki.archlinux.org/title/Systemd/User#Persistent_terminal_multiplexer
+[Unit]
+Description=tmux default session (detached)
+Documentation=man:tmux(1)
+After=gpg-agent.service
+Wants=gpg-agent.service
+
+[Service]
+Type=forking
+ExecStart=%h/.local/bin/tmux new-session -s %u -d
+ExecStop=%h/.local/share/tmux/plugins/tmux-resurrect/scripts/save.sh
+ExecStop=%h/.local/bin/tmux kill-session -t %u
