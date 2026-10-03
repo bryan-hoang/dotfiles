@@ -106,11 +106,12 @@ Say sanitized_rows $sanitized.Count
 Check sanitized_rows_without_reviewed_source @($sanitized | Where-Object { $reviewed -notcontains $_ }).Count 0
 
 # Authored sources and E011's Linux managed destinations (#371): every file in
-# lab/sources maps to a shared or Linux row; E012 has no home-checkout
+# lab/sources maps to a row (Windows sources such as #374's E161 module stay
+# out of the tip, which stream_windows_files checks); E012 has no home-checkout
 # includeIf; E011 never declares the watcher; every non-track declaration is
 # gated to Linux, and none of its targets is in history.
 $srcFiles = @(Get-ChildItem -LiteralPath $srcRoot -Recurse -File -Force | ForEach-Object { $_.FullName.Substring($srcRoot.Length + 1) -replace '\\', '/' })
-Check sources_unmapped @($srcFiles | Where-Object { $built.Live -notcontains "~/$_" }).Count 0
+Check sources_unmapped @($srcFiles | Where-Object { $files.Live -notcontains "~/$_" }).Count 0
 $e012 = @($built | Where-Object Id -EQ 'E012')[0].Stream
 Check e012_home_checkout_includeif @((G cat-file blob ($t[$e012] -split ' ')[1]) | Where-Object { $_ -match 'includeIf\s+"gitdir/?i?:~/\.git' }).Count 0
 $e011Body = [IO.File]::ReadAllText($e011)
