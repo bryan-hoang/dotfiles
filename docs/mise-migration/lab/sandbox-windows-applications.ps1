@@ -140,7 +140,7 @@ try {
 	$env:PATH = "$lab\stub;$env:PATH"
 	Check 'c1_apply_exit' (Mod 'c1_apply' 'Invoke-WindowsApplications apply') 0
 	Check 'c1_status_exit' (Mod 'c1_status' 'Invoke-WindowsApplications status') 0
-	Check 'c1_status_ok_rows' ([regex]::Matches((Log 'c1_status'), 'State=ok').Count) 3
+	Check 'c1_status_ok_rows' ([regex]::Matches((Log 'c1_status'), 'State=ok').Count) 8
 	Check 'c1_profile_link' (LinkOf $profileDest) "SymbolicLink->$profileSrc"
 	Check 'c1_mintty_junction' (LinkOf $minttyDest) "Junction->$minttySrc"
 	Check 'c1_mintty_through_junction' ((Hash (Join-Path $minttyDest 'config')) -eq (Hash (Join-Path $minttySrc 'config'))) 'True'
@@ -148,7 +148,7 @@ try {
 	Check 'c1_topgrade_readonly' (Get-Item -LiteralPath $topDest).IsReadOnly 'True'
 	Check 'c1_topgrade_bytes' ((Hash $topDest) -eq (Hash $topSrc)) 'True'
 	Check 'c1_reapply_exit' (Mod 'c1_reapply' 'Invoke-WindowsApplications apply') 0
-	Check 'c1_reapply_noop_rows' ([regex]::Matches((Log 'c1_reapply'), 'Action=none').Count) 3
+	Check 'c1_reapply_noop_rows' ([regex]::Matches((Log 'c1_reapply'), 'Action=none').Count) 8
 
 	# Flag off: apply reports owned paths and changes none, even a changed one; no quarantine.
 	[IO.File]::WriteAllText($flags, "# lab-marker-374-local`n[vars.windows_applications]`ntopgrade = false`n", $lf)
@@ -167,7 +167,7 @@ try {
 	(Get-Item -LiteralPath $topDest).IsReadOnly = $true
 	[IO.File]::WriteAllText($flags, "# lab-marker-374-local`n[vars.windows_applications]`ntopgrade = true`n", $lf)
 	Mod 'f_on_status' 'Invoke-WindowsApplications status' | Out-Null
-	Check 'f_on_status_ok_rows' ([regex]::Matches((Log 'f_on_status'), 'State=ok').Count) 3
+	Check 'f_on_status_ok_rows' ([regex]::Matches((Log 'f_on_status'), 'State=ok').Count) 8
 
 	# Criterion 3: a replaced managed link makes validate quarantine, block, stop the watcher, exit nonzero.
 	[IO.File]::Delete($profileDest)

@@ -1,0 +1,14 @@
+#:tombi format.disabled = true
+# Alacritty on Windows (E162). The Windows application module (unit
+# alacritty) renders this template to a read-only
+# %APPDATA%\alacritty\alacritty.toml, replacing each env expression with that
+# environment variable. Edit this source, never the rendered file. Values that
+# take a Windows path stay single-quoted literal strings: a basic string would
+# read its backslashes as escapes.
+[general]
+import = ['~/.config/alacritty/alacritty.common.toml']
+working_directory = '{{ env.USERPROFILE }}'
+
+[terminal.shell]
+args = ["--login"]
+program = '{{ env.ProgramFiles }}\Git\bin\bash.exe'
