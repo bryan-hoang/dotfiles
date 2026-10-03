@@ -356,6 +356,39 @@ units remain non-deployable. Shared WezTerm, `MPV`, shell, and related sources
 remain enrolled for Windows or non-X11 use, but their X11 branches cannot
 activate.
 
+## Removed Legacy Entries
+
+The 32 removed legacy entries are `.gitmodules`, every `gitlink`, and the
+following 20 paths from the `Remove` rows of the core, Windows, and Unix
+matrices. The converted tip omits them and the 10 deferred X11 links above.
+
+<!-- removed-legacy-paths:start -->
+
+```text
+.config/emacs
+.config/sway/config
+.config/systemd/user/default.target.wants/atuin.service
+.config/systemd/user/default.target.wants/ssh-agent.service
+.config/systemd/user/sockets.target.wants/gpg-agent-browser.socket
+.config/systemd/user/sockets.target.wants/gpg-agent-extra.socket
+.config/systemd/user/sockets.target.wants/gpg-agent-ssh.socket
+.config/systemd/user/sockets.target.wants/gpg-agent.socket
+.config/tmux/tmux.conf
+.config/windows/atuin-daemon.xml
+.config/windows/glazewm.xml
+.config/windows/lemonade-server.xml
+.config/zebar/.marketplace/glzr-io.starter.json
+.config/zellij/themes/catppuccin.kdl
+.local/bin/docuum
+AppData/Local/Packages/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe/LocalState/settings.json
+AppData/Roaming/dystroy/broot/config/conf.hjson
+AppData/Roaming/nushell/nu/config/config.toml
+AppData/Roaming/silicon/config
+AppData/Roaming/vesktop/package.json
+```
+
+<!-- removed-legacy-paths:end -->
+
 ## Approved Bootstrap Repository Set
 
 These 10 full repositories use public HTTPS origins, omit `ref`, follow the

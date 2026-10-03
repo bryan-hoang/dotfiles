@@ -1,79 +1,182 @@
-# Verifies the prototype setup tip in the canonical exchange against the plan
-# generated from the approved inventory and the legacy tree at the audited tip.
-# Read-only for the exchange; prints key=value results.
-param([Parameter(Mandatory)][string]$IntakeRoot, [string]$Legacy = '46df470')
+# Verifies the conversion commit at main of a setup.git exchange against the
+# plan generated from the approved inventory, the audited-tip tree, and the
+# repository-only guard. Read-only for the exchange. Prints key=value results,
+# then verify_result=pass|fail with the failed checks, and exits 1 on failure.
+# -Kingfisher runs the redacted all-refs scan on a disposable mirror clone.
+param(
+	[Parameter(Mandatory)][string]$Exchange,
+	[Parameter(Mandatory)][string]$Tip,
+	[string]$Kingfisher,
+	[string]$OutDir
+)
 $ErrorActionPreference = 'Stop'
-$repo = Join-Path ([IO.Path]::GetFullPath($IntakeRoot)) 'exchange\setup.git'
+$env:MISE_AUTO_INSTALL = '0'
+$repo = [IO.Path]::GetFullPath($Exchange)
 $p = Join-Path $PSScriptRoot 'prototype'
 $inv = Join-Path $PSScriptRoot '..\matrices\10-approved-enrollment-inventory.md'
+$workspace = Resolve-Path (Join-Path $PSScriptRoot '..\..\..')
 function G { $o = & git -C $repo @args; if ($LASTEXITCODE) { throw "git $args failed" }; $o }
+$failed = [Collections.Generic.List[string]]::new()
 function Say([string]$k, $v) { "$k=$v" }
+# Check: prints the value and records a failure unless it equals the expectation.
+function Check([string]$k, $v, $want) { "$k=$v"; if ("$v" -ne "$want") { $failed.Add($k) } }
 function Tree([string]$rev) {
 	$h = @{}
 	foreach ($l in (G ls-tree -r --full-tree $rev)) { $meta, $path = $l -split "`t", 2; $m, $null, $o = $meta -split ' '; $h[$path] = "$m $o" }
 	$h
 }
+function Block([string]$tag) {
+	$s = [array]::IndexOf($lines, "<!-- ${tag}:start -->"); $e = [array]::IndexOf($lines, "<!-- ${tag}:end -->")
+	if ($s -lt 0 -or $e -lt $s) { throw "block not found: $tag" }
+	@($lines[($s + 1)..($e - 1)] | Where-Object { $_ -and $_ -notmatch '^```' })
+}
+$lines = Get-Content -LiteralPath $inv
+function BlobId([string]$text) {
+	$b = [Text.Encoding]::UTF8.GetBytes($text)
+	$h = [Security.Cryptography.SHA1]::HashData([byte[]]([Text.Encoding]::ASCII.GetBytes("blob $($b.Length)`0") + $b))
+	-join ($h | ForEach-Object { $_.ToString('x2') })
+}
 
-$tip = (G rev-parse main)
-$legacyFull = (G rev-parse $Legacy)
-Say tip $tip
-& git -C $repo merge-base --is-ancestor $legacyFull $tip
-Say legacy_tip_is_ancestor $(if ($LASTEXITCODE -eq 0) { 'yes' } else { 'no' })
-$chain = @(G log --first-parent --format='%H %P' "$legacyFull..$tip")
-Say new_commits $chain.Count
-Say new_merge_commits @($chain | Where-Object { ($_ -split ' ').Count -gt 2 }).Count
-Say new_commit_authors ((G log --format='%an' "$legacyFull..$tip" | Group-Object | ForEach-Object { "$($_.Name):$($_.Count)" }) -join ',')
+# Repository-only guard: no declaration may source a setup-root legacy path or
+# another repository-only root file. Anchored at the setup-repository root, so
+# config/dotfiles/... passes. Returns the offending source values.
+function Guard([string]$toml, [string[]]$rootFiles) {
+	foreach ($m in [regex]::Matches($toml, '(?m)\bsource\s*=\s*["'']([^"'']*)["'']')) {
+		$v = $m.Groups[1].Value -replace '\\', '/'
+		$rel = $v -replace '^(\./|/)+', ''
+		if ($v -match '^~' -or $v -match '^[A-Za-z]:') { continue }
+		if ($rel -match '^(\.config|\.local|\.ssh|AppData|src)(/|$)' -or $rootFiles -contains $rel) { $v }
+	}
+}
 
-$t = Tree $tip
-$old = Tree $legacyFull
+$tipFull = (G rev-parse main)
+$auditedFull = (G rev-parse "$Tip^{commit}")
+Say tip $tipFull
+Say audited_tip $auditedFull
+$parents = @((G rev-list --parents -n 1 $tipFull) -split ' ' | Select-Object -Skip 1)
+Check conversion_parents $parents.Count 1
+Check conversion_parent_is_audited_tip $(if ($parents.Count -eq 1 -and $parents[0] -eq $auditedFull) { 'yes' } else { 'no' }) yes
+
+$t = Tree $tipFull
+$old = Tree $auditedFull
 $files = Get-Content -LiteralPath (Join-Path $p 'files.tsv') | ForEach-Object { $f = $_ -split "`t"; [pscustomobject]@{ Id = $f[0]; Var = $f[1]; Live = $f[2]; Stream = $f[3] } }
+$built = @($files | Where-Object Var -NE 'W')
 $streamRe = '^(home|config)(@[a-z]+)?/'
 $actual = @($t.Keys | Where-Object { $_ -match $streamRe })
-$expected = @($files.Stream)
-Say stream_files $actual.Count
-Say stream_missing @($expected | Where-Object { -not $t.ContainsKey($_) }).Count
-Say stream_unexpected @($actual | Where-Object { $expected -notcontains $_ }).Count
+Check stream_files $actual.Count $built.Count
+Check stream_missing @($built.Stream | Where-Object { -not $t.ContainsKey($_) }).Count 0
+Check stream_unexpected @($actual | Where-Object { $built.Stream -notcontains $_ }).Count 0
+Check stream_windows_files @($actual | Where-Object { $_ -match '^(home|config)@windows/' }).Count 0
 Say stream_by_root (($actual | Group-Object { ($_ -split '/')[0] } | Sort-Object Name | ForEach-Object { "$($_.Name):$($_.Count)" }) -join ',')
-Say stream_modes (($actual | Group-Object { ($t[$_] -split ' ')[0] } | ForEach-Object { "$($_.Name):$($_.Count)" }) -join ',')
-$e011 = [IO.File]::ReadAllText((Join-Path $p 'dotfiles.toml'))
-$badBytes = @(foreach ($f in $files) {
-		if (-not $t.ContainsKey($f.Stream)) { continue }
-		$want = if ($f.Id -eq 'E011') { $e011 } else { "# synthetic $($f.Id) $($f.Stream)`n" }
-		$got = (& git -C $repo cat-file blob ($t[$f.Stream] -split ' ')[1]) -join "`n"
-		if ("$got`n" -ne $want) { $f.Id }
-	})
-Say stream_bytes_mismatch $(if ($badBytes.Count) { ($badBytes | Select-Object -Unique) -join ',' } else { 0 })
-Say managed_stylua_in_history @($t.Keys | Where-Object { $_ -match '/\.config/nvim/stylua\.toml$' }).Count
+Check stream_non_100644 @($actual | Where-Object { ($t[$_] -split ' ')[0] -ne '100644' }).Count 0
+$e031 = @($built | Where-Object Id -EQ 'E031')[0].Stream
+Check e031_mode ($t[$e031] -split ' ')[0] 100644
 
-$lines = Get-Content -LiteralPath $inv
-$s = [array]::IndexOf($lines, '<!-- enrollment-roots:start -->'); $e = [array]::IndexOf($lines, '<!-- enrollment-roots:end -->')
-$roots = $lines[($s + 1)..($e - 1)] | Where-Object { $_ -match '^\|\s*`?E\d{3}`?\s' } | ForEach-Object { $f = @($_.Trim().Trim('|') -split '\|' | ForEach-Object { $_.Trim().Trim('`') }); [pscustomobject]@{ Id = $f[0]; Source = $f[1]; Enroll = $f[2]; Variant = $f[5]; Autosave = $f[6] } }
-$m = (G show "${tip}:.mise-history/manifest.json") -join "`n" | ConvertFrom-Json
-Say format_marker (((G show "${tip}:.mise-history/format.toml") | Where-Object { $_ -match '^format' }) -join '')
-Say manifest_entries $m.enrollment.Count
+# Expected stream bytes: E011 is the generated declaration; a row whose source
+# is a regular file at the audited tip takes that blob; every other row is a
+# synthetic placeholder for a canonical source a later ticket writes.
+$e011 = Join-Path $p 'dotfiles.toml'
+$e011Blob = (& git hash-object --no-filters -- $e011)
+$fromTip = 0; $synthetic = 0
+$badBytes = @(foreach ($f in $built) {
+		if (-not $t.ContainsKey($f.Stream)) { continue }
+		$rel = $f.Live.Substring(2)
+		if ($f.Id -eq 'E011') { $want = $e011Blob }
+		elseif ($old[$rel] -match '^100(644|755) ') { $want = ($old[$rel] -split ' ')[1]; $fromTip++ }
+		else { $want = BlobId "# synthetic $($f.Id) $($f.Stream)`n"; $synthetic++ }
+		if (($t[$f.Stream] -split ' ')[1] -ne $want) { $f.Id }
+	})
+Say stream_from_audited_tip $fromTip
+Say stream_placeholders $synthetic
+Check stream_bytes_mismatch $(if ($badBytes.Count) { ($badBytes | Select-Object -Unique) -join ',' } else { 0 }) 0
+Check managed_stylua_in_history @($t.Keys | Where-Object { $_ -match '/\.config/nvim/stylua\.toml$' }).Count 0
+
+$roots = Block 'enrollment-roots' | Where-Object { $_ -match '^\|\s*`?E\d{3}`?\s' } | ForEach-Object { $f = @($_.Trim().Trim('|') -split '\|' | ForEach-Object { $_.Trim().Trim('`') }); [pscustomobject]@{ Id = $f[0]; Source = $f[1]; Enroll = $f[2]; Variant = $f[5]; Autosave = $f[6] } }
+$m = (G show "${tipFull}:.mise-history/manifest.json") -join "`n" | ConvertFrom-Json
+Check format_marker (((G show "${tipFull}:.mise-history/format.toml") | Where-Object { $_ -match '^format' }) -join '') 'format = 1'
+Check manifest_entries $m.enrollment.Count $roots.Count
 $os = @{ S = ''; W = 'windows'; L = 'linux' }
 $mm = @(foreach ($r in $roots) {
-		$x = @($m.enrollment | Where-Object path -eq $r.Enroll)
+		$x = @($m.enrollment | Where-Object path -EQ $r.Enroll)
 		if ($x.Count -ne 1 -or $x[0].autosave -ne ($r.Autosave -eq 'on') -or $x[0].encrypt -or ((@($x[0].variants | ForEach-Object { $_.os }) -join ',') -ne $os[$r.Variant])) { $r.Id }
 	})
-Say manifest_row_mismatches $(if ($mm.Count) { $mm -join ',' } else { 0 })
-Say manifest_duplicate_paths @($m.enrollment.path | Group-Object | Where-Object Count -gt 1).Count
-Say manifest_recipients $m.recipients.Count
-Say manifest_exclude ($m.exclude -join ',')
-Say e006_in_manifest @($m.enrollment | Where-Object path -eq 'config/config.toml').Count
-Say e006_in_legacy_tree $(if ($old.ContainsKey('.config/mise/config.toml')) { 'yes' } else { 'no' })
+Check manifest_row_mismatches $(if ($mm.Count) { $mm -join ',' } else { 0 }) 0
+Check manifest_duplicate_paths @($m.enrollment.path | Group-Object | Where-Object Count -GT 1).Count 0
+Check manifest_recipients $m.recipients.Count 0
+Check manifest_exclude ($m.exclude -join ',') '~/.config/nvim/stylua.toml'
 
-$removals = @(Get-Content -LiteralPath (Join-Path $p 'removals.txt') | Where-Object { $_ })
-$kept = @($old.Keys | Where-Object { $removals -notcontains $_ })
+# Legacy partition: the approved removed count plus the deferred X11 links
+# leave the tip; every other audited-tip entry stays, unchanged except the
+# README, which must equal the workspace README, and executables normalized
+# to 100644.
+$approved = @($lines | Where-Object { $_ -match '^\|\s*Enrolled-source / managed / repository-only / removed' })[0]
+$approvedRemoved = [int](($approved -split '\|')[2].Trim() -split '\s*/\s*')[3]
+$x11Links = Block 'deferred-x11-links'
+$removals = @('.gitmodules') + @($old.Keys | Where-Object { $old[$_] -like '160000 *' }) + (Block 'removed-legacy-paths') + $x11Links
 Say legacy_entries $old.Count
+Check legacy_removals_unknown @($removals | Where-Object { -not $old.ContainsKey($_) }).Count 0
+Check legacy_removed ($removals.Count - $x11Links.Count) $approvedRemoved
+Check legacy_x11_links_removed $x11Links.Count 10
+Check legacy_removed_still_present @($removals | Where-Object { $t.ContainsKey($_) }).Count 0
+$kept = @($old.Keys | Where-Object { $removals -notcontains $_ })
 Say legacy_kept $kept.Count
-Say legacy_kept_changed @($kept | Where-Object { $t[$_] -ne $old[$_] }).Count
-Say legacy_removed_still_present @($removals | Where-Object { $t.ContainsKey($_) }).Count
+Check legacy_kept_missing @($kept | Where-Object { -not $t.ContainsKey($_) }).Count 0
+$contentChanged = @($kept | Where-Object { $t[$_] -and ($t[$_] -split ' ')[1] -ne ($old[$_] -split ' ')[1] } | Sort-Object)
+Say legacy_kept_content_changed ($contentChanged -join ',')
+Check legacy_kept_content_changed_besides_readme @($contentChanged | Where-Object { $_ -ne 'README.md' }).Count 0
+$readme = (& git -C $workspace hash-object --no-filters -- README.md)
+Check readme_matches_workspace $(if (($t['README.md'] -split ' ')[1] -eq $readme) { 'yes' } else { 'no' }) yes
+$modeChanged = @($kept | Where-Object { $t[$_] -and ($t[$_] -split ' ')[0] -ne ($old[$_] -split ' ')[0] })
+Say legacy_kept_mode_changed $modeChanged.Count
+Check legacy_mode_changes_not_exec_to_regular @($modeChanged | Where-Object { "$(($old[$_] -split ' ')[0])>$(($t[$_] -split ' ')[0])" -ne '100755>100644' }).Count 0
+Check legacy_kept_executable @($kept | Where-Object { $t[$_] -like '100755 *' }).Count 0
+Check gitmodules_in_tip $(if ($t.ContainsKey('.gitmodules')) { 'yes' } else { 'no' }) no
+Check gitlinks_in_tip @($t.Values | Where-Object { $_ -like '160000 *' }).Count 0
 Say repository_only_in_tip @($t.Keys | Where-Object { $_ -notmatch $streamRe -and $_ -notlike '.mise-history/*' }).Count
-Say gitlinks_in_tip @($t.Values | Where-Object { $_ -like '160000 *' }).Count
 
-$s = [array]::IndexOf($lines, '<!-- deferred-x11-sources:start -->'); $e = [array]::IndexOf($lines, '<!-- deferred-x11-sources:end -->')
-$x11 = @($lines[($s + 1)..($e - 1)] | Where-Object { $_ -and $_ -notmatch '^```' })
-Say x11_sources_repository_only_unchanged @($x11 | Where-Object { $t[$_] -and $t[$_] -eq $old[$_] }).Count
-Say x11_in_manifest @($m.enrollment.path | Where-Object { $p2 = $_; @($x11 | Where-Object { $p2 -like "*/$_" }).Count }).Count
-Say x11_in_e011 @(@($x11) + 'xresources', 'dunst', 'dracula/gtk', 'dracula/rofi' | Where-Object { $e011.Contains($_) }).Count
+$rootFiles = @($t.Keys | Where-Object { $_ -notmatch '/' -and $_ -notmatch $streamRe })
+$decl = @($actual | Where-Object { $_ -match '^config(@[a-z]+)?/.*\.toml$' })
+$violations = @(foreach ($d in $decl) { Guard ((G cat-file blob ($t[$d] -split ' ')[1]) -join "`n") $rootFiles })
+Say repository_only_guard_declarations $decl.Count
+Check repository_only_guard_violations $violations.Count 0
+$bad = "[dotfiles]`n`"~/.x`" = { source = `".config/git/config`" }`n`"~/.y`" = { source = `"README.md`" }`n"
+$good = "[dotfiles]`n`"~/.x`" = { source = `"config/dotfiles/.config/git/config`" }`n"
+Check repository_only_guard_negative_control "$(@(Guard $bad $rootFiles).Count),$(@(Guard $good $rootFiles).Count)" '2,0'
+
+$x11 = Block 'deferred-x11-sources'
+$e011Text = [IO.File]::ReadAllText($e011)
+Check x11_sources_repository_only_unchanged_content @($x11 | Where-Object { $t[$_] -and ($t[$_] -split ' ')[1] -eq ($old[$_] -split ' ')[1] }).Count $x11.Count
+Check x11_in_manifest @($m.enrollment.path | Where-Object { $p2 = $_; @($x11 | Where-Object { $p2 -like "*/$_" }).Count }).Count 0
+Check x11_in_e011 @(@($x11) + 'xresources', 'dunst', 'dracula/gtk', 'dracula/rofi' | Where-Object { $e011Text.Contains($_) }).Count 0
+
+if ($Kingfisher) {
+	if (-not $OutDir) { throw '-OutDir is required with -Kingfisher' }
+	New-Item -ItemType Directory -Path $OutDir -Force | Out-Null
+	Check kingfisher_exe_sha256 (Get-FileHash -LiteralPath $Kingfisher -Algorithm SHA256).Hash.ToLower() '7c4d9566294188ef67856ba40c4497b65f3e481c5f1023f2659cb599c43d11c6'
+	$scanRoot = Join-Path $env:LOCALAPPDATA 'Temp\opencode'
+	$mirror = Join-Path $scanRoot "kingfisher-audit-$([guid]::NewGuid())"
+	try {
+		& git clone -q --mirror --no-local $repo $mirror
+		if ($LASTEXITCODE) { throw 'mirror clone failed' }
+		$commits = [int](& git -C $mirror rev-list --all --count)
+		& $Kingfisher scan $mirror --git-history full --redact --no-validate --no-update-check --no-rule-cache --quiet --format json --output (Join-Path $OutDir 'kingfisher.json') *> (Join-Path $OutDir 'kingfisher.terminal.txt')
+		$kfExit = $LASTEXITCODE
+		Check kingfisher_exit $kfExit 0
+		$kj = Get-Content -LiteralPath (Join-Path $OutDir 'kingfisher.json') -Raw | ConvertFrom-Json
+		$audit = @($kj.audit.repositories)
+		Check kingfisher_findings @($kj.findings).Count 0
+		Check kingfisher_repositories $audit.Count 1
+		Check kingfisher_scope "$($audit[0].source),$($audit[0].scan.status),$($audit[0].git.scope)" 'local,completed,all_fetched_git_objects'
+		Check kingfisher_commits_covered $(if ([int]$audit[0].git.fetched_commit_count -eq $commits) { 'yes' } else { 'no' }) yes
+		Say kingfisher_commits $commits
+	}
+	finally {
+		$full = [IO.Path]::GetFullPath($mirror)
+		if ($full.StartsWith($scanRoot + '\kingfisher-audit-') -and (Test-Path -LiteralPath $full) -and -not (Get-Item -LiteralPath $full -Force).LinkType) {
+			Remove-Item -LiteralPath $full -Recurse -Force
+		}
+	}
+}
+
+"verify_result=$(if ($failed.Count) { 'fail' } else { 'pass' })"
+if ($failed.Count) { "verify_failed=$($failed -join ',')"; exit 1 }
