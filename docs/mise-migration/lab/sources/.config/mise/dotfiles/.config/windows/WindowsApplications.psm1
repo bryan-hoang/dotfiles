@@ -8,7 +8,9 @@
 #
 # A unit is one entry in $Units. Optional units are enabled by a boolean of the
 # same name under [vars.windows_applications] in the excluded
-# ~/.config/mise/config.windows.local.toml; absent means false. Path kinds:
+# ~/.config/mise/config.windows.local.toml; absent means false. Apply leaves a
+# disabled unit's paths in place and reports them; only unapply removes or
+# quarantines. Path kinds:
 #   Link     writable file symlink, verified; no copy fallback
 #   Junction writable directory junction, verified; no copy fallback
 #   Copy     copy-ok: read-only replaceable copy, reapplied when the source changes
@@ -181,6 +183,13 @@ function Invoke-UnitApply([string]$name) {
 	Write-State $name $recs
 }
 
+# Apply with a unit's flag off changes nothing: it reports what the module still owns.
+function Get-OwnedReport([string]$name) {
+	foreach ($rec in (Read-State $name).Values) {
+		Result $name $rec (Get-DestState $rec $rec) "owned; flag off, run unapply -Unit $name to remove"
+	}
+}
+
 # Removes only resources this module recorded and that are unchanged; holds the rest.
 function Invoke-UnitUnapply([string]$name) {
 	$recs = Read-State $name
@@ -254,7 +263,7 @@ function Invoke-WindowsApplications {
 		'apply' {
 			# Required units first; a required failure stops before any optional unit.
 			foreach ($name in @($names | Sort-Object { -not $Units[$_].ContainsKey('Required') })) {
-				$r = if (Test-Enabled $name) { Invoke-UnitApply $name } else { Invoke-UnitUnapply $name }
+				$r = if (Test-Enabled $name) { Invoke-UnitApply $name } else { Get-OwnedReport $name }
 				$r
 				if (Test-Incomplete $r) {
 					if ($Units[$name].ContainsKey('Required')) { throw "required unit $name failed" }

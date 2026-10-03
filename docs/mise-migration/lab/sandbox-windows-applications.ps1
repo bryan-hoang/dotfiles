@@ -53,6 +53,7 @@ try {
 	Say 'installs_exit' "$($p1.ExitCode),$($p2.ExitCode)"
 	$git = 'C:\Program Files\Git\cmd\git.exe'
 	Copy-Item -LiteralPath (Join-Path $in 'bin\mise.exe'), (Join-Path $in 'bin\mise-shim.exe') -Destination (Join-Path $lab 'bin')
+	if (-not (Test-Path -LiteralPath (Join-Path $in 'bin\pwsh\pwsh.exe'))) { throw 'PowerShell 7 media is not staged (windows-media-pwsh-<version>)' }
 	Copy-Item -LiteralPath (Join-Path $in 'bin\pwsh') -Destination (Join-Path $lab 'pwsh') -Recurse
 	Copy-Item -LiteralPath (Join-Path $in 'exchange') -Destination (Join-Path $lab 'exchange') -Recurse
 	$mise = Join-Path $lab 'bin\mise.exe'
@@ -148,6 +149,25 @@ try {
 	Check 'c1_topgrade_bytes' ((Hash $topDest) -eq (Hash $topSrc)) 'True'
 	Check 'c1_reapply_exit' (Mod 'c1_reapply' 'Invoke-WindowsApplications apply') 0
 	Check 'c1_reapply_noop_rows' ([regex]::Matches((Log 'c1_reapply'), 'Action=none').Count) 3
+
+	# Flag off: apply reports owned paths and changes none, even a changed one; no quarantine.
+	[IO.File]::WriteAllText($flags, "# lab-marker-374-local`n[vars.windows_applications]`ntopgrade = false`n", $lf)
+	$topHash = Hash $topDest
+	Check 'f_off_apply_exit' (Mod 'f_off_apply' 'Invoke-WindowsApplications apply') 0
+	Check 'f_off_reported' ([regex]::Matches((Log 'f_off_apply'), 'Unit=topgrade .*State=ok .*Action=owned; flag off').Count) 1
+	Check 'f_off_kept' ((LinkOf $topDest) + ':' + (Get-Item -LiteralPath $topDest).IsReadOnly + ':' + ((Hash $topDest) -eq $topHash)) 'plain:True:True'
+	(Get-Item -LiteralPath $topDest).IsReadOnly = $false
+	[IO.File]::AppendAllText($topDest, "# local edit while off`n")
+	$offChanged = Hash $topDest
+	Check 'f_off_changed_apply_exit' (Mod 'f_off_changed_apply' 'Invoke-WindowsApplications apply') 0
+	Check 'f_off_changed_reported' ([regex]::Matches((Log 'f_off_changed_apply'), 'Unit=topgrade .*State=changed .*Action=owned; flag off').Count) 1
+	Check 'f_off_changed_kept' ((Hash $topDest) -eq $offChanged) 'True'
+	Check 'f_off_quarantine_entries' (@(Get-ChildItem -LiteralPath (Join-Path $state 'quarantine') -Recurse -File -ErrorAction SilentlyContinue).Count) 0
+	Copy-Item -LiteralPath $topSrc -Destination $topDest -Force
+	(Get-Item -LiteralPath $topDest).IsReadOnly = $true
+	[IO.File]::WriteAllText($flags, "# lab-marker-374-local`n[vars.windows_applications]`ntopgrade = true`n", $lf)
+	Mod 'f_on_status' 'Invoke-WindowsApplications status' | Out-Null
+	Check 'f_on_status_ok_rows' ([regex]::Matches((Log 'f_on_status'), 'State=ok').Count) 3
 
 	# Criterion 3: a replaced managed link makes validate quarantine, block, stop the watcher, exit nonzero.
 	[IO.File]::Delete($profileDest)
