@@ -8,8 +8,10 @@
 #   a      differing live file, then save and pull --keep-local
 #   b      differing file backed up and moved aside, adoption, then the
 #          reviewed local bytes saved as a descendant
+# Then the E092 Topgrade status check runs against fresh and b (see below).
 # Tools are skipped: the offline lab cannot install the restored tool list.
-# Nothing is published. Results land in ~/lab-out/linux-adopt.txt.
+# Only the guest's exchange copy is published to. Results land in
+# ~/lab-out/linux-adopt.txt.
 set -uo pipefail
 
 in=$HOME/lab-in
@@ -36,7 +38,7 @@ export MISE_AUTO_INSTALL=0
 export GIT_CONFIG_NOSYSTEM=1
 export GIT_CONFIG_GLOBAL=$lab/gitconfig
 export GIT_TERMINAL_PROMPT=0
-chmod +x "$in/bin/mise"
+chmod +x "$in"/bin/*
 export PATH=$in/bin:$PATH
 
 ex=$lab/exchange
@@ -226,6 +228,39 @@ say b_save_parent_is_adopted_head "$([[ "$(git -C "$(hist)" rev-parse main^ 2>/d
 say b_head_contains_tip "$(has_tip)"
 say b_saved_stream_bytes "$(git -C "$(hist)" show "main:$stream" 2>/dev/null)"
 say b_origin_tip_unchanged "$([[ "$(git -C "$ex/setup.git" rev-parse main)" == "$tip" ]] && echo yes || echo no)"
+
+# Topgrade status check from the restored E092, run the way Topgrade runs a
+# custom command ($SHELL -c): fresh passes, fresh with a declared but stopped
+# watcher fails, and b fails once fresh publishes a competing edit of the file
+# b saved. The output must be only true or false, so no local value can leak.
+# Needs jaq in ~/lab-in/bin. Publishing touches only the guest's exchange copy.
+line=$(grep -m1 '^"mise dot status" = "' "$base/fresh/.config/topgrade/topgrade.toml")
+cmd=${line#*= \"}
+cmd=${cmd%\"}
+say check_command_found "$([[ -n $line ]] && echo yes || echo no)"
+say check_jaq "$(command -v jaq >/dev/null && echo yes || echo no)"
+check() {
+	local name=$1
+	export HOME=$base/$2
+	timeout 120 mise dot status --json >"$out/${name}_status.json" 2>/dev/null
+	say "${name}_watcher" "$(jaq -r '.history.watcher' "$out/${name}_status.json")"
+	say "${name}_conflicts" "$(jaq '.history.sync.conflicts // [] | length' "$out/${name}_status.json")"
+	timeout 120 bash -c "$cmd" >"$out/$name.out" 2>"$out/$name.err"
+	say "${name}_exit" "$?"
+	say "${name}_stdout" "$(paste -sd, "$out/$name.out")"
+}
+check check_healthy fresh
+watcher=$base/fresh/.config/mise/config.local.toml
+printf '[bootstrap.services.mise-history]\nbuiltin = "history-watch"\n' >"$watcher"
+check check_watcher_stopped fresh
+rm -f "$watcher"
+check check_watcher_removed fresh
+printf 'remote edit F\n' >"$HOME/$target"
+run fresh_save mise dot save "$HOME/$target"
+run fresh_publish mise dot sync
+export HOME=$base/b
+run b_sync mise dot sync
+check check_conflict b
 
 export HOME=$real_home
 say 'done' yes

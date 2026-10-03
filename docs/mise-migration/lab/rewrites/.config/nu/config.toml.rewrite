@@ -1,0 +1,6 @@
+pivot_mode = "alway"
+prompt = "STARSHIP_SHELL= starship prompt"
+skip_welcome_message = true
+startup = [
+  "source ~/.nu",
+]
