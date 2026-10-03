@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Conversion seed run for the Fedora 44 WSL fixture, on the pinned mise in
-# ~/lab-in/bin. Writes the shared and Linux files from the audited-tip blobs
-# (synthetic placeholders for canonical sources not written yet), installs the
+# ~/lab-in/bin. Writes the shared and Linux files from the audited-tip blobs or
+# their reviewed rewrites (lab/rewrites/<stream path>.rewrite; synthetic
+# placeholders for canonical sources not written yet), installs the
 # generated E011, lets mise capture the baseline, then builds the conversion
 # commit on the exchange copy's main: the audited-tip tree minus the removals,
 # executables normalized to 100644, the reviewed README and rewrites, plus mise's
@@ -58,21 +59,25 @@ say history_sync "$(timeout 30 mise settings get history.sync 2>/dev/null)"
 legacy=$(git -C "$ex/setup.git" rev-parse main)
 say audited_tip "$legacy"
 
-# Shared and Linux files; Windows rows have no stream in the tip. A source
-# that is a regular file at the audited tip takes that blob, written 0644.
+# Shared and Linux files; Windows rows have no stream in the tip. A stream with
+# a reviewed rewrite takes those bytes; otherwise a source that is a regular
+# file at the audited tip takes that blob. All are written 0644.
 declare -A blob
 while IFS=$'\t' read -r meta path; do
 	read -r mode _ oid <<<"$meta"
 	[[ $mode == 100644 || $mode == 100755 ]] && blob[$path]=$oid
 done < <(git -C "$ex/setup.git" ls-tree -r --full-tree main)
-n=0 real=0
+n=0 real=0 rewritten=0
 while IFS=$'\t' read -r id var live stream; do
 	[[ $var == W ]] && continue
 	[[ $id == E011 ]] && continue
 	rel=${live#\~/}
 	f=$HOME/$rel
 	mkdir -p "$(dirname "$f")"
-	if [[ -n ${blob[$rel]:-} ]]; then
+	if [[ -f $in/rewrites/$stream.rewrite ]]; then
+		cp "$in/rewrites/$stream.rewrite" "$f"
+		rewritten=$((rewritten + 1))
+	elif [[ -n ${blob[$rel]:-} ]]; then
 		git -C "$ex/setup.git" cat-file blob "${blob[$rel]}" >"$f"
 		real=$((real + 1))
 	else
@@ -87,7 +92,8 @@ cp "$p/dotfiles.toml" "$HOME/.config/mise/conf.d/dotfiles.toml"
 printf '# managed copy of E102\n' >"$HOME/.config/nvim/stylua.toml"
 say seeded_files "$((n + 1))"
 say seeded_from_audited_tip "$real"
-say seeded_placeholders "$((n - real))"
+say seeded_stream_rewrites "$rewritten"
+say seeded_placeholders "$((n - real - rewritten))"
 
 run paths mise dot paths --json
 mapfile -t saves < <(grep -v $'^[^\t]*\tW\t' "$p/roots.tsv" | cut -f3 | sed "s|^~|$HOME|")
@@ -111,7 +117,8 @@ git -C "$H" ls-tree -r main >"$out/history-tree.txt" 2>/dev/null
 # Conversion commit with the audited tip as its only parent: the legacy tree
 # minus the removals, legacy executables stored 100644, the reviewed README
 # and the reviewed rewrites of repository-only files (lab/rewrites/<path>.rewrite
-# for setup-root <path>), plus every path of mise's checkpoint tree.
+# for setup-root <path>; stream rewrites arrive through mise's tree), plus every
+# path of mise's checkpoint tree.
 c=$lab/conv
 git init -q "$c"
 git -C "$c" fetch -q "$ex/setup.git" main:refs/legacy
@@ -126,6 +133,7 @@ git -C "$c" update-index --cacheinfo "100644,$(git -C "$c" hash-object -w --no-f
 n=0
 while IFS= read -r -d '' f; do
 	rel=${f#"$in/rewrites/"}
+	[[ $rel =~ ^(home|config)(@[a-z]+)?/ ]] && continue
 	git -C "$c" update-index --cacheinfo "100644,$(git -C "$c" hash-object -w --no-filters "$f"),${rel%.rewrite}"
 	n=$((n + 1))
 done < <(find "$in/rewrites" -type f -name '*.rewrite' -print0)

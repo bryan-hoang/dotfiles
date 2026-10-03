@@ -4,8 +4,9 @@
 # files cross the boundary only as tar streams over wsl.exe stdio. cmd.exe
 # pipes carry those streams byte-for-byte. The guest receives a copy of
 # -Exchange, the workspace README, lab/rewrites, and the pinned mise (mise-version.txt) in
-# lab-in/bin, which guest scripts put first on PATH.
-param([Parameter(Mandatory)][string]$IntakeRoot, [Parameter(Mandatory)][string]$Exchange, [string]$Script = 'linux-smoke.sh')
+# lab-in/bin, which guest scripts put first on PATH. -Bin adds verified
+# executables to lab-in/bin.
+param([Parameter(Mandatory)][string]$IntakeRoot, [Parameter(Mandatory)][string]$Exchange, [string]$Script = 'linux-smoke.sh', [string[]]$Bin = @())
 $ErrorActionPreference = 'Stop'
 $intake = [IO.Path]::GetFullPath($IntakeRoot)
 $name = 'mise-lab-run-' + (Get-Date -Format 'yyyyMMddHHmmss')
@@ -23,6 +24,7 @@ New-Item -ItemType Directory -Path $runDir, $results, (Join-Path $stage 'lab-in\
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot $Script), (Join-Path $PSScriptRoot 'repos.txt'), (Join-Path $PSScriptRoot 'prototype'), (Join-Path $PSScriptRoot 'rewrites'), (Join-Path $PSScriptRoot '..\..\..\README.md') -Destination (Join-Path $stage 'lab-in') -Recurse
 Copy-Item -LiteralPath $Exchange -Destination (Join-Path $stage 'lab-in\exchange') -Recurse
 Copy-Item -LiteralPath $mise -Destination (Join-Path $stage 'lab-in\bin\mise')
+foreach ($b in $Bin) { Copy-Item -LiteralPath $b -Destination (Join-Path $stage 'lab-in\bin') }
 wsl.exe --import $name $runDir (Join-Path $intake 'wsl\fedora44-fixture-ready.tar') | Out-Null
 if ($LASTEXITCODE) { throw "import failed: $name" }
 try {

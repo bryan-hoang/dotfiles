@@ -73,18 +73,23 @@ Check stream_non_100644 @($actual | Where-Object { ($t[$_] -split ' ')[0] -ne '1
 $e031 = @($built | Where-Object Id -EQ 'E031')[0].Stream
 Check e031_mode ($t[$e031] -split ' ')[0] 100644
 
-# Expected stream bytes: E011 is the generated declaration; a row whose source
-# is a regular file at the audited tip takes that blob; every other row is a
-# synthetic placeholder for a canonical source a later ticket writes.
+# Expected stream bytes: E011 is the generated declaration; a stream with a
+# reviewed rewrite (lab/rewrites/<stream>.rewrite) takes those bytes; a row
+# whose source is a regular file at the audited tip takes that blob; every
+# other row is a synthetic placeholder for a canonical source a later ticket
+# writes. Only the rewritten streams may differ from their audited-tip blobs.
 $e011 = Join-Path $p 'dotfiles.toml'
 $e011Blob = (& git hash-object --no-filters -- $e011)
-$fromTip = 0; $synthetic = 0
+$fromTip = 0; $synthetic = 0; $streamChanged = @()
 $badBytes = @(foreach ($f in $built) {
 		if (-not $t.ContainsKey($f.Stream)) { continue }
 		$rel = $f.Live.Substring(2)
+		$rw = Join-Path $PSScriptRoot "rewrites/$($f.Stream).rewrite"
 		if ($f.Id -eq 'E011') { $want = $e011Blob }
+		elseif (Test-Path -LiteralPath $rw) { $want = (& git hash-object --no-filters -- $rw) }
 		elseif ($old[$rel] -match '^100(644|755) ') { $want = ($old[$rel] -split ' ')[1]; $fromTip++ }
 		else { $want = BlobId "# synthetic $($f.Id) $($f.Stream)`n"; $synthetic++ }
+		if ($f.Id -ne 'E011' -and $old[$rel] -match '^100(644|755) ' -and ($t[$f.Stream] -split ' ')[1] -ne ($old[$rel] -split ' ')[1]) { $streamChanged += $f.Stream }
 		if (($t[$f.Stream] -split ' ')[1] -ne $want) { $f.Id }
 	})
 Say stream_from_audited_tip $fromTip
@@ -123,16 +128,20 @@ Say legacy_kept $kept.Count
 Check legacy_kept_missing @($kept | Where-Object { -not $t.ContainsKey($_) }).Count 0
 # Approved content rewrites: the workspace README and the reviewed bytes in
 # lab/rewrites/<path>.rewrite. Each must equal its workspace bytes, and a
-# rewrite counts as changed only where it differs from the audited tip.
+# rewrite counts as changed only where it differs from the audited tip. Stream
+# rewrites must be exactly the streams that differ from their audited-tip blobs.
 $rewriteRoot = Join-Path $PSScriptRoot 'rewrites'
-$rewrites = [ordered]@{ '.config/shell/functions.sh' = $null; 'README.md' = Join-Path $workspace 'README.md'; 'package.json' = $null; 'pnpm-lock.yaml' = $null }
+$rewrites = [ordered]@{ '.config/nu/config.toml' = $null; '.config/shell/functions.sh' = $null; 'README.md' = Join-Path $workspace 'README.md'; 'home/.config/shell/aliases.sh' = $null; 'home/.config/topgrade/topgrade.toml' = $null; 'package.json' = $null; 'pnpm-lock.yaml' = $null }
 foreach ($k in @($rewrites.Keys)) { if (-not $rewrites[$k]) { $rewrites[$k] = Join-Path $rewriteRoot "$k.rewrite" } }
 $staged = @(Get-ChildItem -LiteralPath $rewriteRoot -Recurse -File -Force | ForEach-Object { $_.FullName.Substring($rewriteRoot.Length + 1) -replace '\\', '/' -replace '\.rewrite$', '' })
 Check rewrites_unexpected_files @($staged | Where-Object { -not $rewrites.Contains($_) }).Count 0
 $rewriteBlobs = @{}
 foreach ($k in $rewrites.Keys) { $rewriteBlobs[$k] = (& git hash-object --no-filters -- $rewrites[$k]) }
 Check rewrites_not_matching_workspace @($rewrites.Keys | Where-Object { ($t[$_] -split ' ')[1] -ne $rewriteBlobs[$_] }).Count 0
-$expectedChanged = @($rewrites.Keys | Where-Object { $rewriteBlobs[$_] -ne ($old[$_] -split ' ')[1] } | Sort-Object)
+$expectedStreams = @($rewrites.Keys | Where-Object { $_ -match $streamRe } | Sort-Object)
+Say stream_content_changed_expected ($expectedStreams -join ',')
+Check stream_content_changed (@($streamChanged | Sort-Object) -join ',') ($expectedStreams -join ',')
+$expectedChanged = @($rewrites.Keys | Where-Object { $_ -notmatch $streamRe -and $rewriteBlobs[$_] -ne ($old[$_] -split ' ')[1] } | Sort-Object)
 $contentChanged = @($kept | Where-Object { $t[$_] -and ($t[$_] -split ' ')[1] -ne ($old[$_] -split ' ')[1] } | Sort-Object)
 Say legacy_kept_content_changed_expected ($expectedChanged -join ',')
 Check legacy_kept_content_changed ($contentChanged -join ',') ($expectedChanged -join ',')

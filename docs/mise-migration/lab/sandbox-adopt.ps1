@@ -1,7 +1,8 @@
 # Windows adoption run for Windows Sandbox (Windows PowerShell 5.1, ASCII
 # only). Adopts the setup repository from the exchange copy with the pinned
 # mise in C:\lab-in\bin, then checks held paths, restored shared files byte
-# for byte, repository-only paths, and bootstrap repositories. Tools are
+# for byte, repository-only paths, bootstrap repositories, and the E092
+# Topgrade status check. Tools are
 # skipped: the offline lab cannot install the restored tool list. Nothing is
 # published. Writes key=value results and logs to C:\lab-out.
 $ErrorActionPreference = 'Stop'
@@ -28,7 +29,7 @@ try {
 	$p2 = Start-Process -FilePath 'C:\fixture-media\Git-2.55.0.3-64-bit.exe' -ArgumentList '/VERYSILENT', '/NORESTART', '/NOCANCEL', '/SP-', '/SUPPRESSMSGBOXES' -Wait -PassThru
 	Say 'installs_exit' "$($p1.ExitCode),$($p2.ExitCode)"
 	$git = 'C:\Program Files\Git\cmd\git.exe'
-	Copy-Item -LiteralPath (Join-Path $in 'bin\mise.exe'), (Join-Path $in 'bin\mise-shim.exe') -Destination (Join-Path $lab 'bin')
+	Copy-Item -Path (Join-Path $in 'bin\*') -Destination (Join-Path $lab 'bin')
 	Copy-Item -LiteralPath (Join-Path $in 'exchange') -Destination (Join-Path $lab 'exchange') -Recurse
 	$mise = Join-Path $lab 'bin\mise.exe'
 	$env:PATH = "$lab\bin;C:\Program Files\Git\cmd;$env:PATH"
@@ -103,6 +104,27 @@ try {
 		Say 'adopted_head_contains_seed' $(if ((Run 'ancestry_seed' $git @('-C', $hist.FullName, 'merge-base', '--is-ancestor', $seed, 'main')) -eq 0) { 'yes' } else { 'no' })
 	}
 	Run 'status' $mise @('dot', 'status', '--json') | Out-Null
+
+	# Topgrade status check from the restored E092, run the way Topgrade runs a
+	# custom command on Windows without pwsh (powershell -Command), whose pipes
+	# add a byte order mark. It must pass here, fail with a declared but stopped
+	# watcher, and print only true or false. Needs jaq.exe in C:\lab-in\bin.
+	$line = @([IO.File]::ReadAllLines((Live '~/.config/topgrade/topgrade.toml')) | Where-Object { $_ -like '"mise dot status" = "*' })[0]
+	Say 'check_command_found' $(if ($line) { 'yes' } else { 'no' })
+	$cmd = $line.Substring($line.IndexOf('= "') + 3).TrimEnd('"')
+	function StatusCheck([string]$name) {
+		Run "${name}_status" $mise @('dot', 'status', '--json') | Out-Null
+		$ErrorActionPreference = 'Continue'
+		Say "${name}_watcher" (& (Join-Path $lab 'bin\jaq.exe') -r '.history.watcher' (Join-Path $out "${name}_status.log"))
+		Run $name 'powershell.exe' @('-NoProfile', '-Command', $cmd) | Out-Null
+		Say "${name}_output" ((([IO.File]::ReadAllText((Join-Path $out "$name.log"))).Trim() -split "`n") -join ',')
+	}
+	StatusCheck 'check_healthy'
+	$watcher = Live '~/.config/mise/config.local.toml'
+	[IO.File]::WriteAllText($watcher, "[bootstrap.services.mise-history]`nbuiltin = `"history-watch`"`n", $lf)
+	StatusCheck 'check_watcher_stopped'
+	Remove-Item -LiteralPath $watcher
+	StatusCheck 'check_watcher_removed'
 	Say 'done' 'yes'
 }
 catch {
