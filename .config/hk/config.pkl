@@ -41,7 +41,10 @@ steps {
     glob = List("**/*.css")
   }
   ["harper"] = (Builtins.harper) {
-    check = "harper-cli lint --dialect us {{ files }}"
+    // These rules misfire on technical prose: glossary nouns such as "setup"
+    // and "checkout", "Unix", binary units, past participles after "to",
+    // and compound coordinations such as "link and dependency policy".
+    check = "harper-cli lint --dialect us --ignore PhrasalVerbAsCompoundNoun,OrthographicConsistency,MissingTo,InflectedVerbAfterTo,WrongNegative,ExpandMemoryShorthands,CompoundNouns,HopHope,TheirToTheyre,MassNouns,OxfordComma {{ files }}"
     glob = List("*.md")
   }
   ["typos"] = (Builtins.typos) {

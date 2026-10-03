@@ -1,0 +1,14 @@
+{
+	"format": 1,
+	"enrollment": [
+		{
+			"path": "config/prototype.txt",
+			"autosave": true,
+			"encrypt": false,
+			"variants": []
+		}
+	],
+	"exclude": [],
+	"recipients": [],
+	"permissions": {}
+}

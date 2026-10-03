@@ -1,0 +1,60 @@
+{
+	"approved_legacy_tip": "dca1b12e99e7632c6911be647248762d75514d1e",
+	"legacy_entries": 421,
+	"coverage": {
+		"core": 263,
+		"windows": 57,
+		"unix": 101,
+		"overlap": 0
+	},
+	"named_live_mise_source": "~/.config/mise/config.toml",
+	"named_live_in_legacy_partition": false,
+	"roots": {
+		"total": 176,
+		"exact": 174,
+		"directory": 2,
+		"shared": 139,
+		"windows": 24,
+		"linux": 13,
+		"autosave_on": 147,
+		"autosave_off": 29,
+		"encryption": 0,
+		"recipients": 0,
+		"source_overlap": 0,
+		"enrollment_overlap": 0,
+		"stream_overlap": 0
+	},
+	"files": {
+		"total": 235,
+		"shared": 198,
+		"windows": 24,
+		"linux": 13,
+		"regular_0644": 235,
+		"git_100644": 235,
+		"nvim_directory_descendants": 57,
+		"tex_directory_descendants": 4
+	},
+	"x11": {
+		"deferred_sources": 22,
+		"deferred_links": 10,
+		"active_roots": 0,
+		"active_repositories": 0
+	},
+	"bootstrap_repositories": {
+		"active": 11,
+		"names": [
+			"akinomyoga/ble.sh",
+			"b3nj5m1n/xdg-ninja",
+			"catppuccin/alacritty",
+			"catppuccin/delta",
+			"catppuccin/lsd",
+			"catppuccin/rio",
+			"dracula/git",
+			"ewanmellor/git-diff-image",
+			"po5/thumbfast",
+			"tj/git-extras",
+			"tomasklaen/uosc"
+		]
+	},
+	"tree_summary_sha256": "f65098cd323a45e0b6ab2b5c900a6cc875af1f4870ff5a3d403c455e894508f9"
+}

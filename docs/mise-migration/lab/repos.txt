@@ -1,0 +1,10 @@
+akinomyoga/ble.sh
+b3nj5m1n/xdg-ninja
+catppuccin/alacritty
+catppuccin/delta
+catppuccin/rio
+dracula/git
+ewanmellor/git-diff-image
+po5/thumbfast
+tj/git-extras
+tomasklaen/uosc

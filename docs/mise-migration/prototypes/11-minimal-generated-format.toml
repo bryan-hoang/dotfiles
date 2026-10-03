@@ -1,0 +1,3 @@
+# This repository is a mise setup repository (`mise dot origin set`).
+# Do not edit: mise reads this to recognize the layout it publishes.
+format = 1

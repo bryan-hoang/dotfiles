@@ -1,0 +1,250 @@
+# E011 prototype control file, generated from the approved enrollment inventory.
+[history]
+exclude = ["~/.config/nvim/stylua.toml"]
+
+[dotfiles]
+"~/.config/mise/dotfiles/.editorconfig" = { mode = "track" }
+"~/.config/mise/dotfiles/.oxfmtrc.jsonc" = { mode = "track" }
+"~/.config/mise/dotfiles/package.json" = { mode = "track" }
+"~/.config/mise/dotfiles/pnpm-lock.yaml" = { mode = "track" }
+"~/.config/mise/dotfiles/.ssh/config" = { mode = "track", autosave = false }
+"~/.config/mise/config.toml" = { mode = "track" }
+"~/.config/mise/AGENTS.md" = { mode = "track" }
+"~/.config/mise/conf.d/00-tools.toml" = { mode = "track" }
+"~/.config/mise/conf.d/settings.toml" = { mode = "track" }
+"~/.config/mise/conf.d/dotfiles.toml" = { mode = "track", autosave = false }
+"~/.config/mise/dotfiles/.config/git/config" = { mode = "track", autosave = false }
+"~/.config/mise/dotfiles/.config/git/personal.gitconfig" = { mode = "track", autosave = false }
+"~/.config/git/alias.gitconfig" = { mode = "track" }
+"~/.config/git/COMMIT_EDITMSG" = { mode = "track" }
+"~/.config/git/attributes" = { mode = "track" }
+"~/.config/git/diff.gitconfig" = { mode = "track" }
+"~/.config/git/filter.gitconfig" = { mode = "track" }
+"~/.config/git/hook.gitconfig" = { mode = "track" }
+"~/.config/git/ignore" = { mode = "track" }
+"~/.config/git/order" = { mode = "track" }
+"~/.config/bash/.bash_logout" = { mode = "track" }
+"~/.config/bash/.bash_profile" = { mode = "track" }
+"~/.config/bash/.bashrc" = { mode = "track" }
+"~/.config/login/.hushlogin" = { mode = "track" }
+"~/.config/shell/.profile" = { mode = "track" }
+"~/.config/shell/env.sh" = { mode = "track" }
+"~/.config/shell/aliases.sh" = { mode = "track" }
+"~/.config/shell/common.sh" = { mode = "track" }
+"~/.config/shell/functions.sh" = { mode = "track" }
+"~/.config/shell/logout.sh" = { mode = "track" }
+"~/.config/default-pkgs/gem.list" = { mode = "track" }
+"~/.config/mise/dotfiles/.local/bin/check-git-remote" = { mode = "track" }
+"~/.config/mise/dotfiles/.local/bin/git-worktree-prune" = { mode = "track" }
+"~/.config/mise/dotfiles/.local/bin/print-git-email-symbol" = { mode = "track" }
+"~/.config/.actrc" = { mode = "track" }
+"~/.config/.bunfig.toml" = { mode = "track" }
+"~/.config/atuin/config.toml" = { mode = "track" }
+"~/.config/aube/config.toml" = { mode = "track" }
+"~/.config/bat/config" = { mode = "track" }
+"~/.config/biome/biome.jsonc" = { mode = "track" }
+"~/.config/black" = { mode = "track" }
+"~/.config/bob/config.toml" = { mode = "track" }
+"~/.config/bottom/bottom.toml" = { mode = "track" }
+"~/.config/broot/conf.hjson" = { mode = "track" }
+"~/.config/broot/verbs.hjson" = { mode = "track" }
+"~/.config/clang-format/.clang-format" = { mode = "track" }
+"~/.config/clangd/config.yaml" = { mode = "track" }
+"~/.config/conventional-changelog/config.js" = { mode = "track" }
+"~/.config/deno/deno.jsonc" = { mode = "track" }
+"~/.config/direnv/direnv.toml" = { mode = "track" }
+"~/.config/direnv/direnvrc" = { mode = "track" }
+"~/.config/espanso/config/default.yml" = { mode = "track" }
+"~/.config/espanso/match/base.yml" = { mode = "track" }
+"~/.config/git-cliff/cliff.toml" = { mode = "track" }
+"~/.config/gitlogue/config.toml" = { mode = "track" }
+"~/.config/gitui/key_bindings.ron" = { mode = "track" }
+"~/.config/gitui/theme.ron" = { mode = "track" }
+"~/.config/grit/grit.yaml" = { mode = "track" }
+"~/.config/hadolint.yaml" = { mode = "track" }
+"~/.config/harper-ls/dictionary.txt" = { mode = "track" }
+"~/.config/hk/AGENTS.md" = { mode = "track" }
+"~/.config/hk/config.pkl" = { mode = "track" }
+"~/.config/hn-tui.toml" = { mode = "track" }
+"~/.config/hunk/config.toml" = { mode = "track" }
+"~/.config/irb/irbrc" = { mode = "track" }
+"~/.config/jupytext.toml" = { mode = "track" }
+"~/.config/latexindent/.latexindent.yaml" = { mode = "track" }
+"~/.config/latexmk/latexmkrc" = { mode = "track" }
+"~/.config/luacheck/.luacheckrc" = { mode = "track" }
+"~/.config/markdownlint/config" = { mode = "track" }
+"~/.config/pitchfork/config.toml" = { mode = "track" }
+"~/.config/prettier/.prettierrc.mjs" = { mode = "track" }
+"~/.config/python/pythonrc.py" = { mode = "track" }
+"~/.config/readline/inputrc" = { mode = "track" }
+"~/.config/ripgrep/config" = { mode = "track" }
+"~/.config/rtk/config.toml" = { mode = "track" }
+"~/.config/rubocop/config.yml" = { mode = "track" }
+"~/.config/screen/screenrc" = { mode = "track" }
+"~/.config/shellcheckrc" = { mode = "track" }
+"~/.config/shellfirm/settings.yaml" = { mode = "track" }
+"~/.config/silicon/config" = { mode = "track" }
+"~/.config/solargraph/config.yml" = { mode = "track" }
+"~/.config/sqlfluff/.sqlfluff" = { mode = "track" }
+"~/.config/starship/starship.toml" = { mode = "track" }
+"~/.config/stylelint/stylelint.config.js" = { mode = "track" }
+"~/.config/tailspin/theme.toml" = { mode = "track" }
+"~/.config/tealdeer/config.toml" = { mode = "track" }
+"~/.config/television/cable/git-branch-local.toml" = { mode = "track" }
+"~/.config/television/config.toml" = { mode = "track" }
+"~/.config/tokei.toml" = { mode = "track" }
+"~/.config/topgrade/topgrade.toml" = { mode = "track" }
+"~/.config/warp-terminal/keybindings.yaml" = { mode = "track" }
+"~/.config/wezterm/AGENTS.md" = { mode = "track" }
+"~/.config/wezterm/CONTEXT.md" = { mode = "track" }
+"~/.config/wezterm/selene.toml" = { mode = "track" }
+"~/.config/wezterm/wezterm.lua" = { mode = "track" }
+"~/.config/wezterm/wezterm.yml" = { mode = "track" }
+"~/.config/wiki-tui/config.toml" = { mode = "track" }
+"~/.config/zed/settings.json" = { mode = "track" }
+"~/.config/mise/dotfiles/.config/herdr/config.toml.tmpl" = { mode = "track" }
+"~/.config/stylua/stylua.toml" = { mode = "track" }
+"~/.config/helix/config.toml" = { mode = "track" }
+"~/.config/helix/themes/catppuccin_mocha_transparent.toml" = { mode = "track" }
+"~/.config/helix/themes/gruvbox_dark_hard_transparent.toml" = { mode = "track" }
+"~/.config/mpv/input.conf" = { mode = "track" }
+"~/.config/mpv/mpv.conf" = { mode = "track" }
+"~/.config/opencode/AGENTS.md" = { mode = "track" }
+"~/.config/opencode/CONTEXT.md" = { mode = "track" }
+"~/.config/tombi/AGENTS.md" = { mode = "track" }
+"~/.config/mise/dotfiles/.config/.curlrc" = { mode = "track", autosave = false }
+"~/.config/mise/dotfiles/.config/bundle/config" = { mode = "track", autosave = false }
+"~/.config/mise/dotfiles/.config/gem/gemrc" = { mode = "track", autosave = false }
+"~/.config/mise/dotfiles/.config/gh/config.yml" = { mode = "track", autosave = false }
+"~/.config/mise/dotfiles/.config/litecli/config" = { mode = "track", autosave = false }
+"~/.config/mise/dotfiles/.config/mycli/myclirc" = { mode = "track", autosave = false }
+"~/.config/mise/dotfiles/.config/mysql/my.cnf" = { mode = "track", autosave = false }
+"~/.config/mise/dotfiles/.config/npm/npmrc" = { mode = "track", autosave = false }
+"~/.config/mise/dotfiles/.config/pgcli/config" = { mode = "track", autosave = false }
+"~/.config/mise/dotfiles/.config/pip/pip.conf" = { mode = "track", autosave = false }
+"~/.config/mise/dotfiles/.config/pnpm/config.yaml" = { mode = "track", autosave = false }
+"~/.config/mise/dotfiles/.config/pypoetry/config.toml" = { mode = "track", autosave = false }
+"~/.config/mise/dotfiles/.config/uv/uv.toml" = { mode = "track", autosave = false }
+"~/.config/mise/dotfiles/.config/wget/wgetrc" = { mode = "track", autosave = false }
+"~/.config/mise/dotfiles/.config/youtube-dl/config" = { mode = "track", autosave = false }
+"~/.config/mise/dotfiles/.config/yt-dlp/config" = { mode = "track", autosave = false }
+"~/.config/mise/dotfiles/.config/opencode/opencode.jsonc" = { mode = "track", autosave = false }
+"~/.config/opencode/plugins/inject-env.ts" = { mode = "track", autosave = false }
+"~/.config/opencode/tui.jsonc" = { mode = "track" }
+"~/.local/share/gnupg/gpg.conf" = { mode = "track", autosave = false }
+"~/.local/share/gnupg/gpg-agent.conf" = { mode = "track", autosave = false }
+"~/.local/share/cargo/config.toml" = { mode = "track" }
+"~/.config/vale/.vale.ini" = { mode = "track" }
+"~/.local/share/vale/styles/config/vocabularies/bryan/accept.txt" = { mode = "track" }
+"~/.local/share/vale/styles/config/vocabularies/bryan/reject.txt" = { mode = "track" }
+"~/.config/helix/languages.toml" = { mode = "track" }
+"~/.config/nvim" = { mode = "track", autosave = false }
+"~/.local/share/texmf" = { mode = "track", autosave = false }
+"~/.config/rio/config.toml" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/alacritty/alacritty.common.toml" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/glazewm/config.yaml" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/mintty/config" = { mode = "track", variants = [{ os = "windows" }] }
+"~/.config/pwsh/AGENTS.md" = { mode = "track", variants = [{ os = "windows" }] }
+"~/.config/pwsh/CONTEXT.md" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/pwsh/Initialize-Aliases.ps1" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/pwsh/Initialize-Completions.ps1" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/pwsh/Initialize-Environment.ps1" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/pwsh/Initialize-Functions.ps1" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/pwsh/Initialize-Integrations.ps1" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/pwsh/Initialize-Preferences.ps1" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/pwsh/Microsoft.PowerShell_profile.ps1" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/pwsh/PSScriptAnalyzerSettings.psd1" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/windows/wind-term-settings.json" = { mode = "track", autosave = false, variants = [
+  { os = "windows" },
+] }
+"~/.config/zebar/settings.json" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/zebar/custom/README.md" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/zebar/custom/resources/preview-image-1.png" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/zebar/custom/styles.css" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/zebar/custom/with-glazewm.html" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/zebar/custom/zpack.json" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/mise/dotfiles/.config/windows/WindowsApplications.psm1" = { mode = "track", autosave = false, variants = [
+  { os = "windows" },
+] }
+"~/.config/mise/dotfiles/AppData/Roaming/alacritty/alacritty.toml" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/mise/dotfiles/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/start-atuin-daemon.vbs" = { mode = "track", variants = [
+  { os = "windows" },
+] }
+"~/.config/zsh/.zprofile" = { mode = "track", variants = [{ os = "linux" }] }
+"~/.config/zsh/.zshrc" = { mode = "track", variants = [{ os = "linux" }] }
+"~/.config/zsh/.zshenv" = { mode = "track", variants = [{ os = "linux" }] }
+"~/.config/zsh/.zlogout" = { mode = "track", variants = [{ os = "linux" }] }
+"~/.config/sheldon/zsh/plugins.toml" = { mode = "track", variants = [
+  { os = "linux" },
+] }
+"~/.config/blesh/init.sh" = { mode = "track", variants = [{ os = "linux" }] }
+"~/.config/mise/dotfiles/.local/bin/browser-wsl.sh" = { mode = "track", variants = [
+  { os = "linux" },
+] }
+"~/.config/nix/nix.conf" = { mode = "track", variants = [{ os = "linux" }] }
+"~/.config/mise/dotfiles/.config/vscode/server-env-setup" = { mode = "track", variants = [
+  { os = "linux" },
+] }
+"~/.config/systemd/user/docuum.service" = { mode = "track", variants = [
+  { os = "linux" },
+] }
+"~/.config/systemd/user/spotifyd.service" = { mode = "track", variants = [
+  { os = "linux" },
+] }
+"~/.config/systemd/user/ssh-agent.service" = { mode = "track", variants = [
+  { os = "linux" },
+] }
+"~/.config/mise/dotfiles/system/etc/wsl.conf" = { mode = "track", variants = [
+  { os = "linux" },
+] }
+"~/.typos.toml" = { mode = "track" }
+
+[bootstrap.repos]
+"~/src/github.com/akinomyoga/ble.sh" = { url = "https://github.com/akinomyoga/ble.sh" }
+"~/src/github.com/b3nj5m1n/xdg-ninja" = { url = "https://github.com/b3nj5m1n/xdg-ninja" }
+"~/src/github.com/catppuccin/alacritty" = { url = "https://github.com/catppuccin/alacritty" }
+"~/src/github.com/catppuccin/delta" = { url = "https://github.com/catppuccin/delta" }
+"~/src/github.com/catppuccin/rio" = { url = "https://github.com/catppuccin/rio" }
+"~/src/github.com/dracula/git" = { url = "https://github.com/dracula/git" }
+"~/src/github.com/ewanmellor/git-diff-image" = { url = "https://github.com/ewanmellor/git-diff-image" }
+"~/src/github.com/po5/thumbfast" = { url = "https://github.com/po5/thumbfast" }
+"~/src/github.com/tj/git-extras" = { url = "https://github.com/tj/git-extras" }
+"~/src/github.com/tomasklaen/uosc" = { url = "https://github.com/tomasklaen/uosc" }

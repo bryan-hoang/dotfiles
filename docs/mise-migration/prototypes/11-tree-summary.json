@@ -1,0 +1,19 @@
+{
+	"status": "static expected expansion; full mise generation blocked",
+	"roots": 176,
+	"files": 235,
+	"files_by_stream": {
+		"shared": 198,
+		"windows": 24,
+		"linux": 13,
+		"x11": 0
+	},
+	"git_modes": {
+		"100644": 235
+	},
+	"source_modes": {
+		"regular_0644": 235,
+		"directory_0755": 2
+	},
+	"sorted_path_summary_sha256": "f65098cd323a45e0b6ab2b5c900a6cc875af1f4870ff5a3d403c455e894508f9"
+}

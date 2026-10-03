@@ -2,4 +2,13 @@
 
 [default]
 # Tool names that typos reads as misspellings.
-extend-ignore-re = ["commandbox", "muc --count", "tre-command"]
+extend-ignore-re = [
+  "commandbox",
+  "muc --count",
+  "tre-command",
+  # Commit SHAs cited in docs/mise-migration that contain dictionary fragments.
+  "\\b3eb7ca366dbe\\b",
+  "\\b5c9a7ba\\b",
+  # Harper rule name in the hk configuration.
+  "TheirToTheyre",
+]
