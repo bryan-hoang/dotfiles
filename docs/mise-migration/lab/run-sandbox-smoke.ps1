@@ -19,6 +19,13 @@ New-Item -ItemType Directory -Path (Join-Path $labIn 'bin'), $labOut -Force | Ou
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot $Script), (Join-Path $PSScriptRoot 'repos.txt'), (Join-Path $PSScriptRoot 'prototype') -Destination $labIn -Recurse
 Copy-Item -LiteralPath $Exchange -Destination (Join-Path $labIn 'exchange') -Recurse
 Copy-Item -LiteralPath (Join-Path $media 'mise.exe'), (Join-Path $media 'mise-shim.exe') -Destination (Join-Path $labIn 'bin')
+# PowerShell 7 (pwsh-version.txt) in lab-in\bin\pwsh and the authored mirrored
+# sources in lab-in\sources, for guest scripts that run Windows modules.
+$pv = (Get-Content -LiteralPath (Join-Path $PSScriptRoot 'pwsh-version.txt')).Trim()
+$pwshMedia = Join-Path $intake "windows-media-pwsh-$pv"
+if (-not (Test-Path -LiteralPath (Join-Path $pwshMedia 'pwsh.exe'))) { throw "pinned PowerShell $pv is not staged" }
+Copy-Item -LiteralPath $pwshMedia -Destination (Join-Path $labIn 'bin\pwsh') -Recurse
+Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'sources') -Destination $labIn -Recurse
 
 function Map([string]$hostPath, [string]$sandboxPath, [string]$readOnly) {
 	"    <MappedFolder><HostFolder>$hostPath</HostFolder><SandboxFolder>$sandboxPath</SandboxFolder><ReadOnly>$readOnly</ReadOnly></MappedFolder>"
