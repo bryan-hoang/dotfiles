@@ -84,6 +84,12 @@ $linux = foreach ($r in $roots | Where-Object Variant -NE 'W') {
 }
 $toml += '', '# Linux managed destinations (not enrollment roots).'
 $toml += $linux
+# Round-4 (#375): E101's generated Herdr output is the one Windows destination
+# E011 declares; every other Windows destination belongs to E161.
+$herdr = @($roots | Where-Object Id -EQ 'E101')[0]
+if ($herdr.Destination.Replace('`', '') -notmatch '(^|;)\s*generated %APPDATA%/herdr/config\.toml\s*(;|$)') { throw 'E101 no longer lists the Windows Herdr output' }
+$toml += '', '# Windows managed destination: E101 Herdr output only.'
+$toml += "`"~/AppData/Roaming/herdr/config.toml`" = { source = `"$($herdr.Source)`", mode = `"template`", permissions = `"0644`", variants = [{ os = `"windows`" }] }"
 $toml += '', '[bootstrap.repos]'
 $gh = 'https://github.com'
 $toml += Get-Content -LiteralPath (Join-Path $PSScriptRoot 'repos.txt') | Where-Object { $_.Trim() } | ForEach-Object {

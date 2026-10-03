@@ -83,9 +83,17 @@ try {
 	Say 'audited_tip' $tip
 	Check 'adopt_exit' (Run 'adopt' $mise @('bootstrap', '--adopt', 'https://github.com/bryan-hoang/dotfiles', '--yes', '--skip', 'tools')) 0
 
+	# Round-4: E011 renders the Windows Herdr output from the E101 template.
+	$herdr = Join-Path $env:APPDATA 'herdr\config.toml'
+	$ht = if (Test-Path -LiteralPath $herdr -PathType Leaf) { [IO.File]::ReadAllText($herdr) } else { '' }
+	Check 'herdr_rendered' ($ht -ne '') 'True'
+	Check 'herdr_default_shell_pwsh' ($ht -match '(?m)^default_shell = "pwsh"\r?$') 'True'
+	Check 'herdr_kitty_graphics_off' ($ht -match '(?m)^kitty_graphics = false\r?$') 'True'
+	Check 'herdr_template_syntax_left' ($ht -match '\{[{%]') 'False'
+
 	# Windows sources: W rows from audited-tip blobs, E161 to E163 from lab-in.
 	$saved = @()
-	foreach ($rel in '.config/mintty/config', '.config/pwsh/Microsoft.PowerShell_profile.ps1', '.config/rio/config.toml', '.config/alacritty/alacritty.common.toml', '.config/windows/wind-term-settings.json') {
+	foreach ($rel in '.config/mintty/config', '.config/pwsh/Microsoft.PowerShell_profile.ps1', '.config/pwsh/Initialize-Functions.ps1', '.config/pwsh/Initialize-Environment.ps1', '.config/rio/config.toml', '.config/alacritty/alacritty.common.toml', '.config/windows/wind-term-settings.json') {
 		$dest = Live "~/$rel"
 		New-Item -ItemType Directory -Path (Split-Path $dest) -Force | Out-Null
 		Start-Process -FilePath $git -ArgumentList @('-C', "$ex/setup.git", 'cat-file', 'blob', "${tip}:$rel") -RedirectStandardOutput $dest -NoNewWindow -Wait | Out-Null
@@ -222,6 +230,13 @@ try {
 	Check 'apply_base_first' (($units[0..6] -join ',') + '|' + @($units | Select-Object -Skip 7 | Where-Object { $_ -eq 'base' }).Count) 'base,base,base,base,base,base,base|0'
 	Check 'apply_rio_created' (Rows 'apply' 'Unit=rio .*Action=created') 1
 	Check 'validate_exit' (Mod 'validate' 'Invoke-WindowsApplications validate') 0
+	Check 'validate_herdr_ok' (Rows 'validate' 'Unit=base \| Kind=Generated [^\n]*State=ok') 1
+	# Validate fails while the Herdr output is missing, without a drift block.
+	Move-Item -LiteralPath $herdr -Destination (Join-Path $lab 'aside\herdr.toml')
+	Check 'herdr_missing_validate_exit' (Mod 'herdr_missing_validate' 'Invoke-WindowsApplications validate') 1
+	Check 'herdr_missing_reported' (Rows 'herdr_missing_validate' 'Unit=base \| Kind=Generated [^\n]*State=absent') 1
+	Check 'herdr_missing_no_sentinel' (Test-Path -LiteralPath (Join-Path $state 'blocked')) 'False'
+	Move-Item -LiteralPath (Join-Path $lab 'aside\herdr.toml') -Destination $herdr
 	Check 'status_exit' (Mod 'status' 'Invoke-WindowsApplications status') 0
 	Check 'status_enabled_ok' (Rows 'status' 'Enabled=True [^\n]*State=ok') 18
 	Check 'status_enabled_not_ok' (Rows 'status' 'Enabled=True [^\n]*State=(?!ok)') 0
@@ -276,6 +291,18 @@ try {
 	Say 'history_local_paths_list' ($leaked -join ';')
 	Check 'history_marker_commits' (@(& $git -C $H log --all -S 'lab-marker-375-local' --format=%H).Count) 0
 	Check 'history_rendered_home' (@(& $git -C $H log --all -S "$env:USERPROFILE" --format=%H).Count) 0
+
+	# Round-4 GlazeWM/Zebar: the profile chain (E152 sources E149, then E148)
+	# persists both as user variables. Two sessions run, the second inheriting
+	# the user variables the first persisted; the first session's result is
+	# recorded, the values after the second are checked.
+	$envCmd = '. (Join-Path $HOME ''.config/pwsh/Initialize-Functions.ps1''); . (Join-Path $HOME ''.config/pwsh/Initialize-Environment.ps1'')'
+	$refresh = 'foreach ($k in [Environment]::GetEnvironmentVariables(''User'').Keys) { if ($k -ne ''Path'') { Set-Item -LiteralPath (''env:'' + $k) -Value ([Environment]::GetEnvironmentVariable($k, ''User'')) } }; '
+	Run 'pwsh_env_first' $pwsh @('-NoProfile', '-NonInteractive', '-Command', $envCmd) | Out-Null
+	Say 'glazewm_set_after_first_session' ([bool][Environment]::GetEnvironmentVariable('GLAZEWM_CONFIG_PATH', 'User'))
+	Run 'pwsh_env_next' $pwsh @('-NoProfile', '-NonInteractive', '-Command', ($refresh + $envCmd)) | Out-Null
+	Check 'glazewm_config_path' ([Environment]::GetEnvironmentVariable('GLAZEWM_CONFIG_PATH', 'User')) (Live '~/.config/glazewm/config.yaml')
+	Check 'zebar_config_dir' ([Environment]::GetEnvironmentVariable('ZEBAR_CONFIG_DIR', 'User')) (Live '~/.config/zebar')
 	Say 'done' 'yes'
 }
 catch {

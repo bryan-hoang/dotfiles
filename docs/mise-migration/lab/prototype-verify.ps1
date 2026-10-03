@@ -108,8 +108,8 @@ Check sanitized_rows_without_reviewed_source @($sanitized | Where-Object { $revi
 # Authored sources and E011's Linux managed destinations (#371): every file in
 # lab/sources maps to a row (Windows sources such as #374's E161 module stay
 # out of the tip, which stream_windows_files checks); E012 has no home-checkout
-# includeIf; E011 never declares the watcher; every non-track declaration is
-# gated to Linux, and none of its targets is in history.
+# includeIf; E011 never declares the watcher; every non-track declaration but
+# E101's Windows Herdr output is gated to Linux, and none of its targets is in history.
 $srcFiles = @(Get-ChildItem -LiteralPath $srcRoot -Recurse -File -Force | ForEach-Object { $_.FullName.Substring($srcRoot.Length + 1) -replace '\\', '/' })
 Check sources_unmapped @($srcFiles | Where-Object { $files.Live -notcontains "~/$_" }).Count 0
 $e012 = @($built | Where-Object Id -EQ 'E012')[0].Stream
@@ -119,7 +119,15 @@ Check e011_watcher_declared ([regex]::Matches($e011Body, 'bootstrap\.services|hi
 $managed = @([regex]::Split($e011Body, '(?m)^(?=")') | Where-Object { $_ -match '\bsource = ' })
 Say e011_linux_destinations $managed.Count
 Say e011_linux_destinations_gated @($managed | Where-Object { $_ -match 'profile = ' }).Count
-Check e011_destinations_not_linux_only @($managed | Where-Object { $_ -notmatch 'variants = \[\s*\{ os = "linux"' -or $_ -match 'os = "(windows|macos)"' }).Count 0
+# Round-4 (#375): E101's Herdr output is the one Windows destination E011 may
+# declare; every other Windows destination belongs to E161. Comments, section
+# headers, whitespace, and trailing commas do not count, so tombi layout passes.
+$herdrWindows = '"~/AppData/Roaming/herdr/config.toml"={source="~/.config/mise/dotfiles/.config/herdr/config.toml.tmpl",mode="template",permissions="0644",variants=[{os="windows"}]}'
+$isHerdrWindows = { param($d) ((@($d -split "`n" | Where-Object { $_ -notmatch '^\s*(#|\[[a-z.]+\]\s*$)' }) -join '') -replace '\s+', '' -replace ',\]', ']') -eq $herdrWindows }
+$notLinuxOnly = { param($d) -not (& $isHerdrWindows $d) -and ($d -notmatch 'variants = \[\s*\{ os = "linux"' -or $d -match 'os = "(windows|macos)"') }
+Check e011_destinations_not_linux_only @($managed | Where-Object { & $notLinuxOnly $_ }).Count 0
+Check e011_herdr_windows_template @($managed | Where-Object { & $isHerdrWindows $_ }).Count 1
+Check e011_windows_allowance_negative_control @('"~/AppData/Roaming/other/config.toml" = { source = "~/.config/mise/dotfiles/.config/herdr/config.toml.tmpl", mode = "template", permissions = "0644", variants = [{ os = "windows" }] }' | Where-Object { & $notLinuxOnly $_ }).Count 1
 Check e011_destinations_in_history @($managed | ForEach-Object { if ($_ -match '^"~/([^"]+)"') { $Matches[1] } } | Where-Object { $t.ContainsKey("home/$_") -or $t.ContainsKey("home@linux/$_") }).Count 0
 # SANITIZED rows (#372) render through a Linux template declaration.
 Check e011_sanitized_not_template @($sanitized | Where-Object { $id = $_; $src = @($built | Where-Object Id -EQ $id)[0].Live; -not @($managed | Where-Object { $_.Contains("source = `"$src`", mode = `"template`"") }).Count }).Count 0

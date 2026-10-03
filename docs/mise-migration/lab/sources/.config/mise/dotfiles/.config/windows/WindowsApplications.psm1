@@ -110,6 +110,9 @@ $Units = [ordered]@{
 	}
 }
 
+# Required outputs E011 renders (Herdr, from E101); validate fails while one is missing.
+$Generated = @('%APPDATA%/herdr/config.toml')
+
 $StateDir = Join-Path $HOME '.local/state/mise/windows-applications'
 $Sentinel = Join-Path $StateDir 'blocked'
 $FlagFile = Join-Path $HOME '.config/mise/config.windows.local.toml'
@@ -345,7 +348,20 @@ function Invoke-Validate([string[]]$names) {
 			Result $name $rec $s $(if ($s -eq 'changed') { 'quarantined' } else { 'none' })
 		}
 	}
-	if (-not $drift) { return }
+	# Base outputs that mise renders from E011; the module only checks they exist.
+	$missing = @()
+	if ('base' -in $names) {
+		foreach ($g in $Generated) {
+			$p = Expand-Path $g
+			$ok = Test-Path -LiteralPath $p -PathType Leaf
+			if (-not $ok) { $missing += $p }
+			Result 'base' ([pscustomobject]@{ Kind = 'Generated'; Dest = $p }) $(if ($ok) { 'ok' } else { 'absent' }) $(if ($ok) { 'none' } else { 'missing; run mise dot apply' })
+		}
+	}
+	if (-not $drift) {
+		if ($missing) { throw "missing E011 output(s): $($missing -join ', '); run mise dot apply" }
+		return
+	}
 	# Block first so a failure while stopping the watcher still leaves the sentinel.
 	Set-Content -LiteralPath $Sentinel -Value (@("drift detected $(Get-Date -Format o)") + $drift +
 		'Reconcile each path from its quarantined copy, delete this file, then run validate.')

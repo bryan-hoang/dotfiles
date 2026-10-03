@@ -57,6 +57,16 @@ manual WSL procedure steps. The rows are unchanged; the
 [Linux Managed Destinations](#linux-managed-destinations) section records the
 decisions and the capability gates.
 
+Amended 2026-10-03 by
+[Add the Windows application units](https://github.com/bryan-hoang/dotfiles/issues/375):
+the human made three Windows decisions. `E011` declares one Windows destination,
+the `E101` `Herdr` output, as a template. `E161` only validates that it exists,
+and the recorded overwrite of a changed generated output applies to it as on
+Linux. `MPV` on Windows leaves `E161` and is deferred to
+[#390](https://github.com/bryan-hoang/dotfiles/issues/390). `GlazeWM` and
+`Zebar` have no `E161` unit: the PowerShell profile chain (`E152` loads `E148`)
+sets `GLAZEWM_CONFIG_PATH` and `ZEBAR_CONFIG_DIR`. The rows are unchanged.
+
 ## Approved Counts
 
 | Measure                                                                                          |                                   Approved count |
@@ -491,8 +501,13 @@ destination in a shared or Linux row's `destination` field:
 | `AppData`, `%APPDATA%`, setup-root alias | None; Windows destinations belong to `E161`, aliases to the tree                      |
 | Local include, `/etc`, systemd enabling  | None; see the limits below                                                            |
 
-Every declaration selects `variants = [{ os = "linux" }]`. A row in the block
-below also selects that capability as the variant's `profile`. A `wsl` or
+The one exception is the Windows output of `E101`: `E011` renders
+`~/AppData/Roaming/herdr/config.toml` as a template with
+`variants = [{ os = "windows" }]`, and `E161` only validates that it exists.
+Verify rejects any other Windows declaration.
+
+Every other declaration selects `variants = [{ os = "linux" }]`. A row in the
+block below also selects that capability as the variant's `profile`. A `wsl` or
 `native-linux` condition covers every Linux machine, so it needs no profile.
 Destinations are not enrollment roots, so they never enter history; the managed
 `Stylua` link inside `E138` is excluded by the history exclusion.
