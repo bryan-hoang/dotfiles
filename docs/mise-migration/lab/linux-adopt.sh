@@ -67,9 +67,72 @@ real_home=$HOME
 target=.config/git/ignore
 stream=home/.config/git/ignore
 
+# E011's Linux managed destinations (#371): one line per declaration with a
+# source, "target|source|mode|permissions|profile", joining wrapped lines.
+toml_entries() {
+	local line e=
+	while IFS= read -r line; do
+		if [[ $line == '"'* ]]; then
+			[[ -n $e ]] && printf '%s\n' "$e"
+			e=$line
+		elif [[ -n $e && ($line == ' '* || $line == ']'*) ]]; then
+			e="$e $line"
+		else
+			[[ -n $e ]] && printf '%s\n' "$e"
+			e=
+		fi
+	done <"$p/dotfiles.toml"
+	[[ -z $e ]] || printf '%s\n' "$e"
+}
+re='^"~/([^"]+)".* source = "~/([^"]+)", mode = "([a-z-]+)"(, permissions = "([0-7]+)")?.*os = "linux"(, profile = "([a-z-]+)")?'
+while IFS= read -r e; do
+	[[ $e =~ $re ]] && printf '%s|%s|%s|%s|%s\n' "${BASH_REMATCH[1]}" "${BASH_REMATCH[2]}" "${BASH_REMATCH[3]}" "${BASH_REMATCH[5]}" "${BASH_REMATCH[7]}"
+done < <(toml_entries) >"$lab/destinations.tsv"
+declare -A dest=()
+while IFS='|' read -r d _; do dest[$d]=1; done <"$lab/destinations.tsv"
+say destinations_declared "$(wc -l <"$lab/destinations.tsv")"
+same_bytes() { [[ "$(git hash-object --no-filters "$1")" == "$(git hash-object --no-filters "$2")" ]]; }
+# dest_ok <file> <source> <mode> <permissions>: approved type, link target,
+# mode, and copied bytes.
+dest_ok() {
+	case $3 in
+	symlink) [[ -L $1 && "$(readlink "$1")" == "$HOME/$2" ]] ;;
+	copy) [[ -f $1 && ! -L $1 && "$(stat -c %a "$1")" == "${4#0}" ]] && same_bytes "$1" "$HOME/$2" ;;
+	template) [[ -f $1 && ! -L $1 && "$(stat -c %a "$1")" == "${4#0}" ]] ;;
+	*) false ;;
+	esac
+}
+# check_destinations <label> <capability...>: each declaration selected by the
+# capabilities is dest_ok, the others are absent, and no destination is in the
+# history head.
+check_destinations() {
+	local label=$1 ok=0 bad=0 absent=0 stray=0 inhist=0 d s m perm prof f
+	shift
+	while IFS='|' read -r d s m perm prof; do
+		f=$HOME/$d
+		if [[ -n $prof && " $* " != *" $prof "* ]]; then
+			if [[ -e $f || -L $f ]]; then stray=$((stray + 1)); else absent=$((absent + 1)); fi
+		elif dest_ok "$f" "$s" "$m" "$perm"; then
+			ok=$((ok + 1))
+		else
+			bad=$((bad + 1))
+			printf '%s\t%s\n' "$label" "$d" >>"$out/destinations_bad.txt"
+		fi
+		git -C "$(hist)" cat-file -e "main:home/$d" 2>/dev/null && inhist=$((inhist + 1))
+		git -C "$(hist)" cat-file -e "main:home@linux/$d" 2>/dev/null && inhist=$((inhist + 1))
+	done <"$lab/destinations.tsv"
+	say "${label}_destinations_ok" "$ok"
+	say "${label}_destinations_wrong" "$bad"
+	say "${label}_destinations_gated_absent" "$absent"
+	say "${label}_destinations_gated_present" "$stray"
+	say "${label}_destinations_in_history" "$inhist"
+}
+
 # fresh
 export HOME=$base/fresh
-mkdir -p "$HOME"
+mkdir -p "$HOME/.config/mise"
+# Local capabilities, in the excluded input the inventory names.
+printf 'env = ["wsl", "vscode-remote"]\n' >"$HOME/.config/mise/miserc.local.toml"
 run fresh_adopt "${adopt[@]}"
 say fresh_held_paths "$(grep -c 'held:' "$out/fresh_adopt.log")"
 ok=0 bad=0 win=0
@@ -90,6 +153,7 @@ restored=0 checked=0
 while IFS= read -r path; do
 	[[ $path =~ ^(home|config)(@[a-z]+)?/|^\.mise-history/ ]] && continue
 	[[ -n ${live[$path]:-} ]] && continue
+	[[ -n ${dest[$path]:-} ]] && continue
 	checked=$((checked + 1))
 	[[ -e $HOME/$path || -L $HOME/$path ]] && restored=$((restored + 1)) && printf '%s\n' "$path" >>"$out/fresh_repository_only_restored.txt"
 done < <(git -C "$ex/setup.git" ls-tree -r --name-only "$tip")
@@ -104,6 +168,14 @@ say fresh_repos_at_mirror_head "$c"
 say fresh_blesh_contrib_entries "$(find "$HOME/src/github.com/akinomyoga/ble.sh/contrib" -mindepth 1 -maxdepth 1 2>/dev/null | wc -l)"
 say fresh_head_contains_tip "$(has_tip)"
 say fresh_head_parents "$(git -C "$(hist)" log --format='%an:%s' -5 main 2>/dev/null | paste -sd'|' -)"
+check_destinations fresh wsl vscode-remote
+# Recorded limit: status reports a changed generated output as differs, and
+# the next apply overwrites it.
+printf 'local edit\n' >>"$HOME/package.json"
+run fresh_changed_status mise dot status "$HOME/package.json"
+say fresh_changed_generated_status "$(grep -q differs "$out/fresh_changed_status.log" && echo differs || echo other)"
+run fresh_changed_apply mise dot apply --yes "$HOME/package.json"
+say fresh_changed_generated_after_apply "$(same_bytes "$HOME/package.json" "$HOME/.config/mise/dotfiles/package.json" && echo overwritten || echo kept)"
 
 # a: preliminary sequence
 export HOME=$base/a
@@ -128,6 +200,7 @@ mv "$HOME/$target" "$lab/backup-b/ignore.aside"
 run b_adopt "${adopt[@]}"
 adopted=$(head_of)
 say b_adopted_head_contains_tip "$(has_tip)"
+check_destinations b
 say b_adopted_bytes_are_setup "$([[ "$(git hash-object --no-filters "$HOME/$target")" == "$(git -C "$ex/setup.git" rev-parse "$tip:$stream")" ]] && echo yes || echo no)"
 cp "$lab/backup-b/ignore" "$HOME/$target"
 run b_save mise dot save --description 'Reconcile reviewed local content' "$HOME/$target"

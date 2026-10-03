@@ -1,0 +1,186 @@
+[include]
+	# Include Dracula colors.
+	path = ~/src/github.com/dracula/git/config/gitconfig
+	path = alias.gitconfig
+	path = diff.gitconfig
+	path = filter.gitconfig
+	path = hook.gitconfig
+[user]
+	# The excluded machine.gitconfig selects the identity and signing.
+	useConfigOnly = true
+[apply]
+	# Detect whitespace errors when applying a patch.
+	whitespace = fix
+[branch]
+	# Show most recently changed branches first.
+	sort = -committerdate
+# Config for `git bulk` from `git-extras`.`
+[bulkworkspaces]
+[core]
+	# Treat spaces before tabs and all kinds of trailing whitespace as an error.
+	# [default] trailing-space: looks for spaces at the end of a line
+	# [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+	whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+	# Make `git rebase` safer on macOS.
+	# More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+	trustctime = false
+	# Prevent showing files whose names contain non-ASCII symbols as unversioned.
+	# http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+	precomposeunicode = false
+	# Speed up commands involving untracked files such as `git status`.
+	# https://git-scm.com/docs/git-update-index#_untracked_cache
+	untrackedCache = true
+	autocrlf = input
+	eol = lf
+	fsmonitor = true
+	longPaths = true
+	pager = delta
+	symlinks = true
+[interactive]
+	diffFilter = delta --color-only
+[include]
+	path = ~/src/github.com/catppuccin/delta/catppuccin.gitconfig
+[delta]
+	features = decorations zebra-dark catppuccin-mocha
+	navigate = true
+	side-by-side = true
+	tabs = 2
+[delta "decorations"]
+	hunk-header-style = file line-number syntax
+[diff]
+	algorithm = histogram
+	colorMoved = default
+	colorMovedWS = allow-indentation-change
+	mnemonicPrefix = true
+	orderFile = ~/.config/git/order
+	# Detect copies as well as renames.
+	renames = copies
+	submodule = log
+	tool = difftastic
+	renameLimit = 0
+[difftool "difftastic"]
+	cmd = difft "$LOCAL" "$REMOTE"
+[init]
+	defaultBranch = main
+	# FIXME(bryan-hoang): https://github.com/folke/lazy.nvim/issues/2046
+	defaultRefFormat = files
+[feature]
+	experimental = true
+	manyFiles = true
+[log]
+	abbrevCommit = true
+	date = iso
+	follow = true
+[merge]
+	# Include summaries of merged commits in newly created merge commit
+	# messages.
+	log = true
+	conflictStyle = zdiff3
+	ff = only
+	renormalize = true
+	strategy = ort
+	tool = nvimdiff
+[push]
+	autoSetupRemote = true
+	default = current
+	followTags = true
+	recurseSubmodules = check
+[status]
+	showStash = true
+	submoduleSummary = true
+[url "git@github.com:"]
+	insteadOf = "gh:"
+	pushInsteadOf = "git://github.com/"
+	pushInsteadOf = "github:"
+[url "git://github.com/"]
+	insteadOf = "github:"
+[url "git@gist.github.com:"]
+	insteadOf = "gst:"
+	pushInsteadOf = "gist:"
+	pushInsteadOf = "git://gist.github.com/"
+[url "git://gist.github.com/"]
+	insteadOf = "gist:"
+[pull]
+	ff = false
+	rebase = true
+[fetch]
+	all = true
+	parallel = 0
+	prune = true
+	pruneTags = true
+[submodule]
+	fetchJobs = 0
+	recurse = true
+[maintenance]
+	strategy = incremental
+[commit]
+	template = ~/.config/git/COMMIT_EDITMSG
+	verbose = true
+[tag]
+	sort = version:refname
+[grep]
+	column = true
+	lineNumber = true
+	patternType = perl
+[advice]
+	addEmptyPathspec = false
+	addIgnoredFile = false
+	detachedHead = false
+	pushAlreadyExists = true
+	statusHints = false
+	forceDeleteBranch = false
+[credential]
+	helper = cache
+[column]
+	ui = auto
+[color "grep"]
+	column = white
+	match = green bold reverse
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+[clean]
+	requireForce = false
+[rerere]
+	autoupdate = true
+	enabled = true
+[rebase]
+	abbreviateCommands = true
+	autoSquash = true
+	autoStash = true
+	missingCommitsCheck = error
+	stat = true
+	updateRefs = true
+[mergetool]
+	keepBackup = false
+	prompt = true
+	writeToTemp = true
+[checkout]
+	defaultRemote = origin
+[worktree]
+	guessRemote = true
+[format]
+	pretty = fuller
+	signOff = true
+[index]
+	skipHash = false
+[sendemail]
+	annotate = yes
+[transfer]
+	fsckobjects = true
+[absorb]
+	autoStageIfNothingStaged = true
+	oneFixupPerCommit = true
+[safe]
+	directory = *
+[trailer "assist"]
+	key = Assisted-by
+[diff "diff-pdf"]
+	command = "!f() { diff-pdf --view \"$2\" \"$1\"; } ; f"
+
+[include]
+	# Excluded machine-local input: selects the profile (for example by
+	# including ~/.config/mise/dotfiles/.config/git/personal.gitconfig) and holds
+	# signing and any other machine or private fields.
+	path = machine.gitconfig

@@ -237,6 +237,119 @@ exclude = ["~/.config/nvim/stylua.toml"]
 ] }
 "~/.typos.toml" = { mode = "track" }
 
+# Linux managed destinations (not enrollment roots).
+"~/.editorconfig" = { source = "~/.config/mise/dotfiles/.editorconfig", mode = "symlink", variants = [
+  { os = "linux" },
+] }
+"~/.oxfmtrc.jsonc" = { source = "~/.config/mise/dotfiles/.oxfmtrc.jsonc", mode = "symlink", variants = [
+  { os = "linux" },
+] }
+"~/package.json" = { source = "~/.config/mise/dotfiles/package.json", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/pnpm-lock.yaml" = { source = "~/.config/mise/dotfiles/pnpm-lock.yaml", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.ssh/config" = { source = "~/.config/mise/dotfiles/.ssh/config", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.config/git/config" = { source = "~/.config/mise/dotfiles/.config/git/config", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.bash_logout" = { source = "~/.config/bash/.bash_logout", mode = "symlink", variants = [
+  { os = "linux" },
+] }
+"~/.bash_profile" = { source = "~/.config/bash/.bash_profile", mode = "symlink", variants = [
+  { os = "linux" },
+] }
+"~/.bashrc" = { source = "~/.config/bash/.bashrc", mode = "symlink", variants = [
+  { os = "linux" },
+] }
+"~/.hushlogin" = { source = "~/.config/login/.hushlogin", mode = "symlink", variants = [
+  { os = "linux" },
+] }
+"~/.profile" = { source = "~/.config/shell/.profile", mode = "symlink", variants = [
+  { os = "linux" },
+] }
+"~/.local/bin/check-git-remote" = { source = "~/.config/mise/dotfiles/.local/bin/check-git-remote", mode = "copy", permissions = "0755", variants = [
+  { os = "linux" },
+] }
+"~/.local/bin/git-worktree-prune" = { source = "~/.config/mise/dotfiles/.local/bin/git-worktree-prune", mode = "copy", permissions = "0755", variants = [
+  { os = "linux" },
+] }
+"~/.local/bin/print-git-email-symbol" = { source = "~/.config/mise/dotfiles/.local/bin/print-git-email-symbol", mode = "copy", permissions = "0755", variants = [
+  { os = "linux" },
+] }
+"~/.config/herdr/config.toml" = { source = "~/.config/mise/dotfiles/.config/herdr/config.toml.tmpl", mode = "template", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.config/nvim/stylua.toml" = { source = "~/.config/stylua/stylua.toml", mode = "symlink", variants = [
+  { os = "linux" },
+] }
+"~/.config/.curlrc" = { source = "~/.config/mise/dotfiles/.config/.curlrc", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.config/bundle/config" = { source = "~/.config/mise/dotfiles/.config/bundle/config", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.config/gem/gemrc" = { source = "~/.config/mise/dotfiles/.config/gem/gemrc", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.config/gh/config.yml" = { source = "~/.config/mise/dotfiles/.config/gh/config.yml", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.config/litecli/config" = { source = "~/.config/mise/dotfiles/.config/litecli/config", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.config/mycli/myclirc" = { source = "~/.config/mise/dotfiles/.config/mycli/myclirc", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.config/mysql/my.cnf" = { source = "~/.config/mise/dotfiles/.config/mysql/my.cnf", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.config/npm/npmrc" = { source = "~/.config/mise/dotfiles/.config/npm/npmrc", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.config/pgcli/config" = { source = "~/.config/mise/dotfiles/.config/pgcli/config", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.config/pip/pip.conf" = { source = "~/.config/mise/dotfiles/.config/pip/pip.conf", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.config/pnpm/config.yaml" = { source = "~/.config/mise/dotfiles/.config/pnpm/config.yaml", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.config/pypoetry/config.toml" = { source = "~/.config/mise/dotfiles/.config/pypoetry/config.toml", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.config/uv/uv.toml" = { source = "~/.config/mise/dotfiles/.config/uv/uv.toml", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.config/wget/wgetrc" = { source = "~/.config/mise/dotfiles/.config/wget/wgetrc", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.config/youtube-dl/config" = { source = "~/.config/mise/dotfiles/.config/youtube-dl/config", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.config/yt-dlp/config" = { source = "~/.config/mise/dotfiles/.config/yt-dlp/config", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.config/opencode/opencode.jsonc" = { source = "~/.config/mise/dotfiles/.config/opencode/opencode.jsonc", mode = "copy", permissions = "0644", variants = [
+  { os = "linux" },
+] }
+"~/.zshenv" = { source = "~/.config/zsh/.zshenv", mode = "symlink", variants = [
+  { os = "linux" },
+] }
+"~/.local/bin/browser-wsl.sh" = { source = "~/.config/mise/dotfiles/.local/bin/browser-wsl.sh", mode = "copy", permissions = "0755", variants = [
+  { os = "linux", profile = "wsl" },
+] }
+"~/.vscode-server/server-env-setup" = { source = "~/.config/mise/dotfiles/.config/vscode/server-env-setup", mode = "copy", permissions = "0644", variants = [
+  { os = "linux", profile = "vscode-remote" },
+] }
+"~/.vscode-server-insiders/server-env-setup" = { source = "~/.config/mise/dotfiles/.config/vscode/server-env-setup", mode = "copy", permissions = "0644", variants = [
+  { os = "linux", profile = "vscode-remote" },
+] }
+
 [bootstrap.repos]
 "~/src/github.com/akinomyoga/ble.sh" = { url = "https://github.com/akinomyoga/ble.sh" }
 "~/src/github.com/b3nj5m1n/xdg-ninja" = { url = "https://github.com/b3nj5m1n/xdg-ninja" }
