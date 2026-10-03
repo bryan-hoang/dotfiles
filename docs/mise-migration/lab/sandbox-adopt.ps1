@@ -1,8 +1,9 @@
-# Prototype Windows adoption run for Windows Sandbox (Windows PowerShell 5.1).
-# Adopts the seeded setup repository from the exchange copy with stock mise,
-# checks restored files and bootstrap repositories, adds the synthetic Windows
-# stream, and publishes it. Writes key=value results and logs to C:\lab-out,
-# including the advanced setup.git for the host to fast-forward fetch.
+# Windows adoption run for Windows Sandbox (Windows PowerShell 5.1, ASCII
+# only). Adopts the setup repository from the exchange copy with the pinned
+# mise in C:\lab-in\bin, then checks held paths, restored shared files byte
+# for byte, repository-only paths, and bootstrap repositories. Tools are
+# skipped: the offline lab cannot install the restored tool list. Nothing is
+# published. Writes key=value results and logs to C:\lab-out.
 $ErrorActionPreference = 'Stop'
 $in = 'C:\lab-in'
 $out = 'C:\lab-out'
@@ -27,7 +28,7 @@ try {
 	$p2 = Start-Process -FilePath 'C:\fixture-media\Git-2.55.0.3-64-bit.exe' -ArgumentList '/VERYSILENT', '/NORESTART', '/NOCANCEL', '/SP-', '/SUPPRESSMSGBOXES' -Wait -PassThru
 	Say 'installs_exit' "$($p1.ExitCode),$($p2.ExitCode)"
 	$git = 'C:\Program Files\Git\cmd\git.exe'
-	Copy-Item -LiteralPath 'C:\fixture-media\mise.exe' -Destination (Join-Path $lab 'bin\mise.exe')
+	Copy-Item -LiteralPath (Join-Path $in 'bin\mise.exe'), (Join-Path $in 'bin\mise-shim.exe') -Destination (Join-Path $lab 'bin')
 	Copy-Item -LiteralPath (Join-Path $in 'exchange') -Destination (Join-Path $lab 'exchange') -Recurse
 	$mise = Join-Path $lab 'bin\mise.exe'
 	$env:PATH = "$lab\bin;C:\Program Files\Git\cmd;$env:PATH"
@@ -50,24 +51,39 @@ try {
 		$cfg += "[url `"$ex/setup.git`"]", "`tinsteadOf = $origin"
 	}
 	[IO.File]::WriteAllText($env:GIT_CONFIG_GLOBAL, (($cfg -join "`n") + "`n"), $lf)
+	Run 'version' $mise @('--version') | Out-Null
+	Say 'mise' ((([IO.File]::ReadAllText((Join-Path $out 'version.log'))).Trim() -split ' ')[0])
 	$seed = (& $git -C "$ex/setup.git" rev-parse main)
 	Say 'seed_tip' $seed
-
-	Run 'adopt' $mise @('bootstrap', '--adopt', 'https://github.com/bryan-hoang/dotfiles', '--yes') | Out-Null
-
 	$rows = Get-Content -LiteralPath (Join-Path $p 'files.tsv') | ForEach-Object { $f = $_ -split "`t"; [pscustomobject]@{ Id = $f[0]; Var = $f[1]; Live = $f[2]; Stream = $f[3] } }
+	$shared = @{}
+	foreach ($r in ($rows | Where-Object { $_.Var -eq 'S' })) { $shared[$r.Live.Substring(2)] = $true }
+	# Repository-only tip paths that already exist natively are not adoption output.
+	$repoOnly = @(& $git -C "$ex/setup.git" -c core.quotePath=false ls-tree -r --name-only $seed | Where-Object { $_ -notmatch '^(home|config)(@[a-z]+)?/' -and $_ -notlike '.mise-history/*' -and -not $shared.ContainsKey($_) })
+	$preexisting = @($repoOnly | Where-Object { Test-Path -LiteralPath (Live "~/$_") })
+
+	Run 'adopt' $mise @('bootstrap', '--adopt', 'https://github.com/bryan-hoang/dotfiles', '--yes', '--skip', 'tools') | Out-Null
+	Say 'held_paths' @([IO.File]::ReadAllLines((Join-Path $out 'adopt.log')) | Where-Object { $_ -match 'held:' }).Count
+
 	$ok = 0; $bad = @(); $linuxPresent = 0
 	foreach ($r in $rows) {
 		$path = Live $r.Live
 		if ($r.Var -eq 'L') { if (Test-Path -LiteralPath $path) { $linuxPresent++ }; continue }
 		if ($r.Var -eq 'W') { continue }
-		$want = if ($r.Id -eq 'E011') { [IO.File]::ReadAllText((Join-Path $p 'dotfiles.toml')) } else { "# synthetic $($r.Id) $($r.Stream)`n" }
-		if ((Test-Path -LiteralPath $path) -and [IO.File]::ReadAllText($path) -eq $want) { $ok++ } else { $bad += $r.Id }
+		$want = (& $git -C "$ex/setup.git" rev-parse "${seed}:$($r.Stream)")
+		$got = if (Test-Path -LiteralPath $path -PathType Leaf) { (& $git hash-object --no-filters -- $path) } else { '' }
+		if ($got -and $got -eq $want) { $ok++ } else { $bad += $r.Id }
 	}
 	Say 'shared_files_restored_exact' $ok
 	Say 'shared_files_wrong_or_missing' $(if ($bad.Count) { ($bad | Select-Object -Unique) -join ',' } else { 'none' })
 	Say 'linux_files_present' $linuxPresent
 	Say 'stylua_present' (Test-Path -LiteralPath (Live '~/.config/nvim/stylua.toml'))
+
+	$restored = @($repoOnly | Where-Object { $preexisting -notcontains $_ -and (Test-Path -LiteralPath (Live "~/$_")) })
+	[IO.File]::WriteAllText((Join-Path $out 'repository_only_restored.txt'), (($restored -join "`n") + "`n"))
+	Say 'repository_only_checked' $repoOnly.Count
+	Say 'repository_only_preexisting' $preexisting.Count
+	Say 'repository_only_restored' $restored.Count
 
 	$cloned = 0; $wrong = @()
 	foreach ($repo in $repos) {
@@ -86,29 +102,7 @@ try {
 		Say 'adopted_head' (& $git -C $hist.FullName rev-parse main)
 		Say 'adopted_head_contains_seed' $(if ((Run 'ancestry_seed' $git @('-C', $hist.FullName, 'merge-base', '--is-ancestor', $seed, 'main')) -eq 0) { 'yes' } else { 'no' })
 	}
-
-	$n = 0
-	foreach ($r in ($rows | Where-Object Var -eq 'W')) {
-		$path = Live $r.Live
-		New-Item -ItemType Directory -Path (Split-Path -Parent $path) -Force | Out-Null
-		[IO.File]::WriteAllText($path, "# synthetic $($r.Id) $($r.Stream)`n", $lf)
-		$n++
-	}
-	Say 'windows_files_written' $n
-	$saves = @(Get-Content -LiteralPath (Join-Path $p 'roots.tsv') | ForEach-Object { $f = $_ -split "`t"; if ($f[1] -eq 'W') { Live $f[2] } })
-	Say 'windows_save_roots' $saves.Count
-	Run 'save' $mise (@('dot', 'save', '--description', 'Prototype Windows stream') + $saves) | Out-Null
-	Run 'sync' $mise @('dot', 'sync') | Out-Null
 	Run 'status' $mise @('dot', 'status', '--json') | Out-Null
-	if ($hist) {
-		Say 'local_head' (& $git -C $hist.FullName rev-parse main)
-		Say 'local_head_contains_seed' $(if ((Run 'ancestry_local' $git @('-C', $hist.FullName, 'merge-base', '--is-ancestor', $seed, 'main')) -eq 0) { 'yes' } else { 'no' })
-	}
-	$tip = (& $git -C "$ex/setup.git" rev-parse main)
-	Say 'exchange_tip' $tip
-	Say 'exchange_advanced' $(if ($tip -ne $seed) { 'yes' } else { 'no' })
-	Say 'exchange_windows_files' @(& $git -C "$ex/setup.git" ls-tree -r --name-only main -- 'home@windows' 'config@windows').Count
-	Copy-Item -LiteralPath "$lab\exchange\setup.git" -Destination (Join-Path $out 'setup.git') -Recurse
 	Say 'done' 'yes'
 }
 catch {

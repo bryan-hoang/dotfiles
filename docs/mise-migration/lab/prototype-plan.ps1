@@ -5,7 +5,7 @@
 #   files.tsv              id, variant, live file, selected stream path
 #   dotfiles.toml          E011: track declarations, history exclude, repos
 #   removals.txt           legacy tip paths the conversion commit drops
-param([string]$Tip = '46df470')
+param([Parameter(Mandatory)][string]$Tip)
 $ErrorActionPreference = 'Stop'
 $root = Resolve-Path (Join-Path $PSScriptRoot '..\..\..')
 $inv = Join-Path $PSScriptRoot '..\matrices\10-approved-enrollment-inventory.md'
@@ -68,7 +68,7 @@ $toml += Get-Content -LiteralPath (Join-Path $PSScriptRoot 'repos.txt') | Where-
 }
 Save 'dotfiles.toml' $toml
 
-$removals = @('.gitmodules') + @($legacy | Where-Object { $_ -match '^160000 ' } | ForEach-Object { ($_ -split "`t", 2)[1] }) + @(Block 'deferred-x11-links')
+$removals = @('.gitmodules') + @($legacy | Where-Object { $_ -match '^160000 ' } | ForEach-Object { ($_ -split "`t", 2)[1] }) + @(Block 'removed-legacy-paths') + @(Block 'deferred-x11-links')
 Save 'removals.txt' $removals
 
 $byVar = $files | Group-Object Variant | ForEach-Object { "$($_.Name)=$($_.Count)" }

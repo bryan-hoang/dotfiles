@@ -1,18 +1,24 @@
 # Launches a fresh, network-disabled Windows Sandbox that runs a lab script
 # (default sandbox-smoke.ps1) at logon, waits for it to shut down, and removes the run
-# staging. Results land in <IntakeRoot>\lab-results\<run>\lab-out.
-param([Parameter(Mandatory)][string]$IntakeRoot, [int]$TimeoutMinutes = 20, [string]$Script = 'sandbox-smoke.ps1')
+# staging. Results land in <IntakeRoot>\lab-results\<run>\lab-out. The guest
+# receives a copy of -Exchange and the pinned mise (mise-version.txt) in
+# C:\lab-in\bin.
+param([Parameter(Mandatory)][string]$IntakeRoot, [Parameter(Mandatory)][string]$Exchange, [int]$TimeoutMinutes = 20, [string]$Script = 'sandbox-smoke.ps1')
 $ErrorActionPreference = 'Stop'
 $intake = [IO.Path]::GetFullPath($IntakeRoot)
 if (Get-Process -Name 'WindowsSandbox*' -ErrorAction SilentlyContinue) { throw 'A Windows Sandbox is already running.' }
+$v = (Get-Content -LiteralPath (Join-Path $PSScriptRoot 'mise-version.txt')).Trim()
+$media = Join-Path $intake "windows-media-$v"
+if (-not (Test-Path -LiteralPath (Join-Path $media 'mise.exe'))) { throw "pinned mise $v is not staged" }
 $name = 'sandbox-run-' + (Get-Date -Format 'yyyyMMddHHmmss')
 $runsRoot = Join-Path $intake 'sandbox-runs'
 $run = Join-Path $runsRoot $name
 $labIn = Join-Path $run 'lab-in'
 $labOut = Join-Path $intake "lab-results\$name\lab-out"
-New-Item -ItemType Directory -Path $labIn, $labOut -Force | Out-Null
+New-Item -ItemType Directory -Path (Join-Path $labIn 'bin'), $labOut -Force | Out-Null
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot $Script), (Join-Path $PSScriptRoot 'repos.txt'), (Join-Path $PSScriptRoot 'prototype') -Destination $labIn -Recurse
-Copy-Item -LiteralPath (Join-Path $intake 'exchange') -Destination $labIn -Recurse
+Copy-Item -LiteralPath $Exchange -Destination (Join-Path $labIn 'exchange') -Recurse
+Copy-Item -LiteralPath (Join-Path $media 'mise.exe'), (Join-Path $media 'mise-shim.exe') -Destination (Join-Path $labIn 'bin')
 
 function Map([string]$hostPath, [string]$sandboxPath, [string]$readOnly) {
 	"    <MappedFolder><HostFolder>$hostPath</HostFolder><SandboxFolder>$sandboxPath</SandboxFolder><ReadOnly>$readOnly</ReadOnly></MappedFolder>"

@@ -2,8 +2,10 @@
 # fixture checkpoint, then unregisters the run instance. Results land in <IntakeRoot>\lab-results\<run>.
 # The fixture disables interop, which also hides it from \\wsl.localhost, so
 # files cross the boundary only as tar streams over wsl.exe stdio. cmd.exe
-# pipes carry those streams byte-for-byte.
-param([Parameter(Mandatory)][string]$IntakeRoot, [string]$Script = 'linux-smoke.sh')
+# pipes carry those streams byte-for-byte. The guest receives a copy of
+# -Exchange, the workspace README, and the pinned mise (mise-version.txt) in
+# lab-in/bin, which guest scripts put first on PATH.
+param([Parameter(Mandatory)][string]$IntakeRoot, [Parameter(Mandatory)][string]$Exchange, [string]$Script = 'linux-smoke.sh')
 $ErrorActionPreference = 'Stop'
 $intake = [IO.Path]::GetFullPath($IntakeRoot)
 $name = 'mise-lab-run-' + (Get-Date -Format 'yyyyMMddHHmmss')
@@ -11,12 +13,16 @@ $runsRoot = Join-Path $intake 'wsl\runs'
 $runDir = Join-Path $runsRoot $name
 $stage = Join-Path $runsRoot "$name-stage"
 $results = Join-Path $intake "lab-results\$name"
+$v = (Get-Content -LiteralPath (Join-Path $PSScriptRoot 'mise-version.txt')).Trim()
+$mise = Join-Path $intake "linux-media-$v\mise-v$v-linux-x64"
+if (-not (Test-Path -LiteralPath $mise)) { throw "pinned mise $v is not staged" }
 foreach ($n in 'GITHUB_TOKEN', 'GH_TOKEN', 'GITHUB_API_TOKEN', 'MISE_GITHUB_TOKEN') {
 	Remove-Item -LiteralPath "Env:$n" -ErrorAction SilentlyContinue
 }
-New-Item -ItemType Directory -Path $runDir, $results, (Join-Path $stage 'lab-in') -Force | Out-Null
-Copy-Item -LiteralPath (Join-Path $PSScriptRoot $Script), (Join-Path $PSScriptRoot 'repos.txt'), (Join-Path $PSScriptRoot 'prototype') -Destination (Join-Path $stage 'lab-in') -Recurse
-Copy-Item -LiteralPath (Join-Path $intake 'exchange') -Destination (Join-Path $stage 'lab-in') -Recurse
+New-Item -ItemType Directory -Path $runDir, $results, (Join-Path $stage 'lab-in\bin') -Force | Out-Null
+Copy-Item -LiteralPath (Join-Path $PSScriptRoot $Script), (Join-Path $PSScriptRoot 'repos.txt'), (Join-Path $PSScriptRoot 'prototype'), (Join-Path $PSScriptRoot '..\..\..\README.md') -Destination (Join-Path $stage 'lab-in') -Recurse
+Copy-Item -LiteralPath $Exchange -Destination (Join-Path $stage 'lab-in\exchange') -Recurse
+Copy-Item -LiteralPath $mise -Destination (Join-Path $stage 'lab-in\bin\mise')
 wsl.exe --import $name $runDir (Join-Path $intake 'wsl\fedora44-fixture-ready.tar') | Out-Null
 if ($LASTEXITCODE) { throw "import failed: $name" }
 try {

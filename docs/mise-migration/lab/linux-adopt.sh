@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
-# Prototype Linux adoption run for the Fedora 44 WSL fixture. Adopts the
-# exchange copy's setup repository with stock mise in three separate HOME
-# directories, each with its own fresh history store:
-#   fresh  plain adoption; checks restored streams and bootstrap repositories
+# Linux adoption run for the Fedora 44 WSL fixture, on the pinned mise in
+# ~/lab-in/bin. Adopts the exchange copy's setup repository in three separate
+# HOME directories, each with its own fresh history store:
+#   fresh  plain adoption; checks held paths, restored streams byte for byte,
+#          repository-only paths, and bootstrap repositories
 #   a      differing live file, then save and pull --keep-local
 #   b      differing file backed up and moved aside, adoption, then the
 #          reviewed local bytes saved as a descendant
+# Tools are skipped: the offline lab cannot install the restored tool list.
 # Nothing is published. Results land in ~/lab-out/linux-adopt.txt.
 set -uo pipefail
 
@@ -33,6 +35,8 @@ export MISE_AUTO_INSTALL=0
 export GIT_CONFIG_NOSYSTEM=1
 export GIT_CONFIG_GLOBAL=$lab/gitconfig
 export GIT_TERMINAL_PROMPT=0
+chmod +x "$in/bin/mise"
+export PATH=$in/bin:$PATH
 
 ex=$lab/exchange
 
@@ -51,7 +55,9 @@ cp -a "$in/exchange" "$ex"
 	done
 } >"$GIT_CONFIG_GLOBAL"
 
+say mise "$(timeout 30 mise --version 2>/dev/null | cut -d' ' -f1)"
 url=https://github.com/bryan-hoang/dotfiles
+adopt=(mise bootstrap --adopt "$url" --yes --skip tools)
 tip=$(git -C "$ex/setup.git" rev-parse main)
 say tip "$tip"
 hist() { printf '%s/.local/state/mise/history/repo.git' "$HOME"; }
@@ -64,21 +70,31 @@ stream=home/.config/git/ignore
 # fresh
 export HOME=$base/fresh
 mkdir -p "$HOME"
-run fresh_adopt mise bootstrap --adopt "$url" --yes
+run fresh_adopt "${adopt[@]}"
+say fresh_held_paths "$(grep -c 'held:' "$out/fresh_adopt.log")"
 ok=0 bad=0 win=0
-while IFS=$'\t' read -r id var live strm; do
-	f=$HOME/${live#\~/}
+declare -A live
+while IFS=$'\t' read -r _ var l strm; do
+	f=$HOME/${l#\~/}
 	if [[ $var == W ]]; then
 		[[ -e $f ]] && win=$((win + 1))
 		continue
 	fi
-	if [[ $id == E011 ]]; then want=$(cat "$p/dotfiles.toml"); else want="# synthetic $id $strm"; fi
-	if [[ -f $f ]] && [[ "$(cat "$f")" == "$want" ]]; then ok=$((ok + 1)); else bad=$((bad + 1)); fi
+	live[${l#\~/}]=1
+	if [[ -f $f && ! -L $f && "$(git hash-object --no-filters "$f")" == "$(git -C "$ex/setup.git" rev-parse "$tip:$strm")" ]]; then ok=$((ok + 1)); else bad=$((bad + 1)); fi
 done <"$p/files.tsv"
 say fresh_files_restored_exact "$ok"
 say fresh_files_wrong_or_missing "$bad"
 say fresh_windows_files_present "$win"
-say fresh_repository_only_restored "$(for f in README.md .gitmodules .bashrc .config/X11/xinitrc .config/mise/conf.d/fnox.toml; do [[ -e "$HOME/$f" ]] && printf '%s ' "$f"; done)"
+restored=0 checked=0
+while IFS= read -r path; do
+	[[ $path =~ ^(home|config)(@[a-z]+)?/|^\.mise-history/ ]] && continue
+	[[ -n ${live[$path]:-} ]] && continue
+	checked=$((checked + 1))
+	[[ -e $HOME/$path || -L $HOME/$path ]] && restored=$((restored + 1)) && printf '%s\n' "$path" >>"$out/fresh_repository_only_restored.txt"
+done < <(git -C "$ex/setup.git" ls-tree -r --name-only "$tip")
+say fresh_repository_only_checked "$checked"
+say fresh_repository_only_restored "$restored"
 c=0
 while read -r repo; do
 	[[ $repo != "" ]] || continue
@@ -93,7 +109,7 @@ say fresh_head_parents "$(git -C "$(hist)" log --format='%an:%s' -5 main 2>/dev/
 export HOME=$base/a
 mkdir -p "$HOME/$(dirname "$target")"
 printf 'local edit A\n' >"$HOME/$target"
-run a_adopt mise bootstrap --adopt "$url" --yes
+run a_adopt "${adopt[@]}"
 say a_local_head_after_adopt "$(head_of)"
 say a_declaration_present "$([[ -f "$HOME/.config/mise/conf.d/dotfiles.toml" ]] && echo yes || echo no)"
 run a_save mise dot save "$HOME/$target"
@@ -109,10 +125,10 @@ mkdir -p "$HOME/$(dirname "$target")" "$lab/backup-b"
 printf 'local edit B\n' >"$HOME/$target"
 cp -p "$HOME/$target" "$lab/backup-b/ignore"
 mv "$HOME/$target" "$lab/backup-b/ignore.aside"
-run b_adopt mise bootstrap --adopt "$url" --yes
+run b_adopt "${adopt[@]}"
 adopted=$(head_of)
 say b_adopted_head_contains_tip "$(has_tip)"
-say b_adopted_bytes_are_setup "$([[ "$(cat "$HOME/$target")" == "# synthetic E020 $stream" ]] && echo yes || echo no)"
+say b_adopted_bytes_are_setup "$([[ "$(git hash-object --no-filters "$HOME/$target")" == "$(git -C "$ex/setup.git" rev-parse "$tip:$stream")" ]] && echo yes || echo no)"
 cp "$lab/backup-b/ignore" "$HOME/$target"
 run b_save mise dot save --description 'Reconcile reviewed local content' "$HOME/$target"
 say b_save_parent_is_adopted_head "$([[ "$(git -C "$(hist)" rev-parse main^ 2>/dev/null)" == "$adopted" ]] && echo yes || echo no)"

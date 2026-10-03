@@ -27,6 +27,8 @@ export MISE_AUTO_INSTALL=0
 export GIT_CONFIG_NOSYSTEM=1
 export GIT_CONFIG_GLOBAL=$lab/gitconfig
 export GIT_TERMINAL_PROMPT=0
+chmod +x "$in/bin/mise"
+export PATH=$in/bin:$PATH
 
 ex=$in/exchange
 

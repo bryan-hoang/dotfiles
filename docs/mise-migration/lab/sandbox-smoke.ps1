@@ -26,7 +26,7 @@ try {
 	$p = Start-Process -FilePath 'C:\fixture-media\Git-2.55.0.3-64-bit.exe' -ArgumentList '/VERYSILENT', '/NORESTART', '/NOCANCEL', '/SP-', '/SUPPRESSMSGBOXES' -Wait -PassThru
 	Say 'git_install_exit' $p.ExitCode
 	$git = 'C:\Program Files\Git\cmd\git.exe'
-	Copy-Item -LiteralPath 'C:\fixture-media\mise.exe' -Destination (Join-Path $lab 'bin\mise.exe')
+	Copy-Item -LiteralPath (Join-Path $in 'bin\mise.exe'), (Join-Path $in 'bin\mise-shim.exe') -Destination (Join-Path $lab 'bin')
 	Copy-Item -LiteralPath (Join-Path $in 'exchange') -Destination (Join-Path $lab 'exchange') -Recurse
 	$mise = Join-Path $lab 'bin\mise.exe'
 
