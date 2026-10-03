@@ -457,6 +457,13 @@ deferred repositories are unreachable from active setup declarations.
   `copy-ok`; source or repository updates require reapplication.
 - Generated destinations and all local inputs, staging, state, caches, logs,
   sessions, sockets, databases, plugin stores, and service state are excluded.
+- Amended 2026-10-03 by
+  [Write the sanitized sources](https://github.com/bryan-hoang/dotfiles/issues/372):
+  the `SANITIZED` rows `E112` to `E128` have optional local inputs. On Linux, a
+  mise template renders each source to its generated destination and appends the
+  excluded `<destination>.local` when it exists. A missing local input renders
+  the source alone and blocks nothing. `E114` `sources` and `E128` `mcp.*.url`
+  accept only their reviewed public values.
 - Windows application units preflight and fail atomically per application. The
   required Windows base fails as one unit. Work-machine divergent bytes are
   preserved until their public or local disposition is approved.
@@ -475,14 +482,14 @@ deferred repositories are unreachable from active setup declarations.
 `lab/prototype-plan.ps1` generates one `E011` declaration for each Linux managed
 destination in a shared or Linux row's `destination` field:
 
-| Destination form                         | Declaration                                                        |
-| ---------------------------------------- | ------------------------------------------------------------------ |
-| Writable link or read-only alias         | `mode = "symlink"` to the row's source                             |
-| `generated`                              | `mode = "copy"`, or `"template"` for a `.tmpl` source; mode `0644` |
-| `managed` with mode `0755`               | `mode = "copy"` with `permissions = "0755"`                        |
-| `copy-ok`                                | `mode = "copy"` with `permissions = "0644"`                        |
-| `AppData`, `%APPDATA%`, setup-root alias | None; Windows destinations belong to `E161`, aliases to the tree   |
-| Local include, `/etc`, systemd enabling  | None; see the limits below                                         |
+| Destination form                         | Declaration                                                                           |
+| ---------------------------------------- | ------------------------------------------------------------------------------------- |
+| Writable link or read-only alias         | `mode = "symlink"` to the row's source                                                |
+| `generated`                              | `mode = "copy"`, or `"template"` for a `.tmpl` source or `SANITIZED` row; mode `0644` |
+| `managed` with mode `0755`               | `mode = "copy"` with `permissions = "0755"`                                           |
+| `copy-ok`                                | `mode = "copy"` with `permissions = "0644"`                                           |
+| `AppData`, `%APPDATA%`, setup-root alias | None; Windows destinations belong to `E161`, aliases to the tree                      |
+| Local include, `/etc`, systemd enabling  | None; see the limits below                                                            |
 
 Every declaration selects `variants = [{ os = "linux" }]`. A row in the block
 below also selects that capability as the variant's `profile`. A `wsl` or

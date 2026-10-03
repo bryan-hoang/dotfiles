@@ -286,55 +286,55 @@ exclude = ["~/.config/nvim/stylua.toml"]
 "~/.config/nvim/stylua.toml" = { source = "~/.config/stylua/stylua.toml", mode = "symlink", variants = [
   { os = "linux" },
 ] }
-"~/.config/.curlrc" = { source = "~/.config/mise/dotfiles/.config/.curlrc", mode = "copy", permissions = "0644", variants = [
+"~/.config/.curlrc" = { source = "~/.config/mise/dotfiles/.config/.curlrc", mode = "template", permissions = "0644", variants = [
   { os = "linux" },
 ] }
-"~/.config/bundle/config" = { source = "~/.config/mise/dotfiles/.config/bundle/config", mode = "copy", permissions = "0644", variants = [
+"~/.config/bundle/config" = { source = "~/.config/mise/dotfiles/.config/bundle/config", mode = "template", permissions = "0644", variants = [
   { os = "linux" },
 ] }
-"~/.config/gem/gemrc" = { source = "~/.config/mise/dotfiles/.config/gem/gemrc", mode = "copy", permissions = "0644", variants = [
+"~/.config/gem/gemrc" = { source = "~/.config/mise/dotfiles/.config/gem/gemrc", mode = "template", permissions = "0644", variants = [
   { os = "linux" },
 ] }
-"~/.config/gh/config.yml" = { source = "~/.config/mise/dotfiles/.config/gh/config.yml", mode = "copy", permissions = "0644", variants = [
+"~/.config/gh/config.yml" = { source = "~/.config/mise/dotfiles/.config/gh/config.yml", mode = "template", permissions = "0644", variants = [
   { os = "linux" },
 ] }
-"~/.config/litecli/config" = { source = "~/.config/mise/dotfiles/.config/litecli/config", mode = "copy", permissions = "0644", variants = [
+"~/.config/litecli/config" = { source = "~/.config/mise/dotfiles/.config/litecli/config", mode = "template", permissions = "0644", variants = [
   { os = "linux" },
 ] }
-"~/.config/mycli/myclirc" = { source = "~/.config/mise/dotfiles/.config/mycli/myclirc", mode = "copy", permissions = "0644", variants = [
+"~/.config/mycli/myclirc" = { source = "~/.config/mise/dotfiles/.config/mycli/myclirc", mode = "template", permissions = "0644", variants = [
   { os = "linux" },
 ] }
-"~/.config/mysql/my.cnf" = { source = "~/.config/mise/dotfiles/.config/mysql/my.cnf", mode = "copy", permissions = "0644", variants = [
+"~/.config/mysql/my.cnf" = { source = "~/.config/mise/dotfiles/.config/mysql/my.cnf", mode = "template", permissions = "0644", variants = [
   { os = "linux" },
 ] }
-"~/.config/npm/npmrc" = { source = "~/.config/mise/dotfiles/.config/npm/npmrc", mode = "copy", permissions = "0644", variants = [
+"~/.config/npm/npmrc" = { source = "~/.config/mise/dotfiles/.config/npm/npmrc", mode = "template", permissions = "0644", variants = [
   { os = "linux" },
 ] }
-"~/.config/pgcli/config" = { source = "~/.config/mise/dotfiles/.config/pgcli/config", mode = "copy", permissions = "0644", variants = [
+"~/.config/pgcli/config" = { source = "~/.config/mise/dotfiles/.config/pgcli/config", mode = "template", permissions = "0644", variants = [
   { os = "linux" },
 ] }
-"~/.config/pip/pip.conf" = { source = "~/.config/mise/dotfiles/.config/pip/pip.conf", mode = "copy", permissions = "0644", variants = [
+"~/.config/pip/pip.conf" = { source = "~/.config/mise/dotfiles/.config/pip/pip.conf", mode = "template", permissions = "0644", variants = [
   { os = "linux" },
 ] }
-"~/.config/pnpm/config.yaml" = { source = "~/.config/mise/dotfiles/.config/pnpm/config.yaml", mode = "copy", permissions = "0644", variants = [
+"~/.config/pnpm/config.yaml" = { source = "~/.config/mise/dotfiles/.config/pnpm/config.yaml", mode = "template", permissions = "0644", variants = [
   { os = "linux" },
 ] }
-"~/.config/pypoetry/config.toml" = { source = "~/.config/mise/dotfiles/.config/pypoetry/config.toml", mode = "copy", permissions = "0644", variants = [
+"~/.config/pypoetry/config.toml" = { source = "~/.config/mise/dotfiles/.config/pypoetry/config.toml", mode = "template", permissions = "0644", variants = [
   { os = "linux" },
 ] }
-"~/.config/uv/uv.toml" = { source = "~/.config/mise/dotfiles/.config/uv/uv.toml", mode = "copy", permissions = "0644", variants = [
+"~/.config/uv/uv.toml" = { source = "~/.config/mise/dotfiles/.config/uv/uv.toml", mode = "template", permissions = "0644", variants = [
   { os = "linux" },
 ] }
-"~/.config/wget/wgetrc" = { source = "~/.config/mise/dotfiles/.config/wget/wgetrc", mode = "copy", permissions = "0644", variants = [
+"~/.config/wget/wgetrc" = { source = "~/.config/mise/dotfiles/.config/wget/wgetrc", mode = "template", permissions = "0644", variants = [
   { os = "linux" },
 ] }
-"~/.config/youtube-dl/config" = { source = "~/.config/mise/dotfiles/.config/youtube-dl/config", mode = "copy", permissions = "0644", variants = [
+"~/.config/youtube-dl/config" = { source = "~/.config/mise/dotfiles/.config/youtube-dl/config", mode = "template", permissions = "0644", variants = [
   { os = "linux" },
 ] }
-"~/.config/yt-dlp/config" = { source = "~/.config/mise/dotfiles/.config/yt-dlp/config", mode = "copy", permissions = "0644", variants = [
+"~/.config/yt-dlp/config" = { source = "~/.config/mise/dotfiles/.config/yt-dlp/config", mode = "template", permissions = "0644", variants = [
   { os = "linux" },
 ] }
-"~/.config/opencode/opencode.jsonc" = { source = "~/.config/mise/dotfiles/.config/opencode/opencode.jsonc", mode = "copy", permissions = "0644", variants = [
+"~/.config/opencode/opencode.jsonc" = { source = "~/.config/mise/dotfiles/.config/opencode/opencode.jsonc", mode = "template", permissions = "0644", variants = [
   { os = "linux" },
 ] }
 "~/.zshenv" = { source = "~/.config/zsh/.zshenv", mode = "symlink", variants = [

@@ -3,7 +3,8 @@
 # ~/lab-in/bin. Adopts the exchange copy's setup repository in three separate
 # HOME directories, each with its own fresh history store:
 #   fresh  plain adoption; checks held paths, restored streams byte for byte,
-#          repository-only paths, and bootstrap repositories
+#          repository-only paths, and bootstrap repositories, then the
+#          sanitized sources (linux-sanitized.sh)
 #   a      differing live file, then save and pull --keep-local
 #   b      differing file backed up and moved aside, adoption, then the
 #          reviewed local bytes saved as a descendant
@@ -127,12 +128,15 @@ check_destinations() {
 	say "${label}_destinations_gated_present" "$stray"
 	say "${label}_destinations_in_history" "$inhist"
 }
+# shellcheck source=/dev/null
+source "$in/linux-sanitized.sh"
 
 # fresh
 export HOME=$base/fresh
 mkdir -p "$HOME/.config/mise"
 # Local capabilities, in the excluded input the inventory names.
 printf 'env = ["wsl", "vscode-remote"]\n' >"$HOME/.config/mise/miserc.local.toml"
+sanitized_inputs
 run fresh_adopt "${adopt[@]}"
 say fresh_held_paths "$(grep -c 'held:' "$out/fresh_adopt.log")"
 ok=0 bad=0 win=0
@@ -154,6 +158,7 @@ while IFS= read -r path; do
 	[[ $path =~ ^(home|config)(@[a-z]+)?/|^\.mise-history/ ]] && continue
 	[[ -n ${live[$path]:-} ]] && continue
 	[[ -n ${dest[$path]:-} ]] && continue
+	[[ -n ${generated[$path]:-} ]] && continue
 	checked=$((checked + 1))
 	[[ -e $HOME/$path || -L $HOME/$path ]] && restored=$((restored + 1)) && printf '%s\n' "$path" >>"$out/fresh_repository_only_restored.txt"
 done < <(git -C "$ex/setup.git" ls-tree -r --name-only "$tip")
@@ -188,6 +193,7 @@ rm "$HOME/.config/shell/extra.sh"
 timeout 30 env -u GPG_KEY_ID bash -c '. "$HOME"/.config/shell/functions.sh; gpg() { printf "%s " "$@"; }; import_gpg_key' >"$out/fresh_e030_unset.log" 2>&1
 say fresh_e030_unset_key_exit "$?"
 say fresh_e030_unset_key_ran_edit "$(grep -c -- '--edit-key' "$out/fresh_e030_unset.log")"
+sanitized_checks
 
 # a: preliminary sequence
 export HOME=$base/a

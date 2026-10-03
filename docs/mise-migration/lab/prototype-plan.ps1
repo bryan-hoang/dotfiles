@@ -26,7 +26,7 @@ if ($LASTEXITCODE) { throw "cannot list $Tip" }
 $roots = foreach ($line in Block 'enrollment-roots' | Where-Object { $_ -match '^\|\s*`?E\d{3}`?\s' }) {
 	$f = @($line.Trim().Trim('|') -split '\|' | ForEach-Object { $_.Trim().Trim('`') })
 	if ($f.Count -ne 12) { throw "bad row: $line" }
-	[pscustomobject]@{ Id = $f[0]; Source = $f[1]; Enroll = $f[2]; Stream = $f[3]; Kind = $f[4]; Variant = $f[5]; Autosave = $f[6]; Destination = $f[8] }
+	[pscustomobject]@{ Id = $f[0]; Source = $f[1]; Enroll = $f[2]; Stream = $f[3]; Kind = $f[4]; Variant = $f[5]; Autosave = $f[6]; Destination = $f[8]; Review = $f[9] }
 }
 
 $files = foreach ($r in $roots) {
@@ -63,7 +63,9 @@ $toml += $roots | ForEach-Object {
 }
 # Linux managed destinations, per the inventory's Linux Managed Destinations
 # section: one declaration per home destination of a shared or Linux row, gated
-# to Linux and, for rows in the capability block, to that capability.
+# to Linux and, for rows in the capability block, to that capability. SANITIZED
+# rows (#372) render as templates, whose include lines add the excluded
+# application-local input.
 $gates = @{}
 foreach ($l in Block 'linux-capability-gates') { $id, $cap = -split $l; $gates[$id] = $cap }
 $linux = foreach ($r in $roots | Where-Object Variant -NE 'W') {
@@ -71,7 +73,7 @@ $linux = foreach ($r in $roots | Where-Object Variant -NE 'W') {
 		$item = $item.Trim()
 		if ($item -match 'AppData|%APPDATA%|setup-root|selected include|systemd|/etc/' -or $item -notmatch '(~/\S+)') { continue }
 		$target = $Matches[1]
-		$kind, $perm = if ($item -match '^generated ') { $(if ($r.Source -like '*.tmpl') { 'template' } else { 'copy' }), '0644' }
+		$kind, $perm = if ($item -match '^generated ') { $(if ($r.Source -like '*.tmpl' -or $r.Review -eq 'SANITIZED') { 'template' } else { 'copy' }), '0644' }
 		elseif ($item -match 'mode 0755') { 'copy', '0755' }
 		elseif ($item -match '^copy-ok ') { 'copy', '0644' }
 		else { 'symlink', $null }

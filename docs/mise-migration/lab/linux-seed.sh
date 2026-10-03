@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Conversion seed run for the Fedora 44 WSL fixture, on the pinned mise in
-# ~/lab-in/bin. Writes the shared and Linux files from the audited-tip blobs
-# (synthetic placeholders for canonical sources not written yet), installs the
-# generated E011, lets mise capture the baseline, then builds the conversion
+# ~/lab-in/bin. Writes the shared and Linux files from the reviewed new sources
+# and the audited-tip blobs (synthetic placeholders for canonical sources not
+# written yet), installs the generated E011, checks the sanitized sources, lets
+# mise capture the baseline, then builds the conversion
 # commit on the exchange copy's main: the audited-tip tree minus the removals,
 # executables normalized to 100644, the reviewed README and rewrites, plus mise's
 # checkpoint tree. Results land in ~/lab-out, including the advanced
@@ -58,8 +59,9 @@ say history_sync "$(timeout 30 mise settings get history.sync 2>/dev/null)"
 legacy=$(git -C "$ex/setup.git" rev-parse main)
 say audited_tip "$legacy"
 
-# Shared and Linux files; Windows rows have no stream in the tip. A source
-# that is a regular file at the audited tip takes that blob, written 0644.
+# Shared and Linux files; Windows rows have no stream in the tip. A reviewed
+# new source in lab/sources/<live path> wins; otherwise a source that is a regular
+# file at the audited tip takes that blob. Everything is written 0644.
 declare -A blob
 while IFS=$'\t' read -r meta path; do
 	read -r mode _ oid <<<"$meta"
@@ -93,6 +95,12 @@ say seeded_files "$((n + 1))"
 say seeded_from_audited_tip "$real"
 say seeded_from_sources "$authored"
 say seeded_placeholders "$((n - real - authored))"
+
+# Unknown fields in a sanitized source block the baseline.
+if ! run sanitized_check python3 "$in/sanitized.py" check "$HOME/.config/mise"; then
+	say 'done' blocked
+	exit 1
+fi
 
 run paths mise dot paths --json
 mapfile -t saves < <(grep -v $'^[^\t]*\tW\t' "$p/roots.tsv" | cut -f3 | sed "s|^~|$HOME|")

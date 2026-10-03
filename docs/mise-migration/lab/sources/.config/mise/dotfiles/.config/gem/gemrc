@@ -1,0 +1,9 @@
+---
+gem: --no-document
+update_sources: true
+sources:
+  - http://rubygems.org/
+bulk_threshold: 1000
+benchmark: false
+# {% set local = env.HOME ~ "/.config/gem/gemrc.local" %}
+# {% if local is file %}{{ "\n" ~ read_file(path=local) }}{% endif %}

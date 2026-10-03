@@ -73,26 +73,30 @@ Check stream_non_100644 @($actual | Where-Object { ($t[$_] -split ' ')[0] -ne '1
 $e031 = @($built | Where-Object Id -EQ 'E031')[0].Stream
 Check e031_mode ($t[$e031] -split ' ')[0] 100644
 
-# Expected stream bytes: E011 is the generated declaration; a row whose source
-# is a regular file at the audited tip takes that blob; every other row is a
-# synthetic placeholder for a canonical source a later ticket writes.
+# Expected stream bytes: E011 is the generated declaration; a row with a
+# reviewed new source in lab/sources/<live path> takes those bytes; a row whose
+# source is a regular file at the audited tip takes that blob; every other row
+# is a synthetic placeholder for a canonical source a later ticket writes.
 $e011 = Join-Path $p 'dotfiles.toml'
 $e011Blob = (& git hash-object --no-filters -- $e011)
-$fromTip = 0; $synthetic = 0; $authored = 0
+$fromTip = 0; $synthetic = 0; $reviewed = @()
 $srcRoot = Join-Path $PSScriptRoot 'sources'
 $badBytes = @(foreach ($f in $built) {
 		if (-not $t.ContainsKey($f.Stream)) { continue }
 		$rel = $f.Live.Substring(2)
 		$src = Join-Path $srcRoot $rel
 		if ($f.Id -eq 'E011') { $want = $e011Blob }
-		elseif (Test-Path -LiteralPath $src -PathType Leaf) { $want = (& git hash-object --no-filters -- $src); $authored++ }
+		elseif (Test-Path -LiteralPath $src -PathType Leaf) { $want = (& git hash-object --no-filters -- $src); $reviewed += $f.Id }
 		elseif ($old[$rel] -match '^100(644|755) ') { $want = ($old[$rel] -split ' ')[1]; $fromTip++ }
 		else { $want = BlobId "# synthetic $($f.Id) $($f.Stream)`n"; $synthetic++ }
 		if (($t[$f.Stream] -split ' ')[1] -ne $want) { $f.Id }
 	})
 Say stream_from_audited_tip $fromTip
 Say stream_placeholders $synthetic
-Say stream_from_sources $authored
+Say stream_from_sources $reviewed.Count
+$sanitized = @(Block 'enrollment-roots' | Where-Object { $_ -match '^\|\s*`?E\d{3}`?\s' } | ForEach-Object { $c = @($_.Trim().Trim('|') -split '\|' | ForEach-Object { $_.Trim().Trim('`') }); if ($c[9] -eq 'SANITIZED') { $c[0] } })
+Say sanitized_rows $sanitized.Count
+Check sanitized_rows_without_reviewed_source @($sanitized | Where-Object { $reviewed -notcontains $_ }).Count 0
 
 # Authored sources and E011's Linux managed destinations (#371): every file in
 # lab/sources maps to a shared or Linux row; E012 has no home-checkout
@@ -109,6 +113,8 @@ Say e011_linux_destinations $managed.Count
 Say e011_linux_destinations_gated @($managed | Where-Object { $_ -match 'profile = ' }).Count
 Check e011_destinations_not_linux_only @($managed | Where-Object { $_ -notmatch 'variants = \[\s*\{ os = "linux"' -or $_ -match 'os = "(windows|macos)"' }).Count 0
 Check e011_destinations_in_history @($managed | ForEach-Object { if ($_ -match '^"~/([^"]+)"') { $Matches[1] } } | Where-Object { $t.ContainsKey("home/$_") -or $t.ContainsKey("home@linux/$_") }).Count 0
+# SANITIZED rows (#372) render through a Linux template declaration.
+Check e011_sanitized_not_template @($sanitized | Where-Object { $id = $_; $src = @($built | Where-Object Id -EQ $id)[0].Live; -not @($managed | Where-Object { $_.Contains("source = `"$src`", mode = `"template`"") }).Count }).Count 0
 Check stream_bytes_mismatch $(if ($badBytes.Count) { ($badBytes | Select-Object -Unique) -join ',' } else { 0 }) 0
 Check managed_stylua_in_history @($t.Keys | Where-Object { $_ -match '/\.config/nvim/stylua\.toml$' }).Count 0
 

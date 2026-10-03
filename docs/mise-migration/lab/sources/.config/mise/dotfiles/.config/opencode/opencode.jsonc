@@ -1,0 +1,100 @@
+{
+	"$schema": "https://opencode.ai/config.json",
+	"autoupdate": false,
+	"lsp": {},
+	"formatter": {
+		"oxfmt": {
+			"command": ["oxfmt", "$FILE"],
+			"extensions": [".yaml", ".yml"],
+		},
+		"tombi": {
+			"command": ["tombi", "format", "$FILE"],
+			"extensions": [".toml"],
+		},
+	},
+	"mcp": {
+		"chrome-devtools": {
+			"type": "local",
+			"command": ["aube", "dlx", "chrome-devtools-mcp@latest"],
+			"enabled": false,
+		},
+		"exa": {
+			"type": "remote",
+			"url": "https://mcp.exa.ai/mcp",
+			"enabled": false,
+		},
+		"fff": {
+			"type": "local",
+			"command": ["fff-mcp"],
+			"enabled": false,
+		},
+		"obscura": {
+			"type": "local",
+			"command": ["obscura", "mcp"],
+			"enabled": false,
+		},
+		"pitchfork": {
+			"type": "local",
+			"command": ["pitchfork", "mcp"],
+			"enabled": false,
+		},
+		"mdn": {
+			"type": "remote",
+			"url": "https://mcp.mdn.mozilla.net/",
+			"enabled": false,
+		},
+	},
+	"plugin": ["@dietrichgebert/ponytail"],
+	"permission": {
+		"bash": {
+			"cat *": "deny",
+			"sed *": "deny",
+			"rtk perl *": "deny",
+			"rtk sed *": "deny",
+			"rtk cat *": "deny",
+			"rtk awk *": "deny",
+			"find *": "deny",
+			"Add-Content *": "deny",
+			"Get-Content *": "deny",
+			"pwsh -c *": "deny",
+			"pwsh -command *": "deny",
+			"powershell -c *": "deny",
+			"powershell -command *": "deny",
+			"rtk read *": "deny",
+			"echo *": "deny",
+			"New-Item *": "deny",
+			"Set-Content *": "deny",
+			// Ask for commands I want to double check first.
+			"rtk git commit *": "ask",
+			"rtk git push *": "ask",
+			"rtk git pull *": "ask",
+			"rtk git reset *": "ask",
+			"rtk git restore *": "ask",
+			"az *": "ask",
+			"kubectl *": "ask",
+			"sqlcmd *": "ask",
+			// `grep` & friends...
+			"grep *": "deny",
+			"rtk grep *": "deny",
+			"rg *": "allow",
+			"rtk rg *": "allow",
+			"Select-String *": "deny",
+			"findstr *": "deny",
+			"sls *": "deny",
+			"type *": "deny",
+			"node -e *": "deny",
+			"jaq -R *": "deny",
+			// `--target-branch` doesn't seem to work...
+			"az repos pr create *": "deny",
+		},
+		"external_directory": {
+			"~/AppData/Local/Temp/opencode/**": "allow",
+			"~/.config/opencode/**": "allow",
+		},
+	},
+	"websearch": {
+		"provider": "random",
+	},
+	// {% set local = env.HOME ~ "/.config/opencode/opencode.jsonc.local" %}
+	// {% if local is file %}{{ "\n" ~ read_file(path=local) }}{% endif %}
+}
