@@ -20,7 +20,7 @@ foreach ($n in 'GITHUB_TOKEN', 'GH_TOKEN', 'GITHUB_API_TOKEN', 'MISE_GITHUB_TOKE
 	Remove-Item -LiteralPath "Env:$n" -ErrorAction SilentlyContinue
 }
 New-Item -ItemType Directory -Path $runDir, $results, (Join-Path $stage 'lab-in\bin') -Force | Out-Null
-Copy-Item -LiteralPath (Join-Path $PSScriptRoot $Script), (Join-Path $PSScriptRoot 'repos.txt'), (Join-Path $PSScriptRoot 'prototype'), (Join-Path $PSScriptRoot 'rewrites'), (Join-Path $PSScriptRoot '..\..\..\README.md') -Destination (Join-Path $stage 'lab-in') -Recurse
+Copy-Item -LiteralPath (Join-Path $PSScriptRoot $Script), (Join-Path $PSScriptRoot 'repos.txt'), (Join-Path $PSScriptRoot 'prototype'), (Join-Path $PSScriptRoot 'rewrites'), (Join-Path $PSScriptRoot 'sources'), (Join-Path $PSScriptRoot '..\..\..\README.md') -Destination (Join-Path $stage 'lab-in') -Recurse
 Copy-Item -LiteralPath $Exchange -Destination (Join-Path $stage 'lab-in\exchange') -Recurse
 Copy-Item -LiteralPath $mise -Destination (Join-Path $stage 'lab-in\bin\mise')
 wsl.exe --import $name $runDir (Join-Path $intake 'wsl\fedora44-fixture-ready.tar') | Out-Null

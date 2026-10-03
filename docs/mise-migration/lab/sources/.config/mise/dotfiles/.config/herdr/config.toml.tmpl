@@ -1,0 +1,44 @@
+onboarding = false
+
+[experimental]
+# The local `kitty-graphics` capability (an entry in the machine's excluded
+# `miserc.local.toml` env list) turns Kitty graphics on.
+kitty_graphics = {% if mise_env is defined and "kitty-graphics" in mise_env %}true{% else %}false{% endif %}
+pane_history = false
+
+[terminal]
+# Can't configure `herdr` to auto detect `pwsh` over `powershell` on Windows.
+default_shell = "{% if os() == "windows" %}pwsh{% else %}zsh{% endif %}"
+
+[ui]
+hide_tab_bar_when_single_tab = true
+pane_gaps = false
+prompt_new_tab_name = false
+show_agent_labels_on_pane_borders = true
+sidebar_start_collapsed = true
+
+[ui.toast]
+delivery = "terminal"
+
+[worktrees]
+directory = "~/src/localhost/herdr-worktrees"
+
+[keys]
+next_tab = "prefix+ctrl+l"
+next_workspace = "prefix+ctrl+j"
+prefix = "ctrl+a"
+previous_tab = "prefix+ctrl+h"
+previous_workspace = "prefix+ctrl+k"
+switch_workspace = "prefix+alt+1..9"
+
+# [[keys.command]]
+# command = "rmarganti.herdr-pluck.pluck"
+# description = "Pluck visible token"
+# key = "prefix+space"
+# type = "plugin_action"
+#
+# [[keys.command]]
+# command = "rmarganti.herdr-pluck.open-url"
+# description = "Open visible URL"
+# key = "prefix+o"
+# type = "plugin_action"

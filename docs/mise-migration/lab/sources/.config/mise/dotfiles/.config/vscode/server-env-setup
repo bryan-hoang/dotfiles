@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+# VS Code Remote sources this file before it starts its server, so the server
+# sees the same PATH as a login shell.
+# shellcheck source=/dev/null
+. ~/.profile

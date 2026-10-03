@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+GIT_REMOTE=$(git ls-remote --get-url 2>/dev/null)
+case "$GIT_REMOTE" in
+	*github*)
+		GIT_REMOTE_SYMBOL="󰊤"
+		;;
+	*gitlab*)
+		GIT_REMOTE_SYMBOL="󰮠"
+		;;
+	*bucket*)
+		GIT_REMOTE_SYMBOL="󰂨"
+		;;
+	*)
+		GIT_REMOTE_SYMBOL=""
+		;;
+esac
+
+echo "$GIT_REMOTE_SYMBOL"

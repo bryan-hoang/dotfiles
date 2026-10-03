@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+# Prints the selected Git profile's marker (`profile.marker`), or nothing when
+# no profile selects one.
+git config --get profile.marker || true

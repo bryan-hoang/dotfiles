@@ -78,17 +78,37 @@ Check e031_mode ($t[$e031] -split ' ')[0] 100644
 # synthetic placeholder for a canonical source a later ticket writes.
 $e011 = Join-Path $p 'dotfiles.toml'
 $e011Blob = (& git hash-object --no-filters -- $e011)
-$fromTip = 0; $synthetic = 0
+$fromTip = 0; $synthetic = 0; $authored = 0
+$srcRoot = Join-Path $PSScriptRoot 'sources'
 $badBytes = @(foreach ($f in $built) {
 		if (-not $t.ContainsKey($f.Stream)) { continue }
 		$rel = $f.Live.Substring(2)
+		$src = Join-Path $srcRoot $rel
 		if ($f.Id -eq 'E011') { $want = $e011Blob }
+		elseif (Test-Path -LiteralPath $src -PathType Leaf) { $want = (& git hash-object --no-filters -- $src); $authored++ }
 		elseif ($old[$rel] -match '^100(644|755) ') { $want = ($old[$rel] -split ' ')[1]; $fromTip++ }
 		else { $want = BlobId "# synthetic $($f.Id) $($f.Stream)`n"; $synthetic++ }
 		if (($t[$f.Stream] -split ' ')[1] -ne $want) { $f.Id }
 	})
 Say stream_from_audited_tip $fromTip
 Say stream_placeholders $synthetic
+Say stream_from_sources $authored
+
+# Authored sources and E011's Linux managed destinations (#371): every file in
+# lab/sources maps to a shared or Linux row; E012 has no home-checkout
+# includeIf; E011 never declares the watcher; every non-track declaration is
+# gated to Linux, and none of its targets is in history.
+$srcFiles = @(Get-ChildItem -LiteralPath $srcRoot -Recurse -File -Force | ForEach-Object { $_.FullName.Substring($srcRoot.Length + 1) -replace '\\', '/' })
+Check sources_unmapped @($srcFiles | Where-Object { $built.Live -notcontains "~/$_" }).Count 0
+$e012 = @($built | Where-Object Id -EQ 'E012')[0].Stream
+Check e012_home_checkout_includeif @((G cat-file blob ($t[$e012] -split ' ')[1]) | Where-Object { $_ -match 'includeIf\s+"gitdir/?i?:~/\.git' }).Count 0
+$e011Body = [IO.File]::ReadAllText($e011)
+Check e011_watcher_declared ([regex]::Matches($e011Body, 'bootstrap\.services|history-watch')).Count 0
+$managed = @([regex]::Split($e011Body, '(?m)^(?=")') | Where-Object { $_ -match '\bsource = ' })
+Say e011_linux_destinations $managed.Count
+Say e011_linux_destinations_gated @($managed | Where-Object { $_ -match 'profile = ' }).Count
+Check e011_destinations_not_linux_only @($managed | Where-Object { $_ -notmatch 'variants = \[\s*\{ os = "linux"' -or $_ -match 'os = "(windows|macos)"' }).Count 0
+Check e011_destinations_in_history @($managed | ForEach-Object { if ($_ -match '^"~/([^"]+)"') { $Matches[1] } } | Where-Object { $t.ContainsKey("home/$_") -or $t.ContainsKey("home@linux/$_") }).Count 0
 Check stream_bytes_mismatch $(if ($badBytes.Count) { ($badBytes | Select-Object -Unique) -join ',' } else { 0 }) 0
 Check managed_stylua_in_history @($t.Keys | Where-Object { $_ -match '/\.config/nvim/stylua\.toml$' }).Count 0
 

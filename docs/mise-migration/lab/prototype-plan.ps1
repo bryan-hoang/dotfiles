@@ -26,7 +26,7 @@ if ($LASTEXITCODE) { throw "cannot list $Tip" }
 $roots = foreach ($line in Block 'enrollment-roots' | Where-Object { $_ -match '^\|\s*`?E\d{3}`?\s' }) {
 	$f = @($line.Trim().Trim('|') -split '\|' | ForEach-Object { $_.Trim().Trim('`') })
 	if ($f.Count -ne 12) { throw "bad row: $line" }
-	[pscustomobject]@{ Id = $f[0]; Source = $f[1]; Enroll = $f[2]; Stream = $f[3]; Kind = $f[4]; Variant = $f[5]; Autosave = $f[6] }
+	[pscustomobject]@{ Id = $f[0]; Source = $f[1]; Enroll = $f[2]; Stream = $f[3]; Kind = $f[4]; Variant = $f[5]; Autosave = $f[6]; Destination = $f[8] }
 }
 
 $files = foreach ($r in $roots) {
@@ -61,6 +61,27 @@ $toml += $roots | ForEach-Object {
 	$a = if ($_.Autosave -eq 'off') { ', autosave = false' } else { '' }
 	"`"$($_.Source)`" = { mode = `"track`"$a$($sel[$_.Variant]) }"
 }
+# Linux managed destinations, per the inventory's Linux Managed Destinations
+# section: one declaration per home destination of a shared or Linux row, gated
+# to Linux and, for rows in the capability block, to that capability.
+$gates = @{}
+foreach ($l in Block 'linux-capability-gates') { $id, $cap = -split $l; $gates[$id] = $cap }
+$linux = foreach ($r in $roots | Where-Object Variant -NE 'W') {
+	foreach ($item in $r.Destination.Replace('`', '') -split ';') {
+		$item = $item.Trim()
+		if ($item -match 'AppData|%APPDATA%|setup-root|selected include|systemd|/etc/' -or $item -notmatch '(~/\S+)') { continue }
+		$target = $Matches[1]
+		$kind, $perm = if ($item -match '^generated ') { $(if ($r.Source -like '*.tmpl') { 'template' } else { 'copy' }), '0644' }
+		elseif ($item -match 'mode 0755') { 'copy', '0755' }
+		elseif ($item -match '^copy-ok ') { 'copy', '0644' }
+		else { 'symlink', $null }
+		$prof = if ($gates[$r.Id]) { ", profile = `"$($gates[$r.Id])`"" } else { '' }
+		$perms = if ($perm) { ", permissions = `"$perm`"" } else { '' }
+		"`"$target`" = { source = `"$($r.Source)`", mode = `"$kind`"$perms, variants = [{ os = `"linux`"$prof }] }"
+	}
+}
+$toml += '', '# Linux managed destinations (not enrollment roots).'
+$toml += $linux
 $toml += '', '[bootstrap.repos]'
 $gh = 'https://github.com'
 $toml += Get-Content -LiteralPath (Join-Path $PSScriptRoot 'repos.txt') | Where-Object { $_.Trim() } | ForEach-Object {
@@ -78,5 +99,6 @@ $dupLive = @($files.Live | Group-Object | Where-Object Count -gt 1).Count
 "roots_by_variant=$(($roots | Group-Object Variant | ForEach-Object { "$($_.Name)=$($_.Count)" }) -join ',') autosave_off=$(@($roots | Where-Object Autosave -eq 'off').Count)"
 "files=$($files.Count) by_variant=$($byVar -join ',') unique_streams=$streams duplicate_live=$dupLive"
 "nvim=$(@($files | Where-Object Id -eq 'E138').Count) texmf=$(@($files | Where-Object Id -eq 'E139').Count)"
+"linux_destinations=$(@($linux).Count) gated=$(@($linux | Where-Object { $_ -match 'profile = ' }).Count)"
 "removals=$($removals.Count) gitlinks=$(@($legacy | Where-Object { $_ -match '^160000 ' }).Count)"
 "missing_removals=$(@($removals | Where-Object { $p = $_; -not ($legacy | Where-Object { $_.EndsWith("`t$p") }) }).Count)"
