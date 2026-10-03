@@ -53,6 +53,11 @@ indent_style = space
 [{Makefile,*.mk}]
 indent_size = unset
 
+# Byte-exact legacy records written back by the mise conversion build.
+[*.rewrite]
+indent_size = unset
+indent_style = unset
+
 [Tiltfile]
 indent_size = 4
 indent_style = space

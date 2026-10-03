@@ -4,7 +4,7 @@
 # (synthetic placeholders for canonical sources not written yet), installs the
 # generated E011, lets mise capture the baseline, then builds the conversion
 # commit on the exchange copy's main: the audited-tip tree minus the removals,
-# executables normalized to 100644, the reviewed README, plus mise's
+# executables normalized to 100644, the reviewed README and rewrites, plus mise's
 # checkpoint tree. Results land in ~/lab-out, including the advanced
 # setup.git for the host to fast-forward fetch.
 set -uo pipefail
@@ -109,8 +109,9 @@ git -C "$H" show main:.mise-history/manifest.json >"$out/manifest.json" 2>/dev/n
 git -C "$H" ls-tree -r main >"$out/history-tree.txt" 2>/dev/null
 
 # Conversion commit with the audited tip as its only parent: the legacy tree
-# minus the removals, legacy executables stored 100644, the reviewed README,
-# plus every path of mise's checkpoint tree.
+# minus the removals, legacy executables stored 100644, the reviewed README
+# and the reviewed rewrites of repository-only files (lab/rewrites/<path>.rewrite
+# for setup-root <path>), plus every path of mise's checkpoint tree.
 c=$lab/conv
 git init -q "$c"
 git -C "$c" fetch -q "$ex/setup.git" main:refs/legacy
@@ -122,6 +123,13 @@ git -C "$c" ls-files -s | sed -n 's/^100755 /100644 /p' >"$lab/executables.txt"
 say legacy_executables_normalized "$(wc -l <"$lab/executables.txt")"
 git -C "$c" update-index --index-info <"$lab/executables.txt"
 git -C "$c" update-index --cacheinfo "100644,$(git -C "$c" hash-object -w --no-filters "$in/README.md"),README.md"
+n=0
+while IFS= read -r -d '' f; do
+	rel=${f#"$in/rewrites/"}
+	git -C "$c" update-index --cacheinfo "100644,$(git -C "$c" hash-object -w --no-filters "$f"),${rel%.rewrite}"
+	n=$((n + 1))
+done < <(find "$in/rewrites" -type f -name '*.rewrite' -print0)
+say legacy_rewrites "$n"
 overlap=$(git -C "$c" ls-tree -r --name-only refs/mise | grep -cxFf <(git -C "$c" ls-files) || true)
 say generated_legacy_overlap "$overlap"
 git -C "$c" ls-tree -r --full-tree refs/mise | git -C "$c" update-index --index-info

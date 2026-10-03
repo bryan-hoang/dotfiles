@@ -12,3 +12,7 @@ extend-ignore-re = [
   # Harper rule name in the hk configuration.
   "TheirToTheyre",
 ]
+
+[files]
+# Legacy records the conversion build writes back at the root, typos included.
+extend-exclude = ["docs/mise-migration/lab/rewrites/"]

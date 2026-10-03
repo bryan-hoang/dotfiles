@@ -37,15 +37,16 @@ function BlobId([string]$text) {
 	-join ($h | ForEach-Object { $_.ToString('x2') })
 }
 
-# Repository-only guard: no declaration may source a setup-root legacy path or
-# another repository-only root file. Anchored at the setup-repository root, so
+# Repository-only guard: no declaration may source a setup-root legacy path, a
+# planning path below /docs, or another repository-only root file such as
+# /AGENTS.md or /GLOSSARY.md. Anchored at the setup-repository root, so
 # config/dotfiles/... passes. Returns the offending source values.
 function Guard([string]$toml, [string[]]$rootFiles) {
 	foreach ($m in [regex]::Matches($toml, '(?m)\bsource\s*=\s*["'']([^"'']*)["'']')) {
 		$v = $m.Groups[1].Value -replace '\\', '/'
 		$rel = $v -replace '^(\./|/)+', ''
 		if ($v -match '^~' -or $v -match '^[A-Za-z]:') { continue }
-		if ($rel -match '^(\.config|\.local|\.ssh|AppData|src)(/|$)' -or $rootFiles -contains $rel) { $v }
+		if ($rel -match '^(\.config|\.local|\.ssh|AppData|src|docs)(/|$)' -or $rootFiles -contains $rel) { $v }
 	}
 }
 
@@ -107,8 +108,7 @@ Check manifest_exclude ($m.exclude -join ',') '~/.config/nvim/stylua.toml'
 
 # Legacy partition: the approved removed count plus the deferred X11 links
 # leave the tip; every other audited-tip entry stays, unchanged except the
-# README, which must equal the workspace README, and executables normalized
-# to 100644.
+# approved rewrites below and executables normalized to 100644.
 $approved = @($lines | Where-Object { $_ -match '^\|\s*Enrolled-source / managed / repository-only / removed' })[0]
 $approvedRemoved = [int](($approved -split '\|')[2].Trim() -split '\s*/\s*')[3]
 $x11Links = Block 'deferred-x11-links'
@@ -121,11 +121,21 @@ Check legacy_removed_still_present @($removals | Where-Object { $t.ContainsKey($
 $kept = @($old.Keys | Where-Object { $removals -notcontains $_ })
 Say legacy_kept $kept.Count
 Check legacy_kept_missing @($kept | Where-Object { -not $t.ContainsKey($_) }).Count 0
+# Approved content rewrites: the workspace README and the reviewed bytes in
+# lab/rewrites/<path>.rewrite. Each must equal its workspace bytes, and a
+# rewrite counts as changed only where it differs from the audited tip.
+$rewriteRoot = Join-Path $PSScriptRoot 'rewrites'
+$rewrites = [ordered]@{ '.config/shell/functions.sh' = $null; 'README.md' = Join-Path $workspace 'README.md'; 'package.json' = $null; 'pnpm-lock.yaml' = $null }
+foreach ($k in @($rewrites.Keys)) { if (-not $rewrites[$k]) { $rewrites[$k] = Join-Path $rewriteRoot "$k.rewrite" } }
+$staged = @(Get-ChildItem -LiteralPath $rewriteRoot -Recurse -File -Force | ForEach-Object { $_.FullName.Substring($rewriteRoot.Length + 1) -replace '\\', '/' -replace '\.rewrite$', '' })
+Check rewrites_unexpected_files @($staged | Where-Object { -not $rewrites.Contains($_) }).Count 0
+$rewriteBlobs = @{}
+foreach ($k in $rewrites.Keys) { $rewriteBlobs[$k] = (& git hash-object --no-filters -- $rewrites[$k]) }
+Check rewrites_not_matching_workspace @($rewrites.Keys | Where-Object { ($t[$_] -split ' ')[1] -ne $rewriteBlobs[$_] }).Count 0
+$expectedChanged = @($rewrites.Keys | Where-Object { $rewriteBlobs[$_] -ne ($old[$_] -split ' ')[1] } | Sort-Object)
 $contentChanged = @($kept | Where-Object { $t[$_] -and ($t[$_] -split ' ')[1] -ne ($old[$_] -split ' ')[1] } | Sort-Object)
-Say legacy_kept_content_changed ($contentChanged -join ',')
-Check legacy_kept_content_changed_besides_readme @($contentChanged | Where-Object { $_ -ne 'README.md' }).Count 0
-$readme = (& git -C $workspace hash-object --no-filters -- README.md)
-Check readme_matches_workspace $(if (($t['README.md'] -split ' ')[1] -eq $readme) { 'yes' } else { 'no' }) yes
+Say legacy_kept_content_changed_expected ($expectedChanged -join ',')
+Check legacy_kept_content_changed ($contentChanged -join ',') ($expectedChanged -join ',')
 $modeChanged = @($kept | Where-Object { $t[$_] -and ($t[$_] -split ' ')[0] -ne ($old[$_] -split ' ')[0] })
 Say legacy_kept_mode_changed $modeChanged.Count
 Check legacy_mode_changes_not_exec_to_regular @($modeChanged | Where-Object { "$(($old[$_] -split ' ')[0])>$(($t[$_] -split ' ')[0])" -ne '100755>100644' }).Count 0
@@ -134,14 +144,14 @@ Check gitmodules_in_tip $(if ($t.ContainsKey('.gitmodules')) { 'yes' } else { 'n
 Check gitlinks_in_tip @($t.Values | Where-Object { $_ -like '160000 *' }).Count 0
 Say repository_only_in_tip @($t.Keys | Where-Object { $_ -notmatch $streamRe -and $_ -notlike '.mise-history/*' }).Count
 
-$rootFiles = @($t.Keys | Where-Object { $_ -notmatch '/' -and $_ -notmatch $streamRe })
+$rootFiles = @($t.Keys | Where-Object { $_ -notmatch '/' -and $_ -notmatch $streamRe }) + 'AGENTS.md', 'GLOSSARY.md'
 $decl = @($actual | Where-Object { $_ -match '^config(@[a-z]+)?/.*\.toml$' })
 $violations = @(foreach ($d in $decl) { Guard ((G cat-file blob ($t[$d] -split ' ')[1]) -join "`n") $rootFiles })
 Say repository_only_guard_declarations $decl.Count
 Check repository_only_guard_violations $violations.Count 0
-$bad = "[dotfiles]`n`"~/.x`" = { source = `".config/git/config`" }`n`"~/.y`" = { source = `"README.md`" }`n"
-$good = "[dotfiles]`n`"~/.x`" = { source = `"config/dotfiles/.config/git/config`" }`n"
-Check repository_only_guard_negative_control "$(@(Guard $bad $rootFiles).Count),$(@(Guard $good $rootFiles).Count)" '2,0'
+$bad = "[dotfiles]`n`"~/.x`" = { source = `".config/git/config`" }`n`"~/.y`" = { source = `"README.md`" }`n`"~/.z`" = { source = `"/docs/agents/domain.md`" }`n`"~/.w`" = { source = `"./AGENTS.md`" }`n`"~/.v`" = { source = `"GLOSSARY.md`" }`n"
+$good = "[dotfiles]`n`"~/.x`" = { source = `"config/dotfiles/.config/git/config`" }`n`"~/.y`" = { source = `"config/dotfiles/docs/x`" }`n"
+Check repository_only_guard_negative_control "$(@(Guard $bad $rootFiles).Count),$(@(Guard $good $rootFiles).Count)" '5,0'
 
 $x11 = Block 'deferred-x11-sources'
 $e011Text = [IO.File]::ReadAllText($e011)
