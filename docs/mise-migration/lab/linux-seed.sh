@@ -65,14 +65,18 @@ while IFS=$'\t' read -r meta path; do
 	read -r mode _ oid <<<"$meta"
 	[[ $mode == 100644 || $mode == 100755 ]] && blob[$path]=$oid
 done < <(git -C "$ex/setup.git" ls-tree -r --full-tree main)
-n=0 real=0
+n=0 real=0 authored=0
 while IFS=$'\t' read -r id var live stream; do
 	[[ $var == W ]] && continue
 	[[ $id == E011 ]] && continue
 	rel=${live#\~/}
 	f=$HOME/$rel
 	mkdir -p "$(dirname "$f")"
-	if [[ -n ${blob[$rel]:-} ]]; then
+	# Authored mirrored sources: lab/sources/<live path>.
+	if [[ -f $in/sources/$rel ]]; then
+		cp "$in/sources/$rel" "$f"
+		authored=$((authored + 1))
+	elif [[ -n ${blob[$rel]:-} ]]; then
 		git -C "$ex/setup.git" cat-file blob "${blob[$rel]}" >"$f"
 		real=$((real + 1))
 	else
@@ -87,7 +91,8 @@ cp "$p/dotfiles.toml" "$HOME/.config/mise/conf.d/dotfiles.toml"
 printf '# managed copy of E102\n' >"$HOME/.config/nvim/stylua.toml"
 say seeded_files "$((n + 1))"
 say seeded_from_audited_tip "$real"
-say seeded_placeholders "$((n - real))"
+say seeded_from_sources "$authored"
+say seeded_placeholders "$((n - real - authored))"
 
 run paths mise dot paths --json
 mapfile -t saves < <(grep -v $'^[^\t]*\tW\t' "$p/roots.tsv" | cut -f3 | sed "s|^~|$HOME|")

@@ -14,5 +14,9 @@ extend-ignore-re = [
 ]
 
 [files]
-# Legacy records the conversion build writes back at the root, typos included.
-extend-exclude = ["docs/mise-migration/lab/rewrites/"]
+# Legacy records the conversion build writes back at the root, typos included,
+# and the E030 source, which keeps the audited-tip bytes apart from #389's edit.
+extend-exclude = [
+  "docs/mise-migration/lab/rewrites/",
+  "docs/mise-migration/lab/sources/.config/shell/functions.sh",
+]

@@ -78,17 +78,23 @@ Check e031_mode ($t[$e031] -split ' ')[0] 100644
 # synthetic placeholder for a canonical source a later ticket writes.
 $e011 = Join-Path $p 'dotfiles.toml'
 $e011Blob = (& git hash-object --no-filters -- $e011)
-$fromTip = 0; $synthetic = 0
+$fromTip = 0; $synthetic = 0; $authored = 0
+$srcRoot = Join-Path $PSScriptRoot 'sources'
 $badBytes = @(foreach ($f in $built) {
 		if (-not $t.ContainsKey($f.Stream)) { continue }
 		$rel = $f.Live.Substring(2)
+		$src = Join-Path $srcRoot $rel
 		if ($f.Id -eq 'E011') { $want = $e011Blob }
+		elseif (Test-Path -LiteralPath $src -PathType Leaf) { $want = (& git hash-object --no-filters -- $src); $authored++ }
 		elseif ($old[$rel] -match '^100(644|755) ') { $want = ($old[$rel] -split ' ')[1]; $fromTip++ }
 		else { $want = BlobId "# synthetic $($f.Id) $($f.Stream)`n"; $synthetic++ }
 		if (($t[$f.Stream] -split ' ')[1] -ne $want) { $f.Id }
 	})
 Say stream_from_audited_tip $fromTip
 Say stream_placeholders $synthetic
+Say stream_from_sources $authored
+$srcFiles = @(Get-ChildItem -LiteralPath $srcRoot -Recurse -File -Force | ForEach-Object { $_.FullName.Substring($srcRoot.Length + 1) -replace '\\', '/' })
+Check sources_unmapped @($srcFiles | Where-Object { $built.Live -notcontains "~/$_" }).Count 0
 Check stream_bytes_mismatch $(if ($badBytes.Count) { ($badBytes | Select-Object -Unique) -join ',' } else { 0 }) 0
 Check managed_stylua_in_history @($t.Keys | Where-Object { $_ -match '/\.config/nvim/stylua\.toml$' }).Count 0
 
@@ -128,7 +134,7 @@ $rewriteRoot = Join-Path $PSScriptRoot 'rewrites'
 $rewrites = [ordered]@{ '.config/shell/functions.sh' = $null; 'README.md' = Join-Path $workspace 'README.md'; 'package.json' = $null; 'pnpm-lock.yaml' = $null }
 # Private-data sanitization (#389): the removed values never appear here.
 foreach ($k in @(
-		'.config/X11/xresources', '.config/bspwm/bspwmrc', '.config/git/distributive.gitconfig', '.config/clipcat/clipcat-menu.toml', '.config/clipcat/clipcatctl.toml', '.config/clipcat/clipcatd.toml'
+		'.config/X11/xresources', '.config/bspwm/bspwmrc', '.config/git/distributive.gitconfig', '.local/bin/print-git-email-symbol', '.config/clipcat/clipcat-menu.toml', '.config/clipcat/clipcatctl.toml', '.config/clipcat/clipcatd.toml'
 		'.config/emscripten/config', '.config/himalaya/config.toml', '.config/i3/config', '.config/i3status-rust/config.toml'
 		'.config/meli/config.toml', '.config/pam-gnupg', '.config/redshift.conf', '.config/rust-motd/config.toml'
 		'.config/spotify-tui/client.yml', '.config/spotifyd/spotifyd.conf', '.config/systemd/user/emacs.service'
@@ -168,6 +174,14 @@ $e011Text = [IO.File]::ReadAllText($e011)
 Check x11_sources_repository_only_expected_content @($x11 | Where-Object { $t[$_] -and ($t[$_] -split ' ')[1] -eq $(if ($rewrites.Contains($_)) { $rewriteBlobs[$_] } else { ($old[$_] -split ' ')[1] }) }).Count $x11.Count
 Check x11_in_manifest @($m.enrollment.path | Where-Object { $p2 = $_; @($x11 | Where-Object { $p2 -like "*/$_" }).Count }).Count 0
 Check x11_in_e011 @(@($x11) + 'xresources', 'dunst', 'dracula/gtk', 'dracula/rofi' | Where-Object { $e011Text.Contains($_) }).Count 0
+
+# Forbidden private-data classes (#389): any hit anywhere in the built tip
+# fails. Rows carry path, class, and line count only, never values.
+$forbidden = @(& (Join-Path $PSScriptRoot 'forbidden-scan.ps1') -Repo $repo -Rev $tipFull)
+foreach ($h in $forbidden) { Say forbidden_hit ($h -replace "`t", ':') }
+Check forbidden_hits $forbidden.Count 0
+$probe = @(('a@corp-mail' + '.test'), ('signing' + 'key = 0123456789' + 'ABCDEF'), ('pass' + 'word = s3cr3tvalue'), ('Host' + 'Name 10.1' + '.2.3'), 'personal bryan@bryanhoang.dev', ('pass' + 'word = "password"'))
+Check forbidden_negative_control ((& (Join-Path $PSScriptRoot 'forbidden-scan.ps1') -Text $probe) -join ',') 'work-identity,key-identifier,credential,private-endpoint,,'
 
 if ($Kingfisher) {
 	if (-not $OutDir) { throw '-OutDir is required with -Kingfisher' }

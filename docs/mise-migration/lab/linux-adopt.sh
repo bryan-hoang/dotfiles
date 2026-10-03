@@ -104,6 +104,18 @@ say fresh_repos_at_mirror_head "$c"
 say fresh_blesh_contrib_entries "$(find "$HOME/src/github.com/akinomyoga/ble.sh/contrib" -mindepth 1 -maxdepth 1 2>/dev/null | wc -l)"
 say fresh_head_contains_tip "$(has_tip)"
 say fresh_head_parents "$(git -C "$(hist)" log --format='%an:%s' -5 main 2>/dev/null | paste -sd'|' -)"
+# E030 (#389): the GnuPG key identifier comes from the guarded local input
+# ~/.config/shell/extra.sh; without it the helper refuses to run gpg.
+mkdir -p "$HOME/.config/shell"
+printf 'export GPG_KEY_ID=lab-key-id\n' >"$HOME/.config/shell/extra.sh"
+# shellcheck disable=SC2016
+gpg_args=$(timeout 30 bash -c '. "$HOME"/.config/shell/extra.sh; . "$HOME"/.config/shell/functions.sh; gpg() { printf "%s " "$@"; }; import_gpg_key' 2>&1)
+say fresh_e030_key_from_local_input "$([[ $gpg_args == *'--edit-key lab-key-id trust'* ]] && echo yes || echo no)"
+rm "$HOME/.config/shell/extra.sh"
+# shellcheck disable=SC2016
+timeout 30 env -u GPG_KEY_ID bash -c '. "$HOME"/.config/shell/functions.sh; gpg() { printf "%s " "$@"; }; import_gpg_key' >"$out/fresh_e030_unset.log" 2>&1
+say fresh_e030_unset_key_exit "$?"
+say fresh_e030_unset_key_ran_edit "$(grep -c -- '--edit-key' "$out/fresh_e030_unset.log")"
 
 # a: preliminary sequence
 export HOME=$base/a
