@@ -27,9 +27,14 @@ def read(path):
 
 
 def rows():
+    # pin: FIELD=VALUE pairs; every value of a pinned field must be listed.
     for line in read(ALLOWLIST).splitlines()[1:]:
-        rid, path, fmt, allow, _local = line.split("\t")
-        yield rid, path, fmt, [tuple(p.split(".")) for p in allow.split()]
+        rid, path, fmt, allow, pin, _local = line.split("\t")
+        pins = {}
+        for p in pin.split():
+            field, value = p.split("=", 1)
+            pins.setdefault(tuple(field.split(".")), set()).add(value)
+        yield rid, path, fmt, [tuple(p.split(".")) for p in allow.split()], pins
 
 
 def include(path, fmt):
@@ -44,7 +49,8 @@ def include(path, fmt):
 
 
 def jsonc_keys(text):
-    # Every object key as a path; array elements add a "[]" segment.
+    # Every object key as a path, with the offset just past the key; array
+    # elements add a "[]" segment.
     i, stack, path, expect = 0, [], [], False
     while i < len(text):
         c = text[i]
@@ -54,7 +60,7 @@ def jsonc_keys(text):
                 j += 2 if text[j] == "\\" else 1
             if stack and stack[-1] == "{" and expect:
                 path[-1], expect = text[i + 1 : j], False
-                yield tuple(path)
+                yield tuple(path), j + 1
             i = j + 1
             continue
         if text.startswith("//", i):
@@ -82,7 +88,7 @@ def fields(fmt, text):
     fail closed."""
     if fmt == "jsonc":
         try:
-            return list(jsonc_keys(text))
+            return [k for k, _ in jsonc_keys(text)]
         except (IndexError, ValueError):
             return [("<unparsed>",)]
     out, section = [], None
@@ -118,7 +124,39 @@ def allowed(field, patterns):
     )
 
 
-def problems(path, fmt, patterns, text):
+def matches(field, pattern):
+    return len(field) == len(pattern) and allowed(field, [pattern])
+
+
+def values(fmt, text, pattern):
+    """Every value of the fields matching pattern. Anything that is not a
+    plain string (JSONC) or a scalar list item (YAML) is None, so it fails
+    closed."""
+    if fmt == "jsonc":
+        try:
+            for key, end in jsonc_keys(text):
+                if matches(key, pattern):
+                    m = re.compile(r'\s*:\s*"((?:[^"\\]|\\.)*)"').match(text, end)
+                    yield m[1] if m else None
+        except (IndexError, ValueError):
+            yield None
+        return
+    inside = False
+    for raw in text.splitlines():
+        s = raw.strip()
+        if not s or s[0] == "#" or s == "---":
+            continue
+        if raw[0] not in " \t-":
+            key, _, rest = raw.partition(":")
+            inside = matches((key.strip().strip("'\""),), pattern)
+            if inside and rest.strip():
+                yield rest.strip().strip("'\"")
+        elif inside:
+            m = re.match(r"\s*-\s+(\S+)\s*$", raw)
+            yield m[1].strip("'\"") if m else None
+
+
+def problems(path, fmt, patterns, pins, text):
     inc = include(path, fmt)
     if text.count(inc) != 1:
         yield "local input include missing or repeated"
@@ -128,15 +166,19 @@ def problems(path, fmt, patterns, text):
     for f in fields(fmt, body):
         if not allowed(f, patterns):
             yield f"unknown field {'.'.join(f)}"
+    for pattern, reviewed in pins.items():
+        for v in values(fmt, body, pattern):
+            if v not in reviewed:
+                yield f"unreviewed value for pinned field {'.'.join(pattern)}"
 
 
 def check(root):
     bad = n = 0
-    for rid, path, fmt, patterns in rows():
+    for rid, path, fmt, patterns, pins in rows():
         n += 1
         src = Path(root, path)
         found = (
-            list(problems(path, fmt, patterns, read(src)))
+            list(problems(path, fmt, patterns, pins, read(src)))
             if src.is_file()
             else ["missing"]
         )

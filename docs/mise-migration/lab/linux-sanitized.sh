@@ -6,7 +6,8 @@
 #   sanitized_checks  after adoption: every generated destination is its
 #                     adopted source with the local input spliced in, mise
 #                     reports a changed destination as differs, an unknown
-#                     source field blocks the explicit save, and the marker
+#                     source field or an unreviewed value in a pinned field
+#                     blocks the explicit save, and the marker
 #                     reaches no history object, setup object, or lab output
 s=$in/sanitized.py
 mark=LOCALVALUE$(od -An -N8 -tx1 /dev/urandom | tr -d ' \n')
@@ -15,23 +16,23 @@ mark=LOCALVALUE$(od -An -N8 -tx1 /dev/urandom | tr -d ' \n')
 # input is a member list spliced before the closing brace.
 local_input() {
 	case $1 in
-		.config/.curlrc) printf 'user = "lab:%s"\n' "$mark" ;;
-		.config/bundle/config) printf 'BUNDLE_LAB__INVALID: "%s"\n' "$mark" ;;
-		.config/gem/gemrc) printf ':lab_api_key: %s\n' "$mark" ;;
-		.config/gh/config.yml) printf 'hosts:\n  lab.invalid:\n    user: %s\n' "$mark" ;;
-		.config/litecli/config) printf '[favorite_queries]\nlab = select %s\n' "$mark" ;;
-		.config/mycli/myclirc) printf '[alias_dsn]\nlab = mysql://%s@lab.invalid/db\n' "$mark" ;;
-		.config/mysql/my.cnf) printf '[client]\nuser = %s\n' "$mark" ;;
-		.config/npm/npmrc) printf '//registry.lab.invalid/:_authToken=%s\n' "$mark" ;;
-		.config/pgcli/config) printf '[alias_dsn]\nlab = postgresql://%s@lab.invalid/db\n' "$mark" ;;
-		.config/pip/pip.conf) printf 'index-url = https://%s.lab.invalid/simple\n' "$mark" ;;
-		.config/pnpm/config.yaml) printf '"//registry.lab.invalid/:_authToken": %s\n' "$mark" ;;
-		.config/pypoetry/config.toml) printf '[http-basic.lab]\nusername = "%s"\n' "$mark" ;;
-		.config/uv/uv.toml) printf 'index-url = "https://%s.lab.invalid/simple"\n' "$mark" ;;
-		.config/wget/wgetrc) printf 'header = Authorization: Bearer %s\n' "$mark" ;;
-		.config/youtube-dl/config | .config/yt-dlp/config) printf -- '--username %s\n' "$mark" ;;
-		.config/opencode/opencode.jsonc) printf '\t"provider": { "lab": { "options": { "apiKey": "%s" } } },\n' "$mark" ;;
-		*) return 1 ;;
+	.config/.curlrc) printf 'user = "lab:%s"\n' "$mark" ;;
+	.config/bundle/config) printf 'BUNDLE_LAB__INVALID: "%s"\n' "$mark" ;;
+	.config/gem/gemrc) printf ':lab_api_key: %s\n' "$mark" ;;
+	.config/gh/config.yml) printf 'hosts:\n  lab.invalid:\n    user: %s\n' "$mark" ;;
+	.config/litecli/config) printf '[favorite_queries]\nlab = select %s\n' "$mark" ;;
+	.config/mycli/myclirc) printf '[alias_dsn]\nlab = mysql://%s@lab.invalid/db\n' "$mark" ;;
+	.config/mysql/my.cnf) printf '[client]\nuser = %s\n' "$mark" ;;
+	.config/npm/npmrc) printf '//registry.lab.invalid/:_authToken=%s\n' "$mark" ;;
+	.config/pgcli/config) printf '[alias_dsn]\nlab = postgresql://%s@lab.invalid/db\n' "$mark" ;;
+	.config/pip/pip.conf) printf 'index-url = https://%s.lab.invalid/simple\n' "$mark" ;;
+	.config/pnpm/config.yaml) printf '"//registry.lab.invalid/:_authToken": %s\n' "$mark" ;;
+	.config/pypoetry/config.toml) printf '[http-basic.lab]\nusername = "%s"\n' "$mark" ;;
+	.config/uv/uv.toml) printf 'index-url = "https://%s.lab.invalid/simple"\n' "$mark" ;;
+	.config/wget/wgetrc) printf 'header = Authorization: Bearer %s\n' "$mark" ;;
+	.config/youtube-dl/config | .config/yt-dlp/config) printf -- '--username %s\n' "$mark" ;;
+	.config/opencode/opencode.jsonc) printf '\t"provider": { "lab": { "options": { "apiKey": "%s" } } },\n' "$mark" ;;
+	*) return 1 ;;
 	esac
 }
 
@@ -112,7 +113,18 @@ EOF
 	say sanitized_unknown_field_reported "$(grep -c 'E121 dotfiles/.config/pip/pip.conf: unknown field global.proxy' "$out/sanitized_unknown_field_save.log")"
 	say sanitized_unknown_field_head_unchanged "$([[ "$(head_of)" == "$before" ]] && echo yes || echo no)"
 	cp "$lab/pip.conf.reviewed" "$pip"
-	run sanitized_reviewed_save python3 "$s" save "$root" "$pip"
+
+	# An unreviewed endpoint in a pinned field blocks the explicit save too.
+	local gem=$root/dotfiles/.config/gem/gemrc
+	cp "$gem" "$lab/gemrc.reviewed"
+	sed -i "/^  - http:\/\/rubygems\.org\/\$/a\\$(printf '  - https://%s.lab.invalid/' "$mark")" "$gem"
+	say sanitized_unpinned_value_written "$(grep -c "$mark" "$gem")"
+	before=$(head_of)
+	run sanitized_unpinned_value_save python3 "$s" save "$root" "$gem"
+	say sanitized_unpinned_value_reported "$(grep -c 'E114 dotfiles/.config/gem/gemrc: unreviewed value for pinned field sources' "$out/sanitized_unpinned_value_save.log")"
+	say sanitized_unpinned_value_head_unchanged "$([[ "$(head_of)" == "$before" ]] && echo yes || echo no)"
+	cp "$lab/gemrc.reviewed" "$gem"
+	run sanitized_reviewed_save python3 "$s" save "$root" "$pip" "$gem"
 
 	# No local-input value in history, the setup repository, or any lab output.
 	say sanitized_value_in_history_objects "$(git -C "$(hist)" cat-file --batch-all-objects --batch 2>/dev/null | grep -ac "$mark")"

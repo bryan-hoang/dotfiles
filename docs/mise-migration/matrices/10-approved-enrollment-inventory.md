@@ -447,6 +447,13 @@ deferred repositories are unreachable from active setup declarations.
   `copy-ok`; source or repository updates require reapplication.
 - Generated destinations and all local inputs, staging, state, caches, logs,
   sessions, sockets, databases, plugin stores, and service state are excluded.
+- Amended 2026-10-03 by
+  [Write the sanitized sources](https://github.com/bryan-hoang/dotfiles/issues/372):
+  the `SANITIZED` rows `E112` to `E128` have optional local inputs. On Linux, a
+  mise template renders each source to its generated destination and appends the
+  excluded `<destination>.local` when it exists. A missing local input renders
+  the source alone and blocks nothing. `E114` `sources` and `E128` `mcp.*.url`
+  accept only their reviewed public values.
 - Windows application units preflight and fail atomically per application. The
   required Windows base fails as one unit. Work-machine divergent bytes are
   preserved until their public or local disposition is approved.
