@@ -350,6 +350,11 @@ exclude = ["~/.config/nvim/stylua.toml"]
   { os = "linux", profile = "vscode-remote" },
 ] }
 
+# Windows managed destination: E101 Herdr output only.
+"~/AppData/Roaming/herdr/config.toml" = { source = "~/.config/mise/dotfiles/.config/herdr/config.toml.tmpl", mode = "template", permissions = "0644", variants = [
+  { os = "windows" },
+] }
+
 [bootstrap.repos]
 "~/src/github.com/akinomyoga/ble.sh" = { url = "https://github.com/akinomyoga/ble.sh" }
 "~/src/github.com/b3nj5m1n/xdg-ninja" = { url = "https://github.com/b3nj5m1n/xdg-ninja" }

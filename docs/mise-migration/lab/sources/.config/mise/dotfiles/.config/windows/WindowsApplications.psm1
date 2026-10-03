@@ -14,7 +14,15 @@
 #   Link     writable file symlink, verified; no copy fallback
 #   Junction writable directory junction, verified; no copy fallback
 #   Copy     copy-ok: read-only replaceable copy, reapplied when the source changes
+#   Render   generated read-only file: the source with each env template
+#            expression replaced by that environment variable; any other
+#            template syntax fails. Reapplied when the rendered bytes change.
 # Dest is a string (~ and %VAR% expand) or a script block evaluated at run time.
+# Requires lists commands (on the process PATH, or the persistent login PATH
+# when LoginPath is set) and paths (anything with a slash) that must exist.
+# Repos lists bootstrap repositories at ~/src/github.com/<owner>/<repo> that
+# must be present, clean, and have the public HTTPS origin. Any unmet
+# requirement fails the unit's preflight, so none of its paths change.
 #
 # State, quarantine, and the drift sentinel live under the excluded
 # ~/.local/state/mise/windows-applications/. While the sentinel exists every
@@ -23,22 +31,87 @@
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
+$Startup = '%APPDATA%/Microsoft/Windows/Start Menu/Programs/Startup'
 $Units = [ordered]@{
-	base     = @{
+	base             = @{
 		Required = $true
 		Requires = @('git')
 		Paths    = @(
 			@{ Kind = 'Link'; Source = '~/.config/pwsh/Microsoft.PowerShell_profile.ps1'; Dest = { $PROFILE.CurrentUserCurrentHost } }
 			@{ Kind = 'Junction'; Source = '~/.config/mintty'; Dest = '%APPDATA%/mintty' }
+			@{ Kind = 'Link'; Source = '~/.config/bash/.bash_logout'; Dest = '~/.bash_logout' }
+			@{ Kind = 'Link'; Source = '~/.config/bash/.bash_profile'; Dest = '~/.bash_profile' }
+			@{ Kind = 'Link'; Source = '~/.config/bash/.bashrc'; Dest = '~/.bashrc' }
+			@{ Kind = 'Link'; Source = '~/.config/login/.hushlogin'; Dest = '~/.hushlogin' }
+			@{ Kind = 'Link'; Source = '~/.config/shell/.profile'; Dest = '~/.profile' }
 		)
 	}
-	topgrade = @{
+	alacritty        = @{
+		Requires = @('alacritty', '%ProgramFiles%/Git/bin/bash.exe', '~/.config/alacritty/alacritty.common.toml', '~/src/github.com/catppuccin/alacritty/catppuccin-mocha.toml')
+		Repos    = @('catppuccin/alacritty')
+		Paths    = @(
+			@{ Kind = 'Render'; Source = '~/.config/mise/dotfiles/AppData/Roaming/alacritty/alacritty.toml'; Dest = '%APPDATA%/alacritty/alacritty.toml' }
+		)
+	}
+	atuin_daemon     = @{
+		Requires  = @('atuin')
+		LoginPath = $true
+		Paths     = @(
+			@{ Kind = 'Copy'; Source = "~/.config/mise/dotfiles/AppData/Roaming/Microsoft/Windows/Start Menu/Programs/Startup/start-atuin-daemon.vbs"; Dest = "$Startup/start-atuin-daemon.vbs" }
+		)
+	}
+	bat              = @{
+		Requires = @('bat')
+		Paths    = @(@{ Kind = 'Junction'; Source = '~/.config/bat'; Dest = '%APPDATA%/bat' })
+	}
+	espanso          = @{
+		Requires = @('espanso')
+		Paths    = @(@{ Kind = 'Junction'; Source = '~/.config/espanso'; Dest = '%APPDATA%/espanso' })
+	}
+	harper           = @{
+		Requires = @('harper-ls')
+		Paths    = @(@{ Kind = 'Link'; Source = '~/.config/harper-ls/dictionary.txt'; Dest = '%APPDATA%/harper-ls/dictionary.txt' })
+	}
+	helix            = @{
+		Requires = @('hx')
+		Paths    = @(@{ Kind = 'Junction'; Source = '~/.config/helix'; Dest = '%APPDATA%/helix' })
+	}
+	# The source directory is excluded local authority, never enrolled.
+	ncspot           = @{
+		Requires = @('ncspot')
+		Paths    = @(@{ Kind = 'Junction'; Source = '~/.config/ncspot'; Dest = '%APPDATA%/ncspot' })
+	}
+	rio              = @{
+		Requires = @('rio')
+		Repos    = @('catppuccin/rio')
+		Paths    = @(
+			@{ Kind = 'Link'; Source = '~/src/github.com/catppuccin/rio/themes/catppuccin-mocha.toml'; Dest = '~/.config/rio/themes/catppuccin-mocha.toml' }
+			@{ Kind = 'Junction'; Source = '~/.config/rio'; Dest = '%LOCALAPPDATA%/rio' }
+		)
+	}
+	rtk              = @{
+		Requires = @('rtk')
+		Paths    = @(@{ Kind = 'Junction'; Source = '~/.config/rtk'; Dest = '%APPDATA%/rtk' })
+	}
+	# The package folder exists once the matching Terminal package is installed.
+	terminal_preview = @{
+		Requires = @('%LOCALAPPDATA%/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe')
+		Paths    = @(@{ Kind = 'Link'; Source = '~/.config/windows/wind-term-settings.json'; Dest = '%LOCALAPPDATA%/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json' })
+	}
+	terminal_stable  = @{
+		Requires = @('%LOCALAPPDATA%/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe')
+		Paths    = @(@{ Kind = 'Link'; Source = '~/.config/windows/wind-term-settings.json'; Dest = '%LOCALAPPDATA%/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json' })
+	}
+	topgrade         = @{
 		Requires = @('topgrade')
 		Paths    = @(
 			@{ Kind = 'Copy'; Source = '~/.config/topgrade/topgrade.toml'; Dest = '%APPDATA%/topgrade.toml' }
 		)
 	}
 }
+
+# Required outputs E011 renders (Herdr, from E101); validate fails while one is missing.
+$Generated = @('%APPDATA%/herdr/config.toml')
 
 $StateDir = Join-Path $HOME '.local/state/mise/windows-applications'
 $Sentinel = Join-Path $StateDir 'blocked'
@@ -72,6 +145,46 @@ function Get-WindowsApplicationsPathMap {
 
 function Get-Hash([string]$path) { (Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash }
 
+function Get-Rendered([string]$source) {
+	$text = [IO.File]::ReadAllText($source)
+	$out = [regex]::Replace($text, '\{\{\s*env\.(\w+)\s*\}\}', {
+			param($m)
+			$v = [Environment]::GetEnvironmentVariable($m.Groups[1].Value)
+			if ($null -eq $v) { throw "$source needs unset environment variable $($m.Groups[1].Value)" }
+			$v
+		})
+	if ($out -match '\{\{|\{%') { throw "$source has template syntax other than env expressions" }
+	[Text.UTF8Encoding]::new($false).GetBytes($out)
+}
+
+# The hash a Copy or Render destination must have once applied.
+function Get-ExpectedHash($e) {
+	if ($e.Kind -eq 'Copy') { return Get-Hash $e.Source }
+	[Convert]::ToHexString([Security.Cryptography.SHA256]::HashData((Get-Rendered $e.Source)))
+}
+
+function Test-Command([string]$cmd, [bool]$login) {
+	if (-not $login) { return [bool](Get-Command $cmd -CommandType Application -ErrorAction SilentlyContinue) }
+	$dirs = (@('Machine', 'User') | ForEach-Object { [Environment]::GetEnvironmentVariable('Path', $_) }) -join ';'
+	foreach ($d in $dirs -split ';' | Where-Object { $_ }) {
+		foreach ($x in $env:PATHEXT -split ';') {
+			if (Test-Path -LiteralPath (Join-Path ([Environment]::ExpandEnvironmentVariables($d)) "$cmd$x") -PathType Leaf) { return $true }
+		}
+	}
+	$false
+}
+
+# Never reports the origin value: it may be private.
+function Test-Repo([string]$repo) {
+	$dir = Expand-Path "~/src/github.com/$repo"
+	if (-not (Test-Path -LiteralPath (Join-Path $dir '.git'))) { return "missing repository $repo" }
+	$url = & git -C $dir config --get remote.origin.url
+	$public = 'https://github.com/' + $repo
+	if ($url -notin $public, "$public.git") { return "wrong origin for repository $repo" }
+	$dirty = & git -C $dir status --porcelain
+	if ($LASTEXITCODE -or $dirty) { return "dirty repository $repo" }
+}
+
 function Read-State([string]$name) {
 	$f = Join-Path $StateDir "$name.json"
 	$h = @{}
@@ -93,10 +206,10 @@ function Get-DestState($e, $rec) {
 	$match = switch ($e.Kind) {
 		'Link' { $item.LinkType -eq 'SymbolicLink' -and -not $item.PSIsContainer -and $target -eq $e.Source }
 		'Junction' { $item.LinkType -eq 'Junction' -and $target -eq $e.Source }
-		'Copy' { -not $item.LinkType -and -not $item.PSIsContainer -and $item.IsReadOnly -and $rec -and (Get-Hash $e.Dest) -eq $rec.Hash }
+		default { -not $item.LinkType -and -not $item.PSIsContainer -and $item.IsReadOnly -and $rec -and (Get-Hash $e.Dest) -eq $rec.Hash }
 	}
 	if (-not $match) { return $(if ($rec) { 'changed' } else { 'occupied' }) }
-	if ($e.Kind -eq 'Copy' -and (Get-Hash $e.Source) -ne $rec.Hash) { return 'stale' }
+	if ($e.Kind -in 'Copy', 'Render' -and (Get-ExpectedHash $e) -ne $rec.Hash) { return 'stale' }
 	'ok'
 }
 
@@ -126,8 +239,8 @@ function Remove-Owned($rec) {
 	$item = Get-Item -LiteralPath $rec.Dest -Force
 	switch ($rec.Kind) {
 		'Junction' { [IO.Directory]::Delete($rec.Dest, $false) }
-		'Copy' { $item.IsReadOnly = $false; [IO.File]::Delete($rec.Dest) }
-		default { [IO.File]::Delete($rec.Dest) }
+		'Link' { [IO.File]::Delete($rec.Dest) }
+		default { $item.IsReadOnly = $false; [IO.File]::Delete($rec.Dest) }
 	}
 }
 
@@ -140,15 +253,18 @@ function Invoke-UnitApply([string]$name) {
 	$entries = @(Get-WindowsApplicationsPathMap | Where-Object Unit -EQ $name)
 	$recs = Read-State $name
 	$problems = @()
-	foreach ($cmd in $u.Requires) {
-		if (-not (Get-Command $cmd -CommandType Application -ErrorAction SilentlyContinue)) { $problems += "missing application $cmd" }
+	foreach ($r in $u.Requires) {
+		if ($r -match '[/\\]') { if (-not (Test-Path -LiteralPath (Expand-Path $r))) { $problems += "missing path $r" } }
+		elseif (-not (Test-Command $r ([bool]$u['LoginPath']))) { $problems += "missing application $r$(if ($u['LoginPath']) { ' on the login PATH' })" }
 	}
+	foreach ($repo in $u['Repos']) { $problems += @(Test-Repo $repo) }
 	if ('Link' -in $entries.Kind -and -not (Test-LinkCapability)) { $problems += 'symlinks not permitted (Developer Mode or link privilege required)' }
 	$states = @{}
 	foreach ($e in $entries) {
 		$type = if ($e.Kind -eq 'Junction') { 'Container' } else { 'Leaf' }
-		if (-not (Test-Path -LiteralPath $e.Source -PathType $type)) { $problems += "missing source $($e.Source)" }
-		$states[$e.Dest] = Get-DestState $e $recs[$e.Dest]
+		if (-not (Test-Path -LiteralPath $e.Source -PathType $type)) { $problems += "missing source $($e.Source)"; continue }
+		try { $states[$e.Dest] = Get-DestState $e $recs[$e.Dest] }
+		catch { $problems += "$($e.Source): $($_.Exception.Message)"; continue }
 		if ($states[$e.Dest] -in 'changed', 'occupied') { $problems += "$($states[$e.Dest]) destination $($e.Dest)" }
 	}
 	if ($problems) {
@@ -167,9 +283,10 @@ function Invoke-UnitApply([string]$name) {
 		switch ($e.Kind) {
 			'Link' { New-Item -ItemType SymbolicLink -Path $e.Dest -Target $e.Source | Out-Null }
 			'Junction' { New-Item -ItemType Junction -Path $e.Dest -Target $e.Source | Out-Null }
-			'Copy' {
+			default {
 				if ($s -eq 'stale') { (Get-Item -LiteralPath $e.Dest).IsReadOnly = $false }
-				Copy-Item -LiteralPath $e.Source -Destination $e.Dest -Force
+				if ($e.Kind -eq 'Copy') { Copy-Item -LiteralPath $e.Source -Destination $e.Dest -Force }
+				else { [IO.File]::WriteAllBytes($e.Dest, (Get-Rendered $e.Source)) }
 				(Get-Item -LiteralPath $e.Dest).IsReadOnly = $true
 				$hash = Get-Hash $e.Dest
 			}
@@ -202,7 +319,8 @@ function Invoke-UnitUnapply([string]$name) {
 	Write-State $name $recs
 }
 
-function Test-Incomplete($results) { [bool]@($results | Where-Object Action -Match '^(preflight failed|held)').Count }
+# A unit with nothing to report (flag off, nothing owned) returns no results.
+function Test-Incomplete($results) { $results -and [bool]@($results | Where-Object Action -Match '^(preflight failed|held)').Count }
 
 function Stop-HistoryWatcher {
 	Set-StrictMode -Off # COM-handler task actions have no Execute or Arguments.
@@ -230,7 +348,20 @@ function Invoke-Validate([string[]]$names) {
 			Result $name $rec $s $(if ($s -eq 'changed') { 'quarantined' } else { 'none' })
 		}
 	}
-	if (-not $drift) { return }
+	# Base outputs that mise renders from E011; the module only checks they exist.
+	$missing = @()
+	if ('base' -in $names) {
+		foreach ($g in $Generated) {
+			$p = Expand-Path $g
+			$ok = Test-Path -LiteralPath $p -PathType Leaf
+			if (-not $ok) { $missing += $p }
+			Result 'base' ([pscustomobject]@{ Kind = 'Generated'; Dest = $p }) $(if ($ok) { 'ok' } else { 'absent' }) $(if ($ok) { 'none' } else { 'missing; run mise dot apply' })
+		}
+	}
+	if (-not $drift) {
+		if ($missing) { throw "missing E011 output(s): $($missing -join ', '); run mise dot apply" }
+		return
+	}
 	# Block first so a failure while stopping the watcher still leaves the sentinel.
 	Set-Content -LiteralPath $Sentinel -Value (@("drift detected $(Get-Date -Format o)") + $drift +
 		'Reconcile each path from its quarantined copy, delete this file, then run validate.')
