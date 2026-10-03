@@ -25,7 +25,7 @@ steps {
   ["ruff"] = Builtins.ruff
   ["ruff_format"] = Builtins.ruff_format
   ["rumdl"] = Builtins.rumdl
-  ["ryl"] = (Builtins.ryl) { check = #"ryl check -d "extends: default" {{ files }}"# }
+  ["ryl"] = (Builtins.ryl) { check = #"ryl check -d "extends: default" {{ files }}"#; exclude = "pnpm-lock.yaml" }
   ["shellcheck"] = Builtins.shellcheck
   ["shellharden"] = Builtins.shellharden
   ["shfmt"] = (Builtins.shfmt) { check = "shfmt -bn -ci --simplify {{ files }}" }
