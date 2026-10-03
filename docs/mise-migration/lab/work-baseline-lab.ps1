@@ -81,6 +81,10 @@ $r = Baseline 'clean'; $clean = $r[-1]; $r[0..($r.Count - 2)]
 Check 'clean_exit_0' ($r -contains 'clean_exit=0')
 Check 'clean_e063_behind' ((Class (Row $clean 'root' '~/.config/hk/config.pkl')) -eq 'behind')
 Check 'clean_e177_behind' ((Class (Row $clean 'root' '~/.typos.toml')) -eq 'behind')
+# Windows roots have no stream in the tip: they are captured after adoption.
+$wRoot = Row $clean 'root' '~/.config/rio/config.toml'
+Check 'clean_windows_root_capture' ((State $wRoot) -eq 'capture' -and (Class $wRoot) -eq '-')
+Check 'clean_no_windows_root_behind' (@($clean | Where-Object { $_ -like "root`tE1[45]?`t*" -and (State $_) -eq 'behind' }).Count -eq 0)
 Check 'clean_no_tracked_changes' (@($clean | Where-Object { $_ -like "tracked`t*" }).Count -eq 0)
 Check 'clean_unclassified_0' ($clean -contains 'unclassified_count=0')
 Check 'clean_unguarded' ($clean -contains 'guard=unguarded')

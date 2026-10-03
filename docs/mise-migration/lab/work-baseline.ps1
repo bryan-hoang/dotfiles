@@ -146,6 +146,9 @@ try {
 		$live = Live $abs
 		$class = Classify $live $h
 		$state = if ($live.type -eq 'absent') { 'absent' }
+		# A Windows root with no stream in the tip is saved after adoption, so
+		# matching HEAD is not behind; edits against HEAD keep their class.
+		elseif ($variant -eq 'W' -and -not $t) { if ($class -eq 'behind') { $class = '-' }; 'capture' }
 		elseif ($live.type -eq 'file' -and (Same $live $t)) { $class = '-'; 'identical' }
 		elseif ($live.type -eq 'link') { 'link' }
 		elseif ($class -eq 'behind') { 'behind' }
