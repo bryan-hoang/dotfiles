@@ -25,19 +25,44 @@ Amended again 2026-10-02 by
 the human enrolled the added `.typos.toml` as `E177`, and the counts below are
 recomputed at audited tip `46df470`.
 
+Amended 2026-10-03 by
+[Clear post-tip commits through the audit gate](https://github.com/bryan-hoang/dotfiles/issues/370):
+the audited tip advances to `be51989`. The human approved every disposition in
+the block below. Root `AGENTS.md`, root `GLOSSARY.md`, and every `docs/**` path
+are repository-only planning context. They are never sources, and the
+[Repository-Only Guard](#repository-only-guard) covers them. The `E063` and
+`E177` edits keep their rows and review classes. The 417 legacy entries and
+their dispositions are unchanged; the 35 added paths are outside the legacy
+inventory. `lab/audit-gate-check.ps1` fails when a changed path lacks a
+disposition.
+
+<!-- audit-gate-dispositions:start -->
+
+```text
+A AGENTS.md repository-only
+A GLOSSARY.md repository-only
+A docs/** repository-only
+M .config/hk/config.pkl E063
+M .typos.toml E177
+```
+
+<!-- audit-gate-dispositions:end -->
+
 ## Approved Counts
 
-| Measure                                                                                          |                                 Approved count |
-| ------------------------------------------------------------------------------------------------ | ---------------------------------------------: |
-| Tracked legacy entries                                                                           | 417 at audited tip `46df470`; 421 at `dca1b12` |
-| Core / Windows / Unix coverage owners                                                            |                                 261 / 56 / 100 |
-| Enrolled-source / managed / repository-only / removed / local / deferred-X11 legacy dispositions |                    227 / 25 / 92 / 32 / 9 / 32 |
-| Enrollment roots / captured source files                                                         |                                      175 / 234 |
-| Exact-file / reviewed-directory roots                                                            |                                        173 / 2 |
-| Shared / Windows / Linux roots                                                                   |                                  138 / 24 / 13 |
-| Autosave on / off roots                                                                          |                                       147 / 28 |
-| Encryption-enabled roots / recipients                                                            |                                          0 / 0 |
-| Approved full bootstrap repositories                                                             |                                             10 |
+| Measure                                                                                          |                                   Approved count |
+| ------------------------------------------------------------------------------------------------ | -----------------------------------------------: |
+| Tracked entries at audited tip `be51989`                                                         |          452: 417 legacy and 35 planning-context |
+| Tracked legacy entries                                                                           | 417 at `be51989` and `46df470`; 421 at `dca1b12` |
+| Core / Windows / Unix coverage owners                                                            |                                   261 / 56 / 100 |
+| Enrolled-source / managed / repository-only / removed / local / deferred-X11 legacy dispositions |                      227 / 25 / 92 / 32 / 9 / 32 |
+| Repository-only entries at `be51989`, including planning context                                 |                                              127 |
+| Enrollment roots / captured source files                                                         |                                        175 / 234 |
+| Exact-file / reviewed-directory roots                                                            |                                          173 / 2 |
+| Shared / Windows / Linux roots                                                                   |                                    138 / 24 / 13 |
+| Autosave on / off roots                                                                          |                                         147 / 28 |
+| Encryption-enabled roots / recipients                                                            |                                            0 / 0 |
+| Approved full bootstrap repositories                                                             |                                               10 |
 
 The two directory roots capture 61 reviewed files: 57 below `~/.config/nvim/`
 after excluding the managed `Stylua` destination, and four below
@@ -440,10 +465,11 @@ deferred repositories are unreachable from active setup declarations.
 All repository-only legacy paths remain sanitized and inert. No dotfile,
 template, copy, symlink, script, bootstrap file, or repository declaration may
 use a setup-root legacy path below `/.config`, `/.local`, `/.ssh`, `/AppData`,
-or `/src`, or another repository-only root file, as a source. The check is
-anchored at setup-repository root so approved `config/dotfiles/...` sources are
-not rejected. Obsolete scripts are non-executable, generated/local state is
-absent, and historical-only paths are not recreated.
+or `/src`, a planning path below `/docs`, or another repository-only root file
+such as `/AGENTS.md` or `/GLOSSARY.md`, as a source. The check is anchored at
+setup-repository root so approved `config/dotfiles/...` sources are not
+rejected. Obsolete scripts are non-executable, generated/local state is absent,
+and historical-only paths are not recreated.
 
 ## Approval Exceptions
 
