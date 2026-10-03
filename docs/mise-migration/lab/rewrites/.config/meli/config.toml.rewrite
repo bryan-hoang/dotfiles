@@ -1,0 +1,11 @@
+# https://github.com/meli/meli/blob/master/meli/docs/samples/sample-config.toml
+
+[accounts.personal]
+format = "imap"
+root_mailbox = "INBOX"
+use_starttls = true
+listing.index_style = "Conversations"
+subscribed_mailboxes = ["*"]
+
+[composing]
+send_mail = 'false'

@@ -1,0 +1,22 @@
+# https://github.com/soywod/himalaya
+# https://pimalaya.org/himalaya/
+
+# Represents the full display name of the user. It is used for building the
+# sender address From when composing emails.
+# Represents the signature to add at the bottom of all emails. It can be a
+# string or a path to a signature file. The signature supports TOML multiline.
+# Represents the directory to download attachments in.
+downloads-dir = "~/Downloads"
+
+[personal]
+default = true
+
+backend = "imap"
+imap-auth = "passwd"
+imap-starttls = true
+
+sender = "smtp"
+smtp-auth = "passwd"
+smtp-starttls = true
+
+[personal.folder-aliases]

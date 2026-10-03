@@ -1,0 +1,9 @@
+[Unit]
+Description=lemonade server
+Documentation=https://github.com/lemonade-command/lemonade#readme
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/share/go/bin/lemonade server

@@ -1,0 +1,40 @@
+#include "~/src/github.com/catppuccin/xresources/themes/mocha.Xresources"
+#include "xresources.d/dpi"
+
+! Set consistent cursor theme.
+Xcursor.theme: Dracula-cursors
+
+! Some applications like URxvt will ignore fontconfig settings. You can work
+! around this by using ~/.Xresources, but it is not as flexible as fontconfig.
+! https://wiki.archlinux.org/title/Font_configuration#Applications_without_fontconfig_support
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
+Xft.hintstyle: hintslight
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+
+! Font settings.
+XTerm.vt100.faceName: BerkeleyMono Nerd Font Mono
+XTerm.vt100.faceSize: 12
+XTerm.vt100.renderFont: true
+! https://wiki.archlinux.org/title/Xterm#Configuration
+! Support color by default.
+XTerm.termName: xterm-256color
+! Force UTF-8.
+XTerm.vt100.locale: false
+XTerm.vt100.utf8: true
+! Make 'Alt' key behave as on other terminal emulators.
+XTerm.vt100.metaSendsEscape: true
+! Fix the backspace key.
+XTerm.vt100.backarrowKey: false
+XTerm.ttyModes: erase ^?
+! Increase save history by default.
+XTerm.vt100.saveLines: 8192
+! Enable bell urgency.
+XTerm.vt100.bellIsUrgent: true
+XTerm*visualbell: true
+! Fix disappearing cursor on moving backwards through text.
+XTerm*cursorBlink: true
+! Allow sixel graphics. Try: `convert -colors 16 foo.jpg sixel:-`.
+XTerm*decTerminalID: vt340

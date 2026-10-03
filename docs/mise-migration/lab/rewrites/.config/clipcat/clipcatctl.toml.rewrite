@@ -1,0 +1,7 @@
+preview_length = 100
+
+[log]
+emit_journald = true
+emit_stderr = false
+emit_stdout = false
+level = "INFO"

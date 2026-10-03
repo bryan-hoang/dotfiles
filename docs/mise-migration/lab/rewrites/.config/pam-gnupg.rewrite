@@ -1,0 +1,3 @@
+# https://github.com/cruegge/pam-gnupg#gnupghome
+~/.local/share/gnupg
+# https://github.com/cruegge/pam-gnupg#setup-guide

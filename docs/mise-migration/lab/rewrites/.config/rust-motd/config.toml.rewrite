@@ -1,0 +1,37 @@
+# https://github.com/rust-motd/rust-motd/blob/main/example_config.toml
+
+[banner]
+color = 'blue'
+command = """
+macchina -o machine,kernel,distribution,operating-system,packages,processor,gpu
+cfonts "MOTD: Welcome,|$(whoami)@$(hostname)" --font tiny
+"""
+
+[service_status]
+dbus-broker = 'dbus-broker'
+systemd-timesyncd = 'systemd-timesyncd'
+
+[user_service_status]
+gpg-agent = 'gpg-agent'
+ssh-agent = 'ssh-agent'
+tmux = 'tmux'
+
+[filesystems]
+root = '/'
+
+[memory]
+swap_pos = 'beside'
+
+# [cg_stats]
+# state_file = ".cache/cg_stats.toml"
+# threshold = 0.01
+
+[load_avg]
+format = "Load: {one:.02}, {five:.02}, {fifteen:.02}"
+
+[uptime]
+prefix = 'Uptime:'
+
+[last_login]
+
+# [last_run]
