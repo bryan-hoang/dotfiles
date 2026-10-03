@@ -128,7 +128,7 @@ $rewriteRoot = Join-Path $PSScriptRoot 'rewrites'
 $rewrites = [ordered]@{ '.config/shell/functions.sh' = $null; 'README.md' = Join-Path $workspace 'README.md'; 'package.json' = $null; 'pnpm-lock.yaml' = $null }
 # Private-data sanitization (#389): the removed values never appear here.
 foreach ($k in @(
-		'.config/X11/xresources', '.config/clipcat/clipcat-menu.toml', '.config/clipcat/clipcatctl.toml', '.config/clipcat/clipcatd.toml'
+		'.config/X11/xresources', '.config/bspwm/bspwmrc', '.config/git/distributive.gitconfig', '.config/clipcat/clipcat-menu.toml', '.config/clipcat/clipcatctl.toml', '.config/clipcat/clipcatd.toml'
 		'.config/emscripten/config', '.config/himalaya/config.toml', '.config/i3/config', '.config/i3status-rust/config.toml'
 		'.config/meli/config.toml', '.config/pam-gnupg', '.config/redshift.conf', '.config/rust-motd/config.toml'
 		'.config/spotify-tui/client.yml', '.config/spotifyd/spotifyd.conf', '.config/systemd/user/emacs.service'

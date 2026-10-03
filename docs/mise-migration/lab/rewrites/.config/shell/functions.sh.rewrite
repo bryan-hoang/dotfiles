@@ -1027,13 +1027,13 @@ generate_ssh_key() {
 }
 
 export_gpg_key() {
-	gpg --export-secret-key --armor ABE9B748EEAE9E00 >|"$HOME"/.gnupg/secret.asc
+	gpg --export-secret-key --armor "$GPG_KEY_ID" >|"$HOME"/.gnupg/secret.asc
 	scp "$HOME"/.gnupg/secret.asc "${1}":"$HOME"/.gnupg
 }
 
 import_gpg_key() {
 	gpg --import "$HOME"/.gnupg/secret.asc
-	gpg --edit-key ABE9B748EEAE9E00 trust
+	gpg --edit-key "$GPG_KEY_ID" trust
 	gpg --update-trustdb
 }
 
