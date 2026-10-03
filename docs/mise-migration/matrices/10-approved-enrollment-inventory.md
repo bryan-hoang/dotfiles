@@ -533,6 +533,10 @@ Recorded limits in mise `2026.10.0`:
   and `~/.profile` block the `E022` to `E024` and `E026` links, because a
   symlink entry never replaces a regular file without `--force`. The manual WSL
   procedure backs them up and moves them aside before adoption.
+- The home gate (`home-gate.ps1`) runs in PowerShell 7, which Fedora WSL does
+  not ship. The manual WSL and native-Linux procedures install PowerShell 7
+  before the gate runs. Without ICU libraries, run it with
+  `DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1`.
 
 ## Repository-Only Guard
 

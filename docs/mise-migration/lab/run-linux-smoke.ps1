@@ -7,7 +7,9 @@
 # module, and the pinned mise (mise-version.txt) in
 # lab-in/bin, which guest scripts put first on PATH. -Bin adds verified
 # executables to lab-in/bin.
-param([Parameter(Mandatory)][string]$IntakeRoot, [Parameter(Mandatory)][string]$Exchange, [string]$Script = 'linux-smoke.sh', [string[]]$Bin = @())
+# PowerShell 7 (pwsh-version.txt) arrives as lab-in/pwsh.tar.gz when its Linux
+# media is staged. -TimeoutSeconds bounds the guest script.
+param([Parameter(Mandatory)][string]$IntakeRoot, [Parameter(Mandatory)][string]$Exchange, [string]$Script = 'linux-smoke.sh', [string[]]$Bin = @(), [int]$TimeoutSeconds = 600)
 $ErrorActionPreference = 'Stop'
 $intake = [IO.Path]::GetFullPath($IntakeRoot)
 $name = 'mise-lab-run-' + (Get-Date -Format 'yyyyMMddHHmmss')
@@ -27,12 +29,15 @@ Copy-Item -LiteralPath ($inputs | ForEach-Object { Join-Path $PSScriptRoot $_ })
 Copy-Item -LiteralPath $Exchange -Destination (Join-Path $stage 'lab-in\exchange') -Recurse
 Copy-Item -LiteralPath $mise -Destination (Join-Path $stage 'lab-in\bin\mise')
 foreach ($b in $Bin) { Copy-Item -LiteralPath $b -Destination (Join-Path $stage 'lab-in\bin') }
+$pv = (Get-Content -LiteralPath (Join-Path $PSScriptRoot 'pwsh-version.txt')).Trim()
+$pwshTar = Join-Path $intake "linux-media-pwsh-$pv\powershell-$pv-linux-x64.tar.gz"
+if (Test-Path -LiteralPath $pwshTar) { Copy-Item -LiteralPath $pwshTar -Destination (Join-Path $stage 'lab-in\pwsh.tar.gz') }
 wsl.exe --import $name $runDir (Join-Path $intake 'wsl\fedora44-fixture-ready.tar') | Out-Null
 if ($LASTEXITCODE) { throw "import failed: $name" }
 try {
 	cmd.exe /d /c "tar.exe --no-fflags -cf - -C `"$stage`" lab-in | wsl.exe -d $name --cd ~ --exec tar -xf - -C /home/tester"
 	if ($LASTEXITCODE) { throw 'copy-in failed' }
-	wsl.exe -d $name --cd ~ --exec timeout 600 unshare --user --map-current-user --net bash ./lab-in/$Script
+	wsl.exe -d $name --cd ~ --exec timeout $TimeoutSeconds unshare --user --map-current-user --net bash ./lab-in/$Script
 	"smoke exit=$LASTEXITCODE run=$name"
 	cmd.exe /d /c "wsl.exe -d $name --cd ~ --exec tar -cf - -C /home/tester lab-out | tar.exe -xf - -C `"$results`""
 	if ($LASTEXITCODE) { throw 'copy-out failed' }
