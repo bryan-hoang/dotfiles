@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Conversion seed run for the Fedora 44 WSL fixture, on the pinned mise in
-# ~/lab-in/bin. Writes the shared and Linux files from the audited-tip blobs
-# (synthetic placeholders for canonical sources not written yet), installs the
-# generated E011, lets mise capture the baseline, then builds the conversion
+# ~/lab-in/bin. Writes the shared and Linux files from the reviewed new sources
+# and the audited-tip blobs (synthetic placeholders for canonical sources not
+# written yet), installs the generated E011, checks the sanitized sources, lets
+# mise capture the baseline, then builds the conversion
 # commit on the exchange copy's main: the audited-tip tree minus the removals,
 # executables normalized to 100644, the reviewed README and rewrites, plus mise's
 # checkpoint tree. Results land in ~/lab-out, including the advanced
@@ -58,21 +59,25 @@ say history_sync "$(timeout 30 mise settings get history.sync 2>/dev/null)"
 legacy=$(git -C "$ex/setup.git" rev-parse main)
 say audited_tip "$legacy"
 
-# Shared and Linux files; Windows rows have no stream in the tip. A source
-# that is a regular file at the audited tip takes that blob, written 0644.
+# Shared and Linux files; Windows rows have no stream in the tip. A reviewed
+# new source in lab/sources/<stream> wins; otherwise a source that is a regular
+# file at the audited tip takes that blob. Everything is written 0644.
 declare -A blob
 while IFS=$'\t' read -r meta path; do
 	read -r mode _ oid <<<"$meta"
 	[[ $mode == 100644 || $mode == 100755 ]] && blob[$path]=$oid
 done < <(git -C "$ex/setup.git" ls-tree -r --full-tree main)
-n=0 real=0
+n=0 real=0 reviewed=0
 while IFS=$'\t' read -r id var live stream; do
 	[[ $var == W ]] && continue
 	[[ $id == E011 ]] && continue
 	rel=${live#\~/}
 	f=$HOME/$rel
 	mkdir -p "$(dirname "$f")"
-	if [[ -n ${blob[$rel]:-} ]]; then
+	if [[ -f $in/sources/$stream ]]; then
+		cp "$in/sources/$stream" "$f"
+		reviewed=$((reviewed + 1))
+	elif [[ -n ${blob[$rel]:-} ]]; then
 		git -C "$ex/setup.git" cat-file blob "${blob[$rel]}" >"$f"
 		real=$((real + 1))
 	else
@@ -87,7 +92,14 @@ cp "$p/dotfiles.toml" "$HOME/.config/mise/conf.d/dotfiles.toml"
 printf '# managed copy of E102\n' >"$HOME/.config/nvim/stylua.toml"
 say seeded_files "$((n + 1))"
 say seeded_from_audited_tip "$real"
-say seeded_placeholders "$((n - real))"
+say seeded_reviewed_sources "$reviewed"
+say seeded_placeholders "$((n - real - reviewed))"
+
+# Unknown fields in a sanitized source block the baseline.
+if ! run sanitized_check python3 "$in/sanitized.py" check "$HOME/.config/mise"; then
+	say 'done' blocked
+	exit 1
+fi
 
 run paths mise dot paths --json
 mapfile -t saves < <(grep -v $'^[^\t]*\tW\t' "$p/roots.tsv" | cut -f3 | sed "s|^~|$HOME|")

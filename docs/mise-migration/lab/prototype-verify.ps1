@@ -73,22 +73,29 @@ Check stream_non_100644 @($actual | Where-Object { ($t[$_] -split ' ')[0] -ne '1
 $e031 = @($built | Where-Object Id -EQ 'E031')[0].Stream
 Check e031_mode ($t[$e031] -split ' ')[0] 100644
 
-# Expected stream bytes: E011 is the generated declaration; a row whose source
-# is a regular file at the audited tip takes that blob; every other row is a
-# synthetic placeholder for a canonical source a later ticket writes.
+# Expected stream bytes: E011 is the generated declaration; a row with a
+# reviewed new source in lab/sources/<stream> takes those bytes; a row whose
+# source is a regular file at the audited tip takes that blob; every other row
+# is a synthetic placeholder for a canonical source a later ticket writes.
 $e011 = Join-Path $p 'dotfiles.toml'
 $e011Blob = (& git hash-object --no-filters -- $e011)
-$fromTip = 0; $synthetic = 0
+$fromTip = 0; $synthetic = 0; $reviewed = @()
 $badBytes = @(foreach ($f in $built) {
 		if (-not $t.ContainsKey($f.Stream)) { continue }
 		$rel = $f.Live.Substring(2)
+		$src = Join-Path $PSScriptRoot "sources/$($f.Stream)"
 		if ($f.Id -eq 'E011') { $want = $e011Blob }
+		elseif (Test-Path -LiteralPath $src -PathType Leaf) { $want = (& git hash-object --no-filters -- $src); $reviewed += $f.Id }
 		elseif ($old[$rel] -match '^100(644|755) ') { $want = ($old[$rel] -split ' ')[1]; $fromTip++ }
 		else { $want = BlobId "# synthetic $($f.Id) $($f.Stream)`n"; $synthetic++ }
 		if (($t[$f.Stream] -split ' ')[1] -ne $want) { $f.Id }
 	})
 Say stream_from_audited_tip $fromTip
+Say stream_reviewed_sources $reviewed.Count
 Say stream_placeholders $synthetic
+$sanitized = @(Block 'enrollment-roots' | Where-Object { $_ -match '^\|\s*`?E\d{3}`?\s' } | ForEach-Object { $c = @($_.Trim().Trim('|') -split '\|' | ForEach-Object { $_.Trim().Trim('`') }); if ($c[9] -eq 'SANITIZED') { $c[0] } })
+Say sanitized_rows $sanitized.Count
+Check sanitized_rows_without_reviewed_source @($sanitized | Where-Object { $reviewed -notcontains $_ }).Count 0
 Check stream_bytes_mismatch $(if ($badBytes.Count) { ($badBytes | Select-Object -Unique) -join ',' } else { 0 }) 0
 Check managed_stylua_in_history @($t.Keys | Where-Object { $_ -match '/\.config/nvim/stylua\.toml$' }).Count 0
 

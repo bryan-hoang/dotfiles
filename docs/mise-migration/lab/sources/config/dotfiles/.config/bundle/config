@@ -1,0 +1,4 @@
+---
+BUNDLE_IGNORE_FUNDING_REQUESTS: "1"
+# {% set local = env.HOME ~ "/.config/bundle/config.local" %}
+# {% if local is file %}{{ "\n" ~ read_file(path=local) }}{% endif %}

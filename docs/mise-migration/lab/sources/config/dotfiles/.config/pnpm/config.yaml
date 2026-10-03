@@ -1,0 +1,6 @@
+enableGlobalVirtualStore: true
+savePrefix: ""
+trustPolicy: no-downgrade
+updateNotifier: false
+# {% set local = env.HOME ~ "/.config/pnpm/config.yaml.local" %}
+# {% if local is file %}{{ "\n" ~ read_file(path=local) }}{% endif %}

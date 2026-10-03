@@ -3,7 +3,8 @@
 # ~/lab-in/bin. Adopts the exchange copy's setup repository in three separate
 # HOME directories, each with its own fresh history store:
 #   fresh  plain adoption; checks held paths, restored streams byte for byte,
-#          repository-only paths, and bootstrap repositories
+#          repository-only paths, and bootstrap repositories, then the
+#          sanitized sources (linux-sanitized.sh)
 #   a      differing live file, then save and pull --keep-local
 #   b      differing file backed up and moved aside, adoption, then the
 #          reviewed local bytes saved as a descendant
@@ -67,9 +68,13 @@ real_home=$HOME
 target=.config/git/ignore
 stream=home/.config/git/ignore
 
+# shellcheck source=/dev/null
+source "$in/linux-sanitized.sh"
+
 # fresh
 export HOME=$base/fresh
 mkdir -p "$HOME"
+sanitized_inputs
 run fresh_adopt "${adopt[@]}"
 say fresh_held_paths "$(grep -c 'held:' "$out/fresh_adopt.log")"
 ok=0 bad=0 win=0
@@ -90,6 +95,7 @@ restored=0 checked=0
 while IFS= read -r path; do
 	[[ $path =~ ^(home|config)(@[a-z]+)?/|^\.mise-history/ ]] && continue
 	[[ -n ${live[$path]:-} ]] && continue
+	[[ -n ${generated[$path]:-} ]] && continue
 	checked=$((checked + 1))
 	[[ -e $HOME/$path || -L $HOME/$path ]] && restored=$((restored + 1)) && printf '%s\n' "$path" >>"$out/fresh_repository_only_restored.txt"
 done < <(git -C "$ex/setup.git" ls-tree -r --name-only "$tip")
@@ -104,6 +110,7 @@ say fresh_repos_at_mirror_head "$c"
 say fresh_blesh_contrib_entries "$(find "$HOME/src/github.com/akinomyoga/ble.sh/contrib" -mindepth 1 -maxdepth 1 2>/dev/null | wc -l)"
 say fresh_head_contains_tip "$(has_tip)"
 say fresh_head_parents "$(git -C "$(hist)" log --format='%an:%s' -5 main 2>/dev/null | paste -sd'|' -)"
+sanitized_checks
 
 # a: preliminary sequence
 export HOME=$base/a

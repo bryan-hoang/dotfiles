@@ -1,0 +1,14 @@
+cache=${XDG_CACHE_HOME}/npm
+color=always
+fund=false
+init-module=${XDG_CONFIG_HOME}/npm/config/npm-init.js
+init-version=0.0.0-development
+logs-dir=${XDG_STATE_HOME}/npm/logs
+min-release-age=7
+prefix=${XDG_DATA_HOME}/npm
+preid=rc
+save-exact=true
+sign-git-commit=true
+sign-git-tag=true
+# {% set local = env.HOME ~ "/.config/npm/npmrc.local" %}
+# {% if local is file %}{{ "\n" ~ read_file(path=local) }}{% endif %}

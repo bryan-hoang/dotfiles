@@ -26,7 +26,7 @@ if ($LASTEXITCODE) { throw "cannot list $Tip" }
 $roots = foreach ($line in Block 'enrollment-roots' | Where-Object { $_ -match '^\|\s*`?E\d{3}`?\s' }) {
 	$f = @($line.Trim().Trim('|') -split '\|' | ForEach-Object { $_.Trim().Trim('`') })
 	if ($f.Count -ne 12) { throw "bad row: $line" }
-	[pscustomobject]@{ Id = $f[0]; Source = $f[1]; Enroll = $f[2]; Stream = $f[3]; Kind = $f[4]; Variant = $f[5]; Autosave = $f[6] }
+	[pscustomobject]@{ Id = $f[0]; Source = $f[1]; Enroll = $f[2]; Stream = $f[3]; Kind = $f[4]; Variant = $f[5]; Autosave = $f[6]; Destination = $f[8]; Review = $f[9] }
 }
 
 $files = foreach ($r in $roots) {
@@ -65,6 +65,11 @@ $toml += '', '[bootstrap.repos]'
 $gh = 'https://github.com'
 $toml += Get-Content -LiteralPath (Join-Path $PSScriptRoot 'repos.txt') | Where-Object { $_.Trim() } | ForEach-Object {
 	"`"~/src/github.com/$_`" = { url = `"$gh/$_`" }"
+}
+# SANITIZED rows: on Linux, each generated destination renders its source,
+# whose include lines add the excluded application-local input.
+$toml += $roots | Where-Object Review -EQ 'SANITIZED' | ForEach-Object {
+	'', "[dotfiles.`"$($_.Destination -replace '^generated\s+' -replace '`')`"]", "source = `"$($_.Source)`"", 'mode = "template"', 'variants = [{ os = "linux" }]'
 }
 Save 'dotfiles.toml' $toml
 

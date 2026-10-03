@@ -237,6 +237,91 @@ exclude = ["~/.config/nvim/stylua.toml"]
 ] }
 "~/.typos.toml" = { mode = "track" }
 
+[dotfiles."~/.config/.curlrc"]
+source = "~/.config/mise/dotfiles/.config/.curlrc"
+mode = "template"
+variants = [{ os = "linux" }]
+
+[dotfiles."~/.config/bundle/config"]
+source = "~/.config/mise/dotfiles/.config/bundle/config"
+mode = "template"
+variants = [{ os = "linux" }]
+
+[dotfiles."~/.config/gem/gemrc"]
+source = "~/.config/mise/dotfiles/.config/gem/gemrc"
+mode = "template"
+variants = [{ os = "linux" }]
+
+[dotfiles."~/.config/gh/config.yml"]
+source = "~/.config/mise/dotfiles/.config/gh/config.yml"
+mode = "template"
+variants = [{ os = "linux" }]
+
+[dotfiles."~/.config/litecli/config"]
+source = "~/.config/mise/dotfiles/.config/litecli/config"
+mode = "template"
+variants = [{ os = "linux" }]
+
+[dotfiles."~/.config/mycli/myclirc"]
+source = "~/.config/mise/dotfiles/.config/mycli/myclirc"
+mode = "template"
+variants = [{ os = "linux" }]
+
+[dotfiles."~/.config/mysql/my.cnf"]
+source = "~/.config/mise/dotfiles/.config/mysql/my.cnf"
+mode = "template"
+variants = [{ os = "linux" }]
+
+[dotfiles."~/.config/npm/npmrc"]
+source = "~/.config/mise/dotfiles/.config/npm/npmrc"
+mode = "template"
+variants = [{ os = "linux" }]
+
+[dotfiles."~/.config/pgcli/config"]
+source = "~/.config/mise/dotfiles/.config/pgcli/config"
+mode = "template"
+variants = [{ os = "linux" }]
+
+[dotfiles."~/.config/pip/pip.conf"]
+source = "~/.config/mise/dotfiles/.config/pip/pip.conf"
+mode = "template"
+variants = [{ os = "linux" }]
+
+[dotfiles."~/.config/pnpm/config.yaml"]
+source = "~/.config/mise/dotfiles/.config/pnpm/config.yaml"
+mode = "template"
+variants = [{ os = "linux" }]
+
+[dotfiles."~/.config/pypoetry/config.toml"]
+source = "~/.config/mise/dotfiles/.config/pypoetry/config.toml"
+mode = "template"
+variants = [{ os = "linux" }]
+
+[dotfiles."~/.config/uv/uv.toml"]
+source = "~/.config/mise/dotfiles/.config/uv/uv.toml"
+mode = "template"
+variants = [{ os = "linux" }]
+
+[dotfiles."~/.config/wget/wgetrc"]
+source = "~/.config/mise/dotfiles/.config/wget/wgetrc"
+mode = "template"
+variants = [{ os = "linux" }]
+
+[dotfiles."~/.config/youtube-dl/config"]
+source = "~/.config/mise/dotfiles/.config/youtube-dl/config"
+mode = "template"
+variants = [{ os = "linux" }]
+
+[dotfiles."~/.config/yt-dlp/config"]
+source = "~/.config/mise/dotfiles/.config/yt-dlp/config"
+mode = "template"
+variants = [{ os = "linux" }]
+
+[dotfiles."~/.config/opencode/opencode.jsonc"]
+source = "~/.config/mise/dotfiles/.config/opencode/opencode.jsonc"
+mode = "template"
+variants = [{ os = "linux" }]
+
 [bootstrap.repos]
 "~/src/github.com/akinomyoga/ble.sh" = { url = "https://github.com/akinomyoga/ble.sh" }
 "~/src/github.com/b3nj5m1n/xdg-ninja" = { url = "https://github.com/b3nj5m1n/xdg-ninja" }
