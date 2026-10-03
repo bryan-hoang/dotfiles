@@ -51,8 +51,9 @@ M .typos.toml E177
 Amended 2026-10-03 by
 [Author the public and Git mirrored sources and the Linux managed destinations](https://github.com/bryan-hoang/dotfiles/issues/371):
 the human accepted that mise overwrites changed Linux generated outputs as a
-recorded limit, made `E176` a manual WSL procedure step, and chose local
-capability selection. The rows are unchanged; the
+recorded limit and chose local capability selection. Installing `E176`, enabling
+the `E173` to `E175` units, and moving aside stock shell startup files are
+manual WSL procedure steps. The rows are unchanged; the
 [Linux Managed Destinations](#linux-managed-destinations) section records the
 decisions and the capability gates.
 
@@ -518,7 +519,13 @@ Recorded limits in mise `2026.10.0`:
   `0644`, next to the manual WSL restart.
 - `E011` does not declare the systemd user enabling of `E173` to `E175`. Mise
   user services and systemd units write their own unit files instead of enabling
-  an enrolled one, and neither takes a capability gate.
+  an enrolled one, and neither takes a capability gate. The human made enabling
+  each unit whose capabilities the machine has a manual WSL or native-Linux
+  procedure step, after adoption restores the unit file.
+- Stock distribution files at `~/.bashrc`, `~/.bash_profile`, `~/.bash_logout`,
+  and `~/.profile` block the `E022` to `E024` and `E026` links, because a
+  symlink entry never replaces a regular file without `--force`. The manual WSL
+  procedure backs them up and moves them aside before adoption.
 
 ## Repository-Only Guard
 
