@@ -6,8 +6,8 @@
 # yet), installs the generated E011, checks the sanitized sources, lets mise
 # capture the baseline, then builds the conversion
 # commit on the exchange copy's main: the audited-tip tree minus the removals,
-# executables normalized to 100644, the reviewed README and rewrites, plus mise's
-# checkpoint tree. Results land in ~/lab-out, including the advanced
+# executables normalized to 100644, the reviewed rewrites (README.md is one),
+# plus mise's checkpoint tree. Results land in ~/lab-out, including the advanced
 # setup.git for the host to fast-forward fetch.
 set -uo pipefail
 
@@ -128,9 +128,9 @@ git -C "$H" show main:.mise-history/manifest.json >"$out/manifest.json" 2>/dev/n
 git -C "$H" ls-tree -r main >"$out/history-tree.txt" 2>/dev/null
 
 # Conversion commit with the audited tip as its only parent: the legacy tree
-# minus the removals, legacy executables stored 100644, the reviewed README
-# and the reviewed rewrites of repository-only files (lab/rewrites/<path>.rewrite
-# for setup-root <path>; stream rewrites arrive through mise's tree), plus every
+# minus the removals, legacy executables stored 100644, the reviewed rewrites
+# of repository-only files such as README.md (lab/rewrites/<path>.rewrite for
+# setup-root <path>; stream rewrites arrive through mise's tree), plus every
 # path of mise's checkpoint tree.
 c=$lab/conv
 git init -q "$c"
@@ -142,7 +142,6 @@ tr -d '\r' <"$p/removals.txt" | git -C "$c" update-index --force-remove --stdin
 git -C "$c" ls-files -s | sed -n 's/^100755 /100644 /p' >"$lab/executables.txt"
 say legacy_executables_normalized "$(wc -l <"$lab/executables.txt")"
 git -C "$c" update-index --index-info <"$lab/executables.txt"
-git -C "$c" update-index --cacheinfo "100644,$(git -C "$c" hash-object -w --no-filters "$in/README.md"),README.md"
 n=0
 while IFS= read -r -d '' f; do
 	rel=${f#"$in/rewrites/"}

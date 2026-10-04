@@ -14,7 +14,6 @@ $env:MISE_AUTO_INSTALL = '0'
 $repo = [IO.Path]::GetFullPath($Exchange)
 $p = Join-Path $PSScriptRoot 'prototype'
 $inv = Join-Path $PSScriptRoot '..\matrices\10-approved-enrollment-inventory.md'
-$workspace = Resolve-Path (Join-Path $PSScriptRoot '..\..\..')
 function G { $o = & git -C $repo @args; if ($LASTEXITCODE) { throw "git $args failed" }; $o }
 $failed = [Collections.Generic.List[string]]::new()
 function Say([string]$k, $v) { "$k=$v" }
@@ -163,12 +162,12 @@ Check legacy_removed_still_present @($removals | Where-Object { $t.ContainsKey($
 $kept = @($old.Keys | Where-Object { $removals -notcontains $_ })
 Say legacy_kept $kept.Count
 Check legacy_kept_missing @($kept | Where-Object { -not $t.ContainsKey($_) }).Count 0
-# Approved content rewrites: the workspace README and the reviewed bytes in
-# lab/rewrites/<path>.rewrite. Each must equal its workspace bytes, and a
+# Approved content rewrites: the reviewed bytes in lab/rewrites/<path>.rewrite
+# (README.md included). Each must equal its workspace bytes, and a
 # rewrite counts as changed only where it differs from the audited tip. Stream
 # rewrites must be exactly the streams that differ from their audited-tip blobs.
 $rewriteRoot = Join-Path $PSScriptRoot 'rewrites'
-$rewrites = [ordered]@{ '.config/nu/config.toml' = $null; '.config/shell/functions.sh' = $null; 'README.md' = Join-Path $workspace 'README.md'; 'home/.config/shell/aliases.sh' = $null; 'home/.config/topgrade/topgrade.toml' = $null; 'package.json' = $null; 'pnpm-lock.yaml' = $null }
+$rewrites = [ordered]@{ '.config/nu/config.toml' = $null; '.config/shell/functions.sh' = $null; 'README.md' = $null; 'home/.config/shell/aliases.sh' = $null; 'home/.config/topgrade/topgrade.toml' = $null; 'package.json' = $null; 'pnpm-lock.yaml' = $null }
 # Private-data sanitization (#389): the removed values never appear here.
 foreach ($k in @(
 		'.config/X11/xresources', '.config/bspwm/bspwmrc', '.config/git/distributive.gitconfig', '.local/bin/print-git-email-symbol', '.config/clipcat/clipcat-menu.toml', '.config/clipcat/clipcatctl.toml', '.config/clipcat/clipcatd.toml'

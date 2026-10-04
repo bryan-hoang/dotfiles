@@ -3,7 +3,7 @@
 # The fixture disables interop, which also hides it from \\wsl.localhost, so
 # files cross the boundary only as tar streams over wsl.exe stdio. cmd.exe
 # pipes carry those streams byte-for-byte. The guest receives a copy of
-# -Exchange, the workspace README, lab/rewrites, lab/sources, the sanitized
+# -Exchange, lab/rewrites, lab/sources, the sanitized
 # module, and the pinned mise (mise-version.txt) in
 # lab-in/bin, which guest scripts put first on PATH. -Bin adds verified
 # executables to lab-in/bin.
@@ -24,7 +24,7 @@ foreach ($n in 'GITHUB_TOKEN', 'GH_TOKEN', 'GITHUB_API_TOKEN', 'MISE_GITHUB_TOKE
 	Remove-Item -LiteralPath "Env:$n" -ErrorAction SilentlyContinue
 }
 New-Item -ItemType Directory -Path $runDir, $results, (Join-Path $stage 'lab-in\bin') -Force | Out-Null
-$inputs = $Script, 'repos.txt', 'prototype', 'rewrites', 'sources', 'sanitized.py', 'sanitized-allowlist.tsv', 'linux-sanitized.sh', '..\..\..\README.md'
+$inputs = $Script, 'repos.txt', 'prototype', 'rewrites', 'sources', 'sanitized.py', 'sanitized-allowlist.tsv', 'linux-sanitized.sh'
 Copy-Item -LiteralPath ($inputs | ForEach-Object { Join-Path $PSScriptRoot $_ }) -Destination (Join-Path $stage 'lab-in') -Recurse
 Copy-Item -LiteralPath $Exchange -Destination (Join-Path $stage 'lab-in\exchange') -Recurse
 Copy-Item -LiteralPath $mise -Destination (Join-Path $stage 'lab-in\bin\mise')
