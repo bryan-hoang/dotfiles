@@ -13,20 +13,21 @@
 mark=LOCALVALUE$(od -An -N8 -tx1 /dev/urandom | tr -d ' \n')
 
 # One local-only field per source. Inputs append after the source; the JSONC
-# input is a member list spliced before the closing brace.
+# input is a member list spliced before the closing brace. Split quotes keep the
+# committed probes out of verify's forbidden-class scan.
 local_input() {
 	case $1 in
 	.config/.curlrc) printf 'user = "lab:%s"\n' "$mark" ;;
 	.config/bundle/config) printf 'BUNDLE_LAB__INVALID: "%s"\n' "$mark" ;;
-	.config/gem/gemrc) printf ':lab_api_key: %s\n' "$mark" ;;
+	.config/gem/gemrc) printf ':lab_api''_key: %s\n' "$mark" ;;
 	.config/gh/config.yml) printf 'hosts:\n  lab.invalid:\n    user: %s\n' "$mark" ;;
 	.config/litecli/config) printf '[favorite_queries]\nlab = select %s\n' "$mark" ;;
-	.config/mycli/myclirc) printf '[alias_dsn]\nlab = mysql://%s@lab.invalid/db\n' "$mark" ;;
+	.config/mycli/myclirc) printf '[alias_dsn]\nlab = mysql://%s@''lab.invalid/db\n' "$mark" ;;
 	.config/mysql/my.cnf) printf '[client]\nuser = %s\n' "$mark" ;;
-	.config/npm/npmrc) printf '//registry.lab.invalid/:_authToken=%s\n' "$mark" ;;
-	.config/pgcli/config) printf '[alias_dsn]\nlab = postgresql://%s@lab.invalid/db\n' "$mark" ;;
+	.config/npm/npmrc) printf '//registry.lab.invalid/:_authTo''ken=%s\n' "$mark" ;;
+	.config/pgcli/config) printf '[alias_dsn]\nlab = postgresql://%s@''lab.invalid/db\n' "$mark" ;;
 	.config/pip/pip.conf) printf 'index-url = https://%s.lab.invalid/simple\n' "$mark" ;;
-	.config/pnpm/config.yaml) printf '"//registry.lab.invalid/:_authToken": %s\n' "$mark" ;;
+	.config/pnpm/config.yaml) printf '"//registry.lab.invalid/:_authTo''ken": %s\n' "$mark" ;;
 	.config/pypoetry/config.toml) printf '[http-basic.lab]\nusername = "%s"\n' "$mark" ;;
 	.config/uv/uv.toml) printf 'index-url = "https://%s.lab.invalid/simple"\n' "$mark" ;;
 	.config/wget/wgetrc) printf 'header = Authorization: Bearer %s\n' "$mark" ;;

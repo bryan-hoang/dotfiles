@@ -34,8 +34,14 @@ function Log([string]$name) { [IO.File]::ReadAllText((Join-Path $out "$name.log"
 function Live([string]$tilde) { Join-Path $env:USERPROFILE ($tilde.Substring(2) -replace '/', '\') }
 function Blob([string]$p) { (& $git hash-object --no-filters -- $p) }
 $lf = New-Object Text.UTF8Encoding $false
-# Values the gate must never print.
-$secrets = @('lab-marker-376-local', 'lab-work-376@example.invalid', 'Lab Work 376', 'lab-proxy-376.invalid', 'bryan@bryanhoang.dev', 'Bryan Hoang')
+# Lab values, fresh per run and built from parts so no committed file or past
+# commit holds them. The gate must never print them.
+$run = [guid]::NewGuid().ToString('N').Substring(0, 12)
+$marker = 'lab-marker-376-' + $run
+$workName = 'Lab Work ' + $run
+$workEmail = 'lab-work-' + $run + '@' + 'example.invalid'
+$proxyHost = 'lab-proxy-' + $run + '.invalid'
+$secrets = @($marker, $workEmail, $workName, $proxyHost, 'bryan@bryanhoang.dev', 'Bryan Hoang')
 # Runs the gate; returns its exit code and records gate, failed_checks, and leaks.
 function Gate([string]$name, [string[]]$extra) {
 	$code = Run $name $pwsh (@('-NoProfile', '-NonInteractive', '-File', (Join-Path $lab 'home-gate.ps1'), '-ConversionCommit', $seed) + $extra)
@@ -108,10 +114,10 @@ try {
 	$machine = Live '~/.config/git/machine.gitconfig'
 	$flags = Live '~/.config/mise/config.windows.local.toml'
 	New-Item -ItemType Directory -Path (Split-Path $machine) -Force | Out-Null
-	[IO.File]::WriteAllText($localToml, "# lab-marker-376-local`n[settings.history]`nsync = `"manual`"`n", $lf)
-	$publicGit = "# lab-marker-376-local`n[include]`n`tpath = ~/.config/mise/dotfiles/.config/git/personal.gitconfig`n"
+	[IO.File]::WriteAllText($localToml, "# $marker`n[settings.history]`nsync = `"manual`"`n", $lf)
+	$publicGit = "# $marker`n[include]`n`tpath = ~/.config/mise/dotfiles/.config/git/personal.gitconfig`n"
 	[IO.File]::WriteAllText($machine, $publicGit, $lf)
-	[IO.File]::WriteAllText($flags, "# lab-marker-376-local`n[vars.windows_applications]`ntopgrade = false`n", $lf)
+	[IO.File]::WriteAllText($flags, "# $marker`n[vars.windows_applications]`ntopgrade = false`n", $lf)
 	Check 'e161_base_apply_exit' (Mod 'e161_base_apply' 'Invoke-WindowsApplications apply -Unit base') 0
 	$profileDest = (& $pwsh -NoProfile -Command '$PROFILE.CurrentUserCurrentHost')
 	$H = Live '~/.local/state/mise/history/repo.git'
@@ -156,7 +162,7 @@ try {
 	# names the row, path, and class only, never the field name or value.
 	$pip = Live '~/.config/mise/dotfiles/.config/pip/pip.conf'
 	$reviewed = [IO.File]::ReadAllBytes($pip)
-	[IO.File]::AppendAllText($pip, "proxy = http://lab-proxy-376.invalid:3128`n")
+	[IO.File]::AppendAllText($pip, "proxy = http://${proxyHost}:3128`n")
 	Check 'sanitized_unknown_exit' (Gate 'sanitized_unknown' @()) 1
 	Check 'sanitized_unknown_reported' (Value 'sanitized_unknown' 'sanitized_problem') 'E121 dotfiles/.config/pip/pip.conf: unknown-field'
 	Check 'sanitized_unknown_name_printed' ([regex]::Matches((Log 'sanitized_unknown'), 'proxy').Count) 0
@@ -177,7 +183,7 @@ try {
 	Check 'drift_resolved_exit' (Gate 'drift_resolved' @()) 0
 
 	# Identity: a work identity passes in work mode and fails in public mode.
-	[IO.File]::WriteAllText($machine, "# lab-marker-376-local`n[user]`n`tname = Lab Work 376`n`temail = lab-work-376@example.invalid`n", $lf)
+	[IO.File]::WriteAllText($machine, "# $marker`n[user]`n`tname = $workName`n`temail = $workEmail`n", $lf)
 	Check 'work_exit' (Gate 'work' @('-Identity', 'work')) 0
 	Check 'work_history_commits' (Value 'work' 'identity_history_commits') 0
 	Check 'work_as_public_exit' (Gate 'work_as_public' @()) 1

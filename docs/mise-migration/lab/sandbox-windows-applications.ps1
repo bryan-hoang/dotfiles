@@ -117,7 +117,9 @@ try {
 	$topSrc = Live '~/.config/topgrade/topgrade.toml'
 	$state = Live '~/.local/state/mise/windows-applications'
 	$flags = Live '~/.config/mise/config.windows.local.toml'
-	[IO.File]::WriteAllText($flags, "# lab-marker-374-local`n[vars.windows_applications]`ntopgrade = true`n", $lf)
+	# A fresh value per run: no committed file or past commit can hold it.
+	$marker = 'lab-marker-374-' + [guid]::NewGuid().ToString('N')
+	[IO.File]::WriteAllText($flags, "# $marker`n[vars.windows_applications]`ntopgrade = true`n", $lf)
 	Mod 'pathmap' 'Get-WindowsApplicationsPathMap' | Out-Null
 
 	# Criterion 2: a preflight failure changes no destination in its unit.
@@ -151,7 +153,7 @@ try {
 	Check 'c1_reapply_noop_rows' ([regex]::Matches((Log 'c1_reapply'), 'Action=none').Count) 8
 
 	# Flag off: apply reports owned paths and changes none, even a changed one; no quarantine.
-	[IO.File]::WriteAllText($flags, "# lab-marker-374-local`n[vars.windows_applications]`ntopgrade = false`n", $lf)
+	[IO.File]::WriteAllText($flags, "# $marker`n[vars.windows_applications]`ntopgrade = false`n", $lf)
 	$topHash = Hash $topDest
 	Check 'f_off_apply_exit' (Mod 'f_off_apply' 'Invoke-WindowsApplications apply') 0
 	Check 'f_off_reported' ([regex]::Matches((Log 'f_off_apply'), 'Unit=topgrade .*State=ok .*Action=owned; flag off').Count) 1
@@ -165,7 +167,7 @@ try {
 	Check 'f_off_quarantine_entries' (@(Get-ChildItem -LiteralPath (Join-Path $state 'quarantine') -Recurse -File -ErrorAction SilentlyContinue).Count) 0
 	Copy-Item -LiteralPath $topSrc -Destination $topDest -Force
 	(Get-Item -LiteralPath $topDest).IsReadOnly = $true
-	[IO.File]::WriteAllText($flags, "# lab-marker-374-local`n[vars.windows_applications]`ntopgrade = true`n", $lf)
+	[IO.File]::WriteAllText($flags, "# $marker`n[vars.windows_applications]`ntopgrade = true`n", $lf)
 	Mod 'f_on_status' 'Invoke-WindowsApplications status' | Out-Null
 	Check 'f_on_status_ok_rows' ([regex]::Matches((Log 'f_on_status'), 'State=ok').Count) 8
 
@@ -248,8 +250,9 @@ try {
 	Check 'c5_module_declares_service' ([IO.File]::ReadAllText($mod) -match '\[bootstrap\.services') 'False'
 	Run 'c5_services' $mise @('bootstrap', 'services', 'status') | Out-Null
 	Check 'c5_final_save_exit' (Run 'c5_final_save' $mise @('dot', 'save', '--description', 'Lab final')) 0
-	Check 'c5_history_local_paths' (@(& $git -C $H log --all --name-only --format= | Where-Object { $_ -match 'windows-applications|config\.windows\.local|quarantine' }).Count) 0
-	Check 'c5_history_marker_commits' (@(& $git -C $H log --all -S 'lab-marker-374-local' --format=%H).Count) 0
+	# Stream paths only: the legacy ancestry names this lab script.
+	Check 'c5_history_local_paths' (@(& $git -C $H log --all --name-only --format= | Where-Object { $_ -match '^(home|config)(@\w+)?/' -and $_ -match 'windows-applications|config\.windows\.local|quarantine' }).Count) 0
+	Check 'c5_history_marker_commits' (@(& $git -C $H log --all -S $marker --format=%H).Count) 0
 	Run 'c5_status' $mise @('dot', 'status', '--json') | Out-Null
 	Check 'c5_status_mentions_local' ((Log 'c5_status') -match 'windows-applications|config\.windows\.local') 'False'
 	Copy-Item -LiteralPath (Join-Path $state 'quarantine\log.tsv') -Destination (Join-Path $out 'quarantine-log.tsv')

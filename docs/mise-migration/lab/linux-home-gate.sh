@@ -90,15 +90,21 @@ run adopt mise bootstrap --adopt https://github.com/bryan-hoang/dotfiles --yes -
 check adopt_exit "$?" 0
 
 # Lab local inputs (synthetic values; the marker and identities must never
-# appear in gate output).
+# appear in gate output). Fresh per run and built from parts, so no committed
+# file or past commit holds them.
+run_id=$(od -An -N6 -tx1 /dev/urandom | tr -d ' \n')
+marker=lab-marker-376-$run_id
+work_name="Lab Work $run_id"
+work_email=lab-work-$run_id'@'example.invalid
+proxy_host=lab-proxy-$run_id.invalid
 local_toml=$HOME/.config/mise/config.local.toml
 machine=$HOME/.config/git/machine.gitconfig
 personal=$HOME/.config/mise/dotfiles/.config/git/personal.gitconfig
-printf '# lab-marker-376-local\n[settings.history]\nsync = "manual"\n' >"$local_toml"
-public_git=$(printf '# lab-marker-376-local\n[include]\n\tpath = %s\n' "$personal")
+printf '# %s\n[settings.history]\nsync = "manual"\n' "$marker" >"$local_toml"
+public_git=$(printf '# %s\n[include]\n\tpath = %s\n' "$marker" "$personal")
 printf '%s\n' "$public_git" >"$machine"
 {
-	printf '%s\n' lab-marker-376-local 'Lab Work 376' lab-work-376@example.invalid lab-proxy-376.invalid
+	printf '%s\n' "$marker" "$work_name" "$work_email" "$proxy_host"
 	git config --file "$personal" --get user.name
 	git config --file "$personal" --get user.email
 } | sed '/^$/d' >"$lab/secrets.txt"
@@ -166,7 +172,7 @@ check history_path_cleared_exit "$?" 0
 # names the row, path, and class only, never the field name or value.
 pip=$HOME/.config/mise/dotfiles/.config/pip/pip.conf
 cp "$pip" "$lab/pip.conf.reviewed"
-printf 'proxy = http://lab-proxy-376.invalid:3128\n' >>"$pip"
+printf 'proxy = http://%s:3128\n' "$proxy_host" >>"$pip"
 gate sanitized_unknown
 check sanitized_unknown_exit "$?" 1
 check sanitized_unknown_reported "$(val sanitized_unknown sanitized_problem)" 'E121 dotfiles/.config/pip/pip.conf: unknown-field'
@@ -188,7 +194,7 @@ check no_systemd_user_allowed_reported "$(val no_systemd_user_allowed systemd_us
 gate_env=(env)
 
 # Identity: a work identity passes in work mode and fails in public mode.
-printf '# lab-marker-376-local\n[user]\n\tname = Lab Work 376\n\temail = lab-work-376@example.invalid\n' >"$machine"
+printf '# %s\n[user]\n\tname = %s\n\temail = %s\n' "$marker" "$work_name" "$work_email" >"$machine"
 gate work -Identity work
 check work_exit "$?" 0
 check work_history_commits "$(val work identity_history_commits)" 0

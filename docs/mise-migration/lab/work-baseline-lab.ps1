@@ -91,7 +91,8 @@ Check 'clean_unguarded' ($clean -contains 'guard=unguarded')
 Check 'clean_mise_version' ($clean -contains "mise_version=$((Get-Content -LiteralPath (Join-Path $PSScriptRoot 'mise-version.txt')).Trim())")
 
 # Alterations.
-$marker = 'lab-private-value-377'
+# Built from parts so the committed tree never holds the value it searches for.
+$marker = 'lab-private-' + 'value-377'
 $edit = '.config/git/alias.gitconfig'
 [IO.File]::AppendAllText((Join-Path $homeDir $edit), "# $marker`n")
 $link, $retarget = (git -C $homeDir ls-tree -r --full-tree HEAD | Where-Object { $_ -like '120000 *' } | Select-Object -First 2) -replace '^.*\t', ''

@@ -41,8 +41,10 @@ function Mod([string]$name, [string]$cmd) {
 	Run $name $pwsh @('-NoProfile', '-NonInteractive', '-Command', ("Import-Module '$mod'; " + $cmd + $fmt))
 }
 function Rows([string]$log, [string]$pattern) { [regex]::Matches((Log $log), $pattern).Count }
-function Flags([string[]]$lines) { [IO.File]::WriteAllText($flags, ((@('# lab-marker-375-local', '[vars.windows_applications]') + $lines) -join "`n") + "`n", $lf) }
+function Flags([string[]]$lines) { [IO.File]::WriteAllText($flags, ((@("# $marker", '[vars.windows_applications]') + $lines) -join "`n") + "`n", $lf) }
 $lf = New-Object Text.UTF8Encoding $false
+# A fresh value per run: no committed file or past commit can hold it.
+$marker = 'lab-marker-375-' + [guid]::NewGuid().ToString('N')
 try {
 	Start-Transcript -LiteralPath (Join-Path $out 'transcript.txt') | Out-Null
 	New-Item -ItemType Directory -Path (Join-Path $lab 'bin'), (Join-Path $lab 'stub'), (Join-Path $lab 'login-stub'), (Join-Path $lab 'aside') -Force | Out-Null
@@ -142,7 +144,7 @@ try {
 	}
 	# ncspot's source is excluded local authority.
 	New-Item -ItemType Directory -Path (Live '~/.config/ncspot') -Force | Out-Null
-	[IO.File]::WriteAllText((Live '~/.config/ncspot/config.toml'), "# lab-marker-375-local`n", $lf)
+	[IO.File]::WriteAllText((Live '~/.config/ncspot/config.toml'), "# $marker`n", $lf)
 
 	$flags = Live '~/.config/mise/config.windows.local.toml'
 	$optional = 'alacritty', 'atuin_daemon', 'bat', 'espanso', 'harper', 'helix', 'ncspot', 'rio', 'rtk', 'terminal_preview', 'terminal_stable', 'topgrade'
@@ -289,7 +291,7 @@ try {
 	$leaked = @(& $git -C $H log --all --name-only --format= | Where-Object { $_ -match '^(home|config)(@\w+)?/' -and $_ -match 'windows-applications|config\.windows\.local|quarantine|ncspot|rio/themes|^home(@windows)?/AppData' })
 	Check 'history_local_paths' $leaked.Count 0
 	Say 'history_local_paths_list' ($leaked -join ';')
-	Check 'history_marker_commits' (@(& $git -C $H log --all -S 'lab-marker-375-local' --format=%H).Count) 0
+	Check 'history_marker_commits' (@(& $git -C $H log --all -S $marker --format=%H).Count) 0
 	Check 'history_rendered_home' (@(& $git -C $H log --all -S "$env:USERPROFILE" --format=%H).Count) 0
 
 	# Round-4 GlazeWM/Zebar: the profile chain (E152 sources E149, then E148)
