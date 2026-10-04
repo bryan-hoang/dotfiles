@@ -25,9 +25,12 @@
 # requirement fails the unit's preflight, so none of its paths change.
 #
 # State, quarantine, and the drift sentinel live under the excluded
-# ~/.local/state/mise/windows-applications/. While the sentinel exists every
-# command refuses: reconcile the quarantined paths, then delete the sentinel.
-# The module declares no service and no watcher.
+# ~/.local/state/mise/windows-applications/. Validate moves a drifted path
+# into quarantine, so its destination is empty. While the sentinel exists every
+# exported command refuses: reconcile the quarantined paths, delete the
+# sentinel, re-enable any watcher task it lists, then apply relinks. A path
+# that already matched before the module recorded it is monitored, but unapply
+# leaves it in place. The module declares no service and no watcher.
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
@@ -124,8 +127,10 @@ function Expand-Path($p) {
 	[IO.Path]::GetFullPath($p)
 }
 
+function Test-Required([string]$name) { $Units[$name]['Required'] -eq $true }
+
 function Test-Enabled([string]$name) {
-	if ($Units[$name].ContainsKey('Required')) { return $true }
+	if (Test-Required $name) { return $true }
 	if (-not (Test-Path -LiteralPath $FlagFile)) { return $false }
 	$o = & mise config get -f $FlagFile "vars.windows_applications.$name" 2>&1 | ForEach-Object { "$_" }
 	if ($LASTEXITCODE) {
@@ -135,7 +140,16 @@ function Test-Enabled([string]$name) {
 	switch ($o -join '') { 'true' { $true } 'false' { $false } default { throw "vars.windows_applications.$name must be a boolean" } }
 }
 
+function Assert-Unblocked {
+	if (Test-Path -LiteralPath $Sentinel) { throw "blocked by drift sentinel $Sentinel; reconcile the quarantined paths, then delete it" }
+}
+
 function Get-WindowsApplicationsPathMap {
+	Assert-Unblocked
+	Get-PathEntries
+}
+
+function Get-PathEntries {
 	foreach ($name in $Units.Keys) {
 		foreach ($p in $Units[$name].Paths) {
 			[pscustomobject]@{ Unit = $name; Kind = $p.Kind; Source = (Expand-Path $p.Source); Dest = (Expand-Path $p.Dest) }
@@ -199,7 +213,10 @@ function Write-State([string]$name, [hashtable]$recs) {
 }
 
 # absent | ok | stale (owned copy of an older source) | changed (owned, diverged) | occupied (not owned)
-function Get-DestState($e, $rec) {
+# -Recorded compares the destination with its record only and never reads the
+# source, so it works after the source is deleted or a template input is unset;
+# it never reports stale.
+function Get-DestState($e, $rec, [switch]$Recorded) {
 	$item = Get-Item -LiteralPath $e.Dest -Force -ErrorAction SilentlyContinue
 	if (-not $item) { return 'absent' }
 	$target = if ($item.LinkTarget) { [IO.Path]::GetFullPath($item.LinkTarget, (Split-Path $item.FullName)) } else { $null }
@@ -209,7 +226,7 @@ function Get-DestState($e, $rec) {
 		default { -not $item.LinkType -and -not $item.PSIsContainer -and $item.IsReadOnly -and $rec -and (Get-Hash $e.Dest) -eq $rec.Hash }
 	}
 	if (-not $match) { return $(if ($rec) { 'changed' } else { 'occupied' }) }
-	if ($e.Kind -in 'Copy', 'Render' -and (Get-ExpectedHash $e) -ne $rec.Hash) { return 'stale' }
+	if (-not $Recorded -and $e.Kind -in 'Copy', 'Render' -and (Get-ExpectedHash $e) -ne $rec.Hash) { return 'stale' }
 	'ok'
 }
 
@@ -220,17 +237,17 @@ function Test-LinkCapability {
 	finally { if (Test-Path -LiteralPath $probe) { [IO.File]::Delete($probe) } }
 }
 
-function Save-Quarantine([string]$path) {
+# Copies the path into quarantine, or with -Move moves it there and leaves the
+# destination empty. A link is recorded by its target (and moved itself).
+function Save-Quarantine([string]$path, [switch]$Move) {
 	$q = Join-Path $StateDir ('quarantine/' + (Get-Date -Format 'yyyyMMddHHmmssfff'))
 	[IO.Directory]::CreateDirectory($q) | Out-Null
 	$item = Get-Item -LiteralPath $path -Force
 	$copy = Join-Path $q $item.Name
-	$hash = ''
+	$hash = if (-not $item.LinkType -and -not $item.PSIsContainer) { Get-Hash $path } else { '' }
 	if ($item.LinkType) { Set-Content -LiteralPath "$copy.link-target" -Value $item.LinkTarget }
-	else {
-		Copy-Item -LiteralPath $path -Destination $copy -Recurse
-		if (-not $item.PSIsContainer) { $hash = Get-Hash $path }
-	}
+	if ($Move) { Move-Item -LiteralPath $path -Destination $copy }
+	elseif (-not $item.LinkType) { Copy-Item -LiteralPath $path -Destination $copy -Recurse }
 	Add-Content -LiteralPath (Join-Path $StateDir 'quarantine/log.tsv') -Value "$(Get-Date -Format o)`t$path`t$copy`t$hash"
 	$copy
 }
@@ -250,7 +267,7 @@ function Result($name, $e, $state, $action) {
 
 function Invoke-UnitApply([string]$name) {
 	$u = $Units[$name]
-	$entries = @(Get-WindowsApplicationsPathMap | Where-Object Unit -EQ $name)
+	$entries = @(Get-PathEntries | Where-Object Unit -EQ $name)
 	$recs = Read-State $name
 	$problems = @()
 	foreach ($r in $u.Requires) {
@@ -274,7 +291,9 @@ function Invoke-UnitApply([string]$name) {
 	foreach ($e in $entries) {
 		$s = $states[$e.Dest]
 		if ($s -eq 'ok') {
-			if (-not $recs[$e.Dest]) { $recs[$e.Dest] = [pscustomobject]@{ Dest = $e.Dest; Kind = $e.Kind; Source = $e.Source; Hash = '' } }
+			# Already linked before the module recorded it: monitored by validate,
+			# but not created here, so unapply leaves it in place.
+			if (-not $recs[$e.Dest]) { $recs[$e.Dest] = [pscustomobject]@{ Dest = $e.Dest; Kind = $e.Kind; Source = $e.Source; Hash = ''; Adopted = $true } }
 			Result $name $e $s 'none'
 			continue
 		}
@@ -291,7 +310,7 @@ function Invoke-UnitApply([string]$name) {
 				$hash = Get-Hash $e.Dest
 			}
 		}
-		$recs[$e.Dest] = [pscustomobject]@{ Dest = $e.Dest; Kind = $e.Kind; Source = $e.Source; Hash = $hash }
+		$recs[$e.Dest] = [pscustomobject]@{ Dest = $e.Dest; Kind = $e.Kind; Source = $e.Source; Hash = $hash; Adopted = $false }
 		Write-State $name $recs
 		$after = Get-DestState $e $recs[$e.Dest]
 		if ($after -ne 'ok') { throw "$($e.Dest) did not verify as $($e.Kind) after apply ($after)" }
@@ -303,16 +322,18 @@ function Invoke-UnitApply([string]$name) {
 # Apply with a unit's flag off changes nothing: it reports what the module still owns.
 function Get-OwnedReport([string]$name) {
 	foreach ($rec in (Read-State $name).Values) {
-		Result $name $rec (Get-DestState $rec $rec) "owned; flag off, run unapply -Unit $name to remove"
+		Result $name $rec (Get-DestState $rec $rec -Recorded) "owned; flag off, run unapply -Unit $name to remove"
 	}
 }
 
-# Removes only resources this module recorded and that are unchanged; holds the rest.
+# Removes only resources this module created and that are unchanged; holds the
+# rest. Compares each destination with its record, never with the source.
 function Invoke-UnitUnapply([string]$name) {
 	$recs = Read-State $name
 	foreach ($rec in @($recs.Values)) {
-		$s = Get-DestState $rec $rec
-		if ($s -in 'ok', 'stale') { Remove-Owned $rec; $recs.Remove($rec.Dest); Result $name $rec $s 'removed' }
+		$s = Get-DestState $rec $rec -Recorded
+		if ($s -eq 'ok' -and $rec.Adopted) { $recs.Remove($rec.Dest); Result $name $rec $s 'released; left in place, not created by this module' }
+		elseif ($s -eq 'ok') { Remove-Owned $rec; $recs.Remove($rec.Dest); Result $name $rec $s 'removed' }
 		elseif ($s -eq 'absent') { $recs.Remove($rec.Dest); Result $name $rec $s 'forgotten' }
 		else { Result $name $rec $s "held; quarantined copy $(Save-Quarantine $rec.Dest)" }
 	}
@@ -325,6 +346,7 @@ function Test-Incomplete($results) { $results -and [bool]@($results | Where-Obje
 function Stop-HistoryWatcher {
 	Set-StrictMode -Off # COM-handler task actions have no Execute or Arguments.
 	$n = 0
+	$tasks = @()
 	foreach ($p in Get-CimInstance Win32_Process -Filter "Name LIKE 'mise%'") {
 		if ($p.CommandLine -match '\b(dot|dotfiles)\s+watch\b|history-watch') { Stop-Process -Id $p.ProcessId -Force; $n++ }
 	}
@@ -332,10 +354,12 @@ function Stop-HistoryWatcher {
 		if (@($t.Actions | Where-Object { "$($_.Execute) $($_.Arguments)" -match 'mise.*(\b(dot|dotfiles)\s+watch\b|history-watch)' })) {
 			$t | Stop-ScheduledTask
 			$t | Disable-ScheduledTask | Out-Null
-			$n++
+			$tasks += "Enable-ScheduledTask -TaskPath '$($t.TaskPath)' -TaskName '$($t.TaskName)'"
 		}
 	}
-	if ($n) { "stopped $n watcher process or task(s)" } else { 'no watcher declared or running (no-op)' }
+	# First line: the summary; then one re-enable command per disabled task.
+	if ($n -or $tasks) { "stopped $n watcher process(es), disabled $($tasks.Count) watcher task(s)" } else { 'no watcher declared or running (no-op)' }
+	$tasks
 }
 
 function Invoke-Validate([string[]]$names) {
@@ -343,9 +367,9 @@ function Invoke-Validate([string[]]$names) {
 	foreach ($name in $names) {
 		$recs = Read-State $name
 		foreach ($rec in $recs.Values) {
-			$s = Get-DestState $rec $rec
-			if ($s -eq 'changed') { $drift += "$($rec.Dest)`t$(Save-Quarantine $rec.Dest)" }
-			Result $name $rec $s $(if ($s -eq 'changed') { 'quarantined' } else { 'none' })
+			$s = Get-DestState $rec $rec -Recorded
+			if ($s -eq 'changed') { $drift += "$($rec.Dest)`t$(Save-Quarantine $rec.Dest -Move)" }
+			Result $name $rec $s $(if ($s -eq 'changed') { 'moved to quarantine' } else { 'none' })
 		}
 	}
 	# Base outputs that mise renders from E011; the module only checks they exist.
@@ -364,10 +388,12 @@ function Invoke-Validate([string[]]$names) {
 	}
 	# Block first so a failure while stopping the watcher still leaves the sentinel.
 	Set-Content -LiteralPath $Sentinel -Value (@("drift detected $(Get-Date -Format o)") + $drift +
-		'Reconcile each path from its quarantined copy, delete this file, then run validate.')
-	$watcher = Stop-HistoryWatcher
-	Add-Content -LiteralPath $Sentinel -Value "watcher: $watcher"
-	throw "drift in $($drift.Count) managed path(s); quarantined, sentinel written at $Sentinel, watcher: $watcher"
+		'Each path above was moved into quarantine, so its destination is empty.' +
+		'Reconcile it from the quarantined copy into its source or a local input, delete this file,' +
+		're-enable each watcher task listed below if validate disabled it, then run apply and validate.')
+	$watcher = @(Stop-HistoryWatcher)
+	Add-Content -LiteralPath $Sentinel -Value (@("watcher: $($watcher[0])") + @($watcher | Select-Object -Skip 1 | ForEach-Object { "re-enable: $_" }))
+	throw "drift in $($drift.Count) managed path(s); moved to quarantine, sentinel written at $Sentinel, watcher: $($watcher[0])"
 }
 
 function Invoke-WindowsApplications {
@@ -376,7 +402,7 @@ function Invoke-WindowsApplications {
 		[Parameter(Mandatory)][ValidateSet('status', 'apply', 'unapply', 'validate')][string]$Verb,
 		[string[]]$Unit
 	)
-	if (Test-Path -LiteralPath $Sentinel) { throw "blocked by drift sentinel $Sentinel; reconcile the quarantined paths, then delete it" }
+	Assert-Unblocked
 	foreach ($n in $Unit) { if (-not $Units.Contains($n)) { throw "unknown unit $n" } }
 	$names = if ($Unit) { $Unit } else { @($Units.Keys) }
 	[IO.Directory]::CreateDirectory($StateDir) | Out-Null
@@ -386,18 +412,18 @@ function Invoke-WindowsApplications {
 			foreach ($name in $names) {
 				$recs = Read-State $name
 				$on = Test-Enabled $name
-				foreach ($e in @(Get-WindowsApplicationsPathMap | Where-Object Unit -EQ $name)) {
+				foreach ($e in @(Get-PathEntries | Where-Object Unit -EQ $name)) {
 					[pscustomobject]@{ Unit = $name; Enabled = $on; Kind = $e.Kind; Dest = $e.Dest; State = (Get-DestState $e $recs[$e.Dest]); Source = $e.Source }
 				}
 			}
 		}
 		'apply' {
 			# Required units first; a required failure stops before any optional unit.
-			foreach ($name in @($names | Sort-Object { -not $Units[$_].ContainsKey('Required') })) {
+			foreach ($name in @($names | Sort-Object { -not (Test-Required $_) })) {
 				$r = if (Test-Enabled $name) { Invoke-UnitApply $name } else { Get-OwnedReport $name }
 				$r
 				if (Test-Incomplete $r) {
-					if ($Units[$name].ContainsKey('Required')) { throw "required unit $name failed" }
+					if (Test-Required $name) { throw "required unit $name failed" }
 					$failed += $name
 				}
 			}

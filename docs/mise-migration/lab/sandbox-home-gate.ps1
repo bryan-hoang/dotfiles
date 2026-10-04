@@ -157,9 +157,9 @@ try {
 	Check 'drift_exit' (Gate 'drift' @()) 1
 	Check 'drift_validate_exit' (Value 'drift' 'e161_validate_exit') 1
 	Check 'drift_sentinel' (Value 'drift' 'e161_sentinel') 'present'
+	Check 'drift_dest_moved' (Test-Path -LiteralPath $profileDest) 'False'
 	Check 'sentinel_rerun_exit' (Gate 'sentinel_rerun' @()) 1
 	Check 'sentinel_rerun_before' (Value 'sentinel_rerun' 'e161_sentinel_before') 'present'
-	[IO.File]::Delete($profileDest)
 	[IO.File]::Delete((Live '~/.local/state/mise/windows-applications/blocked'))
 	Check 'drift_resolved_apply_exit' (Mod 'drift_resolved_apply' 'Invoke-WindowsApplications apply -Unit base') 0
 	Check 'drift_resolved_exit' (Gate 'drift_resolved' @()) 0

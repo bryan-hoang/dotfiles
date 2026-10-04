@@ -169,7 +169,9 @@ try {
 	Mod 'f_on_status' 'Invoke-WindowsApplications status' | Out-Null
 	Check 'f_on_status_ok_rows' ([regex]::Matches((Log 'f_on_status'), 'State=ok').Count) 8
 
-	# Criterion 3: a replaced managed link makes validate quarantine, block, stop the watcher, exit nonzero.
+	# Criterion 3: a replaced managed link makes validate move it into
+	# quarantine (leaving the destination empty), block, stop the watcher, and
+	# exit nonzero; apply relinks once the sentinel is resolved.
 	[IO.File]::Delete($profileDest)
 	[IO.File]::WriteAllText($profileDest, "# replaced by the lab`n", $lf)
 	$drift = Hash $profileDest
@@ -179,7 +181,7 @@ try {
 	Check 'c3_validate_exit' (Mod 'c3_validate' 'Invoke-WindowsApplications validate') 1
 	Check 'c3_sentinel' (Test-Path -LiteralPath (Join-Path $state 'blocked')) 'True'
 	Check 'c3_quarantined_copy' (Quarantined 'Microsoft.PowerShell_profile.ps1' $drift) 1
-	Check 'c3_native_path_kept' ((LinkOf $profileDest) + ':' + ((Hash $profileDest) -eq $drift)) 'plain:True'
+	Check 'c3_native_path_moved' (LinkOf $profileDest) 'absent'
 	Start-Sleep -Seconds 2
 	Check 'c3_watcher_stopped' $w.HasExited 'True'
 	Say 'c3_validate_watcher_message' ([regex]::Match((Log 'c3_validate'), 'watcher: [^\r\n]*').Value)
@@ -187,10 +189,16 @@ try {
 		Check "c3_blocked_${v}_exit" (Mod "c3_blocked_$v" "Invoke-WindowsApplications $v") 1
 		Check "c3_blocked_${v}_refused" ((Log "c3_blocked_$v") -match 'blocked by drift sentinel') 'True'
 	}
+	Check 'c3_blocked_pathmap_exit' (Mod 'c3_blocked_pathmap' 'Get-WindowsApplicationsPathMap') 1
+	Check 'c3_blocked_pathmap_refused' ((Log 'c3_blocked_pathmap') -match 'blocked by drift sentinel') 'True'
+	$sentinelText = [IO.File]::ReadAllText((Join-Path $state 'blocked'))
+	Check 'c3_sentinel_says_moved' ($sentinelText -match 'moved into quarantine') 'True'
+	Check 'c3_sentinel_says_reenable' ($sentinelText -match 're-enable each watcher task') 'True'
 	[IO.File]::Copy((Join-Path $state 'blocked'), (Join-Path $out 'sentinel.txt'))
-	[IO.File]::Delete($profileDest)
+	Check 'c3_still_absent_while_blocked' (LinkOf $profileDest) 'absent'
 	[IO.File]::Delete((Join-Path $state 'blocked'))
 	Check 'c3_resolved_apply_exit' (Mod 'c3_resolved_apply' 'Invoke-WindowsApplications apply -Unit base') 0
+	Check 'c3_resolved_relinked' (LinkOf $profileDest) "SymbolicLink->$profileSrc"
 	Check 'c3_resolved_validate_exit' (Mod 'c3_resolved_validate' 'Invoke-WindowsApplications validate') 0
 
 	# Criterion 4: unapply removes owned unchanged resources and holds a changed one.
@@ -211,6 +219,30 @@ try {
 	Check 'c4_app_still_installed' (Test-Path -LiteralPath (Join-Path $lab 'stub\topgrade.exe')) 'True'
 	Check 'c4_repos_not_rewound' ((@($repos | ForEach-Object { & $git -C (Live "~/src/github.com/$_") rev-parse HEAD }) -join ',') -eq $heads) 'True'
 	Check 'c4_history_not_rewound' ((& $git -C $H rev-parse main) -eq $histHead) 'True'
+
+	# A link that already pointed at its source before apply is monitored, but
+	# the module did not create it, so unapply leaves it in place.
+	$hush = Live '~/.hushlogin'
+	$hushSrc = Live '~/.config/login/.hushlogin'
+	New-Item -ItemType SymbolicLink -Path $hush -Target $hushSrc | Out-Null
+	Check 'c4_preexisting_apply_exit' (Mod 'c4_preexisting_apply' 'Invoke-WindowsApplications apply -Unit base') 0
+	Check 'c4_preexisting_apply_none' ([regex]::Matches((Log 'c4_preexisting_apply'), '\.hushlogin \| State=ok \| Action=none').Count) 1
+	Check 'c4_preexisting_unapply_exit' (Mod 'c4_preexisting_unapply' 'Invoke-WindowsApplications unapply -Unit base') 0
+	Check 'c4_preexisting_released' ([regex]::Matches((Log 'c4_preexisting_unapply'), '\.hushlogin \| State=ok \| Action=released').Count) 1
+	Check 'c4_preexisting_left_in_place' (LinkOf $hush) "SymbolicLink->$hushSrc"
+	Check 'c4_created_link_removed' (LinkOf $profileDest) 'absent'
+	[IO.File]::Delete($hush)
+
+	# Unapply compares each destination with its record only, so it still
+	# removes an owned copy after its source is deleted.
+	[IO.File]::Delete($topDest)
+	Check 'c4_forget_exit' (Mod 'c4_forget' 'Invoke-WindowsApplications unapply -Unit topgrade') 0
+	Check 'c4_reapply_copy_exit' (Mod 'c4_reapply_copy' 'Invoke-WindowsApplications apply -Unit topgrade') 0
+	Check 'c4_reapply_copy' (LinkOf $topDest) 'plain'
+	Move-Item -LiteralPath $topSrc -Destination "$topSrc.aside"
+	Check 'c4_unapply_without_source_exit' (Mod 'c4_unapply_without_source' 'Invoke-WindowsApplications unapply -Unit topgrade') 0
+	Check 'c4_removed_without_source' (LinkOf $topDest) 'absent'
+	Move-Item -LiteralPath "$topSrc.aside" -Destination $topSrc
 
 	# Criterion 5: no watcher declared; no local input or module state reaches history.
 	Check 'c5_module_declares_service' ([IO.File]::ReadAllText($mod) -match '\[bootstrap\.services') 'False'
