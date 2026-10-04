@@ -6,7 +6,19 @@
 param([Parameter(Mandatory)][string]$IntakeRoot, [Parameter(Mandatory)][string]$Exchange, [int]$TimeoutMinutes = 20, [string]$Script = 'sandbox-smoke.ps1', [string[]]$Bin = @())
 $ErrorActionPreference = 'Stop'
 $intake = [IO.Path]::GetFullPath($IntakeRoot)
-if (Get-Process -Name 'WindowsSandbox*' -ErrorAction SilentlyContinue) { throw 'A Windows Sandbox is already running.' }
+# Killing the WindowsSandbox* client processes does not stop the VM: its guest
+# keeps running and writing lab-out, and a sandbox launched meanwhile never runs
+# its LogonCommand. So liveness and stopping go through `wsb` (the Windows
+# Sandbox CLI) when it exists.
+$wsbCli = Get-Command wsb -CommandType Application -ErrorAction SilentlyContinue
+function SandboxIds {
+	if (-not $wsbCli) { return @() }
+	@((& $wsbCli list --raw | ConvertFrom-Json).WindowsSandboxEnvironments | ForEach-Object { if ($_.PSObject.Properties['Id']) { $_.Id } else { "$_" } })
+}
+# WindowsSandboxServer is the CLI's broker; it lingers idle after `wsb list`.
+function Clients { Get-Process -Name 'WindowsSandbox*' -ErrorAction SilentlyContinue | Where-Object Name -NE 'WindowsSandboxServer' }
+function SandboxAlive { [bool](Clients) -or @(SandboxIds).Count -gt 0 }
+if (SandboxAlive) { throw 'A Windows Sandbox is already running.' }
 $v = (Get-Content -LiteralPath (Join-Path $PSScriptRoot 'mise-version.txt')).Trim()
 $media = Join-Path $intake "windows-media-$v"
 if (-not (Test-Path -LiteralPath (Join-Path $media 'mise.exe'))) { throw "pinned mise $v is not staged" }
@@ -54,9 +66,14 @@ try {
 	Start-Process -FilePath "$env:WINDIR\System32\WindowsSandbox.exe" -ArgumentList "`"$wsb`""
 	$deadline = (Get-Date).AddMinutes($TimeoutMinutes)
 	Start-Sleep -Seconds 20
-	while ((Get-Process -Name 'WindowsSandbox*' -ErrorAction SilentlyContinue) -and (Get-Date) -lt $deadline) { Start-Sleep -Seconds 10 }
-	if (Get-Process -Name 'WindowsSandbox*' -ErrorAction SilentlyContinue) {
-		Get-Process -Name 'WindowsSandbox*' | Stop-Process -Force
+	while ((SandboxAlive) -and (Get-Date) -lt $deadline) { Start-Sleep -Seconds 10 }
+	if (SandboxAlive) {
+		foreach ($id in SandboxIds) { & $wsbCli stop --id $id | Out-Null }
+		Clients | Stop-Process -Force
+		# Wait for the VM to go away so lab-out is final and the next run can start.
+		$stopBy = (Get-Date).AddMinutes(5)
+		while ((SandboxAlive) -and (Get-Date) -lt $stopBy) { Start-Sleep -Seconds 5 }
+		if (SandboxAlive) { throw "sandbox timed out and could not be stopped: $name" }
 		"sandbox timed out and was stopped: $name"
 	}
 	else { "sandbox exited: $name" }

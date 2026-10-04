@@ -8,7 +8,8 @@
 # input, a local-input path in history, drift with its sentinel, a conflict),
 # and the work identity. No gate output may contain a local-input or identity
 # value. Writes key=value results and logs to C:\lab-out; pass=yes only when
-# every check holds.
+# every check holds. A run takes about 50 minutes (each passing gate about 6):
+# give the runner -TimeoutMinutes 90.
 $ErrorActionPreference = 'Stop'
 $in = 'C:\lab-in'
 $out = 'C:\lab-out'
