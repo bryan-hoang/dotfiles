@@ -4,7 +4,8 @@
 # ~/lab-in/pwsh.tar.gz. Adopts the exchange copy in a fresh HOME, writes lab
 # local inputs, then runs the gate: clean (pass, exact pre-gate hash), each
 # injected fault (a missing core local input, a local-input path in history,
-# no systemd user session, a conflict), and the work identity. The drift
+# an unknown field in a sanitized source, no systemd user session, a
+# conflict), and the work identity. The drift
 # sentinel is Windows-only (E161). No gate output may contain a local-input or
 # identity value. Results land in ~/lab-out/linux-home-gate.txt; pass=yes only
 # when every check holds.
@@ -97,11 +98,11 @@ printf '# lab-marker-376-local\n[settings.history]\nsync = "manual"\n' >"$local_
 public_git=$(printf '# lab-marker-376-local\n[include]\n\tpath = %s\n' "$personal")
 printf '%s\n' "$public_git" >"$machine"
 {
-	printf '%s\n' lab-marker-376-local 'Lab Work 376' lab-work-376@example.invalid
+	printf '%s\n' lab-marker-376-local 'Lab Work 376' lab-work-376@example.invalid lab-proxy-376.invalid
 	git config --file "$personal" --get user.name
 	git config --file "$personal" --get user.email
 } | sed '/^$/d' >"$lab/secrets.txt"
-check secrets_listed "$(wc -l <"$lab/secrets.txt")" 5
+check secrets_listed "$(wc -l <"$lab/secrets.txt")" 6
 
 # gate <name> [args...]: runs the gate, records its result, and checks its
 # output for leaked values and lines that are not key=value. Returns its exit.
@@ -131,7 +132,7 @@ check clean_final_hash_is_pre_gate "$([[ "$(blob "$test_file")" == "$pre" ]] && 
 check clean_head_blob_is_pre_gate "$([[ "$(git -C "$H" rev-parse "main:$test_stream")" == "$pre" ]] && echo yes || echo no)" yes
 check clean_checkpoints_added "$(($(git -C "$H" rev-list --count main) > count))" 1
 check clean_test_stream_root "$(val clean test_stream_root)" home@linux
-for k in watcher sync_mode conflicts head_contains_conversion systemd_user test_checkpoint_created test_checkpoint_in_stream rollback_dry_run_unchanged rollback_restores_pre_gate_hash undo_restores_edit_hash status_history_problems doctor_history_problems identity_selects_public; do
+for k in watcher sync_mode conflicts head_contains_conversion systemd_user test_checkpoint_created test_checkpoint_in_stream rollback_dry_run_unchanged rollback_restores_pre_gate_hash undo_restores_edit_hash status_history_problems doctor_history_problems identity_selects_public sanitized_problems; do
 	say "clean_$k" "$(val clean "$k")"
 done
 
@@ -160,6 +161,18 @@ check history_path_reported "$(val history_path local_input_machine_gitconfig_hi
 git -C "$H" update-ref -d refs/heads/lab-fault
 gate history_path_cleared
 check history_path_cleared_exit "$?" 0
+
+# Fault: an unknown field in a sanitized source (the E178 check). The gate
+# names the row, path, and class only, never the field name or value.
+pip=$HOME/.config/mise/dotfiles/.config/pip/pip.conf
+cp "$pip" "$lab/pip.conf.reviewed"
+printf 'proxy = http://lab-proxy-376.invalid:3128\n' >>"$pip"
+gate sanitized_unknown
+check sanitized_unknown_exit "$?" 1
+check sanitized_unknown_reported "$(val sanitized_unknown sanitized_problem)" 'E121 dotfiles/.config/pip/pip.conf: unknown-field'
+check sanitized_unknown_name_printed "$(grep -c proxy "$out/sanitized_unknown.log")" 0
+check sanitized_unknown_test_edit "$(val sanitized_unknown test_edit)" skipped
+cp "$lab/pip.conf.reviewed" "$pip"
 
 # Fault: no systemd user session (no runtime directory or bus address). The
 # gate fails, and -AllowNoSystemdUser reports it without failing.

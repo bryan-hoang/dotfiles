@@ -7,6 +7,8 @@
 #   2. the core local inputs (config.local.toml, machine.gitconfig, and on
 #      Windows config.windows.local.toml) exist and no history ref touches
 #      their paths;
+#   2b. the E178 check (~/.config/mise/sanitized.ps1) finds no unknown field,
+#      unreviewed pinned value, or broken include in a sanitized source;
 #   3. Windows: E161 `Invoke-WindowsApplications validate` exits 0 and no drift
 #      sentinel exists. Linux: a systemd user session answers
 #      (-AllowNoSystemdUser reports an unavailable one without failing);
@@ -79,6 +81,18 @@ foreach ($k in $inputs.Keys) {
 	$n = @((Native git @('-C', $hist, 'log', '--all', '--format=%H', '--', ":(glob)**/$leaf")).Out -split "`n" | Where-Object { $_ }).Count
 	Check "local_input_${k}_history_commits" ($n -eq 0) $n
 }
+
+# 2b. Sanitized sources: the E178 check prints row, path, and problem class
+# only, never a field name or value.
+$sanitizer = Live '~/.config/mise/sanitized.ps1'
+if (Test-Path -LiteralPath $sanitizer -PathType Leaf) {
+	$c = Native (Get-Process -Id $PID).Path @('-NoProfile', '-NonInteractive', '-File', $sanitizer, 'check')
+	$problems = @($c.Out -split "`n" | Where-Object { $_ -match '^E\d{3} \S+: [a-z-]+$' })
+	foreach ($p in $problems) { Say 'sanitized_problem' $p }
+	Check 'sanitized_check_exit' ($c.Code -eq 0) $c.Code
+	Check 'sanitized_problems' ($c.Code -eq 0 -and $problems.Count -eq 0) $problems.Count
+}
+else { Check 'sanitized_check' $false 'missing' }
 
 # 3. Platform control.
 if ($IsWindows) {

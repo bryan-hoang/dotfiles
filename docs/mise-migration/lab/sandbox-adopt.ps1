@@ -32,7 +32,8 @@ try {
 	Copy-Item -Path (Join-Path $in 'bin\*') -Destination (Join-Path $lab 'bin')
 	Copy-Item -LiteralPath (Join-Path $in 'exchange') -Destination (Join-Path $lab 'exchange') -Recurse
 	$mise = Join-Path $lab 'bin\mise.exe'
-	$env:PATH = "$lab\bin;C:\Program Files\Git\cmd;$env:PATH"
+	# PowerShell 7 from lab-in runs the E178 sanitized check in the status check.
+	$env:PATH = "$lab\bin;$in\bin\pwsh;C:\Program Files\Git\cmd;$env:PATH"
 	$env:MISE_HISTORY_SYNC = 'manual'
 	$env:MISE_AUTO_INSTALL = '0'
 	$env:GIT_CONFIG_NOSYSTEM = '1'
@@ -108,10 +109,11 @@ try {
 	# Topgrade status check from the restored E092, run the way Topgrade runs a
 	# custom command on Windows without pwsh (powershell -Command), whose pipes
 	# add a byte order mark. It must pass here, fail with a declared but stopped
-	# watcher, and print only true or false. Needs jaq.exe in C:\lab-in\bin.
+	# watcher or an unknown field in a sanitized source (the E178 check), and
+	# print only true or false. Needs jaq.exe and PowerShell 7 in C:\lab-in\bin.
 	$line = @([IO.File]::ReadAllLines((Live '~/.config/topgrade/topgrade.toml')) | Where-Object { $_ -like '"mise dot status" = "*' })[0]
 	Say 'check_command_found' $(if ($line) { 'yes' } else { 'no' })
-	$cmd = $line.Substring($line.IndexOf('= "') + 3).TrimEnd('"')
+	$cmd = $line.Substring($line.IndexOf('= "') + 3).TrimEnd('"').Replace('\"', '"')
 	function StatusCheck([string]$name) {
 		Run "${name}_status" $mise @('dot', 'status', '--json') | Out-Null
 		$ErrorActionPreference = 'Continue'
@@ -125,6 +127,12 @@ try {
 	StatusCheck 'check_watcher_stopped'
 	Remove-Item -LiteralPath $watcher
 	StatusCheck 'check_watcher_removed'
+	$pip = Live '~/.config/mise/dotfiles/.config/pip/pip.conf'
+	$reviewed = [IO.File]::ReadAllBytes($pip)
+	[IO.File]::AppendAllText($pip, "proxy = http://lab.invalid:3128`n")
+	StatusCheck 'check_sanitized_unknown'
+	[IO.File]::WriteAllBytes($pip, $reviewed)
+	StatusCheck 'check_sanitized_restored'
 	Say 'done' 'yes'
 }
 catch {

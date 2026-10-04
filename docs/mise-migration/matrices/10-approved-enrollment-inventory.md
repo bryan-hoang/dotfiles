@@ -67,6 +67,25 @@ Linux. `MPV` on Windows leaves `E161` and is deferred to
 `Zebar` have no `E161` unit: the PowerShell profile chain (`E152` loads `E148`)
 sets `GLAZEWM_CONFIG_PATH` and `ZEBAR_CONFIG_DIR`. The rows are unchanged.
 
+Amended 2026-10-04 by the human's code review of
+[the conversion spec](https://github.com/bryan-hoang/dotfiles/issues/368):
+
+- New row `E178` enrolls `sanitized.ps1`, the allowlist check for the
+  `SANITIZED` rows `E112` to `E128`, as a PowerShell 7 control source on every
+  machine. The home gate and the `E092` Topgrade status check fail when a
+  sanitized source has an unknown field, a pinned field with a value nobody
+  reviewed, or a broken include. Detection happens on their next run, not at
+  save time; plain `mise dot save` does not run the check, and
+  `sanitized.ps1 save` does. Output names the row, the source path, and the
+  problem class only, never a field name or value.
+- `E161` `validate` moves a drifted native path into quarantine instead of
+  copying it, so its destination is empty and `apply` relinks it once the path
+  is reconciled and the sentinel deleted. This supersedes the copy-only
+  quarantine in the Windows matrix.
+- `E092` includes the excluded `~/.config/topgrade/topgrade.local.toml`. The
+  input is optional: Topgrade logs that it cannot read a missing include and
+  continues.
+
 ## Approved Counts
 
 | Measure                                                                                          |                                   Approved count |
@@ -76,16 +95,16 @@ sets `GLAZEWM_CONFIG_PATH` and `ZEBAR_CONFIG_DIR`. The rows are unchanged.
 | Core / Windows / Unix coverage owners                                                            |                                   261 / 56 / 100 |
 | Enrolled-source / managed / repository-only / removed / local / deferred-X11 legacy dispositions |                      227 / 25 / 92 / 32 / 9 / 32 |
 | Repository-only entries at `be51989`, including planning context                                 |                                              127 |
-| Enrollment roots / captured source files                                                         |                                        175 / 234 |
-| Exact-file / reviewed-directory roots                                                            |                                          173 / 2 |
-| Shared / Windows / Linux roots                                                                   |                                    138 / 24 / 13 |
-| Autosave on / off roots                                                                          |                                         147 / 28 |
+| Enrollment roots / captured source files                                                         |                                        176 / 235 |
+| Exact-file / reviewed-directory roots                                                            |                                          174 / 2 |
+| Shared / Windows / Linux roots                                                                   |                                    139 / 24 / 13 |
+| Autosave on / off roots                                                                          |                                         147 / 29 |
 | Encryption-enabled roots / recipients                                                            |                                            0 / 0 |
 | Approved full bootstrap repositories                                                             |                                               10 |
 
 The two directory roots capture 61 reviewed files: 57 below `~/.config/nvim/`
 after excluding the managed `Stylua` destination, and four below
-`~/.local/share/texmf/`. The other 173 roots are exact files, producing 234
+`~/.local/share/texmf/`. The other 174 roots are exact files, producing 235
 captured files in total.
 
 ## Row Contract
@@ -328,6 +347,7 @@ row-specific decision; `22` names an audit gate decision.
 | `E175` | `~/.config/systemd/user/ssh-agent.service`                                                                     | `home/.config/systemd/user/ssh-agent.service`                                                          | `home@linux/.config/systemd/user/ssh-agent.service`                                                            | exact     | L       | on       | 0644                   | same; owned systemd user enabling                                                                     | PUBLIC          | WSL or native Linux systemd; system `OpenSSH` client                                             | 09          |
 | `E176` | `~/.config/mise/dotfiles/system/etc/wsl.conf`                                                                  | `config/dotfiles/system/etc/wsl.conf`                                                                  | `config@linux/dotfiles/system/etc/wsl.conf`                                                                    | exact     | L       | on       | 0644                   | owned privileged `/etc/wsl.conf` root:root 0644                                                       | PUBLIC          | Local WSL capability; elevation preflight; manual WSL restart                                    | 08+09       |
 | `E177` | `~/.typos.toml`                                                                                                | `home/.typos.toml`                                                                                     | `home/.typos.toml`                                                                                             | exact     | `S`     | on       | 0644                   | same                                                                                                  | PUBLIC          | `typos`; `hk` typos step and projects under HOME without their own configuration                 | 22          |
+| `E178` | `~/.config/mise/sanitized.ps1`                                                                                 | `config/sanitized.ps1`                                                                                 | `config/sanitized.ps1`                                                                                         | exact     | `S`     | off      | 0644                   | bootstrap control only                                                                                | CONTROL         | PowerShell 7; `SANITIZED` allowlist check; home gate and `E092` status check                     | 10          |
 
 <!-- enrollment-roots:end -->
 

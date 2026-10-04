@@ -5,7 +5,8 @@
 # E152 from audited-tip blobs, E161 from C:\lab-in\sources) with a named save,
 # writes lab local inputs, applies the E161 base unit, then runs the gate:
 # clean (pass, exact pre-gate hash), each injected fault (a missing core local
-# input, a local-input path in history, drift with its sentinel, a conflict),
+# input, a local-input path in history, an unknown field in a sanitized source,
+# drift with its sentinel, a conflict),
 # and the work identity. No gate output may contain a local-input or identity
 # value. Writes key=value results and logs to C:\lab-out; pass=yes only when
 # every check holds. A run takes about 50 minutes (each passing gate about 6):
@@ -34,7 +35,7 @@ function Live([string]$tilde) { Join-Path $env:USERPROFILE ($tilde.Substring(2) 
 function Blob([string]$p) { (& $git hash-object --no-filters -- $p) }
 $lf = New-Object Text.UTF8Encoding $false
 # Values the gate must never print.
-$secrets = @('lab-marker-376-local', 'lab-work-376@example.invalid', 'Lab Work 376', 'bryan@bryanhoang.dev', 'Bryan Hoang')
+$secrets = @('lab-marker-376-local', 'lab-work-376@example.invalid', 'Lab Work 376', 'lab-proxy-376.invalid', 'bryan@bryanhoang.dev', 'Bryan Hoang')
 # Runs the gate; returns its exit code and records gate, failed_checks, and leaks.
 function Gate([string]$name, [string[]]$extra) {
 	$code = Run $name $pwsh (@('-NoProfile', '-NonInteractive', '-File', (Join-Path $lab 'home-gate.ps1'), '-ConversionCommit', $seed) + $extra)
@@ -123,7 +124,7 @@ try {
 	Check 'clean_final_hash_is_pre_gate' ((Blob $test) -eq $pre) 'True'
 	Check 'clean_head_blob_is_pre_gate' ((& $git -C $H rev-parse 'main:home@windows/.config/mintty/config') -eq $pre) 'True'
 	Check 'clean_checkpoints_added' ([int](& $git -C $H rev-list --count main) -gt [int]$ids) 'True'
-	foreach ($k in 'watcher', 'sync_mode', 'conflicts', 'head_contains_conversion', 'e161_validate_exit', 'e161_sentinel', 'test_checkpoint_created', 'test_checkpoint_in_stream', 'rollback_dry_run_unchanged', 'rollback_restores_pre_gate_hash', 'undo_restores_edit_hash', 'status_history_problems', 'doctor_history_problems', 'identity_selects_public') {
+	foreach ($k in 'watcher', 'sync_mode', 'conflicts', 'head_contains_conversion', 'e161_validate_exit', 'e161_sentinel', 'test_checkpoint_created', 'test_checkpoint_in_stream', 'rollback_dry_run_unchanged', 'rollback_restores_pre_gate_hash', 'undo_restores_edit_hash', 'status_history_problems', 'doctor_history_problems', 'identity_selects_public', 'sanitized_problems') {
 		Say "clean_$k" (Value 'clean' $k)
 	}
 	Check 'clean_test_stream_root' (Value 'clean' 'test_stream_root') 'home@windows'
@@ -150,6 +151,17 @@ try {
 	Check 'history_path_reported' (Value 'history_path' 'local_input_machine_gitconfig_history_commits') 1
 	& $git -C $H update-ref -d refs/heads/lab-fault
 	Check 'history_path_cleared_exit' (Gate 'history_path_cleared' @()) 0
+
+	# Fault: an unknown field in a sanitized source (the E178 check). The gate
+	# names the row, path, and class only, never the field name or value.
+	$pip = Live '~/.config/mise/dotfiles/.config/pip/pip.conf'
+	$reviewed = [IO.File]::ReadAllBytes($pip)
+	[IO.File]::AppendAllText($pip, "proxy = http://lab-proxy-376.invalid:3128`n")
+	Check 'sanitized_unknown_exit' (Gate 'sanitized_unknown' @()) 1
+	Check 'sanitized_unknown_reported' (Value 'sanitized_unknown' 'sanitized_problem') 'E121 dotfiles/.config/pip/pip.conf: unknown-field'
+	Check 'sanitized_unknown_name_printed' ([regex]::Matches((Log 'sanitized_unknown'), 'proxy').Count) 0
+	Check 'sanitized_unknown_test_edit' (Value 'sanitized_unknown' 'test_edit') 'skipped'
+	[IO.File]::WriteAllBytes($pip, $reviewed)
 
 	# Fault: drift (a replaced managed link) writes the sentinel through validate.
 	[IO.File]::Delete($profileDest)

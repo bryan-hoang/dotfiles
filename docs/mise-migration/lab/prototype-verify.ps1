@@ -103,6 +103,9 @@ Say stream_from_sources $reviewed.Count
 $sanitized = @(Block 'enrollment-roots' | Where-Object { $_ -match '^\|\s*`?E\d{3}`?\s' } | ForEach-Object { $c = @($_.Trim().Trim('|') -split '\|' | ForEach-Object { $_.Trim().Trim('`') }); if ($c[9] -eq 'SANITIZED') { $c[0] } })
 Say sanitized_rows $sanitized.Count
 Check sanitized_rows_without_reviewed_source @($sanitized | Where-Object { $reviewed -notcontains $_ }).Count 0
+# The E178 check's allowlist covers exactly the SANITIZED rows.
+$allowIds = @(Get-Content -LiteralPath (Join-Path $srcRoot '.config/mise/sanitized.ps1') | Where-Object { $_ -match '^E\d{3}\t' } | ForEach-Object { ($_ -split "`t")[0] })
+Check sanitized_allowlist_rows_mismatch @(Compare-Object @($sanitized) $allowIds).Count 0
 
 # Authored sources and E011's Linux managed destinations (#371): every file in
 # lab/sources maps to a row (Windows sources such as #374's E161 module stay

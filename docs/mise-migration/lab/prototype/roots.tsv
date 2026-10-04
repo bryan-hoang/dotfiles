@@ -173,3 +173,4 @@ E174	L	~/.config/systemd/user/spotifyd.service
 E175	L	~/.config/systemd/user/ssh-agent.service
 E176	L	~/.config/mise/dotfiles/system/etc/wsl.conf
 E177	S	~/.typos.toml
+E178	S	~/.config/mise/sanitized.ps1

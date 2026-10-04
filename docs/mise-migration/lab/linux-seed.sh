@@ -36,6 +36,11 @@ export GIT_CONFIG_GLOBAL=$lab/gitconfig
 export GIT_TERMINAL_PROMPT=0
 chmod +x "$in/bin/mise"
 export PATH=$in/bin:$PATH
+# PowerShell 7 (staged as lab-in/pwsh.tar.gz) runs the E178 sanitized check.
+export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1 POWERSHELL_TELEMETRY_OPTOUT=1 POWERSHELL_UPDATECHECK=Off
+mkdir -p "$lab/pwsh"
+tar -xzf "$in/pwsh.tar.gz" -C "$lab/pwsh" && chmod +x "$lab/pwsh/pwsh"
+export PATH=$lab/pwsh:$PATH
 
 ex=$lab/exchange
 
@@ -102,8 +107,8 @@ say seeded_from_sources "$authored"
 say seeded_stream_rewrites "$rewritten"
 say seeded_placeholders "$((n - real - authored - rewritten))"
 
-# Unknown fields in a sanitized source block the baseline.
-if ! run sanitized_check python3 "$in/sanitized.py" check "$HOME/.config/mise"; then
+# A problem in a sanitized source (E178 check) blocks the baseline.
+if ! run sanitized_check pwsh -NoProfile -File "$HOME/.config/mise/sanitized.ps1" check; then
 	say 'done' blocked
 	exit 1
 fi

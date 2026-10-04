@@ -48,13 +48,15 @@ enable_pipupgrade = true
 pipupgrade_arguments = "-y -u --pip-path pip"
 
 [commands]
-# Fail on any setup history conflict or error, or a declared watcher that is
-# not running. Prints only true or false. Runs under pwsh or powershell on
-# Windows and $SHELL elsewhere, so the filter avoids double quotes. Windows
-# PowerShell 5.1 prefixes piped input with a byte order mark (U+FEFF), so the
-# input is read raw and the mark stripped before parsing. Unreadable status
-# prints false rather than the input.
-"mise dot status" = "mise dot status --json | jaq -e -R -s --arg r running --arg n not-declared 'try (ltrimstr([65279] | implode) | fromjson | .history | (.watcher == $r or .watcher == $n) and ((.sync // {}) | (.conflicts // []) == [] and .last_error == null and .validation_error == null and .application_failure == null)) catch false'"
+# Fail on any setup history conflict or error, a declared watcher that is not
+# running, or a sanitized source with an unknown field (the E178 check, which
+# passes the verdict through and names nothing). Prints only true or false.
+# Runs under pwsh or powershell on Windows and $SHELL elsewhere, so the filter
+# avoids double quotes and the script path is quoted for HOME paths with
+# spaces. Windows PowerShell 5.1 prefixes piped input with a byte order mark
+# (U+FEFF), so the input is read raw and the mark stripped before parsing.
+# Unreadable status prints false rather than the input.
+"mise dot status" = "mise dot status --json | jaq -e -R -s --arg r running --arg n not-declared 'try (ltrimstr([65279] | implode) | fromjson | .history | (.watcher == $r or .watcher == $n) and ((.sync // {}) | (.conflicts // []) == [] and .last_error == null and .validation_error == null and .application_failure == null)) catch false' | pwsh -NoProfile -NonInteractive -File \"$HOME/.config/mise/sanitized.ps1\" topgrade"
 
 [windows]
 # Manually select Windows updates

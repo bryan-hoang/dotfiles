@@ -236,6 +236,7 @@ exclude = ["~/.config/nvim/stylua.toml"]
   { os = "linux" },
 ] }
 "~/.typos.toml" = { mode = "track" }
+"~/.config/mise/sanitized.ps1" = { mode = "track", autosave = false }
 
 # Linux managed destinations (not enrollment roots).
 "~/.editorconfig" = { source = "~/.config/mise/dotfiles/.editorconfig", mode = "symlink", variants = [

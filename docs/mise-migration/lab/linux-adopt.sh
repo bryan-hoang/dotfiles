@@ -40,6 +40,11 @@ export GIT_CONFIG_GLOBAL=$lab/gitconfig
 export GIT_TERMINAL_PROMPT=0
 chmod +x "$in"/bin/*
 export PATH=$in/bin:$PATH
+# PowerShell 7 (staged as lab-in/pwsh.tar.gz) runs the E178 sanitized check.
+export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1 POWERSHELL_TELEMETRY_OPTOUT=1 POWERSHELL_UPDATECHECK=Off
+mkdir -p "$lab/pwsh"
+tar -xzf "$in/pwsh.tar.gz" -C "$lab/pwsh" && chmod +x "$lab/pwsh/pwsh"
+export PATH=$lab/pwsh:$PATH
 
 ex=$lab/exchange
 
@@ -231,12 +236,14 @@ say b_origin_tip_unchanged "$([[ "$(git -C "$ex/setup.git" rev-parse main)" == "
 
 # Topgrade status check from the restored E092, run the way Topgrade runs a
 # custom command ($SHELL -c): fresh passes, fresh with a declared but stopped
-# watcher fails, and b fails once fresh publishes a competing edit of the file
+# watcher fails, fresh with an unknown field in a sanitized source fails (the
+# E178 check), and b fails once fresh publishes a competing edit of the file
 # b saved. The output must be only true or false, so no local value can leak.
 # Needs jaq in ~/lab-in/bin. Publishing touches only the guest's exchange copy.
 line=$(grep -m1 '^"mise dot status" = "' "$base/fresh/.config/topgrade/topgrade.toml")
 cmd=${line#*= \"}
 cmd=${cmd%\"}
+cmd=${cmd//\\\"/\"}
 say check_command_found "$([[ -n $line ]] && echo yes || echo no)"
 say check_jaq "$(command -v jaq >/dev/null && echo yes || echo no)"
 check() {
@@ -255,6 +262,12 @@ printf '[bootstrap.services.mise-history]\nbuiltin = "history-watch"\n' >"$watch
 check check_watcher_stopped fresh
 rm -f "$watcher"
 check check_watcher_removed fresh
+pip=$base/fresh/.config/mise/dotfiles/.config/pip/pip.conf
+cp "$pip" "$lab/pip.conf.check"
+printf 'proxy = http://lab.invalid:3128\n' >>"$pip"
+check check_sanitized_unknown fresh
+cp "$lab/pip.conf.check" "$pip"
+check check_sanitized_restored fresh
 printf 'remote edit F\n' >"$HOME/$target"
 run fresh_save mise dot save "$HOME/$target"
 run fresh_publish mise dot sync

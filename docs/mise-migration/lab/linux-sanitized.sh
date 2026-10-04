@@ -1,5 +1,6 @@
 # shellcheck shell=bash disable=SC2154,SC2034 # shares variables with linux-adopt.sh
-# Sourced by linux-adopt.sh (uses say, run, hist, head_of, ex, in, lab, out).
+# Sourced by linux-adopt.sh (uses say, run, hist, head_of, ex, in, lab, out;
+# pwsh on PATH).
 # Proves the SANITIZED sources E112 to E128 in the fresh HOME:
 #   sanitized_inputs  before adoption: one synthetic application-local input
 #                     per source, each carrying a random marker value
@@ -9,7 +10,6 @@
 #                     source field or an unreviewed value in a pinned field
 #                     blocks the explicit save, and the marker
 #                     reaches no history object, setup object, or lab output
-s=$in/sanitized.py
 mark=LOCALVALUE$(od -An -N8 -tx1 /dev/urandom | tr -d ' \n')
 
 # One local-only field per source. Inputs append after the source; the JSONC
@@ -36,15 +36,16 @@ local_input() {
 	esac
 }
 
-# Generated destinations; some share a path with a legacy repository-only
-# file, so linux-adopt.sh skips them when it looks for restored legacy files.
+# Generated destinations, from the allowlist rows in the E178 check; some share
+# a path with a legacy repository-only file, so linux-adopt.sh skips them when
+# it looks for restored legacy files.
 rels=()
 declare -A generated
 while IFS=$'\t' read -r id path _; do
-	[[ $id == id ]] && continue
+	[[ $id =~ ^E[0-9]{3}$ ]] || continue
 	rels+=("${path#dotfiles/}")
 	generated[${path#dotfiles/}]=1
-done <"$in/sanitized-allowlist.tsv"
+done <"$in/sources/.config/mise/sanitized.ps1"
 
 sanitized_inputs() {
 	local r
@@ -109,8 +110,9 @@ EOF
 	cp "$pip" "$lab/pip.conf.reviewed"
 	printf 'proxy = http://%s.lab.invalid:3128\n' "$mark" >>"$pip"
 	before=$(head_of)
-	run sanitized_unknown_field_save python3 "$s" save "$root" "$pip"
-	say sanitized_unknown_field_reported "$(grep -c 'E121 dotfiles/.config/pip/pip.conf: unknown field global.proxy' "$out/sanitized_unknown_field_save.log")"
+	run sanitized_unknown_field_save pwsh -NoProfile -File "$root/sanitized.ps1" save "$pip"
+	say sanitized_unknown_field_reported "$(grep -c 'E121 dotfiles/.config/pip/pip.conf: unknown-field' "$out/sanitized_unknown_field_save.log")"
+	say sanitized_unknown_field_name_printed "$(grep -c 'proxy' "$out/sanitized_unknown_field_save.log")"
 	say sanitized_unknown_field_head_unchanged "$([[ "$(head_of)" == "$before" ]] && echo yes || echo no)"
 	cp "$lab/pip.conf.reviewed" "$pip"
 
@@ -120,11 +122,11 @@ EOF
 	sed -i "/^  - http:\/\/rubygems\.org\/\$/a\\$(printf '  - https://%s.lab.invalid/' "$mark")" "$gem"
 	say sanitized_unpinned_value_written "$(grep -c "$mark" "$gem")"
 	before=$(head_of)
-	run sanitized_unpinned_value_save python3 "$s" save "$root" "$gem"
-	say sanitized_unpinned_value_reported "$(grep -c 'E114 dotfiles/.config/gem/gemrc: unreviewed value for pinned field sources' "$out/sanitized_unpinned_value_save.log")"
+	run sanitized_unpinned_value_save pwsh -NoProfile -File "$root/sanitized.ps1" save "$gem"
+	say sanitized_unpinned_value_reported "$(grep -c 'E114 dotfiles/.config/gem/gemrc: unreviewed-pinned-value' "$out/sanitized_unpinned_value_save.log")"
 	say sanitized_unpinned_value_head_unchanged "$([[ "$(head_of)" == "$before" ]] && echo yes || echo no)"
 	cp "$lab/gemrc.reviewed" "$gem"
-	run sanitized_reviewed_save python3 "$s" save "$root" "$pip" "$gem"
+	run sanitized_reviewed_save pwsh -NoProfile -File "$root/sanitized.ps1" save "$pip" "$gem"
 
 	# No local-input value in history, the setup repository, or any lab output.
 	say sanitized_value_in_history_objects "$(git -C "$(hist)" cat-file --batch-all-objects --batch 2>/dev/null | grep -ac "$mark")"

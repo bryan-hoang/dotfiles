@@ -232,3 +232,4 @@ E174	L	~/.config/systemd/user/spotifyd.service	home@linux/.config/systemd/user/s
 E175	L	~/.config/systemd/user/ssh-agent.service	home@linux/.config/systemd/user/ssh-agent.service
 E176	L	~/.config/mise/dotfiles/system/etc/wsl.conf	config@linux/dotfiles/system/etc/wsl.conf
 E177	S	~/.typos.toml	home/.typos.toml
+E178	S	~/.config/mise/sanitized.ps1	config/sanitized.ps1
