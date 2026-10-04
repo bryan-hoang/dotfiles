@@ -1,3 +1,4 @@
+#Requires -Version 7.0
 # Read-only work-machine baseline (PowerShell 7, Windows). Reports paths,
 # types, states, and hashes only; never file contents, URLs, or local-input
 # values. Classifies every differing path as behind, local edit, or type change
@@ -44,7 +45,7 @@ function BlobId([byte[]]$bytes) {
 	[Convert]::ToHexString($h.GetHashAndReset()).ToLowerInvariant()
 }
 # type: absent, file, link, or dir; id: Git blob id of the bytes or link target.
-function Live([string]$path) {
+function Live([string]$path, [bool]$autocrlf) {
 	$fi = [IO.FileInfo]::new($path)
 	if ([int]$fi.Attributes -eq -1) { return @{ type = 'absent'; id = '-' } }
 	if ($fi.LinkTarget) { return @{ type = 'link'; id = BlobId ([Text.Encoding]::UTF8.GetBytes(($fi.LinkTarget -replace '\\', '/'))) } }
@@ -71,14 +72,14 @@ function Tree([string]$dir, [string]$rev) {
 }
 # Types the live entry may have for a HEAD entry. Without core.symlinks Git
 # checks a link out as a file holding its target.
-function Types($head) { $head.type; if ($head.type -eq 'link' -and -not $symlinks) { 'file' } }
-function MatchesHead($live, $head) { $head -and $live.type -in (Types $head) -and (Same $live $head) }
+function Types($head, [bool]$symlinks) { $head.type; if ($head.type -eq 'link' -and -not $symlinks) { 'file' } }
+function MatchesHead($live, $head, [bool]$symlinks) { $head -and $live.type -in (Types $head $symlinks) -and (Same $live $head) }
 # A path HEAD does not track cannot be classified; a deleted path or one with
 # other bytes (or another link target) is a local edit.
-function Classify($live, $head) {
+function Classify($live, $head, [bool]$symlinks) {
 	if (-not $head) { if ($live.type -eq 'absent') { '-' } else { 'unclassified' } }
-	elseif (MatchesHead $live $head) { 'behind' }
-	elseif ($live.type -eq 'absent' -or $live.type -in (Types $head)) { 'local edit' }
+	elseif (MatchesHead $live $head $symlinks) { 'behind' }
+	elseif ($live.type -eq 'absent' -or $live.type -in (Types $head $symlinks)) { 'local edit' }
 	else { 'type change' }
 }
 
@@ -121,9 +122,9 @@ try {
 	foreach ($p in $head.Keys | Sort-Object) {
 		$h = $head[$p]
 		if ($h.type -eq 'gitlink') { continue }
-		$live = Live (Join-Path $Checkout $p)
-		if (MatchesHead $live $h) { continue }
-		$class = Classify $live $h
+		$live = Live (Join-Path $Checkout $p) $autocrlf
+		if (MatchesHead $live $h $symlinks) { continue }
+		$class = Classify $live $h $symlinks
 		Count $p $class
 		"tracked`t$p`t$($h.type)`t$($live.type)`t$($live.id)`t$class"
 	}
@@ -143,8 +144,8 @@ try {
 		$rel = [IO.Path]::GetRelativePath($Checkout, $abs) -replace '\\', '/'
 		$h = if (-not $rel.StartsWith('..')) { $head[$rel] }
 		$t = $tip[$stream]
-		$live = Live $abs
-		$class = Classify $live $h
+		$live = Live $abs $autocrlf
+		$class = Classify $live $h $symlinks
 		$state = if ($live.type -eq 'absent') { 'absent' }
 		# A Windows root with no stream in the tip is saved after adoption, so
 		# matching HEAD is not behind; edits against HEAD keep their class.
