@@ -1,7 +1,9 @@
 # Audit gate step 3: every path added, changed, or deleted in From..To must
 # match exactly one approved disposition in the inventory's
 # audit-gate-dispositions block. A row-ID disposition must name an existing
-# root whose source is that path. Reads path names only, never contents.
+# root whose source is that path, or whose destination names the path as its
+# setup-root read-only alias (E001 and the root .editorconfig). Reads path
+# names only, never contents.
 # Exits 1 and lists every path without a disposition.
 param([string]$From = '46df470', [string]$To = 'be51989')
 $ErrorActionPreference = 'Stop'
@@ -16,10 +18,11 @@ function Block([string]$tag) {
 	$inv[($s + 1)..($e - 1)] | Where-Object { $_ -and $_ -notmatch '^```' }
 }
 
-$sources = @{}
+$sources = @{}; $aliases = @{}
 foreach ($line in Block 'enrollment-roots' | Where-Object { $_ -match '^\|\s*`?E\d{3}`?\s' }) {
 	$f = @($line.Trim().Trim('|') -split '\|' | ForEach-Object { $_.Trim().Trim('`') })
 	$sources[$f[0]] = $f[1]
+	$aliases[$f[0]] = @([regex]::Matches($f[8], 'setup-root `([^`]+)` read-only alias') | ForEach-Object { $_.Groups[1].Value })
 }
 # Rule: <status letters> <path or glob> <repository-only | Ennn>
 $rules = foreach ($l in Block 'audit-gate-dispositions') {
@@ -33,7 +36,7 @@ $bad = @(); $counts = @{}
 foreach ($d in $diff) {
 	$st, $path = $d -split "`t", 2
 	$hit = @($rules | Where-Object { $_.Status.Contains($st) -and ($path -eq $_.Glob -or ($_.Glob.EndsWith('/**') -and $path.StartsWith($_.Glob.Substring(0, $_.Glob.Length - 2)))) })
-	$ok = $hit.Count -eq 1 -and ($hit[0].Disp -eq 'repository-only' -or $sources[$hit[0].Disp] -eq "~/$path")
+	$ok = $hit.Count -eq 1 -and ($hit[0].Disp -eq 'repository-only' -or $sources[$hit[0].Disp] -eq "~/$path" -or $aliases[$hit[0].Disp] -contains $path)
 	if ($ok) { $counts[$hit[0].Disp] += 1 } else { $bad += "$st`t$path" }
 }
 "paths=$(@($diff).Count) " + (($counts.GetEnumerator() | Sort-Object Name | ForEach-Object { "$($_.Name)=$($_.Value)" }) -join ' ')

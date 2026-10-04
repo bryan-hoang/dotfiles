@@ -36,14 +36,27 @@ their dispositions are unchanged; the 35 added paths are outside the legacy
 inventory. `lab/audit-gate-check.ps1` fails when a changed path lacks a
 disposition.
 
+Amended 2026-10-04 by
+[Build the final conversion candidate](https://github.com/bryan-hoang/dotfiles/issues/378):
+the audit gate covers every commit after `be51989`. The human approved four more
+dispositions in the block below. Added and changed `docs/**` paths and the
+changed root `README.md` and `.lycheeignore` are repository-only. The changed
+root `.editorconfig` maps to `E001`: it is that row's setup-root read-only
+alias, and the `E001` source carries the same bytes. A row-ID disposition passes
+for a path that is the row's source or its setup-root read-only alias. The
+legacy entries, their dispositions, and the counts are unchanged.
+
 <!-- audit-gate-dispositions:start -->
 
 ```text
 A AGENTS.md repository-only
 A GLOSSARY.md repository-only
-A docs/** repository-only
+AM docs/** repository-only
 M .config/hk/config.pkl E063
 M .typos.toml E177
+M .editorconfig E001
+M .lycheeignore repository-only
+M README.md repository-only
 ```
 
 <!-- audit-gate-dispositions:end -->
