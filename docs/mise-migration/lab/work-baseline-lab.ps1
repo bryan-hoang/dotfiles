@@ -88,7 +88,7 @@ Check 'clean_no_windows_root_behind' (@($clean | Where-Object { $_ -like "root`t
 Check 'clean_no_tracked_changes' (@($clean | Where-Object { $_ -like "tracked`t*" }).Count -eq 0)
 Check 'clean_unclassified_0' ($clean -contains 'unclassified_count=0')
 Check 'clean_unguarded' ($clean -contains 'guard=unguarded')
-Check 'clean_mise_version' ($clean -contains 'mise_version=2026.10.0')
+Check 'clean_mise_version' ($clean -contains "mise_version=$((Get-Content -LiteralPath (Join-Path $PSScriptRoot 'mise-version.txt')).Trim())")
 
 # Alterations.
 $marker = 'lab-private-value-377'
