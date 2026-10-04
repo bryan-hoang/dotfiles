@@ -65,8 +65,9 @@ say history_sync "$(timeout 30 mise settings get history.sync 2>/dev/null)"
 legacy=$(git -C "$ex/setup.git" rev-parse main)
 say audited_tip "$legacy"
 
-# Shared and Linux files; Windows rows have no stream in the tip. A reviewed
-# new source in lab/sources/<live path> wins; then a stream with a reviewed
+# Shared and Linux files; Windows rows have no stream in the tip. E006 takes
+# the approved live snapshot (lab-in/e006.toml) when the runner stages one. A
+# reviewed new source in lab/sources/<live path> wins; then a stream with a reviewed
 # rewrite takes those bytes; otherwise a source that is a regular file at the
 # audited tip takes that blob. Everything is written 0644.
 declare -A blob
@@ -74,15 +75,18 @@ while IFS=$'\t' read -r meta path; do
 	read -r mode _ oid <<<"$meta"
 	[[ $mode == 100644 || $mode == 100755 ]] && blob[$path]=$oid
 done < <(git -C "$ex/setup.git" ls-tree -r --full-tree main)
-n=0 real=0 authored=0 rewritten=0
+n=0 real=0 authored=0 rewritten=0 snapshot=0
 while IFS=$'\t' read -r id var live stream; do
 	[[ $var == W ]] && continue
 	[[ $id == E011 ]] && continue
 	rel=${live#\~/}
 	f=$HOME/$rel
 	mkdir -p "$(dirname "$f")"
+	if [[ $id == E006 && -f $in/e006.toml ]]; then
+		cp "$in/e006.toml" "$f"
+		snapshot=1
 	# Authored mirrored sources: lab/sources/<live path>.
-	if [[ -f $in/sources/$rel ]]; then
+	elif [[ -f $in/sources/$rel ]]; then
 		cp "$in/sources/$rel" "$f"
 		authored=$((authored + 1))
 	elif [[ -f $in/rewrites/$stream.rewrite ]]; then
@@ -105,7 +109,8 @@ say seeded_files "$((n + 1))"
 say seeded_from_audited_tip "$real"
 say seeded_from_sources "$authored"
 say seeded_stream_rewrites "$rewritten"
-say seeded_placeholders "$((n - real - authored - rewritten))"
+say seeded_e006_snapshot "$snapshot"
+say seeded_placeholders "$((n - real - authored - rewritten - snapshot))"
 
 # A problem in a sanitized source (E178 check) blocks the baseline.
 if ! run sanitized_check pwsh -NoProfile -File "$HOME/.config/mise/sanitized.ps1" check; then

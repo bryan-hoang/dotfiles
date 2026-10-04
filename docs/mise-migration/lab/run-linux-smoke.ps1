@@ -7,8 +7,10 @@
 # (mise-version.txt) in lab-in/bin, which guest scripts put first on PATH. -Bin adds verified
 # executables to lab-in/bin.
 # PowerShell 7 (pwsh-version.txt) arrives as lab-in/pwsh.tar.gz when its Linux
-# media is staged. -TimeoutSeconds bounds the guest script.
-param([Parameter(Mandatory)][string]$IntakeRoot, [Parameter(Mandatory)][string]$Exchange, [string]$Script = 'linux-smoke.sh', [string[]]$Bin = @(), [int]$TimeoutSeconds = 600)
+# media is staged. -TimeoutSeconds bounds the guest script. -E006 stages the
+# approved live snapshot of ~/.config/mise/config.toml as lab-in/e006.toml, the
+# one private input the conversion seed reads.
+param([Parameter(Mandatory)][string]$IntakeRoot, [Parameter(Mandatory)][string]$Exchange, [string]$Script = 'linux-smoke.sh', [string[]]$Bin = @(), [int]$TimeoutSeconds = 600, [string]$E006)
 $ErrorActionPreference = 'Stop'
 $intake = [IO.Path]::GetFullPath($IntakeRoot)
 $name = 'mise-lab-run-' + (Get-Date -Format 'yyyyMMddHHmmss')
@@ -28,6 +30,7 @@ Copy-Item -LiteralPath ($inputs | ForEach-Object { Join-Path $PSScriptRoot $_ })
 Copy-Item -LiteralPath $Exchange -Destination (Join-Path $stage 'lab-in\exchange') -Recurse
 Copy-Item -LiteralPath $mise -Destination (Join-Path $stage 'lab-in\bin\mise')
 foreach ($b in $Bin) { Copy-Item -LiteralPath $b -Destination (Join-Path $stage 'lab-in\bin') }
+if ($E006) { Copy-Item -LiteralPath $E006 -Destination (Join-Path $stage 'lab-in\e006.toml') }
 $pv = (Get-Content -LiteralPath (Join-Path $PSScriptRoot 'pwsh-version.txt')).Trim()
 $pwshTar = Join-Path $intake "linux-media-pwsh-$pv\powershell-$pv-linux-x64.tar.gz"
 if (Test-Path -LiteralPath $pwshTar) { Copy-Item -LiteralPath $pwshTar -Destination (Join-Path $stage 'lab-in\pwsh.tar.gz') }

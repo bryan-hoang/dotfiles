@@ -3,11 +3,14 @@
 # repository-only guard. Read-only for the exchange. Prints key=value results,
 # then verify_result=pass|fail with the failed checks, and exits 1 on failure.
 # -Kingfisher runs the redacted all-refs scan on a disposable mirror clone.
+# -E006 is the approved live snapshot the seed staged for E006; without it E006
+# is expected as a placeholder. Any other placeholder fails.
 param(
 	[Parameter(Mandatory)][string]$Exchange,
 	[Parameter(Mandatory)][string]$Tip,
 	[string]$Kingfisher,
-	[string]$OutDir
+	[string]$OutDir,
+	[string]$E006
 )
 $ErrorActionPreference = 'Stop'
 $env:MISE_AUTO_INSTALL = '0'
@@ -72,7 +75,8 @@ Check stream_non_100644 @($actual | Where-Object { ($t[$_] -split ' ')[0] -ne '1
 $e031 = @($built | Where-Object Id -EQ 'E031')[0].Stream
 Check e031_mode ($t[$e031] -split ' ')[0] 100644
 
-# Expected stream bytes: E011 is the generated declaration; a row with a
+# Expected stream bytes: E011 is the generated declaration; E006 is the
+# approved live snapshot when -E006 is given; a row with a
 # reviewed new source in lab/sources/<live path> takes those bytes; a stream
 # with a reviewed rewrite (lab/rewrites/<stream>.rewrite) takes those bytes; a
 # row whose source is a regular file at the audited tip takes that blob; every
@@ -81,7 +85,7 @@ Check e031_mode ($t[$e031] -split ' ')[0] 100644
 # from their audited-tip blobs.
 $e011 = Join-Path $p 'dotfiles.toml'
 $e011Blob = (& git hash-object --no-filters -- $e011)
-$fromTip = 0; $synthetic = 0; $reviewed = @(); $streamChanged = @()
+$fromTip = 0; $synthetic = @(); $reviewed = @(); $streamChanged = @()
 $srcRoot = Join-Path $PSScriptRoot 'sources'
 $badBytes = @(foreach ($f in $built) {
 		if (-not $t.ContainsKey($f.Stream)) { continue }
@@ -90,15 +94,18 @@ $badBytes = @(foreach ($f in $built) {
 		$rw = Join-Path $PSScriptRoot "rewrites/$($f.Stream).rewrite"
 		$authoredRow = Test-Path -LiteralPath $src -PathType Leaf
 		if ($f.Id -eq 'E011') { $want = $e011Blob }
+		elseif ($f.Id -eq 'E006' -and $E006) { $want = (& git hash-object --no-filters -- $E006) }
 		elseif ($authoredRow) { $want = (& git hash-object --no-filters -- $src); $reviewed += $f.Id }
 		elseif (Test-Path -LiteralPath $rw) { $want = (& git hash-object --no-filters -- $rw) }
 		elseif ($old[$rel] -match '^100(644|755) ') { $want = ($old[$rel] -split ' ')[1]; $fromTip++ }
-		else { $want = BlobId "# synthetic $($f.Id) $($f.Stream)`n"; $synthetic++ }
+		else { $want = BlobId "# synthetic $($f.Id) $($f.Stream)`n"; $synthetic += $f.Id }
 		if ($f.Id -ne 'E011' -and -not $authoredRow -and $old[$rel] -match '^100(644|755) ' -and ($t[$f.Stream] -split ' ')[1] -ne ($old[$rel] -split ' ')[1]) { $streamChanged += $f.Stream }
 		if (($t[$f.Stream] -split ' ')[1] -ne $want) { $f.Id }
 	})
 Say stream_from_audited_tip $fromTip
-Say stream_placeholders $synthetic
+Say stream_placeholders $synthetic.Count
+Say e006_source $(if ($E006) { 'snapshot' } else { 'placeholder' })
+Check stream_placeholders_except_e006 $($other = @($synthetic | Where-Object { $_ -ne 'E006' }); if ($other.Count) { $other -join ',' } else { 0 }) 0
 Say stream_from_sources $reviewed.Count
 $sanitized = @(Block 'enrollment-roots' | Where-Object { $_ -match '^\|\s*`?E\d{3}`?\s' } | ForEach-Object { $c = @($_.Trim().Trim('|') -split '\|' | ForEach-Object { $_.Trim().Trim('`') }); if ($c[9] -eq 'SANITIZED') { $c[0] } })
 Say sanitized_rows $sanitized.Count
