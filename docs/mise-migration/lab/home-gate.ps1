@@ -85,8 +85,9 @@ if ($IsWindows) {
 	$sentinel = Live '~/.local/state/mise/windows-applications/blocked'
 	Check 'e161_sentinel_before' (-not (Test-Path -LiteralPath $sentinel)) $(if (Test-Path -LiteralPath $sentinel) { 'present' } else { 'absent' })
 	$module = Live '~/.config/mise/dotfiles/.config/windows/WindowsApplications.psm1'
+	# Single-quoted literal with apostrophes doubled, so any HOME path is safe.
 	$v = Native (Get-Process -Id $PID).Path @('-NoProfile', '-NonInteractive', '-Command',
-		"Import-Module '$module'; Invoke-WindowsApplications validate | Out-Null")
+		"Import-Module '$($module -replace "'", "''")'; Invoke-WindowsApplications validate | Out-Null")
 	Check 'e161_validate_exit' ($v.Code -eq 0) $v.Code
 	Check 'e161_sentinel' (-not (Test-Path -LiteralPath $sentinel)) $(if (Test-Path -LiteralPath $sentinel) { 'present' } else { 'absent' })
 }
