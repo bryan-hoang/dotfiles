@@ -72,7 +72,7 @@ mise.local.toml
 mprocs.yaml
 
 AGENTS.md
-CONTEXT.md
+GLOSSARY.md
 /.agents/
 tmp/
 fnox*.toml

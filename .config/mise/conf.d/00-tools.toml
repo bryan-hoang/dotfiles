@@ -5,7 +5,7 @@ cargo-cache = "cargo:cargo-cache"
 cflint = "github:cfmleditor/cflint"
 cocogitto = "cargo:cocogitto"
 dab = "dotnet:microsoft.dataapibuilder"
-delta = "cargo:git-delta"
+delta = "github:dandavison/delta"
 diff-pdf = "github:vslavik/diff-pdf"
 dtctl = "github:dynatrace-oss/dtctl"
 ec = "github:editorconfig-checker/editorconfig-checker"
@@ -55,7 +55,6 @@ aube = { version = "latest", minimum_release_age = "0d" }
 bun = { version = "latest", lazy = true }
 cargo-binstall = "latest"
 cargo-cache = "latest"
-cocogitto = "latest"
 delta = "latest"
 eza = "latest"
 fd = "latest"
@@ -84,7 +83,6 @@ pkl = "latest"
 pnpm = { version = "latest", lazy = true, minimum_release_age = "0d" }
 rg = "latest"
 rmz = "latest"
-rtk = "latest"
 rumdl = "latest"
 rust = { version = "nightly", profile = "minimal", mr_boxington = true }
 ryl = { version = "latest", lazy = true, lazy_bins = ["ryl"] }
