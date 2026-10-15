@@ -54,3 +54,4 @@ shellcheck
 tty
 uncached
 zsh
+Zelda

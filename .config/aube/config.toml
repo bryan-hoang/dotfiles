@@ -1,11 +1,11 @@
 globalBinDir = ["~/.local/bin"]
 jailBuildExclusions = [
-	"@opencode-ai/cli",
-	"bun",
-	"core-js",
-	"@nubjs/nub",
-	"@azure-devops/mcp",
+  "@opencode/cli",
+  "bun",
+  "core-js",
+  "@nubjs/nub",
+  "@azure-devops/mcp",
 ]
-minimumReleaseAgeExclude = ["@opencode-ai/*"]
+minimumReleaseAgeExclude = ["@opencode/*"]
 paranoid = true
 trustPolicyExclude = []
