@@ -105,8 +105,8 @@ if (Test-CommandExists 'nvim') {
 	Set-UserEnvVar 'EDITOR' 'nvim'
 }
 
-# Improve `git <command> --stat` output.
-# https://stackoverflow.com/questions/75482606/how-can-width-of-git-stat-be-configured/75490052#75490052
-if (Test-CommandExists 'tput') {
-	$env:COLUMNS = $(tput cols)
-}
+# # Improve `git <command> --stat` output.
+# # https://stackoverflow.com/questions/75482606/how-can-width-of-git-stat-be-configured/75490052#75490052
+# if (Test-CommandExists 'tput') {
+# 	$env:COLUMNS = $(tput cols)
+# }

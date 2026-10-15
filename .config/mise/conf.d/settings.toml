@@ -7,6 +7,10 @@ experimental = true
 minimum_release_age = "1d"
 paranoid = true
 
+[settings.self_update]
+auto = true
+minimum_release_age = "0d"
+
 [settings.cargo]
 binstall_native = true
 binstall_only = true

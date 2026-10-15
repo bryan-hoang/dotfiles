@@ -21,7 +21,7 @@ local config = wezterm.config_builder()
 config:set_strict_mode(true)
 
 config.color_scheme = "Catppuccin Mocha"
-config.font = wezterm.font("BerkeleyMono Nerd Font Mono")
+config.font = wezterm.font("JetBrainsMono Nerd Font")
 -- In points.
 config.font_size = 12.0
 config.default_cursor_style = "SteadyBlock"
@@ -76,7 +76,7 @@ config.quick_select_patterns = {
 local act = wezterm.action
 
 config.keys = {
-	-- https://wezfurlong.org/wezterm/config/lua/keyassignment/QuickSelectArgs.html
+	-- https://wezterm.org/config/lua/keyassignment/QuickSelectArgs.html
 	{
 		key = "O",
 		mods = "CTRL",
@@ -119,7 +119,7 @@ for _index, domain in ipairs(wsl_domains) do
 end
 config.wsl_domains = wsl_domains
 
--- https://wezfurlong.org/wezterm/config/lua/wezterm/enumerate_ssh_hosts/
+-- https://wezterm.org/config/lua/wezterm/enumerate_ssh_hosts.html
 local ssh_domains = {}
 for host, _config in pairs(wezterm.enumerate_ssh_hosts()) do
 	table.insert(ssh_domains, {
@@ -148,10 +148,10 @@ config.window_padding = {
 	bottom = 0,
 }
 
--- (https://wezfurlong.org/wezterm/config/lua/config/hyperlink_rules.html?h=hyperlink)
--- [https://wezfurlong.org/wezterm/config/lua/config/hyperlink_rules.html?h=hyperlink]
--- {https://wezfurlong.org/wezterm/config/lua/config/hyperlink_rules.html?h=hyperlink}
--- <https://wezfurlong.org/wezterm/config/lua/config/hyperlink_rules.html?h=hyperlink>
+-- (https://wezterm.org/config/lua/config/hyperlink_rules.html)
+-- [https://wezterm.org/config/lua/config/hyperlink_rules.html]
+-- {https://wezterm.org/config/lua/config/hyperlink_rules.html}
+-- <https://wezterm.org/config/lua/config/hyperlink_rules.html>
 --
 -- Use the defaults as a base
 local hyperlink_rules = {
@@ -211,8 +211,7 @@ table.insert(hyperlink_rules, {
 -- are for github. ( "nvim-treesitter/nvim-treesitter" | wbthomason/packer.nvim
 -- | wez/wezterm | "wez/wezterm.git" ) as long as a full url hyperlink regex
 -- exists above this it should not match a full url to github or gitlab /
--- bitbucket (i.e. https://gitlab.com/user/project.git is still a whole
--- clickable url)
+-- bitbucket.
 table.insert(hyperlink_rules, {
 	regex = [[((?:[\w\d]{1}[-\w\d]+)/{1}(?:[-\w\d\.]+))]],
 	format = "https://github.com/$1",
