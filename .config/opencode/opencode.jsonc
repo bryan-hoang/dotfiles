@@ -1,5 +1,6 @@
 {
 	"$schema": "https://opencode.ai/config.json",
+	"instructions": ["~/.cursor/rules/pstack-models.mdc"],
 	"autoupdate": false,
 	"lsp": {},
 	"formatter": {

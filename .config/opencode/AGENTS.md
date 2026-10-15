@@ -37,6 +37,35 @@ applying rules involving `Agent Tool`, `Question Agent Tool`, `Shell Command`,
   model first. Otherwise, inherit the parent model when one is available; if no
   parent model is available, use `gpt-5.6-luna` by default for cost efficiency.
 
+## OpenCode-Only `pstack` Model Selectors
+
+This section applies only to OpenCode. Other tools should use their own model
+syntax. OpenCode loads the role map from `~/.cursor/rules/pstack-models.mdc`.
+Treat its role values as explicit model selections and translate them before
+launching a subagent. Do not copy the role table into another file.
+
+- `gpt-6-luna-<effort>` becomes `opencode/gpt-6-luna#<effort>`.
+- `claude-opus-5-5-<effort>` becomes `opencode/claude-opus-5-5#<effort>`.
+- Keep the family when Poteto Mode adjusts effort. Change only the `#variant`
+  and confirm that variant exists in the active model catalog.
+- `inherit-parent` and `auto` mean omit `model` so the child inherits its
+  parent's model. OpenCode has no separate automatic model router.
+- The current catalog has no fast variant for these families. Use standard speed
+  and report any fast request that cannot be honored.
+- For a hard-coded `grok-4.7-<effort>-fast` fallback with no configured role
+  line, use `opencode/gpt-6-luna#<effort>` when that variant exists, use
+  standard speed, and report the family substitution. An explicit role line
+  takes precedence.
+- `arena cross-judge pool` selects one model from the list, preferably from a
+  family different from the parent. It is not a fan-out panel.
+- Pass the selector through the active OpenCode subagent tool's `model` field.
+  If that field is unavailable, report the limitation rather than putting the
+  selector in `agent`.
+
+This section adapts model selection only. It does not translate Cursor-only
+`subagent_type`, `readonly`, or `environment` fields, and it does not make
+children read-only or give them isolated worktrees.
+
 ## Grilling
 
 - In `/grilling` and any skill that invokes it, use the built-in `question`

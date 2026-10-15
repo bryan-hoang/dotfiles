@@ -25,6 +25,7 @@ OpenCode
 PIM
 Pkl
 Polyfill
+Poteto
 README
 SFW
 Selene's
@@ -39,6 +40,7 @@ WezTerm
 Worktree
 XDG
 XHR
+Zelda
 allowlist
 biome
 bundler
@@ -54,4 +56,3 @@ shellcheck
 tty
 uncached
 zsh
-Zelda
