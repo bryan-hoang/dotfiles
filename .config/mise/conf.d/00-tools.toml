@@ -74,9 +74,6 @@ lychee = "latest"
 mr-boxington = "latest"
 neovim = { version = "latest" }
 node = "latest"
-opencode = { version = "2", minimum_release_age = "0d", allow_builds = [
-  "@opencode/cli",
-], lazy = true }
 oxfmt = "latest"
 oxlint = "latest"
 pkl = "latest"
@@ -110,6 +107,9 @@ herdr = { version = "latest", lazy = true, version_prefix = "preview-", prerelea
 hunkdiff = { version = "latest", lazy = true, trust_policy_excludes = [
   "@pierre/theme",
 ] }
+opencode = { version = "2", minimum_release_age = "0d", allow_builds = [
+  "@opencode/cli",
+], lazy = true }
 
 [tools.ec]
 version = "latest"

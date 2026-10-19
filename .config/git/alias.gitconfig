@@ -95,3 +95,4 @@
 	worktree-convert = "!f() { grm wt convert && mv .git-main-working-tree .git && printf '' >| .git/index && git worktree add main \"$(git branch-default)\" && git worktree lock main; }; f"
 	ls-merged = "!git branch --format '%(refname:short)' --merged | grep --invert-match --line-regex \"$(git branch --show-current)\""
 	diff-image = "!f() { cd -- \"${GIT_PREFIX:-.}\"; GIT_DIFF_IMAGE_ENABLED=1 git diff \"$@\"; }; f"
+	fix-case-colliding-origin-ref = "!f() { ref=$1; case \"$ref\" in refs/remotes/origin/*) ;; *) echo \"Usage: git fix-case-colliding-origin-ref refs/remotes/origin/<deleted-branch> (omit .lock)\" >&2; return 2;; esac; git update-ref -d \"$ref\" && git fetch --prune origin; }; f"

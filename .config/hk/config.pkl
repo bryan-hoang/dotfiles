@@ -5,7 +5,9 @@ import "package://github.com/jdx/hk/releases/download/v2.6.0/hk@2.6.0#/Builtins.
 steps {
   ["bom"] = Builtins.byte_order_marker
   ["check_add_large_files"] = Builtins.check_added_large_files
-  ["check_case_conflict"] = Builtins.check_case_conflict
+  // NOTE: Can't really act on it if it's caused by another team member's
+  // commit.
+  // ["check_case_conflict"] = Builtins.check_case_conflict
   ["check_executables_have_shebangs"] = Builtins.check_executables_have_shebangs
   ["check_merge_conflict"] = Builtins.check_merge_conflict
   ["check_shebang_scripts_are_executable"] = Builtins.check_shebang_scripts_are_executable
