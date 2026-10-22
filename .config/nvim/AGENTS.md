@@ -1,4 +1,4 @@
-# Neovim Config (`~/.config/nvim`) Context
+# Neovim Configuration (`~/.config/nvim`) Context
 
 This directory contains the user's Neovim configuration, which is part of a
 larger dotfiles repository.
@@ -8,13 +8,13 @@ larger dotfiles repository.
 - **LazyVim Based**: This setup is built on
   [LazyVim](https://lazyvim.github.io). Do not write monolithic `init.lua`
   configurations.
-- **Entrypoints**:
+- **Entry points**:
   - `init.lua` and `lua/config/lazy.lua`: Core bootstrapping.
   - `lazyvim.json`: Defines enabled LazyVim extras.
 - **Plugin Management**: Custom plugins and overrides belong in
   `lua/plugins/*.lua` or `lua/plugins/extras/`.
-- **Core Options**: Neovim built-in options, keymaps, and autocmds are separated
-  into `lua/config/options.lua`, `lua/config/keymaps.lua`, and
+- **Core Options**: Neovim built-in options, keymaps, and `autocmds` are
+  separated into `lua/config/options.lua`, `lua/config/keymaps.lua`, and
   `lua/config/autocmds.lua`.
 
 ## Linting & Formatting
@@ -27,6 +27,17 @@ larger dotfiles repository.
   - When adding new languages, check these files to register the appropriate
     tools instead of installing standalone plugins where `conform` or
     `nvim-lint` would suffice.
+
+## Testing
+
+- For changes to Pkl LSP settings or its `workspace/configuration` handler, run
+  the no-network regression test. It verifies the flat Pkl settings response and
+  the default nested behavior for other clients. It prints
+  `Pkl LSP settings regression: ok`.
+
+  ```powershell
+  nvim --headless -u NONE -l tests\pkl-lsp-settings.lua
+  ```
 
 ## Tooling & Environment Requirements
 

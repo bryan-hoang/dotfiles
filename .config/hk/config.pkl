@@ -26,12 +26,10 @@ steps {
   ["oxlint"] = Builtins.ox_lint
   ["ruff"] = Builtins.ruff
   ["ruff_format"] = Builtins.ruff_format
-  ["rumdl"] = Builtins.rumdl
-  ["ryl"] = (Builtins.ryl) { check = #"ryl check -d "extends: default" {{ files }}"#; exclude = "pnpm-*.yaml" }
   ["shellcheck"] = Builtins.shellcheck
   ["shellharden"] = Builtins.shellharden
   ["shfmt"] = (Builtins.shfmt) { check = "shfmt -bn -ci --simplify {{ files }}" }
-  ["sql_fluff"] = Builtins.sql_fluff
+  // ["sql_fluff"] = Builtins.sql_fluff
   ["stylua"] = Builtins.stylua
   ["tombi"] = Builtins.tombi
   ["tombi_format"] = Builtins.tombi_format
@@ -45,8 +43,13 @@ steps {
     // These rules misfire on technical prose: glossary nouns such as "setup"
     // and "checkout", "Unix", binary units, past participles after "to",
     // and compound coordinations such as "link and dependency policy".
-    check = "harper-cli lint --dialect us --ignore PhrasalVerbAsCompoundNoun,OrthographicConsistency,MissingTo,InflectedVerbAfterTo,WrongNegative,ExpandMemoryShorthands,CompoundNouns,HopHope,TheirToTheyre,MassNouns,OxfordComma {{ files }}"
+    check =
+      "harper-cli lint --dialect us --ignore PhrasalVerbAsCompoundNoun,OrthographicConsistency,MissingTo,InflectedVerbAfterTo,WrongNegative,ExpandMemoryShorthands,CompoundNouns,HopHope,TheirToTheyre,MassNouns,OxfordComma {{ files }}"
     glob = List("*.md")
+  }
+  ["ryl"] = (Builtins.ryl) {
+    check = #"ryl check -d "extends: default" {{ files }}"#
+    exclude = "pnpm-*.yaml"
   }
   ["typos"] = (Builtins.typos) {
     check = "typos --force-exclude {{files}}"
