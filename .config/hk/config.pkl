@@ -55,6 +55,11 @@ steps {
     fix = #"ryl check --config-data "extends: default" --fix {{ files }}"#
     exclude = "pnpm-*.yaml"
   }
+  ["sqruff"] = new Step {
+    glob = "**/*.sql"
+    check = "sqruff lint {{files}}"
+    fix = "sqruff fix {{files}}"
+  }
   ["typos"] = (Builtins.typos) {
     check = "typos --force-exclude {{files}}"
   }
