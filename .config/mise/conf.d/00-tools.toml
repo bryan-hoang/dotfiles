@@ -38,7 +38,6 @@ sqlpackage = "dotnet:microsoft.sqlpackage"
 television = "cargo:television"
 tspin = "cargo:tailspin"
 vp = "github:voidzero-dev/vite-plus"
-vscode-lsp = "npm:vscode-langservers-extracted"
 whisper-cpp = "github:ggml-org/whisper.cpp"
 xmlstarlet = "http:xmlstarlet"
 
@@ -102,7 +101,6 @@ tspin = "latest"
 typos = "latest"
 usage = { version = "latest" }
 uv = "latest"
-vscode-lsp = { version = "latest" }
 yq = { version = "latest", lazy = true }
 zoxide = "latest"
 

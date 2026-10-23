@@ -36,16 +36,9 @@ return {
 				servers = {
 					-- JSON
 					jsonls = {
-						mason = false,
 						settings = {
 							json = {
-								schemas = require("schemastore").json.schemas({
-									ignore = {
-										-- Ignore files like `app.json` that may be used for
-										-- translations instead.
-										"Expo SDK",
-									},
-								}),
+								schemas = require("schemastore").json.schemas({}),
 							},
 						},
 						-- Don't auto extend the JSON schema defined previously.
