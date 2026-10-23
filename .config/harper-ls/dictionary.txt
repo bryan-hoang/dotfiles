@@ -1,3 +1,4 @@
+Affero
 ASK
 ATC
 ATC's
@@ -29,6 +30,7 @@ Poteto
 README
 SFW
 Selene's
+Slidev
 TODO
 Topgrade
 Typst
@@ -43,11 +45,14 @@ XHR
 Zelda
 allowlist
 biome
+bryan
 bundler
 endregion
 eslint
 formatter
+hoang
 idempotently
+js
 minification
 mise
 oxlint

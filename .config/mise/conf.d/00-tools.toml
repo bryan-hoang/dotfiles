@@ -52,14 +52,14 @@ hunkdiff = "npm:hunkdiff"
 sonarqube-cli = "http:sonarqube-cli"
 
 [tools]
-aube = { version = "latest", minimum_release_age = "0d" }
+aube = { version = "latest" }
 bun = { version = "latest", lazy = true }
 cargo-binstall = "latest"
-cargo-cache = "latest"
+cargo-cache = { version = "latest", lazy = true, lazy_bins = ["cargo-cache"] }
 delta = "latest"
 eza = "latest"
 fd = "latest"
-fnox = { version = "latest", minimum_release_age = "0d" }
+fnox = { version = "latest" }
 gh = "latest"
 git-absorb = "latest"
 git-grab = "latest"
@@ -67,7 +67,8 @@ go = "latest"
 gs = "latest"
 harper-cli = "latest"
 harper-ls = "latest"
-hk = { version = "latest", minimum_release_age = "0d" }
+herdr = { version = "latest", lazy = true, version_prefix = "preview-", prerelease = "true" }
+hk = { version = "latest" }
 jactionlint = { version = "latest", lazy = true }
 jaq = "latest"
 kingfisher = "latest"
@@ -75,22 +76,23 @@ lychee = "latest"
 mr-boxington = "latest"
 neovim = { version = "latest" }
 node = "latest"
+opencode = { version = "2", allow_builds = ["@opencode/cli"], lazy = true }
 oxfmt = "latest"
 oxlint = "latest"
-pkl = "latest"
-pnpm = { version = "latest", lazy = true, minimum_release_age = "0d" }
+pkl = { version = "latest", lazy = true }
+pnpm = { version = "latest", lazy = true }
 rg = "latest"
 rmz = "latest"
 rumdl = "latest"
 rust = { version = "nightly", profile = "minimal", mr_boxington = true }
 ryl = { version = "latest", lazy = true, lazy_bins = ["ryl"] }
 sccache = "latest"
-sd = "latest"
+sd = { version = "latest", lazy = true }
 selene = "latest"
 sfw = "latest"
-shellcheck = "latest"
-shellharden = "latest"
-shfmt = "latest"
+shellcheck = { version = "latest", lazy = true }
+shellharden = { version = "latest", lazy = true }
+shfmt = { version = "latest", lazy = true }
 skills = "latest"
 starship = "latest"
 television = "latest"
@@ -98,19 +100,15 @@ tombi = "latest"
 tree-sitter = "latest"
 tspin = "latest"
 typos = "latest"
-usage = { version = "latest", minimum_release_age = "0d" }
+usage = { version = "latest" }
 uv = "latest"
 vscode-lsp = { version = "latest" }
-yq = "latest"
+yq = { version = "latest", lazy = true }
 zoxide = "latest"
 
-herdr = { version = "latest", lazy = true, version_prefix = "preview-", prerelease = "true", minimum_release_age = "0d" }
 hunkdiff = { version = "latest", lazy = true, trust_policy_excludes = [
   "@pierre/theme",
 ] }
-opencode = { version = "2", minimum_release_age = "0d", allow_builds = [
-  "@opencode/cli",
-], lazy = true }
 
 [tools.ec]
 version = "latest"
@@ -119,7 +117,6 @@ version = "latest"
 asset_pattern = 'editorconfig-checker-{{os()}}-{{arch(x64="amd64")}}.zip'
 
 [tools.fff-mcp]
-minimum_release_age = "0d"
 version = "latest"
 
 [tools.fff-mcp.platforms.windows-x64]

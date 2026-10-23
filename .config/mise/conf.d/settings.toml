@@ -5,10 +5,19 @@ color_theme = "catppuccin"
 env_cache = true
 experimental = true
 minimum_release_age = "1d"
+minimum_release_age_excludes = [
+  "aube",
+  "fnox",
+  "herdr",
+  "hk",
+  "opencode",
+  "usage",
+]
 paranoid = true
 
 [settings.self_update]
 auto = true
+check_duration = "12h"
 minimum_release_age = "0d"
 
 [settings.cargo]

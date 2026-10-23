@@ -18,7 +18,6 @@ steps {
   ["fix_smart_quotes"] = Builtins.fix_smart_quotes
   ["jactionlint"] = Builtins.jactionlint
   ["kingfisher"] = Builtins.kingfisher
-  ["lychee"] = (Builtins.lychee) { exclude = List("**/git/config", "**/opencode.json*") }
   ["mise"] = Builtins.mise
   ["mixed_line_ending"] = Builtins.mixed_line_ending
   ["newlines"] = Builtins.newlines
@@ -26,6 +25,7 @@ steps {
   ["oxlint"] = Builtins.ox_lint
   ["ruff"] = Builtins.ruff
   ["ruff_format"] = Builtins.ruff_format
+  ["rumdl"] = Builtins.rumdl
   ["shellcheck"] = Builtins.shellcheck
   ["shellharden"] = Builtins.shellharden
   ["shfmt"] = (Builtins.shfmt) { check = "shfmt -bn -ci --simplify {{ files }}" }
@@ -47,8 +47,12 @@ steps {
       "harper-cli lint --dialect us --ignore PhrasalVerbAsCompoundNoun,OrthographicConsistency,MissingTo,InflectedVerbAfterTo,WrongNegative,ExpandMemoryShorthands,CompoundNouns,HopHope,TheirToTheyre,MassNouns,OxfordComma {{ files }}"
     glob = List("*.md")
   }
+  ["lychee"] = (Builtins.lychee) {
+    exclude = List("**/git/config", "**/opencode.json*", "**/.lycheeignore")
+  }
   ["ryl"] = (Builtins.ryl) {
-    check = #"ryl check -d "extends: default" {{ files }}"#
+    check = #"ryl check --config-data "extends: default" {{ files }}"#
+    fix = #"ryl check --config-data "extends: default" --fix {{ files }}"#
     exclude = "pnpm-*.yaml"
   }
   ["typos"] = (Builtins.typos) {
