@@ -100,11 +100,11 @@ $character"""
 
 add_newline = true
 # command_timeout = 500
-continuation_prompt = '[>](bright-black) '
+continuation_prompt = "[>](bright-black) "
 scan_timeout = 30
 
 [bun]
-format = '[$symbol($version )]($style)'
+format = "[$symbol($version )]($style)"
 
 [c]
 format = "[$symbol($version(-$name) )]($style)"
@@ -122,7 +122,7 @@ format = "[$symbol($version )]($style)"
 version_format = "v${major}.${minor}"
 
 [cmd_duration]
-format = '[$duration]($style) '
+format = "[$duration]($style) "
 min_time = 0
 show_notifications = true
 
@@ -131,14 +131,14 @@ format = "[$symbol$environment]($style) "
 ignore_base = false
 
 [container]
-format = '[$symbol ]($style)'
+format = "[$symbol ]($style)"
 
 [directory]
 format = "[$path]($style)[$read_only]($read_only_style) "
 
 [deno]
-format = '[$symbol($version )]($style)'
-version_format = 'v${major}.${minor}'
+format = "[$symbol($version )]($style)"
+version_format = "v${major}.${minor}"
 
 [direnv]
 disabled = true
@@ -175,15 +175,30 @@ disabled = false
 format = "[$symbol $context(\\($namespace\\))]($style) "
 style = "blue bold"
 
+[[kubernetes.contexts]]
+context_pattern = ".*DEV.*"
+context_alias = "dev"
+style = "blue"
+
+[[kubernetes.contexts]]
+context_pattern = ".*TST.*"
+context_alias = "tst"
+style = "#fab387"
+
+[[kubernetes.contexts]]
+context_pattern = ".*PRD.*"
+context_alias = "prd"
+style = "red"
+
 [line_break]
 disabled = false
 
 [lua]
-format = '[$symbol($version )]($style)'
+format = "[$symbol($version )]($style)"
 
 [memory_usage]
 disabled = true
-format = '$symbol[${ram}( | ${swap})]($style) '
+format = "$symbol[${ram}( | ${swap})]($style) "
 
 [mise]
 disabled = false
@@ -196,14 +211,14 @@ unhealthy_symbol = "✗"
 detect_extensions = []
 detect_files = ["package-lock.json", "pnpm-lock.yaml", "yarn.lock"]
 detect_folders = []
-format = '[$symbol($version )]($style)'
+format = "[$symbol($version )]($style)"
 version_format = "v${major}"
 
 [os]
 disabled = true
 
 [package]
-format = '[$symbol$version]($style) '
+format = "[$symbol$version]($style) "
 
 [python]
 format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
@@ -215,22 +230,22 @@ detect_files = ["Gemfile", ".ruby-version", "Rakefile"]
 format = "[$symbol($version )]($style)"
 
 [rust]
-format = '[$symbol($version )]($style)'
-version_format = 'v${major}.${minor}'
+format = "[$symbol($version )]($style)"
+version_format = "v${major}.${minor}"
 
 [shell]
 disabled = false
 
 [shlvl]
 disabled = false
-symbol = '↕️ '
+symbol = "↕️ "
 
 [status]
 disabled = false
 map_symbol = true
 pipestatus = true
 pipestatus_format = '\[$pipestatus\] => [$symbol$common_meaning$signal_name$maybe_int ]($style)'
-pipestatus_segment_format = '[$symbol$status]($style)'
+pipestatus_segment_format = "[$symbol$status]($style)"
 
 [sudo]
 disabled = true
@@ -257,38 +272,38 @@ style = "white"
 when = "true"
 
 [custom.git_email]
-command = 'print-git-email-symbol'
-description = 'The currently configured Git user.email'
+command = "print-git-email-symbol"
+description = "The currently configured Git user.email"
 disabled = true
-format = '[<$output> ]($style)'
+format = "[<$output> ]($style)"
 require_repo = true
-style = 'blue'
-when = 'true'
+style = "blue"
+when = "true"
 
 [custom.pnpm]
 command = "pnpm --version | awk -F '.' '{print \"v\"$1}'"
 description = "The currently installed version of pnpm"
-detect_files = ['pnpm-lock.yaml']
+detect_files = ["pnpm-lock.yaml"]
 disabled = true
-format = '[$symbol($output )]($style)'
+format = "[$symbol($output )]($style)"
 style = "bold yellow"
-symbol = 'p '
+symbol = "p "
 
 # To help switch between npm versions when it matters -_-
 [custom.npm]
 command = "npm --version | awk -F '.' '{print $1}'"
 description = "The currently installed version of npm"
-detect_files = ['package-lock.json']
+detect_files = ["package-lock.json"]
 disabled = true
-format = '[$symbol(v$output )]($style)'
+format = "[$symbol(v$output )]($style)"
 style = "bold red"
-symbol = ' '
+symbol = " "
 
 [custom.yarn]
 command = "yarn --version | awk -F '.' '{print \"v\"$1}'"
 description = "The currently installed version of yarn"
-detect_files = ['yarn.lock']
+detect_files = ["yarn.lock"]
 disabled = true
-format = '[$symbol($output )]($style)'
+format = "[$symbol($output )]($style)"
 style = "bold blue"
-symbol = ' '
+symbol = " "
