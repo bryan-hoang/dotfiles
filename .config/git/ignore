@@ -73,7 +73,6 @@ mprocs.yaml
 
 AGENTS.md
 GLOSSARY.md
-/.agents/
 tmp/
 fnox*.toml
 .venv
