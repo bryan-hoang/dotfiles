@@ -1,5 +1,5 @@
 [tool_alias]
-ado-mcp = "npm:@azure-devops/mcp"
+bicep = "aqua:Azure/bicep"
 box = "http:command-box"
 cargo-cache = "cargo:cargo-cache"
 cflint = "github:cfmleditor/cflint"
@@ -85,7 +85,6 @@ rmz = "latest"
 rumdl = "latest"
 rust = { version = "nightly", profile = "minimal", mr_boxington = true }
 ryl = { version = "latest", lazy = true, lazy_bins = ["ryl"] }
-sccache = "latest"
 sd = { version = "latest", lazy = true }
 selene = "latest"
 sfw = "latest"

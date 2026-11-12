@@ -53,7 +53,7 @@ steps {
   ["ryl"] = (Builtins.ryl) {
     check = #"ryl check --config-data "extends: default" {{ files }}"#
     fix = #"ryl check --config-data "extends: default" --fix {{ files }}"#
-    exclude = "pnpm-*.yaml"
+    exclude = List("pnpm-*.yaml")
   }
   ["sqruff"] = new Step {
     glob = "**/*.sql"
@@ -62,6 +62,7 @@ steps {
   }
   ["typos"] = (Builtins.typos) {
     check = "typos --force-exclude {{files}}"
+    exclude = List("*.ps1")
   }
 }
 

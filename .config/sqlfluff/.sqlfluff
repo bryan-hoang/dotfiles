@@ -1,4 +1,4 @@
-# https://docs.sqlfluff.com/en/stable/reference/rules.html#ruleref
+# https://docs.sqlfluff.com/en/stable/configuration/defaults.html#default-configuration
 
 [sqlfluff]
 dialect = tsql
@@ -8,24 +8,25 @@ max_line_length = 120
 processes = -1
 warn_unused_ignores = False
 
-[sqlfluff:indentation]
 # See https://docs.sqlfluff.com/en/stable/perma/indent_locations.html
-indent_unit = tab
-
-[sqlfluff:rules:capitalisation.functions]
-capitalisation_policy = upper
-
-[sqlfluff:rules:capitalisation.identifiers]
-extended_capitalisation_policy = consistent
+[sqlfluff:indentation]
+indent_unit = space
+tab_space_size = 2
 
 [sqlfluff:rules:capitalisation.keywords]
 capitalisation_policy = upper
+
+[sqlfluff:rules:capitalisation.functions]
+extended_capitalisation_policy = upper
+
+[sqlfluff:rules:capitalisation.identifiers]
+extended_capitalisation_policy = consistent
 
 [sqlfluff:rules:capitalisation.literals]
 capitalisation_policy = upper
 
 [sqlfluff:rules:capitalisation.types]
-capitalisation_policy = upper
+extended_capitalisation_policy = upper
 
 [sqlfluff:rules:convention.terminator]
 require_final_semicolon = True
