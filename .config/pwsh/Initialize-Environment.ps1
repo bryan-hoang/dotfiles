@@ -24,9 +24,6 @@ Set-UserEnvVar 'DOTNET_CLI_HOME' $(Join-Path $env:XDG_DATA_HOME 'dotnet')
 Set-UserEnvVar 'DOTNET_CLI_TELEMETRY_OPTOUT' 'true'
 Set-UserEnvVar 'DOTNET_NOLOGO' 'true'
 
-# `mbx` intentionally passes registry/Git `cargo install` through to Cargo.
-# Keep sccache as the compiler wrapper so those installs remain cached.
-Set-UserEnvVar 'RUSTC_WRAPPER' 'sccache'
 Set-UserEnvVar 'RUSTUP_HOME' $(Join-Path $env:XDG_DATA_HOME 'rustup')
 
 Set-UserEnvVar 'COPILOT_HOME' $(Join-Path $env:XDG_DATA_HOME 'copilot')

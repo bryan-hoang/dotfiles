@@ -124,22 +124,19 @@ export PAGER=less
 command -v nvim >/dev/null \
 	&& export MANPAGER='nvim +Man!'
 
-# Enable persistent REPL history for `node`.
-[ -n "$NODE_REPL_HISTORY" ] || export NODE_REPL_HISTORY="$XDG_STATE_HOME"/node/history
-mkdir -p "$(dirname "$NODE_REPL_HISTORY")"
-touch "$NODE_REPL_HISTORY"
-
-# Allow 32^3 entries; the default is 1000.
-export NODE_REPL_HISTORY_SIZE="$HISTFILESIZE"
-
 if uname -a | grep -q -E "WSL"; then
 	export BROWSER='browser-wsl.sh'
 fi
 
+# Enable persistent REPL history for `node`.
+export NODE_REPL_HISTORY="$XDG_STATE_HOME"/node/history
+mkdir -p "$(dirname "$NODE_REPL_HISTORY")"
+touch "$NODE_REPL_HISTORY"
+export NODE_REPL_HISTORY_SIZE="$HISTFILESIZE"
 # Use sloppy mode by default, matching web browsers.
 export NODE_REPL_MODE=sloppy
-export NODE_INSPECT_RESUME_ON_START=1
 export NODE_COMPILE_CACHE="$XDG_CACHE_HOME"/node/compile
+export NODE_INSPECT_RESUME_ON_START=1
 
 export npm_config_userconfig="$XDG_CONFIG_HOME"/npm/npmrc
 export npm_config_cache="$XDG_CACHE_HOME"/npm
@@ -308,9 +305,8 @@ export SDIRS="$XDG_STATE_HOME"/bashmarks/sdirs
 mkdir -p "$(dirname "$SDIRS")"
 # https://github.com/mozilla/sccache#usage
 if command -v sccache >/dev/null; then
-	export RUSTC_WRAPPER=sccache
-	export CMAKE_C_COMPILER_LAUNCHER="$RUSTC_WRAPPER"
-	export CMAKE_CXX_COMPILER_LAUNCHER="$RUSTC_WRAPPER"
+	export CMAKE_C_COMPILER_LAUNCHER="sccache"
+	export CMAKE_CXX_COMPILER_LAUNCHER="$CMAKE_C_COMPILER_LAUNCHER"
 fi
 # Enable the generation of `compile_commands.json` by default.
 # https://clangd.llvm.org/installation#project-setup
